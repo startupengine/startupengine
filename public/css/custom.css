@@ -1,0 +1,61 @@
+#mobileNav ul a {
+  font-size: 150%;
+}
+
+@media (min-width: 600px) {
+  .hiddenOnDesktop {
+    display: none !important;
+    opacity: 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hiddenOnMobile {
+    display: none !important;
+    opacity: 0 !important;
+  }
+}
+
+header.light li a {
+  background: #fff;
+  color: #222;
+}
+
+header li:first-of-type a {
+  border-radius: 2px 0px 0px 2px;
+}
+
+header li:last-of-type a {
+  border-radius: 0px 2px 2px 0px;
+}
+
+header li.menuButton a {
+  border-radius: 2px !important;
+  -webkit-box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
+}
+
+header .hiddenOnDesktop {
+  position: fixed;
+  right: 25px;
+}
+
+.button {
+  border-radius: 2px;
+}
+
+.button.ghost {
+  color: #44d !important;
+  border: 1px solid #44d !important;
+}
+
+[class*="bg-gradient-"] a {
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+input {
+  border-radius: 3px;
+  padding: 15px;
+}
+
