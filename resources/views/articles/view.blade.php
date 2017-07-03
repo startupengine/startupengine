@@ -113,7 +113,7 @@
 @include('components.footer')
 @include('components.analytics')
 @include('components.scripts')
-@include('components.mobileNav')
+@include('components.mobilenav')
 
 </body>
 </html>
