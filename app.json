@@ -47,6 +47,10 @@
         "CONTENTFUL_MANAGEMENT_TOKEN": {
             "description": "Contentful Management Token.",
             "value": "XXXXX"
+        },
+        "APP_INSTALLED": {
+            "description": "Whether the app has been installed.",
+            "value": "FALSE"
         }
     },
     "formation": {
