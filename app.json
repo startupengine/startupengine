@@ -14,7 +14,7 @@
     "logo": "http://www.luckyrabbit.info/images/lr-logo.png",
     "success_url": "/",
     "scripts": {
-        "postdeploy": "bundle exec rake bootstrap"
+        "postdeploy": ""
     },
     "env": {
         "SECRET_TOKEN": {
