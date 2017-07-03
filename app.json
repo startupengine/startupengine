@@ -36,18 +36,6 @@
             "description": "URL for this app.",
             "value": "https://XXXXX.herokuapp.com/"
         },
-        "CONTENTFUL_API_KEY": {
-            "description": "Contentful API Key.",
-            "value": "XXXXX"
-        },
-        "CONTENTFUL_SPACE_ID": {
-            "description": "Contentful Space ID.",
-            "value": "XXXXX"
-        },
-        "CONTENTFUL_MANAGEMENT_TOKEN": {
-            "description": "Contentful Management Token.",
-            "value": "XXXXX"
-        },
         "APP_INSTALLED": {
             "description": "Whether the app has been installed.",
             "value": "FALSE"
