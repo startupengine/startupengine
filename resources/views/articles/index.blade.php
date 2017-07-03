@@ -127,7 +127,7 @@
     }
 </script>
 
-@include('components.mobileNav')
+@include('components.mobilenav')
 
 </body>
 </html>
