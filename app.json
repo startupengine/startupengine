@@ -23,6 +23,30 @@
         "WEB_CONCURRENCY": {
             "description": "The number of processes to run.",
             "value": "5"
+        },
+        "APP_DEBUG": {
+            "description": "Whether to enable the debug bar.",
+            "value": "FALSE"
+        },
+        "APP_KEY": {
+            "description": "Encryption key.",
+            "value": "base64:ICO5NZdtA3yqmcwrwz3/NUuqrZz0VwvdgocA1HWYckw="
+        },
+        "APP_URL": {
+            "description": "URL for this app.",
+            "value": "https://slideblogger-test.herokuapp.com/"
+        },
+        "CONTENTFUL_API_KEY": {
+            "description": "Contentful API Key.",
+            "value": "XXXXX"
+        },
+        "CONTENTFUL_SPACE_ID": {
+            "description": "Contentful Space ID.",
+            "value": "XXXXX"
+        },
+        "CONTENTFUL_MANAGEMENT_TOKEN": {
+            "description": "Contentful Management Token.",
+            "value": "XXXXX"
         }
     },
     "formation": {
