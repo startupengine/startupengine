@@ -1,5 +1,5 @@
 {
-    "name": "SlideBlogger",
+    "name": "SitePress",
     "description": "A beautiful & open-source content platform. Powered by Webslides, Laravel, and Contentful.",
     "keywords": [
         "Productivity",
@@ -7,9 +7,10 @@
         "CMS",
         "HTML5",
         "Blog",
-        "Laravel"
+        "Laravel",
+        "Contentful"
     ],
-    "website": "https://luckyrabbit.info/slideblogger",
+    "website": "https://luckyrabbit.info/sitepress",
     "repository": "https://github.com/luckyrabbitllc/SlideBlogger",
     "logo": "http://www.luckyrabbit.info/images/lr-logo.png",
     "success_url": "/",
@@ -22,7 +23,7 @@
         },
         "APP_DEBUG": {
             "description": "Whether to enable debugging messages.",
-            "value": "TRUE"
+            "value": "FALSE"
         },
         "APP_KEY": {
             "description": "Encryption key.",
