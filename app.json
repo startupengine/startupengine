@@ -27,11 +27,11 @@
     },
     "formation": {
         "web": {
-            "quantity": 2,
-            "size": "Performance-M"
+            "quantity": 1,
+            "size": "Free"
         }
     },
-    "image": "heroku/ruby",
+    "image": "heroku/php",
     "addons": [
         {
             "plan": "heroku-postgresql",
