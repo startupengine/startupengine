@@ -14,8 +14,8 @@
 //Authentication
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
 
+//Web Middleware
 Route::group(['middleware' => ['web']], function () {
-
     //Homepage
     Route::get('/', 'ArticleController@getHomepage');
     Route::get('/about', 'ArticleController@getHomepage');
