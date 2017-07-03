@@ -14,21 +14,24 @@
 //Authentication
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
 
-//Homepage
-Route::get('/','ArticleController@getHomepage');
-Route::get('/about','ArticleController@getHomepage');
+Route::group(['middleware' => ['web']], function () {
 
-//Install
-Route::get('/install','SettingsController@install');
+    //Homepage
+    Route::get('/', 'ArticleController@getHomepage');
+    Route::get('/about', 'ArticleController@getHomepage');
 
-//Settings
-Route::post('/install','SettingsController@installContentful');
+    //Install
+    Route::get('/install', 'SettingsController@install');
 
-//Import
-Route::get('/install/import','ContentfulController@import');
-Route::get('/install/import-complete','SettingsController@importComplete');
+    //Settings
+    Route::post('/install', 'SettingsController@installContentful');
 
-//Articles
-Route::get('/articles','ArticleController@getArticles');
-Route::get('/article/{slug}',['uses' => 'ArticleController@getArticle','as' => 'article']);
-Route::get('/article/{slug}/{section}','ArticleController@getArticleSection');
+    //Import
+    Route::get('/install/import', 'ContentfulController@import');
+    Route::get('/install/import-complete', 'SettingsController@importComplete');
+
+    //Articles
+    Route::get('/articles', 'ArticleController@getArticles');
+    Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/article/{slug}/{section}', 'ArticleController@getArticleSection');
+});
