@@ -27,7 +27,7 @@ class Settings extends Model
         if(count($data) > 0){
 
             // Read .env-file
-            $env = file_get_contents(base_path() . '/.env');
+            $env = file_get_contents(base_path() . '/.env.example');
 
             // Split string on every " " and write into array
             $env = preg_split('/\s+/', $env);;
