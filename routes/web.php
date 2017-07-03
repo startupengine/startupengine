@@ -11,7 +11,7 @@
 |
 */
 
-//Authentication
+//External Authentication
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
 
 //Web Middleware
