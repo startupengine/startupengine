@@ -2,9 +2,9 @@
     <!--.wrap.longform (width:72rem=720px) = Better reading experience (90-95 characters per line) -->
     <div class="wrap longform">
         <?php echo @markdown($section->getContent()); ?>
-            <?php if($section->getImage()->getFile()->getUrl() !== NULL) { ?>
+            <?php if($section->getImage() !== NULL) { ?>
             <figure class="text-pull" >
-                <img src="<?php echo $section->getImage()->getFile()->getUrl(); ?>" style="border-radius:4px;">
+                <img src="<?php echo $section->getImage()->getFile()->getUrl(); ?>" alt="Robot" style="border-radius:4px;">
                 <figcaption>
                     <p><?php echo $section->getImage()->getTitle(); ?></p>
                 </figcaption>

@@ -54,13 +54,13 @@
                 <h3 align="center"><?php echo Lang::get('app.enter_credentials'); ?></h3>
                 <p><?php echo Lang::get('app.credentials_help'); ?></p>
                 <form action="/install" method="post" >
-                    <ul class="flexblock">
-                        <li><input type="CONTENTFUL_SPACE_ID" tabindex="1" name="CONTENTFUL_SPACE_ID" placeholder="Contentful Space ID" required=""></li>
-                        <li><input type="CONTENTFUL_API_KEY" tabindex="2" name="CONTENTFUL_API_KEY" placeholder="Contentful API Key" required=""></li>
-                        <li><input type="CONTENTFUL_MANAGEMENT_TOKEN" tabindex="2" name="CONTENTFUL_MANAGEMENT_TOKEN" placeholder="Management Token" required=""></li>
+                    <ul class="flexblock" >
+                        <li style="text-align: center;"><label>Space ID</label><input type="CONTENTFUL_SPACE_ID" tabindex="1" name="CONTENTFUL_SPACE_ID" placeholder="Contentful Space ID" required="" value="<?php echo config('app.CONTENTFUL_SPACE_ID'); ?>"></li>
+                        <li style="text-align: center;"><label>API Key</label><input type="CONTENTFUL_API_KEY" tabindex="2" name="CONTENTFUL_API_KEY" placeholder="Contentful API Key" required="" value="<?php echo config('app.CONTENTFUL_API_KEY'); ?>"></li>
+                        <li style="text-align: center;"><label>Management Token</label><input type="CONTENTFUL_MANAGEMENT_TOKEN" tabindex="2" name="CONTENTFUL_MANAGEMENT_TOKEN" placeholder="Management Token" required="" value="<?php echo config('app.CONTENTFUL_MANAGEMENT_TOKEN'); ?>"></li>
                         {{ csrf_field() }}
-                        <li><button type="submit" class="radius" tabindex="3" title="Submit">Continue ›</button></li>
                     </ul>
+                    <div align="center"><button type="submit" class="radius" tabindex="3" title="Submit" style="max-width:200px;">Continue ›</button></div>
                 </form>
         </section>
     </article>

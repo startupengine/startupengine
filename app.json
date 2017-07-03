@@ -20,12 +20,8 @@
             "description": "A secret key for verifying the integrity of signed cookies.",
             "generator": "secret"
         },
-        "WEB_CONCURRENCY": {
-            "description": "The number of processes to run.",
-            "value": "5"
-        },
         "APP_DEBUG": {
-            "description": "Whether to enable the debug bar.",
+            "description": "Whether to enable debugging messages.",
             "value": "TRUE"
         },
         "APP_KEY": {
@@ -34,11 +30,19 @@
         },
         "APP_URL": {
             "description": "URL for this app.",
-            "value": "https://XXXXX.herokuapp.com/"
+            "value": "https://xxxxx.herokuapp.com/"
         },
-        "APP_INSTALLED": {
-            "description": "Whether the app has been installed.",
-            "value": "FALSE"
+        "CONTENTFUL_API_KEY": {
+            "description": "Contentful API Key.",
+            "value": "XXXXX"
+        },
+        "CONTENTFUL_SPACE_ID": {
+            "description": "Contentful Space ID.",
+            "value": "XXXXX"
+        },
+        "CONTENTFUL_MANAGEMENT_TOKEN": {
+            "description": "Contentful Management Token.",
+            "value": "XXXXX"
         }
     },
     "formation": {
