@@ -1,4 +1,4 @@
-# SitePress
+# About SitePress
 A beautiful &amp; open-source content platform. Powered by Webslides, Laravel, and Contentful.
 
 # Demo
