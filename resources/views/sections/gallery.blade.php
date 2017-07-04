@@ -1,4 +1,4 @@
-<section class="" id="section-{{ $count }}">
+<section class="" id="section-{{ $count }}" style="min-height:auto !important;">
     <div class="wrap aligncenter">
         <br>
         <h3>{{ $section->getTitle() }}</h3>
