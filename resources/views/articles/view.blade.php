@@ -105,6 +105,7 @@
             <?php $count = $count + 1; ?>
         @endforeach
 
+        @include('components.comments')
     </article>
 </main>
 <!--main-->
