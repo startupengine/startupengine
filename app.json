@@ -23,7 +23,7 @@
             "generator": "secret"
         },
         "APP_DEBUG": {
-            "description": "Whether to enable debugging messages.",
+            "description": "Set to TRUE to enable debugging messages.",
             "value": "FALSE"
         },
         "APP_KEY": {
@@ -70,7 +70,8 @@
     "environments": {
         "test": {
             "scripts": {
-                "test": "bundle exec rake test"
+                "test": "bundle exec rake test",
+                "postdeploy": "php artisan command:ImportDefaultSpace"
             }
         }
     }
