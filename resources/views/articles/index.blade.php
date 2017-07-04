@@ -88,7 +88,13 @@
                 <h3 align="center">Articles</h3>
                 <ul class="flexblock gallery">
                     @foreach($articles as $item)
+                        <?php
+                            $tags = $item->getTags();
+                            if (in_array("Landing", $tags) OR in_array("Hidden", $tags) OR in_array("Page", $tags)) {
+                            } else {
+                            ?>
                         @include('components.galleryItem')
+                        <?php } ?>
                     @endforeach
                 </ul>
             <!-- .end .wrap -->

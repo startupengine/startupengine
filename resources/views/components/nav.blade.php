@@ -1,4 +1,4 @@
-<header role="banner" style="opacity:1;background:transparent;" class="light">
+<header role="banner" style="opacity:1;background:transparent;" class="<?php if($defaults !== NULL && $defaults->getNavStyle() !== NULL) { echo strtolower($defaults->getNavStyle()); } ?>">
     <nav role="navigation" class="navbar hiddenOnMobile">
         <ul>
             <?php if($defaults !== NULL && $defaults->getLogo() !== NULL) { ?>

@@ -86,9 +86,9 @@
             <!--.wrap = container width: 90% -->
             <div class="wrap zoomIn" align="center" style="padding:75px 10%;min-width:300px;">
                 <h1 style="margin-bottom:15px;">
-                    <strong><?php echo $article->getTitle(); ?></strong>
+                    <strong><?php echo $article->getHeadline(); ?></strong>
                 </h1>
-                <?php if($article->getSubtitle() !== NULL && $article->getSubtitle() !== '') { ?><div class="text-subtitle" style="padding:0% 10%;"><?php echo @markdown($article->getSubtitle()); ?></div><?php } ?>
+                <?php if($article->getSubtitle() !== NULL && $article->getSubtitle() !== '') { ?><div class="text-subtitle"><?php echo @markdown($article->getSubtitle()); ?></div><?php } ?>
                 <p>
                     <?php $headerCTA = $article->getHeaderCta(); if($headerCTA == NULL) { $headerCTA = 'Read Article'; } ?>
                     <a href="#section-1" class="button radius ga-track" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
