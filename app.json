@@ -15,7 +15,7 @@
     "logo": "http://www.luckyrabbit.info/images/lr-logo.png",
     "success_url": "/",
     "scripts": {
-        "postdeploy": "php artisan command:ImportDefaultSpace"
+        
     },
     "env": {
         "SECRET_TOKEN": {
@@ -70,7 +70,7 @@
     "environments": {
         "test": {
             "scripts": {
-                
+                "test": "bundle exec rake test"
             }
         }
     }
