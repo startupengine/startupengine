@@ -4,8 +4,6 @@
         <h3>{{ $section->getTitle() }}</h3>
         <p>{{ $section->getDescription() }}</p>
         <ul class="flexblock gallery">
-
-
             <?php foreach($section->getImages() as $image) { ?>
                 <li>
                     <a href="">
@@ -17,7 +15,6 @@
                         </figure>
                     </a>
                 </li>
-
             <?php } ?>
         </ul>
     </div>
