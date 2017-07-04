@@ -33,5 +33,5 @@ Route::group(['middleware' => ['web']], function () {
     //Articles
     Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/article/{slug}/{section}', 'ArticleController@getArticleSection');
+    Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
 });

@@ -1,7 +1,18 @@
 <header role="banner" style="opacity:1;background:transparent;" class="light">
     <nav role="navigation" class="navbar hiddenOnMobile">
         <ul>
-            <?php if($defaults !== NULL && $defaults->getFacebook() !== NULL) { ?>
+            <?php if($defaults !== NULL && $defaults->getLogo() !== NULL) { ?>
+            <li class="">
+
+                <a rel="external" href="/">
+                    <p>
+                    <img src="<?php echo $defaults->getLogo()->getFile()->getUrl(); ?>"/> &nbsp;
+                    </p>
+                </a>
+
+            </li>
+            <? } ?>
+            <?php if($defaults !== NULL) { ?>
                 <?php foreach($defaults->getHeaderMenu()->getItems() as $item) { ?>
                     <li><?php echo @markdown($item->getContent()); ?></li>
                 <?php } ?>

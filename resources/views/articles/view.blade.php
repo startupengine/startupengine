@@ -78,19 +78,18 @@
 </head>
 <body>
 @include('components.nav')
-
 <main role="main">
     <article>
-        <section class="bg-light">
+        <section class="<?php echo $splash; ?>">
             <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
             <span class="background dark" style="background-image:url('<?php echo $article->getFeaturedImage(); ?>')"></span>
             <!--.wrap = container width: 90% -->
-            <div class="wrap zoomIn" align="center" style="width:50%;min-width:300px;">
-                <h1>
+            <div class="wrap zoomIn" align="center" style="padding:75px 10%;min-width:300px;">
+                <h1 style="margin-bottom:15px;">
                     <strong><?php echo $article->getTitle(); ?></strong>
                 </h1>
-                <?php if($article->getSubtitle() !== NULL) { ?><p class="text-subtitle" ><?php echo @markdown($article->getSubtitle()); ?></p><?php } ?>
-                <p >
+                <?php if($article->getSubtitle() !== NULL && $article->getSubtitle() !== '') { ?><div class="text-subtitle" style="padding:0% 10%;"><?php echo @markdown($article->getSubtitle()); ?></div><?php } ?>
+                <p>
                     <?php $headerCTA = $article->getHeaderCta(); if($headerCTA == NULL) { $headerCTA = 'Read Article'; } ?>
                     <a href="#section-1" class="button radius ga-track" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
                         {{ $headerCTA }}

@@ -54,9 +54,16 @@ header nav.hiddenOnMobile {
   border: 1px solid #44d !important;
 }
 
-[class*="bg-gradient-"] a {
+[class*="bg-gradient-"] a,
+[class*="bg-gradient-"] .button {
   color: #fff !important;
+  background: transparent !important;
   font-weight: bold !important;
+}
+
+.text-subtitle p {
+  font-size: 133%;
+  text-transform: none;
 }
 
 input {

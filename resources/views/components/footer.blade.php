@@ -1,4 +1,4 @@
-<?php if(isset($defaults) && $defaults !== NULL) { ?>
+<?php if(isset($defaults) && $defaults !== NULL && $defaults->getMenu() !== NULL) { ?>
 <footer role="contentinfo">
     <div class="wrap">
         <div class="grid">
