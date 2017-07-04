@@ -81,7 +81,7 @@
 
 <main role="main">
     <article>
-        <section class="bg-light">
+        <section class="">
             <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
             <!--.wrap = container width: 90% -->
             <div class="wrap">
