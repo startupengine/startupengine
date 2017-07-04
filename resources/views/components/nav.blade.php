@@ -37,7 +37,7 @@
             <? } ?>
             <?php if($defaults !== NULL && $defaults->getGithub() !== NULL) { ?>
             <li class="">
-                <a rel="external" href="<?php echo $defaults->getGithub(); ?>" target="_blank" title="Twitter">
+                <a rel="external" href="<?php echo $defaults->getGithub(); ?>" target="_blank" title="Github">
                     <svg class="fa-github">
                         <use xlink:href="#fa-github"></use>
                     </svg>
