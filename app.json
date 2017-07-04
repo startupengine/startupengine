@@ -53,14 +53,6 @@
         }
     },
     "image": "heroku/php",
-    "addons": [
-        {
-            "plan": "heroku-postgresql",
-            "options": {
-                "version": "9.5"
-            }
-        }
-    ],
     "buildpacks": [
         {
             "url": "https://github.com/lifekent/heroku-buildpack-laravel.git"
