@@ -37,7 +37,7 @@ class ArticleController extends Controller
             ->where('fields.slug', 'default');
         $defaults = $this->client->getEntries($query2);
         if(!empty($defaults->getItems())) { $defaults = $defaults->getItems()[0]; } else { $defaults = NULL; }
-        $splash = "bg-black";
+        $splash = $article->getSplashClass();
         return view('articles.view')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash);
     }
 
@@ -76,7 +76,7 @@ class ArticleController extends Controller
             } else {
                 $defaults = NULL;
             }
-            $splash = "bg-gradient-v";
+            $splash = $article->getSplashClass();
             return view('welcome')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash);
         }
     }
