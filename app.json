@@ -10,12 +10,12 @@
         "Laravel",
         "Contentful"
     ],
-    "website": "https://luckyrabbit.info/sitepress",
-    "repository": "https://github.com/luckyrabbitllc/SlideBlogger",
+    "website": "https://sitepress.herokuapp.com",
+    "repository": "https://github.com/luckyrabbitllc/SitePress",
     "logo": "http://www.luckyrabbit.info/images/lr-logo.png",
     "success_url": "/",
     "scripts": {
-        
+        "postdeploy": "php artisan command:ImportDefaultSpace"
     },
     "env": {
         "SECRET_TOKEN": {
