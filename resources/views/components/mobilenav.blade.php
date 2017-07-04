@@ -5,7 +5,7 @@
     </div>
     <div class="content">
         <ul style="list-style: none !important;">
-            <?php if($defaults !== NULL && $defaults->getFacebook() !== NULL) { ?>
+            <?php if($defaults !== NULL && $defaults->getHeaderMenu()->getItems() !== NULL) { ?>
             <?php foreach($defaults->getHeaderMenu()->getItems() as $item) { ?>
             <li><?php echo @markdown($item->getContent()); ?></li>
             <?php } ?>

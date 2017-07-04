@@ -91,7 +91,7 @@
                 <?php if($article->getSubtitle() !== NULL && $article->getSubtitle() !== '') { ?><div class="text-subtitle"><?php echo @markdown($article->getSubtitle()); ?></div><?php } ?>
                 <p>
                     <?php $headerCTA = $article->getHeaderCta(); if($headerCTA == NULL) { $headerCTA = 'Read Article'; } ?>
-                    <a href="#section-1" class="button radius ga-track" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
+                    <a href="#section-1" class="button radius <?php if(\Request::capture()->getRequestUri() == '/') { echo "ghost"; } ?>  ga-track" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
                         {{ $headerCTA }}
                     </a>
                 </p>
