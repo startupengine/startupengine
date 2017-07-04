@@ -40,6 +40,6 @@ class ImportDefaultSpace extends Command
         $contentful = new \App\Contentful;
         $output = $contentful->import();
         echo implode($output, " \n");
-        echo "\nDefault space imported into Contentful.\n";
+        echo "\nCurre space imported into Contentful.\n";
     }
 }

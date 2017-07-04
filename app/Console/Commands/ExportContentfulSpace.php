@@ -37,6 +37,9 @@ class ExportContentfulSpace extends Command
      */
     public function handle()
     {
-        //
+        $contentful = new \App\Contentful;
+        $output = $contentful->export();
+        echo implode($output, " \n");
+        echo "\nCurrent space exported from Contentful.\n";
     }
 }
