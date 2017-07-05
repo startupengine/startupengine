@@ -3,7 +3,7 @@
     <div class="wrap">
         <div class="grid vertical-align">
             <div class="column">
-                <figure><img class="aligncenter" src="/static/images/iphone.png" alt="iPhone"></figure>
+                <figure><img class="aligncenter" src="<?php echo $section->getImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getImage()->getTitle(); ?>"></figure>
             </div>
             <div class="column">
                 <h1>
