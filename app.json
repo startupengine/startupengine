@@ -12,7 +12,7 @@
     ],
     "website": "https://sitepress.herokuapp.com",
     "repository": "https://github.com/luckyrabbitllc/SitePress",
-    "logo": "http://www.luckyrabbit.info/images/lr-logo.png",
+    "logo": "https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png",
     "success_url": "/",
     "scripts": {
         "postdeploy": "php artisan command:ImportDefaultSpace"
