@@ -1,5 +1,7 @@
+![Logo](https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png = 250x250)
+
 # About SitePress
-A beautiful &amp; open-source content platform. Powered by Webslides, Laravel, and Contentful.
+SitePress is a beautiful &amp; open-source content platform. Powered by Webslides, Laravel, and Contentful.
 
 # Demo
 A demo instance is online at https://sitepress.herokuapp.com/
