@@ -78,7 +78,9 @@
     ],
     "buildpacks": [
         {
-            "url": "https://github.com/heroku/heroku-buildpack-nodejs#v83",
+            "url": "https://github.com/heroku/heroku-buildpack-nodejs#v83"
+        },
+        {
             "url": "https://github.com/heroku/heroku-buildpack-php"
         }
     ],
