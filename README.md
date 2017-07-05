@@ -26,7 +26,7 @@ $ heroku run bash --app $yourHerokuAppName
 ```
 
 ```
-$ npm-install contentful-import
+$ npm install contentful-import
 ```
 
 ```
