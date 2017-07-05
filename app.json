@@ -25,10 +25,11 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan migrate --force",
-            "npm install"
+            "npm install",
+            "npm install contentful-import --save",
+            "php artisan command:ImportDefaultSpace"
         ],
         "post-update-cmd": [
-            "php artisan command:ImportDefaultSpace"
         ]
     },
     "env": {
