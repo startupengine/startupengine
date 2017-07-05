@@ -1,4 +1,6 @@
-![Logo](https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png =100x100)
+<div><img src="https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png" width="100">
+<img src="http://www.luckyrabbit.info/images/lr-logo.png" width="100">
+</div>
 
 # About SitePress
 SitePress is a beautiful &amp; open-source content platform. Powered by Webslides, Laravel, and Contentful.
