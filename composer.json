@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "luckyrabbitllc/sitepress",
+    "description": "A beautiful & open-source content platform. Powered by Webslides, Laravel, and Contentful.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
