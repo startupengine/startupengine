@@ -3,7 +3,7 @@
 </div>
 
 # About SitePress
-SitePress is a beautiful &amp; open-source content platform. Powered by Webslides, Laravel, and Contentful.
+SitePress is a beautiful &amp; open-source content platform. Powered by [Webslides](https://github.com/webslides/webslides/), [Laravel](https://laravel.com), and [Contentful](https://contentful.com).
 
 # Demo
 A demo instance is online at https://sitepress.herokuapp.com/
