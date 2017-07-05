@@ -15,3 +15,20 @@ You will need a [Contentful](https://contentful.com) account to use SitePress. B
 You can deploy a new instance of SitePress to Heroku instantly by clicking the button below.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/SitePress)
+
+# Import Default Content
+After deploying, you will need to import the default content to your Contentful space. 
+
+Connect to your SitePress instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
+```
+heroku run bash --app $yourHerokuAppName
+```
+
+```
+$ npm-install contentful-import
+```
+
+```
+$ php artisan command:ImportDefaultSpace
+```
