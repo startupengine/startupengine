@@ -22,7 +22,7 @@ After deploying, you will need to import the default content to your Contentful 
 Connect to your SitePress instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 
 ```
-heroku run bash --app $yourHerokuAppName
+$ heroku run bash --app $yourHerokuAppName
 ```
 
 ```
