@@ -11,7 +11,7 @@
                 </h1>
                 <p class="text-intro"><?php echo $section->getSubHeading(); ?></p>
                 <p><?php echo $section->getContent(); ?></p>
-                <p>
+                <p align="left">
                     <a href="<?php echo $section->getButtonLink(); ?>" class="button ga-track" data-ga-text="<?php echo $section->getButtonText(); ?>" title="<?php echo $section->getButtonText(); ?>">
                         <?php echo $section->getButtonText(); ?>
                     </a>
