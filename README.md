@@ -32,3 +32,5 @@ $ npm-install contentful-import
 ```
 $ php artisan command:ImportDefaultSpace
 ```
+
+Your Contentful space is now be populated with content. Simply edit the existing pages or create new ones to administrate your site.
