@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/app/backups
+!/storage/app/contentful/*
 /vendor
 /.idea
 /.vagrant
@@ -9,5 +11,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
-/storage/app/backups
-!*/storage/contentful
