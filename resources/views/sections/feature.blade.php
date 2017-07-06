@@ -16,7 +16,7 @@
                 <?php if($section->getSubHeading() !== NULL) { ?>
                 <p class="text-intro"><?php echo $section->getSubHeading(); ?></p>
                 <?php } ?>
-                <p align="left"><?php echo @markdown($section->getContent()); ?></p>
+                <div align="left"><?php echo @markdown($section->getContent()); ?></div>
                 <?php if($section->getButtonText() !== NULL) { ?>
                 <p>
                     <a href="<?php echo $section->getButtonLink(); ?>" class="button ga-track" data-ga-text="<?php echo $section->getButtonText(); ?>" title="<?php echo $section->getButtonText(); ?>">
