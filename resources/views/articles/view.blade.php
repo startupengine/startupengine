@@ -114,6 +114,7 @@
 @include('components.analytics')
 @include('components.scripts')
 @include('components.mobilenav')
+@include('components.lightbox')
 
 </body>
 </html>

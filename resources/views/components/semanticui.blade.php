@@ -9,5 +9,13 @@
                 .modal('show');
             console.log('Clicked');
         });
+        $(".showLightbox").click(function () {
+            var url = $(this).find('img').attr('src');
+            console.log(url);
+            $('#lightboxImage').attr('src', url);
+            $('#lightbox')
+                .modal('show');
+            console.log('Clicked');
+        });
     });
 </script>
