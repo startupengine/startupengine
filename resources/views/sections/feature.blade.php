@@ -2,7 +2,7 @@
     <!--.wrap.longform (width:72rem=720px) = Better reading experience (90-95 characters per line) -->
     <div class="wrap">
         <div class="grid vertical-align">
-            <?php if($section->getImagePosition() !== NULL OR $section->getImagePosition() == "left") { ?>
+            <?php if($section->getImagePosition() == NULL OR $section->getImagePosition() == "left") { ?>
             <div class="column">
                 <figure><img class="aligncenter" src="<?php echo $section->getImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getImage()->getTitle(); ?>"></figure>
             </div>
