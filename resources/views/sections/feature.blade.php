@@ -19,6 +19,11 @@
                 <p align="left">
                     <a href="<?php echo $section->getButtonLink(); ?>" class="button ga-track" data-ga-text="<?php echo $section->getButtonText(); ?>" title="<?php echo $section->getButtonText(); ?>">
                         <?php echo $section->getButtonText(); ?>
+                        <?php if($section->getButtonIcon() !== NULL) { ?>
+                            <svg class="<?php echo $section->getButtonIcon(); ?>">
+                                <use xlink:href="#<?php echo $section->getButtonIcon(); ?>"></use>
+                            </svg>
+                        <?php } ?>
                     </a>
                 </p>
                 <?php } ?>
