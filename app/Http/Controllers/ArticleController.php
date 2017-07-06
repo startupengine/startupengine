@@ -30,8 +30,10 @@ class ArticleController extends Controller
             ->where('fields.slug', $slug)
             ->setInclude(2);
         $entries = $this->client->getEntries($query);
+        if (empty($entries->getItems())) {
+            abort(404);
+        }
         $article = $entries[0];
-
         $query2 = (new \Contentful\Delivery\Query());
         $query2->setContentType('defaults')
             ->where('fields.slug', 'default');
@@ -70,6 +72,9 @@ class ArticleController extends Controller
             $query->setContentType('defaults')
                 ->where('fields.slug', 'default');
             $defaults = $this->client->getEntries($query);
+            if (empty($defaults->getItems())) {
+                abort(404);
+            }
             $article = $defaults[0]->getHomepage();
             if (!empty($defaults->getItems())) {
                 $defaults = $defaults->getItems()[0];
@@ -80,14 +85,4 @@ class ArticleController extends Controller
             return view('welcome')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash);
         }
     }
-
-    public function getArticleSection($article, $section) {
-        $query = (new \Contentful\Delivery\Query());
-        $query->setContentType('section')
-            ->where('fields.slug', $section);
-        $entries = $this->client->getEntries($query);
-
-        return view('articles.section')->with('article', $entries[0]);
-    }
-
 }

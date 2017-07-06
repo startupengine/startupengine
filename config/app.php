@@ -11,7 +11,6 @@ return [
     'APP_INSTALLED' => env('APP_INSTALLED', 'FALSE'),
 
 
-
     /*
     |--------------------------------------------------------------------------
     | Contentful Credentials

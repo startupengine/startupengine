@@ -1,5 +1,5 @@
 <li style="float:left; max-width:50%;background:#fff;">
-    <a href="/article/{{ $item->getSlug() }}">
+    <a href="/{{ $item->getSlug() }}">
         <figure>
             <?php echo "<img src='".$item->getFeaturedImage()."'/>"; ?>
             <figcaption>

@@ -38,7 +38,7 @@
         });
 </script>
 
-<?php if($defaults !== NULL && $defaults->getDriftId() !== NULL) { ?>
+<?php if($defaults !== NULL && $defaults->getDriftId() !== NULL && strpos(\Request::capture()->getRequestUri(), '/admin') == false) { ?>
 <!-- Start of Async Drift Code -->
 <script>
     !function() {
