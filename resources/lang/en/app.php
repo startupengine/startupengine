@@ -25,5 +25,6 @@ return [
     'view_site' => 'View Your Site',
     'manage_content' => 'Manage Your Content',
     'sign_in_message' => 'Sign in to continue.',
+    'go_back' => 'Go Back',
 
 ];

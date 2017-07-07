@@ -21,7 +21,7 @@
             lock.show();
         </script>
         <div align="center">
-            <a href="/" class="button" style="color: #222; text-shadow: none; background: #fff;border: none;" >Go Back</a>
+            <a href="/" class="button" style="color: #222; text-shadow: none; background: #fff;border: none;" ><?php echo Lang::get('app.go_back'); ?></a>
         </div>
     </div>
 </section>
