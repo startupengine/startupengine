@@ -2,11 +2,9 @@
     "name": "SitePress",
     "description": "A beautiful & open-source content platform. Powered by Webslides, Laravel, and Contentful.",
     "keywords": [
-        "Productivity",
-        "Publishing",
         "CMS",
-        "HTML5",
         "Blog",
+        "Marketing",
         "Laravel",
         "Contentful"
     ],
@@ -24,10 +22,7 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "php artisan migrate --force",
-            "npm install",
-            "npm install contentful-import --save",
-            "php artisan command:ImportDefaultSpace"
+            "php artisan migrate --force"
         ],
         "post-update-cmd": [
         ]

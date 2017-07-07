@@ -1,3 +1,3 @@
-@extends('layouts.app')
+@extends('layouts.app-webslides')
 @section('content')
 @endsection
