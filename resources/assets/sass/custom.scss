@@ -67,3 +67,14 @@ input {
   border-radius:3px;
   padding:15px;
 }
+
+i.close.icon {
+  color: #fff !important; background: #222; padding: 5px; border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+  .ui.modal > .close {
+    top: -3rem !important;
+    right: -0.5rem !important;
+  }
+}
