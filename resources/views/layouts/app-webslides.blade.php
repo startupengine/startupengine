@@ -50,6 +50,7 @@
         }
         .auth0-lock-widget{
             box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+            border-radius:0px 0px 4px 4px !important;
         }
         .auth0-lock-tabs {
             border-radius: 4px 4px 0px 0px;
@@ -60,6 +61,7 @@
         }
         .auth0-lock-submit {
             background:#222 !important;
+            border-radius:0px 0px 4px 4px !important;
         }
         .auth0-lock-widget input {
             box-shadow:none !important;
