@@ -1,6 +1,5 @@
-<div class="ui modal" id="lightbox" style="max-width:90%;max-height:90%;">
+<div class="ui modal" id="lightbox" style="">
     <i class="close icon"></i>
-    <div class="content">
-        <img src="" id="lightboxImage">
+    <div id="lightboxImage" style="border:10px solid #fff;width:100%;height:500px;background-size:cover;background-position:center;">
     </div>
 </div>
