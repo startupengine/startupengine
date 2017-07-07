@@ -61,6 +61,9 @@
         .auth0-lock-submit {
             background:#222 !important;
         }
+        .auth0-lock-widget input {
+            box-shadow:none !important;
+        }
     </style>
 
     <!-- CSRF Token -->
