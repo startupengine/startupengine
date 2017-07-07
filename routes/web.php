@@ -14,7 +14,6 @@
 //Authentication
 Auth::routes();
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
-Route::get('/home', 'HomeController@index')->name('home');
 
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
@@ -37,6 +36,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
 
-    //Admin
+    //Users
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    //Admins
     Route::get('/app/admin', 'AdminController@index')->middleware('auth');
 });
