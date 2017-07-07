@@ -24,5 +24,6 @@ return [
     'import_complete_message' => 'Your content has been imported. You may now use SlideBlogger.',
     'view_site' => 'View Your Site',
     'manage_content' => 'Manage Your Content',
+    'sign_in_message' => 'Sign in to continue.',
 
 ];
