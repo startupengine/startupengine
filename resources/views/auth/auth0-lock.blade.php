@@ -15,9 +15,13 @@
                     params: {
                         scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
                     }
-                }
+                },
+                rememberLastLogin: false
             });
             lock.show();
         </script>
+        <div align="center">
+            <a href="/" class="button ghost">Go Back</a>
+        </div>
     </div>
 </section>

@@ -58,6 +58,9 @@
         .auth0-lock-input-email {
             padding-top:25px !important;
         }
+        .auth0-lock-submit {
+            background:#222 !important;
+        }
     </style>
 
     <!-- CSRF Token -->
@@ -96,8 +99,6 @@
 
 </head>
 <body>
-
-@include('components.nav-login')
 
 <main role="main">
     <article>
