@@ -56,7 +56,7 @@
         }
 
         .auth0-lock-input-email {
-            padding-top:25px !important;
+            padding-top:15px !important;
         }
         .auth0-lock-submit {
             background:#222 !important;
