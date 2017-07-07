@@ -1,6 +1,6 @@
 <section>
     <div class="wrap">
-        <h4 style="width:100%;text-align:center;">Sign In</h4>
+        <h4 style="width:100%;text-align:center;">Sign in to your account.</h4>
         <div id="root" style="width: 320px; margin: 40px auto; padding: 10px; border-style: none; border-width: 1px; box-sizing: border-box;">
             embedded area
         </div>
