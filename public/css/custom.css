@@ -78,10 +78,8 @@ i.close.icon {
   border-radius: 50%;
 }
 
-@media (max-width: 767px) {
-  .ui.modal > .close {
-    top: -3rem !important;
-    right: -0.5rem !important;
-  }
+.ui.modal > .close {
+  top: -3rem !important;
+  right: -0.5rem !important;
 }
 
