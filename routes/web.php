@@ -31,14 +31,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/install/import', 'ContentfulController@import');
     Route::get('/install/import-complete', 'SettingsController@importComplete');
 
-    //Articles
-    Route::get('/articles', 'ArticleController@getArticles');
-    Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    //Admins
+    Route::get('/admin', 'AdminController@index')->middleware('auth');
 
     //Users
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/app', 'HomeController@index')->name('home')->middleware('auth');
 
-    //Admins
-    Route::get('/app/admin', 'AdminController@index')->middleware('auth');
+    //Articles
+    Route::get('/articles', 'ArticleController@getArticles');
+    Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
 });
