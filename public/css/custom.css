@@ -2,14 +2,21 @@
   font-size: 150%;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
   .hiddenOnDesktop {
     display: none !important;
     opacity: 0 !important;
   }
 }
 
-@media (max-width: 600px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .hiddenOnTablet {
+    display: none !important;
+    opacity: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
   .hiddenOnMobile {
     display: none !important;
     opacity: 0 !important;
