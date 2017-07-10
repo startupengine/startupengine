@@ -7,7 +7,7 @@
                         <svg class="fa-bar-chart" style="margin: 15px 5px;">
                             <use xlink:href="#fa-bar-chart"></use>
                         </svg>
-                        Dashboard
+                        <span class="hiddenOnTablet">Dashboard</span>
                     </p>
                 </a>
             </li>
@@ -17,7 +17,7 @@
                         <svg class="fa-tasks" style="margin: 15px 5px;">
                             <use xlink:href="#fa-tasks"></use>
                         </svg>
-                        Marketing
+                        <span class="hiddenOnTablet">Marketing</span>
                     </p>
                 </a>
             </li>
@@ -27,7 +27,7 @@
                         <svg class="fa-line-chart" style="margin: 15px 5px;">
                             <use xlink:href="#fa-line-chart"></use>
                         </svg>
-                        Analytics
+                        <span class="hiddenOnTablet">Analytics</span>
                     </p>
                 </a>
             </li>
@@ -37,14 +37,14 @@
                         <svg class="fa-cog" style="margin: 15px 5px;">
                             <use xlink:href="#fa-cog"></use>
                         </svg>
-                        Settings
+                        <span class="hiddenOnTablet">Settings</span>
                     </p>
                 </a>
             </li>
             <li class="" style="">
                 <a rel="external" href="/signout" >
                     <p>
-                        Sign Out
+                        <span class="hiddenOnTablet">Sign Out</span>
                         <svg class="fa-sign-out" style="margin: 15px 5px;">
                             <use xlink:href="#fa-sign-out"></use>
                         </svg>

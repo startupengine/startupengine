@@ -115,7 +115,7 @@
                 margin-bottom:0px;
             }
         }
-        #popular, #referrers, #trafficChart {
+        #popular, #referrers, #trafficChart, #metrics {
             box-shadow:0px 10px 30px rgba(0,0,0,0.05);
             border:1px solid #ddd !important;
             padding:0px 25px 25px 25px;
@@ -137,6 +137,29 @@
                 <div id="charts" class="grid">
                     <div id="trafficChart" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
                         {!! $traffic->render() !!}
+                    </div>
+                    <div id="metrics" style="width:100%;padding:25px;margin:25px 25px 0px 25px;">
+
+                            <!-- li>a? Add blink = <ul class="flexblock metrics blink">-->
+                            <ul class="flexblock metrics border">
+                                <li>
+                                    Total # of Sessions
+                                    <span>{{ round($sessions) }}</span>
+                                </li>
+                                <li>
+                                    Total Time Spent
+                                    <span>{{ round($totalSessionTime/60/60) }} hrs</span>
+                                </li>
+                                <li>
+                                    Avg. Session Duration
+                                    <span>{{ round($avgSessionDuration/60) }} min</span>
+                                </li>
+                                <li>
+                                    Bounce Rate
+                                    <span>{{ round($bounceRate, 2) }}%</span>
+                                </li>
+                            </ul>
+
                     </div>
                     <div class="column">
                         <div id="popular">

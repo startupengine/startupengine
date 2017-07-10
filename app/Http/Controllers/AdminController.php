@@ -26,6 +26,10 @@ class AdminController extends Controller
     }
 
     public function analytics() {
+        $sessions = Analytics::performQuery(Period::days(30), 'ga:sessions')->totalsForAllResults["ga:sessions"]; //Total number of sessions
+        $bounceRate = Analytics::performQuery(Period::days(30), 'ga:bounceRate')->totalsForAllResults["ga:bounceRate"]; //Number of sessions ended from the entrance page
+        $totalSessionTime = Analytics::performQuery(Period::days(30), 'ga:sessionDuration')->totalsForAllResults["ga:sessionDuration"]; //Sum of all session durations (in seconds)
+        $avgSessionDuration = Analytics::performQuery(Period::days(30), 'ga:avgSessionDuration')->totalsForAllResults["ga:avgSessionDuration"]; //Average session duration (in seconds)
         $popular = Analytics::fetchMostVisitedPages(Period::days(30), 10);
         $referrers = Analytics::fetchTopReferrers(Period::days(30), 10);
         $traffic = Analytics::fetchTotalVisitorsAndPageViews(Period::days(30));
@@ -46,6 +50,6 @@ class AdminController extends Controller
             ->dataset('Page Views', $views)
             // Setup what the values mean
             ->labels($dates);
-        return view('admin.analytics')->with('popular', $popular)->with('referrers', $referrers)->with('traffic', $traffic);
+        return view('admin.analytics')->with('popular', $popular)->with('referrers', $referrers)->with('traffic', $traffic)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration);
     }
 }
