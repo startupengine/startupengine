@@ -190,6 +190,8 @@ return [
         Contentful\Laravel\ContentfulServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
         Auth0\Login\LoginServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -250,7 +252,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Markdown' => Indal\Markdown\Facade::class,
-        'Auth0' => Auth0\Login\Facade\Auth0::class
+        'Auth0' => Auth0\Login\Facade\Auth0::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 

@@ -32,7 +32,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/install/import-complete', 'SettingsController@importComplete');
 
     //Admins
-    Route::get('/admin', 'AdminController@index')->middleware('auth');
+    Route::get('/admin', 'AdminController@index');//->middleware('auth');
+    Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
 
     //Users
     Route::get('/app', 'HomeController@index')->name('home')->middleware('auth');

@@ -49,8 +49,8 @@
     <nav role="navigation" class="hiddenOnDesktop" style="width:100%;">
         <ul class="hiddenOnDesktop" style="margin-right:11px;">
             <li class="showMobileNav menuButton">
-                <a href="#" style="font-size:150%;">
-                    <svg class="fa-bars" style="margin: 15px 5px;">
+                <a href="#" style="font-size:125%;">
+                    <svg class="fa-bars" style="margin: 14px;">
                         <use xlink:href="#fa-bars"></use>
                     </svg>
                 </a>

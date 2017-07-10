@@ -9,6 +9,7 @@
         "andreasindal/laravel-markdown": "1.0",
         "auth0/login": "~5.0",
         "barryvdh/laravel-debugbar": "^2.4",
+        "consoletvs/charts": "4.*",
         "contentful/laravel": "^2.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

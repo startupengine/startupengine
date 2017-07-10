@@ -16,7 +16,7 @@
     -->
 
     <!-- SEO -->
-    <title>Admin</title>
+    <title>Analytics</title>
     <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
 
     <!-- URL CANONICAL -->
@@ -75,23 +75,94 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
 
+    <!-- Charts -->
+    {!! Charts::assets() !!}
+
+    <style>
+        #charts svg {
+            overflow:visible;
+        }
+        td, th, tr {
+            border-color:transparent !important;
+            border-bottom:1px solid #ddd !important;
+            overflow:hidden !important;
+            max-width:100%;
+            text-transform: none;
+        }
+        @media only screen and (max-width: 1024px) {
+            table {
+                table-layout: fixed;
+                border-collapse: collapse;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            td {
+                background: #F00;
+                padding: 20px;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 100%;
+                border: solid 1px #000;
+            }
+            #trafficChart {
+                margin:0px 25px 0px 25px !important;
+                padding:0px !important;
+                box-shadow:none !important;
+            }
+            #popular, #referrers {
+                margin-top:10px;
+                margin-bottom:0px;
+            }
+        }
+        #popular, #referrers, #trafficChart {
+            box-shadow:0px 10px 30px rgba(0,0,0,0.05);
+            border:1px solid #ddd !important;
+            padding:0px 25px 25px 25px;
+            border-radius:4px !important;
+            overflow:hidden;
+        }
+        table {
+            margin-top:0px !important;
+        }
+    </style>
 </head>
 <body>
 @include('components.nav-admin')
 <main role="main">
     <article>
-        <section class="bg-white">
-            <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
-            <span class="background dark"></span>
-            <!--.wrap = container width: 90% -->
-            <div class="wrap zoomIn" align="center" style="padding:75px 10%;min-width:300px;">
-                <h1 style="margin-bottom:15px;">
-                    <strong>Admin</strong>
-                </h1>
-                <div class="text-subtitle">Manage your website.</div>
-
+        <section class="bg-white" >
+            <div class="wrap">
+                <h4 class="hiddenOnDesktop" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Analytics</h4>
+                <div id="charts" class="grid">
+                    <div id="trafficChart" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
+                        {!! $traffic->render() !!}
+                    </div>
+                    <div class="column">
+                        <div id="popular">
+                            <table >
+                                <th colspan="2" style="text-align:center;">Most Popular Pages</th>
+                                <tr><td style="background:#fff;">Page</td><td style="background:#fff;max-width:100px !important;width:100px !important;text-align:center;">Views</td></tr>
+                                <?php foreach($popular as $page) { ?>
+                                <tr><td style="background:#fff;"><a href="<?php echo $page['url']; ?>"><?php echo $page['pageTitle']; ?></a></td><td style="background:#fff;max-width:100px !important;width:100px !important;text-align:center;"><?php echo $page['pageViews']; ?></td></tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div id="referrers">
+                            <table style="width:100%;">
+                                <th colspan="2" style="text-align:center;">Top Referrers</th>
+                                <tr><td style="background:#fff;">Page</td><td style="background:#fff;">Views</td></tr>
+                                <?php foreach($referrers as $source) {
+                                if($source['url'] !== '(direct)') { ?>
+                                <tr><td style="background:#fff;"><a href="http://<?php echo $source['url']; ?>"><?php echo mb_strimwidth($source['url'], 0, 40).'...'; ?></a></td><td style="background:#fff;max-width:100px !important;width:100px !important;text-align:center;"><?php echo $source['pageViews']; ?></td></tr>
+                                <?php } } ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- .end .wrap -->
         </section>
     </article>
 </main>

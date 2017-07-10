@@ -19,6 +19,3 @@
     <!-- .end .wrap -->
 </footer>
 <? } ?>
-
-<!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
-<script defer src="/js/svg-icons.js"></script>

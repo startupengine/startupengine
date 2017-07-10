@@ -6,7 +6,17 @@
     <div class="content">
         <ul style="list-style: none !important;">
             <li>
-                <a rel="external" href="/app/admin/marketing" >
+                <a rel="external" href="/admin/marketing" >
+                    <p>
+                        <svg class="fa-bar-chart" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-bar-chart"></use>
+                        </svg>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
+            <li>
+                <a rel="external" href="/admin/marketing" >
                     <p>
                         <svg class="fa-tasks" style="margin: 15px 5px;">
                             <use xlink:href="#fa-tasks"></use>
@@ -16,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a rel="external" href="/app/admin/settings" >
+                <a rel="external" href="/admin/settings" >
                     <p>
                         <svg class="fa-cog" style="margin: 15px 5px;">
                             <use xlink:href="#fa-cog"></use>
@@ -26,22 +36,12 @@
                 </a>
             </li>
             <li>
-                <a rel="external" href="/app/admin/analytics" >
+                <a rel="external" href="/admin/analytics" >
                     <p>
                         <svg class="fa-line-chart" style="margin: 15px 5px;">
                             <use xlink:href="#fa-line-chart"></use>
                         </svg>
                         Analytics
-                    </p>
-                </a>
-            </li>
-            <li>
-                <a rel="external" href="/app/admin/help" >
-                    <p>
-                        <svg class="fa-question-circle" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-question-circle"></use>
-                        </svg>
-                        Help
                     </p>
                 </a>
             </li>
