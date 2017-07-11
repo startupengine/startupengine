@@ -114,6 +114,28 @@
                 margin-top:10px;
                 margin-bottom:0px;
             }
+            #popular, #referrers, #trafficChart, #metrics {
+                box-shadow:0px 10px 30px rgba(0,0,0,0.05);
+                border:1px solid #ddd !important;
+                padding:0px 25px 25px 25px;
+                border-radius:4px !important;
+                overflow:hidden;
+                font-size:66% !important;
+            }
+            #metrics span {
+                font-size:166%;
+                padding:0px;
+                margin:10px;
+                line-height:25px;
+                font-weight:bold;
+            }
+            #metrics li {
+                padding:10px !important;
+            }
+            .column {
+                margin-bottom:0px !important;
+                padding-bottom:0px !important;
+            }
         }
         #popular, #referrers, #trafficChart, #metrics {
             box-shadow:0px 10px 30px rgba(0,0,0,0.05);
