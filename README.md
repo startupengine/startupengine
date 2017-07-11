@@ -35,6 +35,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Subscriptions (via Stripe)
 * [ ] Mailing Lists (via Active Campaign & MailChimp)
 * [ ] Forms/Polls (via Typeform)
+* [ ] Asset Storage (via AWS S3)
 
 ## Administrative Features
 * [x] Web traffic analytics
@@ -54,6 +55,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] REST API
 * [ ] Console Commands
 * [ ] Tests
+* [ ] Automatic Backups
 
 # Requirements
 You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
