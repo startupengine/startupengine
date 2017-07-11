@@ -38,6 +38,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Market Research
 * [ ] Social Media Post Scheduling
 * [ ] Landing Page Optimization (automated A/B testing)
+* [ ] Site Settings
 
 ## Developer Features 
 * [ ] REST API
