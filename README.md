@@ -28,7 +28,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Custom Themes
 
 ## 3rd-Party Integrations
-* [x] CMS (via Contentful)
+* [x] Mobile & Browser-Based CMS (via Contentful)
 * [x] Commenting (via Disqus)
 * [x] Chat (via Drift/Intercom)
 * [x] SSO (via Auth0)
@@ -39,6 +39,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Asset Storage (via AWS S3)
 
 ## Administrative Features
+* [x] Content analytics (topics, keywords, etc)
 * [x] Web traffic analytics
 * [ ] Conversion Analytics
 * [ ] Revenue Analytics

@@ -34,6 +34,7 @@ Route::group(['middleware' => ['web']], function () {
     //Admins
     Route::get('/admin', 'AdminController@index');//->middleware('auth');
     Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
+    Route::get('/admin/pages', 'AdminController@pages');//->middleware('auth');
 
     //Users
     Route::get('/app', 'HomeController@index')->name('home')->middleware('auth');
