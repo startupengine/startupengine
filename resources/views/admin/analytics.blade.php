@@ -147,6 +147,16 @@
         table {
             margin-top:0px !important;
         }
+        @media only screen and (max-width: 1024px) and (min-width: 768px) {
+            nav li a .hiddenOnTablet {
+                display:none;
+            }
+        }
+        @media only screen and (max-width: 1024px) and (min-width: 768px) {
+            .visibleOnTablet {
+                display: block !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -155,7 +165,7 @@
     <article>
         <section class="bg-white" >
             <div class="wrap">
-                <h4 class="hiddenOnDesktop" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Analytics</h4>
+                <h4 class="hiddenOnDesktop visibleOnTablet" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Analytics</h4>
                 <div id="charts" class="grid">
                     <div id="trafficChart" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
                         {!! $traffic->render() !!}
@@ -212,12 +222,10 @@
     </article>
 </main>
 <!--main-->
-
 @include('components.mobilenav-admin')
 
 <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
 <script defer src="/js/svg-icons.js"></script>
-
 
 </body>
 </html>

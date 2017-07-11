@@ -102,6 +102,12 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
 
+    <style>
+        nav li a span {
+
+        }
+    </style>
+
 </head>
 <body>
 
@@ -112,6 +118,7 @@
 </main>
 <!--main-->
 @include('components.lightbox')
+@include('components.mobilenav-admin')
 
 <!-- Scripts -->
 @include('auth.auth0-lock')

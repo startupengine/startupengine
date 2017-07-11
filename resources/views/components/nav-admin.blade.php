@@ -4,50 +4,80 @@
             <li class="" style="text-align:left;">
                 <a rel="external" href="/admin">
                     <p>
-                        <svg class="fa-bar-chart" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-bar-chart"></use>
+                        <svg class="fa-th-large" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-th-large"></use>
                         </svg>
                         <span class="hiddenOnTablet">Dashboard</span>
                     </p>
                 </a>
             </li>
             <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/marketing" >
+                <a rel="external" href="/admin/pages" >
                     <p>
-                        <svg class="fa-tasks" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-tasks"></use>
+                        <svg class="fa-th-list" style="margin: 15px 5px;">
+                        <use xlink:href="#fa-th-list"></use>
                         </svg>
-                        <span class="hiddenOnTablet">Marketing</span>
+                        <span class="hiddenOnTablet">Pages</span>
                     </p>
                 </a>
             </li>
             <li class="" style="text-align:left;">
                 <a rel="external" href="/admin/analytics" >
                     <p>
-                        <svg class="fa-line-chart" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-line-chart"></use>
+                        <svg class="fa-bar-chart" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-bar-chart"></use>
                         </svg>
                         <span class="hiddenOnTablet">Analytics</span>
                     </p>
                 </a>
             </li>
             <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/settings" >
+                <a rel="external" href="/admin/users" >
                     <p>
-                        <svg class="fa-cog" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-cog"></use>
+                        <svg class="fa-users" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-users"></use>
                         </svg>
-                        <span class="hiddenOnTablet">Settings</span>
+                        <span class="hiddenOnTablet">Users</span>
                     </p>
                 </a>
             </li>
-            <li class="" style="">
-                <a rel="external" href="/signout" >
+            <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/products" >
                     <p>
-                        <span class="hiddenOnTablet">Sign Out</span>
-                        <svg class="fa-sign-out" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-sign-out"></use>
+                        <svg class="fa-dropbox" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-dropbox"></use>
                         </svg>
+                        <span class="hiddenOnTablet">Products</span>
+                    </p>
+                </a>
+            </li>
+            <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/sales" >
+                    <p>
+                        <svg class="fa-usd" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-usd"></use>
+                        </svg>
+                        <span class="hiddenOnTablet">Sales</span>
+                    </p>
+                </a>
+            </li>
+            <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/marketing" >
+                    <p>
+                        <svg class="fa-commenting" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-commenting"></use>
+                        </svg>
+                        <span class="hiddenOnTablet">Marketing</span>
+                    </p>
+                </a>
+            </li>
+            <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/settings" >
+                    <p>
+                        <svg class="fa-cogs" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-cogs"></use>
+                        </svg>
+                        <span class="hiddenOnTablet">Settings</span>
                     </p>
                 </a>
             </li>

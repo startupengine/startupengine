@@ -43,6 +43,7 @@ header li.menuButton a {
   width: 50px;
   -webkit-box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
+  margin-top: -5px;
 }
 
 header .hiddenOnDesktop {
