@@ -37,33 +37,34 @@ Your Contentful space is now populated with content. Simply edit the existing pa
 
 # Roadmap
 ## Content Types / UI Components
-* [Done] Landing pages
-* [Done] Articles (blog posts)
-* [Done] Galleries
-* Products
-* Features
-* Services
-* Pricing Plans
+* [x] Landing pages
+* [x] Articles (blog posts)
+* [x] Galleries
+* [ ] Products
+* [ ] Features
+* [ ] Services
+* [ ] Pricing Plans
 
 ## 3rd-Party Integrations
-* [Done] CMS (via Contentful)
-* [Done] Commenting (via Disqus)
-* [Done] Chat (via Drift/Intercom)
-* [Done] SSO (via Auth0)
-* Store (via Shopify)
-* Subscriptions (via Stripe)
+* [x] CMS (via Contentful)
+* [x] Commenting (via Disqus)
+* [x] Chat (via Drift/Intercom)
+* [x] SSO (via Auth0)
+* [ ] Store (via Shopify)
+* [ ] Subscriptions (via Stripe)
 
 ## Administrative Features
-* [Done] Web traffic analytics
-* Conversion Analytics
-* Revenue Analytics
-* Traction Analytics (i.e., average time to conversion)
-* User Analytics (age, gender, country, income, etc)
-* Social Analytics
-* Market Research
-* Social Media Post Scheduling
-* Landing Page Optimization (automated A/B testing)
+* [x] Web traffic analytics
+* [ ] Conversion Analytics
+* [ ] Revenue Analytics
+* [ ] Traction Analytics (i.e., average time to conversion)
+* [ ] User Analytics (age, gender, country, income, etc)
+* [ ] Social Analytics
+* [ ] Market Research
+* [ ] Social Media Post Scheduling
+* [ ] Landing Page Optimization (automated A/B testing)
 
 ## Developer Features
-* REST API
-* Tests
+* [ ] REST API
+* [ ] Console Commands
+* [ ] Tests
