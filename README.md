@@ -19,11 +19,11 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [x] Landing pages
 * [x] Articles (blog posts)
 * [x] Galleries
+* [x] Lightbox
 * [ ] Products
 * [ ] Features
 * [ ] Services
 * [ ] Pricing Plans
-* [ ] Lightbox
 * [ ] Embedded Video / Video Backgrounds
 
 ## 3rd-Party Integrations
