@@ -25,6 +25,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Services
 * [ ] Pricing Plans
 * [ ] Embedded Video / Video Backgrounds
+* [ ] Custom Themes
 
 ## 3rd-Party Integrations
 * [x] CMS (via Contentful)
@@ -52,6 +53,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 
 ## Developer Features 
 * [x] Content Import/Export
+* [ ] Content Caching (to minimize 3rd-Party API calls)
 * [ ] REST API
 * [ ] Console Commands
 * [ ] Tests
