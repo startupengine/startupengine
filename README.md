@@ -27,6 +27,8 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [x] SSO (via Auth0)
 * [ ] Store (via Shopify)
 * [ ] Subscriptions (via Stripe)
+* [ ] Mailing Lists (via Active Campaign & MailChimp)
+* [ ] Forms/Polls (via Typeform)
 
 ## Administrative Features
 * [x] Web traffic analytics
