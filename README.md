@@ -41,6 +41,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Site Settings
 
 ## Developer Features 
+* [x] Content Import/Export
 * [ ] REST API
 * [ ] Console Commands
 * [ ] Tests
