@@ -8,8 +8,8 @@ SitePress is a beautiful &amp; open-source content platform. Powered by [Webslid
 # Demo
 A demo instance is online at https://sitepress.herokuapp.com/
 
-# Features
-## Content Types / UI Components
+# Features 
+## UI Components
 * [x] Landing pages
 * [x] Articles (blog posts)
 * [x] Galleries
@@ -19,6 +19,12 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Pricing Plans
 * [ ] Lightbox
 * [ ] Embedded Video / Video Backgrounds
+
+## Content Types
+* [x] Public (can be viewed by guests)
+* [ ] Private (requires password)
+* [ ] Premium (requires login)
+* [ ] Paid (requires paid subscription)
 
 ## 3rd-Party Integrations
 * [x] CMS (via Contentful)
