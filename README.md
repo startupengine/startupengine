@@ -36,10 +36,14 @@ $ php artisan command:ImportDefaultSpace
 Your Contentful space is now populated with content. Simply edit the existing pages or create new ones to administrate your site.
 
 # Roadmap
-## End-user Features
+## Content Types / UI Components
 * [Done] Landing pages
+* [Done] Articles (blog posts)
 * [Done] Galleries
-* [Done] Articles
+* Products
+* Features
+* Services
+* Pricing Plans
 
 ## 3rd-Party Integrations
 * [Done] CMS (via Contentful)
@@ -51,14 +55,14 @@ Your Contentful space is now populated with content. Simply edit the existing pa
 
 ## Administrative Features
 * [Done] Web traffic analytics
-* Conversion analytics
-* Revenue analytics
-* Traction analytics (time to conversion)
-* User analytics (age, gender, country, etc)
-* Landing page optimization (automated A/B testing)
-* Market research
-* Social media post scheduling
-* Social analytics
+* Conversion Analytics
+* Revenue Analytics
+* Traction Analytics (i.e., average time to conversion)
+* User Analytics (age, gender, country, income, etc)
+* Social Analytics
+* Market Research
+* Social Media Post Scheduling
+* Landing Page Optimization (automated A/B testing)
 
 ## Developer Features
 * REST API
