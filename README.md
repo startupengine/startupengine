@@ -8,34 +8,7 @@ SitePress is a beautiful &amp; open-source content platform. Powered by [Webslid
 # Demo
 A demo instance is online at https://sitepress.herokuapp.com/
 
-# Requirements
-You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
-
-# Deploying
-You can deploy a new instance of SitePress to Heroku instantly by clicking the button below.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/SitePress)
-
-# Import Default Content
-After deploying, you will need to import the default content to your Contentful space. 
-
-Connect to your SitePress instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-
-```
-$ heroku run bash --app $yourHerokuAppName
-```
-
-```
-$ npm install contentful-import
-```
-
-```
-$ php artisan command:ImportDefaultSpace
-```
-
-Your Contentful space is now populated with content. Simply edit the existing pages or create new ones to administrate your site.
-
-# Roadmap
+# Features
 ## Content Types / UI Components
 * [x] Landing pages
 * [x] Articles (blog posts)
@@ -64,7 +37,34 @@ Your Contentful space is now populated with content. Simply edit the existing pa
 * [ ] Social Media Post Scheduling
 * [ ] Landing Page Optimization (automated A/B testing)
 
-## Developer Features
+## Developer Features 
 * [ ] REST API
 * [ ] Console Commands
 * [ ] Tests
+
+# Requirements
+You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
+
+# Deploying
+You can deploy a new instance of SitePress to Heroku instantly by clicking the button below.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/SitePress)
+
+# Import Default Content
+After deploying, you will need to import the default content to your Contentful space. 
+
+Connect to your SitePress instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
+```
+$ heroku run bash --app $yourHerokuAppName
+```
+
+```
+$ npm install contentful-import
+```
+
+```
+$ php artisan command:ImportDefaultSpace
+```
+
+Your Contentful space is now populated with content. Simply edit the existing pages or create new ones to administrate your site.
