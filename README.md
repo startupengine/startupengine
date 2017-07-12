@@ -54,33 +54,34 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
  
 ## Analytics
 * [x] Web Traffic
-* [ ] Popular Pages
+* [x] Popular Pages
 * [ ] Search Keywords
+* [ ] Content Insights
 * [ ] Traction (Conversion Rate)
 * [ ] Sales / Subscriptions / Revenue
 * [ ] Content analytics (Topic Extraction)
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
 ## Business
-* [ ] Market Research / Audience Personas
-* [ ] Daily KPI (Key Performance Indicator) Notifications
-* [ ] User Funnel Stages
-* [ ] Social Media Post Scheduling & Approval
-* [ ] Landing Page Optimization (Automated A/B Testing)
+* [ ] User Segments
+* [ ] Market Research
 * [ ] Social Listening
+* [ ] Daily KPI Notifications
 * [ ] Automatic SEO Optimization
+* [ ] Social Media Post Scheduling
+* [ ] Landing Page Optimization (Automated A/B Testing)
 
 ## Administration
-* [ ] Admin Panel / Staff Section
+* [ ] Admin Panel
 * [ ] User Permissions
 
 ## Developer
-* [x] Content Import/Export
-* [ ] Content Caching (Minimize 3rd-Party API Calls)
+* [ ] Tests
 * [ ] REST API
 * [ ] Console Commands
-* [ ] Tests
 * [ ] Automatic Backups
+* [x] Content Import/Export
+* [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 # Requirements
 You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
