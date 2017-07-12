@@ -14,6 +14,7 @@ SitePress is a beautiful &amp; open-source content platform. Powered by [Webslid
 - [Features](#features)
     - [Publish content](#publish-content)
     - [Control access to your content](#control-access-to-your-content)
+    - [Accept Payment](#accept-payment)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
     - [Refine your business/product/concept](#refine-your-businessproductconcept)
     - [Administrate your site](#administrate-your-site)
@@ -56,6 +57,9 @@ Everything you need to launch your website/app/business idea.
 * [ ] Protected (Requires Password)
 * [ ] Premium (Requires Login)
 * [ ] Paid (Requires Paid Subscription)
+
+##### Accept Payment
+* [ ] Easy PCI-compliant credit card processing
  
 ##### Make informed decisions with analytics
 * [x] Web Traffic
