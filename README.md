@@ -39,7 +39,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
 ##### Analytics
 * [x] Google Analytics (Web Analytics)
-* [x] MixPanel (Audience Segmentation & Engagement)
+* [x] MixPanel (Audience Segmentation)
 ##### User Engagement
 * [x] Disqus (Commenting)
 * [x] Drift (Customer Support / Chat)
