@@ -1,33 +1,26 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+# SitePress: the CMS for Startups
 
-- [About SitePress](#about-sitepress)
-- [Screenshots](#screenshots)
-- [Demo](#demo)
-- [Features](#features)
-        - [Publish content](#publish-content)
-        - [Control access to your content](#control-access-to-your-content)
-        - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
-        - [Refine your business/product/concept](#refine-your-businessproductconcept)
-        - [Administrate your site](#administrate-your-site)
-        - [Developer Tools](#developer-tools)
-  - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
-        - [Hosting](#hosting)
-- [Strategic Benefits](#strategic-benefits)
-- [Requirements](#requirements)
-- [Deploying](#deploying)
-- [Import Default Content](#import-default-content)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+SitePress is a beautiful &amp; open-source content platform. Powered by [Webslides](https://github.com/webslides/webslides/), [Laravel](https://laravel.com), and [Contentful](https://contentful.com).
 
 <div>
      <img src="https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png" width="100">
      <img src="http://www.luckyrabbit.info/images/lr-logo.png" width="100">
 </div>
 
-# About SitePress
-SitePress is a beautiful &amp; open-source content platform. Powered by [Webslides](https://github.com/webslides/webslides/), [Laravel](https://laravel.com), and [Contentful](https://contentful.com).
+**Table of Contents** 
+
+- [Screenshots](#screenshots)
+- [Demo](#demo)
+- [Features](#features)
+    - [Publish content](#publish-content)
+    - [Control access to your content](#control-access-to-your-content)
+    - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
+    - [Refine your business/product/concept](#refine-your-businessproductconcept)
+    - [Administrate your site](#administrate-your-site)
+    - [Developer Tools](#developer-tools)
+- [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
+- [Strategic Benefits](#strategic-benefits)
+- [Deploying](#deploying)
 
 # Screenshots
 <div>
@@ -151,17 +144,19 @@ All of these services are **best-in-class** and offer a free plan.
 
 * **Launch your site/business/campaign in under 5 minutes**. 
 
-# Requirements
+# Deploying
+
+## Requirements
 At the minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on SitePress.
 
 Simply specify your account credentials (Space ID, API Key, and Management Token) during deployment.
 
-# Deploying
+## Deploy to Heroku
 Click the button below to deploy a new instance of SitePress to Heroku instantly.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/SitePress)
 
-# Import Default Content
+## Import Default Content
 After deploying, you will need to import the default content to your Contentful space. 
 
 Connect to your SitePress instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
