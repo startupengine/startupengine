@@ -180,6 +180,10 @@
             background: #444 !important;
             color:#fff !important;
         }
+        .ui.button.mini {
+            min-width:8em !important;
+            padding:10px 5px !important;
+        }
     </style>
 </head>
 <body>
@@ -191,16 +195,24 @@
                 <h4 class="" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Analytics</h4>
                 <div class="module" style="margin-left:25px;margin-right:25px;margin-bottom:25px;">
                     <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
+                        <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left labeled icon button basic mini">
+                            <i class="left arrow icon"></i>
+                            Next
+                        </a>
                         <a href="/admin/analytics?period=week" class="ui button basic mini <?php if($period == '7') { echo "active"; } ?>">Week</a>
                         <a href="/admin/analytics/" class="ui button basic mini <?php if($period == '30') { echo "active"; } ?>">Month</a>
                         <a href="/admin/analytics/?period=year" class="ui button basic mini <?php if($period == '365') { echo "active"; } ?>">Year</a>
+                        <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right labeled icon button basic mini <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>">
+                            <i class="right arrow icon"></i>
+                            Next
+                        </a>
                     </div>
                 </div>
                 <div id="charts" class="grid" >
                     <div id="trafficChart" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
                         {!! $traffic->render() !!}
                     </div>
-                    <div id="metrics" style="width:100%;padding:25px;margin:25px 25px 0px 25px;">
+                    <div id="metrics" style="width:100%;padding:25px;margin:25px">
                         <!-- li>a? Add blink = <ul class="flexblock metrics blink">-->
                         <ul class="flexblock metrics border">
                             <li>
@@ -220,6 +232,9 @@
                                 <span>{{ round($bounceRate, 2) }}%</span>
                             </li>
                         </ul>
+                    </div>
+                    <div id="" class="module" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
+                        {!! $countries->render() !!}
                     </div>
                 </div>
             </div>

@@ -180,6 +180,10 @@
             background: #444 !important;
             color:#fff !important;
         }
+        .ui.button.mini {
+            min-width:8em !important;
+            padding:10px 5px !important;
+        }
     </style>
 </head>
 <body>
@@ -200,7 +204,7 @@
                                 <?php } ?>
                             </table>
                             <div class="ui buttons" align="center" style="width:100%;">
-                                <a href="/admin/pages/popular" class="ui button basic default active">Show More</a>
+                                <a href="/admin/pages/popular" class="ui button basic default">More</a>
                             </div>
                         </div>
                     </div>
@@ -215,7 +219,7 @@
                                 <?php } } ?>
                             </table>
                             <div class="ui buttons" align="center" style="width:100%;">
-                                <a href="/admin/referrers" class="ui button basic default active">Show More</a>
+                                <a href="/admin/referrers" class="ui button basic default">More</a>
                             </div>
                         </div>
                     </div>
