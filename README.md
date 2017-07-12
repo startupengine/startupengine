@@ -37,7 +37,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Commenting (Disqus) [Free plan available]
 * [x] Chat (Drift/Intercom) [Free plan available]
 * [x] SSO (Auth0) [Free plan available]
-* [ ] Store (Shopify) [Free trial]
+* [ ] Store (Shopify or Square) [Free trial/plan]
 * [ ] Subscriptions (Stripe) [Free plan available]
 * [ ] Mailing Lists (MailChimp) [Free plan available]
 * [ ] Marketing Automation (Active Campaign or OptiMail) [Free plan available]
