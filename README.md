@@ -68,13 +68,12 @@ Everything you need to launch your website/app/business idea.
 * [ ] Easy & secure credit card processing
  
 ##### Make informed decisions with analytics
-* [x] Web Traffic
-* [x] Popular Pages
-* [ ] Content Insights
-* [ ] Search Keywords
-* [ ] Traction (Conversion Rate)
+* [ ] Content Analytics (top performing topics and keywords)
+* [ ] User Analytics (breakdown by age, gender, country, income, etc)
+* [x] Web Analytics (popular pages, number of visitors and pageviews)
+* [ ] Search Analytics (top search terms, traffic sources)
+* [ ] Traction (conversion rate)
 * [ ] Sales / Subscriptions / Revenue
-* [ ] Users (Age, Gender, Country, Income, Etc)
 
 ##### Refine your strategy
 * [ ] Break down your users into segments
