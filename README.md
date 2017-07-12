@@ -152,7 +152,7 @@ All of these services are **best-in-class** and offer a free plan.
  
 * You're not on your own. **Paid professional support is available when you need it**.
 
-* **Launch your site/business/campaign in under 5 minutes**. 
+* **Launch a site, business, or campaign in under 5 minutes**. 
 
 # Deploying
 
