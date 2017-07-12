@@ -73,16 +73,16 @@ Everything you need to launch your website/app/business idea.
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
 ##### Refine your strategy
-* [ ] User Segments
-* [ ] Social Listening
-* [ ] Market Research
-* [ ] Daily KPI Notifications
-* [ ] Automatic SEO Optimization
-* [ ] Social Media Post Scheduling
-* [ ] Landing Page Optimization (Automated A/B Testing)
+* [ ] Break down your users into segments
+* [ ] Monitor what people are saying about your company on social media 
+* [ ] Conduct market research to gain pychological insight into your customers
+* [ ] Get daily notifications about how your business is performing 
+* [ ] Automatically optimize your site for search engines
+* [ ] Schedule social media posts ahead of time
+* [ ] Optimize your landing page with automatic A/B Testing
 
 ##### Administrate your site
-* [ ] Admin Panel
+* [x] Admin Panel
 * [x] User Management
 * [x] Role Based Access Control for Staff (Authors, Editors, & Admins)
 
