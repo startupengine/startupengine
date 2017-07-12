@@ -94,7 +94,7 @@ Everything you need to launch your website/app/business idea.
 * [ ] Tests
 * [ ] REST API
 * [x] Auto-Scaling
-* [ ] Easy Migrations
+* [x] Easy Migrations
 * [x] Console Commands
 * [x] Server Monitoring
 * [x] Automatic Backups
