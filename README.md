@@ -39,7 +39,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] MixPanel (Audience Segmentation & Engagement)
 * [x] Disqus (Commenting)
 * [x] Drift (Customer Chat)
-* [x] Auth0 (SSO Authentication)
+* [x] Auth0 (Social Sign-On)
 * [ ] Square (E-commerce Store / Point of Sale)
 * [ ] Stripe (Subscriptions) 
 * [ ] MailChimp (Mailing List)
