@@ -6,7 +6,7 @@
 SitePress is a beautiful &amp; open-source content platform. Powered by [Webslides](https://github.com/webslides/webslides/), [Laravel](https://laravel.com), and [Contentful](https://contentful.com).
 
 # Demo
-A demo of SitePress is online at https://sitepress.herokuapp.com/
+A demo of SitePress is online at https://luckyrabbitllc.herokuapp.com/
 
 # Features 
 Everything you need to launch your website/app/business idea.
