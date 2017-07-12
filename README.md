@@ -34,8 +34,8 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 ## Analytics Features
 * [x] Web Traffic
 * [x] Popular Pages
-* [ ] Search Keywords
 * [ ] Content Insights
+* [ ] Search Keywords
 * [ ] Traction (Conversion Rate)
 * [ ] Sales / Subscriptions / Revenue
 * [ ] Content analytics (Topic Extraction)
