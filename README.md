@@ -38,7 +38,6 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Search Keywords
 * [ ] Traction (Conversion Rate)
 * [ ] Sales / Subscriptions / Revenue
-* [ ] Content analytics (Topic Extraction)
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
 ## Business Features
