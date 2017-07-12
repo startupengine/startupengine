@@ -63,10 +63,9 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 ## Integrations with 3rd-Party Services
 ##### All of these services are ***best-in-class*** and offer a free plan.
-##### Web Hosting
-* [x] Contentful (Headless CMS with Mobile & Web App)
-* [x] Amazon S3 (File Storage)
+##### Hosting
 * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
+* [x] Contentful (Content Management via Mobile or Web App)
 ##### Analytics
 * [x] Google Analytics (Web Analytics)
 * [x] MixPanel (Audience Segmentation)
