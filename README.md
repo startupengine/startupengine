@@ -124,7 +124,6 @@ All of these services are **best-in-class** and offer a free plan.
 * [ ] Stripe
 * [ ] Google AdSense
 * [ ] Square
-* [ ] Shopify
 * [x] Auth0
 * [x] Sentry
 
