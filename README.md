@@ -77,23 +77,6 @@ Everything you need to launch your website/app/business idea.
 * [x] Content Import/Export
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
-## Strategic Benefits
-* SitePress is **designed specifically for the needs of a startup** (unlike Wordpress, Ghost, and other open-source CMS offerings.)
-
-* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress lets you take advantage of others' hard work by leveraging the latest technologies, best practices, and best-in-class 3rd party services, freeing you to **focus on running your business or developing your business/product**. No plugins to install. Just enter your account information and you're good to go.
-
-* Allows anyone to **create a beautiful, feature-rich website easily**. No custom-coding required, but since it's completely Open-Source, you can modify or distribute it however you want.
-
-* **No vendor lock-in** like you might have with services like Instapage, LeadPages, Wix, etc.
-
-* **Automatic updates** via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
-
-* Don't have funding? It's ok, you can **run SitePress on your own at little or no cost**.
- 
-* You're not on your own. **Paid professional support is available when you need it**.
-
-* **Launch your site/business/campaign in under 5 minutes**. 
-
 ## Integrations with 3rd-Party Services
 All of these services are **best-in-class** and offer a free plan.
 
@@ -127,6 +110,23 @@ All of these services are **best-in-class** and offer a free plan.
 ##### Security
 * [x] Auth0 (Social Authentication)
 * [x] Sentry.io (Error Reporting)
+
+# Strategic Benefits
+* SitePress is **designed specifically for the needs of a startup** (unlike Wordpress, Ghost, and other open-source CMS offerings.)
+
+* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress leverages the latest technologies, practices, and services, so you can **focus on running your business**.
+
+* **Custom coding not required.** No plugins to install. Just enter your account information and go.
+
+* **No worries about vendor lock-in** like you might have with services like Instapage, LeadPages, Wix, etc.
+
+* **Automatic updates** via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
+
+* Don't have funding? It's ok, you can **run SitePress on your own at little or no cost**.
+ 
+* You're not on your own. **Paid professional support is available when you need it**.
+
+* **Launch your site/business/campaign in under 5 minutes**. 
 
 # Requirements
 At the minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on SitePress.
