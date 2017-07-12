@@ -77,7 +77,7 @@ Everything you need to launch your website/app/business idea.
 * [x] Content Import/Export
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
-##### Strategic Benefits
+## Strategic Benefits
 * SitePress is **designed specifically for the needs of a startup** (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
 * Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress lets you take advantage of others' hard work by leveraging the latest technologies, best practices, and best-in-class 3rd party services.
