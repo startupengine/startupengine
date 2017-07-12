@@ -69,6 +69,8 @@ class AdminController extends Controller
                 'sessions' => (int) $dateRow[1],
             ];
         });
+        $countrylist = [];
+        $countrysessions = [];
         foreach ($countries as $country) {
             $countrylist[] = $country['country'];
             $countrysessions[] = $country['sessions'];
