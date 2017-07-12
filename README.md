@@ -32,22 +32,24 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Paid (requires paid subscription)
 
 ## Integrations with 3rd-Party Services
-* [x] Headless CMS with Mobile & Webb App (Contentful) [Free plan available]
-* [x] Analytics (Google Analytics) [Free plan available]
-* [x] Commenting (Disqus) [Free plan available]
-* [x] Chat (Drift/Intercom) [Free plan available]
-* [x] SSO (Auth0) [Free plan available]
-* [ ] Store (Shopify or Square) [Free trial/plan]
-* [ ] Subscriptions (Stripe) [Free plan available]
-* [ ] Mailing Lists (MailChimp) [Free plan available]
-* [ ] Marketing Automation (Active Campaign or OptiMail) [Free plan available]
-* [ ] Forms/Polls (Typeform) [Free plan available]
-* [ ] Asset Storage (S3) [Free plan available]
-* [ ] Search (Algolia) [Free plan available]
-* [ ] Public Facing Chatbot (BotPress) [Free]
-* [ ] Internal Company Chatbot (Slack) [Free plan available]
-* [ ] Documentation Generator (Github or Swagger) [Free]
-* [ ] Ads (Google AdSense) [Free]
+##### All of these services offer a free plan.
+* [x] Headless CMS with Mobile & Webb App (Contentful)
+* [x] Hosting & Auto-Deployment (Heroku)
+* [x] Analytics (Google Analytics)
+* [x] Commenting (Disqus)
+* [x] Chat (Drift/Intercom)
+* [x] SSO (Auth0)
+* [ ] Store (Square)
+* [ ] Subscriptions (Stripe)
+* [ ] Mailing Lists (MailChimp)
+* [ ] Marketing Automation (OptiMail)
+* [ ] Forms/Polls (Typeform)
+* [ ] Asset Storage (S3)
+* [ ] Search (Algolia)
+* [ ] Public Facing Chatbot (BotPress)
+* [ ] Internal Company Chatbot (Slack)
+* [ ] Documentation Generator (Github or Swagger)
+* [ ] Ads (Google AdSense)
 
 ## Analytics
 * [x] Web Traffic
