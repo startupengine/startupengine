@@ -6,29 +6,30 @@
 SitePress is a beautiful &amp; open-source content platform. Powered by [Webslides](https://github.com/webslides/webslides/), [Laravel](https://laravel.com), and [Contentful](https://contentful.com).
 
 # Demo
-A demo instance is online at https://sitepress.herokuapp.com/
+A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 # Features 
-## Content Types
-* [x] Public (can be viewed by guests)
-* [ ] Private (requires password)
-* [ ] Premium (requires login)
-* [ ] Paid (requires paid subscription)
 
-## UI Components
+## Components
 * [x] Landing pages
-* [x] Articles (blog posts)
-* [x] Galleries
-* [x] Lightbox
+* [x] Articles
 * [ ] Products
 * [ ] Services
 * [x] Features
 * [ ] Pricing Plans
 * [x] Call To Action
 * [ ] Embedded Video / Video Backgrounds
-* [ ] Custom Themes
+* [x] Galleries
+* [x] Lightbox
+* [ ] Custom HTML/CSS/JS
 
-## 3rd-Party Integrations
+## Content Types
+* [x] Public (can be viewed by guests)
+* [ ] Private (requires password)
+* [ ] Premium (requires login)
+* [ ] Paid (requires paid subscription)
+
+## Integrations
 * [x] Mobile & Browser-Based CMS (via Contentful)
 * [x] Commenting (via Disqus)
 * [x] Chat (via Drift/Intercom)
@@ -39,22 +40,30 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Forms/Polls (via Typeform)
 * [ ] Asset Storage (via AWS S3)
 * [ ] Search (via Algolia)
+* [ ] SlackBot
 
-## Administrative Features
-* [x] Content analytics (topics, keywords, etc)
-* [x] Web traffic analytics
-* [ ] Conversion Analytics
-* [ ] Revenue Analytics
-* [ ] Traction Analytics (i.e., average time to conversion)
-* [ ] User Analytics (age, gender, country, income, etc)
-* [ ] Social Analytics
-* [ ] Market Research
-* [ ] Social Media Post Scheduling
-* [ ] Landing Page Optimization (automated A/B testing)
-* [ ] Site Settings
+## Analytics
+* [x] Web Traffic
+* [ ] Search Keywords
+* [ ] Traction (conversion rate)
+* [ ] Sales / Subscriptions / Revenue
+* [ ] Users (age, gender, country, income, retention, etc)
+* [ ] Content analytics (topic extraction)
+
+## Business
 * [ ] KPI Notifications
+* [ ] Social Media Post Scheduling & Approval
+* [ ] Landing Page Optimization (automated A/B testing)
+* [ ] User Funnels
+* [ ] Social Listening
+* [ ] Market Research
+* [ ] Automatic SEO Optimization
 
-## Developer Features 
+## Administration
+* [ ] Admin Panel / Staff Section
+* [ ] User Permissions
+
+## Developer
 * [x] Content Import/Export
 * [ ] Content Caching (to minimize 3rd-Party API calls)
 * [ ] REST API
