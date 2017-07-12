@@ -140,7 +140,7 @@ All of these services are **best-in-class** and offer a free plan.
 # Strategic Benefits
 * SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
-* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress leverages the latest technologies, practices, and services, so you can **focus on running your business**.
+* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress leverages the latest technologies, practices, and services, so you can focus on running your business.
 
 * Custom coding not required. No plugins to install. Just enter your account information and go.
 
