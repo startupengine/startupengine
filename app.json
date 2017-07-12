@@ -1,6 +1,6 @@
 {
     "name": "SitePress",
-    "description": "A beautiful & open-source content platform. Powered by Webslides, Laravel, and Contentful.",
+    "description": "A beautiful & open-source content, marketing, and analytics platform for startups.",
     "keywords": [
         "CMS",
         "Blog",
@@ -25,6 +25,7 @@
             "php artisan migrate --force"
         ],
         "post-update-cmd": [
+            "php artisan migrate --force"
         ]
     },
     "env": {
@@ -35,10 +36,6 @@
         "APP_DEBUG": {
             "description": "Set to TRUE to enable debugging messages.",
             "value": "FALSE"
-        },
-        "APP_KEY": {
-            "description": "Encryption key.",
-            "value": "base64:ICO5NZdtA3yqmcwrwz3/NUuqrZz0VwvdgocA1HWYckw="
         },
         "APP_URL": {
             "description": "URL for this app.",
