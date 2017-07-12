@@ -168,13 +168,17 @@
             border:none !important;
             text-shadow:none !important;
         }
-        .ui.button.active {
-            background: #457cde;
-            color:#fff;
+        .ui.button.basic {
+            background: #eee !important;
+            color:#222 !important;
         }
-        .ui.button:hover, .ui.button.active:hover {
-            background: #5992de;
-            color:#fff;
+        .ui.button.basic.active {
+            background: #4444dd !important;
+            color:#fff !important;
+        }
+        .ui.button.basic:hover, .ui.button.basic.active:hover {
+            background: #444 !important;
+            color:#fff !important;
         }
     </style>
 </head>
@@ -187,8 +191,9 @@
                 <h4 class="" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Analytics</h4>
                 <div class="module" style="margin-left:25px;margin-right:25px;margin-bottom:25px;">
                     <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
-                        <a href="/admin/analytics?period=week"><button class="ui button default mini">Week</button></a>
-                        <a href="/admin/analytics/"><button class="ui button default mini active">Month</button></a>
+                        <a href="/admin/analytics?period=week" class="ui button basic mini">Week</a>
+                        <a href="/admin/analytics/" class="ui button basic mini active">Month</a>
+                        <a href="/admin/analytics/?period=year" class="ui button basic mini ">Year</a>
                     </div>
                 </div>
                 <div id="charts" class="grid" >

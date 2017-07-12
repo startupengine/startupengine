@@ -168,13 +168,17 @@
             border:none !important;
             text-shadow:none !important;
         }
-        .ui.button.active {
-            background: #457cde;
-            color:#fff;
+        .ui.button.basic {
+            background: #eee !important;
+            color:#222 !important;
         }
-        .ui.button:hover, .ui.button.active:hover {
-            background: #5992de;
-            color:#fff;
+        .ui.button.basic.active {
+            background: #4444dd !important;
+            color:#fff !important;
+        }
+        .ui.button.basic:hover, .ui.button.basic.active:hover {
+            background: #444 !important;
+            color:#fff !important;
         }
     </style>
 </head>
@@ -196,7 +200,7 @@
                                 <?php } ?>
                             </table>
                             <div class="ui buttons" align="center" style="width:100%;">
-                                <a href="/admin/pages/popular" class="ui button basic default" style="box-shadow:0px 10px 50px rgba(0,0,0,0.1);">Show More</a>
+                                <a href="/admin/pages/popular" class="ui button basic default active">Show More</a>
                             </div>
                         </div>
                     </div>
@@ -211,7 +215,7 @@
                                 <?php } } ?>
                             </table>
                             <div class="ui buttons" align="center" style="width:100%;">
-                                <a href="/admin/referrers" class="ui button basic default" style="box-shadow:0px 10px 50px rgba(0,0,0,0.1);">Show More</a>
+                                <a href="/admin/referrers" class="ui button basic default active">Show More</a>
                             </div>
                         </div>
                     </div>
