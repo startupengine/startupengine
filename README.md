@@ -104,7 +104,6 @@ Everything you need to launch your website/app/business idea.
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ##### Integrations with 3rd-Party Services
-###### Note:
 All of these services are **best-in-class** and offer a free plan.
 
 * [x] Heroku
