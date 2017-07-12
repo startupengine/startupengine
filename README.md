@@ -99,7 +99,7 @@ All of these services are **best-in-class** and offer a free plan.
 ##### Hosting
 * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
 * [x] Contentful (Content Management via Mobile or Web App)
-* [ ] File storage via S3/Dropbox/Google Drive
+* [x] File storage via S3/Dropbox/Google Drive
 ##### Analytics
 * [x] Google Analytics (Web Analytics)
 * [x] MixPanel (User Segmentation)
