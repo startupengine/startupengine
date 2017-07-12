@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/pages" >
+                <a rel="external" href="/admin/content" >
                     <p>
                         <svg class="fa-th-list" style="margin: 15px 5px;">
                         <use xlink:href="#fa-th-list"></use>

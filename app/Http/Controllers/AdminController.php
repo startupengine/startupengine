@@ -26,7 +26,7 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function pages() {
+    public function content() {
         $popular = Analytics::fetchMostVisitedPages(Period::days(30), 10);
         $referrers = Analytics::fetchTopReferrers(Period::days(30), 10);
         return view('admin.pages')->with('popular', $popular)->with('referrers', $referrers);
@@ -88,7 +88,7 @@ class AdminController extends Controller
 
         $traffic = Charts::multi('bar', 'chartjs')
             // Setup the chart settings
-            ->title("Traffic for the last $days days")
+            ->title("Web Traffic")
             // A dimension of 0 means it will take 100% of the space
             ->dimensions(0, 400) // Width x Height
             ->colors(['#f44256','#ffc107','#4444dd'])
@@ -99,10 +99,10 @@ class AdminController extends Controller
             ->labels($dates);
         $countries = Charts::multi('bar', 'chartjs')
             // Setup the chart settings
-            ->title("Traffic by country for the last $days days")
+            ->title("Web Traffic by Country")
             // A dimension of 0 means it will take 100% of the space
             ->dimensions(0, 400) // Width x Height
-            ->colors(['#f44256','#ffc107','#4444dd'])
+            ->colors(['#4444dd','#ffc107','#4444dd'])
             // Setup the diferent datasets (this is a multi chart)
             ->dataset('Sessions', $countrysessions)
             // Setup what the values mean

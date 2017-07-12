@@ -196,14 +196,14 @@
                 <div class="module" style="margin-left:25px;margin-right:25px;margin-bottom:25px;">
                     <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
                         <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left labeled icon button basic mini">
-                            <i class="left arrow icon"></i>
-                            Next
+                            <i class="left chevron icon"></i>
+                            Prev
                         </a>
-                        <a href="/admin/analytics?period=week" class="ui button basic mini <?php if($period == '7') { echo "active"; } ?>">Week</a>
-                        <a href="/admin/analytics/" class="ui button basic mini <?php if($period == '30') { echo "active"; } ?>">Month</a>
-                        <a href="/admin/analytics/?period=year" class="ui button basic mini <?php if($period == '365') { echo "active"; } ?>">Year</a>
+                        <a href="/admin/analytics?period=week&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button basic mini <?php if($period == '7') { echo "active"; } ?>">Week</a>
+                        <a href="/admin/analytics/?period=month&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button basic mini <?php if($period == '30') { echo "active"; } ?>">Month</a>
+                        <a href="/admin/analytics/?period=year&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button basic mini <?php if($period == '365') { echo "active"; } ?>">Year</a>
                         <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right labeled icon button basic mini <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>">
-                            <i class="right arrow icon"></i>
+                            <i class="right chevron icon"></i>
                             Next
                         </a>
                     </div>
