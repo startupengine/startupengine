@@ -11,16 +11,17 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 # Features 
 
 ## Content Types
-* [x] Landing Pages
-* [x] Articles
-* [ ] Products
-* [ ] Services
-* [x] Features
-* [ ] Pricing Plans
+* [x] Landing Page
+* [x] Article
+* [ ] Product
+* [ ] Service
+* [x] Feature
+* [ ] Pricing Plan
 * [x] Call To Action
-* [ ] Videos
+* [ ] Video
 * [x] Image Galleries
-* [x] Multimedia Lightbox
+* [x] Attachment (any file format)
+* [ ] Form/Poll
 * [ ] Custom HTML/CSS/JS
 
 ## Content Permissions
@@ -30,23 +31,25 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Premium (requires login)
 * [ ] Paid (requires paid subscription)
 
-## 3rd-Party Integrations
-* [x] Mobile & Browser-Based CMS (via Contentful)
-* [x] Commenting (via Disqus)
-* [x] Chat (via Drift/Intercom)
-* [x] SSO (via Auth0)
-* [ ] Store (via Shopify)
-* [ ] Subscriptions (via Stripe)
-* [ ] Mailing Lists (via Active Campaign & MailChimp)
-* [ ] Forms/Polls (via Typeform)
-* [ ] Asset Storage (via AWS S3)
-* [ ] Search (via Algolia)
-* [ ] Public Chatbot (via BotPress)
-* [ ] Internal Chatbot (via Slack)
-* [ ] Documentation Generator (via Github or Swagger)
-* [ ] Ads (via Google AdSense)
+## Integrations with 3rd-Party Services
+* [x] Headless CMS with Mobile & Webb App (Contentful) [Free plan available]
+* [x] Analytics (Google Analytics) [Free plan available]
+* [x] Commenting (Disqus) [Free plan available]
+* [x] Chat (Drift/Intercom) [Free plan available]
+* [x] SSO (Auth0) [Free plan available]
+* [ ] Store (Shopify) [Free trial]
+* [ ] Subscriptions (Stripe) [Free plan available]
+* [ ] Mailing Lists (MailChimp) [Free plan available]
+* [ ] Marketing Automation (Active Campaign or OptiMail) [Free plan available]
+* [ ] Forms/Polls (Typeform) [Free plan available]
+* [ ] Asset Storage (S3) [Free plan available]
+* [ ] Search (Algolia) [Free plan available]
+* [ ] Public Facing Chatbot (BotPress) [Free]
+* [ ] Internal Company Chatbot (Slack) [Free plan available]
+* [ ] Documentation Generator (Github or Swagger) [Free]
+* [ ] Ads (Google AdSense) [Free]
 
-## Data & Analytics
+## Analytics
 * [x] Web Traffic
 * [ ] Search Keywords
 * [ ] Traction (conversion rate)
@@ -55,12 +58,12 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Content analytics (topic extraction)
 
 ## Business
-* [ ] KPI Notifications
+* [ ] Market Research (audience segment personas)
+* [ ] Daily KPI (Key Performance Indicator) Notifications
+* [ ] User Funnel Stages
 * [ ] Social Media Post Scheduling & Approval
 * [ ] Landing Page Optimization (automated A/B testing)
-* [ ] User Funnels
 * [ ] Social Listening
-* [ ] Market Research
 * [ ] Automatic SEO Optimization
 
 ## Administration
