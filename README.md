@@ -78,8 +78,8 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Square (E-commerce / Point of Sale)
 * [ ] Stripe (Subscriptions)
 ##### User Experience
-* [ ] Typeform (Forms/Polls)
 * [ ] Algolia (Search)
+* [ ] Typeform (Forms/Polls)
 ##### Security
 * [x] Auth0 (Social Sign On)
 ##### Business
