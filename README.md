@@ -9,30 +9,30 @@ SitePress is a beautiful &amp; open-source content platform. Powered by [Webslid
 A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 # Features 
-
-## Content Elements
-* [x] Landing Page
-* [x] Article
-* [ ] Product
-* [ ] Service
-* [x] Feature
+##### Everything you need to launch your website/app/business idea.
+##### Publish content
+* [x] Landing Pages
+* [x] Articles
+* [ ] Products
+* [ ] Services
+* [x] Features
 * [ ] Pricing
-* [ ] Video
+* [ ] Videos
 * [x] Gallery
-* [ ] Form/Poll
-* [ ] List/Table
+* [ ] Forms/Polls
+* [ ] Lists/Tables
 * [x] Call To Action
-* [x] File Attachment
+* [x] File Attachments
 * [ ] Custom HTML/CSS/JS
 
-## Content Types
+##### Control access to your content
 * [x] Public (Viewable by Guests)
 * [ ] Private (Unlisted, Requires Direct Link)
 * [ ] Protected (Requires Password)
 * [ ] Premium (Requires Login)
 * [ ] Paid (Requires Paid Subscription)
  
-## Analytics Features
+##### Make informed decisions with analytics
 * [x] Web Traffic
 * [x] Popular Pages
 * [ ] Content Insights
@@ -41,7 +41,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Sales / Subscriptions / Revenue
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
-## Business Features
+##### Develop your business
 * [ ] User Segments
 * [ ] Social Listening
 * [ ] Market Research
@@ -50,11 +50,11 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Social Media Post Scheduling
 * [ ] Landing Page Optimization (Automated A/B Testing)
 
-## Administration Features
+##### Administrate your site
 * [ ] Admin Panel
 * [ ] User Management
 
-## Developer Features
+##### Develop something amazing
 * [ ] Tests
 * [ ] REST API
 * [ ] Automatic Backups
@@ -81,13 +81,13 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 ##### User Experience
 * [ ] Algolia (Search)
 * [ ] Typeform (Forms/Polls)
-##### Security
-* [x] Auth0 (Social Sign On)
-* [x] Sentry.io (Error Reporting)
 ##### Business
 * [ ] Slack (Internal Chat)
 * [ ] Google AdSense (Text Ads)
 * [ ] Github (Documentation & Issue Tracking)
+##### Security
+* [x] Auth0 (Social Sign On)
+* [x] Sentry.io (Error Reporting)
 
 # Requirements
 You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
