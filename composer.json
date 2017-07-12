@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "algolia/algoliasearch-client-php": "^1.18",
         "andreasindal/laravel-markdown": "1.0",
         "auth0/login": "~5.0",
         "barryvdh/laravel-debugbar": "^2.4",
