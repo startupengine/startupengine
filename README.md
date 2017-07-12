@@ -44,6 +44,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Stripe (Subscriptions) 
 * [ ] MailChimp (Mailing List)
 * [ ] OptiMail (Onboarding Automation)
+* [ ] Drip(Email Marketing Automation)
 * [ ] Sumo (Marketing Tools)
 * [ ] Typeform (Forms/Polls)
 * [ ] Amazon S3 (Asset Storage)

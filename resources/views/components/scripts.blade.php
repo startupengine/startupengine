@@ -38,7 +38,7 @@
         });
 </script>
 
-<?php if($defaults !== NULL && $defaults->getDriftId() !== NULL && strpos(\Request::capture()->getRequestUri(), '/admin') == false) { ?>
+<?php if(config('app.ENABLE_DRIFT') !== NULL && $defaults !== NULL && $defaults->getDriftId() !== NULL && strpos(\Request::capture()->getRequestUri(), '/admin') == false) { ?>
 <!-- Drift -->
 <script>
     !function() {
@@ -64,7 +64,7 @@
 </script>
 <?php } ?>
 
-<?php if(config('app.INTERCOM_APP_ID') !== NULL) { ?>
+<?php if(config('app.ENABLE_INTERCOM') == TRUE && config('app.INTERCOM_APP_ID') !== NULL) { ?>
 <!-- Intercom -->
 <script>
     window.intercomSettings = {
@@ -72,8 +72,4 @@
     };
 </script>
 <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/kkcoq8wp';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-<?php } ?>
-
-<?php if(config('app.INTERCOM_APP_ID') !== NULL && config('app.ENABLE_SUMO') == TRUE) { ?>
-<script src="//load.sumome.com/" data-sumo-site-id="<?php echo config('app.SUMO_SITE_ID'); ?>" async="async"></script>
 <?php } ?>

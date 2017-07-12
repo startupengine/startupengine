@@ -10,7 +10,6 @@ return [
 
     'APP_INSTALLED' => env('APP_INSTALLED', 'FALSE'),
 
-
     /*
     |--------------------------------------------------------------------------
     | 3rd Party Credentials
@@ -20,10 +19,13 @@ return [
     'CONTENTFUL_MANAGEMENT_TOKEN' => env('CONTENTFUL_MANAGEMENT_TOKEN', NULL),
     'CONTENTFUL_SPACE_ID' => env('CONTENTFUL_SPACE_ID', NULL),
     'CONTENTFUL_API_KEY' => env('CONTENTFUL_API_KEY', NULL),
+    'ENABLE_INTERCOM' => env('ENABLE_INTERCOM', NULL),
     'INTERCOM_APP_ID' => env('INTERCOM_APP_ID', NULL),
+    'ENABLE_DRIFT' => env('ENABLE_DRIFT', FALSE),
+    'DRIFT_ID' => env('DRIFT_ID', NULL),
     'MIXPANEL_ID' => env('MIXPANEL_ID', NULL),
-    'ENABLE_SUMO' => env('ENABLE_SUMO', FALSE),
-    'SUMO_SITE_ID' => env('SUMO_SITE_ID', NULL),
+    'ENABLE_MAILCHIMP' => env('ENABLE_MAILCHIMP', FALSE),
+    'MAILCHIMP_API_KEY' => env('MAILCHIMP_API_KEY', NULL),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'SitePress'),
 
     /*
     |--------------------------------------------------------------------------
