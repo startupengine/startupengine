@@ -33,7 +33,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 ## Integrations with 3rd-Party Services
 ##### All of these services offer a free plan.
-* [x] Headless CMS with Mobile & Webb App (Contentful)
+* [x] Headless CMS with Mobile & Web App (Contentful)
 * [x] Hosting & Auto-Deployment (Heroku)
 * [x] Analytics (Google Analytics)
 * [x] Commenting (Disqus)
