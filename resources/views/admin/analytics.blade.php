@@ -191,9 +191,9 @@
                 <h4 class="" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Analytics</h4>
                 <div class="module" style="margin-left:25px;margin-right:25px;margin-bottom:25px;">
                     <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
-                        <a href="/admin/analytics?period=week" class="ui button basic mini">Week</a>
-                        <a href="/admin/analytics/" class="ui button basic mini active">Month</a>
-                        <a href="/admin/analytics/?period=year" class="ui button basic mini ">Year</a>
+                        <a href="/admin/analytics?period=week" class="ui button basic mini <?php if($period == '7') { echo "active"; } ?>">Week</a>
+                        <a href="/admin/analytics/" class="ui button basic mini <?php if($period == '30') { echo "active"; } ?>">Month</a>
+                        <a href="/admin/analytics/?period=year" class="ui button basic mini <?php if($period == '365') { echo "active"; } ?>">Year</a>
                     </div>
                 </div>
                 <div id="charts" class="grid" >
