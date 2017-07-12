@@ -32,29 +32,33 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Paid (Requires Paid Subscription)
 
 ## Integrations with 3rd-Party Services
-##### All of these services are best-in-class and offer a free plan.
+##### All of these services are ***best-in-class*** and offer a free plan.
+##### Web Hosting
 * [x] Contentful (Headless CMS with Mobile & Web App)
-* [x] Heroku (Hosting & Auto-Deployment, & Data Backups)
+* [x] Amazon S3 (File Storage)
+* [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
+##### Analytics
 * [x] Google Analytics (Web Analytics)
 * [x] MixPanel (Audience Segmentation & Engagement)
+##### User Engagement
 * [x] Disqus (Commenting)
-* [x] Drift (Customer Chat)
-* [x] Auth0 (Social Sign-On)
+* [x] Drift (Customer Support / Chat)
+* [ ] MailChimp (E-mail Marketing Automation)
+* [ ] BotPress (Chatbot)
+##### Sales & Subscriptions
 * [ ] Square (E-commerce / Point of Sale)
-* [ ] Stripe (Subscriptions) 
-* [ ] MailChimp (Mailing List)
-* [ ] OptiMail (Onboarding Automation)
-* [ ] Drip(Email Marketing Automation)
-* [ ] Sumo (Marketing Tools)
+* [ ] Stripe (Subscriptions)
+##### User Experience
 * [ ] Typeform (Forms/Polls)
-* [ ] Amazon S3 (Asset Storage)
 * [ ] Algolia (Search)
-* [ ] BotPress (Marketing Chatbot)
-* [ ] Slack/Slackbot (Internal Company Chat/Chatbot)
+##### Security
+* [x] Auth0 (Social Sign On)
+##### Business
+* [ ] Slack (Internal Chat)
 * [ ] Github (Documentation & Issue Tracking)
 * [ ] Google AdSense (Text Ads)
  
-## Analytics
+## Analytics Features
 * [x] Web Traffic
 * [x] Popular Pages
 * [ ] Search Keywords
@@ -64,7 +68,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Content analytics (Topic Extraction)
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
-## Business
+## Business Features
 * [ ] User Segments
 * [ ] Market Research
 * [ ] Social Listening
@@ -73,11 +77,11 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Social Media Post Scheduling
 * [ ] Landing Page Optimization (Automated A/B Testing)
 
-## Administration
+## Administration Features
 * [ ] Admin Panel
-* [ ] User Permissions
+* [ ] User Management
 
-## Developer
+## Developer Features
 * [ ] Tests
 * [ ] REST API
 * [ ] Console Commands
