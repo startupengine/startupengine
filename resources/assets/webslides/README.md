@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [WebSlides = Create stories with Karma](#webslides--create-stories-with-karma)
+    - [Download](#download)
+    - [Why WebSlides? Productivity](#why-webslides-productivity)
+  - [Features](#features)
+  - [Markup](#markup)
+    - [Vertical Sliding](#vertical-sliding)
+    - [What's in the download?](#whats-in-the-download)
+    - [CSS Syntax (classes)](#css-syntax-classes)
+    - [Extensions](#extensions)
+    - [Dive In!](#dive-in)
+    - [Credits](#credits)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # WebSlides = Create stories with Karma
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)

@@ -1,3 +1,30 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [1.3.0 (2017-04-20)](#130-2017-04-20)
+  - [Misc](#misc)
+  - [New features](#new-features)
+  - [Bugfixes](#bugfixes)
+- [1.2.1 (2017-03-02)](#121-2017-03-02)
+  - [Bugfixes](#bugfixes-1)
+- [1.2.0 (2017-03-02)](#120-2017-03-02)
+  - [New Features](#new-features)
+- [1.1.0 (2017-02-28)](#110-2017-02-28)
+  - [Bugfixes](#bugfixes-2)
+  - [New Features](#new-features-1)
+  - [Regression](#regression)
+- [1.0.0 (2017-02-23)](#100-2017-02-23)
+  - [Bugfixes](#bugfixes-3)
+  - [New Features](#new-features-2)
+  - [Breaking Changes](#breaking-changes)
+- [0.2.0 (2017-02-22)](#020-2017-02-22)
+  - [New Features](#new-features-3)
+- [0.1.1 (2017-02-11)](#011-2017-02-11)
+- [0.1.0 (2017-01-08)](#010-2017-01-08)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # 1.3.0 (2017-04-20)
 
 ## Misc

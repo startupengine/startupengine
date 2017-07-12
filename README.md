@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [About SitePress](#about-sitepress)
+- [Screenshots](#screenshots)
+- [Demo](#demo)
+- [Features](#features)
+        - [Publish content](#publish-content)
+        - [Control access to your content](#control-access-to-your-content)
+        - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
+        - [Refine your business/product/concept](#refine-your-businessproductconcept)
+        - [Administrate your site](#administrate-your-site)
+        - [Developer Tools](#developer-tools)
+  - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
+        - [Hosting](#hosting)
+- [Strategic Benefits](#strategic-benefits)
+- [Requirements](#requirements)
+- [Deploying](#deploying)
+- [Import Default Content](#import-default-content)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <div>
      <img src="https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png" width="100">
      <img src="http://www.luckyrabbit.info/images/lr-logo.png" width="100">
