@@ -11,7 +11,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 # Features 
 
 ## Components
-* [x] Landing pages
+* [x] Landing Pages
 * [x] Articles
 * [ ] Products
 * [ ] Services
