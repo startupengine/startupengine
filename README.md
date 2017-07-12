@@ -30,33 +30,6 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Protected (Requires Password)
 * [ ] Premium (Requires Login)
 * [ ] Paid (Requires Paid Subscription)
-
-## Integrations with 3rd-Party Services
-##### All of these services are ***best-in-class*** and offer a free plan.
-##### Web Hosting
-* [x] Contentful (Headless CMS with Mobile & Web App)
-* [x] Amazon S3 (File Storage)
-* [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
-##### Analytics
-* [x] Google Analytics (Web Analytics)
-* [x] MixPanel (Audience Segmentation)
-##### User Engagement
-* [x] Disqus (Commenting)
-* [x] Drift (Customer Support / Chat)
-* [ ] MailChimp (E-mail Marketing Automation)
-* [ ] BotPress (Chatbot)
-##### Sales & Subscriptions
-* [ ] Square (E-commerce / Point of Sale)
-* [ ] Stripe (Subscriptions)
-##### User Experience
-* [ ] Typeform (Forms/Polls)
-* [ ] Algolia (Search)
-##### Security
-* [x] Auth0 (Social Sign On)
-##### Business
-* [ ] Slack (Internal Chat)
-* [ ] Github (Documentation & Issue Tracking)
-* [ ] Google AdSense (Text Ads)
  
 ## Analytics Features
 * [x] Web Traffic
@@ -88,6 +61,33 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Automatic Backups
 * [x] Content Import/Export
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
+
+## Integrations with 3rd-Party Services
+##### All of these services are ***best-in-class*** and offer a free plan.
+##### Web Hosting
+* [x] Contentful (Headless CMS with Mobile & Web App)
+* [x] Amazon S3 (File Storage)
+* [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
+##### Analytics
+* [x] Google Analytics (Web Analytics)
+* [x] MixPanel (Audience Segmentation)
+##### User Engagement
+* [x] Disqus (Commenting)
+* [x] Drift (Customer Support / Chat)
+* [ ] MailChimp (E-mail Marketing Automation)
+* [ ] BotPress (Chatbot)
+##### Sales & Subscriptions
+* [ ] Square (E-commerce / Point of Sale)
+* [ ] Stripe (Subscriptions)
+##### User Experience
+* [ ] Typeform (Forms/Polls)
+* [ ] Algolia (Search)
+##### Security
+* [x] Auth0 (Social Sign On)
+##### Business
+* [ ] Slack (Internal Chat)
+* [ ] Github (Documentation & Issue Tracking)
+* [ ] Google AdSense (Text Ads)
 
 # Requirements
 You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
