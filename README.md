@@ -9,7 +9,7 @@ SitePress is a beautiful &amp; open-source content platform. Powered by [Webslid
 A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 # Features 
-##### Everything you need to launch your website/app/business idea.
+#### Everything you need to launch your website/app/business idea.
 ##### Publish content
 * [x] Landing Pages
 * [x] Articles
@@ -63,7 +63,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ## Integrations with 3rd-Party Services
-##### All of these services are ***best-in-class*** and offer a free plan.
+#### All of these services are ***best-in-class*** and offer a free plan.
 ##### Hosting
 * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
 * [x] Contentful (Content Management via Mobile or Web App)
