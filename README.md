@@ -89,11 +89,11 @@ Everything you need to launch your website/app/business idea.
 ##### Developer tools
 * [ ] Tests
 * [ ] REST API
-* [ ] Auto-Scaling
+* [x] Auto-Scaling
 * [ ] Easy Migrations
-* [ ] Console Commands
-* [ ] Server Monitoring
-* [ ] Automatic Backups
+* [x] Console Commands
+* [x] Server Monitoring
+* [x] Automatic Backups
 * [x] Free SSL Certificate
 * [x] One-click Deployment
 * [x] Content Import/Export
@@ -119,7 +119,7 @@ All of these services are **best-in-class** and offer a free plan.
 * [ ] Facebook
 * [ ] Reddit
 ##### User Experience
-* [ ] Algolia (Search)
+* [x] Algolia (Search)
 * [ ] Typeform (Forms/Polls)
 ##### Business Administration
 * [ ] Slack (Internal Chat)
