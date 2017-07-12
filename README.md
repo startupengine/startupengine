@@ -74,10 +74,10 @@ All of these services are ***best-in-class*** and offer a free plan.
 * [x] Google Analytics (Web Analytics)
 * [x] MixPanel (User Segmentation)
 ##### User Engagement
+* [ ] BotPress (Chatbots)
 * [x] Disqus (Commenting)
 * [x] Drift (Customer Support / Chat)
 * [ ] MailChimp (E-mail Marketing Automation)
-* [ ] BotPress (Chatbot)
 ##### Social Media
 * [ ] Twitter
 * [ ] Facebook
