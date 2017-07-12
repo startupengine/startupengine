@@ -138,21 +138,21 @@ All of these services are **best-in-class** and offer a free plan.
 * [x] Sentry.io (Error Reporting)
 
 # Strategic Benefits
-* SitePress is **designed specifically for the needs of a startup** (unlike Wordpress, Ghost, and other open-source CMS offerings.)
+* SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
 * Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress leverages the latest technologies, practices, and services, so you can **focus on running your business**.
 
-* **Custom coding not required.** No plugins to install. Just enter your account information and go.
+* Custom coding not required. No plugins to install. Just enter your account information and go.
 
-* **No worries about vendor lock-in** like you might have with services like Instapage, LeadPages, Wix, etc.
+* No worries about vendor lock-in like you might have with services like Instapage, LeadPages, Wix, etc.
 
-* **Automatic updates** via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
+* Automatic updates via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
 
-* Don't have funding? It's ok, you can **run SitePress on your own at little or no cost**.
+* Don't have funding? It's ok, you can run SitePress on your own at little or no cost.
  
-* You're not on your own. **Paid professional support is available when you need it**.
+* You're not on your own. Paid professional support is available when you need it.
 
-* **Launch a site, business, or campaign in under 5 minutes**. 
+* Launch a site, business, or campaign in under 5 minutes. 
 
 # Deploying
 
