@@ -33,25 +33,25 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 ## Integrations with 3rd-Party Services
 ##### All of these services are best-in-class and offer a free plan.
-* [x] Headless CMS with Mobile & Web App (Contentful)
-* [x] Hosting & Auto-Deployment, & Data Backups (Heroku)
-* [x] Analytics (Google Analytics)
-* [x] Audience Segmentation & Engagement (MixPanel)
-* [x] Commenting (Disqus)
-* [x] Chat (Drift)
-* [x] SSO (Auth0)
-* [ ] Store (Square)
-* [ ] Subscriptions (Stripe)
-* [ ] Mailing Lists (MailChimp)
-* [ ] Marketing Automation (OptiMail)
-* [ ] Forms/Polls (Typeform)
-* [ ] Asset Storage (S3)
-* [ ] Search (Algolia)
-* [ ] Public Facing Chatbot (BotPress)
-* [ ] Internal Company Chatbot (Slack)
-* [ ] Documentation (Github)
-* [ ] Ads (Google AdSense)
-
+* [x] Contentful (Headless CMS with Mobile & Web App)
+* [x] Heroku (Hosting & Auto-Deployment, & Data Backups)
+* [x] Google Analytics (Web Analytics)
+* [x] MixPanel (Audience Segmentation & Engagement)
+* [x] Disqus (Commenting)
+* [x] Drift (Customer Chat)
+* [x] Auth0 (SSO Authentication)
+* [ ] Square (E-commerce Store / Point of Sale)
+* [ ] Stripe (Subscriptions) 
+* [ ] MailChimp (Mailing List)
+* [ ] OptiMail (Marketing Automation)
+* [ ] Typeform (Forms/Polls)
+* [ ] Amazon S3 (Asset Storage)
+* [ ] Algolia (Search)
+* [ ] BotPress (Marketing Chatbot)
+* [ ] Slack/Slackbot (Internal Company Chat/Chatbot)
+* [ ] Github (Documentation & Issue Tracking)
+* [ ] Google AdSense (Text Ads)
+ 
 ## Analytics
 * [x] Web Traffic
 * [ ] Popular Pages
