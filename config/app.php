@@ -35,7 +35,7 @@ return [
     'MIXPANEL_ID' => env('MIXPANEL_ID', NULL),
 
     'ENABLE_MAILCHIMP' => env('ENABLE_MAILCHIMP', FALSE),
-    'MAILCHIMP_API_KEY' => env('MAILCHIMP_API_KEY', NULL),
+    'MAILCHIMP_APIKEY' => env('MAILCHIMPAPI_KEY', NULL),
 
     /*
     |--------------------------------------------------------------------------
@@ -209,6 +209,7 @@ return [
         Spatie\Analytics\AnalyticsServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -273,6 +274,7 @@ return [
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
 
     ],
 
