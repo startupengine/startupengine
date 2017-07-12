@@ -22,6 +22,8 @@ return [
     'CONTENTFUL_API_KEY' => env('CONTENTFUL_API_KEY', NULL),
     'INTERCOM_APP_ID' => env('INTERCOM_APP_ID', NULL),
     'MIXPANEL_ID' => env('MIXPANEL_ID', NULL),
+    'ENABLE_SUMO' => env('ENABLE_SUMO', FALSE),
+    'SUMO_SITE_ID' => env('SUMO_SITE_ID', NULL),
 
     /*
     |--------------------------------------------------------------------------
