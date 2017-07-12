@@ -74,7 +74,7 @@
     <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
-
+    @include('components.header-scripts')
 </head>
 <body>
 @include('components.nav')

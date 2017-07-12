@@ -21,6 +21,7 @@ return [
     'CONTENTFUL_SPACE_ID' => env('CONTENTFUL_SPACE_ID', NULL),
     'CONTENTFUL_API_KEY' => env('CONTENTFUL_API_KEY', NULL),
     'INTERCOM_APP_ID' => env('INTERCOM_APP_ID', NULL),
+    'MIXPANEL_ID' => env('MIXPANEL_ID', NULL),
 
     /*
     |--------------------------------------------------------------------------
