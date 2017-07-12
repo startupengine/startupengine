@@ -71,6 +71,7 @@ Everything you need to launch your website/app/business idea.
 * [x] Web analytics - popular pages, number of visitors, and pageviews
 * [ ] Content analytics - top performing topics and keywords
 * [ ] User analytics - breakdown by age, gender, country, income, etc
+* [ ] Social analytics - which platforms and posts are bringing in the most visitors?
 * [ ] Search analytics - top search terms & traffic sources
 * [ ] Sales, subscriptions, & revenue
 * [ ] Traction (conversion rate)
