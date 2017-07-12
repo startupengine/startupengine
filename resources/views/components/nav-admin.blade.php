@@ -17,7 +17,7 @@
                         <svg class="fa-th-list" style="margin: 15px 5px;">
                         <use xlink:href="#fa-th-list"></use>
                         </svg>
-                        <span class="hiddenOnTablet">Pages</span>
+                        <span class="hiddenOnTablet">Content</span>
                     </p>
                 </a>
             </li>
@@ -41,6 +41,7 @@
                     </p>
                 </a>
             </li>
+            <?php /*
             <li class="" style="text-align:left;">
                 <a rel="external" href="/admin/products" >
                     <p>
@@ -51,6 +52,17 @@
                     </p>
                 </a>
             </li>
+            */ ?>
+            <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/marketing" >
+                    <p>
+                        <svg class="fa-commenting" style="margin: 10px 5px 15px 5px;">
+                            <use xlink:href="#fa-commenting"></use>
+                        </svg>
+                        <span class="hiddenOnTablet">Marketing</span>
+                    </p>
+                </a>
+            </li>
             <li class="" style="text-align:left;">
                 <a rel="external" href="/admin/sales" >
                     <p>
@@ -58,16 +70,6 @@
                             <use xlink:href="#fa-usd"></use>
                         </svg>
                         <span class="hiddenOnTablet">Sales</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/marketing" >
-                    <p>
-                        <svg class="fa-commenting" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-commenting"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Marketing</span>
                     </p>
                 </a>
             </li>

@@ -188,7 +188,7 @@
     <article>
         <section class="bg-white" >
             <div class="wrap">
-                <h4 class="" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Pages</h4>
+                <h4 class="" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Content</h4>
                 <div id="charts" class="grid">
                     <div class="column">
                         <div id="popular">

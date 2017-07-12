@@ -38,6 +38,7 @@ A demo instance is online at https://sitepress.herokuapp.com/
 * [ ] Mailing Lists (via Active Campaign & MailChimp)
 * [ ] Forms/Polls (via Typeform)
 * [ ] Asset Storage (via AWS S3)
+* [ ] Search (via Algolia)
 
 ## Administrative Features
 * [x] Content analytics (topics, keywords, etc)
