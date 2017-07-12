@@ -108,7 +108,6 @@ All of these services are **best-in-class** and offer a free plan.
 
 * [x] Heroku
 * [x] Contentful
-* [x] File storage via S3/Dropbox/Google Drive
 * [x] Google Analytics
 * [x] MixPanel
 * [ ] BotPress
