@@ -80,13 +80,11 @@ Everything you need to launch your website/app/business idea.
 ## Strategic Benefits
 * SitePress is **designed specifically for the needs of a startup** (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
-* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress lets you take advantage of others' hard work by leveraging the latest technologies, best practices, and best-in-class 3rd party services.
- 
-* Content Management, Marketing Automation, and Analytics all work out-of-the-box, freeing you to **focus on running your business or developing your business/product**. No plugins to install. Just enter your account information and you're good to go.
+* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress lets you take advantage of others' hard work by leveraging the latest technologies, best practices, and best-in-class 3rd party services, freeing you to **focus on running your business or developing your business/product**. No plugins to install. Just enter your account information and you're good to go.
 
-* Create a beautiful website easily. No custom-coding required, but since it's completely Open-Source, you can modify or distribute it however you want.
+* Allows anyone to **create a beautiful, feature-rich website easily**. No custom-coding required, but since it's completely Open-Source, you can modify or distribute it however you want.
 
-* No vendor lock-in like you might have with services like Instapage, LeadPages, Wix, etc.
+* **No vendor lock-in** like you might have with services like Instapage, LeadPages, Wix, etc.
 
 * **Automatic updates** via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
 
