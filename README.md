@@ -69,6 +69,7 @@ All of these services are ***best-in-class*** and offer a free plan.
 ##### Hosting
 * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
 * [x] Contentful (Content Management via Mobile or Web App)
+* [ ] File storage via S3/Dropbox/Google Drive
 ##### Analytics
 * [x] Google Analytics (Web Analytics)
 * [x] MixPanel (User Segmentation)
@@ -77,18 +78,23 @@ All of these services are ***best-in-class*** and offer a free plan.
 * [x] Drift (Customer Support / Chat)
 * [ ] MailChimp (E-mail Marketing Automation)
 * [ ] BotPress (Chatbot)
-##### Sales & Subscriptions
-* [ ] Square (E-commerce / Point of Sale)
-* [ ] Stripe (Subscriptions)
+##### Social Media
+* [ ] Twitter
+* [ ] Facebook
+* [ ] Reddit
 ##### User Experience
 * [ ] Algolia (Search)
 * [ ] Typeform (Forms/Polls)
-##### Business
+##### Business Administration
 * [ ] Slack (Internal Chat)
-* [ ] Google AdSense (Text Ads)
 * [ ] Github (Documentation & Issue Tracking)
+##### Sales / Subscriptions / Monetization
+* [ ] Stripe (Subscriptions)
+* [ ] Google AdSense (Text Ads)
+* [ ] Square (E-commerce / Point of Sale)
+* [ ] Shopify (E-commerce / Point of Sale)
 ##### Security
-* [x] Auth0 (Social Sign On)
+* [x] Auth0 (Social Authentication)
 * [x] Sentry.io (Error Reporting)
 
 # Requirements
