@@ -210,6 +210,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
 
         /*
          * Application Service Providers...

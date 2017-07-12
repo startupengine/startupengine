@@ -68,7 +68,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Contentful (Content Management via Mobile or Web App)
 ##### Analytics
 * [x] Google Analytics (Web Analytics)
-* [x] MixPanel (Audience Segmentation)
+* [x] MixPanel (User Segmentation)
 ##### User Engagement
 * [x] Disqus (Commenting)
 * [x] Drift (Customer Support / Chat)

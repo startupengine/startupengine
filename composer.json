@@ -12,6 +12,7 @@
         "consoletvs/charts": "4.*",
         "contentful/laravel": "^2.0",
         "laravel/framework": "5.4.*",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.7.0",
         "spatie/laravel-analytics": "^3.0",
