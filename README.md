@@ -18,7 +18,7 @@ Powered by [Webslides](https://github.com/webslides/webslides/), [Laravel](https
     - [Control access to your content](#control-access-to-your-content)
     - [Accept payments](#accept-payments)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
-    - [Refine your business/product/concept](#refine-your-businessproductconcept)
+    - [Refine your strategy](#refine-your-strategy)
     - [Administrate your site](#administrate-your-site)
     - [Developer tools](#developer-tools)
 - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
@@ -72,7 +72,7 @@ Everything you need to launch your website/app/business idea.
 * [ ] Sales / Subscriptions / Revenue
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
-##### Refine your business/product/concept
+##### Refine your strategy
 * [ ] User Segments
 * [ ] Social Listening
 * [ ] Market Research
