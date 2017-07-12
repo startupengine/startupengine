@@ -22,6 +22,9 @@ return [
 
     'ENABLE_GOOGLE_ANALYTICS' => env('ENABLE_GOOGLE_ANALYTICS', FALSE),
 
+    'ENABLE_SENTRY' => env('ENABLE_SENTRY', FALSE),
+    'SENTRY_PUBLIC_DSN' => env('SENTRY_PUBLIC_DSN', NULL),
+
     'ENABLE_INTERCOM' => env('ENABLE_INTERCOM', NULL),
     'INTERCOM_APP_ID' => env('INTERCOM_APP_ID', NULL),
 
@@ -205,6 +208,7 @@ return [
         Auth0\Login\LoginServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -268,6 +272,7 @@ return [
         'Auth0' => Auth0\Login\Facade\Auth0::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
 
     ],
 

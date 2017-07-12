@@ -82,6 +82,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Typeform (Forms/Polls)
 ##### Security
 * [x] Auth0 (Social Sign On)
+* [x] Sentry.io (Error Reporting)
 ##### Business
 * [ ] Slack (Internal Chat)
 * [ ] Github (Documentation & Issue Tracking)
