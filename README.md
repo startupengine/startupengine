@@ -49,7 +49,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Search (Algolia)
 * [ ] Public Facing Chatbot (BotPress)
 * [ ] Internal Company Chatbot (Slack)
-* [ ] Documentation Generator (Github or Swagger)
+* [ ] Documentation (Github)
 * [ ] Ads (Google AdSense)
 
 ## Analytics
