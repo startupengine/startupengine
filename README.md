@@ -18,7 +18,7 @@ SitePress is a beautiful &amp; open-source content platform. Powered by [Webslid
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
     - [Refine your business/product/concept](#refine-your-businessproductconcept)
     - [Administrate your site](#administrate-your-site)
-    - [Developer Tools](#developer-tools)
+    - [Developer tools](#developer-tools)
 - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
 - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
@@ -84,7 +84,7 @@ Everything you need to launch your website/app/business idea.
 * [x] User Management
 * [x] Role Based Access Control for Staff (Authors, Editors, & Admins)
 
-##### Developer Tools
+##### Developer tools
 * [ ] Tests
 * [ ] REST API
 * [ ] Auto-Scaling
