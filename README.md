@@ -72,8 +72,8 @@ Everything you need to launch your website/app/business idea.
 * [ ] Console Commands
 * [ ] Server Monitoring
 * [ ] Automatic Backups
-* [x] One-click Deployment
 * [x] Free SSL Certificate
+* [x] One-click Deployment
 * [x] Content Import/Export
 * [x] No Vendor Lock-In (Completely Open-Source)
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
