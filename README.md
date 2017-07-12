@@ -25,11 +25,11 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Custom HTML/CSS/JS
 
 ## Content Permissions
-* [x] Public (can be viewed by guests)
-* [ ] Private (unlisted, requires direct link)
-* [ ] Protected (requires password)
-* [ ] Premium (requires login)
-* [ ] Paid (requires paid subscription)
+* [x] Public (Viewable by Guests)
+* [ ] Private (Unlisted, Requires Direct Link)
+* [ ] Protected (Requires Password)
+* [ ] Premium (Requires Login)
+* [ ] Paid (Requires Paid Subscription)
 
 ## Integrations with 3rd-Party Services
 ##### All of these services are best-in-class and offer a free plan.
@@ -56,17 +56,17 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Web Traffic
 * [ ] Popular Pages
 * [ ] Search Keywords
-* [ ] Traction (conversion rate)
+* [ ] Traction (Conversion Rate)
 * [ ] Sales / Subscriptions / Revenue
-* [ ] Content analytics (topic extraction)
-* [ ] Users (age, gender, country, income, retention, top users, user segments, etc)
+* [ ] Content analytics (Topic Extraction)
+* [ ] Users (Age, Gender, Country, Income, Etc)
 
 ## Business
-* [ ] Market Research (audience segment personas)
+* [ ] Market Research / Audience Personas
 * [ ] Daily KPI (Key Performance Indicator) Notifications
 * [ ] User Funnel Stages
 * [ ] Social Media Post Scheduling & Approval
-* [ ] Landing Page Optimization (automated A/B testing)
+* [ ] Landing Page Optimization (Automated A/B Testing)
 * [ ] Social Listening
 * [ ] Automatic SEO Optimization
 
@@ -76,7 +76,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 ## Developer
 * [x] Content Import/Export
-* [ ] Content Caching (to minimize 3rd-Party API calls)
+* [ ] Content Caching (Minimize 3rd-Party API Calls)
 * [ ] REST API
 * [ ] Console Commands
 * [ ] Tests
