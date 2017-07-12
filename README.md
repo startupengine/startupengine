@@ -50,7 +50,7 @@ Everything you need to launch your website/app/business idea.
 * [ ] Sales / Subscriptions / Revenue
 * [ ] Users (Age, Gender, Country, Income, Etc)
 
-##### Develop your business
+##### Refine your business/product/concept
 * [ ] User Segments
 * [ ] Social Listening
 * [ ] Market Research
@@ -61,7 +61,8 @@ Everything you need to launch your website/app/business idea.
 
 ##### Administrate your site
 * [ ] Admin Panel
-* [ ] User Management
+* [x] User Management
+* [x] Role Based Access Control for Staff (Authors, Editors, & Admins)
 
 ##### Develop something amazing
 * [ ] Tests
