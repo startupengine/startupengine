@@ -56,8 +56,8 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 ## Developer Features
 * [ ] Tests
 * [ ] REST API
-* [ ] Console Commands
 * [ ] Automatic Backups
+* [ ] Console Commands
 * [x] Content Import/Export
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
