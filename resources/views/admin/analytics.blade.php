@@ -233,8 +233,44 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="" class="module" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
-                        {!! $countries->render() !!}
+                    <div id="" class="grid" style="width:100%;">
+                        <div class="column" >
+                            <div id="" class="module" style="max-width:100%;width:100%;padding:15px 50px 25px 50px;border-radius:2px;">
+                                {!! $countries->render() !!}
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="module" style="" align="center">
+                                <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
+                                    <p>
+                                        <svg class="fa-bar-chart" style="margin: 15px 5px;">
+                                            <use xlink:href="#fa-bar-chart"></use>
+                                        </svg>
+                                        Analytics Apps
+                                    </p>
+                                    <?php if(config('app.ENABLE_GOOGLE_ANALYTICS')) { ?>
+                                        <a href="https://analytics.google.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Google Analytics<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_MIXPANEL')) { ?>
+                                        <a href="https://mixpanel.com/report" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">MixPanel<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                        <a href="https://manage.auth0.com/" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Auth0<i class="right chevron icon"></i></a>
+                                    <?php if(config('app.ENABLE_INTERCOM')) { ?>
+                                        <a href="https://app.intercom.io" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Intercom<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_DRIFT')) { ?>
+                                        <a href="https://app.drift.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Drift<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_MAILCHIMP')) { ?>
+                                        <a href="https://admin.mailchimp.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Mailchimp<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_SENTRY')) { ?>
+                                        <a href="https://sentry.io" class="ui button basic right labeled icon" target="_blank" style="width:100%;">Sentry<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
