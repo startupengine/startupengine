@@ -10,21 +10,22 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 # Features 
 
-## Content Types
+## Content Elements
 * [x] Landing Page
 * [x] Article
 * [ ] Product
 * [ ] Service
 * [x] Feature
-* [ ] Pricing Plan
-* [x] Call To Action
+* [ ] Pricing
 * [ ] Video
-* [x] Image Galleries
-* [x] Attachment (any file format)
+* [x] Gallery
 * [ ] Form/Poll
+* [ ] List/Table
+* [x] Call To Action
+* [x] File Attachment
 * [ ] Custom HTML/CSS/JS
 
-## Content Permissions
+## Content Types
 * [x] Public (Viewable by Guests)
 * [ ] Private (Unlisted, Requires Direct Link)
 * [ ] Protected (Requires Password)
@@ -85,8 +86,8 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Sentry.io (Error Reporting)
 ##### Business
 * [ ] Slack (Internal Chat)
-* [ ] Github (Documentation & Issue Tracking)
 * [ ] Google AdSense (Text Ads)
+* [ ] Github (Documentation & Issue Tracking)
 
 # Requirements
 You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
@@ -113,4 +114,5 @@ $ npm install contentful-import
 $ php artisan command:ImportDefaultSpace
 ```
 
-Your Contentful space is now populated with content. Simply edit the existing pages or create new ones to administrate your site.
+Your Contentful space is now populated with content.
+Simply edit the existing pages or create new ones to administrate your site.
