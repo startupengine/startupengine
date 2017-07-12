@@ -1,4 +1,5 @@
 *
 !contentful/*
+!docs/*
 !public/
 !.gitignore

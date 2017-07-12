@@ -5,6 +5,7 @@
 /storage/*.key
 /storage/app/backups
 !/storage/app/contentful/*
+!/storage/app/docs/*
 /vendor
 /.idea
 /.vagrant
@@ -12,3 +13,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+.DS_Store
