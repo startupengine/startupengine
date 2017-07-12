@@ -10,7 +10,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 # Features 
 
-## Components
+## Content Types
 * [x] Landing Pages
 * [x] Articles
 * [ ] Products
@@ -18,18 +18,19 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Features
 * [ ] Pricing Plans
 * [x] Call To Action
-* [ ] Embedded Video / Video Backgrounds
-* [x] Galleries
-* [x] Lightbox
+* [ ] Videos
+* [x] Image Galleries
+* [x] Multimedia Lightbox
 * [ ] Custom HTML/CSS/JS
 
-## Content Types
+## Content Permissions
 * [x] Public (can be viewed by guests)
-* [ ] Private (requires password)
+* [ ] Private (unlisted, requires direct link)
+* [ ] Protected (requires password)
 * [ ] Premium (requires login)
 * [ ] Paid (requires paid subscription)
 
-## Integrations
+## 3rd-Party Integrations
 * [x] Mobile & Browser-Based CMS (via Contentful)
 * [x] Commenting (via Disqus)
 * [x] Chat (via Drift/Intercom)
@@ -40,9 +41,12 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Forms/Polls (via Typeform)
 * [ ] Asset Storage (via AWS S3)
 * [ ] Search (via Algolia)
-* [ ] SlackBot
+* [ ] Public Chatbot (via BotPress)
+* [ ] Internal Chatbot (via Slack)
+* [ ] Documentation Generator (via Github or Swagger)
+* [ ] Ads (via Google AdSense)
 
-## Analytics
+## Data & Analytics
 * [x] Web Traffic
 * [ ] Search Keywords
 * [ ] Traction (conversion rate)
