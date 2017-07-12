@@ -106,36 +106,28 @@ Everything you need to launch your website/app/business idea.
 ##### Integrations with 3rd-Party Services
 All of these services are **best-in-class** and offer a free plan.
 
-* Hosting
-    * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
-    * [x] Contentful (Content Management via Mobile or Web App)
-    * [x] File storage via S3/Dropbox/Google Drive
-* Analytics
-    * [x] Google Analytics (Web Analytics)
-    * [x] MixPanel (User Segmentation)
-* User Engagement
-    * [ ] BotPress (Chatbots)
-    * [x] Disqus (Commenting)
-    * [x] Drift (Customer Support / Chat)
-    * [ ] MailChimp (E-mail Marketing Automation)
-* Social Media
-    * [ ] Twitter
-    * [ ] Facebook
-    * [ ] Reddit
-* User Experience
-    * [x] Algolia (Search)
-    * [ ] Typeform (Forms/Polls)
-* Business Administration
-    * [ ] Slack (Internal Chat)
-    * [ ] Github (Documentation & Issue Tracking)
-* Sales / Subscriptions / Monetization
-    * [ ] Stripe (Subscriptions)
-    * [ ] Google AdSense (Text Ads)
-    * [ ] Square (E-commerce / Point of Sale)
-    * [ ] Shopify (E-commerce / Point of Sale)
-* Security
-    * [x] Auth0 (Social Authentication)
-    * [x] Sentry.io (Error Reporting)
+* [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
+* [x] Contentful (Content Management via Mobile or Web App)
+* [x] File storage via S3/Dropbox/Google Drive
+* [x] Google Analytics (Web Analytics)
+* [x] MixPanel (User Segmentation)
+* [ ] BotPress (Chatbots)
+* [x] Disqus (Commenting)
+* [x] Drift (Customer Support / Chat)
+* [ ] MailChimp (E-mail Marketing Automation)
+* [ ] Twitter
+* [ ] Facebook
+* [ ] Reddit
+* [x] Algolia (Search)
+* [ ] Typeform (Forms/Polls)
+* [ ] Slack (Internal Chat)
+* [ ] Github (Documentation & Issue Tracking)
+* [ ] Stripe (Subscriptions)
+* [ ] Google AdSense (Text Ads)
+* [ ] Square (E-commerce / Point of Sale)
+* [ ] Shopify (E-commerce / Point of Sale)
+* [x] Auth0 (Social Authentication)
+* [x] Sentry.io (Error Reporting)
 
 ##### Strategic Benefits
 * SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
