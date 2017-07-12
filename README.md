@@ -21,8 +21,8 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
     - [Refine your strategy](#refine-your-strategy)
     - [Administrate your site](#administrate-your-site)
     - [Developer tools](#developer-tools)
-- [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
-- [Strategic Benefits](#strategic-benefits)
+    - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
+    - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
 
 # Screenshots
@@ -103,41 +103,41 @@ Everything you need to launch your website/app/business idea.
 * [x] Content Import/Export
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
-## Integrations with 3rd-Party Services
+##### Integrations with 3rd-Party Services
 All of these services are **best-in-class** and offer a free plan.
 
-##### Hosting
-* [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
-* [x] Contentful (Content Management via Mobile or Web App)
-* [x] File storage via S3/Dropbox/Google Drive
-##### Analytics
-* [x] Google Analytics (Web Analytics)
-* [x] MixPanel (User Segmentation)
-##### User Engagement
-* [ ] BotPress (Chatbots)
-* [x] Disqus (Commenting)
-* [x] Drift (Customer Support / Chat)
-* [ ] MailChimp (E-mail Marketing Automation)
-##### Social Media
-* [ ] Twitter
-* [ ] Facebook
-* [ ] Reddit
-##### User Experience
-* [x] Algolia (Search)
-* [ ] Typeform (Forms/Polls)
-##### Business Administration
-* [ ] Slack (Internal Chat)
-* [ ] Github (Documentation & Issue Tracking)
-##### Sales / Subscriptions / Monetization
-* [ ] Stripe (Subscriptions)
-* [ ] Google AdSense (Text Ads)
-* [ ] Square (E-commerce / Point of Sale)
-* [ ] Shopify (E-commerce / Point of Sale)
-##### Security
-* [x] Auth0 (Social Authentication)
-* [x] Sentry.io (Error Reporting)
+* Hosting
+    * [x] Heroku (Hosting, Auto-Deployment, & Auto-Scaling)
+    * [x] Contentful (Content Management via Mobile or Web App)
+    * [x] File storage via S3/Dropbox/Google Drive
+* Analytics
+    * [x] Google Analytics (Web Analytics)
+    * [x] MixPanel (User Segmentation)
+* User Engagement
+    * [ ] BotPress (Chatbots)
+    * [x] Disqus (Commenting)
+    * [x] Drift (Customer Support / Chat)
+    * [ ] MailChimp (E-mail Marketing Automation)
+* Social Media
+    * [ ] Twitter
+    * [ ] Facebook
+    * [ ] Reddit
+* User Experience
+    * [x] Algolia (Search)
+    * [ ] Typeform (Forms/Polls)
+* Business Administration
+    * [ ] Slack (Internal Chat)
+    * [ ] Github (Documentation & Issue Tracking)
+* Sales / Subscriptions / Monetization
+    * [ ] Stripe (Subscriptions)
+    * [ ] Google AdSense (Text Ads)
+    * [ ] Square (E-commerce / Point of Sale)
+    * [ ] Shopify (E-commerce / Point of Sale)
+* Security
+    * [x] Auth0 (Social Authentication)
+    * [x] Sentry.io (Error Reporting)
 
-# Strategic Benefits
+##### Strategic Benefits
 * SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
 * Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress leverages the latest technologies, practices, and services, so you can focus on running your business.
