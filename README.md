@@ -64,7 +64,7 @@ Everything you need to launch your website/app/business idea.
 * [x] User Management
 * [x] Role Based Access Control for Staff (Authors, Editors, & Admins)
 
-##### Develop something amazing
+##### Developer Tools
 * [ ] Tests
 * [ ] REST API
 * [ ] Auto-Scaling
@@ -75,8 +75,18 @@ Everything you need to launch your website/app/business idea.
 * [x] Free SSL Certificate
 * [x] One-click Deployment
 * [x] Content Import/Export
-* [x] No Vendor Lock-In (Completely Open-Source)
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
+
+##### Strategic Benefits
+* [x] Don't waste time and effort making your own CMS. SitePress handles your content, marketing, and analytics so you can **focus on running your business**.
+* [x] Unlike other CMS offerings (Wordpress, Ghost, etc), SitePress is **designed specifically for the needs of a modern startup**.  
+* [x] Implements the **latest technologies, best practices, and best-in-class 3rd party services**. 
+* [x] Just as important: **Doesn't include anything unnecessary**.
+* [x] Since it's **completely Open-Source**, you own your code. **No vendor lock-in** like you might have with proprietary servies like Instapage, LeadPages, Wix, etc.
+* [x] Enable **free continuous updates** ("push-to-deploy") with one click via Github & Heroku (No need to pay for Jekins, DeployBot, CodeShip, etc.)
+* [x] Don't have funding? It's ok, you can **run SitePress on your own at little or no cost**. 
+* [x] You're not on your own. **Professional support** is available when you need it.
+* [x] Get started in **under 5 minutes.** 
 
 ## Integrations with 3rd-Party Services
 All of these services are ***best-in-class*** and offer a free plan.
