@@ -92,7 +92,7 @@ All of these services are ***best-in-class*** and offer a free plan.
 * [x] Sentry.io (Error Reporting)
 
 # Requirements
-You will need a [Contentful](https://contentful.com) account to use SitePress. Before deployment you must specify your account credentials (Space ID, API Key, and Management Token).
+You will need a [Contentful](https://contentful.com) account to use SitePress. You must specify your account credentials (Space ID, API Key, and Management Token) during deployment.
 
 # Deploying
 You can deploy a new instance of SitePress to Heroku instantly by clicking the button below.
