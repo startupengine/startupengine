@@ -42,8 +42,8 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 
 ## Business Features
 * [ ] User Segments
-* [ ] Market Research
 * [ ] Social Listening
+* [ ] Market Research
 * [ ] Daily KPI Notifications
 * [ ] Automatic SEO Optimization
 * [ ] Social Media Post Scheduling
