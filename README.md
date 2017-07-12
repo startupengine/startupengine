@@ -37,7 +37,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [x] Hosting & Auto-Deployment (Heroku)
 * [x] Analytics (Google Analytics)
 * [x] Commenting (Disqus)
-* [x] Chat (Drift/Intercom)
+* [x] Chat (Drift)
 * [x] SSO (Auth0)
 * [ ] Store (Square)
 * [ ] Subscriptions (Stripe)
