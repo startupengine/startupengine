@@ -131,7 +131,7 @@ All of these services are **best-in-class** and offer a free plan.
 * [x] Sentry.io (Error Reporting)
 
 # Requirements
-You will need a free [Contentful](https://contentful.com) account to manage your content on SitePress.
+At the minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on SitePress.
 
 Simply specify your account credentials (Space ID, API Key, and Management Token) during deployment.
 
