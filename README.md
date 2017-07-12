@@ -32,7 +32,7 @@ A demo of SitePress is online at https://sitepress.herokuapp.com/
 * [ ] Paid (requires paid subscription)
 
 ## Integrations with 3rd-Party Services
-##### All of these services offer a free plan.
+##### All of these services are best-in-class and offer a free plan.
 * [x] Headless CMS with Mobile & Web App (Contentful)
 * [x] Hosting & Auto-Deployment (Heroku)
 * [x] Analytics (Google Analytics)
