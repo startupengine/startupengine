@@ -67,9 +67,15 @@ Everything you need to launch your website/app/business idea.
 ##### Develop something amazing
 * [ ] Tests
 * [ ] REST API
-* [ ] Automatic Backups
+* [ ] Auto-Scaling
+* [ ] Easy Migrations
 * [ ] Console Commands
+* [ ] Server Monitoring
+* [ ] Automatic Backups
+* [x] One-click Deployment
+* [x] Free SSL Certificate
 * [x] Content Import/Export
+* [x] No Vendor Lock-In (Completely Open-Source)
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ## Integrations with 3rd-Party Services
