@@ -94,6 +94,7 @@ All of these products are **best-in-class** and cost nothing to start.
 * [x] Heroku
 * [ ] MailChimp
 * [x] MixPanel
+* [ ] Plotly
 * [ ] Reddit
 * [x] Sentry
 * [ ] Slack

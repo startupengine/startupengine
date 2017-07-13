@@ -3,14 +3,20 @@
     <div class="ui grid sixteen wide">
         <div class="sixteen wide column" align="center">
             <div class="ui buttons fluid" align="center">
-                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left labeled icon button default mini">
+                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left icon button default mini hiddenOnDesktop hiddenOnTablet">
+                    <i class="left chevron icon"></i>
+                </a>
+                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left labeled icon button default mini hiddenOnMobile">
                     <i class="left chevron icon"></i>
                     Prev
                 </a>
                 <a href="/admin/analytics?period=week&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '7') { echo "active"; } ?>">Week</a>
                 <a href="/admin/analytics/?period=month&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '30') { echo "active"; } ?>">Month</a>
                 <a href="/admin/analytics/?period=year&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '365') { echo "active"; } ?>">Year</a>
-                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right labeled icon button default mini <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>">
+                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right icon button default mini hiddenOnDesktop hiddenOnTablet <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>">
+                    <i class="right chevron icon"></i>
+                </a>
+                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right labeled icon button default mini hiddenOnMobile <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>">
                     <i class="right chevron icon"></i>
                     Next
                 </a>
@@ -28,7 +34,33 @@
                 {!! $countries->render() !!}
             </div>
         </div>
+
+
         <div class="eight wide column">
+            <div class="ui raised basic segment module" align="center">
+                <div align="center" style="line-height:25px;">
+                    <p class="header">Stats</p>
+                    <table class="ui selectable table">
+                        <tbody>
+                        <tr>
+                            <td>Avgerage Session Duration</td>
+                            <td class="right aligned">{{ round($avgSessionDuration/60) }} Minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Total Session Time</td>
+                            <td class="right aligned">{{ round($totalSessionTime/3600) }} Hours</td>
+                        </tr>
+                        <tr>
+                            <td>Bounce Rate</td>
+                            <td class="right aligned">{{ round($bounceRate) }}%</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="eight wide column" style="display:none;">
             <div class="ui raised basic segment module" align="center">
                 <div align="center" style="line-height:25px;">
                     <p class="header">Your Apps</p>
