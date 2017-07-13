@@ -38,10 +38,6 @@ A demo of SitePress is online at https://luckyrabbitllc.herokuapp.com/
 # Features 
 Everything you need to launch & grow your website, app, or business.
 
-###### Note:
-* [x] Means this feature is currently in development.
-* [ ] Means this feature is planned for a future release.
-
 ##### Create pages
 * [x] Landing pages
 * [X] Product pages

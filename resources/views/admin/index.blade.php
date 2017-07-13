@@ -16,7 +16,7 @@
     -->
 
     <!-- SEO -->
-    <title>Admin</title>
+    <title>Analytics</title>
     <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
 
     <!-- URL CANONICAL -->
@@ -26,9 +26,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 
     <!-- Semantic UI -->
-    @include('components.semanticui')
+@include('components.semanticui')
 
-    <!-- CSS Base -->
+<!-- CSS Base -->
     <link rel="stylesheet" type='text/css' media='all' href="/css/base.css">
 
     <!-- CSS Colors -->
@@ -75,33 +75,165 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
 
+    <!-- Charts -->
+    {!! Charts::assets() !!}
+
+    <style>
+        #charts svg {
+            overflow:visible;
+        }
+        td, th, tr {
+            border-color:transparent !important;
+            border-bottom:1px solid #ddd !important;
+            overflow:hidden !important;
+            max-width:100%;
+            text-transform: none;
+        }
+        @media only screen and (max-width: 1024px) {
+            table {
+                table-layout: fixed;
+                border-collapse: collapse;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            td {
+                background: #F00;
+                padding: 20px;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 100%;
+                border: solid 1px #000;
+            }
+            #trafficChart {
+                margin:0px 25px 0px 25px !important;
+                padding:0px !important;
+                box-shadow:none !important;
+            }
+            #popular, #referrers {
+                margin-top:10px;
+                margin-bottom:0px;
+            }
+            #popular, #referrers, #trafficChart, #metrics {
+                box-shadow:0px 10px 30px rgba(0,0,0,0.05);
+                border:1px solid #ddd !important;
+                padding:0px 25px 25px 25px;
+                border-radius:4px !important;
+                overflow:hidden;
+                font-size:66% !important;
+            }
+            #metrics span {
+                font-size:166%;
+                padding:0px;
+                margin:10px;
+                line-height:25px;
+                font-weight:bold;
+            }
+            #metrics li {
+                padding:10px !important;
+            }
+            .column {
+                margin-bottom:0px !important;
+                padding-bottom:0px !important;
+            }
+        }
+        #popular, #referrers, #trafficChart, #metrics, .module {
+            box-shadow:0px 10px 30px rgba(0,0,0,0.05);
+            border:1px solid #ddd !important;
+            padding:0px 25px 25px 25px;
+            border-radius:4px !important;
+            overflow:hidden;
+        }
+        table {
+            margin-top:0px !important;
+        }
+        @media only screen and (max-width: 1024px) and (min-width: 768px) {
+            nav li a .hiddenOnTablet {
+                display:none;
+            }
+        }
+        @media only screen and (max-width: 1024px) and (min-width: 768px) {
+            .visibleOnTablet {
+                display: block !important;
+            }
+        }
+        .ui.buttons .ui.button {
+            float:none;
+            font-size:90%;
+            border-radius:4px !important;
+            margin-bottom:5px;
+        }
+        .ui.button:hover {
+            border:none !important;
+            text-shadow:none !important;
+        }
+        .ui.button.basic {
+            background: #eee !important;
+            color:#222 !important;
+        }
+        .ui.button.basic.active {
+            background: #4444dd !important;
+            color:#fff !important;
+        }
+        .ui.button.basic:hover, .ui.button.basic.active:hover {
+            background: #444 !important;
+            color:#fff !important;
+        }
+        .ui.button.mini {
+            min-width:8em !important;
+            padding:10px 5px !important;
+        }
+    </style>
 </head>
 <body>
 @include('components.nav-admin')
 <main role="main">
     <article>
-        <section class="bg-white">
-            <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
-            <span class="background dark"></span>
-            <!--.wrap = container width: 90% -->
-            <div class="wrap zoomIn" align="center" style="padding:75px 10%;min-width:300px;">
-                <h1 style="margin-bottom:15px;">
-                    <strong>Admin</strong>
-                </h1>
-                <div class="text-subtitle">Manage your website.</div>
+        <section class="bg-white" >
+            <div class="wrap">
+                <h4 class="" style="width:100%;text-align:center;margin-top:0px;margin-bottom:25px;">Dashboard</h4>
+                <div id="charts" class="grid" >
+                    <div id="" class="  grid" style="width:100%;">
+                        <div class="column">
+                            <div class="module" align="center" style="margin-top:25px;">
+                                <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
+                                    <p>
+                                        Currently Installed Apps
+                                    </p>
+                                    <?php if(config('app.ENABLE_GOOGLE_ANALYTICS')) { ?>
+                                    <a href="https://analytics.google.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Google Analytics<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_MIXPANEL')) { ?>
+                                    <a href="https://mixpanel.com/report" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">MixPanel<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <a href="https://manage.auth0.com/" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Auth0<i class="right chevron icon"></i></a>
+                                    <?php if(config('app.ENABLE_INTERCOM')) { ?>
+                                    <a href="https://app.intercom.io" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Intercom<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_DRIFT')) { ?>
+                                    <a href="https://app.drift.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Drift<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_MAILCHIMP')) { ?>
+                                    <a href="https://admin.mailchimp.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Mailchimp<i class="right chevron icon"></i></a>
+                                    <?php } ?>
+                                    <?php if(config('app.ENABLE_SENTRY')) { ?>
+                                    <a href="https://sentry.io" class="ui button basic right labeled icon" target="_blank" style="width:100%;text-align:left;">Sentry<i class="right chevron icon"></i></a>
+                                    <?php } ?>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- .end .wrap -->
         </section>
     </article>
 </main>
 <!--main-->
-
 @include('components.mobilenav-admin')
 
 <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
 <script defer src="/js/svg-icons.js"></script>
-
 
 </body>
 </html>
