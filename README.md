@@ -14,7 +14,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 - [Screenshots](#screenshots)
 - [Demo](#demo)
 - [Features](#features)
-    - [Publish content](#publish-content)
+    - [Create pages](#create-pages)
     - [Control access to your content](#control-access-to-your-content)
     - [Accept payments](#accept-payments)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
@@ -42,27 +42,31 @@ Everything you need to launch your website/app/business idea.
 * [x] Means this feature is currently in development.
 * [ ] Means this feature is planned for a future release.
 
-##### Publish content
-* [x] Landing Pages
-* [x] Articles
-* [X] Products
-* [X] Services
-* [x] Features
-* [x] Pricing
-* [x] Videos
-* [x] Gallery
-* [x] Forms/Polls
-* [x] Lists/Tables
-* [x] Call To Action
-* [x] File Attachments
+##### Create pages
+* [x] Landing pages
+* [X] Product pages
+* [X] Service pages
+* [x] Blog posts
+* [x] Help/documentation
+
+##### Pages can include
+* [x] Text
+* [x] Featured image
+* [x] Image gallery
+* [x] Video
+* [x] File attachment
+* [x] Forms/polls
+* [x] Lists/tables
+* [x] Pricing plans
+* [x] Call-to-action
 * [x] Custom HTML/JS
 
 ##### Control access to your content
-* [x] Public (Viewable by Guests)
-* [ ] Private (Unlisted, Requires Direct Link)
-* [ ] Protected (Requires Password)
-* [ ] Premium (Requires Login)
-* [ ] Paid (Requires Paid Subscription)
+* [x] Public (viewable by guests)
+* [ ] Private (unlisted, requires direct link)
+* [ ] Protected (requires password)
+* [ ] Premium (requires login)
+* [ ] Paid (requires paid subscription)
 
 ##### Accept Payments 
 * [ ] For Products
