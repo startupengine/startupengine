@@ -47,19 +47,19 @@ Everything you need to launch your website/app/business idea.
 * [x] Landing pages
 * [X] Product pages
 * [X] Service pages
+* [X] Subscription pages
 * [x] Blog posts
 * [x] Help/documentation
 
 ##### Components you can include in a page
 * [x] Text
-* [x] Featured image
-* [x] Image gallery
-* [x] Video
-* [x] File attachment
-* [x] Forms/polls
+* [x] Images
+* [x] Videos
+* [x] File attachments
 * [x] Lists/tables
 * [x] Pricing plans
 * [x] Call-to-action
+* [x] Forms
 * [x] Custom HTML/JS
 
 ##### Control access to your content
