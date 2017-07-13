@@ -1,4 +1,4 @@
-<div class="ui huge borderless main menu">
+<div class="ui huge borderless main menu" style="border-radius:0px;">
     <div class="ui container">
 
         <div class="item hiddenOnDesktop" align="center">

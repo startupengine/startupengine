@@ -48,6 +48,16 @@
             color:#fff !important;
         }
     </style>
+    <script>
+        $( document ).ready(function() {
+            $('.message .close')
+            .on('click', function() {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+        });
+    </script>
 </head>
 <body>
     @include('components.nav-admin')

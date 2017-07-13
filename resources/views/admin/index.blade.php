@@ -2,29 +2,29 @@
 @section('content')
 <div class="ui grid sixteen wide">
     <div class="sixteen wide column">
-        <div class="ui message">
-            <div class="header">
+        <div class="ui message" align="center">
+            <div class="header" align="center">
                 Notice
             </div>
-            <p>We just updated our privacy policy here to better service our customers. We recommend reviewing the changes.</p>
+            <p>You have <span class="ui label">23</span> unread notifications. You can read them in the <a href="/admin/notifications">notification center</a>.</p>
         </div>
         <div class="ui fluid ordered steps">
             <div class="completed step">
                 <div class="content">
                     <div class="title">Create a SitePress account</div>
-                    <div class="description">http://sitepress.com/site/luckyrabbit</div>
+                    <div class="description">https://sitepress.co/site/luckyrabbit</div>
                 </div>
             </div>
             <div class="completed step">
                 <div class="content">
-                    <div class="title">Billing</div>
-                    <div class="description">Enter billing information</div>
+                    <div class="title">Make some content</div>
+                    <div class="description">Create landing pages & blog posts</div>
                 </div>
             </div>
             <div class="active step">
                 <div class="content">
                     <div class="title">Integrate Apps</div>
-                    <div class="description">Enter your account details</div>
+                    <div class="description">Add chat, analytics, etc</div>
                 </div>
             </div>
         </div>
