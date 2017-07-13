@@ -15,14 +15,13 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 - [Demo](#demo)
 - [Features](#features)
     - [Create pages](#create-pages)
-    - [Components](#components-you-can-include-in-a-page)
     - [Control access to your content](#control-access-to-your-content)
+    - [Implement a marketing strategy](#implement-a-marketing-strategy)        
     - [Accept payments](#accept-payments)
-    - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
-    - [Refine your strategy](#refine-your-strategy)
-    - [Administrate your site](#administrate-your-site)
-    - [Developer tools](#developer-tools)
+    - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)   
+    - [Optimize your site](#optimize-your-site)
     - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
+    - [Admin & Developer tools](#admin-and-developer-tools)
     - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
 
@@ -51,23 +50,16 @@ Everything you need to launch your website/app/business idea.
 * [x] Blog posts
 * [x] Help/documentation
 
-##### Components you can include in a page
-* [x] Text
-* [x] Images
-* [x] Videos
-* [x] File attachments
-* [x] Lists/tables
-* [x] Pricing plans
-* [x] Call-to-action
-* [x] Forms
-* [x] Custom HTML/JS
-
 ##### Control access to your content
 * [x] Public (viewable by guests)
 * [ ] Private (unlisted, requires direct link)
 * [ ] Protected (requires password)
 * [ ] Premium (requires login)
 * [ ] Paid (requires paid subscription)
+
+##### Implement a marketing strategy
+* [ ] Conduct market research to gain insight into your customers' psychological needs
+* [ ] Schedule social media posts ahead of time 
 
 ##### Accept Payments 
 * [ ] For Products
@@ -78,41 +70,19 @@ Everything you need to launch your website/app/business idea.
 * [ ] All without leaving the site
  
 ##### Make informed decisions with analytics
-* [x] Web analytics - visitors and page views
-* [ ] Content analytics - top performing pages, topics, and keywords
-* [ ] Product analytics - top selling products
-* [ ] Subscription analytics - top selling subscriptions
-* [ ] User analytics - breakdown by age, gender, country, etc
-* [ ] Social analytics - which platforms and posts are bringing in the most visitors?
-* [ ] Search analytics - top search terms & traffic sources
-* [ ] Traction (conversion rate)
+* [x] Visitors, page views, and clicks
+* [ ] Top performing pages, topics, and keywords
+* [ ] Top selling products, services, & subscriptions
+* [ ] Top search terms & traffic sources
+* [ ] User insights (age, gender, country, etc)
+* [ ] Social insights (mentions, likes, etc)
+* [ ] Traction (how quickly guests convert into customers)
 
-##### Refine your strategy
-* [ ] Monitor user funnels to know where you're gaining/losing leads
-* [ ] Monitor what people are saying about your company on social media 
-* [ ] Conduct market research to gain insight into your customers' psychological needs
-* [ ] Optimize your landing page with automatic A/B Testing
+##### Optimize your site 
+* [ ] Improve your landing page with automatic A/B Testing
 * [ ] Automatically optimize your site for search engines
 * [ ] Get daily notifications about how your business is performing
-* [ ] Schedule social media posts ahead of time
-
-##### Administrate your site
-* [x] Admin Panel
-* [x] User Management
-* [x] Role Based Access Control for Staff (Authors, Editors, & Admins)
-
-##### Developer tools
-* [ ] Tests
-* [ ] REST API
-* [x] Auto-Scaling
-* [x] Easy Migrations
-* [x] Console Commands
-* [x] Server Monitoring
-* [x] Automatic Backups
-* [x] Free SSL Certificate
-* [x] One-click Deployment
-* [x] Content Import/Export
-* [ ] Content Caching (Minimize 3rd-Party API Calls)
+* [ ] Track user funnels to know where to focus your efforts (no configuration required)
 
 ##### Integrations with 3rd-Party Services
 All of these products are **best-in-class** and cost nothing to start.
@@ -138,6 +108,21 @@ All of these products are **best-in-class** and cost nothing to start.
 * [ ] Twitter
 * [ ] Typeform
 * [ ] ZenHub
+
+##### Admin & Developer tools
+* [x] Admin Panel
+* [ ] Tests
+* [ ] REST API
+* [x] Auto-Scaling
+* [x] Easy Migrations
+* [x] Console Commands
+* [x] Server Monitoring
+* [x] Automatic Backups
+* [x] Free SSL Certificate
+* [x] One-click Deployment
+* [x] Content Import/Export
+* [x] Role Based Access Control
+* [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ##### Strategic Benefits
 * SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
