@@ -208,7 +208,8 @@
                     </div>
                 </div>
                 <div id="charts" class="grid" >
-                    <div id="trafficChart" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;">
+                    <div id="trafficChart" style="width:100%;margin-left:25px; margin-right:25px; padding:15px 50px 25px 50px;border-radius:2px;text-align:center;">
+                        <p style="margin-bottom:0px;">{{ $daterange }}</p>
                         {!! $traffic->render() !!}
                     </div>
                     <div id="metrics" style="width:100%;padding:25px;margin:25px 25px 0px 25px">
@@ -236,9 +237,6 @@
                         <div class="ui equal height column" >
                             <div id="" class="module" style="max-width:100%;width:100%;padding:15px 50px 25px 50px;border-radius:2px;text-align:center;">
                                 <p style="margin-bottom:0px;">
-                                    <svg class="fa-globe" style="margin: 15px 5px;">
-                                        <use xlink:href="#fa-globe"></use>
-                                    </svg>
                                     Visitors by Country
                                 </p>
                                 {!! $countries->render() !!}
@@ -247,9 +245,6 @@
                         <div class="column">
                             <div id="referrers" style="text-align:center;">
                                 <p style="margin-bottom:0px;margin-top:15px;">
-                                    <svg class="fa-link" style="margin: 15px 5px;">
-                                        <use xlink:href="#fa-link"></use>
-                                    </svg>
                                     Top Referrers
                                 </p>
                                 <table style="width:100%;text-align:left;">
@@ -266,9 +261,6 @@
                             <div class="module" align="center" style="margin-top:25px;">
                                 <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
                                     <p>
-                                        <svg class="fa-bar-chart" style="margin: 15px 5px;">
-                                            <use xlink:href="#fa-bar-chart"></use>
-                                        </svg>
                                         Currently Installed Apps
                                     </p>
                                     <?php if(config('app.ENABLE_GOOGLE_ANALYTICS')) { ?>
