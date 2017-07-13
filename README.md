@@ -132,6 +132,7 @@ All of these products are **best-in-class** and cost nothing to start.
 * [ ] Stripe
 * [ ] Twitter
 * [ ] Typeform
+* [ ] ZenHub
 
 ##### Strategic Benefits
 * SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
