@@ -258,33 +258,6 @@
                                     <a href="/admin/referrers" class="ui button basic default">More</a>
                                 </div>
                             </div>
-                            <div class="module" align="center" style="margin-top:25px;">
-                                <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
-                                    <p>
-                                        Currently Installed Apps
-                                    </p>
-                                    <?php if(config('app.ENABLE_GOOGLE_ANALYTICS')) { ?>
-                                    <a href="https://analytics.google.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Google Analytics<i class="right chevron icon"></i></a>
-                                    <?php } ?>
-                                    <?php if(config('app.ENABLE_MIXPANEL')) { ?>
-                                    <a href="https://mixpanel.com/report" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">MixPanel<i class="right chevron icon"></i></a>
-                                    <?php } ?>
-                                    <a href="https://manage.auth0.com/" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Auth0<i class="right chevron icon"></i></a>
-                                    <?php if(config('app.ENABLE_INTERCOM')) { ?>
-                                    <a href="https://app.intercom.io" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Intercom<i class="right chevron icon"></i></a>
-                                    <?php } ?>
-                                    <?php if(config('app.ENABLE_DRIFT')) { ?>
-                                    <a href="https://app.drift.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Drift<i class="right chevron icon"></i></a>
-                                    <?php } ?>
-                                    <?php if(config('app.ENABLE_MAILCHIMP')) { ?>
-                                    <a href="https://admin.mailchimp.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Mailchimp<i class="right chevron icon"></i></a>
-                                    <?php } ?>
-                                    <?php if(config('app.ENABLE_SENTRY')) { ?>
-                                    <a href="https://sentry.io" class="ui button basic right labeled icon" target="_blank" style="width:100%;text-align:left;">Sentry<i class="right chevron icon"></i></a>
-                                    <?php } ?>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
