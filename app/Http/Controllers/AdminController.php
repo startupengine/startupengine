@@ -85,10 +85,10 @@ class AdminController extends Controller
         $next = $next->addDays($days);
         $prev = $period->startDate->copy();
         $prev = $prev->subDays($days);
-
-        $traffic = Charts::multi('bar', 'chartjs')
+        $title = $period->startDate->toFormattedDateString().' to '.$period->endDate->toFormattedDateString();
+        $traffic = Charts::multi('area', 'chartjs')
             // Setup the chart settings
-            ->title("Web Traffic")
+            ->title($title)
             // A dimension of 0 means it will take 100% of the space
             ->dimensions(0, 400) // Width x Height
             ->colors(['#f44256','#ffc107','#4444dd'])

@@ -143,6 +143,7 @@
             padding:0px 25px 25px 25px;
             border-radius:4px !important;
             overflow:hidden;
+            height:100%;
         }
         table {
             margin-top:0px !important;
@@ -233,13 +234,13 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="" class="grid" style="width:100%;">
-                        <div class="column" >
+                    <div id="" class="  grid" style="width:100%;">
+                        <div class="ui equal height column" >
                             <div id="" class="module" style="max-width:100%;width:100%;padding:15px 50px 25px 50px;border-radius:2px;">
                                 {!! $countries->render() !!}
                             </div>
                         </div>
-                        <div class="column">
+                        <div class="ui equal height column">
                             <div class="module" style="" align="center">
                                 <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
                                     <p>
