@@ -40,7 +40,7 @@ class ArticleController extends Controller
         $defaults = $this->client->getEntries($query2);
         if(!empty($defaults->getItems())) { $defaults = $defaults->getItems()[0]; } else { $defaults = NULL; }
         $splash = $article->getSplashClass();
-        return view('articles.view')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash);
+        return view('articles.view')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash)->with('analyticsCategory', 'article');
     }
 
     public function getArticles($slug = NULL) {
@@ -57,7 +57,7 @@ class ArticleController extends Controller
             ->where('fields.slug', 'default');
         $defaults = $this->client->getEntries($query2);
         if(!empty($defaults->getItems())) { $defaults = $defaults->getItems()[0]; } else { $defaults = NULL; }
-        return view('articles.index')->with('articles', $articles)->with('defaults', $defaults);
+        return view('articles.index')->with('articles', $articles)->with('defaults', $defaults)->with('analyticsCategory', 'articles');
     }
 
     public function getHomepage() {
@@ -82,7 +82,7 @@ class ArticleController extends Controller
                 $defaults = NULL;
             }
             $splash = $article->getSplashClass();
-            return view('welcome')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash);
+            return view('welcome')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash)->with('analyticsCategory', 'homepage');
         }
     }
 }
