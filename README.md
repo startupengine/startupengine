@@ -20,7 +20,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
     - [Accept payments](#accept-payments)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)   
     - [Optimize your site](#optimize-your-site)
-    - [Integrations with 3rd-Party Services](#integrations-with-3rd-party-services)
+    - [Integrate with 3rd-Party Services](#integrate-with-3rd-party-services)
     - [Admin & Developer tools](#admin-and-developer-tools)
     - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
@@ -40,9 +40,7 @@ Everything you need to launch & grow your website, app, or business.
 
 ##### Create pages
 * [x] Landing pages
-* [X] Product pages
-* [X] Service pages
-* [X] Subscription pages
+* [X] Products, services, and subscriptions
 * [x] Blog posts
 * [x] Help/documentation
 
@@ -68,7 +66,7 @@ Everything you need to launch & grow your website, app, or business.
 ##### Make informed decisions with analytics
 * [ ] Get daily notifications about how your business is performing, including:
 * [x] Visitors, page views, and clicks
-* [ ] Top performing pages, topics, and keywords
+* [x] Top performing pages, topics, and keywords
 * [ ] Top selling products, services, & subscriptions
 * [ ] Top search terms & traffic sources
 * [ ] User insights (age, gender, country, etc)
@@ -80,7 +78,7 @@ Everything you need to launch & grow your website, app, or business.
 * [ ] Automatically optimize your site for search engines
 * [ ] Track user funnels to know where to focus your efforts (no configuration required)
 
-##### Integrations with 3rd-Party Services
+##### Integrate with 3rd-Party Services
 All of these products are **best-in-class** and cost nothing to start.
 
 * [x] Auth0
