@@ -36,7 +36,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 A demo of SitePress is online at https://luckyrabbitllc.herokuapp.com/
 
 # Features 
-Everything you need to launch your website/app/business idea.
+Everything you need to launch your website, app, or business idea.
 
 ###### Note:
 * [x] Means this feature is currently in development.
