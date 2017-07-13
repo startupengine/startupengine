@@ -106,26 +106,26 @@ Everything you need to launch your website/app/business idea.
 ##### Integrations with 3rd-Party Services
 All of these services are **best-in-class** and offer a free plan.
 
-* [x] Heroku
-* [x] Contentful
-* [x] Google Analytics
-* [x] MixPanel
+* [x] Auth0
+* [x] Algolia
 * [ ] BotPress
+* [x] Contentful
 * [x] Disqus
 * [x] Drift
-* [ ] MailChimp
-* [ ] Twitter
 * [ ] Facebook
-* [ ] Reddit
-* [x] Algolia
-* [ ] Typeform
-* [ ] Slack
-* [ ] Github
-* [ ] Stripe
+* [x] Github
 * [ ] Google AdSense
-* [ ] Square
-* [x] Auth0
+* [x] Google Analytics
+* [x] Heroku
+* [ ] MailChimp
+* [x] MixPanel
+* [ ] Reddit
 * [x] Sentry
+* [ ] Slack
+* [ ] Square
+* [ ] Stripe
+* [ ] Twitter
+* [ ] Typeform
 
 ##### Strategic Benefits
 * SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
