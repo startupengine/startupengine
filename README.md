@@ -49,9 +49,9 @@ Everything you need to launch your website/app/business idea.
 * [X] Services
 * [x] Features
 * [ ] Pricing
-* [ ] Videos
+* [x] Videos
 * [x] Gallery
-* [ ] Forms/Polls
+* [x] Forms/Polls
 * [ ] Lists/Tables
 * [x] Call To Action
 * [x] File Attachments
