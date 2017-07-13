@@ -22,22 +22,22 @@
                 </a>
             </li>
             <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/marketing" >
+                    <p>
+                        <svg class="fa-commenting" style="margin: 10px 5px 15px 5px;">
+                            <use xlink:href="#fa-commenting"></use>
+                        </svg>
+                        <span class="hiddenOnTablet">Marketing</span>
+                    </p>
+                </a>
+            </li>
+            <li class="" style="text-align:left;">
                 <a rel="external" href="/admin/analytics" >
                     <p>
                         <svg class="fa-bar-chart" style="margin: 15px 5px;">
                             <use xlink:href="#fa-bar-chart"></use>
                         </svg>
                         <span class="hiddenOnTablet">Analytics</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/users" >
-                    <p>
-                        <svg class="fa-users" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-users"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Users</span>
                     </p>
                 </a>
             </li>
@@ -54,22 +54,22 @@
             </li>
             */ ?>
             <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/marketing" >
-                    <p>
-                        <svg class="fa-commenting" style="margin: 10px 5px 15px 5px;">
-                            <use xlink:href="#fa-commenting"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Marketing</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
                 <a rel="external" href="/admin/sales" >
                     <p>
                         <svg class="fa-usd" style="margin: 15px 5px;">
                             <use xlink:href="#fa-usd"></use>
                         </svg>
                         <span class="hiddenOnTablet">Sales</span>
+                    </p>
+                </a>
+            </li>
+            <li class="" style="text-align:left;">
+                <a rel="external" href="/admin/users" >
+                    <p>
+                        <svg class="fa-users" style="margin: 15px 5px;">
+                            <use xlink:href="#fa-users"></use>
+                        </svg>
+                        <span class="hiddenOnTablet">Users</span>
                     </p>
                 </a>
             </li>

@@ -245,7 +245,7 @@
                         <div class="column">
                             <div id="referrers" style="text-align:center;">
                                 <p style="margin-bottom:0px;margin-top:15px;">
-                                    Top Referrers
+                                    Top Traffic Sources
                                 </p>
                                 <table style="width:100%;text-align:left;">
                                     <tr><td style="background:#fff;">Page</td><td style="background:#fff;">Referrals</td></tr>
