@@ -1,99 +1,58 @@
-<header role="banner" style="opacity:1;background:transparent;padding-left:35px;padding-right:35px;" class="light">
-    <nav role="navigation" class="navbar hiddenOnMobile" style="width: 100%;">
-        <ul style="text-align:left;justify-content: flex-start;">
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin">
-                    <p>
-                        <svg class="fa-th-large" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-th-large"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Dashboard</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/content" >
-                    <p>
-                        <svg class="fa-th-list" style="margin: 15px 5px;">
-                        <use xlink:href="#fa-th-list"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Content</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/marketing" >
-                    <p>
-                        <svg class="fa-commenting" style="margin: 10px 5px 15px 5px;">
-                            <use xlink:href="#fa-commenting"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Marketing</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/analytics" >
-                    <p>
-                        <svg class="fa-bar-chart" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-bar-chart"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Analytics</span>
-                    </p>
-                </a>
-            </li>
-            <?php /*
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/products" >
-                    <p>
-                        <svg class="fa-dropbox" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-dropbox"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Products</span>
-                    </p>
-                </a>
-            </li>
-            */ ?>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/sales" >
-                    <p>
-                        <svg class="fa-usd" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-usd"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Sales</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/users" >
-                    <p>
-                        <svg class="fa-users" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-users"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Users</span>
-                    </p>
-                </a>
-            </li>
-            <li class="" style="text-align:left;">
-                <a rel="external" href="/admin/settings" >
-                    <p>
-                        <svg class="fa-cogs" style="margin: 15px 5px;">
-                            <use xlink:href="#fa-cogs"></use>
-                        </svg>
-                        <span class="hiddenOnTablet">Settings</span>
-                    </p>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <nav role="navigation" class="hiddenOnDesktop" style="width:100%;">
-        <ul class="hiddenOnDesktop" style="margin-right:11px;">
-            <li class="showMobileNav menuButton">
-                <a href="#" style="font-size:125%;">
-                    <svg class="fa-bars" style="margin: 14px;">
-                        <use xlink:href="#fa-bars"></use>
-                    </svg>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<div class="ui huge borderless main menu">
+    <div class="ui container">
+
+        <div class="item hiddenOnDesktop" align="center">
+            <a href="/"><img src="/images/sitepress-logo.png" style="max-height:40px;margin-top:3px;"></a>
+        </div>
+        <div class="left labeled icon menu hiddenOnTablet hiddenOnMobile">
+            <div class="item" align="center">
+                <a href="/"><img src="/images/sitepress-logo.png" style="max-height:40px;margin-top:3px;"></a>
+            </div>
+            <a class="item" href="/admin"><i class="block layout icon"></i> Dashboard</a>
+            <a class="item" href="/admin/research"><i class="idea icon"></i> Strategy</a>
+            <a class="item" href="/admin/content"><i class="list icon"></i> Content</a>
+            <a class="item" href="/admin/marketing"><i class="calendar icon"></i> Post Scheduling</a>
+            <a class="item" href="/admin/analytics"><i class="bar chart icon"></i> Analytics</a>
+            <a class="item" href="/admin/sales"><i class="dollar icon"></i> Sales</a>
+            <a class="item" href="/admin/users"><i class="user outline icon"></i> Users</a>
+            <a class="item" href="/admin/users"><i class="setting icon"></i> Settings</a>
+        </div>
+
+        <div class="right menu hiddenOnMobile" >
+            <div class="ui simple dropdown item">
+                <div style="position: relative; text-align: right; width:100%; ">
+                    <div><i class="bars icon"></i></div>
+                </div>
+                <div class="menu">
+                    <div class="">
+                        <a class="item" href="/admin"><i class="user circle outline icon"></i> Your Account</a>
+                        <a class="item" href="/admin/users"><i class="sign out icon"></i> Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right menu hiddenOnDesktop" >
+            <div class="ui simple dropdown item">
+                <div style="position: relative; text-align: right; width:100%; ">
+                    <div><i class="bars icon"></i></div>
+                </div>
+                <div class="menu">
+                    <div class="">
+                        <a class="item" href="/admin"><i class="block layout icon"></i> Dashboard</a>
+                        <a class="item" href="/admin/research"><i class="idea icon"></i> Strategy</a>
+                        <a class="item" href="/admin/content"><i class="list icon"></i> Content</a>
+                        <a class="item" href="/admin/marketing"><i class="calendar icon"></i> Post Scheduling</a>
+                        <a class="item" href="/admin/analytics"><i class="bar chart icon"></i> Analytics</a>
+                        <a class="item" href="/admin/sales"><i class="dollar icon"></i> Sales</a>
+                        <a class="item" href="/admin/users"><i class="user outline icon"></i> Users</a>
+                        <a class="item" href="/admin/users"><i class="setting icon"></i> Settings</a>
+                        <a class="item" href="/admin" style="border-top:1px solid #ddd;"><i class="user circle outline icon"></i> Your Account</a>
+                        <a class="item" href="/admin/users"><i class="sign out icon"></i> Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
