@@ -1,29 +1,37 @@
 @extends('layouts.app-semanticui')
 @section('content')
-    <div class="eight wide column">
-        <div class="ui segment module " align="center" >
-            <div align="center" style="line-height:25px;">
-                <p class="header">Currently Installed Apps</p>
-                <?php if(config('app.ENABLE_GOOGLE_ANALYTICS')) { ?>
-                <a href="https://analytics.google.com" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">Google Analytics</a>
-                <?php } ?>
-                <?php if(config('app.ENABLE_MIXPANEL')) { ?>
-                <a href="https://mixpanel.com/report" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">MixPanel</a>
-                <?php } ?>
-                <a href="https://manage.auth0.com/" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">Auth0</a>
-                <?php if(config('app.ENABLE_INTERCOM')) { ?>
-                <a href="https://app.intercom.io" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">Intercom</a>
-                <?php } ?>
-                <?php if(config('app.ENABLE_DRIFT')) { ?>
-                <a href="https://app.drift.com" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">Drift</a>
-                <?php } ?>
-                <?php if(config('app.ENABLE_MAILCHIMP')) { ?>
-                <a href="https://admin.mailchimp.com" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">Mailchimp</a>
-                <?php } ?>
-                <?php if(config('app.ENABLE_SENTRY')) { ?>
-                <a href="https://sentry.io" class="ui basic button" target="_blank"  style="width:100%;text-align:left;">Sentry</a>
-                <?php } ?>
+<div class="ui grid sixteen wide">
+    <div class="sixteen wide column">
+        <div class="ui message">
+            <div class="header">
+                Notice
+            </div>
+            <p>We just updated our privacy policy here to better service our customers. We recommend reviewing the changes.</p>
+        </div>
+        <div class="ui fluid ordered steps">
+            <div class="completed step">
+                <div class="content">
+                    <div class="title">Create a SitePress account</div>
+                    <div class="description">http://sitepress.com/site/luckyrabbit</div>
+                </div>
+            </div>
+            <div class="completed step">
+                <div class="content">
+                    <div class="title">Billing</div>
+                    <div class="description">Enter billing information</div>
+                </div>
+            </div>
+            <div class="active step">
+                <div class="content">
+                    <div class="title">Integrate Apps</div>
+                    <div class="description">Enter your account details</div>
+                </div>
             </div>
         </div>
+        <div class="ui raised basic segment module" align="center" >
+            <p class="header" style="margin-bottom:0px;padding-bottom:0px;">Activity for {{ $trafficTitle }}</p>
+            {!! $traffic->render() !!}
+        </div>
     </div>
+</div>
 @endsection

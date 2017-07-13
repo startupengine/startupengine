@@ -27,8 +27,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 
 # Screenshots
 <div>
-     <img src="/storage/app/docs/screenshots/Home.png" width="250">
-     <img src="/storage/app/docs/screenshots/Content.png" width="250">
+     <img src="/storage/app/docs/screenshots/Home.png" width="250">    
      <img src="/storage/app/docs/screenshots/Analytics.png" width="250">     
 </div>
 

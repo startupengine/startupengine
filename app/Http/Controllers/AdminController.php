@@ -23,7 +23,27 @@ class AdminController extends Controller
     }
 
     public function index() {
-        return view('admin.index');
+        $period = Period::days(30);
+        $traffic = Analytics::fetchTotalVisitorsAndPageViews($period);
+        foreach($traffic as $item) {
+            $visitors[] = $item['visitors'];
+            $views[] = $item['pageViews'];
+            $date = $item['date']->toFormattedDateString();
+            $dates[] = $date;
+        }
+        $title = $period->startDate->format('F dS').' to '.$period->endDate->format('F dS');
+        $traffic = Charts::multi('bar', 'chartjs')
+            // Setup the chart settings
+            ->title(' ')
+            // A dimension of 0 means it will take 100% of the space
+            ->dimensions(0, 400) // Width x Height
+            ->colors(['#f44256','#ffc107','#4444dd'])
+            // Setup the diferent datasets (this is a multi chart)
+            ->dataset('Unique Visitors', $visitors)
+            ->dataset('Page Views', $views)
+            // Setup what the values mean
+            ->labels($dates);
+        return view('admin.index')->with('traffic', $traffic)->with('trafficTitle', $title);
     }
 
     public function content() {
@@ -106,6 +126,6 @@ class AdminController extends Controller
             ->dataset('Sessions', $countrysessions)
             // Setup what the values mean
             ->labels($countrylist);
-        return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('daterange', $title);
+        return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('trafficTitle', $title);
     }
 }

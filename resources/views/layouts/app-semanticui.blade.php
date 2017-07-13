@@ -43,21 +43,20 @@
                 display: block !important;
             }
         }
-
-        .ui.button {
-            margin-bottom:5px;
-            line-height:150%;
+        .button.active {
+            background:#4444dd !important;
+            color:#fff !important;
         }
     </style>
 </head>
 <body>
     @include('components.nav-admin')
     <div class="ui container">
-        <div class="ui grid sixteen wide" style="padding-top:15px;">
+
             @yield('content')
             <!-- Scripts -->
             <script src="{{ asset('js/app.js') }}"></script>
-        </div>
+
     </div>
 </body>
 </html>
