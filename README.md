@@ -68,22 +68,23 @@ Everything you need to launch your website/app/business idea.
 * [ ] Easy & secure credit card processing
  
 ##### Make informed decisions with analytics
-* [x] Web analytics - popular pages, number of visitors, and pageviews
-* [ ] Content analytics - top performing topics and keywords
-* [ ] User analytics - breakdown by age, gender, country, income, etc
+* [x] Web analytics - visitors and page views
+* [ ] Content analytics - top performing pages, topics, and keywords
+* [ ] Product analytics - top selling products
+* [ ] Subscription analytics - top selling subscriptions
+* [ ] User analytics - breakdown by age, gender, country, etc
 * [ ] Social analytics - which platforms and posts are bringing in the most visitors?
 * [ ] Search analytics - top search terms & traffic sources
-* [ ] Sales, subscriptions, & revenue
 * [ ] Traction (conversion rate)
 
 ##### Refine your strategy
-* [ ] Break down your users into segments
+* [ ] Monitor user funnels to know where you're gaining/losing leads
 * [ ] Monitor what people are saying about your company on social media 
-* [ ] Conduct market research to gain pychological insight into your customers
-* [ ] Get daily notifications about how your business is performing 
-* [ ] Automatically optimize your site for search engines
-* [ ] Schedule social media posts ahead of time
+* [ ] Conduct market research to gain insight into your customers' psychological needs
 * [ ] Optimize your landing page with automatic A/B Testing
+* [ ] Automatically optimize your site for search engines
+* [ ] Get daily notifications about how your business is performing
+* [ ] Schedule social media posts ahead of time
 
 ##### Administrate your site
 * [x] Admin Panel
