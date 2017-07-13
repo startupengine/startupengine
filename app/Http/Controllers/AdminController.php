@@ -85,7 +85,7 @@ class AdminController extends Controller
         $prev = $period->startDate->copy();
         $prev = $prev->subDays($days);
         $title = $period->startDate->toFormattedDateString().' to '.$period->endDate->toFormattedDateString();
-        $traffic = Charts::multi('area', 'chartjs')
+        $traffic = Charts::multi('bar', 'chartjs')
             // Setup the chart settings
             ->title($title)
             // A dimension of 0 means it will take 100% of the space
@@ -98,7 +98,7 @@ class AdminController extends Controller
             ->labels($dates);
         $countries = Charts::multi('bar', 'chartjs')
             // Setup the chart settings
-            ->title("Web Traffic by Country")
+            ->title(" ")
             // A dimension of 0 means it will take 100% of the space
             ->dimensions(0, 400) // Width x Height
             ->colors(['#4444dd','#ffc107','#4444dd'])
