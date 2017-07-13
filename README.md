@@ -64,8 +64,13 @@ Everything you need to launch your website/app/business idea.
 * [ ] Premium (Requires Login)
 * [ ] Paid (Requires Paid Subscription)
 
-##### Accept Payments
-* [ ] Easy & secure credit card processing
+##### Accept Payments 
+* [ ] For Products
+* [ ] For Services (i.e., for consulting or web development)
+* [ ] For Subscriptions (i.e., for an app) 
+* [ ] For Premium Content (i.e., music or video tutorials)
+* [ ] Via easy & secure credit card processing
+* [ ] All without leaving the site
  
 ##### Make informed decisions with analytics
 * [x] Web analytics - visitors and page views
@@ -105,7 +110,7 @@ Everything you need to launch your website/app/business idea.
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ##### Integrations with 3rd-Party Services
-All of these services are **best-in-class** and offer a free plan.
+All of these products are **best-in-class** and cost nothing to start.
 
 * [x] Auth0
 * [x] Algolia
