@@ -208,21 +208,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column">
-                        <div id="referrers">
-                            <table style="width:100%;">
-                                <th colspan="2" style="text-align:center;">Top Referrers</th>
-                                <tr><td style="background:#fff;">Page</td><td style="background:#fff;">Referrals</td></tr>
-                                <?php foreach($referrers as $source) {
-                                if($source['url'] !== '(direct)') { ?>
-                                <tr><td style="background:#fff;"><a href="http://<?php echo $source['url']; ?>"><?php echo mb_strimwidth($source['url'], 0, 40).'...'; ?></a></td><td style="background:#fff;max-width:100px !important;width:100px !important;text-align:center;"><?php echo $source['pageViews']; ?></td></tr>
-                                <?php } } ?>
-                            </table>
-                            <div class="ui buttons" align="center" style="width:100%;">
-                                <a href="/admin/referrers" class="ui button basic default">More</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

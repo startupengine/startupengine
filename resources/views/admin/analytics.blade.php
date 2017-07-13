@@ -143,7 +143,6 @@
             padding:0px 25px 25px 25px;
             border-radius:4px !important;
             overflow:hidden;
-            height:100%;
         }
         table {
             margin-top:0px !important;
@@ -158,7 +157,6 @@
                 display: block !important;
             }
         }
-
         .ui.buttons .ui.button {
             float:none;
             font-size:90%;
@@ -240,33 +238,46 @@
                                 {!! $countries->render() !!}
                             </div>
                         </div>
-                        <div class="ui equal height column">
-                            <div class="module" style="" align="center">
+                        <div class="column">
+                            <div id="referrers">
+                                <table style="width:100%;">
+                                    <th colspan="2" style="text-align:center;">Top Referrers</th>
+                                    <tr><td style="background:#fff;">Page</td><td style="background:#fff;">Referrals</td></tr>
+                                    <?php foreach($referrers as $source) {
+                                    if($source['url'] !== '(direct)') { ?>
+                                    <tr><td style="background:#fff;"><a href="http://<?php echo $source['url']; ?>"><?php echo mb_strimwidth($source['url'], 0, 40).'...'; ?></a></td><td style="background:#fff;max-width:100px !important;width:100px !important;text-align:center;"><?php echo $source['pageViews']; ?></td></tr>
+                                    <?php } } ?>
+                                </table>
+                                <div class="ui buttons" align="center" style="width:100%;">
+                                    <a href="/admin/referrers" class="ui button basic default">More</a>
+                                </div>
+                            </div>
+                            <div class="module" align="center" style="margin-top:25px;">
                                 <div class="ui buttons " align="center" style="width:100%;padding-top:25px;">
                                     <p>
                                         <svg class="fa-bar-chart" style="margin: 15px 5px;">
                                             <use xlink:href="#fa-bar-chart"></use>
                                         </svg>
-                                        Analytics Apps
+                                        Your Analytics Apps
                                     </p>
                                     <?php if(config('app.ENABLE_GOOGLE_ANALYTICS')) { ?>
-                                        <a href="https://analytics.google.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Google Analytics<i class="right chevron icon"></i></a>
+                                    <a href="https://analytics.google.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Google Analytics<i class="right chevron icon"></i></a>
                                     <?php } ?>
                                     <?php if(config('app.ENABLE_MIXPANEL')) { ?>
-                                        <a href="https://mixpanel.com/report" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">MixPanel<i class="right chevron icon"></i></a>
+                                    <a href="https://mixpanel.com/report" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">MixPanel<i class="right chevron icon"></i></a>
                                     <?php } ?>
-                                        <a href="https://manage.auth0.com/" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Auth0<i class="right chevron icon"></i></a>
+                                    <a href="https://manage.auth0.com/" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Auth0<i class="right chevron icon"></i></a>
                                     <?php if(config('app.ENABLE_INTERCOM')) { ?>
-                                        <a href="https://app.intercom.io" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Intercom<i class="right chevron icon"></i></a>
+                                    <a href="https://app.intercom.io" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Intercom<i class="right chevron icon"></i></a>
                                     <?php } ?>
                                     <?php if(config('app.ENABLE_DRIFT')) { ?>
-                                        <a href="https://app.drift.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Drift<i class="right chevron icon"></i></a>
+                                    <a href="https://app.drift.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Drift<i class="right chevron icon"></i></a>
                                     <?php } ?>
                                     <?php if(config('app.ENABLE_MAILCHIMP')) { ?>
-                                        <a href="https://admin.mailchimp.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;">Mailchimp<i class="right chevron icon"></i></a>
+                                    <a href="https://admin.mailchimp.com" class="ui button basic right labeled icon" target="_blank"  style="width:100%;text-align:left;">Mailchimp<i class="right chevron icon"></i></a>
                                     <?php } ?>
                                     <?php if(config('app.ENABLE_SENTRY')) { ?>
-                                        <a href="https://sentry.io" class="ui button basic right labeled icon" target="_blank" style="width:100%;">Sentry<i class="right chevron icon"></i></a>
+                                    <a href="https://sentry.io" class="ui button basic right labeled icon" target="_blank" style="width:100%;text-align:left;">Sentry<i class="right chevron icon"></i></a>
                                     <?php } ?>
 
                                 </div>

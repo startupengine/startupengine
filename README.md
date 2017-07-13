@@ -45,8 +45,8 @@ Everything you need to launch your website/app/business idea.
 ##### Publish content
 * [x] Landing Pages
 * [x] Articles
-* [ ] Products
-* [ ] Services
+* [X] Products
+* [X] Services
 * [x] Features
 * [ ] Pricing
 * [ ] Videos
@@ -55,7 +55,7 @@ Everything you need to launch your website/app/business idea.
 * [ ] Lists/Tables
 * [x] Call To Action
 * [x] File Attachments
-* [ ] Custom HTML/CSS/JS
+* [x] Custom HTML/JS
 
 ##### Control access to your content
 * [x] Public (Viewable by Guests)
