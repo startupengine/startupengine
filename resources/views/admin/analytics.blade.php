@@ -37,11 +37,15 @@
 
 
         <div class="eight wide column">
-            <div class="ui raised basic segment module" align="center">
+            <div class="ui raised basic segment module" align="center" style="height:100%;">
                 <div align="center" style="line-height:25px;">
                     <p class="header">Stats</p>
                     <table class="ui selectable table">
                         <tbody>
+                        <tr>
+                            <td>Total Number of Sessions</td>
+                            <td class="right aligned">{{ round($sessions) }}</td>
+                        </tr>
                         <tr>
                             <td>Avgerage Session Duration</td>
                             <td class="right aligned">{{ round($avgSessionDuration/60) }} Minutes</td>

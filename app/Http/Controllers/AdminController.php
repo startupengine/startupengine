@@ -120,7 +120,7 @@ class AdminController extends Controller
             // Setup the chart settings
             ->title(" ")
             // A dimension of 0 means it will take 100% of the space
-            ->dimensions(0, 400) // Width x Height
+            ->dimensions(0, 250) // Width x Height
             ->colors(['#4444dd','#ffc107','#4444dd'])
             // Setup the diferent datasets (this is a multi chart)
             ->dataset('Sessions', $countrysessions)
