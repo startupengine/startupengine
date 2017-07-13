@@ -48,11 +48,11 @@ Everything you need to launch your website/app/business idea.
 * [X] Products
 * [X] Services
 * [x] Features
-* [ ] Pricing
+* [x] Pricing
 * [x] Videos
 * [x] Gallery
 * [x] Forms/Polls
-* [ ] Lists/Tables
+* [x] Lists/Tables
 * [x] Call To Action
 * [x] File Attachments
 * [x] Custom HTML/JS
