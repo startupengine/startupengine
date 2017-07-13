@@ -8,7 +8,7 @@
             </div>
             <p>You have <span class="ui label">23</span> unread notifications. You can read them in the <a href="/admin/notifications">notification center</a>.</p>
         </div>
-        <div class="ui fluid ordered steps">
+        <div class="ui fluid ordered tablet stackable steps">
             <div class="completed step">
                 <div class="content">
                     <div class="title">Create a SitePress account</div>
@@ -23,7 +23,7 @@
             </div>
             <div class="active step">
                 <div class="content">
-                    <div class="title">Integrate Apps</div>
+                    <div class="title"><a href="/admin/settings/apps">Integrate Apps</a></div>
                     <div class="description">Add chat, analytics, etc</div>
                 </div>
             </div>

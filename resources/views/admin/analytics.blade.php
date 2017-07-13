@@ -3,20 +3,20 @@
     <div class="ui grid sixteen wide">
         <div class="sixteen wide column" align="center">
             <div class="ui buttons fluid" align="center">
-                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left labeled icon button default mini hiddenOnMobile">
+                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left labeled icon button default mini hiddenOnMobile" style="border-right:#ccc 1px solid;">
                     <i class="left chevron icon"></i>
                     Prev
                 </a>
                 <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $prev->format('m/d/Y'); ?>" class="ui left icon button default mini hiddenOnDesktop hiddenOnTablet" style="border-right:#ccc 1px solid;border-radius:4px 0px 0px 4px;">
                     <i class="left chevron icon"></i>
                 </a>
-                <a href="/admin/analytics?period=week&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '7') { echo "active"; } ?>">Week</a>
+                <a href="/admin/analytics?period=week&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '7') { echo "active"; } ?>" >Week</a>
                 <a href="/admin/analytics/?period=month&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '30') { echo "active"; } ?>">Month</a>
-                <a href="/admin/analytics/?period=year&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '365') { echo "active"; } ?>">Year</a>
+                <a href="/admin/analytics/?period=year&start=<?php echo $prev->copy()->addDays($period)->format('m/d/Y'); ?>" class="ui button default mini <?php if($period == '365') { echo "active"; } ?>" >Year</a>
                 <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right icon button default mini hiddenOnDesktop hiddenOnTablet <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>"  style="border-left:#ccc 1px solid;border-radius:0px 4px 4px 0px;">
                     <i class="right chevron icon"></i>
                 </a>
-                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right labeled icon button default mini hiddenOnMobile <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>">
+                <a href="?period=<?php if($period == '7') { echo "week"; }elseif($period == '30') { echo "month"; }elseif($period == '365') { echo "year"; } ?>&start=<?php echo $next->format('m/d/Y'); ?>" class="ui right labeled icon button default mini hiddenOnMobile <?php if(!$next->copy()->addDay()->isPast()) { echo "disabled"; } ?>" style="border-left:#ccc 1px solid;">
                     <i class="right chevron icon"></i>
                     Next
                 </a>
