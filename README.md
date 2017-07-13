@@ -15,6 +15,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 - [Demo](#demo)
 - [Features](#features)
     - [Create pages](#create-pages)
+    - [Components](#components-you-can-include-in-a-page)
     - [Control access to your content](#control-access-to-your-content)
     - [Accept payments](#accept-payments)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)
@@ -49,7 +50,7 @@ Everything you need to launch your website/app/business idea.
 * [x] Blog posts
 * [x] Help/documentation
 
-##### Pages can include
+##### Components you can include in a page
 * [x] Text
 * [x] Featured image
 * [x] Image gallery
