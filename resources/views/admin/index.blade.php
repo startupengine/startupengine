@@ -12,7 +12,7 @@
             <div class="completed step">
                 <div class="content">
                     <div class="title">Create a SitePress account</div>
-                    <div class="description">https://sitepress.co/site/luckyrabbit</div>
+                    <div class="description">{{ config('app.url')  }}</div>
                 </div>
             </div>
             <div class="completed step">
@@ -31,6 +31,9 @@
         <div class="ui raised basic segment module" align="center" >
             <p class="header" style="margin-bottom:0px;padding-bottom:0px;">Activity for {{ $trafficTitle }}</p>
             {!! $traffic->render() !!}
+            <div align="right">
+                <a href="/admin/analytics" class="ui default right labeled icon button">Explore your analytics <i class="right chevron icon"></i></a>
+            </div>
         </div>
     </div>
 </div>

@@ -29,7 +29,7 @@
             padding:0px 25px 25px 25px;
             border-radius:4px !important;
         }
-        .module .header {
+        p.header {
             font-size:120%;
             padding:15px;
         }
@@ -61,12 +61,8 @@
 </head>
 <body>
     @include('components.nav-admin')
-    <div class="ui container">
-
-            @yield('content')
-            <!-- Scripts -->
-            <script src="{{ asset('js/app.js') }}"></script>
-
+    <div class="ui container" style="padding-top:95px;">
+        @yield('content')
     </div>
 </body>
 </html>

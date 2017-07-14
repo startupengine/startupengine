@@ -43,12 +43,17 @@ class AdminController extends Controller
             ->dataset('Page Views', $views)
             // Setup what the values mean
             ->labels($dates);
-        return view('admin.index')->with('traffic', $traffic)->with('trafficTitle', $title);
+        return view('admin.index')->with('traffic', $traffic)->with('trafficTitle', $title)->with('active', 'dashboard');
     }
 
     public function content() {
-        $popular = Analytics::fetchMostVisitedPages(Period::days(30), 10);
-        return view('admin.pages')->with('popular', $popular);
+        $popular = Analytics::performQuery(Period::days(30),'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions'=>'ga:pagePath,ga:pageTitle']);
+        // dd($popular->rows); // returns arrays with key values of ga:pagePath, ga:pageTitle, ga:pageViews, ga:uniquePageviews, ga:timeOnPage, ga:bounces, ga:entrances, ga:exits
+        return view('admin.content')->with('popular', $popular)->with('active', 'content');
+    }
+
+    public function postscheduling() {
+        return view('admin.postscheduling')->with('active', 'postscheduling');
     }
 
     public function analytics(Request $request) {
@@ -126,6 +131,6 @@ class AdminController extends Controller
             ->dataset('Sessions', $countrysessions)
             // Setup what the values mean
             ->labels($countrylist);
-        return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('trafficTitle', $title);
+        return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('trafficTitle', $title)->with('active', 'analytics');
     }
 }

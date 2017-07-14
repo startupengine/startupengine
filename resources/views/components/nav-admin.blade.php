@@ -1,4 +1,4 @@
-<div class="ui huge borderless main menu" style="border-radius:0px;">
+<div class="ui huge borderless fixed main menu" style="border-radius:0px;">
     <div class="ui container">
 
         <div class="item hiddenOnDesktop" align="center">
@@ -8,11 +8,11 @@
             <div class="item" align="center">
                 <a href="/"><img src="/images/sitepress-logo.png" style="max-height:40px;margin-top:3px;"></a>
             </div>
-            <a class="item" href="/admin"><i class="block layout icon"></i><span class="hiddenOnTablet"> Dashboard</span></a>
-            <a class="item" href="/admin/research"><i class="idea icon"></i><span class="hiddenOnTablet"> Strategy</span></a>
-            <a class="item" href="/admin/content"><i class="list icon"></i><span class="hiddenOnTablet"> Content</span></a>
-            <a class="item" href="/admin/marketing"><i class="calendar icon"></i><span class="hiddenOnTablet"> Post Scheduling</span></a>
-            <a class="item" href="/admin/analytics"><i class="bar chart icon"></i><span class="hiddenOnTablet"> Analytics</span></a>
+            <a class="item <?php if($active == 'dashboard') { echo "active"; } ?>" href="/admin"><i class="block layout icon"></i><span class="hiddenOnTablet"> Dashboard</span></a>
+            <?php /* <a class="item" href="/admin/research"><i class="idea icon"></i><span class="hiddenOnTablet"> Strategy</span></a> */ ?>
+            <a class="item <?php if($active == 'content') { echo "active"; } ?>" href="/admin/content"><i class="list icon"></i><span class="hiddenOnTablet"> Content</span></a>
+            <a class="item <?php if($active == 'postscheduling') { echo "active"; } ?>" href="/admin/postscheduling"><i class="calendar icon"></i><span class="hiddenOnTablet"> Post Scheduling</span></a>
+            <a class="item <?php if($active == 'analytics') { echo "active"; } ?>" href="/admin/analytics"><i class="bar chart icon"></i><span class="hiddenOnTablet"> Analytics</span></a>
             <?php /*<a class="item" href="/admin/sales"><i class="dollar icon"></i><span class="hiddenOnTablet"> Sales</span></a> */ ?>
             <a class="item" href="/admin/users"><i class="user outline icon"></i><span class="hiddenOnTablet"> Users</span></a>
             <a class="item" href="/admin/users"><i class="setting icon"></i><span class="hiddenOnTablet"> Settings</span></a>
@@ -25,6 +25,7 @@
                 </div>
                 <div class="menu">
                     <div class="">
+                        <a class="item ui" href="/admin/notifications" style="border-bottom:1px solid #ddd;"><span class="ui label yellow"><i class="announcement icon"></i> 23 <div class="detail">Notifications</div></span></a>
                         <a class="item" href="/admin"><i class="user circle outline icon"></i> Your Account</a>
                         <a class="item" href="/admin/users"><i class="sign out icon"></i> Sign Out</a>
                     </div>
@@ -39,15 +40,17 @@
                 </div>
                 <div class="menu">
                     <div class="">
+                        <a class="item ui" href="/admin/notifications" style="border-bottom:1px solid #ddd;"><span class="ui label yellow"><i class="announcement icon"></i> 23 <div class="detail">Notifications</div></span></a>
                         <a class="item" href="/admin"><i class="block layout icon"></i> Dashboard</a>
-                        <a class="item" href="/admin/research"><i class="idea icon"></i> Strategy</a>
+                        <?php /* <a class="item" href="/admin/research"><i class="idea icon"></i><span class="hiddenOnTablet"> Strategy</span></a> */ ?>
                         <a class="item" href="/admin/content"><i class="list icon"></i> Content</a>
-                        <a class="item" href="/admin/marketing"><i class="calendar icon"></i> Post Scheduling</a>
+                        <a class="item" href="/admin/postscheduling"><i class="calendar icon"></i> Post Scheduling</a>
                         <a class="item" href="/admin/analytics"><i class="bar chart icon"></i> Analytics</a>
                         <?php /*<a class="item" href="/admin/sales"><i class="dollar icon"></i><span class="hiddenOnTablet"> Sales</span></a> */ ?>
                         <a class="item" href="/admin/users"><i class="user outline icon"></i> Users</a>
                         <a class="item" href="/admin/users"><i class="setting icon"></i> Settings</a>
-                        <a class="item" href="/admin" style="border-top:1px solid #ddd;"><i class="user circle outline icon"></i> Your Account</a>
+
+                        <a class="item" href="/admin"  style="border-top:1px solid #ddd;"><i class="user circle outline icon"></i> Your Account</a>
                         <a class="item" href="/admin/users"><i class="sign out icon"></i> Sign Out</a>
                     </div>
                 </div>
