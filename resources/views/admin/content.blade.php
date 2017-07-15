@@ -15,7 +15,10 @@
         $( document ).ready(function() {
             $('#contentType').change(function(){
                 var value = $(this).val();
-                window.location = "/admin/content/?page=" + value;
+                var value = $(this).val();
+                console.log(window.location.href);
+                var newurl = replaceUrlParam(window.location.href, 'page', value);
+                window.location = newurl;
             });
             $('#periodSelector').change(function(){
                 var value = $(this).val();
@@ -30,10 +33,11 @@
 
                 <p class="header" style="margin-bottom:35px;padding-bottom:0px;">Popular content for the last
                     <select class="ui inline dropdown" style="margin:0px 10px 0px 10px;" id="periodSelector">
-                        <option value="30">30</option>
-                        <option value="60">60</option>
-                        <option value="90">90</option>
-                        <option value="365">365</option>
+                        <option value="7" <?php if($period == '7'){ echo 'selected'; }?>>7</option>
+                        <option value="30" <?php if($period == '30'){ echo 'selected'; }?>>30</option>
+                        <option value="60" <?php if($period == '60'){ echo 'selected'; }?>>60</option>
+                        <option value="90" <?php if($period == '90'){ echo 'selected'; }?>>90</option>
+                        <option value="365" <?php if($period == '365'){ echo 'selected'; }?>>365</option>
                     </select>
                     days</p>
                 <div class="ui buttons fluid" align="center">
@@ -43,14 +47,7 @@
                 </div>
 
 
-            <div class="ui top attached tabular menu hiddenOnMobile" align="center">
-                    <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=all" class="item <?php if($page == 'all') { echo "active"; }?> "  >All Content</a>
-                    <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=landings" class="item <?php if($page == 'landings') { echo "active"; }?> "  >Landing Pages</a>
-                    <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=articles" class="item <?php if($page == 'articles') { echo "active"; }?> ">Articles</a>
-                    <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=products" class="item <?php if($page == 'products') { echo "active"; }?> ">Products</a>
-                    <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=services" class="item <?php if($page == 'services') { echo "active"; }?> ">Services</a>
-                    <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=subscriptions" class="item <?php if($page == 'subscriptions') { echo "active"; }?> ">Subscriptions</a>
-            </div>
+
             <div class="ui top attached segment hiddenOnDesktop hiddenOnTablet">
                 <select class="ui dropdown " style="margin:10px;" id="contentType">
                     <option class="" value="all" <?php if($page == 'all') { echo "selected"; }?>>All Content</option>
@@ -60,6 +57,14 @@
                     <option class="" value="services" <?php if($page == 'services') { echo "selected"; }?>>Services</option>
                     <option class="" value="subscriptions" <?php if($page == 'subscriptions') { echo "selected"; }?>>Subscriptions</option>
                 </select>
+            </div>
+            <div class="ui top attached tabular menu hiddenOnMobile" align="center">
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=all<?php echo "&period=".$period; ?>" class="item <?php if($page == 'all') { echo "active"; }?> "  >All Content</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=landings<?php echo "&period=".$period; ?>" class="item <?php if($page == 'landings') { echo "active"; }?> "  >Landing Pages</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=articles<?php echo "&period=".$period; ?>" class="item <?php if($page == 'articles') { echo "active"; }?> ">Articles</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=products<?php echo "&period=".$period; ?>" class="item <?php if($page == 'products') { echo "active"; }?> ">Products</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=services<?php echo "&period=".$period; ?>" class="item <?php if($page == 'services') { echo "active"; }?> ">Services</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=subscriptions<?php echo "&period=".$period; ?>" class="item <?php if($page == 'subscriptions') { echo "active"; }?> ">Subscriptions</a>
             </div>
             <div class="ui bottom attached active tab segment">
                 <?php if($popular->totalsForAllResults['ga:pageviews'] > 0) { ?>

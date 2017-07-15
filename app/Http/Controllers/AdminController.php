@@ -47,12 +47,13 @@ class AdminController extends Controller
     }
 
     public function content(Request $request) {
-        $period = $request->period;
-        if($period == NULL OR !isset($period)) {
+        $days = $request->period;
+        if($days == NULL) { $days = 30; }
+        if($days == NULL OR !isset($days)) {
             $period = Period::days(30);
         }
         else {
-            $period = Period::days($period);
+            $period = Period::days($days);
         }
         $campaign = $request->input('campaign');
         $topic = $request->input('topic');
@@ -81,7 +82,7 @@ class AdminController extends Controller
         }
         // dd($popular->rows); // returns arrays with key values of ga:pagePath, ga:pageTitle, ga:pageViews, ga:uniquePageviews, ga:timeOnPage, ga:bounces, ga:entrances, ga:exits
         if($tag == NULL && $page == NULL & $topic == NULL && $campaign == NULL) { $page = "all"; }
-        return view('admin.content')->with('popular', $popular)->with('active', 'content')->with('campaign', $campaign)->with('topic', $topic)->with('page', $page)->with('tag', $tag);
+        return view('admin.content')->with('popular', $popular)->with('active', 'content')->with('campaign', $campaign)->with('topic', $topic)->with('page', $page)->with('tag', $tag)->with('period', $days);
     }
 
     public function postscheduling() {
