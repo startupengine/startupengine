@@ -46,10 +46,42 @@ class AdminController extends Controller
         return view('admin.index')->with('traffic', $traffic)->with('trafficTitle', $title)->with('active', 'dashboard');
     }
 
-    public function content() {
-        $popular = Analytics::performQuery(Period::days(30),'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions'=>'ga:pagePath,ga:pageTitle']);
+    public function content(Request $request) {
+        $period = $request->period;
+        if($period == NULL OR !isset($period)) {
+            $period = Period::days(30);
+        }
+        else {
+            $period = Period::days($period);
+        }
+        $campaign = $request->input('campaign');
+        $topic = $request->input('topic');
+        $page = $request->input('page');
+        $tag = $request->input('tag');
+        if($page == 'articles' OR $page == 'landings' OR $page == 'products' OR $page == 'services' OR $page == 'subscriptions') {
+            if($page == 'articles') {
+                $filters = 'ga:pagePath=@/article';
+            }
+            if($page == 'landings') {
+                $filters = 'ga:pagePath=@/landing';
+            }
+            if($page == 'products') {
+                $filters = 'ga:pagePath=@/product';
+            }
+            if($page == 'services') {
+                $filters = 'ga:pagePath=@/service';
+            }
+            if($page == 'subscriptions') {
+                $filters = 'ga:pagePath=@/subscription';
+            }
+            $popular = Analytics::performQuery($period,'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions'=>'ga:pagePath,ga:pageTitle', 'filters' => $filters, 'sort' => '-ga:pageViews']);
+        }
+        else {
+            $popular = Analytics::performQuery($period, 'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions' => 'ga:pagePath,ga:pageTitle', 'sort' => '-ga:pageViews']);
+        }
         // dd($popular->rows); // returns arrays with key values of ga:pagePath, ga:pageTitle, ga:pageViews, ga:uniquePageviews, ga:timeOnPage, ga:bounces, ga:entrances, ga:exits
-        return view('admin.content')->with('popular', $popular)->with('active', 'content');
+        if($tag == NULL && $page == NULL & $topic == NULL && $campaign == NULL) { $page = "all"; }
+        return view('admin.content')->with('popular', $popular)->with('active', 'content')->with('campaign', $campaign)->with('topic', $topic)->with('page', $page)->with('tag', $tag);
     }
 
     public function postscheduling() {
@@ -82,6 +114,17 @@ class AdminController extends Controller
         }
         $referrers = Analytics::fetchTopReferrers($period, 10);
         $sessions = Analytics::performQuery($period, 'ga:sessions')->totalsForAllResults["ga:sessions"]; //Total number of sessions
+        $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'filters' => 'ga:eventCategory==article', 'dimensions' => 'ga:date']);
+        foreach ($events->rows as $event) {
+            //$date = $event[0];
+            //$carbon = new Carbon;
+            //$date = $carbon->toFormattedDateString($date);
+            $item = $event[1];
+            $articleEvents[] = $item;
+        }
+        //$test = new Carbon;
+        //$test = $test->toFormattedDateString($events->rows[0][0]);
+        //dd($test);
         $bounceRate = Analytics::performQuery($period, 'ga:bounceRate')->totalsForAllResults["ga:bounceRate"]; //Number of sessions ended from the entrance page
         $totalSessionTime = Analytics::performQuery($period, 'ga:sessionDuration')->totalsForAllResults["ga:sessionDuration"]; //Sum of all session durations (in seconds)
         $avgSessionDuration = Analytics::performQuery($period, 'ga:avgSessionDuration')->totalsForAllResults["ga:avgSessionDuration"]; //Average session duration (in seconds)
@@ -119,6 +162,7 @@ class AdminController extends Controller
             // Setup the diferent datasets (this is a multi chart)
             ->dataset('Unique Visitors', $visitors)
             ->dataset('Page Views', $views)
+            ->dataset('Interactions with Articles', $articleEvents)
             // Setup what the values mean
             ->labels($dates);
         $countries = Charts::multi('bar', 'chartjs')
@@ -131,6 +175,11 @@ class AdminController extends Controller
             ->dataset('Sessions', $countrysessions)
             // Setup what the values mean
             ->labels($countrylist);
-        return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('trafficTitle', $title)->with('active', 'analytics');
+        return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('trafficTitle', $title)->with('active', 'analytics')->with('events', $events);
     }
+
+    public function settings() {
+        return view('admin.settings')->with('active', 'settings');
+    }
+
 }

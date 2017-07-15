@@ -3,13 +3,11 @@
         <ul>
             <?php if($defaults !== NULL && $defaults->getLogo() !== NULL) { ?>
             <li class="">
-
                 <a rel="external" href="/">
                     <p>
                     <img src="<?php echo $defaults->getLogo()->getFile()->getUrl(); ?>"/> &nbsp;
                     </p>
                 </a>
-
             </li>
             <? } ?>
             <?php if($defaults !== NULL) { ?>

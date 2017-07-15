@@ -36,11 +36,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
     Route::get('/admin/content', 'AdminController@content');//->middleware('auth');
     Route::get('/admin/postscheduling', 'AdminController@postscheduling');//->middleware('auth');
+    Route::get('/admin/settings', 'AdminController@settings');//->middleware('auth');
 
     //Users
     Route::get('/app', 'HomeController@index')->name('home')->middleware('auth');
 
-    //Articles
+    //Pages
     Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/landing/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
 });
