@@ -20,7 +20,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
     - [Accept payments](#accept-payments)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)   
     - [Optimize your site](#optimize-your-site)
-    - [Easily Integrate with 3rd-Party Services](#integrate-with-3rd-party-services)
+    - [Easily Integrate with 3rd-Party Services](#easily-integrate-with-3rd-party-services)
     - [Admin & Developer tools](#admin-and-developer-tools)
     - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
