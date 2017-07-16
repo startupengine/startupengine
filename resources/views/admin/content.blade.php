@@ -42,8 +42,7 @@
                     days</p>
                 <div class="ui buttons fluid" align="center">
                     <a href="/admin/content?page=all" class="ui button default <?php if($page !== NULL) { echo "active"; }?>" style="border-right:#ccc 1px solid;" >Pages</a>
-                    <a href="/admin/content?topic=all" class="ui button default <?php if($topic !== NULL) { echo "active"; }?>" style="border-right:#ccc 1px solid;" >Topics</a>
-                    <a href="/admin/content?campaign=all" class="ui button default <?php if($campaign !== NULL) { echo "active"; }?>" style="border-right:#ccc 1px solid;" >Campaigns</a>
+                    <a href="/admin/content/campaign" class="ui button default <?php if($campaign !== NULL) { echo "active"; }?>" style="border-right:#ccc 1px solid;" >Campaigns</a>
                 </div>
 
 
@@ -55,16 +54,14 @@
                     <option class="" value="articles" <?php if($page == 'articles') { echo "selected"; }?>>Articles</option>
                     <option class="" value="products" <?php if($page == 'products') { echo "selected"; }?>>Products</option>
                     <option class="" value="services" <?php if($page == 'services') { echo "selected"; }?>>Services</option>
-                    <option class="" value="subscriptions" <?php if($page == 'subscriptions') { echo "selected"; }?>>Subscriptions</option>
                 </select>
             </div>
             <div class="ui top attached tabular menu hiddenOnMobile" align="center">
-                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=all<?php echo "&period=".$period; ?>" class="item <?php if($page == 'all') { echo "active"; }?> "  >All Content</a>
-                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=landings<?php echo "&period=".$period; ?>" class="item <?php if($page == 'landings') { echo "active"; }?> "  >Landing Pages</a>
-                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=articles<?php echo "&period=".$period; ?>" class="item <?php if($page == 'articles') { echo "active"; }?> ">Articles</a>
-                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=products<?php echo "&period=".$period; ?>" class="item <?php if($page == 'products') { echo "active"; }?> ">Products</a>
-                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=services<?php echo "&period=".$period; ?>" class="item <?php if($page == 'services') { echo "active"; }?> ">Services</a>
-                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($topic)) { echo "topic"; } if(isset($campaign)) { echo "campaign"; } ?>=subscriptions<?php echo "&period=".$period; ?>" class="item <?php if($page == 'subscriptions') { echo "active"; }?> ">Subscriptions</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($campaign)) { echo "campaign"; } ?>=all<?php echo "&period=".$period; ?>" class="item <?php if($page == 'all') { echo "active"; }?> "  >All Content</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($campaign)) { echo "campaign"; } ?>=landings<?php echo "&period=".$period; ?>" class="item <?php if($page == 'landings') { echo "active"; }?> "  >Landing Pages</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($campaign)) { echo "campaign"; } ?>=articles<?php echo "&period=".$period; ?>" class="item <?php if($page == 'articles') { echo "active"; }?> ">Articles</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($campaign)) { echo "campaign"; } ?>=products<?php echo "&period=".$period; ?>" class="item <?php if($page == 'products') { echo "active"; }?> ">Products</a>
+                <a href="/admin/content?<?php if(isset($page)) { echo "page"; } if(isset($campaign)) { echo "campaign"; } ?>=services<?php echo "&period=".$period; ?>" class="item <?php if($page == 'services') { echo "active"; }?> ">Services</a>
             </div>
             <div class="ui bottom attached active tab segment">
                 <?php if($popular->totalsForAllResults['ga:pageviews'] > 0) { ?>

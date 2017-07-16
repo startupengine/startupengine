@@ -29,13 +29,8 @@
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="ui bottom attached basic segment">
-                        <div align="center">
-                            <button class="ui right labeled icon button">
-                                Configure App Settings
-                                <i class="setting icon"></i>
-                            </button>
-                        </div>
+                    <div class="ui raised basic bottom attached segment" align="center">
+                        <a href="/admin/settings/apps/add" class="ui button default right labeled icon" >Add an app <i class="plus icon"></i></a>
                     </div>
                 </div>
             </div>

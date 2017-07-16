@@ -9,7 +9,6 @@ use Analytics;
 use Spatie\Analytics\Period;
 use Charts;
 
-
 class AdminController extends Controller
 {
 
@@ -56,10 +55,9 @@ class AdminController extends Controller
             $period = Period::days($days);
         }
         $campaign = $request->input('campaign');
-        $topic = $request->input('topic');
         $page = $request->input('page');
         $tag = $request->input('tag');
-        if($page == 'articles' OR $page == 'landings' OR $page == 'products' OR $page == 'services' OR $page == 'subscriptions') {
+        if($page == 'articles' OR $page == 'landings' OR $page == 'products' OR $page == 'services') {
             if($page == 'articles') {
                 $filters = 'ga:pagePath=@/article';
             }
@@ -72,17 +70,21 @@ class AdminController extends Controller
             if($page == 'services') {
                 $filters = 'ga:pagePath=@/service';
             }
-            if($page == 'subscriptions') {
-                $filters = 'ga:pagePath=@/subscription';
-            }
             $popular = Analytics::performQuery($period,'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions'=>'ga:pagePath,ga:pageTitle', 'filters' => $filters, 'sort' => '-ga:pageViews']);
         }
         else {
             $popular = Analytics::performQuery($period, 'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions' => 'ga:pagePath,ga:pageTitle', 'sort' => '-ga:pageViews']);
         }
-        // dd($popular->rows); // returns arrays with key values of ga:pagePath, ga:pageTitle, ga:pageViews, ga:uniquePageviews, ga:timeOnPage, ga:bounces, ga:entrances, ga:exits
-        if($tag == NULL && $page == NULL & $topic == NULL && $campaign == NULL) { $page = "all"; }
-        return view('admin.content')->with('popular', $popular)->with('active', 'content')->with('campaign', $campaign)->with('topic', $topic)->with('page', $page)->with('tag', $tag)->with('period', $days);
+        if($tag == NULL && $page == NULL && $campaign == NULL) { $page = "all"; }
+        return view('admin.content')->with('popular', $popular)->with('active', 'content')->with('campaign', $campaign)->with('page', $page)->with('tag', $tag)->with('period', $days);
+    }
+
+    public function campaign($slug = NULL) {
+        $query = (new \Contentful\Delivery\Query());
+        $query->setContentType('campaign');
+        $campaigns = $this->client->getEntries($query);
+        dd($campaigns);
+        return view('articles.index')->with('campaigns', $campaigns);
     }
 
     public function postscheduling() {
@@ -123,9 +125,6 @@ class AdminController extends Controller
             $item = $event[1];
             $articleEvents[] = $item;
         }
-        //$test = new Carbon;
-        //$test = $test->toFormattedDateString($events->rows[0][0]);
-        //dd($test);
         $bounceRate = Analytics::performQuery($period, 'ga:bounceRate')->totalsForAllResults["ga:bounceRate"]; //Number of sessions ended from the entrance page
         $totalSessionTime = Analytics::performQuery($period, 'ga:sessionDuration')->totalsForAllResults["ga:sessionDuration"]; //Sum of all session durations (in seconds)
         $avgSessionDuration = Analytics::performQuery($period, 'ga:avgSessionDuration')->totalsForAllResults["ga:avgSessionDuration"]; //Average session duration (in seconds)

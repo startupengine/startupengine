@@ -21,6 +21,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "contentful": "^4.5.0",
     "contentful-export": "^4.7.5",
     "contentful-import": "^4.5.4"
   }

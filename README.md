@@ -20,7 +20,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
     - [Accept payments](#accept-payments)
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)   
     - [Optimize your site](#optimize-your-site)
-    - [Integrate with 3rd-Party Services](#integrate-with-3rd-party-services)
+    - [Easily Integrate with 3rd-Party Services](#integrate-with-3rd-party-services)
     - [Admin & Developer tools](#admin-and-developer-tools)
     - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
@@ -78,31 +78,39 @@ Everything you need to launch & grow your website, app, or business.
 * [ ] Automatically optimize your site for search engines
 * [ ] Track user funnels to know where to focus your efforts (no configuration required)
 
-##### Integrate with 3rd-Party Services
+##### Easily Integrate with 3rd-Party Services
 All of these products are **best-in-class** and cost nothing to start.
 
-* [x] Auth0
-* [x] Algolia
-* [ ] BotPress
-* [x] Contentful
-* [x] Disqus
-* [x] Drift
-* [ ] Facebook
-* [x] Github
-* [ ] Google AdSense
-* [x] Google Analytics
-* [x] Heroku
-* [ ] MailChimp
-* [x] MixPanel
-* [ ] Plotly
-* [ ] Reddit
-* [x] Sentry
-* [ ] Slack
-* [ ] Square
-* [ ] Stripe
-* [ ] Twitter
-* [ ] Typeform
-* [ ] ZenHub
+* Ads
+  * Google AdSense
+* Authentication
+  * Auth0
+* Chat/Chatbots
+  * Drift
+  * Intercom
+  * Slack
+* Comments
+  * Disqus
+* Marketing Automation
+  * MailChimp
+* Analytics
+  * Google Analytics
+  * MixPanel
+  * Rakam
+* Data Visualization
+  * Plotly
+* Error Tracking
+  * Sentry
+* Payment Processing
+  * Square
+  * Stripe
+* Search
+  * Algolia  
+* Social Media
+  * Facebook
+  * Twitter
+* User Feedback
+  * Typeform
 
 ##### Admin & Developer tools
 * [x] Admin Panel

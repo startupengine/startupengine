@@ -35,6 +35,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin', 'AdminController@index');//->middleware('auth');
     Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
     Route::get('/admin/content', 'AdminController@content');//->middleware('auth');
+    Route::get('/admin/content/topic', 'AdminController@topic');//->middleware('auth');
+    Route::get('/admin/content/campaign', 'AdminController@campaign');//->middleware('auth');
     Route::get('/admin/postscheduling', 'AdminController@postscheduling');//->middleware('auth');
     Route::get('/admin/settings', 'AdminController@settings');//->middleware('auth');
 

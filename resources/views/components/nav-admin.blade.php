@@ -10,7 +10,7 @@
             <a class="item <?php if($active == 'dashboard') { echo "active"; } ?>" href="/admin"><i class="block layout icon"></i><span class="hiddenOnTablet"> Dashboard</span></a>
             <?php /* <a class="item" href="/admin/research"><i class="idea icon"></i><span class="hiddenOnTablet"> Strategy</span></a> */ ?>
             <a class="item <?php if($active == 'content') { echo "active"; } ?>" href="/admin/content"><i class="list icon"></i><span class="hiddenOnTablet"> Content</span></a>
-            <a class="item <?php if($active == 'postscheduling') { echo "active"; } ?>" href="/admin/postscheduling"><i class="calendar icon"></i><span class="hiddenOnTablet"> Post Scheduling</span></a>
+            <a class="item <?php if($active == 'schedule') { echo "active"; } ?>" href="/admin/calendar"><i class="calendar icon"></i><span class="hiddenOnTablet"> Calendar</span></a>
             <a class="item <?php if($active == 'analytics') { echo "active"; } ?>" href="/admin/analytics"><i class="bar chart icon"></i><span class="hiddenOnTablet"> Analytics</span></a>
             <?php /*<a class="item" href="/admin/sales"><i class="dollar icon"></i><span class="hiddenOnTablet"> Sales</span></a> */ ?>
             <a class="item" href="/admin/users"><i class="user outline icon"></i><span class="hiddenOnTablet"> Users</span></a>
@@ -41,7 +41,7 @@
                         <a class="item" href="/admin"><i class="block layout icon"></i> Dashboard</a>
                         <?php /* <a class="item" href="/admin/research"><i class="idea icon"></i><span class="hiddenOnTablet"> Strategy</span></a> */ ?>
                         <a class="item" href="/admin/content"><i class="list icon"></i> Content</a>
-                        <a class="item" href="/admin/postscheduling"><i class="calendar icon"></i> Post Scheduling</a>
+                        <a class="item" href="/admin/postscheduling"><i class="calendar icon"></i> Calendar</a>
                         <a class="item" href="/admin/analytics"><i class="bar chart icon"></i> Analytics</a>
                         <?php /*<a class="item" href="/admin/sales"><i class="dollar icon"></i><span class="hiddenOnTablet"> Sales</span></a> */ ?>
                         <a class="item" href="/admin/users"><i class="user outline icon"></i> Users</a>
