@@ -8,6 +8,7 @@ class AppController extends Controller
 {
     public function login()
     {
+        Auth::logout();
         return \App::make('auth0')->login();
     }
 }
