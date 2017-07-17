@@ -14,7 +14,7 @@
 //Authentication
 Auth::routes();
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
-Route::get('/login', 'AppController@login');
+Route::get('/login', 'AppController@login')->name('login');;
 Route::get('/logout', function() {
     Auth::logout();
     return redirect('/');
@@ -37,13 +37,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/install/import-complete', 'SettingsController@importComplete');
 
     //Admins
-    Route::get('/admin', 'AdminController@index');//->middleware('auth');
-    Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
-    Route::get('/admin/content', 'AdminController@content');//->middleware('auth');
-    Route::get('/admin/content/topic', 'AdminController@topic');//->middleware('auth');
-    Route::get('/admin/content/campaign', 'AdminController@campaign');//->middleware('auth');
-    Route::get('/admin/postscheduling', 'AdminController@postscheduling');//->middleware('auth');
-    Route::get('/admin/settings', 'AdminController@settings');
+    Route::get('/admin', 'AdminController@index')->middleware('auth');
+    Route::get('/admin/analytics', 'AdminController@analytics')->middleware('auth');
+    Route::get('/admin/content', 'AdminController@content')->middleware('auth');
+    Route::get('/admin/content/topic', 'AdminController@topic')->middleware('auth');
+    Route::get('/admin/content/campaign', 'AdminController@campaign')->middleware('auth');
+    Route::get('/admin/postscheduling', 'AdminController@postscheduling')->middleware('auth');
+    Route::get('/admin/settings', 'AdminController@settings')->middleware('auth');
 
     //Pages
     Route::get('/articles', 'ArticleController@getArticles');

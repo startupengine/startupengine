@@ -21,6 +21,10 @@ class RedirectIfAuthenticated
             return redirect('/');
         }
 
+        else{
+            return redirect('/login');
+        }
+
         return $next($request);
     }
 }
