@@ -9,13 +9,16 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $connection = 'mysql';
+    protected $table = 'pgsql';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'auth0id', 'name', 'email', 'password', 'given_name', 'family_name', 'locale', 'gender', 'picture', 'picture_large', 'birthday',
     ];
 
     /**

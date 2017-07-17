@@ -21,6 +21,7 @@ class User implements Auth0UserRepository {
     }
 
     protected function upsertUser($profile) {
+        dd($profile);
 
         $user = \App\User::where("auth0id", $profile['user_id'])->first();
 
