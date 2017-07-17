@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as Auth;
+
 
 class AppController extends Controller
 {
@@ -11,5 +11,11 @@ class AppController extends Controller
     {
         \Auth::logout();
         return \App::make('auth0')->login();
+    }
+
+    public function loginWidget()
+    {
+        \Auth::logout();
+        return view('auth.login');
     }
 }

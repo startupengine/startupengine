@@ -13,8 +13,11 @@
 
 //Authentication
 Auth::routes();
+Route::get('/auth0', '\Auth0\Login\Auth0Controller@callback');
+Route::get('/callback', '\Auth0\Login\Auth0Controller@callback');
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
-Route::get('/login', 'AppController@login')->name('login');;
+//Route::get('/login', 'AppController@login')->name('login');
+Route::get('/login', 'AppController@loginWidget')->name('login');
 Route::get('/logout', function() {
     Auth::logout();
     return redirect('/');
