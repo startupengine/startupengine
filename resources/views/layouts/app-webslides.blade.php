@@ -55,9 +55,11 @@
         .auth0-lock-tabs {
             border-radius: 4px 4px 0px 0px;
         }
-
-        .auth0-lock-input-email {
+        .auth0-lock-social-buttons-container {
             padding-top:15px !important;
+        }
+        .auth0-lock-input-email {
+            /* padding-top:15px !important; */
         }
         .auth0-lock-submit {
             background:#222 !important;

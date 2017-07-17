@@ -8,6 +8,7 @@
         <script src="https://cdn.auth0.com/js/lock/10.18/lock.min.js"></script>
         <script>
             var lock = new Auth0Lock('<?php echo \Config::get('laravel-auth0.client_id') ?>', '<?php echo \Config::get('laravel-auth0.domain') ?>', {
+                container: 'root',
                 auth: {
                     redirectUrl: '<?php echo \Config::get('laravel-auth0.redirect_uri') ?>',
                     responseType: 'code',
