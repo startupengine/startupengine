@@ -1,9 +1,10 @@
 <?php
 
 //Store a copy of the Google Analytics credentials file in local storage for fast access
+use Illuminate\Http\File;
 $path = storage_path() . "/google/analytics-credentials.json";
 if (file_exists($path)){
-    Storage::disk('local')->put('/google/analytics-credentials.json', env('GOOGLE_ANALYTICS_CREDENTIALS'));
+    \Storage::putFileAs('json', new File(env('GOOGLE_ANALYTICS_CREDENTIALS')), $path);
 }
 
 return [
