@@ -1,6 +1,7 @@
 <?php
 
-
+//Store a copy of the Google Analytics credentials file in local storage for fast access
+use Storage;
 $path = storage_path() . "/google/analytics-credentials.json"; // ie: /var/www/laravel/app/storage/json/filename.json
 if (!File::exists($path)) {
     Storage::disk('local')->put('/google/analytics-credentials.json', env('GOOGLE_ANALYTICS_CREDENTIALS'));
