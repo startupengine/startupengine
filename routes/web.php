@@ -14,6 +14,7 @@
 //Authentication
 Auth::routes();
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
+Route::get('/login', 'AppController@login');
 Route::get('/logout', function() {
     Auth::logout();
     return redirect('/');
@@ -43,9 +44,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/content/campaign', 'AdminController@campaign');//->middleware('auth');
     Route::get('/admin/postscheduling', 'AdminController@postscheduling');//->middleware('auth');
     Route::get('/admin/settings', 'AdminController@settings');//->middleware('auth');
-
-    //Users
-    Route::get('/app', 'AppController@login');
 
     //Pages
     Route::get('/articles', 'ArticleController@getArticles');
