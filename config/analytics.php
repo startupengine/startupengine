@@ -1,6 +1,6 @@
 <?php
 
-$handle = fopen(env('GOOGLE_ANALYTICS_CREDENTIALS', storage_path('app/google/analytics-credentials.json'), "rb");
+$handle = fopen(env('GOOGLE_ANALYTICS_CREDENTIALS'),"rb");
 $contents = stream_get_contents($handle);
 
 return [
