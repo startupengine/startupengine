@@ -91,6 +91,8 @@ All of these products are **best-in-class** and cost nothing to start.
   * Slack
 * Comments
   * Disqus
+* Continuous Delivery (push-to-deploy)
+  * Heroku + Github
 * Marketing Automation
   * MailChimp
 * Analytics

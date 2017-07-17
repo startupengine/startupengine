@@ -26,6 +26,7 @@
                 var newurl = replaceUrlParam(window.location.href, 'period', value);
                 window.location = newurl;
             });
+            //$('.ui.dropdown').dropdown();
         });
     </script>
     <div class="ui grid sixteen wide">

@@ -80,15 +80,11 @@ class AdminController extends Controller
     }
 
     public function campaign($slug = NULL) {
-        $query = (new \Contentful\Delivery\Query());
+        /*$query = (new \Contentful\Delivery\Query());
         $query->setContentType('campaign');
         $campaigns = $this->client->getEntries($query);
-        dd($campaigns);
-        return view('articles.index')->with('campaigns', $campaigns);
-    }
-
-    public function postscheduling() {
-        return view('admin.postscheduling')->with('active', 'postscheduling');
+        dd($campaigns);*/
+        return view('admin.campaign'); //->with('campaigns', $campaigns);
     }
 
     public function analytics(Request $request) {
