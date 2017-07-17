@@ -1,6 +1,7 @@
 <?php
 
-
+$handle = fopen(env('GOOGLE_ANALYTICS_CREDENTIALS', storage_path('app/google/analytics-credentials.json'), "rb");
+$contents = stream_get_contents($handle);
 
 return [
 
@@ -13,7 +14,7 @@ return [
      * Path to the client secret json file. Take a look at the README of this package
      * to learn how to get this file.
      */
-    'service_account_credentials_json' => fopen(env('GOOGLE_ANALYTICS_CREDENTIALS', storage_path('app/google/analytics-credentials.json'))),
+    'service_account_credentials_json' => $contents,
 
     /*
      * The amount of minutes the Google API responses will be cached.
