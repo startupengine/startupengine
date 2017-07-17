@@ -4,7 +4,8 @@
 use Illuminate\Http\File;
 $path = storage_path() . "/google/analytics-credentials.json";
 if (file_exists($path)){
-    \Storage::putFileAs('json', new File(env('GOOGLE_ANALYTICS_CREDENTIALS')), $path);
+    $content = file_get_contents(env('GOOGLE_ANALYTICS_CREDENTIALS'));
+    \Storage::put( '/google/analytics-credentials.json', $content );
 }
 
 return [
