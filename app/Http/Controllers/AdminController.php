@@ -174,7 +174,7 @@ class AdminController extends Controller
         return view('admin.analytics')->with('traffic', $traffic)->with('countries', $countries)->with('sessions', $sessions)->with('bounceRate', $bounceRate)->with('totalSessionTime', $totalSessionTime)->with('avgSessionDuration', $avgSessionDuration)->with('period', $days)->with('prev', $prev)->with('next', $next)->with('referrers', $referrers)->with('trafficTitle', $title)->with('active', 'analytics')->with('events', $events);
     }
 
-    public function settings() {
+    public function apps() {
         return view('admin.settings')->with('active', 'settings');
     }
 
