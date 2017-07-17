@@ -14,6 +14,10 @@
 //Authentication
 Auth::routes();
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
+Route::get('/logout', function() {
+    Auth::logout();
+    return Redirect::home();
+});
 
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
