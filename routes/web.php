@@ -17,7 +17,7 @@ Route::get('/auth0', '\Auth0\Login\Auth0Controller@callback');
 Route::get('/callback', '\Auth0\Login\Auth0Controller@callback');
 Route::get('/auth0/callback', '\Auth0\Login\Auth0Controller@callback');
 
-if(config('laravel-auth0.mod') == 'hosted') {
+if(config('laravel-auth0.mode') == 'hosted') {
     Route::get('/login', 'AppController@login')->name('login');
 }
 else {
