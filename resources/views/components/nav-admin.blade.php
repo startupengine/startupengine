@@ -14,7 +14,7 @@
             <a class="item <?php if($active == 'analytics') { echo "active"; } ?>" href="/admin/analytics"><i class="bar chart icon"></i><span class="hiddenOnTablet"> Analytics</span></a>
             <?php /*<a class="item" href="/admin/sales"><i class="dollar icon"></i><span class="hiddenOnTablet"> Sales</span></a> */ ?>
             <a class="item" href="/admin/users"><i class="user outline icon"></i><span class="hiddenOnTablet"> Users</span></a>
-            <a class="item" href="/admin/integrations"><i class="server icon"></i><span class="hiddenOnTablet"> Apps</span></a>
+            <a class="item <?php if($active == 'apps') { echo "active"; } ?>" href="/admin/integrations"><i class="server icon"></i><span class="hiddenOnTablet"> Apps</span></a>
         </div>
         <div class="right menu hiddenOnMobile" >
             <div class="ui simple dropdown item">

@@ -182,7 +182,7 @@ class AdminController extends Controller
     }
 
     public function apps() {
-        return view('admin.settings')->with('active', 'settings');
+        return view('admin.apps')->with('active', 'apps');
     }
 
 }
