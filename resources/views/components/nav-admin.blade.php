@@ -25,7 +25,7 @@
                     <div class="">
                         <a class="item ui" href="/admin/notifications" style="border-bottom:1px solid #ddd;"><span class="ui label yellow"><i class="announcement icon"></i> 23 <div class="detail">Notifications</div></span></a>
                         <a class="item" href="/admin/account"><i class="user circle outline icon"></i> Your Account</a>
-                        <a class="item" href="/logout"><i class="setting icon"></i><span class="hiddenOnTablet"> Settings</span></a>
+                        <a class="item" href="/logout"><i class="sign out icon"></i> Sign Out</a>
                     </div>
                 </div>
             </div>
