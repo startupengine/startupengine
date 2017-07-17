@@ -46,8 +46,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/settings', 'AdminController@settings')->middleware('auth');
 
     //Pages
-    Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/landing/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/product/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/service/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/help/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/form/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
 });
