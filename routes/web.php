@@ -46,7 +46,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/content/topic', 'AdminController@topic')->middleware('auth');
     Route::get('/admin/content/campaign', 'AdminController@campaign')->middleware('auth');
     Route::get('/admin/postscheduling', 'AdminController@postscheduling')->middleware('auth');
-    Route::get('/admin/settings', 'AdminController@settings')->middleware('auth');
+    Route::get('/admin/apps', 'AdminController@apps')->middleware('auth');
 
     //Pages
     Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
