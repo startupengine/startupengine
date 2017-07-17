@@ -9,6 +9,10 @@
         <script>
             var lock = new Auth0Lock('<?php echo \Config::get('laravel-auth0.client_id') ?>', '<?php echo \Config::get('laravel-auth0.domain') ?>', {
                 container: 'root',
+                theme: {
+                    logo: '<?php echo \Config::get('app.logo') ?>',
+                    primaryColor: '#222'
+                },
                 auth: {
                     redirectUrl: '<?php echo \Config::get('laravel-auth0.redirect_uri') ?>',
                     responseType: 'code',
@@ -16,6 +20,7 @@
                         scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
                     }
                 },
+                hashCleanup: true,
                 rememberLastLogin: false,
             });
             lock.show();

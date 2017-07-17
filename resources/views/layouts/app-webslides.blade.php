@@ -45,8 +45,15 @@
     <link rel="stylesheet" type='text/css' media='all' href="/css/custom.css">
 
     <style>
-        .auth0-lock-header {
+        .auth0-lock-header{
+            display:none !important;
+        }
+        .auth0-lock-name {
             display:none;
+        }
+        .auth0-lock-header-bg {
+            height:80px !important;
+            background:#fff !important;
         }
         .auth0-lock-widget{
             box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
@@ -55,18 +62,13 @@
         .auth0-lock-tabs {
             border-radius: 4px 4px 0px 0px;
         }
-        .auth0-lock-social-buttons-container {
-            padding-top:15px !important;
-        }
-        .auth0-lock-input-email {
-            /* padding-top:15px !important; */
-        }
-        .auth0-lock-submit {
-            background:#222 !important;
-            border-radius:0px 0px 4px 4px !important;
-        }
         .auth0-lock-widget input {
             box-shadow:none !important;
+        }
+
+        .auth0-lock.auth0-lock .auth0-lock-tabs-container {
+            margin: -20px -20px 20px !important;
+            height: 55px !important;
         }
     </style>
 
