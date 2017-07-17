@@ -14,7 +14,7 @@
             <a class="item <?php if($active == 'analytics') { echo "active"; } ?>" href="/admin/analytics"><i class="bar chart icon"></i><span class="hiddenOnTablet"> Analytics</span></a>
             <?php /*<a class="item" href="/admin/sales"><i class="dollar icon"></i><span class="hiddenOnTablet"> Sales</span></a> */ ?>
             <a class="item" href="/admin/users"><i class="user outline icon"></i><span class="hiddenOnTablet"> Users</span></a>
-            <a class="item" href="/admin/settings"><i class="setting icon"></i><span class="hiddenOnTablet"> Settings</span></a>
+            <a class="item" href="/logout"><i class="setting icon"></i><span class="hiddenOnTablet"> Settings</span></a>
         </div>
         <div class="right menu hiddenOnMobile" >
             <div class="ui simple dropdown item">
@@ -47,7 +47,7 @@
                         <a class="item" href="/admin/users"><i class="user outline icon"></i> Users</a>
                         <a class="item" href="/admin/users"><i class="setting icon"></i> Settings</a>
                         <a class="item" href="/admin/account"  style="border-top:1px solid #ddd;"><i class="user circle outline icon"></i> Your Account</a>
-                        <a class="item" href="/admin/users"><i class="sign out icon"></i> Sign Out</a>
+                        <a class="item" href="/logout"><i class="sign out icon"></i> Sign Out</a>
                     </div>
                 </div>
             </div>
