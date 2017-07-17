@@ -1,5 +1,20 @@
 <?php
 
+$ch = curl_init(env('GOOGLE_ANALYTICS_CREDENTIALS', storage_path('app/google/analytics-credentials.json')));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+curl_setopt($ch, CURLOPT_TIMEOUT_MS, 200);
+$string = curl_exec($ch);
+$curl_errno = curl_errno($ch);
+$curl_error = curl_error($ch);
+curl_close($ch);
+
+if ($curl_errno > 0) {
+    dd( "cURL Error ($curl_errno): $curl_error\n");
+} else {
+    $json = $data;
+}
+
 return [
 
     /*
@@ -11,7 +26,7 @@ return [
      * Path to the client secret json file. Take a look at the README of this package
      * to learn how to get this file.
      */
-    'service_account_credentials_json' => env('GOOGLE_ANALYTICS_CREDENTIALS', storage_path('app/google/analytics-credentials.json')),
+    'service_account_credentials_json' => $data,
 
     /*
      * The amount of minutes the Google API responses will be cached.
