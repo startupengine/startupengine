@@ -41,7 +41,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/settings', 'AdminController@settings');//->middleware('auth');
 
     //Users
-    Route::get('/app', 'HomeController@index')->name('home')->middleware('auth');
+    Route::get('/app', 'AppController@login');
 
     //Pages
     Route::get('/articles', 'ArticleController@getArticles');

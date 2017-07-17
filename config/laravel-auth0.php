@@ -39,7 +39,7 @@ return array(
     |
     */
 
-    'redirect_uri'  => env('AUTH0_CALLBACK_URL', '/auth0/callback'),
+    'redirect_uri'  => env('AUTH0_CALLBACK_URL', 'http://127.0.0.1:8000/auth0/callback'),
 
     /*
     |--------------------------------------------------------------------------

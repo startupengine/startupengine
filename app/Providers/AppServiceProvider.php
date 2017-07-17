@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register() {
+        if (env('APP_ENV') === 'production') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
         $this->app->bind(
             Auth0UserRepositoryContract::class,
             \App\Repository\User::class); //'\Auth0\Login\Repository\Auth0UserRepository');

@@ -5,7 +5,7 @@
             embedded area
         </div>
         <?php $redirecturl = \Config::get('app.url').'/auth0/callback'; ?>
-        <script src="https://cdn.auth0.com/js/lock/10.17/lock.min.js"></script>
+        <script src="https://cdn.auth0.com/js/lock/10.15/lock.min.js"></script>
         <script>
             var lock = new Auth0Lock('<?php echo \Config::get('laravel-auth0.client_id') ?>', '<?php echo \Config::get('laravel-auth0.domain') ?>', {
                 container: 'root',
