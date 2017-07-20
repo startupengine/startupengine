@@ -26,7 +26,7 @@ class ArticleController extends Controller
 
     public function getArticle($slug) {
         $query = (new \Contentful\Delivery\Query());
-        $query->setContentType('article')
+        $query->setContentType('page')
             ->where('fields.slug', $slug)
             ->setInclude(2);
         $entries = $this->client->getEntries($query);
@@ -61,28 +61,21 @@ class ArticleController extends Controller
     }
 
     public function getHomepage() {
-        \Artisan::call('config:clear');
-        \Artisan::call('config:cache');
-        $installed = config('app.APP_INSTALLED');
-        if ($installed == FALSE) {
-            return view('settings.welcome');
+
+        $query = (new \Contentful\Delivery\Query());
+        $query->setContentType('settings')
+            ->where('fields.slug', 'Default');
+        $defaults = $this->client->getEntries($query);
+        if (empty($defaults->getItems())) {
+            abort(404);
         }
-        else {
-            $query = (new \Contentful\Delivery\Query());
-            $query->setContentType('defaults')
-                ->where('fields.slug', 'default');
-            $defaults = $this->client->getEntries($query);
-            if (empty($defaults->getItems())) {
-                abort(404);
-            }
-            $article = $defaults[0]->getHomepage();
-            if (!empty($defaults->getItems())) {
-                $defaults = $defaults->getItems()[0];
-            } else {
-                $defaults = NULL;
-            }
-            $splash = $article->getSplashClass();
-            return view('welcome')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash)->with('analyticsCategory', 'homepage');
+        $homepage = $defaults[0]->getHomepage();
+        if (!empty($defaults->getItems())) {
+            $defaults = $defaults->getItems()[0];
+        } else {
+            $defaults = NULL;
         }
+        return view('welcome')->with('page', $homepage)->with('defaults', $defaults)->with('analyticsCategory', 'homepage');
+
     }
 }

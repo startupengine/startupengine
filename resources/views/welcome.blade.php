@@ -1,1 +1,1 @@
-@include('articles.view')
+@include('pages.view')

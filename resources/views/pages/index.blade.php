@@ -16,7 +16,7 @@
     -->
 
     <!-- SEO -->
-    <title><?php echo $article->getTitle(); ?></title>
+    <title>Articles</title>
     <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
 
     <!-- URL CANONICAL -->
@@ -78,43 +78,60 @@
 </head>
 <body>
 @include('components.nav')
+
 <main role="main">
     <article>
-        <section class="<?php echo $splash; ?>">
+        <section class="">
             <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
-            <span class="background dark" style="background-image:url('<?php echo $article->getFeaturedImage(); ?>')"></span>
             <!--.wrap = container width: 90% -->
-            <div class="wrap zoomIn" align="center" style="padding:75px 10%;min-width:300px;">
-                <h1 style="margin-bottom:15px;">
-                    <strong><?php echo $article->getHeadline(); ?></strong>
-                </h1>
-                <?php if($article->getSubtitle() !== NULL && $article->getSubtitle() !== '') { ?><div class="text-subtitle"><?php echo @markdown($article->getSubtitle()); ?></div><?php } ?>
-                <p>
-                    <?php $headerCTA = $article->getHeaderCta(); if($headerCTA == NULL) { $headerCTA = 'Read Article'; } ?>
-                    <a href="#section-1" class="button radius <?php if(\Request::capture()->getRequestUri() == '/') { echo "ghost"; } ?>  ga-track" data-ga-category="{{ $analyticsCategory }}" data-ga-action="button" data-ga-label="{{ $headerCTA }}" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
-                        {{ $headerCTA }}
-                    </a>
-                </p>
-            </div>
+            <div class="wrap">
+                <h3 align="center">Articles</h3>
+                <ul class="flexblock gallery">
+                    @foreach($articles as $item)
+                        <?php
+                            $tags = $item->getTags();
+                            if (in_array("Landing", $tags) OR in_array("Hidden", $tags) OR in_array("Page", $tags)) {
+                            } else {
+                            ?>
+                        @include('components.galleryItem')
+                        <?php } ?>
+                    @endforeach
+                </ul>
             <!-- .end .wrap -->
         </section>
-        <?php $count = 1; ?>
-        @foreach($article->getSections() as $section)
-            <?php $contentType = $section->getContentType()->getId(); ?>
-            @include('sections.'.strtolower($contentType))
-            <?php $count = $count + 1; ?>
-        @endforeach
-
-        @include('components.comments')
     </article>
 </main>
 <!--main-->
 
 @include('components.footer')
-@include('components.analytics')
-@include('components.scripts')
-@include('components.mobilenav')
-@include('components.lightbox')
+
+<!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
+<script defer src="/js/svg-icons.js"></script>
+
+<!-- OPTIONAL - Google Analytics (just for us) -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', '{{ getenv('GOOGLE_ANALYTICS') }}', 'auto');
+    ga('send', 'pageview');
+    setTimeout(function() {
+        ga('send', 'event', '15_seconds', 'read');
+    },15000);
+</script>
+<script>
+    var elementsToTrack = document.getElementsByClassName('ga-track');
+    var i = elementsToTrack.length;
+    var gaTrackOnClick = function() {
+        ga('send', 'event', this.dataset.gaText || this.textContent.trim());
+    };
+
+    while(i--) {
+        elementsToTrack[i].addEventListener('click', gaTrackOnClick);
+    }
+</script>
 
 </body>
 </html>

@@ -1,16 +1,13 @@
-<?php if(isset($defaults) && $defaults !== NULL && $defaults->getMenu() !== NULL) { ?>
+<?php if($defaults !== NULL && $defaults->getFooterMenu() !== NULL) { ?>
 <footer role="contentinfo">
     <div class="wrap">
         <div class="grid">
-            <?php foreach($defaults->getMenu()->getMenuGroups() as $menuGroup) { ?>
-            <div class="column">
-                <h3><?php echo $menuGroup->getTitle(); ?></h3>
-                <ul>
-                    <?php foreach($menuGroup->getItems() as $item) { ?>
-                    <li><a href="#"><?php echo @markdown($item->getContent()); ?></a></li>
-                    <?php } ?>
-                </ul>
-            </div>
+            <?php foreach($defaults->getFooterMenu()->getItems() as $item) { ?>
+                <div class="column">
+                    <ul>
+                        <li><a href="#"><?php echo @markdown($item->getContent()); ?></a></li>
+                    </ul>
+                </div>
             <?php } ?>
             <!-- .end .column -->
         </div>
