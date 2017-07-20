@@ -26,38 +26,39 @@ class ArticleController extends Controller
 
     public function getArticle($slug) {
         $query = (new \Contentful\Delivery\Query());
-        $query->setContentType('page')
-            ->where('fields.slug', $slug)
-            ->setInclude(2);
-        $entries = $this->client->getEntries($query);
-        if (empty($entries->getItems())) {
+        $query->setContentType('settings')
+            ->where('fields.slug', 'Default');
+        $defaults = $this->client->getEntries($query);
+        if (!empty($defaults->getItems())) {
+            $defaults = $defaults->getItems()[0];
+        } else {
+            $defaults = NULL;
+        }
+        $query2 = (new \Contentful\Delivery\Query());
+        $query2->setContentType('page')
+            ->where('fields.slug', $slug);
+        $pages = $this->client->getEntries($query2);
+        if (empty($pages->getItems())) {
             abort(404);
         }
-        $article = $entries[0];
-        $query2 = (new \Contentful\Delivery\Query());
-        $query2->setContentType('defaults')
-            ->where('fields.slug', 'default');
-        $defaults = $this->client->getEntries($query2);
-        if(!empty($defaults->getItems())) { $defaults = $defaults->getItems()[0]; } else { $defaults = NULL; }
-        $splash = $article->getSplashClass();
-        return view('articles.view')->with('article', $article)->with('defaults', $defaults)->with('splash', $splash)->with('analyticsCategory', 'article');
+        $page = $pages[0];
+        return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article');
     }
 
     public function getArticles($slug = NULL) {
         if($slug == NULL) {
-            $slug = 'article';
+            $slug = 'page';
         }
         $query = (new \Contentful\Delivery\Query());
         $query->setContentType($slug)
             ->setInclude(2);
         $articles = $this->client->getEntries($query);
-
         $query2 = (new \Contentful\Delivery\Query());
-        $query2->setContentType('defaults')
-            ->where('fields.slug', 'default');
+        $query2->setContentType('settings')
+            ->where('fields.slug', 'Default');
         $defaults = $this->client->getEntries($query2);
         if(!empty($defaults->getItems())) { $defaults = $defaults->getItems()[0]; } else { $defaults = NULL; }
-        return view('articles.index')->with('articles', $articles)->with('defaults', $defaults)->with('analyticsCategory', 'articles');
+        return view('pages.index')->with('articles', $articles)->with('defaults', $defaults)->with('analyticsCategory', 'articles');
     }
 
     public function getHomepage() {

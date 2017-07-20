@@ -4,7 +4,7 @@
         <div class="grid vertical-align">
             <?php if($section->getAlignment() == "left") { ?>
             <div class="column">
-                <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>"></figure>
+                <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:500px;"></figure>
             </div>
             <?php } ?>
             <div class="column">

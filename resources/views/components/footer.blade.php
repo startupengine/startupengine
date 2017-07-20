@@ -5,7 +5,7 @@
             <?php foreach($defaults->getFooterMenu()->getItems() as $item) { ?>
                 <div class="column">
                     <ul>
-                        <li><a href="#"><?php echo @markdown($item->getContent()); ?></a></li>
+                        <li><?php echo @markdown($item->getContent()); ?></li>
                     </ul>
                 </div>
             <?php } ?>

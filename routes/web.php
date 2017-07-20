@@ -55,9 +55,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/apps', 'AdminController@apps')->middleware('auth');
 
     //Pages
+    Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/landing/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/product/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/service/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);

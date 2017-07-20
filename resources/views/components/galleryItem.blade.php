@@ -1,10 +1,10 @@
 <li style="float:left; max-width:50%;background:#fff;">
     <a href="/{{ $item->getSlug() }}">
         <figure>
-            <?php echo "<img src='".$item->getFeaturedImage()."'/>"; ?>
+            <?php echo "<img src='".$item->getFeaturedImage()->getFile()->getUrl()."'/>"; ?>
             <figcaption>
                 <h2>{{ $item->getTitle() }}</h2>
-                <p><?php echo @markdown($item->getSubtitle()); ?></p>
+                <p>{{  $item->getDescription() }}</p>
             </figcaption>
         </figure>
     </a>

@@ -178,3 +178,11 @@ $ php artisan command:ImportDefaultSpace
 Your Contentful space is now populated with content.
 
 Simply edit the existing pages or create new ones to administrate your site.
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within SitePress, please send an e-mail to support@luckyrabbit.info. All security vulnerabilities will be promptly addressed.
+
+## License
+
+SitePress is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
