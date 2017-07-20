@@ -79,6 +79,10 @@
             border-color:#fff !important;
             font-weight:normal !important;
         }
+        section.bg-gradient-h .button.ghost:hover, section.bg-gradient-v .button.ghost:hover, section.bg-gradient-r .button.ghost:hover {
+            color:#222 !important;
+            background:#fff !important;
+        }
     </style>
     @include('components.header-scripts')
 </head>
