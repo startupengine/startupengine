@@ -33,7 +33,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 </div>
 
 # Demo
-A demo of SitePress is online at http://sitepress.co
+A demo of SitePress is online at https://www.smartstartup.io/
 
 # Features 
 Everything you need to launch & grow your website, app, or business.

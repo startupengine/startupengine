@@ -4,7 +4,7 @@
         <div class="grid vertical-align">
             <?php if($section->getAlignment() == "left") { ?>
             <div class="column">
-                <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:500px;"></figure>
+                <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:50%;max-width:77%;"></figure>
             </div>
             <?php } ?>
             <div class="column">
@@ -27,7 +27,7 @@
             </div>
             <?php if($section->getAlignment() == "right" OR $section->getAlignment() == "center" OR $section->getAlignment() == null) { ?>
             <div class="column">
-                <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:500px;"></figure>
+                <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:50%;max-width:77%;"></figure>
             </div>
             <?php } ?>
         </div>
