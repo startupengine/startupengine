@@ -91,6 +91,11 @@
         body {
             background:#fff;
         }
+        @media (min-width: 1024px) {
+            .flexblock li {
+                width: 50% !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -102,8 +107,8 @@
             <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
             <!--.wrap = container width: 90% -->
             <div class="wrap" style="">
-                <h2 align="center">Help & Documentation</h2>
-                <ul class="flexblock border">
+                <h2 align="center">Help & Support</h2>
+                <ul class="flexblock">
                     @foreach($defaults->getHelpMenu()->getItems() as $item)
                         @include('components.helpItem')
                     @endforeach
