@@ -98,11 +98,13 @@
         .ui.menu .item {
             font-size:125% !important;
         }
-        .doc-menu {
-            opacity:0.5;
+        .column {
+            padding-top:0px !important;
         }
-        .doc-menu:hover {
-            opacity:1;
+        @media (max-width: 768px) {
+            hr {
+                margin-bottom:3.2rem !important;
+            }
         }
     </style>
     @include('components.header-scripts')
@@ -118,7 +120,7 @@
                 <hr>
                 <div class="grid sm">
                     <div class="column doc-menu">
-                        <h3>Help</h3>
+                        <h4 align="center">Browse Help</h4>
                         <div class="ui menu vertical fluid">
                             <a href="#" class="item active">Quickstart Guide</a>
                             <a href="#" class="item">Customize your site's appearance</a>
