@@ -15,7 +15,7 @@
     <nav role="navigation" class="hiddenOnDesktop" style="width:100%;">
         <ul class="hiddenOnDesktop" style="margin-right:11px;">
             <li class="showMobileNav menuButton">
-                <a href="#" style="font-size:133%;padding:1px 0px 2px 2px;">
+                <a style="font-size:133%;padding:1px 0px 2px 2px;">
                     <i class="sidebar icon"></i>
                 </a>
             </li>
