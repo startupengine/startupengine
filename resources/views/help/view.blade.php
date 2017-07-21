@@ -121,14 +121,13 @@
                 <div class="grid sm">
                     <div class="column doc-menu">
                         <h4 align="center">Browse Help</h4>
-                        <div class="ui menu vertical fluid">
-                            <a href="#" class="item active">Quickstart Guide</a>
-                            <a href="#" class="item">Customize your site's appearance</a>
-                            <a href="#" class="item">Integrating 3rd Party Apps</a>
-                            <a href="#" class="item">Create your first campaign</a>
-                            <a href="#" class="item">Intro to analytics</a>
-                            <a href="#" class="item">API Reference</a>
-                        </div>
+                        <?php if($defaults !== null && $defaults->getHelpMenu() !== null) { ?>
+                            <div class="ui menu vertical fluid">
+                                <?php foreach($defaults->getHelpMenu()->getItems() as $item) { ?>
+                                <a href="/help/{{ $item->getSlug() }}" class="item <?php if($page->getSlug() == $item->getSlug() ) { echo "active"; } ?>">{{ $item->getTitle() }}</a>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="column">
                         <?php echo @markdown($page->getContent()); ?>
