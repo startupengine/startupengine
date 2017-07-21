@@ -88,6 +88,12 @@
             color:#222 !important;
             background:#fff !important;
         }
+        section:first-of-type {
+            padding-top:100px !important;
+        }
+        body {
+            background:#fff;
+        }
     </style>
     @include('components.header-scripts')
 </head>
