@@ -61,6 +61,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/landing/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/product/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/service/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/help/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'article']);
     Route::get('/form/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
 });

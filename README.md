@@ -181,7 +181,7 @@ Simply edit the existing pages or create new ones to administrate your site.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within SitePress, please send an e-mail to support@luckyrabbit.info. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within SitePress, please send an e-mail to support@sitepress.co. All security vulnerabilities will be promptly addressed.
 
 ## License
 

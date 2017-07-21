@@ -16,7 +16,7 @@
     -->
 
     <!-- SEO -->
-    <title>Articles</title>
+    <title><?php echo $page->getTitle(); ?></title>
     <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
 
     <!-- URL CANONICAL -->
@@ -63,6 +63,10 @@
     <meta name="twitter:image" content="/images/share-webslides.jpg"> <!-- EDIT -->
 
     <!-- FAVICONS -->
+    <?php if( $defaults->getLogo() !== null) { ?>
+        <link rel="apple-touch-icon icon" sizes="180x180" href="{{ $defaults->getLogo()->getFile()->getUrl() }}">
+    <?php } ?>
+    <?php /*
     <link rel="shortcut icon" sizes="16x16" href="/images/favicons/favicon.png">
     <link rel="shortcut icon" sizes="32x32" href="/images/favicons/favicon-32.png">
     <link rel="apple-touch-icon icon" sizes="76x76" href="/images/favicons/favicon-76.png">
@@ -70,11 +74,11 @@
     <link rel="apple-touch-icon icon" sizes="152x152" href="/images/favicons/favicon-152.png">
     <link rel="apple-touch-icon icon" sizes="180x180" href="/images/favicons/favicon-180.png">
     <link rel="apple-touch-icon icon" sizes="192x192" href="/images/favicons/favicon-192.png">
+    */ ?>
 
     <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
-    @include('components.header-scripts')
     <style>
         section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost{
             border-color:#fff !important;
@@ -91,64 +95,54 @@
         body {
             background:#fff;
         }
+        .ui.menu .item {
+            font-size:125% !important;
+        }
+        .doc-menu {
+            opacity:0.5;
+        }
+        .doc-menu:hover {
+            opacity:1;
+        }
     </style>
+    @include('components.header-scripts')
 </head>
 <body>
 @include('components.nav')
-
 <main role="main">
     <article>
-        <section class="">
-            <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
-            <!--.wrap = container width: 90% -->
+        <section class="bg-white" style="min-height:auto !important;">
+            <!--.wrap.longform (width:72rem=720px) = Better reading experience (90-95 characters per line) -->
             <div class="wrap">
-                <h2 align="center">Articles</h2>
-                <ul class="flexblock gallery">
-                    @foreach($articles as $item)
-                        <?php
-                            $tags = $item->getTags();
-                            if (in_array("Landing", $tags) OR in_array("Hidden", $tags) OR in_array("Page", $tags)) {
-                            } else {
-                            ?>
-                        @include('components.galleryItem')
-                        <?php } ?>
-                    @endforeach
-                </ul>
-            <!-- .end .wrap -->
+                <h2 align="center"> {{ $page->getTitle() }}</h2>
+                <hr>
+                <div class="grid sm">
+                    <div class="column doc-menu">
+                        <h3>Documentation</h3>
+                        <div class="ui menu vertical fluid">
+                            <a href="#" class="item">Quickstart Guide</a>
+                            <a href="#" class="item">Customize your site's appearance</a>
+                            <a href="#" class="item">Integrating 3rd Party Apps</a>
+                            <a href="#" class="item">Create your first campaign</a>
+                            <a href="#" class="item">Intro to analytics</a>
+                            <a href="#" class="item">API Reference</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <?php echo @markdown($page->getContent()); ?>
+                    </div>
+                </div>
+                <!--end .grid -->
+            </div>
         </section>
     </article>
 </main>
 <!--main-->
 
 @include('components.footer')
-
-<!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
-<script defer src="/js/svg-icons.js"></script>
-
-<!-- OPTIONAL - Google Analytics (just for us) -->
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', '{{ getenv('GOOGLE_ANALYTICS') }}', 'auto');
-    ga('send', 'pageview');
-    setTimeout(function() {
-        ga('send', 'event', '15_seconds', 'read');
-    },15000);
-</script>
-<script>
-    var elementsToTrack = document.getElementsByClassName('ga-track');
-    var i = elementsToTrack.length;
-    var gaTrackOnClick = function() {
-        ga('send', 'event', this.dataset.gaText || this.textContent.trim());
-    };
-
-    while(i--) {
-        elementsToTrack[i].addEventListener('click', gaTrackOnClick);
-    }
-</script>
+@include('components.analytics')
+@include('components.scripts')
+@include('components.lightbox')
 
 </body>
 </html>
