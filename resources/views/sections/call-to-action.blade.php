@@ -14,15 +14,17 @@
         <?php if( $section->getComponents() !== null) { ?>
             <ul class="flexblock plans blink" style="margin-top:30px;">
                 <?php foreach($section->getComponents() as $component) { ?>
+                <?php  if($component->getContentType()->getId() == "service") { ?>
                     <li style="border-radius:4px !important; box-shadow:0px 10px 30px rgba(0,0,0,0.1) !important;">
                         <h2 style="background:#444;border-radius:4px 4px 0px 0px !important;">{{ $component->getTitle() }}</h2>
                         <div>
                             <span class="price"><sup>$</sup>{{ $component->getPrice() }}<sup>/month</sup></span>
                             <?php echo @markdown($component->getDescription()); ?>
-                            <a href="/purchase/{{ $component->getSlug() }}" class="button radius">Buy Now</a>
+                            <a href="/purchase/service/{{ $component->getSlug() }}" class="button radius">Buy Now</a>
                         </div>
                     </li>
                     <?php } ?>
+                <?php } ?>
             </ul>
         <?php } ?>
     </div>
