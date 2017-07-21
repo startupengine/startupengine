@@ -118,9 +118,9 @@
                 <hr>
                 <div class="grid sm">
                     <div class="column doc-menu">
-                        <h3>Documentation</h3>
+                        <h3>Help</h3>
                         <div class="ui menu vertical fluid">
-                            <a href="#" class="item">Quickstart Guide</a>
+                            <a href="#" class="item active">Quickstart Guide</a>
                             <a href="#" class="item">Customize your site's appearance</a>
                             <a href="#" class="item">Integrating 3rd Party Apps</a>
                             <a href="#" class="item">Create your first campaign</a>
