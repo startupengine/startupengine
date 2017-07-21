@@ -88,9 +88,17 @@
             color:#222 !important;
             background:#fff !important;
         }
-        section:first-of-type {
-            padding-top:100px !important;
-            padding-bottom:100px !important;
+        @media (min-width: 768px) {
+            section:first-of-type {
+                padding-top:100px !important;
+                padding-bottom:100px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            section:first-of-type {
+                padding-top:75px !important;
+                padding-bottom:75px !important;
+            }
         }
         body {
             background:#fff;

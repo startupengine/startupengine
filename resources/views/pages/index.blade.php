@@ -75,7 +75,7 @@
     <link rel="apple-touch-icon icon" sizes="180x180" href="/images/favicons/favicon-180.png">
     <link rel="apple-touch-icon icon" sizes="192x192" href="/images/favicons/favicon-192.png">
     */ ?>
-    
+
     <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
@@ -89,9 +89,17 @@
             color:#222 !important;
             background:#fff !important;
         }
-        section:first-of-type {
-            padding-top:100px !important;
-            padding-bottom:100px !important;
+        @media (min-width: 768px) {
+            section:first-of-type {
+                padding-top:100px !important;
+                padding-bottom:100px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            section:first-of-type {
+                padding-top:75px !important;
+                padding-bottom:75px !important;
+            }
         }
         body {
             background:#fff;
