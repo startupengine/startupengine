@@ -101,6 +101,11 @@
                 padding-bottom:75px !important;
             }
         }
+        @media (min-width:768px) {
+            li.article {
+                max-width: 50%;
+            }
+        }
         body {
             background:#fff;
         }

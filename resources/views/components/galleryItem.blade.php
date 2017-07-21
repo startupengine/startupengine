@@ -1,5 +1,5 @@
 <?php if($item->getFeaturedImage() !== NULL) { ?>
-    <li style="float:left; max-width:50%;background:#fff;">
+    <li class="article" style="float:left; background:#fff;">
         <a href="/{{ $item->getSlug() }}">
             <figure>
                 <?php echo "<img src='".$item->getFeaturedImage()->getFile()->getUrl()."'/>"; ?>
