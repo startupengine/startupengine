@@ -90,6 +90,7 @@
         }
         section:first-of-type {
             padding-top:100px !important;
+            padding-bottom:100px !important;
         }
         body {
             background:#fff;
