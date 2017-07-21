@@ -120,7 +120,7 @@
                 <hr>
                 <div class="grid sm">
                     <div class="column doc-menu">
-                        <h4 align="center">Browse Help</h4>
+                        <h3 align="center">Browse Help</h3>
                         <?php if($defaults !== null && $defaults->getHelpMenu() !== null) { ?>
                             <div class="ui menu vertical fluid">
                                 <?php foreach($defaults->getHelpMenu()->getItems() as $item) { ?>
