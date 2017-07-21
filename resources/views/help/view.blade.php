@@ -127,10 +127,10 @@
                 <h2 align="center"> {{ $page->getTitle() }}</h2>
                 <hr>
                 <div class="grid sm">
-                    <div class="column doc-menu">
+                    <div class="column doc-menu hiddenOnMobile">
                         <h3 align="center">Browse Help</h3>
                         <?php if($defaults !== null && $defaults->getHelpMenu() !== null) { ?>
-                            <div class="ui menu vertical fluid">
+                            <div class="ui menu vertical fluid ">
                                 <?php foreach($defaults->getHelpMenu()->getItems() as $item) { ?>
                                 <a href="/help/{{ $item->getSlug() }}" class="item <?php if($page->getSlug() == $item->getSlug() ) { echo "active"; } ?>">{{ $item->getTitle() }}</a>
                                 <?php } ?>
@@ -139,6 +139,16 @@
                     </div>
                     <div class="column">
                         <?php echo @markdown($page->getContent()); ?>
+                    </div>
+                    <div class="column doc-menu hiddenOnTablet hiddenOnDesktop">
+                        <h3 align="center">Browse Help</h3>
+                        <?php if($defaults !== null && $defaults->getHelpMenu() !== null) { ?>
+                        <div class="ui menu vertical fluid ">
+                            <?php foreach($defaults->getHelpMenu()->getItems() as $item) { ?>
+                            <a href="/help/{{ $item->getSlug() }}" class="item <?php if($page->getSlug() == $item->getSlug() ) { echo "active"; } ?>">{{ $item->getTitle() }}</a>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <!--end .grid -->
