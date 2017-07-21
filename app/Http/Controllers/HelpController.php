@@ -24,6 +24,19 @@ class HelpController extends Controller
         return $entry;
     }
 
+    public function index() {
+        $query = (new \Contentful\Delivery\Query());
+        $query->setContentType('settings')
+            ->where('fields.slug', 'Default');
+        $defaults = $this->client->getEntries($query);
+        if (!empty($defaults->getItems())) {
+            $defaults = $defaults->getItems()[0];
+        } else {
+            $defaults = NULL;
+        }
+        return view('help.index')->with('defaults', $defaults)->with('analyticsCategory', 'help');
+    }
+
     public function getArticle($slug) {
         $query = (new \Contentful\Delivery\Query());
         $query->setContentType('settings')

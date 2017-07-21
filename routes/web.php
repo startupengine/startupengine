@@ -56,6 +56,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //Pages
     Route::get('/articles', 'ArticleController@getArticles');
+    Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'article']);
     Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
     Route::get('/landing/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);

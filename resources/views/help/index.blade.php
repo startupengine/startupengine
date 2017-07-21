@@ -98,23 +98,18 @@
 
 <main role="main">
     <article>
-        <section class="">
+        <section class="" style="min-height:auto !important;">
             <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
             <!--.wrap = container width: 90% -->
-            <div class="wrap">
-                <h2 align="center">Articles</h2>
-                <ul class="flexblock gallery">
-                    @foreach($articles as $item)
-                        <?php
-                            $tags = $item->getTags();
-                            if (in_array("Landing", $tags) OR in_array("Hidden", $tags) OR in_array("Page", $tags)) {
-                            } else {
-                            ?>
-                        @include('components.galleryItem')
-                        <?php } ?>
+            <div class="wrap" style="">
+                <h2 align="center">Help & Documentation</h2>
+                <ul class="flexblock border">
+                    @foreach($defaults->getHelpMenu()->getItems() as $item)
+                        @include('components.helpItem')
                     @endforeach
                 </ul>
             <!-- .end .wrap -->
+            </div>
         </section>
     </article>
 </main>
