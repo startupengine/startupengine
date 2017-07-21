@@ -63,6 +63,10 @@
     <meta name="twitter:image" content="/images/share-webslides.jpg"> <!-- EDIT -->
 
     <!-- FAVICONS -->
+    <?php if( $defaults->getLogo() !== null) { ?>
+    <link rel="apple-touch-icon icon" sizes="180x180" href="{{ $defaults->getLogo()->getFile()->getUrl() }}">
+    <?php } ?>
+    <?php /*
     <link rel="shortcut icon" sizes="16x16" href="/images/favicons/favicon.png">
     <link rel="shortcut icon" sizes="32x32" href="/images/favicons/favicon-32.png">
     <link rel="apple-touch-icon icon" sizes="76x76" href="/images/favicons/favicon-76.png">
@@ -70,7 +74,8 @@
     <link rel="apple-touch-icon icon" sizes="152x152" href="/images/favicons/favicon-152.png">
     <link rel="apple-touch-icon icon" sizes="180x180" href="/images/favicons/favicon-180.png">
     <link rel="apple-touch-icon icon" sizes="192x192" href="/images/favicons/favicon-192.png">
-
+    */ ?>
+    
     <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#333333">
