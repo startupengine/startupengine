@@ -19,7 +19,7 @@
                         <div>
                             <span class="price"><sup>$</sup>{{ $component->getPrice() }}<sup>/month</sup></span>
                             <?php echo @markdown($component->getDescription()); ?>
-                            <a href="/purchase/{{ $component->getSlug() }}}" class="button radius">Buy Now</a>
+                            <a href="/purchase/{{ $component->getSlug() }}" class="button radius">Buy Now</a>
                         </div>
                     </li>
                     <?php } ?>
