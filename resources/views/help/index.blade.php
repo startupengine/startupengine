@@ -16,7 +16,7 @@
     -->
 
     <!-- SEO -->
-    <title>Articles</title>
+    <title>Help</title>
     <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
 
     <!-- URL CANONICAL -->
