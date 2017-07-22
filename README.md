@@ -1,6 +1,6 @@
-# SitePress: the CMS for Startups
+# SmartStartup: the CMS for Startups
 
-SitePress is a beautiful &amp; open-source content, marketing, and analytics platform **for startups**. 
+SmartStartup is a beautiful &amp; open-source content, marketing, and analytics platform **for startups**. 
 
 Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com), and [Webslides](https://github.com/webslides/webslides/).
 
@@ -33,7 +33,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 </div>
 
 # Demo
-A demo of SitePress is online at https://www.smartstartup.io/
+A demo is online at https://www.smartstartup.io/
 
 # Features 
 Everything you need to launch & grow your website, app, or business.
@@ -130,9 +130,9 @@ All of these products are **best-in-class** and cost nothing to start.
 * [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ##### Strategic Benefits
-* SitePress is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
+* SmartStartup is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
-* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SitePress leverages the latest technologies, practices, and services, so you can focus on running your business.
+* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SmartStartup leverages the latest technologies, practices, and services, so you can focus on running your business.
 
 * Custom coding not required. No plugins to install. Just enter your account information and go.
 
@@ -140,7 +140,7 @@ All of these products are **best-in-class** and cost nothing to start.
 
 * Automatic updates via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
 
-* Don't have funding? It's ok, you can run SitePress on your own at little or no cost.
+* Don't have funding? It's ok, you can run SmartStartup on your own at little or no cost.
  
 * You're not on your own. Paid professional support is available when you need it.
 
@@ -149,19 +149,19 @@ All of these products are **best-in-class** and cost nothing to start.
 # Deploying
 
 ## Requirements
-At minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on SitePress.
+At minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on SmartStartup.
 
 Simply specify your account credentials (Space ID, API Key, and Management Token) during deployment.
 
 ## Deploy to Heroku
-Click the button below to deploy a new instance of SitePress to Heroku instantly.
+Click the button below to deploy a new instance of SmartStartup to Heroku instantly.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/SitePress)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/smartstartup)
 
 ## Import Default Content
 After deploying, you will need to import the default content to your Contentful space. 
 
-Connect to your SitePress instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+Connect to your SmartStartup instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 
 ```
 $ heroku run bash --app $yourHerokuAppName
@@ -181,8 +181,8 @@ Simply edit the existing pages or create new ones to administrate your site.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within SitePress, please send an e-mail to support@sitepress.co. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within SmartStartup, please send an e-mail to info@smartstartup.io. All security vulnerabilities will be promptly addressed.
 
 ## License
 
-SitePress is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+SmartStartup is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
