@@ -20,7 +20,7 @@
                         <div>
                             <span class="price"><sup>$</sup>{{ $component->getPrice() }}<sup>/month</sup></span>
                             <?php echo @markdown($component->getDescription()); ?>
-                            <a href="{{ $component->getButtonLink() }}/purchase" class="button ghost" style="margin-bottom:5px;">{{ $component->getButtonText }}</a><br>
+                            <a href="{{ $component->getButtonLink() }}/purchase" class="button ghost" style="margin-bottom:5px;">{{ $component->getButtonText() }}</a><br>
                         </div>
                     </li>
                     <?php } ?>
