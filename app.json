@@ -37,22 +37,6 @@
             "description": "Set to TRUE to enable debugging messages.",
             "value": "FALSE"
         },
-        "APP_URL": {
-            "description": "URL for this app.",
-            "value": "https://xxxxx.herokuapp.com/"
-        },
-        "CONTENTFUL_API_KEY": {
-            "description": "Contentful API Key.",
-            "value": "XXXXX"
-        },
-        "CONTENTFUL_SPACE_ID": {
-            "description": "Contentful Space ID.",
-            "value": "XXXXX"
-        },
-        "CONTENTFUL_MANAGEMENT_TOKEN": {
-            "description": "Contentful Management Token.",
-            "value": "XXXXX"
-        }
     },
     "formation": {
         "web": {
