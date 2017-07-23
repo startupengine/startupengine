@@ -32,10 +32,6 @@
         "SECRET_TOKEN": {
             "description": "A secret key for verifying the integrity of signed cookies.",
             "generator": "secret"
-        },
-        "APP_DEBUG": {
-            "description": "Set to TRUE to enable debugging messages.",
-            "value": "FALSE"
         }
     },
     "formation": {
