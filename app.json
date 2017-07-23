@@ -36,7 +36,7 @@
         "APP_DEBUG": {
             "description": "Set to TRUE to enable debugging messages.",
             "value": "FALSE"
-        },
+        }
     },
     "formation": {
         "web": {
