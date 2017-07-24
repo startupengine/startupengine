@@ -8,27 +8,30 @@ use Spatie\Analytics\Period;
 
 class APIResponse extends Model
 {
-    public function getAnalytics(){
+    public function getAnalyticsSummary(){
         return response()->json([
-            'name' => 'Abigail',
-            'state' => 'CA'
+            'satatus' => 'success'
         ]);
     }
 
     public function getTraffic() {
-
         $period = Period::days(30);
         $traffic = Analytics::fetchTotalVisitorsAndPageViews($period);
-        foreach($traffic as $item) {
-            $visitors[] = $item['visitors'];
-            $views[] = $item['pageViews'];
-            $date = $item['date']->toFormattedDateString();
-            $dates[] = $date;
-        }
         return response()->json([
             'status' => 'success',
             'period' => $period,
-            'dates' => $dates
+            'raw' => $traffic
+        ]);
+    }
+
+    public function getEvents() {
+        $period = Period::days(30);
+        $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'dimensions' => 'ga:date']);
+        return response()->json([
+            'status' => 'success',
+            'period' => $period,
+            'totals' => $events->totalsForAllResults,
+            'raw' => $events
         ]);
     }
 }
