@@ -213,6 +213,7 @@ return [
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Flugg\Responder\ResponderServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -278,6 +279,7 @@ return [
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
+        'Responder' => Flugg\Responder\Facades\Responder::class,
 
     ],
 

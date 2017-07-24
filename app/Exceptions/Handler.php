@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+
     private $sentryID;
 
     /**
@@ -50,6 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
         if (config('app.ENABLE_SENTRY') == TRUE && app()->bound('sentry') && $this->shouldReport($exception)) {
             app('sentry')->captureException($exception);
             return response()->view('errors.500', [
