@@ -46,7 +46,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/install/import-complete', 'SettingsController@importComplete');
 
     //Admins
-    Route::get('/admin', 'AdminController@index')->middleware('auth');
+    Route::get('/admin', 'AdminController@index');//->middleware('auth');
     Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
     Route::get('/admin/content', 'AdminController@content')->middleware('auth');
     Route::get('/admin/content/topic', 'AdminController@topic')->middleware('auth');
