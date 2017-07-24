@@ -46,7 +46,7 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
-            $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file); //implicitly creates file
+            $handle = fopen($my_file, 'w');
             file_put_contents($my_file, $file);
         }
         else {
@@ -57,7 +57,7 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
-            $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file); //implicitly creates file
+            $handle = fopen($my_file, 'w');
             file_put_contents($my_file, $file);
         }
         //echo "\nTest...\n";
