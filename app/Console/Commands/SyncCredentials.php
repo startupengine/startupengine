@@ -37,9 +37,8 @@ class SyncCredentials extends Command
      */
     public function handle()
     {
-        $path = storage_path() . "/app/app/google/analytics-credentials.json";
-        //$dummy = storage_path() . "/app/app/google/dummy.json";
-        if (!file_exists($path)){
+        $path = "google-analytics-credentials.json";
+        if (!\Storage::disk('dropbox')->exists($path)){
             //Download remote file and copy to disk
             $url = config('analytics.credentials');
             echo ("File does not exist.\n");
@@ -47,8 +46,7 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
-            //\File::copy($dummy, $path);
-            \File::put($path,$file);
+            \Storage::disk('dropbox')->put($path,$file);
         }
         else {
             //Download remote file and copy to disk
@@ -58,8 +56,8 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
-            //\File::copy($dummy, $path);
-            \File::put($path,$file);
+            \Storage::disk('dropbox')->put($path,$file);
         }
+        echo "Dropbox file contents:". \Storage::disk('dropbox')->get($path);
     }
 }
