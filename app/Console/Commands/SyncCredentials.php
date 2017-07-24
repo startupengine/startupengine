@@ -37,7 +37,8 @@ class SyncCredentials extends Command
      */
     public function handle()
     {
-        $path = storage_path() . "/app/google/analytics-credentials.json";
+        $path = storage_path() . "/app/app/google/analytics-credentials.json";
+        $dummy = storage_path() . "/app/app/google/dummy.json";
         if (!file_exists($path)){
             //Download remote file and copy to disk
             $url = config('analytics.credentials');
@@ -46,6 +47,7 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
+            \File::copy($dummy, $path);
             \File::put($path,$file);
             //$handle = fopen($my_file, 'w');
             //file_put_contents($my_file, $file);
@@ -58,6 +60,7 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
+            \File::copy($dummy, $path);
             \File::put($path,$file);
             //$handle = fopen($my_file, 'w');
             //file_put_contents($my_file, $file);

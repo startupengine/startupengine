@@ -1,4 +1,6 @@
 *
+app/google/*
+!app/google/dummy.json
 !contentful/*
 !docs/*
 !public/

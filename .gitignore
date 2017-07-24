@@ -6,6 +6,8 @@
 /storage/app/backups
 !/storage/app/contentful/*
 !/storage/app/docs/*
+/storage/app/google/*
+!/storage/app/google/dummy.json
 /vendor
 /.idea
 /.vagrant
