@@ -10,6 +10,7 @@
         "andreasindal/laravel-markdown": "1.0",
         "auth0/login": "~5.0",
         "barryvdh/laravel-debugbar": "^2.4",
+        "benjamincrozat/laravel-dropbox-driver": "^2.0",
         "cloudcreativity/laravel-json-api": "^0.9.1",
         "consoletvs/charts": "4.*",
         "contentful/laravel": "^2.0",
@@ -19,6 +20,7 @@
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.7.0",
         "shalvah/laravel-jsend": "^1.1",
+        "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-analytics": "^3.0",
         "spatie/laravel-newsletter": "^3.6",
         "wangaz/laravel-semantic-ui-css": "^1.2"

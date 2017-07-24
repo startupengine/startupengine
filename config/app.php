@@ -214,6 +214,7 @@ return [
         Spatie\Newsletter\NewsletterServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         Flugg\Responder\ResponderServiceProvider::class,
+        BC\Laravel\DropboxDriver\ServiceProvider::class,
 
         /*
          * Application Service Providers...
