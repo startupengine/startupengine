@@ -16,12 +16,10 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 - [Features](#features)
     - [Create pages](#create-pages)
     - [Control access to your content](#control-access-to-your-content)
-    - [Implement a marketing strategy](#implement-a-marketing-strategy)        
     - [Accept payments](#accept-payments)
+    - [Implement a marketing strategy](#implement-a-marketing-strategy)          
     - [Make informed decisions with analytics](#make-informed-decisions-with-analytics)   
     - [Optimize your site](#optimize-your-site)
-    - [Easily Integrate with 3rd-Party Services](#easily-integrate-with-3rd-party-services)
-    - [Admin & Developer tools](#admin-and-developer-tools)
     - [Strategic Benefits](#strategic-benefits)
 - [Deploying](#deploying)
 
@@ -51,10 +49,6 @@ Everything you need to launch & grow your website, app, or business.
 * [ ] Premium (requires login)
 * [ ] Paid (requires paid subscription)
 
-##### Implement a marketing strategy
-* [ ] Conduct market research to gain insight into your customers' psychological needs
-* [ ] Schedule social media posts ahead of time 
-
 ##### Accept Payments 
 * [ ] For Products
 * [ ] For Services (i.e., for consulting or web development)
@@ -62,6 +56,10 @@ Everything you need to launch & grow your website, app, or business.
 * [ ] For Premium Content (i.e., music or video tutorials)
 * [ ] Via easy & secure credit card processing
 * [ ] All without leaving the site
+
+##### Implement a marketing strategy
+* [ ] Conduct market research to gain insight into your customers' psychological needs
+* [ ] Schedule social media posts ahead of time 
  
 ##### Make informed decisions with analytics
 * [ ] Get daily notifications about how your business is performing, including:
@@ -77,57 +75,6 @@ Everything you need to launch & grow your website, app, or business.
 * [ ] Improve your landing page with automatic A/B Testing
 * [ ] Automatically optimize your site for search engines
 * [ ] Track user funnels to know where to focus your efforts (no configuration required)
-
-##### Easily Integrate with 3rd-Party Services
-All of these products are **best-in-class** and cost nothing to start.
-
-* Ads
-  * Google AdSense
-* Authentication
-  * Auth0
-* Chat/Chatbots
-  * Drift
-  * Intercom
-  * Slack
-* Comments
-  * Disqus
-* Continuous Delivery (push-to-deploy)
-  * Heroku + Github
-* Marketing Automation
-  * MailChimp
-* Analytics
-  * Google Analytics
-  * MixPanel
-  * Rakam
-* Data Visualization
-  * Plotly
-* Error Tracking
-  * Sentry
-* Payment Processing
-  * Square
-  * Stripe
-* Search
-  * Algolia  
-* Social Media
-  * Facebook
-  * Twitter
-* User Feedback
-  * Typeform
-
-##### Admin & Developer tools
-* [x] Admin Panel
-* [ ] Tests
-* [ ] REST API
-* [x] Auto-Scaling
-* [x] Easy Migrations
-* [x] Console Commands
-* [x] Server Monitoring
-* [x] Automatic Backups
-* [x] Free SSL Certificate
-* [x] One-click Deployment
-* [x] Content Import/Export
-* [x] Role Based Access Control
-* [ ] Content Caching (Minimize 3rd-Party API Calls)
 
 ##### Strategic Benefits
 * SmartStartup is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
