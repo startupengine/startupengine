@@ -16,6 +16,7 @@ class APISecret
     public function handle($request, Closure $next)
     {
         if( $request->input('s') !== null && $request->input('s') == env('API_SECRET') ) {
+            $syncCredentials = \Artisan::call('command:SyncCredentials', []);
             return $next($request);
         }
         else {
