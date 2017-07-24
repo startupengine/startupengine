@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Overview
-Route::get('/v1/overview', 'APIController@getOverview')->middleware('apisecret');
+Route::get('/v1/overview', 'APIController@getOverview');
 
 // Status
 Route::get('/v1/status/summary', 'APIController@getStatusSummary');
