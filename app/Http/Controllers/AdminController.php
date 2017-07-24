@@ -88,12 +88,16 @@ class AdminController extends Controller
     }
 
     public function analytics(Request $request) {
-        $path = storage_path() . "/app/google/analytics-credentials.json";
+        $path = storage_path() . "/app/google/analytics-credentials-downloaded.json";
         if (!file_exists($path)){
             $url = config('analytics.credentials');
             $contents = file_get_contents($url);
-            \Storage::disk('local')->put('/app/google/analytics-credentials.json', $contents);
+            $credentials = $url;
+            \Storage::disk('local')->put('/app/google/analytics-credentials-downloaded.json', $credentials);
         }
+        //$credentials = json_decode(file_get_contents($path));
+        //dd($path);
+
 
         if($request->period == "week") {
             $days = 7;

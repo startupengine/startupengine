@@ -22,10 +22,12 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "php artisan migrate --force"
+            "php artisan migrate --force",
+            "php artisan command:SyncCredentials"
         ],
         "post-update-cmd": [
-            "php artisan migrate --force"
+            "php artisan migrate --force",
+            "php artisan command:SyncCredentials"
         ]
     },
     "env": {
