@@ -34,6 +34,10 @@
         "SECRET_TOKEN": {
             "description": "A secret key for verifying the integrity of signed cookies.",
             "generator": "secret"
+        },
+        "API_SECRET": {
+            "description": "A secret key for accessing the API.",
+            "generator": "secret"
         }
     },
     "formation": {
