@@ -12,7 +12,7 @@ class APIController extends Controller
         return $response->getAnalytics();
     }
 
-    public function getTraffic() {
+    public function getTrafficSummary() {
         $response = new APIResponse();
         return $response->getTraffic();
     }
@@ -22,12 +22,12 @@ class APIController extends Controller
         return $response->getTraffic($page);
     }
 
-    public function getTrafficByCategory($category) {
+    public function getTrafficByType($type) {
         $response = new APIResponse();
-        return $response->getTraffic($category);
+        return $response->getTraffic($type);
     }
 
-    public function getEvents() {
+    public function getEventsSummary() {
         $response = new APIResponse();
         return $response->getEvents();
     }
@@ -35,6 +35,16 @@ class APIController extends Controller
     public function getEventsByType($type) {
         $response = new APIResponse();
         return $response->getEvents($type);
+    }
+
+    public function getContentSummary() {
+        $response = new APIResponse();
+        return $response->getContent();
+    }
+
+    public function getContentByType($type) {
+        $response = new APIResponse();
+        return $response->getContent($type);
     }
 
     public function getUsersSummary() {
