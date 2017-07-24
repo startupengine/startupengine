@@ -8,9 +8,9 @@ use Spatie\Analytics\Period;
 
 class APIResponse extends Model
 {
-    public function getAnalyticsSummary(){
+    public function getOverview(){
         return response()->json([
-            'satatus' => 'success'
+            'status' => 'success'
         ]);
     }
 

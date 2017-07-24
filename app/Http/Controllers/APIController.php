@@ -7,9 +7,19 @@ use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
-    public function getAnalyticsSummary() {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('apisecret');
+    }
+
+    public function getOverview() {
         $response = new APIResponse();
-        return $response->getAnalytics();
+        return $response->getOverview();
     }
 
     public function getTrafficSummary() {

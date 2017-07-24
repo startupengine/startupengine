@@ -17,19 +17,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Overview
+Route::get('/v1/overview', 'APIController@getOverview')->middleware('apisecret');
+
 // Status
 Route::get('/v1/status/summary', 'APIController@getStatusSummary');
 Route::get('/v1/status/{name}', 'APIController@getStatusByName');
-
-// Overview
-Route::get('/v1/analytics/summary', 'APIController@getAnalyticsSummary');
 
 // Traffic
 Route::get('/v1/traffic', 'APIController@getTrafficSummary');
 Route::get('/v1/traffic/page/{page}', 'APIController@getTrafficByPage');
 Route::get('/v1/traffic/type/{type}', 'APIController@getTrafficByType');
 
-// Events (clicks, shares, etc)
+// Events
 Route::get('/v1/events', 'APIController@getEventsSummary');
 Route::get('/v1/events/type/{type}', 'APIController@getEventsByType');
 
@@ -64,6 +64,7 @@ Route::get('/v1/experiments/name/{name}', 'APIController@getExperimentsByName');
 Route::get('/v1/campaigns/summary', 'APIController@getCampaignSummary');
 Route::get('/v1/campaigns/{campaign}/stages', 'APIController@getCampaignStages');
 Route::get('/v1/campaigns/{campaign}/notes', 'APIController@getCampaignNotes');
+Route::get('/v1/campaigns/{campaign}/content', 'APIController@getCampaignContent');
 Route::get('/v1/campaigns/{campaign}/traffic', 'APIController@getCampaignTraffic');
 Route::get('/v1/campaigns/{campaign}/events', 'APIController@getCampaignEvents');
 Route::get('/v1/campaigns/{campaign}/users', 'APIController@getCampaignUsers');
