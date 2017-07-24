@@ -46,8 +46,9 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
-            $handle = fopen($my_file, 'w');
-            file_put_contents($my_file, $file);
+            \File::put($path,$file);
+            //$handle = fopen($my_file, 'w');
+            //file_put_contents($my_file, $file);
         }
         else {
             //Download remote file and copy to disk
@@ -57,8 +58,9 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             echo "Contents:\n \n ".$file;
             $my_file = $path;
-            $handle = fopen($my_file, 'w');
-            file_put_contents($my_file, $file);
+            \File::put($path,$file);
+            //$handle = fopen($my_file, 'w');
+            //file_put_contents($my_file, $file);
         }
         //echo "\nTest...\n";
         //$credentials = json_decode(file_get_contents($path));
