@@ -58,6 +58,9 @@ class SyncCredentials extends Command
             $my_file = $path;
             \Storage::disk('dropbox')->put($path,$file);
         }
+        config(['analytics.service_account_credentials_json' => \Storage::disk('dropbox')->get($path)]);
+        echo "New config value: ".config('analytics.service_account_credentials_json');
+        config:cache();
         echo "Dropbox file contents:". \Storage::disk('dropbox')->get($path);
     }
 }
