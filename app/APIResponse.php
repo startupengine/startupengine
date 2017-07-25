@@ -69,8 +69,16 @@ class APIResponse extends Model
 
     public function getEvents($request, $type = null) {
         $period = $this->getPeriod($request);
-        if($type !== null) {
-            $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'filters' => "ga:eventCategory==$type", 'dimensions' => 'ga:date']);
+        if($type !== null OR $request->campaign !== null) {
+            $filters = "";
+            if(isset($type)) {
+                $filters = $filters."ga:eventCategory==$type";
+            }
+            if(isset($request->campaign)) {
+                if($filters !== "") { $filters = $filters.",";}
+                $filters =  $filters."ga:eventLabel==$request->campaign";
+            }
+            $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'filters' => "$filters", 'dimensions' => 'ga:date']);
         } else {
             $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'dimensions' => 'ga:date']);
         }
