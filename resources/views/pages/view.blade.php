@@ -117,6 +117,25 @@
             <?php $count = $count + 1; ?>
         @endforeach
         @include('components.comments')
+        <?php if($page->getCampaign() !== null) { ?>
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', '<?php echo config('app.GOOGLE_ANALYTICS') ?>', 'auto', '<?php echo $page->getCampaign()->getSlug(); ?>');
+                ga('<?php echo $page->getCampaign()->getSlug(); ?>.send', 'pageview');
+                var elementsToTrack = document.getElementsByClassName('ga-track');
+                var i = elementsToTrack.length;
+                var gaTrackOnClick = function() {
+                    ga('<?php echo $page->getCampaign()->getSlug(); ?>.send', 'event', this.dataset.gaCategory, this.dataset.gaAction, this.dataset.gaLabel, 0);
+                };
+                while(i--) {
+                    elementsToTrack[i].addEventListener('click', gaTrackOnClick);
+                }
+            </script>
+        <?php } ?>
     </article>
 </main>
 <!--main-->
