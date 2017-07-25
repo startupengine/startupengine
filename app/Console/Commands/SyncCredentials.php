@@ -38,7 +38,7 @@ class SyncCredentials extends Command
     public function handle()
     {
         $path = "google/google-analytics-credentials.json";
-        if (!\Storage::disk('dropbox')->exists($path)){
+        if (!\Storage::disk('local')->exists($path)){
             //Download remote file and copy to disk
             $url = config('analytics.credentials');
             //echo ("File does not exist.\n");
@@ -46,24 +46,24 @@ class SyncCredentials extends Command
             $file = file_get_contents($url);
             //echo "Contents:\n \n ".$file;
             $my_file = $path;
-            \Storage::disk('dropbox')->put($path,$file);
+            //\Storage::disk('dropbox')->put($path,$file);
             \Storage::disk('local')->put($path,$file);
         }
         else {
             //Download remote file and copy to disk
-            $url = config('analytics.credentials');
+            //$url = config('analytics.credentials');
             //echo ("File exists.\n");
             //echo "Downloading from: ". $url."\n";
-            $file = file_get_contents($url);
+            //$file = file_get_contents($url);
             //echo "Contents:\n \n ".$file;
-            $my_file = $path;
-            \Storage::disk('dropbox')->put($path,$file);
-            \Storage::disk('local')->put($path,$file);
+            //$my_file = $path;
+            //\Storage::disk('dropbox')->put($path,$file);
+            //\Storage::disk('local')->put($path,$file);
         }
-        config(['analytics.service_account_credentials_json' => \Storage::disk('dropbox')->get($path)]);
+        //config(['analytics.service_account_credentials_json' => \Storage::disk('dropbox')->get($path)]);
         //dd(\Storage::disk('dropbox')->get($path));
         //echo "New config value: ".config('analytics.service_account_credentials_json');
-        config:cache();
+        //config:cache();
         //echo "Dropbox file contents:". \Storage::disk('dropbox')->get($path);
     }
 }
