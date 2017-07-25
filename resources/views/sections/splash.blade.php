@@ -9,7 +9,7 @@
         <?php if($section->getSubtitle() !== NULL && $section->getSubtitle() !== '') { ?><div class="text-subtitle"><?php echo @markdown($section->getSubtitle()) ?></div><?php } ?>
         <p>
             <?php $headerCTA = $section->getButtonText(); if($headerCTA == NULL) { $headerCTA = 'Read Article'; } ?>
-            <a href="#section-{{ $count + 1 }}" class="button radius <?php if(\Request::capture()->getRequestUri() == '/') { echo "ghost"; } ?>  ga-track" data-ga-category="{{ $analyticsCategory }}" data-ga-action="button" data-ga-label="{{ $headerCTA }}" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
+            <a href="#section-{{ $count + 1 }}" class="button radius <?php if(\Request::capture()->getRequestUri() == '/') { echo "ghost"; } ?>  ga-track" data-ga-category="{{ $analyticsCategory }}" data-ga-action="button" data-ga-label="<?php if($page->getCampaign() !== null) { echo $page->getCampaign()->getSlug(); } else { echo $headerCTA;  } ?>" data-ga-text="{{ $headerCTA }}" title="{{ $headerCTA }}">
                 {{ $headerCTA }}
             </a>
         </p>
