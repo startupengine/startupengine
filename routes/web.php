@@ -45,6 +45,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/install/import', 'ContentfulController@import');
     Route::get('/install/import-complete', 'SettingsController@importComplete');
 
+    //Admins
+    Route::get('/admin', 'AdminController@index');//->middleware('auth');
+    Route::get('/admin/analytics', 'AdminController@analytics');//->middleware('auth');
+    Route::get('/admin/content', 'AdminController@content')->middleware('auth');
+    Route::get('/admin/content/topic', 'AdminController@topic')->middleware('auth');
+    Route::get('/admin/content/campaign', 'AdminController@campaign')->middleware('auth');
+    Route::get('/admin/postscheduling', 'AdminController@postscheduling')->middleware('auth');
+    Route::get('/admin/apps', 'AdminController@apps')->middleware('auth');
+
     //Pages
     Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'article']);
