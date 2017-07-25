@@ -49,6 +49,7 @@ class APIResponse extends Model
         $results = $client->getEntries($query);
         return response()->json([
             'status' => 'success',
+            'source' => 'contentful',
             'raw' => $results
         ]);
     }
@@ -63,6 +64,7 @@ class APIResponse extends Model
         return response()->json([
             'status' => 'success',
             'period' => $period,
+            'source' => 'google-analytics',
             'raw' => $traffic
         ]);
     }
@@ -86,6 +88,7 @@ class APIResponse extends Model
             'status' => 'success',
             'period' => $period,
             'totals' => $events->totalsForAllResults,
+            'source' => 'google-analytics',
             'raw' => $events
         ]);
     }
@@ -98,6 +101,7 @@ class APIResponse extends Model
         return response()->json([
             'status' => 'success',
             'period' => $period,
+            'source' => 'google-analytics',
             'raw' => $results
         ]);
     }
