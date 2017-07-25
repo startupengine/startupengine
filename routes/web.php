@@ -44,7 +44,7 @@ Route::group(['middleware' => ['web']], function () {
     //Import
     Route::get('/install/import', 'ContentfulController@import');
     Route::get('/install/import-complete', 'SettingsController@importComplete');
-    
+
     //Pages
     Route::get('/articles', 'ArticleController@getArticles');
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'article']);
