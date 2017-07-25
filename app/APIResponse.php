@@ -75,7 +75,7 @@ class APIResponse extends Model
                 $filters = $filters."ga:eventCategory==$type";
             }
             if(isset($request->campaign)) {
-                if($filters !== "") { $filters = $filters.",";}
+                if($filters !== "") { $filters = $filters.";";} // The semicolon represents the AND operator (combines filters)
                 $filters =  $filters."ga:eventLabel==$request->campaign";
             }
             $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'filters' => "$filters", 'dimensions' => 'ga:date']);

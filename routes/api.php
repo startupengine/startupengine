@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Traffic
 Route::get('/v1/traffic', 'APIController@getTraffic'); // Get all traffic [DONE]
 Route::get('/v1/traffic/path/{path}', 'APIController@getTraffic'); // Get traffic stats for a particular path [DONE]
+Route::get('/v1/traffic/campaign/{campaign}', 'APIController@getTrafficForCampaign'); // Get all traffic for pages associated with a campaign [DONE]
 
 // Events
 Route::get('/v1/events', 'APIController@getEvents'); // Lists all events (interactions such as clicks, shares, etc) [DONE]

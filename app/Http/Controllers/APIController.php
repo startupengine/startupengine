@@ -37,6 +37,21 @@ class APIController extends Controller
         return $response->getTraffic($request);
     }
 
+    public function getTrafficForCampaign(Request $request, $campaign) {
+        $response = new APIResponse();
+        $pages = $response->getContent($client = $this->client, 'page', $campaign);
+        $pages = $pages->original["raw"];
+        $results = [];
+        $filters = "";
+        foreach($pages as $page){
+            $path = "/".$page->getSlug();
+            if(strtolower($page->getType()) !== "landing" && strtolower($page->getType()) !== "page") { $path = "/".strtolower($page->getType()).$path; }
+            $results[] = "ga:pagePath=@".$path;
+        }
+        $filters = implode($results, ',');
+        return $response->performQuery($request, 'ga:totalEvents,ga:sessions', ['sort'=>'ga:date', 'dimensions' => 'ga:date', 'filters' => $filters]);
+    }
+
     // Events
     public function getEvents(Request $request) {
         $response = new APIResponse();
