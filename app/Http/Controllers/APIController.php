@@ -4,71 +4,59 @@ namespace App\Http\Controllers;
 
 use App\APIResponse;
 use Illuminate\Http\Request;
+use Contentful\Delivery\Client as DeliveryClient;
 
 class APIController extends Controller
 {
+
+    /**
+     * @var DeliveryClient
+     */
+    private $client;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(DeliveryClient $client)
     {
         $this->middleware('apisecret');
+        $this->client = $client;
     }
 
-    public function getOverview() {
+    // Google Analytics
+    public function performQuery(Request $request) {
         $response = new APIResponse();
-        return $response->getOverview();
+        return $response->performQuery($request);
     }
 
-    public function getTrafficSummary() {
+    // Traffic
+    public function getTraffic(Request $request) {
         $response = new APIResponse();
-        return $response->getTraffic();
+        return $response->getTraffic($request);
     }
 
-    public function getTrafficByPage($page) {
+    // Events
+    public function getEvents(Request $request) {
         $response = new APIResponse();
-        return $response->getTraffic($page);
+        return $response->getEvents($request);
     }
 
-    public function getTrafficByType($type) {
+    public function getEventsByType(Request $request, $type) {
         $response = new APIResponse();
-        return $response->getTraffic($type);
+        return $response->getEvents($request, $type);
     }
 
-    public function getEventsSummary() {
-        $response = new APIResponse();
-        return $response->getEvents();
-    }
-
-    public function getEventsByType($type) {
-        $response = new APIResponse();
-        return $response->getEvents($type);
-    }
-
-    public function getContentSummary() {
-        $response = new APIResponse();
-        return $response->getContent();
-    }
-
+    // Content
     public function getContentByType($type) {
         $response = new APIResponse();
-        return $response->getContent($type);
+        return $response->getContent($client = $this->client, $type);
     }
 
-    public function getUsersSummary() {
+    public function getContentByCampaign($campaign) {
         $response = new APIResponse();
-        return $response->getUsers();
+        return $response->getContent($client = $this->client, null, $campaign);
     }
 
-    public function getExperimentsSummary() {
-        $response = new APIResponse();
-        return $response->getExperiments();
-    }
-
-    public function getExperimentsByName($name) {
-        $response = new APIResponse();
-        return $response->getExperiments($name);
-    }
 }

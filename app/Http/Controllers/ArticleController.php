@@ -35,9 +35,9 @@ class ArticleController extends Controller
             $defaults = NULL;
         }
         $query2 = (new \Contentful\Delivery\Query());
+        $pages = $this->client->getEntries($query2);
         $query2->setContentType('page')
             ->where('fields.slug', $slug);
-        $pages = $this->client->getEntries($query2);
         if (empty($pages->getItems())) {
             abort(404);
         }
