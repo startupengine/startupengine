@@ -109,7 +109,10 @@
         }
         .button.ghost {
             border-color: {{ env('COLOR1') }} !important;
-            color: {{ env('COLOR1') }} !important;
+            color: {{ env('COLOR1') }};
+        }
+        section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost {
+            color:#fff;
         }
         <?php } ?>
         body {
