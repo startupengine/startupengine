@@ -94,6 +94,24 @@
                 padding-bottom:100px !important;
             }
         }
+        <?php if( env('COLOR1') !== null  && env('COLOR2') !== null ) { ?>
+        .bg-gradient-h {
+            background: linear-gradient(134deg,{{ env('COLOR1') }} 0,{{ env('COLOR2') }}  100%) !important;
+        }
+        .bg-gradient-v {
+            background: linear-gradient(to top, {{ env('COLOR1') }} 0,{{ env('COLOR2') }}  100%) !important;
+        }
+        .bg-gradient-r {
+            background: radial-gradient(ellipse at center, {{ env('COLOR1') }} 0%, {{ env('COLOR2') }} 100%) !important;
+        }
+        .button {
+            background-color: {{ env('COLOR1') }} !important;
+        }
+        .button.ghost {
+            border-color: {{ env('COLOR1') }} !important;
+            color: {{ env('COLOR1') }} !important;
+        }
+        <?php } ?>
         body {
             background:#fff;
         }
