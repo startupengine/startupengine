@@ -102,7 +102,7 @@
 
     //provide countly initialization parameters
     Countly.app_key = '6b45e93171f5c8979b0f1cc5676f5332d8be6333';
-    Countly.url = 'http://159.203.113.73';
+    Countly.url = 'http://analytics.startupengine.io';
 
     Countly.q.push(['track_sessions']);
     Countly.q.push(['track_pageview']);
@@ -117,7 +117,7 @@
         var cly = document.createElement('script'); cly.type = 'text/javascript';
         cly.async = true;
         //enter url of script here
-        cly.src = 'http://159.203.113.73/sdk/web/countly.min.js';
+        cly.src = 'https://cdn.jsdelivr.net/countly-sdk-web/latest/countly.min.js';
         cly.onload = function(){Countly.init()};
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
     })();
