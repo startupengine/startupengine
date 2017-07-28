@@ -43,7 +43,8 @@ class ArticleController extends Controller
             abort(404);
         }
         $page = $pages[0];
-        return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article');
+        $campaign = $page->getCampaign();
+        return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article')->with('campaign', $campaign);
     }
 
     public function getArticles($slug = NULL) {

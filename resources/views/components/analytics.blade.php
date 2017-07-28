@@ -112,6 +112,20 @@
     Countly.q.push(['track_forms']);
     Countly.q.push(['collect_from_forms']);
 
+    <?php if(isset($campaign) && isset($page)) { ?>
+    Countly.q.push(['add_event',{
+        "key": "campaign",
+        "count": 1,
+        "sum": null,
+        "dur": null,
+        "segmentation": {
+            "slug": "<?php echo $campaign->getSlug(); ?>",
+            "title": "<?php echo $campaign->getTitle(); ?>",
+            "page": "<?php echo $page->getSlug(); ?>"
+        }
+    }]);
+    <?php } ?>
+
     //load countly script asynchronously
     (function() {
         var cly = document.createElement('script'); cly.type = 'text/javascript';
