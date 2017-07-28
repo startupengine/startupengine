@@ -121,7 +121,8 @@
         "segmentation": {
             "slug": "<?php echo $campaign->getSlug(); ?>",
             "title": "<?php echo $campaign->getTitle(); ?>",
-            "page": "<?php echo $page->getSlug(); ?>"
+            "page": "<?php echo $page->getSlug(); ?>",
+            "appUrl": "<?php echo env('APP_URL'); ?>"
         }
     }]);
     <?php } ?>
