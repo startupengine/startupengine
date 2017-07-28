@@ -1,6 +1,6 @@
-# SmartStartup: the CMS for Startups
+# StartupEngine: the CMS for Startups
 
-SmartStartup is a beautiful &amp; open-source content, marketing, and analytics platform **for startups**. 
+StartupEngine is a beautiful &amp; open-source content, marketing, and analytics platform **for startups**. 
 
 Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com), and [Webslides](https://github.com/webslides/webslides/).
 
@@ -31,7 +31,7 @@ Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com),
 </div>
 
 # Demo
-A demo is online at https://www.smartstartup.io/
+A demo is online at https://www.StartupEngine.io/
 
 # Features 
 Everything you need to launch & grow your website, app, or business.
@@ -77,9 +77,9 @@ Everything you need to launch & grow your website, app, or business.
 * [ ] Track user funnels to know where to focus your efforts (no configuration required)
 
 ##### Strategic Benefits
-* SmartStartup is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
+* StartupEngine is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
 
-* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. SmartStartup leverages the latest technologies, practices, and services, so you can focus on running your business.
+* Stop wasting time and effort making your own CMS or modifying another one to suit your needs. StartupEngine leverages the latest technologies, practices, and services, so you can focus on running your business.
 
 * Custom coding not required. No plugins to install. Just enter your account information and go.
 
@@ -87,7 +87,7 @@ Everything you need to launch & grow your website, app, or business.
 
 * Automatic updates via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
 
-* Don't have funding? It's ok, you can run SmartStartup on your own at little or no cost.
+* Don't have funding? It's ok, you can run StartupEngine on your own at little or no cost.
  
 * You're not on your own. Paid professional support is available when you need it.
 
@@ -96,19 +96,19 @@ Everything you need to launch & grow your website, app, or business.
 # Deploying
 
 ## Requirements
-At minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on SmartStartup.
+At minimum, you will need a free [Contentful](https://contentful.com) account to manage your content on StartupEngine.
 
 Simply specify your account credentials (Space ID, API Key, and Management Token) during deployment.
 
 ## Deploy to Heroku
-Click the button below to deploy a new instance of SmartStartup to Heroku instantly.
+Click the button below to deploy a new instance of StartupEngine to Heroku instantly.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/smartstartup)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
 
 ## Import Default Content
 After deploying, you will need to import the default content to your Contentful space. 
 
-Connect to your SmartStartup instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+Connect to your StartupEngine instance using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 
 ```
 $ heroku run bash --app $yourHerokuAppName
@@ -128,8 +128,8 @@ Simply edit the existing pages or create new ones to administrate your site.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within SmartStartup, please send an e-mail to info@smartstartup.io. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within StartupEngine, please send an e-mail to info@StartupEngine.io. All security vulnerabilities will be promptly addressed.
 
 ## License
 
-SmartStartup is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+StartupEngine is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
