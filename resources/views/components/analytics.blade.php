@@ -124,3 +124,33 @@
 </script>
 <noscript><img src='http://159.203.113.73/pixel.png?app_key=6b45e93171f5c8979b0f1cc5676f5332d8be6333&begin_session=1'/></noscript>
 <?php } ?>
+<?php if(env('ENABLE_COUNTLY_ANALYTICS') == TRUE) { ?>
+<script type='text/javascript'>
+    //some default pre init
+    var Countly = Countly || {};
+    Countly.q = Countly.q || [];
+
+    //provide countly initialization parameters
+    Countly.app_key = '<?php echo env('COUNTLY_APP_KEY')?>';
+    Countly.url = '<?php echo env('COUNTLY_URL')?>';
+
+    Countly.q.push(['track_sessions']);
+    Countly.q.push(['track_pageview']);
+    Countly.q.push(['track_clicks']);
+    Countly.q.push(['track_errors']);
+    Countly.q.push(['track_links']);
+    Countly.q.push(['track_forms']);
+    Countly.q.push(['collect_from_forms']);
+
+    //load countly script asynchronously
+    (function() {
+        var cly = document.createElement('script'); cly.type = 'text/javascript';
+        cly.async = true;
+        //enter url of script here
+        cly.src = 'https://cdnjs.cloudflare.com/ajax/libs/countly-sdk-web/17.05.0/countly.min.js';
+        cly.onload = function(){Countly.init()};
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
+    })();
+</script>
+<noscript><img src='http://159.203.113.73/pixel.png?app_key=6b45e93171f5c8979b0f1cc5676f5332d8be6333&begin_session=1'/></noscript>
+<?php } ?>
