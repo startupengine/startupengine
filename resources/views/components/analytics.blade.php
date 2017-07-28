@@ -117,7 +117,7 @@
         var cly = document.createElement('script'); cly.type = 'text/javascript';
         cly.async = true;
         //enter url of script here
-        cly.src = 'https://cdnjs.cloudflare.com/ajax/libs/countly-sdk-web/17.05.0/countly.min.js';
+        cly.src = 'http://159.203.113.73/sdk/web/countly.min.js';
         cly.onload = function(){Countly.init()};
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
     })();
