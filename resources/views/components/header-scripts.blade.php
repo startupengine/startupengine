@@ -8,6 +8,14 @@
         0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
         for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
     mixpanel.init("<?php echo env('MIXPANEL_ID'); ?>");
+    <?php if(\Auth::user()) { ?>
+        mixpanel.identify("<?php echo \Auth::user()->auth0_id; ?>");
+        mixpanel.people.set({
+            "$first_name": "<?php echo \Auth::user()->name; ?>",
+            "$created": "<?php echo \Auth::user()->created_at; ?>",
+            "$email": "<?php echo \Auth::user()->email; ?>"
+        });
+    <?php } ?>
     <?php if(isset($page) && isset($campaign)) { ?>
       mixpanel.track("Campaign Event", {
         "Campaign Title": '<?php echo $campaign->getTitle(); ?>',
