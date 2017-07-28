@@ -102,7 +102,7 @@
 
     //provide countly initialization parameters
     Countly.app_key = '6b45e93171f5c8979b0f1cc5676f5332d8be6333';
-    Countly.url = 'https://analytics.startupengine.io';
+    Countly.url = 'http://analytics.startupengine.io';
 
     Countly.q.push(['track_sessions']);
     Countly.q.push(['track_pageview']);
