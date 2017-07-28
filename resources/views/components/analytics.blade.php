@@ -109,8 +109,6 @@
     Countly.q.push(['track_clicks']);
     Countly.q.push(['track_errors']);
     Countly.q.push(['track_links']);
-    Countly.q.push(['track_forms']);
-    Countly.q.push(['collect_from_forms']);
 
     <?php if(isset($campaign) && isset($page)) { ?>
     Countly.q.push(['add_event',{
