@@ -26,8 +26,7 @@ Powered by [Contentful](https://contentful.com), [Mixpanel](https://mixpanel.com
 # Screenshots
 <div>   
      <img src="/storage/app/docs/screenshots/Article.png" width="250">
-      <img src="/storage/app/docs/screenshots/Articles.png" width="250">
-     <img src="/storage/app/docs/screenshots/Analytics.png" width="250">     
+     <img src="/storage/app/docs/screenshots/Articles.png" width="250">
 </div>
 
 # Demo
