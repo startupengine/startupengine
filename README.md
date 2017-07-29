@@ -1,6 +1,6 @@
 # StartupEngine: the CMS for Startups
 
-StartupEngine is a beautiful &amp; open-source content, marketing, and analytics platform **for startups**. 
+A beautiful & open-source platform for launching startups.
 
 Powered by [Contentful](https://contentful.com), [Laravel](https://laravel.com), and [Webslides](https://github.com/webslides/webslides/).
 
