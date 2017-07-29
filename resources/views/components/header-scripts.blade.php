@@ -16,7 +16,7 @@
             "$email": "<?php echo \Auth::user()->email; ?>"
         });
     <?php } ?>
-    <?php if(isset($campaign)) { ?>
+    <?php if(isset($page) && isset($campaign)) { ?>
       mixpanel.track("Campaign Event", {
         "Campaign Title": '<?php echo $campaign->getTitle(); ?>',
         "Campaign Slug": '<?php echo $campaign->getSlug(); ?>',
