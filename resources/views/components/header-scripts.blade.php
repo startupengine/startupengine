@@ -16,17 +16,23 @@
             "$email": "<?php echo \Auth::user()->email; ?>"
         });
     <?php } ?>
-    <?php if(isset($page)) { ?>
+    <?php if(isset($campaign)) { ?>
       mixpanel.track("Campaign Event", {
-        <?php if(isset($campaign)) { ?>
         "Campaign Title": '<?php echo $campaign->getTitle(); ?>',
         "Campaign Slug": '<?php echo $campaign->getSlug(); ?>',
-        <?php } ?>
         "Page Title": "<?php echo $page->getTitle(); ?>",
         "Page Slug": "<?php echo $page->getSlug(); ?>",
         "Page Type": "<?php echo $page->getType(); ?>"
     });
     <?php } ?>
+    <?php if(isset($page)) { ?>
+      mixpanel.track("Page View", {
+        "Page Title": "<?php echo $page->getTitle(); ?>",
+        "Page Slug": "<?php echo $page->getSlug(); ?>",
+        "Page Type": "<?php echo $page->getType(); ?>"
+    });
+    <?php } ?>
+
 </script>
 <!-- end Mixpanel -->
 <?php } ?>
