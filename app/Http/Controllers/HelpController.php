@@ -55,7 +55,7 @@ class HelpController extends Controller
             abort(404);
         }
         $page = $pages[0];
-        return view('help.view')->with('help', $page)->with('defaults', $defaults)->with('analyticsCategory', 'help');
+        return view('help.view')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'help');
     }
 
 }
