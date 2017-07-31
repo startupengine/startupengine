@@ -145,7 +145,7 @@
 
     //provide countly initialization parameters
     Countly.app_key = '<?php echo env('COUNTLY_APP_KEY')?>';
-    Countly.url = '<?php echo env('COUNTLY_URL')?>';
+    Countly.url = '<?php echo env('COUNTLY_API_URL')?>';
 
     Countly.q.push(['track_sessions']);
     Countly.q.push(['track_pageview']);
@@ -160,7 +160,7 @@
         var cly = document.createElement('script'); cly.type = 'text/javascript';
         cly.async = true;
         //enter url of script here
-        cly.src = 'https://cdnjs.cloudflare.com/ajax/libs/countly-sdk-web/17.05.0/countly.min.js';
+        cly.src = '<?php echo env('COUNTLY_SOURCE_URL')?>';
         cly.onload = function(){Countly.init()};
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
     })();
