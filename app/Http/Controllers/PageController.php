@@ -90,7 +90,7 @@ class PageController extends Controller
             } else {
                 $result = json_decode($response);
             }
-            if ($result !== null && $result->watson_analysis !== NULL) {
+            if ($result !== null && isset($result->watson_analysis)) {
                 $analysis = json_decode($result->watson_analysis);
                 $contentItem->watson_analysis = $result->watson_analysis;
                 $contentItem->save();
