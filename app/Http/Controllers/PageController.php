@@ -48,56 +48,14 @@ class PageController extends Controller
         $page = $pages[0];
         $campaign = $page->getCampaign();
         $pageJson = json_decode(json_encode($page));
-        $site = env('STARTUPENGINE_SITE_ID');
+
         $space = $pageJson->sys->space->sys->id;
         $uid = $pageJson->sys->id;
         $version = $pageJson->sys->revision;
-
-        $contentItem = ContentItem::where('space', '=', $space)->where('uid', '=', $uid)->where('version', '=', $version)->first();
-        if($contentItem == null) {
-            $contentItem = new ContentItem();
-            $contentItem->uid = $uid;
-            $contentItem->version = $version;
-            $contentItem->space = $space;
-            $string = "";
-            foreach ($page->getSections() as $section) {
-                $string = $string . ' ' . $section->getContent() . ' ' . $section->getButtonText();
-            }
-            $string = $page->getTitle() . ' ' . $page->getDescription() . ' ' . $string;
-            $url = "http://127.0.0.1:8000/api/v1/$site/nlp/contentful/$space/$uid/version/$version";
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_PORT => "8000",
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"text\"\r\n\r\n$string\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
-                CURLOPT_HTTPHEADER => array(
-                    "cache-control: no-cache",
-                    "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-                ),
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-            curl_close($curl);
-
-            if ($err) {
-                $result = json_encode(['result' => ['error' => $err]]);
-            } else {
-                $result = json_decode($response);
-            }
-            if ($result !== null && isset($result->watson_analysis)) {
-                $analysis = json_decode($result->watson_analysis);
-                $contentItem->watson_analysis = $result->watson_analysis;
-                $contentItem->save();
-            }
-        }
-        //dd($contentItem->getDominantEmotion());
-        return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article')->with('campaign', $campaign)->with('contentItem', $contentItem);//->with('analysis', $analysis)->with('dominantEmotion', $dominantEmotion);
+        $search = new ContentItem();
+        $contentItem = $search->getContentItemAnalysis($page, $space, $uid, $version);
+        //dd($contentItem->getSentiment());
+        return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article')->with('campaign', $campaign)->with('contentItem', $contentItem);
     }
 
     public function getArticles($slug = NULL) {
