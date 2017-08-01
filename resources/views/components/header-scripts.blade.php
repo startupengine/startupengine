@@ -15,7 +15,7 @@
         mixpanel.people.set({
             "$first_name": "<?php echo \Auth::user()->name; ?>",
             "$created": "<?php echo \Auth::user()->created_at; ?>",
-            "$email": "<?php echo \Auth::user()->email; ?>"
+            "$email": "<?php echo \Auth::user()->email; ?>",
             "$gender": "<?php echo \Auth::user()->gender; ?>"
         });
     <?php } ?>
