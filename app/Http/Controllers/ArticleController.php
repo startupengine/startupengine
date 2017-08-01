@@ -46,28 +46,18 @@ class ArticleController extends Controller
         }
         $page = $pages[0];
         $campaign = $page->getCampaign();
-
         $pageJson = json_decode(json_encode($page));
-
         $space = $pageJson->sys->space->sys->id;
         $uid = $pageJson->sys->id;
         $version = $pageJson->sys->revision;
         $site = env('STARTUPENGINE_SITE_ID');
-
         $string = "";
         foreach($page->getSections() as $section){
             $string = $string.' '.$section->getContent().' '.$section->getButtonText();
         }
         $string = urlencode($page->getTitle().' '.$page->getDescription().' '.$string);
-
-        //$client = new Client();
         $url = (string) "http://127.0.0.1:8000/api/v1/$site/nlp/contentful/$space/$uid/version/$version";
-        /* $result = $client->request('POST', $url, [
-            'text' => $string
-        ]); */
-
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
             CURLOPT_PORT => "8000",
             CURLOPT_URL => $url,
@@ -83,7 +73,6 @@ class ArticleController extends Controller
                 "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
             ),
         ));
-
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
@@ -92,7 +81,6 @@ class ArticleController extends Controller
         } else {
             $result = json_decode($response);
         }
-
         if($result !== null && $result->watson_analysis !== null) {
             $analysis = json_decode($result->watson_analysis);
             $emotions = json_decode(json_encode($analysis->emotion->document->emotion), true);
