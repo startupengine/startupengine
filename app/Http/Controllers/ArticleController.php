@@ -81,7 +81,7 @@ class ArticleController extends Controller
         } else {
             $result = json_decode($response);
         }
-        if($result !== null && $result->watson_analysis !== null) {
+        if($result !== null) {
             $analysis = json_decode($result->watson_analysis);
             $emotions = json_decode(json_encode($analysis->emotion->document->emotion), true);
             foreach($emotions as $key => $value) {
