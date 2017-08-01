@@ -23,6 +23,9 @@
         "Page Title": "<?php echo $page->getTitle(); ?>",
         "Page Slug": "<?php echo $page->getSlug(); ?>",
         "Page Type": "<?php echo $page->getType(); ?>"
+        <?php if(isset($dominantEmotion) && $dominantEmotion !== null) { ?>
+        "Dominant Emotion": "<?php echo (string) ucfirst($dominantEmotion[0]); ?>",
+        <?php } ?>
     });
     <?php } ?>
     <?php if(isset($page)) { ?>
@@ -30,6 +33,9 @@
         "Page Title": "<?php echo $page->getTitle(); ?>",
         "Page Slug": "<?php echo $page->getSlug(); ?>",
         "Page Type": "<?php echo $page->getType(); ?>"
+        <?php if(isset($dominantEmotion) && $dominantEmotion !== null) { ?>
+        "Dominant Emotion": "<?php echo (string) ucfirst($dominantEmotion[0]); ?>",
+        <?php } ?>
     });
     <?php } ?>
 
