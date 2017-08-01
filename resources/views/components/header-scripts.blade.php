@@ -37,15 +37,16 @@
     });
     <?php } ?>
 
-    <?php if( isset($analysis) && $analysis->emotion->document !== null) { ?>
+    <?php if( isset($contentItem) && $contentItem->watson_analysis !== null) { ?>
       mixpanel.track("Emotion", {
-        "Sadness": <?php echo (float) $analysis->emotion->document->emotion->sadness * 100; ?>,
+        <?php /* "Sadness": <?php echo (float) $analysis->emotion->document->emotion->sadness * 100; ?>,
         "Joy": <?php echo (float) $analysis->emotion->document->emotion->joy * 100; ?>,
         "Fear": <?php echo (float) $analysis->emotion->document->emotion->fear * 100; ?>,
         "Disgust": <?php echo (float) $analysis->emotion->document->emotion->disgust * 100; ?>,
         "Anger": <?php echo (float) $analysis->emotion->document->emotion->anger * 100; ?>,
-        <?php if(isset($dominantEmotion) && $dominantEmotion !== null) { ?>
-        "Dominant Emotion": "<?php echo (string) ucfirst($dominantEmotion[0]); ?>",
+        */ ?>
+        <?php if($contentItem->getDominantEmotion() !== null) { ?>
+        "Dominant Emotion": "<?php echo (string) ucfirst($contentItem->getDominantEmotion()); ?>",
         <?php } ?>
     });
     <?php } ?>

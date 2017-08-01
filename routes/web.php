@@ -32,8 +32,8 @@ Route::get('/logout', function() {
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
     //Homepage
-    Route::get('/', 'ArticleController@getHomepage');
-    Route::get('/about', 'ArticleController@getHomepage');
+    Route::get('/', 'PageController@getHomepage');
+    Route::get('/about', 'PageController@getHomepage');
 
     //Install
     Route::get('/install', 'SettingsController@install');
@@ -55,13 +55,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/apps', 'AdminController@apps')->middleware('auth');
 
     //Pages
-    Route::get('/articles', 'ArticleController@getArticles');
+    Route::get('/articles', 'PageController@getArticles');
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'article']);
-    Route::get('/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/article/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/landing/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/product/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
-    Route::get('/service/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
+    Route::get('/article/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
+    Route::get('/landing/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
+    Route::get('/product/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
+    Route::get('/service/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'article']);
-    Route::get('/form/{slug}', ['uses' => 'ArticleController@getArticle', 'as' => 'article']);
+    Route::get('/form/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
 });

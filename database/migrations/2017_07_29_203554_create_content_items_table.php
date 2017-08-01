@@ -13,7 +13,7 @@ class CreateContentItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('content_items', function (Blueprint $table) {
+        Schema::create('content_items', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('rawtext')->nullable();
             $table->text('space');
