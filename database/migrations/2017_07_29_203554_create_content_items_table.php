@@ -15,10 +15,14 @@ class CreateContentItemsTable extends Migration
     {
         Schema::table('content_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');
             $table->longText('rawtext')->nullable();
+            $table->text('space');
             $table->text('uid');
             $table->text('version');
+            $table->text('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('content')->nullable();
+            $table->longText('watson_analysis')->nullable();
             $table->timestamps();
         });
     }
