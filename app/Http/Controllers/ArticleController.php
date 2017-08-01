@@ -83,12 +83,14 @@ class ArticleController extends Controller
         }
         if($result !== null) {
             $analysis = json_decode($result->watson_analysis);
-            $emotions = json_decode(json_encode($analysis->emotion->document->emotion), true);
-            foreach($emotions as $key => $value) {
-                $emotions[$key] = (float) $value * 100;
+            if(isset($analysis->emotion)) {
+                $emotions = json_decode(json_encode($analysis->emotion->document->emotion), true);
+                foreach ($emotions as $key => $value) {
+                    $emotions[$key] = (float)$value * 100;
+                }
+                $dominantEmotion = array_keys($emotions, max($emotions));
+                $dominantEmotion = $dominantEmotion;
             }
-            $dominantEmotion = array_keys($emotions, max($emotions));
-            $dominantEmotion = $dominantEmotion;
         }
         else { $analysis = null; $dominantEmotion = null; }
         return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article')->with('campaign', $campaign)->with('analysis', $analysis)->with('dominantEmotion', $dominantEmotion);
