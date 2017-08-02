@@ -54,7 +54,6 @@ class PageController extends Controller
         $version = $pageJson->sys->revision;
         $search = new ContentItem();
         $contentItem = $search->getContentItemAnalysis($page, $space, $uid, $version);
-        //dd($contentItem->getSentiment());
         return view('welcome')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'article')->with('campaign', $campaign)->with('contentItem', $contentItem);
     }
 
