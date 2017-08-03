@@ -17,7 +17,7 @@
 
     <!-- SEO -->
     <title><?php echo $page->getTitle(); ?></title>
-    <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
+    <meta name="description" content="<?php echo $page->getDescription(); ?>">
 
     <!-- URL CANONICAL -->
     <!-- <link rel="canonical" href="http://your-url.com/"> -->
@@ -47,20 +47,20 @@
     <!-- SOCIAL CARDS (ADD YOUR INFO) -->
 
     <!-- FACEBOOK -->
-    <meta property="og:url" content="http://your-url.com/"> <!-- YOUR URL -->
+    <meta property="og:url" content="{{ \Request::url(); }}"> <!-- YOUR URL -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="WebSlides — Making HTML Presentations Easy"> <!-- EDIT -->
-    <meta property="og:description" content="WebSlides is about telling stories beautifully. Just the essential features. Good karma."> <!-- EDIT -->
-    <meta property="og:updated_time" content="2017-01-04T17:20:50"> <!-- EDIT -->
-    <meta property="og:image" content="/images/share-webslides.jpg"> <!-- EDIT -->
+    <meta property="og:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
+    <meta property="og:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
+    <meta property="og:updated_time" content="{{ \Carbon::now()->toFormattedDateString() }}"> <!-- EDIT -->
+    <meta property="og:image" content="<?php echo $page->getFeaturedImage()->getFile()->getUrl(); ?>"> <!-- EDIT -->
 
     <!-- TWITTER -->
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="<?php echo $page->getFeaturedImage()->getFile()->getUrl(); ?>">
     <meta name="twitter:site" content="@webslides"> <!-- EDIT -->
     <meta name="twitter:creator" content="@jlantunez"> <!-- EDIT -->
-    <meta name="twitter:title" content="WebSlides — Making HTML Presentations Easy"> <!-- EDIT -->
-    <meta name="twitter:description" content="WebSlides is about good karma. Just essential features. 120+ free slides ready to use."> <!-- EDIT -->
-    <meta name="twitter:image" content="/images/share-webslides.jpg"> <!-- EDIT -->
+    <meta name="twitter:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
+    <meta name="twitter:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
+    <meta name="twitter:image" content="<?php echo $page->getFeaturedImage()->getFile()->getUrl(); ?>"> <!-- EDIT -->
 
     <!-- FAVICONS -->
     <?php if( $defaults->getLogo() !== null) { ?>
