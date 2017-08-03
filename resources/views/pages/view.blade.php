@@ -55,7 +55,7 @@
     <meta property="og:image" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>"> <!-- EDIT -->
 
     <!-- TWITTER -->
-    <meta name="twitter:card" content="<?php echo $page->getFeaturedImage()->getFile()->getUrl(); ?>">
+    <meta name="twitter:card" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>">
     <meta name="twitter:site" content="@webslides"> <!-- EDIT -->
     <meta name="twitter:creator" content="@jlantunez"> <!-- EDIT -->
     <meta name="twitter:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
