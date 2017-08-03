@@ -86,5 +86,5 @@
 <?php */ } ?>
 
 <?php if (env('PSYCHO-ANALYITICS-SITE-ID') !== null) { ?>
-<script src='http://localhost:8000/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}'></script>
+<script src='http://psychoanalytics.io/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}'></script>
 <?php } ?>
