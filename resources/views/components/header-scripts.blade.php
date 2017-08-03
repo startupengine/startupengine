@@ -11,80 +11,17 @@
     mixpanel.init("<?php echo env('MIXPANEL_ID'); ?>");
 </script>
 <?php } ?>
-<?php if(env('ENABLE_MIXPANEL_ANALYTICS') == TRUE) { /* ?>
-    <?php if(\Auth::user()) { ?>
-        mixpanel.identify("<?php echo \Auth::user()->id; ?>");
-        mixpanel.people.set({
-            "$first_name": "<?php echo \Auth::user()->name; ?>",
-            "$created": "<?php echo \Auth::user()->created_at; ?>",
-            "$email": "<?php echo \Auth::user()->email; ?>",
-            "$gender": "<?php echo \Auth::user()->gender; ?>"
-        });
-    <?php } ?>
-    <?php if(isset($page) && isset($campaign)) { ?>
-        mixpanel.track("Campaign", {
-            "Campaign Title": '<?php echo $campaign->getTitle(); ?>',
-            "Campaign Slug": '<?php echo $campaign->getSlug(); ?>',
+
+<?php if(env('ENABLE_MIXPANEL_ANALYTICS') == TRUE && \Auth::user() !== null) { ?>
+    mixpanel.identify("<?php echo \Auth::user()->id; ?>");
+    mixpanel.people.set({
+        "$first_name": "<?php echo \Auth::user()->name; ?>",
+        "$created": "<?php echo \Auth::user()->created_at; ?>",
+        "$email": "<?php echo \Auth::user()->email; ?>",
+        "$gender": "<?php echo \Auth::user()->gender; ?>"
     });
-    <?php } ?>
-    <?php if(isset($page)) { ?>
-        mixpanel.track("Page View", {
-            "Page Title": "<?php echo $page->getTitle(); ?>",
-            "Page Slug": "<?php echo $page->getSlug(); ?>",
-            "Page Type": "<?php echo $page->getType(); ?>"
-    });
-    <?php } ?>
-    <?php if( isset($contentItem) && $contentItem->getEmotions() !== null) { ?>
-        mixpanel.track("Emotion", {
-            "Name": "Sadness",
-            "Value": <?php echo $contentItem->getEmotions()['sadness']; ?>
-        });
-        mixpanel.track("Emotion", {
-            "Name": "Joy",
-            "Value": <?php echo $contentItem->getEmotions()['joy']; ?>
-        });
-        mixpanel.track("Emotion", {
-            "Name": "Fear",
-            "Value": <?php echo $contentItem->getEmotions()['fear']; ?>
-        });
-        mixpanel.track("Emotion", {
-            "Name": "Disgust",
-            "Value": <?php echo $contentItem->getEmotions()['disgust']; ?>
-        });
-        mixpanel.track("Emotion", {
-            "Name": "Anger",
-            "Value": <?php echo $contentItem->getEmotions()['anger']; ?>
-        });
-        mixpanel.track("Emotion", {
-            "Dominant Emotion": "<?php echo (string) ucfirst($contentItem->getDominantEmotion()); ?>",
-        });
-    <?php } ?>
-    <?php if( isset($contentItem) && $contentItem->getKeywords() !== null) { ?>
-        <?php foreach($contentItem->getKeywords() as $keyword) { ?>
-        mixpanel.track("Keywords", {
-        "Word": "<?php echo urldecode($keyword->text); ?>",
-        "Value": <?php echo $keyword->relevance * 100; ?>,
-        });
-        <?php } ?>
-    <?php } ?>
-    <?php if( isset($contentItem) && $contentItem->getConcepts() !== null) { ?>
-        <?php foreach($contentItem->getConcepts() as $concept) { ?>
-        mixpanel.track("Concepts", {
-            "Concept": "<?php echo urldecode($concept->text); ?>",
-            "Value": <?php echo $concept->relevance * 100; ?>,
-        });
-        <?php } ?>
-    <?php } ?>
-    <?php if( isset($contentItem) && $contentItem->getSentiment() !== null) { ?>
-        mixpanel.track("Sentiment", {
-            "Label": "<?php echo $contentItem->getSentiment()->label; ?>",
-            "Value": <?php echo $contentItem->getSentiment()->score; ?>,
-        });
-    <?php } ?>
-</script>
-<!-- end Mixpanel -->
-<?php */ } ?>
+<?php } ?>
 
 <?php if (env('PSYCHO-ANALYITICS-SITE-ID') !== null) { ?>
-<script src='http://psychoanalytics.io/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}'></script>
+<script src='https://api.psychoanalytics.io/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}<?php if(isset($page) && isset($campaign)) { echo '&campaign='.$campaign->getSlug(); } ?>'></script>
 <?php } ?>
