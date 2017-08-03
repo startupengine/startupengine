@@ -47,7 +47,7 @@
     <!-- SOCIAL CARDS (ADD YOUR INFO) -->
 
     <!-- FACEBOOK -->
-    <meta property="og:url" content="{{ \Request::url(); }}"> <!-- YOUR URL -->
+    <meta property="og:url" content="{{ \Request::url() }}"> <!-- YOUR URL -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
     <meta property="og:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
