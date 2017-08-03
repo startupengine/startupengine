@@ -51,7 +51,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
     <meta property="og:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
-    <meta property="og:updated_time" content="{{ \Carbon::now()->toFormattedDateString() }}"> <!-- EDIT -->
+    <meta property="og:updated_time" content="{{ \Carbon\Carbon::now()->toFormattedDateString() }}"> <!-- EDIT -->
     <meta property="og:image" content="<?php echo $page->getFeaturedImage()->getFile()->getUrl(); ?>"> <!-- EDIT -->
 
     <!-- TWITTER -->
