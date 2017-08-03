@@ -94,49 +94,6 @@
     rakam.setSuperProperties({platform: 'Web', _ip: true, _user_agent:true, _referrer:document.referrer, resolution: window.screen.width+" × "+window.screen.height}, true);
 </script>
 <?php } ?>
-<?php if(env('ENABLE_DEFAULT_ANALYTICS') == TRUE) { ?>
-<script type='text/javascript'>
-    //some default pre init
-    var Countly = Countly || {};
-    Countly.q = Countly.q || [];
-
-    //provide countly initialization parameters
-    Countly.app_key = '6b45e93171f5c8979b0f1cc5676f5332d8be6333';
-    Countly.url = 'http://analytics.startupengine.io';
-
-    Countly.q.push(['track_sessions']);
-    Countly.q.push(['track_pageview']);
-    Countly.q.push(['track_clicks']);
-    Countly.q.push(['track_errors']);
-    Countly.q.push(['track_links']);
-
-    <?php if(isset($campaign) && isset($page)) { ?>
-    Countly.q.push(['add_event',{
-        "key": "campaign",
-        "count": 1,
-        "sum": null,
-        "dur": null,
-        "segmentation": {
-            "slug": "<?php echo $campaign->getSlug(); ?>",
-            "title": "<?php echo $campaign->getTitle(); ?>",
-            "page": "<?php echo $page->getSlug(); ?>",
-            "appUrl": "<?php echo env('APP_URL'); ?>"
-        }
-    }]);
-    <?php } ?>
-
-    //load countly script asynchronously
-    (function() {
-        var cly = document.createElement('script'); cly.type = 'text/javascript';
-        cly.async = true;
-        //enter url of script here
-        cly.src = 'https://cdn.jsdelivr.net/countly-sdk-web/latest/countly.min.js';
-        cly.onload = function(){Countly.init()};
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
-    })();
-</script>
-<noscript><img src='http://analytics.startupengine.io/pixel.png?app_key=6b45e93171f5c8979b0f1cc5676f5332d8be6333&begin_session=1'/></noscript>
-<?php } ?>
 <?php if(env('ENABLE_COUNTLY_ANALYTICS') == TRUE) { ?>
 <script type='text/javascript'>
     //some default pre init
