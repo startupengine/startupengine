@@ -85,4 +85,6 @@
 <!-- end Mixpanel -->
 <?php */ } ?>
 
-<script src="http://127.0.0.1:8000/js/v1?site-id=35"></script>
+<?php if (env('PSYCHO-ANALYITICS-SITE-ID') !== null) { ?>
+<script src='http://localhost:8000/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}'></script>
+<?php } ?>
