@@ -23,5 +23,5 @@
 <?php } ?>
 
 <?php if (env('PSYCHO-ANALYITICS-SITE-ID') !== null) { ?>
-<script src='http://app.psychoanalytics.io/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}<?php if(isset($page) && isset($campaign)) { echo '&campaign='.$campaign->getSlug(); } ?>'></script>
+<script src='http://app.psychoanalytics.io/js/v1?site-id={{ env('PSYCHO-ANALYITICS-SITE-ID') }}<?php if(isset($page) && isset($campaign)) { echo '&campaign='.$campaign->getSlug(); } ?>&include-base=false'></script>
 <?php } ?>
