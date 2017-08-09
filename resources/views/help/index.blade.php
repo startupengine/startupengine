@@ -1,6 +1,7 @@
 @extends('layouts.webslides')
 
-@section('title')Help@endsection
+@section('title')Help
+@endsection
 
 @section('content')
     <article>
