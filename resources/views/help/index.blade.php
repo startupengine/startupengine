@@ -3,6 +3,16 @@
 @section('title')Help
 @endsection
 
+@section('styles')
+    <style>
+        @media (min-width: 1024px) {
+            .flexblock li {
+                width: 50%;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
     <article>
         <section class="" style="min-height:auto !important;">
