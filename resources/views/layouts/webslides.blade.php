@@ -75,6 +75,26 @@
                 padding-bottom:100px !important;
             }
         }
+        @media (max-width: 768px) {
+            section:first-of-type {
+                padding-top:75px !important;
+                padding-bottom:75px !important;
+            }
+        }
+        body {
+            background:#fff;
+        }
+        .ui.menu .item {
+            font-size:125% !important;
+        }
+        .column {
+            padding-top:0px !important;
+        }
+        @media (max-width: 768px) {
+            hr {
+                margin-bottom:3.2rem !important;
+            }
+        }
         <?php if( env('COLOR1') !== null  && env('COLOR2') !== null ) { ?>
         .bg-gradient-h {
             background: linear-gradient(134deg,{{ env('COLOR1') }} 0,{{ env('COLOR2') }}  100%) !important;
@@ -93,10 +113,11 @@
             color: {{ env('COLOR1') }};
             background: none !important;
         }
+        <?php } ?>
         section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost {
             color:#fff;
         }
-        <?php } ?>
+
         body {
             background:#fff;
         }
