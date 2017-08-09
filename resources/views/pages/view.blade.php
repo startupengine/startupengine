@@ -1,129 +1,30 @@
-<!doctype html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.webslides')
 
-<!-- CLEAN MARKUP = GOOD KARMA.
-      Hi source code lover,
+@section('title')<?php echo $page->getTitle(); ?>@endsection
 
-      you're a curious person and a fast learner ;)
-      Let's make something beautiful together. Contribute on Github:
-      https://github.com/webslides/webslides
+@section('meta')
+<meta name="description" content="<?php echo $page->getDescription(); ?>">
+<!-- SOCIAL CARDS (ADD YOUR INFO) -->
 
-      Thanks,
-      @jlantunez.
-    -->
+<!-- FACEBOOK -->
+<meta property="og:url" content="{{ \Request::url() }}"> <!-- YOUR URL -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
+<meta property="og:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
+<meta property="og:updated_time" content="{{ \Carbon\Carbon::now()->toFormattedDateString() }}"> <!-- EDIT -->
+<meta property="og:image" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>"> <!-- EDIT -->
 
-    <!-- SEO -->
-    <title><?php echo $page->getTitle(); ?></title>
-    <meta name="description" content="<?php echo $page->getDescription(); ?>">
+<!-- TWITTER -->
+<meta name="twitter:card" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>">
+<meta name="twitter:site" content="@webslides"> <!-- EDIT -->
+<meta name="twitter:creator" content="@jlantunez"> <!-- EDIT -->
+<meta name="twitter:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
+<meta name="twitter:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
+<meta name="twitter:image" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>"> <!-- EDIT -->
+@endsection
 
-    <!-- URL CANONICAL -->
-    <!-- <link rel="canonical" href="http://your-url.com/"> -->
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
-
-    <!-- Semantic UI -->
-    @include('components.semanticui')
-
-    <!-- CSS Base -->
-    <link rel="stylesheet" type='text/css' media='all' href="/css/base.css">
-
-    <!-- CSS Colors -->
-    <link rel="stylesheet" type='text/css' media='all' href="/css/colors.css">
-
-    <!-- Optional - CSS SVG Icons (Font Awesome) -->
-    <link rel="stylesheet" type='text/css' media='all' href="/css/svg-icons.css">
-
-    <!-- Optional - Animate On Scroll -->
-    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-
-    <!-- CSS Custom -->
-    <link rel="stylesheet" type='text/css' media='all' href="/css/custom.css">
-
-    <!-- SOCIAL CARDS (ADD YOUR INFO) -->
-
-    <!-- FACEBOOK -->
-    <meta property="og:url" content="{{ \Request::url() }}"> <!-- YOUR URL -->
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
-    <meta property="og:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
-    <meta property="og:updated_time" content="{{ \Carbon\Carbon::now()->toFormattedDateString() }}"> <!-- EDIT -->
-    <meta property="og:image" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>"> <!-- EDIT -->
-
-    <!-- TWITTER -->
-    <meta name="twitter:card" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>">
-    <meta name="twitter:site" content="@webslides"> <!-- EDIT -->
-    <meta name="twitter:creator" content="@jlantunez"> <!-- EDIT -->
-    <meta name="twitter:title" content="<?php echo $page->getTitle(); ?>"> <!-- EDIT -->
-    <meta name="twitter:description" content="<?php echo $page->getDescription(); ?>"> <!-- EDIT -->
-    <meta name="twitter:image" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>"> <!-- EDIT -->
-
-    <!-- FAVICONS -->
-    <?php if( $defaults->getLogo() !== null) { ?>
-        <link rel="apple-touch-icon icon" sizes="180x180" href="{{ $defaults->getLogo()->getFile()->getUrl() }}">
-    <?php } ?>
-    <?php /*
-    <link rel="shortcut icon" sizes="16x16" href="/images/favicons/favicon.png">
-    <link rel="shortcut icon" sizes="32x32" href="/images/favicons/favicon-32.png">
-    <link rel="apple-touch-icon icon" sizes="76x76" href="/images/favicons/favicon-76.png">
-    <link rel="apple-touch-icon icon" sizes="120x120" href="/images/favicons/favicon-120.png">
-    <link rel="apple-touch-icon icon" sizes="152x152" href="/images/favicons/favicon-152.png">
-    <link rel="apple-touch-icon icon" sizes="180x180" href="/images/favicons/favicon-180.png">
-    <link rel="apple-touch-icon icon" sizes="192x192" href="/images/favicons/favicon-192.png">
-    */ ?>
-
-    <!-- Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#333333">
-    <style>
-        section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost{
-            border-color:#fff !important;
-            font-weight:normal !important;
-        }
-        section.bg-gradient-h .button.ghost:hover, section.bg-gradient-v .button.ghost:hover, section.bg-gradient-r .button.ghost:hover {
-            color:#222 !important;
-            background:#fff !important;
-        }
-        @media (min-width: 768px) {
-            section:first-of-type {
-                padding-top:100px !important;
-                padding-bottom:100px !important;
-            }
-        }
-        <?php if( env('COLOR1') !== null  && env('COLOR2') !== null ) { ?>
-        .bg-gradient-h {
-            background: linear-gradient(134deg,{{ env('COLOR1') }} 0,{{ env('COLOR2') }}  100%) !important;
-        }
-        .bg-gradient-v {
-            background: linear-gradient(to top, {{ env('COLOR1') }} 0,{{ env('COLOR2') }}  100%) !important;
-        }
-        .bg-gradient-r {
-            background: radial-gradient(ellipse at center, {{ env('COLOR1') }} 0%, {{ env('COLOR2') }} 100%) !important;
-        }
-        .button {
-            background-color: {{ env('COLOR1') }} !important;
-        }
-        .button.ghost {
-            border-color: {{ env('COLOR1') }} !important;
-            color: {{ env('COLOR1') }};
-            background: none !important;
-        }
-        section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost {
-            color:#fff;
-        }
-        <?php } ?>
-        body {
-            background:#fff;
-        }
-    </style>
-    @include('components.header-scripts')
-</head>
-<body>
-@include('components.nav')
+@section('content')
+<!--Main -->
 <main role="main">
     <article>
         <?php $count = 1; ?>
@@ -136,12 +37,4 @@
         @include('components.comments')
     </article>
 </main>
-<!--main-->
-
-@include('components.footer')
-@include('components.analytics')
-@include('components.scripts')
-@include('components.lightbox')
-
-</body>
-</html>
+@endsection
