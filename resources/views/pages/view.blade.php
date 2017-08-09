@@ -24,17 +24,14 @@
 @endsection
 
 @section('content')
-<!--Main -->
-<main role="main">
-    <article>
-        <?php $count = 1; ?>
-        @foreach($page->getSections() as $section)
-            <?php $contentType = $section->getType(); ?>
-            @include('sections.'.strtolower($contentType))
-            <?php $count = $count + 1; ?>
-            <?php echo $section->getHtml(); ?>
-        @endforeach
-        @include('components.comments')
-    </article>
-</main>
+<article>
+    <?php $count = 1; ?>
+    @foreach($page->getSections() as $section)
+        <?php $contentType = $section->getType(); ?>
+        @include('sections.'.strtolower($contentType))
+        <?php $count = $count + 1; ?>
+        <?php echo $section->getHtml(); ?>
+    @endforeach
+    @include('components.comments')
+</article>
 @endsection

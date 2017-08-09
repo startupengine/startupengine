@@ -118,14 +118,10 @@
 <body>
 @include('components.nav')
 <main role="main">
-    <article>
-        @yield('content')
-    </article>
+    @yield('content')
 </main>
-<!--main-->
 
 <!-- Scripts -->
-@include('auth.auth0-lock')
 @include('components.footer')
 @include('components.analytics')
 @include('components.scripts')
