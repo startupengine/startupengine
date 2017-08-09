@@ -1,4 +1,4 @@
-@extends('layouts.webslides')
+@extends('layouts.webslides-errors')
 
 @section('title')Error
 @endsection
