@@ -117,11 +117,11 @@
         section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost {
             color:#fff;
         }
-
         body {
             background:#fff;
         }
     </style>
+    @yield('styles')
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
