@@ -117,6 +117,11 @@
         section.bg-gradient-h .button.ghost, section.bg-gradient-v .button.ghost, section.bg-gradient-r .button.ghost {
             color:#fff;
         }
+        @media (min-width:768px) {
+            li.article {
+                max-width: 50%;
+            }
+        }
         body {
             background:#fff;
         }
