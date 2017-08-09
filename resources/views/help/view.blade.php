@@ -3,7 +3,7 @@
 @section('title')<?php echo $page->getTitle(); ?>@endsection
 
 @section('meta')
-    <meta name="description" content="<?php echo $page->getDescription(); ?>">
+    <meta name="description" content="<?php echo $page->getContent(); ?>">
     <!-- SOCIAL CARDS (ADD YOUR INFO) -->
 
     <!-- FACEBOOK -->
