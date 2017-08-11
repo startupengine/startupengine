@@ -125,9 +125,8 @@
         body {
             background:#fff;
         }
-        footer {
-            position: absolute !important;
-            bottom: 0px !important;
+        section:first-of-type {
+            min-height:100vh;
         }
     </style>
     @yield('styles')
