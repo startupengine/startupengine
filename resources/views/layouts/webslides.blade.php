@@ -126,7 +126,7 @@
             background:#fff;
         }
         section:first-of-type {
-            min-height:100vh;
+            min-height:100vh !important;
         }
     </style>
     @yield('styles')
