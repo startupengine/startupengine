@@ -15,7 +15,7 @@
 
 @section('content')
     <article>
-        <section class="" style="min-height:auto !important;">
+        <section class="" style="min-height:auto;">
             <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
             <!--.wrap = container width: 90% -->
             <div class="wrap" style="">
