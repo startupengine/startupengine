@@ -128,6 +128,9 @@
         section:first-of-type {
             min-height:100vh !important;
         }
+        #section-1 {
+            min-height:100vh !important;
+        }
     </style>
     @yield('styles')
 
