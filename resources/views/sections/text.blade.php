@@ -1,4 +1,4 @@
-<section class="bg-white" id="section-{{ $count }}" style="min-height:auto !important;">
+<section class="bg-white" id="section-{{ $count }}" style="min-height:auto;">
     <!--.wrap.longform (width:72rem=720px) = Better reading experience (90-95 characters per line) -->
     <div class="wrap longform">
         <?php echo @markdown($section->getContent()); ?>
