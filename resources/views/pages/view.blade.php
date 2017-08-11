@@ -24,7 +24,7 @@
 @endsection
 
 @section('styles')
-    <?php if($page->getCSS() !== null) { echo $page->getCSS(); } ?>
+    <?php if($page->getCss() !== null) { echo $page->getCss(); } ?>
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@
         <?php $count = $count + 1; ?>
         <?php echo $section->getHtml(); ?>
     @endforeach
-    <?php if($page->getHTML() !== null) { echo $page->getHTML(); } ?>
+    <?php if($page->getHtml() !== null) { echo $page->getHtml(); } ?>
     @include('components.comments')
 </article>
 @endsection
