@@ -23,6 +23,10 @@
 <meta name="twitter:image" content="<?php if($page->getFeaturedImage() !== null) { echo $page->getFeaturedImage()->getFile()->getUrl(); } ?>"> <!-- EDIT -->
 @endsection
 
+@section('styles')
+    <?php if($page->getCSS() !== null) { echo $page->getCSS(); } ?>
+@endsection
+
 @section('content')
 <article>
     <?php $count = 1; ?>
@@ -32,6 +36,7 @@
         <?php $count = $count + 1; ?>
         <?php echo $section->getHtml(); ?>
     @endforeach
+    <?php if($page->getHTML() !== null) { echo $page->getHTML(); } ?>
     @include('components.comments')
 </article>
 @endsection
