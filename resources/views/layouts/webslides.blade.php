@@ -125,6 +125,10 @@
         body {
             background:#fff;
         }
+        footer {
+            position: absolute !important;
+            bottom: 0px !important;
+        }
     </style>
     @yield('styles')
 
