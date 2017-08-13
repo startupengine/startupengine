@@ -3,7 +3,7 @@
     <div class="wrap">
         <div class="grid vertical-align">
             <?php if($section->getAlignment() == "left") { ?>
-            <div class="column">
+            <div class="column" data-aos="fade-right">
                 <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:50%;max-width:77%;border-radius:4px;"></figure>
             </div>
             <?php } ?>
@@ -26,7 +26,7 @@
                 <?php } ?>
             </div>
             <?php if($section->getAlignment() == "right" OR $section->getAlignment() == "center" OR $section->getAlignment() == null) { ?>
-            <div class="column">
+            <div class="column" data-aos="fade-left">
                 <figure><img class="aligncenter" src="<?php echo $section->getFeaturedImage()->getFile()->getUrl(); ?>" alt="<?php echo $section->getFeaturedImage()->getTitle(); ?>" style="max-height:50%;max-width:77%;border-radius:4px;"></figure>
             </div>
             <?php } ?>

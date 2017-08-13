@@ -13,7 +13,7 @@
 <?php } ?>
 
 <?php if(env('ENABLE_MIXPANEL_ANALYTICS') == TRUE && \Auth::user() !== null) { ?>
-    mixpanel.identify("<?php echo \Auth::user()->id; ?>");
+    mixpanel.identify("<?php echo \Auth::user()->auth0id; ?>");
     mixpanel.people.set({
         "$first_name": "<?php echo \Auth::user()->name; ?>",
         "$created": "<?php echo \Auth::user()->created_at; ?>",
