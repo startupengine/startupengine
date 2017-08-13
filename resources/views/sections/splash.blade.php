@@ -1,6 +1,8 @@
 <section class="{{ $section->getStyle() }}" id="section-{{ $count }}">
+    <?php if($page->getFeaturedImage() !== null) { ?>
     <!-- Overlay/Opacity: [class*="bg-"] > .background.dark or .light -->
-    <span class="background dark" style="background-image:url('<?php echo $page->getFeaturedImage()->getFile()->getUrl(); ?>')"></span>
+    <span class="background dark" style="background-image:url('<?php echo $page->getFeaturedImage()->getFile()->getUrl();  ?>')"></span>
+    <?php } ?>
     <!--.wrap = container width: 90% -->
     <div class="wrap zoomIn" align="center" style="padding:75px 10%;min-width:300px;">
         <h1 style="margin-bottom:15px;">

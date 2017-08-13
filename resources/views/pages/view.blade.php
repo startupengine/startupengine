@@ -28,7 +28,7 @@
 @endsection
 
 @section('content')
-<article>
+<article id="particles-js">
     <?php $count = 1; ?>
     @foreach($page->getSections() as $section)
         <?php $contentType = $section->getType(); ?>
