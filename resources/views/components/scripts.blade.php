@@ -29,8 +29,8 @@
                             return false;
                         } else {
                             $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-                            $target.focus(); // Set focus again
-                            $target.blur(); // Unset focus
+                            //$target.focus(); // Set focus again
+                            //$target.blur(); // Unset focus
                         };
                     });
                 }
