@@ -2,7 +2,7 @@
 
 A beautiful & open-source platform for launching startups.
 
-Powered by [Contentful](https://contentful.com), [Mixpanel](https://mixpanel.com), [Heroku](https://Heroku.com), [Laravel](https://laravel.com), and [Webslides](https://github.com/webslides/webslides/).
+Powered by [Contentful](https://contentful.com), [Heroku](https://Heroku.com), [Laravel](https://laravel.com), and [Webslides](https://github.com/webslides/webslides/).
 
 <div>
      <img src="https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png" width="100">    
@@ -19,7 +19,7 @@ Powered by [Contentful](https://contentful.com), [Mixpanel](https://mixpanel.com
 - [Deploying](#deploying)
 
 # Screenshots
-<div>   
+<div>
      <img src="/storage/app/docs/screenshots/Article.png" width="250">
      <img src="/storage/app/docs/screenshots/Articles.png" width="250">
 </div>
@@ -32,9 +32,9 @@ Everything you need to launch & grow your website, app, or business.
 
 ##### Create pages
 * [x] Landing pages
-* [X] Products, services, and subscriptions
-* [x] Blog posts
-* [x] Help/documentation
+* [X] Products & Services
+* [x] Articles
+* [x] Help & Documentation
 
 ##### Control access to your content
 * [x] Public (viewable by guests)
@@ -43,16 +43,11 @@ Everything you need to launch & grow your website, app, or business.
 * [x] Premium (requires login)
 * [x] Paid (requires paid subscription)
 
-
 ##### Strategic Benefits
-* StartupEngine is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
-
-* Custom coding not required. No plugins to install. Just enter your account information and go.
-
-* Automatic updates via Github & Heroku. No need to pay for server automation services like Jekins, DeployBot, CodeShip, etc.
-
-* Don't have funding? It's ok, you can run StartupEngine on Heroku for free.
-
+* [x] Completely free.
+* [x] StartupEngine is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
+* [x] Custom coding not required. No plugins to install. Just enter your account information and go.
+* [x] Automatic updates via Github & Heroku. No need to pay for third-party server automation services like Jenkins, DeployBot, CodeShip, etc.
 
 # Deploying
 
