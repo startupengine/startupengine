@@ -11,7 +11,6 @@ Powered by [Contentful](https://contentful.com), [Heroku](https://Heroku.com), [
 **Table of Contents** 
 
 - [Screenshots](#screenshots)
-- [Demo](#demo)
 - [Features](#features)
     - [Create pages](#create-pages)
     - [Control access to your content](#control-access-to-your-content)                    
@@ -23,9 +22,6 @@ Powered by [Contentful](https://contentful.com), [Heroku](https://Heroku.com), [
      <img src="/storage/app/docs/screenshots/Article.png" width="250">
      <img src="/storage/app/docs/screenshots/Articles.png" width="250">
 </div>
-
-# Demo
-A demo is online at https://www.StartupEngine.io/
 
 # Features 
 Everything you need to launch & grow your website, app, or business.
