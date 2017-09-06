@@ -33,7 +33,7 @@ Everything you need to launch & grow your website, app, or business.
 * [x] Articles
 * [x] Help & Documentation
 
-##### Control access to your content
+##### Control access
 * [x] Public (viewable by guests)
 * [x] Private (unlisted, requires direct link)
 * [x] Protected (requires password)
