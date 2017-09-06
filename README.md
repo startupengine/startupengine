@@ -12,10 +12,11 @@ Powered by [Contentful](https://contentful.com), [Heroku](https://Heroku.com), [
 
 - [Screenshots](#screenshots)
 - [Features](#features)
-    - [Create pages](#create-pages)
-    - [Control access to your content](#control-access-to-your-content)                    
-    - [Strategic Benefits](#strategic-benefits)
+    - [Create content](#create-content)
+    - [Control access](#control-access)                    
+    - [Strategic benefits](#strategic-benefits)
 - [Deploying](#deploying)
+- [License](#license)
 
 # Screenshots
 <div>
@@ -26,7 +27,7 @@ Powered by [Contentful](https://contentful.com), [Heroku](https://Heroku.com), [
 # Features 
 Everything you need to launch & grow your website, app, or business.
 
-##### Create pages
+##### Create content
 * [x] Landing pages
 * [X] Products & Services
 * [x] Articles
@@ -39,7 +40,7 @@ Everything you need to launch & grow your website, app, or business.
 * [x] Premium (requires login)
 * [x] Paid (requires paid subscription)
 
-##### Strategic Benefits
+##### Strategic benefits
 * [x] Completely free.
 * [x] Completely plug-and-play. No coding required.
 * [x] Automatic updates via Github & Heroku.
@@ -78,10 +79,6 @@ Your Contentful space is now populated with content.
 
 Simply edit the existing pages or create new ones to administrate your site.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within StartupEngine, please send an e-mail to info@StartupEngine.io. All security vulnerabilities will be promptly addressed.
-
-## License
+# License
 
 StartupEngine is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
