@@ -45,9 +45,9 @@ Everything you need to launch & grow your website, app, or business.
 
 ##### Strategic Benefits
 * [x] Completely free.
-* [x] StartupEngine is designed specifically for the needs of a startup (unlike Wordpress, Ghost, and other open-source CMS offerings.)
-* [x] Custom coding not required. No plugins to install. Just enter your account information and go.
-* [x] Automatic updates via Github & Heroku. No need to pay for third-party server automation services like Jenkins, DeployBot, CodeShip, etc.
+* [x] Completely plug-and-play. No coding required.
+* [x] Automatic updates via Github & Heroku.
+* [x] Decoupled architecture: if you ever want to move your site to another platform, you can do so without having to migrate your data.
 
 # Deploying
 
