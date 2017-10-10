@@ -216,6 +216,7 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         Flugg\Responder\ResponderServiceProvider::class,
         BC\Laravel\DropboxDriver\ServiceProvider::class,
+        TCG\Voyager\VoyagerServiceProvider::class,
 
         /*
          * Application Service Providers...

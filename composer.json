@@ -1,7 +1,10 @@
 {
     "name": "luckyrabbitllc/sitepress",
     "description": "A beautiful & open-source content platform. Powered by Webslides, Laravel, and Contentful.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -23,7 +26,8 @@
         "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-analytics": "^3.0",
         "spatie/laravel-newsletter": "^3.6",
-        "wangaz/laravel-semantic-ui-css": "^1.2"
+        "wangaz/laravel-semantic-ui-css": "^1.2",
+        "tcg/voyager": "^1.0.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -60,10 +64,16 @@
         ]
     },
     "minimum-stability": "dev",
-    "prefer-stable" : true,
+    "prefer-stable": true,
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": {
+        "hooks": {
+            "type": "composer",
+            "url": "https://larapack.io"
+        }
     }
 }

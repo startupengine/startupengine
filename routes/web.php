@@ -65,3 +65,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'article']);
     Route::get('/form/{slug}', ['uses' => 'PageController@getArticle', 'as' => 'article']);
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
