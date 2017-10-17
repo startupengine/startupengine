@@ -26,9 +26,9 @@ A beautiful & open-source platform for launching startups.
 * [x] Completely plug-and-play - coding is optional.
 * [x] Completely open-source - you can change and distribute the code.
 * [x] Create pages, blog posts, and documentation, or make your own custom content types.
+* [x] Display your content anywhere using the content API.
 * [x] Define who can see and edit your content with role-based access control.
-* [x] Use the pre-installed Boostrap 4 theme, or throw it out and build your own with the framework of your choice. 
-* [x] Decoupled architecture - display your content anywhere using the content API.
+* [x] Use the pre-installed Boostrap 4 theme, or build your own with the framework of your choice. 
 
 ##### Pre-Installed Content Types
 * [x] Landing pages
