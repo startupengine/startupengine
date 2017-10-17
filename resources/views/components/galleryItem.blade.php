@@ -1,11 +1,11 @@
-<?php if($item->getFeaturedImage() !== NULL) { ?>
+<?php if($item->image !== NULL) { ?>
     <li class="article" style="float:left; background:#fff;">
-        <a href="/<?php if( strtolower($item->getType()) !== "landing" && strtolower($item->getType()) !== "page") { echo strtolower($item->getType())."/"; } ?>{{ $item->getSlug() }}">
+        <a href="/article/{{ $item->slug }}">
             <figure>
-                <?php echo "<img src='".$item->getFeaturedImage()->getFile()->getUrl()."'/>"; ?>
+                <img src="{{ Storage::disk('public')->url($item->image) }}" style="size:100%;"/>
                 <figcaption>
-                    <h2>{{ $item->getTitle() }}</h2>
-                    <p>{{  $item->getDescription() }}</p>
+                    <h2>{{ $item->title }}</h2>
+                    <p>{{  $item->excerpt }}</p>
                 </figcaption>
             </figure>
         </a>

@@ -1,7 +1,3 @@
-<?php if($defaults !== NULL && $defaults->getHeaderCode() !== NULL) {
-    echo $defaults->getHeaderCode();
- }?>
-
 <?php if(env('ENABLE_MIXPANEL_ANALYTICS') == TRUE) { ?>
 <!-- start Mixpanel -->
 <script type="text/javascript">

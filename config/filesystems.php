@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'dropbox'),
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,10 +49,16 @@ return [
         ],
 
         'public' => [
+            'driver' => 's3',
+            'key' => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'region' => env('AWS_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+        ],
+
+        'snapshots' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
+            'root' => database_path('snapshots'),
         ],
 
         's3' => [
@@ -61,12 +67,6 @@ return [
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
-        ],
-
-        'dropbox' => [
-            'driver' => 'dropbox',
-            'app_secret' => env('DROPBOX_APP_SECRET'),
-            'token' => env('DROPBOX_TOKEN'),
         ],
 
     ],

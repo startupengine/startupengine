@@ -3,106 +3,115 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Analytics;
-use Spatie\Analytics\Period;
+use TCG\Voyager\Models\Category;
 
 class APIResponse extends Model
 {
-    public function getPeriod($request) {
-        $days = $request->days;
-        if($days == NULL) {
-            // Default to a period of 30 days
-            $days = 30;
-            $period = Period::days(30);
-        }
-        else {
-            // Set period manually if it's specified in the request
-            $period = Period::days($days);
-        }
-        if($request->start !== NULL) {
-            // Set a start date manually if it's specified in the request
-            $start = \Carbon\Carbon::createFromFormat('m/d/Y', $request->start);
-            $end = \Carbon\Carbon::createFromFormat('m/d/Y', $request->start)->addDays($days);
-            $period = Period::create($start, $end);
-            if(!$start->isPast()) {
-                return response()->json([
-                    'status' => 'failure',
-                    'error' => 'Start date is in the future.'
-                ]);
-            }
-        }
-        return $period;
+
+    public function getItemsByCategory($request){
+        $type = $request->input('type');
+        $limit = $request->input('limit');
+        if($limit == null) { $limit = 10; }
+        $category = $request->input('category');
+        $category = Category::where('slug', '=', $category)->first();
+
+        $items = \DB::table($type)
+            ->select(\DB::raw('id, status, title, meta_description, slug, image'))
+            ->where('status', '=', 'published')
+            ->where('category_id', '=', $category->id)
+            ->limit($limit)
+            ->groupBy('slug')
+            ->orderBy('created_at')
+            ->get();
+
+        $items->transform(function ($item, $key) {
+            $item->image = \Storage::disk('public')->url($item->image);
+            $item->slug = '/content/'.$item->slug;
+            return $item;
+        });
+
+        $response = (json_decode(json_encode($items->toArray())));
+
+        return response()
+            ->json($response);
     }
 
-    public function getContent($client, $type = null, $campaign = null) {
-        if($type == NULL) {
-            $type = 'page';
-        }
-        $query = (new \Contentful\Delivery\Query());
-        $query->setContentType($type);
-        if($campaign !== null) {
-            $query->setContentType($type)
-                ->setInclude(2)
-                ->where('fields.campaign.sys.contentType.sys.id', 'campaign')
-                ->where('fields.campaign.fields.slug', $campaign);
-        }
-        $results = $client->getEntries($query);
-        return response()->json([
-            'status' => 'success',
-            'source' => 'contentful',
-            'raw' => $results
-        ]);
+    public function getItems($request){
+        $type = $request->input('type');
+        $limit = $request->input('limit');
+        if($limit == null) { $limit = 10; }
+
+        $items = \DB::table($type)
+            ->select(\DB::raw('id, status, title, meta_description, slug, image'))
+            ->where('status', '=', 'published')
+            ->limit($limit)
+            ->groupBy('slug')
+            ->orderBy('created_at')
+            ->get();
+
+        $items->transform(function ($item, $key) {
+            $item->image = \Storage::disk('public')->url($item->image);
+            $item->slug = '/content/'.$item->slug;
+            return $item;
+        });
+
+        $response = (json_decode(json_encode($items->toArray())));
+
+        return response()
+            ->json($response);
     }
 
-    public function getTraffic($request, $path = null) {
-        $period = $this->getPeriod($request);
-        $traffic = Analytics::fetchTotalVisitorsAndPageViews($period);
-        if($path !== null) {
-            $filters = "ga:pagePath=@/$path";
-            $popular = Analytics::performQuery($period,'ga:pageviews,ga:uniquePageviews,ga:timeOnPage,ga:bounces,ga:entrances,ga:exits', ['dimensions'=>'ga:pagePath,ga:pageTitle', 'filters' => $filters, 'sort' => '-ga:pageViews']);
-        }
-        return response()->json([
-            'status' => 'success',
-            'period' => $period,
-            'source' => 'google-analytics',
-            'raw' => $traffic
-        ]);
+    public function getItem($request){
+        $type = $request->input('type');
+        $slug = $request->input('slug');
+
+        $items = \DB::table($type)
+            ->select(\DB::raw('*'))
+            ->where('slug', '=', $slug)
+            ->groupBy('slug')
+            ->orderBy('created_at')
+            ->get();
+
+
+        $items->transform(function ($item, $key) {
+            if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
+            if(isset($item->body)) { $item->body= json_encode($item->body); }
+            return $item;
+        });
+
+        $response = (json_decode(json_encode($items->toArray())));
+
+        return response()
+            ->json($response);
     }
 
-    public function getEvents($request, $type = null) {
-        $period = $this->getPeriod($request);
-        if($type !== null OR $request->campaign !== null) {
-            $filters = "";
-            if(isset($type)) {
-                $filters = $filters."ga:eventCategory==$type";
-            }
-            if(isset($request->campaign)) {
-                if($filters !== "") { $filters = $filters.";";} // The semicolon represents the AND operator (combines filters)
-                $filters =  $filters."ga:eventLabel==$request->campaign";
-            }
-            $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'filters' => "$filters", 'dimensions' => 'ga:date']);
-        } else {
-            $events = Analytics::performQuery($period,'ga:totalEvents,ga:sessions',  ['sort'=>'ga:date', 'dimensions' => 'ga:date']);
-        }
-        return response()->json([
-            'status' => 'success',
-            'period' => $period,
-            'totals' => $events->totalsForAllResults,
-            'source' => 'google-analytics',
-            'raw' => $events
-        ]);
+    public function search($request){
+        $type = $request->input('type');
+        $input = $request->input('s');
+        $limit = $request->input('limit');
+        if($limit == null) { $limit = 10; }
+
+        $items = \DB::table($type)
+            ->select(\DB::raw('id, status, title, meta_description, slug, image'))
+            ->where('status', '=', 'published')
+            ->where('body', 'like', '%'.$input.'%')
+            ->orWhere('title', 'like', '%'.$input.'%')
+            ->limit($limit)
+            ->groupBy('slug')
+            ->orderBy('created_at')
+            ->get();
+
+        $items->transform(function ($item, $key) {
+            $item->image = \Storage::disk('public')->url($item->image);
+            $item->slug = '/content/'.$item->slug;
+            return $item;
+        });
+
+        $response = (json_decode(json_encode($items->toArray())));
+
+        return response()
+            ->json($response);
     }
 
-    public function performQuery($request, $metrics = 'ga:totalEvents,ga:sessions', $options = ['sort'=>'ga:date', 'dimensions' => 'ga:date']) {
-        $period = $this->getPeriod($request);
-        if($request->metrics !== null) { $metrics = $request->metrics; }
-        if($request->options !== null) { $options = $request->options; }
-        $results = Analytics::performQuery($period, $metrics, $options);
-        return response()->json([
-            'status' => 'success',
-            'period' => $period,
-            'source' => 'google-analytics',
-            'raw' => $results
-        ]);
-    }
+
 }

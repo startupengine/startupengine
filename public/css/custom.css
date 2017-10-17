@@ -94,3 +94,9 @@ i.close.icon {
   right: -0.5rem !important;
 }
 
+
+  header ul {
+    -webkit-flex-flow: inherit !important;
+    flex-flow: inherit !important;
+  }
+

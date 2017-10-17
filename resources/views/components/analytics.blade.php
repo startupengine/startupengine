@@ -1,4 +1,4 @@
-<?php if(config('app.ENABLE_GOOGLE_ANALYTICS') == TRUE) { ?>
+<?php if(setting('site.google_analytics_tracking_id') !== null) { ?>
 <!-- OPTIONAL - Google Analytics -->
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -6,7 +6,7 @@
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', '<?php echo config('app.GOOGLE_ANALYTICS') ?>', 'auto');
+    ga('create', '{{ setting('site.google_analytics_tracking_id') }}', 'auto');
     ga('send', 'pageview');
     setTimeout(function() {
         ga('send', 'event', '15_seconds', 'read');

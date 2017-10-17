@@ -41,3 +41,4 @@
 <script>
     AOS.init();
 </script>
+{!! html_entity_decode(setting('site.global_scripts')) !!}

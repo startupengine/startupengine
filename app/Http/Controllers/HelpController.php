@@ -1,61 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\ContentItem;
 use Illuminate\Http\Request;
 use Contentful\Delivery\Client as DeliveryClient;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+use TCG\Voyager\Models\Category;
+use TCG\Voyager\Models\Page;
+use TCG\Voyager\Models\Post;
 
 class HelpController extends Controller
 {
-
-    /**
-     * @var DeliveryClient
-     */
-    private $client;
-
-    public function __construct(DeliveryClient $client) {
-        $this->client = $client;
-    }
-
-    public function entryById($id) {
-        $entry = $this->client->getEntry($id);
-        if (!$entry) {
-            abort(404);
-        }
-        return $entry;
-    }
-
     public function index() {
-        $query = (new \Contentful\Delivery\Query());
-        $query->setContentType('settings')
-            ->where('fields.slug', 'Default');
-        $defaults = $this->client->getEntries($query);
-        if (!empty($defaults->getItems())) {
-            $defaults = $defaults->getItems()[0];
-        } else {
-            $defaults = NULL;
-        }
-        return view('help.index')->with('defaults', $defaults)->with('analyticsCategory', 'help');
-    }
-
-    public function getArticle($slug) {
-        $query = (new \Contentful\Delivery\Query());
-        $query->setContentType('settings')
-            ->where('fields.slug', 'Default');
-        $defaults = $this->client->getEntries($query);
-        if (!empty($defaults->getItems())) {
-            $defaults = $defaults->getItems()[0];
-        } else {
-            $defaults = NULL;
-        }
-        $query2 = (new \Contentful\Delivery\Query());
-        $query2->setContentType('help')
-            ->where('fields.slug', $slug);
-        $pages = $this->client->getEntries($query2);
-        if (empty($pages->getItems())) {
+        $page =  Page::where('slug', '=', 'help')->first();
+        if ($page == null) {
             abort(404);
         }
-        $page = $pages[0];
-        return view('help.view')->with('page', $page)->with('defaults', $defaults)->with('analyticsCategory', 'help');
+        return view('pages.view')->with('page', $page)->with('template', 'help');
+    }
+
+    public function getPage($slug) {
+        $page =  Page::where('slug', '=', $slug)->first();
+        if ($page == null) {
+            abort(404);
+        }
+        return view('help.view')->with('page', $page);
+    }
+
+    public function getCategory($slug) {
+        $category = Category::where('slug', '=', $slug)->first();
+        if ($category == null) {
+            abort(404);
+        }
+        $posts =  Post::where('category_id', '=', $category->id)->get();
+        if ($posts == null) {
+            abort(404);
+        }
+        return view('help.category')->with('articles', $posts)->with('category', $category);
     }
 
 }

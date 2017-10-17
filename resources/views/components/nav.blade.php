@@ -1,41 +1,19 @@
-<?php if($defaults !== NULL && $defaults->getHeaderMenu() !== NULL) { ?>
-<header role="banner" style="opacity:1;background:transparent;padding-left:35px;padding-right:35px;" class="<?php if($defaults !== NULL && $defaults->getHeaderMenu()->getStyle() !== NULL) { echo strtolower($defaults->getHeaderMenu()->getStyle()); } ?>">
-    <nav role="navigation" class="navbar hiddenOnMobile" style="width: 100%;">
-        <ul>
-            <?php if($defaults !== NULL) { ?>
-                <?php if($defaults->getHeaderMenu()->getLogo() !== null) { ?>
-                    <li style="max-width:100px;"><a href="/" style="padding:4px;"><img src="<?php echo $defaults->getHeaderMenu()->getLogo()->getFile()->getUrl(); ?>" style="max-height:50px;"/></a></li>
-                <?php } ?>
-                <?php foreach($defaults->getHeaderMenu()->getItems() as $item) { ?>
-                    <li><?php echo @markdown($item->getContent()); ?></li>
-                <?php } ?>
-            <?php } ?>
-        </ul>
-    </nav>
-    <nav role="navigation" class="hiddenOnDesktop" style="width:100%;">
-        <ul class="hiddenOnDesktop" style="margin-right:11px;">
-            <li class="showMobileNav menuButton">
-                <a style="font-size:133%;padding:1px 0px 2px 2px;">
-                    <i class="sidebar icon"></i>
-                </a>
+<header role="banner" style="opacity:1;background:transparent;padding-left:35px;padding-right:35px; height:75px;box-shadow: 0px 0px 60px rgba(0,0,0,0.1);" class="{{ setting('site.site_menu_class') }} ">
+    <nav role="navigation" id="primary-nav" class="navbar " style="padding-top:15px !important;margin-top:-10px;width: 100%;height:100px !important;">
+        <ul style="float:left;">
+            <li  style="float:left;padding:5px !important;position:absolute;top:-2px;left:-16px;">
+                <a href="/"  style="color:#000 !important;background:none !important;border:none !important;font-weight: 400;">
+                    <?php if(setting('site.logo') !== null) { ?>
+                    <img src="{{ Storage::disk('public')->url(setting('site.logo')) }}"  />
+                    <?php } ?>
+                     <span id="site-title" style="max-height:35px;float:right !important; margin-top:8px !important;margin-left:0px !important;background:#fff ;padding:5px 10px !important;border-radius:4px !important;" class="">{{ setting('site.title') }}</span></a>
             </li>
         </ul>
+        <span class="hiddenOnMobile">
+            {{ menu('site') }}
+        </span>
+        <span class="hiddenOnDesktop">
+            <ul><li><a href="#" id="mobile-nav-button"  onclick="slideout.open();">Menu</a></li></ul>
+        </span>
     </nav>
 </header>
-<?php } ?>
-<div class="ui modal" id="mobileNav">
-    <i class="close icon"></i>
-    <div class="header" align="center">
-        Navigation
-    </div>
-    <div class="content">
-        <ul style="list-style: none !important;">
-            <li><a href="/">Home</a></li>
-            <?php if($defaults !== NULL && $defaults->getHeaderMenu()->getItems() !== NULL) { ?>
-            <?php foreach($defaults->getHeaderMenu()->getItems() as $item) { ?>
-            <li><?php echo @markdown($item->getContent()); ?></li>
-            <?php } ?>
-            <?php } ?>
-        </ul>
-    </div>
-</div>

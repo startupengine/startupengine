@@ -9,16 +9,13 @@ class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
 
-    protected $connection = 'pgsql';
-    protected $table = 'users';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'auth0id', 'name', 'email', 'password', 'given_name', 'family_name', 'locale', 'gender', 'picture', 'picture_large', 'birthday',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -29,4 +26,22 @@ class User extends \TCG\Voyager\Models\User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Return the user attributes.
+
+     * @return array
+     */
+    public static function getAuthor($id)
+    {
+        $user = self::find($id);
+        return [
+            'id'     => $user->id,
+            'name'   => $user->name,
+            'email'  => $user->email,
+            'url'    => '',  // Optional
+            'avatar' => 'gravatar',  // Default avatar
+            'admin'  => $user->role === 'admin', // bool
+        ];
+    }
 }
