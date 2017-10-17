@@ -9,10 +9,7 @@ A beautiful & open-source platform for launching startups.
 **Table of Contents** 
 
 - [Screenshots](#screenshots)
-- [Features](#features)
-    - [Create content](#create-content)
-    - [Control access](#control-access)                    
-    - [Strategic benefits](#strategic-benefits)
+- [Features](#features)   
 - [Deploying](#deploying)
 - [License](#license)
 
@@ -25,14 +22,12 @@ A beautiful & open-source platform for launching startups.
 <img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/help.png" width="200" /><br>
 
 # Features 
-Everything you need to launch & grow your website, app, or business.
-
-##### Features
 * [x] Completely plug-and-play (coding is optional.)
 * [x] Completely free (MIT License): you can change and distribute the code.
 * [x] Free continuous deployment via Github & Heroku.
 * [x] Custom schema: define your own content types.
-* [x] Role-based access: define who can see and edit your content. 
+* [x] Role-based access: define who can see and edit your content.
+* [x] Front-end agnostic: StartupEngine comes installed with a theme built in Bootstrap 4 & Vue.js, but you can use any framework or UI kit you want. 
 * [x] Decoupled CMS architecture: if you ever want to move your site to another platform, you can do so without having to migrate your data by using the content API.
 
 ##### Pre-Installed Content Types
