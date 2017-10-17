@@ -1,16 +1,17 @@
 {
     "name": "StartupEngine",
-    "description": "A CMS for startups.",
+    "description": "A beautiful, open-source, free CMS for startups.",
     "keywords": [
         "CMS",
         "Blog",
+        "Startup",
         "Marketing",
         "Laravel",
-        "Contentful"
+        "Framework"
     ],
     "website": "https://startupengine.herokuapp.com",
     "repository": "https://github.com/luckyrabbitllc/startupengine",
-    "logo": "https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png",
+    "logo": "https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/images/logo.png",
     "success_url": "/",
     "scripts": {
         "post-root-package-install": [
