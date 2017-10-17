@@ -18,11 +18,11 @@ A beautiful & open-source platform for launching startups.
 
 # Screenshots
 
-<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/landing-page.png" width="150" /><br>
+<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/landing-page.png" width="200" /><br>
        
-<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="150" /><br>
+<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/blog.png" width="200" /><br>
 
-<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/zTiOAn3QVjqBJftpq8sQP4ZjpkHceWjft9zfUwPl.png" width="150" /><br>
+<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/help.png" width="200" /><br>
 
 # Features 
 Everything you need to launch & grow your website, app, or business.
