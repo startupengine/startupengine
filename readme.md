@@ -18,9 +18,9 @@ A beautiful & open-source platform for launching startups.
 
 # Screenshots
 <div>
-     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Wn6DXImiSCQYGPsFWV2MoqEo9QKeOLRRBxeppN6C.png" width="175" style="border-radius:5px;" />
-     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="175" style="border-radius:5px;" />
-     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/zTiOAn3QVjqBJftpq8sQP4ZjpkHceWjft9zfUwPl.png" width="175" style="border-radius:5px;" />
+     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Wn6DXImiSCQYGPsFWV2MoqEo9QKeOLRRBxeppN6C.png" width="150" />
+     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="150" />
+     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/zTiOAn3QVjqBJftpq8sQP4ZjpkHceWjft9zfUwPl.png" width="150" />
 </div>
 
 # Features 
