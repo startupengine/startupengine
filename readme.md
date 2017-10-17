@@ -18,7 +18,7 @@ A beautiful & open-source platform for launching startups.
 
 # Screenshots
 
-<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Wn6DXImiSCQYGPsFWV2MoqEo9QKeOLRRBxeppN6C.png" width="150" /><br>
+<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/bH2w9VVLi3Hmwal2ydbV0Cjc0gAelqrydpe8SE2u.png" width="150" /><br>
        
 <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="150" /><br>
 
@@ -27,18 +27,19 @@ A beautiful & open-source platform for launching startups.
 # Features 
 Everything you need to launch & grow your website, app, or business.
 
-##### Content Types
+##### Features
+* [x] Completely plug-and-play (coding is optional.)
+* [x] Completely free (MIT License): you can change and distribute the code.
+* [x] Free continuous deployment via Github & Heroku.
+* [x] Custom schema: define your own content types.
+* [x] Role-based access: define who can see and edit your content. 
+* [x] Decoupled CMS architecture: if you ever want to move your site to another platform, you can do so without having to migrate your data by using the content API.
+
+##### Pre-Installed Content Types
 * [x] Landing pages
 * [x] Blog Posts
 * [x] Help & Documentation
 * [x] Custom Content Types
-
-##### Benefits
-* [x] Completely free.
-* [x] Completely plug-and-play (coding is optional)
-* [x] Free continuous deployment via Github & Heroku.
-* [x] Custom schema: define the fields and input format of your own custom content types.
-* [x] Decoupled CMS architecture: if you ever want to move your site to another platform, you can do so without having to migrate your data by using the content API.
 
 # Deploying
 
