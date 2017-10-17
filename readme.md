@@ -17,11 +17,12 @@ A beautiful & open-source platform for launching startups.
 - [License](#license)
 
 # Screenshots
-<div>
-     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Wn6DXImiSCQYGPsFWV2MoqEo9QKeOLRRBxeppN6C.png" width="100" />       
-     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="100" />
-     <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/zTiOAn3QVjqBJftpq8sQP4ZjpkHceWjft9zfUwPl.png" width="100" />
-</div>
+
+<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Wn6DXImiSCQYGPsFWV2MoqEo9QKeOLRRBxeppN6C.png" width="150" /><br>
+       
+<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="150" /><br>
+
+<img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/zTiOAn3QVjqBJftpq8sQP4ZjpkHceWjft9zfUwPl.png" width="150" /><br>
 
 # Features 
 Everything you need to launch & grow your website, app, or business.
