@@ -18,6 +18,8 @@ A beautiful & open-source platform for launching startups.
 
 # Screenshots
 
+<img src="" width="150" /><br>
+
 <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/bH2w9VVLi3Hmwal2ydbV0Cjc0gAelqrydpe8SE2u.png" width="150" /><br>
        
 <img src="https://psychoanalytics.s3-us-west-1.amazonaws.com/docs/screenshots/Tnkzq85PHLtcHqIEDQL9lwpOHbeBvLku1MDoTkpk.png" width="150" /><br>
