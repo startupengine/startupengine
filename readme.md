@@ -30,11 +30,15 @@ A beautiful & open-source platform for launching startups.
 * [x] Define who can see and edit your content with role-based access control.
 * [x] Use the pre-installed Boostrap 4 theme, or build your own with the framework of your choice. 
 
-##### Pre-Installed Content Types
-* [x] Landing pages
-* [x] Blog Posts
-* [x] Help & Documentation
-* [x] Custom Content Types
+##### Pre-Installed Pages
+* [x] Landing page
+* [x] Features
+* [x] Blog
+* [x] Help / Search
+* [x] Frequently Asked Questions
+* [x] Documentation
+* [x] Tutorials
+
 
 # Deploying
 
