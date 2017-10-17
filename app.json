@@ -39,6 +39,10 @@
         "API_SECRET": {
             "description": "A secret key for accessing the API.",
             "generator": "secret"
+        },
+        "DB_CONNECTION": {
+            "description": "Use Heroku's pgsql by default.",
+            "value": "pgsql"
         }
     },
     "formation": {
