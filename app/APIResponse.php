@@ -42,7 +42,7 @@ class APIResponse extends Model
         if($limit == null) { $limit = 10; }
         $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
-            ->select(\DB::raw('id, status, title, meta_description, slug, image'))
+            ->select(\DB::raw($fields))
             ->where('status', '=', 'published')
             ->limit($limit)
             ->orderBy('created_at')
@@ -66,12 +66,11 @@ class APIResponse extends Model
         $slug = $request->input('slug');
         $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
-            ->select(\DB::raw('*'))
+            ->select(\DB::raw($fields))
             ->where('slug', '=', $slug)
             ->orderBy('created_at')
             ->groupBy($fields)
             ->get();
-
 
         $items->transform(function ($item, $key) {
             if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
@@ -92,7 +91,7 @@ class APIResponse extends Model
         if($limit == null) { $limit = 10; }
         $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
-            ->select(\DB::raw('id, status, title, meta_description, slug, image'))
+            ->select(\DB::raw($fields))
             ->where('status', '=', 'published')
             ->where('body', 'like', '%'.$input.'%')
             ->orWhere('title', 'like', '%'.$input.'%')
