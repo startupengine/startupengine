@@ -14,7 +14,7 @@ class APIResponse extends Model
         if($limit == null) { $limit = 10; }
         $category = $request->input('category');
         $category = Category::where('slug', '=', $category)->first();
-        $fields = '*';
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
@@ -39,7 +39,7 @@ class APIResponse extends Model
         $type = $request->input('type');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-        $fields = '*';
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
@@ -86,7 +86,7 @@ class APIResponse extends Model
         $input = $request->input('s');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-        $fields = '*';
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
