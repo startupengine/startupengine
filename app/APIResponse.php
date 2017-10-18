@@ -20,6 +20,7 @@ class APIResponse extends Model
             ->where('status', '=', 'published')
             ->where('category_id', '=', $category->id)
             ->limit($limit)
+            ->groupBy('id, status, title, meta_description, slug, image')
             ->orderBy('created_at')
             ->get();
 
@@ -44,6 +45,7 @@ class APIResponse extends Model
             ->select(\DB::raw('id, status, title, meta_description, slug, image'))
             ->where('status', '=', 'published')
             ->limit($limit)
+            ->groupBy('id, status, title, meta_description, slug, image')
             ->orderBy('created_at')
             ->get();
 
@@ -66,6 +68,7 @@ class APIResponse extends Model
         $items = \DB::table($type)
             ->select(\DB::raw('*'))
             ->where('slug', '=', $slug)
+            ->groupBy('id, status, title, meta_description, slug, image')
             ->orderBy('created_at')
             ->get();
 
@@ -94,6 +97,7 @@ class APIResponse extends Model
             ->where('body', 'like', '%'.$input.'%')
             ->orWhere('title', 'like', '%'.$input.'%')
             ->limit($limit)
+            ->groupBy('id, status, title, meta_description, slug, image')
             ->orderBy('created_at')
             ->get();
 
