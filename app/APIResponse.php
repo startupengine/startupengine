@@ -70,7 +70,7 @@ class APIResponse extends Model
             ->orderBy('created_at')
             ->get();
         */
-        $items = \DB::select('select * from '.$type.' where slug = \''.$slug.'\' and status = \'PUBLISHED\' order by created_at asc');
+        $items = \DB::select('select * from '.$type.' where slug = \''.$slug.'\' and status = \'PUBLISHED\'');
         $items = collect($items[0]);
         $items->transform(function ($item, $key) {
             if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
