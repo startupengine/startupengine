@@ -16,11 +16,11 @@ A beautiful & open-source platform for launching startups.
 
 # Screenshots
 
-<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/landing-page.png" width="200" /><br>
+<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/landing-page.png" width="400" /><br>
        
-<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/blog.png" width="200" /><br>
+<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/blog.png" width="400" /><br>
 
-<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/help.png" width="200" /><br>
+<img src="https://raw.githubusercontent.com/luckyrabbitllc/startupengine/master/storage/docs/screenshots/help.png" width="400" /><br>
 
 # Demo
 
