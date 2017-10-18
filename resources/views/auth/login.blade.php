@@ -50,8 +50,8 @@
                             <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon">
                         @endif
                         <div class="copy animated fadeIn">
-                            <h1>{{ Voyager::setting('admin.title', 'Voyager') }}</h1>
-                            <p>{{ Voyager::setting('admin.description', __('voyager.login.welcome')) }}</p>
+                            <h1>{{ Voyager::setting('site.title', 'Voyager') }}</h1>
+                            <p>{{ Voyager::setting('site.description', __('voyager.login.welcome')) }}</p>
                         </div>
                     </div> <!-- .logo-title-container -->
                 </div>
@@ -104,37 +104,5 @@
         </div> <!-- .login-sidebar -->
     </div> <!-- .row -->
 </div> <!-- .container-fluid -->
-<script>
-    var btn = document.querySelector('button[type="submit"]');
-    var form = document.forms[0];
-    var email = document.querySelector('[name="email"]');
-    var password = document.querySelector('[name="password"]');
-    btn.addEventListener('click', function(ev){
-        if (form.checkValidity()) {
-            btn.querySelector('.signingin').className = 'signingin';
-            btn.querySelector('.signin').className = 'signin hidden';
-        } else {
-            ev.preventDefault();
-        }
-    });
-    email.focus();
-    document.getElementById('emailGroup').classList.add("focused");
-
-    // Focus events for email and password fields
-    email.addEventListener('focusin', function(e){
-        document.getElementById('emailGroup').classList.add("focused");
-    });
-    email.addEventListener('focusout', function(e){
-        document.getElementById('emailGroup').classList.remove("focused");
-    });
-
-    password.addEventListener('focusin', function(e){
-        document.getElementById('passwordGroup').classList.add("focused");
-    });
-    password.addEventListener('focusout', function(e){
-        document.getElementById('passwordGroup').classList.remove("focused");
-    });
-
-</script>
 </body>
 </html>

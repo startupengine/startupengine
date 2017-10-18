@@ -11,12 +11,13 @@
 |
 */
 
-//Auth::routes();
-Route::get('/login', '\App\Http\Controllers\Auth\LoginController@login');
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
+
+    Auth::routes();
+    Route::get('/signin', '\App\Http\Controllers\Auth\LoginController@signin');
+    Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
     //Pages
     Route::get('/', 'PageController@getHomepage');
     Route::get('/home', 'PageController@getHomepage');
@@ -24,6 +25,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/content/{slug}', ['uses' => 'PostController@getPost', 'as' => 'page']);
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'page']);
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
+
 });
 Route::group(['middleware' => ['roles']], function () {
     Route::group(['prefix' => 'admin'], function () {
