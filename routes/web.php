@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
     //Pages
@@ -21,11 +23,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'page']);
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
 });
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+Route::group(['middleware' => ['roles']], function () {
+    Route::group(['prefix' => 'admin'], function () {
+        Voyager::routes();
+    });
 });
 Auth::routes();
 
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index')->name('home');
