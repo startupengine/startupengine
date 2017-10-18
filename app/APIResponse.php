@@ -69,23 +69,23 @@ class APIResponse extends Model
         }
         if(Schema::hasColumn($type, 'body'))
         {
-            $fields = $fields.'body';
+            $fields = $fields.', body';
         }
         if(Schema::hasColumn($type, 'image'))
         {
-            $fields = $fields.'image';
+            $fields = $fields.', image';
         }
         if(Schema::hasColumn($type, 'background_image'))
         {
-            $fields = $fields.'background_image';
+            $fields = $fields.', background_image';
         }
         if(Schema::hasColumn($type, 'name'))
         {
-            $fields = $fields.'name';
+            $fields = $fields.', name';
         }
         if(Schema::hasColumn($type, 'title'))
         {
-            $fields = $fields.'title';
+            $fields = $fields.', title';
         }
 
         $items = \DB::table($type)
