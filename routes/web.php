@@ -12,7 +12,7 @@
 */
 
 //Auth::routes();
-// Route::get('/login', '\App\Http\Controllers\Auth\LoginController@login');
+Route::get('/login', '\App\Http\Controllers\Auth\LoginController@login');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //Web Middleware
