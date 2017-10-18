@@ -63,27 +63,35 @@ class APIResponse extends Model
         $type = $request->input('type');
         $slug = $request->input('slug');
         $fields = 'id, status';
-        if(Schema::hasColumn($type, 'meta_description'))
+        if(\Schema::hasColumn($type, 'meta_description'))
         {
-            $fields = $fields.'meta_description';
+            $fields = $fields.', meta_description';
         }
-        if(Schema::hasColumn($type, 'body'))
+        if(\Schema::hasColumn($type, 'description'))
+        {
+            $fields = $fields.', description';
+        }
+        if(\Schema::hasColumn($type, 'excerpt'))
+        {
+            $fields = $fields.', excerpt';
+        }
+        if(\Schema::hasColumn($type, 'body'))
         {
             $fields = $fields.', body';
         }
-        if(Schema::hasColumn($type, 'image'))
+        if(\Schema::hasColumn($type, 'image'))
         {
             $fields = $fields.', image';
         }
-        if(Schema::hasColumn($type, 'background_image'))
+        if(\Schema::hasColumn($type, 'background_image'))
         {
             $fields = $fields.', background_image';
         }
-        if(Schema::hasColumn($type, 'name'))
+        if(\Schema::hasColumn($type, 'name'))
         {
             $fields = $fields.', name';
         }
-        if(Schema::hasColumn($type, 'title'))
+        if(\Schema::hasColumn($type, 'title'))
         {
             $fields = $fields.', title';
         }
