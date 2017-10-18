@@ -63,13 +63,15 @@ class APIResponse extends Model
         $type = $request->input('type');
         $slug = $request->input('slug');
         $fields = '*';
-        $items = \DB::table($type)
+        /*$items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('slug', '=', $slug)
             ->where('status', '=', 'PUBLISHED')
             ->orderBy('created_at')
             ->get();
-
+        */
+        $items = \DB::select('select * from '.$type.' where slug = \''.$slug.'\' and status = \'PUBLISHED\' order by created_at asc');
+        $items = collect($items[0]);
         $items->transform(function ($item, $key) {
             if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
             if(isset($item->body)) { $item->body= json_encode($item->body); }
