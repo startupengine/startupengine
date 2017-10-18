@@ -620,7 +620,7 @@ items: null
 },
 created: function () {
 var _this = this;
-$.getJSON(\'http://127.0.0.1:8000/api/item?type=posts&slug=\' + slug, function (json) {
+$.getJSON(\'/api/item?type=posts&slug=\' + slug, function (json) {
 _this.items = json;
 });
 }

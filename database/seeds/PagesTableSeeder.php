@@ -248,7 +248,7 @@ items: null
 },
 created: function () {
 var _this = this;
-$.getJSON(\'http://127.0.0.1:8000/api/items?type=posts&limit=10\', function (json) {
+$.getJSON(\'/api/items?type=posts&limit=10\', function (json) {
 _this.items = json;
 });
 }
@@ -311,7 +311,7 @@ items: null
 },
 created: function () {
 var _this = this;
-$.getJSON(\'http://127.0.0.1:8000/api/search?type=posts&s=\' + input, function (json) {
+$.getJSON(\'/api/search?type=posts&s=\' + input, function (json) {
 _this.items = json;
 });
 }
@@ -410,7 +410,7 @@ categories: null
 },
 created: function () {
 var _this = this;
-$.getJSON(\'http://127.0.0.1:8000/api/item?type=categories&slug=\' + input, function (json) {
+$.getJSON(\'/api/item?type=categories&slug=\' + input, function (json) {
 _this.categories = json;
 });
 }
@@ -422,7 +422,7 @@ items: null
 },
 created: function () {
 var _this = this;
-$.getJSON(\'http://127.0.0.1:8000/api/browse?type=posts&category=\' + input, function (json) {
+$.getJSON(\'/api/browse?type=posts&category=\' + input, function (json) {
 _this.items = json;
 });
 }
