@@ -62,7 +62,7 @@ class APIResponse extends Model
     public function getItem($request){
         $type = $request->input('type');
         $slug = $request->input('slug');
-        $fields = 'id, status, title, meta_description, slug, image';
+        $fields = '*';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('slug', '=', $slug)
