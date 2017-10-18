@@ -66,6 +66,7 @@ class APIResponse extends Model
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('slug', '=', $slug)
+            ->where('status', '=', 'PUBLISHED')
             ->orderBy('created_at')
             ->get();
 
