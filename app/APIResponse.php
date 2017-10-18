@@ -14,13 +14,14 @@ class APIResponse extends Model
         if($limit == null) { $limit = 10; }
         $category = $request->input('category');
         $category = Category::where('slug', '=', $category)->first();
-
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
-            ->select(\DB::raw('id, status, title, meta_description, slug, image'))
+            ->select(\DB::raw($fields))
             ->where('status', '=', 'published')
             ->where('category_id', '=', $category->id)
             ->limit($limit)
             ->orderBy('created_at')
+            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
@@ -39,12 +40,13 @@ class APIResponse extends Model
         $type = $request->input('type');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw('id, status, title, meta_description, slug, image'))
             ->where('status', '=', 'published')
             ->limit($limit)
             ->orderBy('created_at')
+            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
@@ -62,11 +64,12 @@ class APIResponse extends Model
     public function getItem($request){
         $type = $request->input('type');
         $slug = $request->input('slug');
-
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw('*'))
             ->where('slug', '=', $slug)
             ->orderBy('created_at')
+            ->groupBy($fields)
             ->get();
 
 
@@ -87,7 +90,7 @@ class APIResponse extends Model
         $input = $request->input('s');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-
+        $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw('id, status, title, meta_description, slug, image'))
             ->where('status', '=', 'published')
@@ -95,6 +98,7 @@ class APIResponse extends Model
             ->orWhere('title', 'like', '%'.$input.'%')
             ->limit($limit)
             ->orderBy('created_at')
+            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
