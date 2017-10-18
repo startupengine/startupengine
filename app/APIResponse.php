@@ -62,21 +62,21 @@ class APIResponse extends Model
     public function getItem($request){
         $type = $request->input('type');
         $slug = $request->input('slug');
-        $fields = '*';
+        $fields = 'id, status, title, body, meta_description, slug, image';
+
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('slug', '=', $slug)
             ->where('status', '=', 'PUBLISHED')
             ->get();
-        /*
-        $items = \DB::select('select * from '.$type.' where slug = \''.$slug.'\' and status = \'PUBLISHED\'');
-        $items = collect($items[0]);
-        */
+
         $items->transform(function ($item, $key) {
             if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
             if(isset($item->body)) { $item->body= json_encode($item->body); }
             return $item;
         });
+
+
 
         $response = (json_decode(json_encode($items->toArray())));
 
