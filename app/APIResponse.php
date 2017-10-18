@@ -21,7 +21,6 @@ class APIResponse extends Model
             ->where('category_id', '=', $category->id)
             ->limit($limit)
             ->orderBy('created_at')
-            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
@@ -46,7 +45,6 @@ class APIResponse extends Model
             ->where('status', '=', 'published')
             ->limit($limit)
             ->orderBy('created_at')
-            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
@@ -69,7 +67,6 @@ class APIResponse extends Model
             ->select(\DB::raw($fields))
             ->where('slug', '=', $slug)
             ->orderBy('created_at')
-            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
@@ -97,7 +94,6 @@ class APIResponse extends Model
             ->orWhere('title', 'like', '%'.$input.'%')
             ->limit($limit)
             ->orderBy('created_at')
-            ->groupBy($fields)
             ->get();
 
         $items->transform(function ($item, $key) {
