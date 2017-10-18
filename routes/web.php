@@ -11,6 +11,13 @@
 |
 */
 
+
+Route::group(['middleware' => ['roles']], function () {
+    Route::group(['prefix' => 'admin'], function () {
+        Voyager::routes();
+    });
+});
+
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
 
@@ -26,11 +33,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'page']);
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
 
-});
-Route::group(['middleware' => ['roles']], function () {
-    Route::group(['prefix' => 'admin'], function () {
-        Voyager::routes();
-    });
+
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

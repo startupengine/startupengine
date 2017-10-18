@@ -18,13 +18,38 @@ class Roles
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            $user = \Auth::user();
-            $role = Role::where('id', '=', $user->role_id)->first();
-            if ($role->name == 'Administrator' OR $role->name == 'Developer' OR $role->name == 'Writer') {
+        $user = \Auth::user();
+
+        //If the user is not logged in
+        if ($user == null) {
+            //but the path is /admin/login...
+            if ($request->path() == 'admin/login') {
+                //continue
                 return $next($request);
             }
+            //otherwise,
+            else {
+                //abort
+                return abort('404');
+            }
         }
-        else { return redirect('/'); }
+
+        //If the user IS logged in
+        else {
+            $role = Role::where('id', '=', $user->role_id)->first();
+            
+            //And they have been assigned a staff role
+            if ($role->name == 'admin' OR $role->name == 'developer' OR $role->name == 'writer') {
+                //continue...
+                return $next($request);
+
+            }
+            //Otherwise...
+            else {
+                //abort
+                return abort('404');
+            }
+
+        }
     }
 }
