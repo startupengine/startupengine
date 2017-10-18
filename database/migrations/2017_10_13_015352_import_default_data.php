@@ -13,7 +13,12 @@ class ImportDefaultData extends Migration
      */
     public function up()
     {
-        DB::unprepared(file_get_contents('storage/database/data.sql'));
+        if(env('APP_PLATFORM' == 'heroku')) {
+
+        }
+        else {
+            //DB::unprepared(file_get_contents('storage/database/data.sql'));
+        }
     }
 
     /**
