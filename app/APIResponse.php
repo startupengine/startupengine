@@ -17,7 +17,7 @@ class APIResponse extends Model
         $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
-            ->where('status', '=', 'published')
+            ->where('status', '=', 'PUBLISHED')
             ->where('category_id', '=', $category->id)
             ->limit($limit)
             ->orderBy('created_at')
@@ -42,7 +42,7 @@ class APIResponse extends Model
         $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
-            ->where('status', '=', 'published')
+            ->where('status', '=', 'PUBLISHED')
             ->limit($limit)
             ->orderBy('created_at')
             ->get();
@@ -89,7 +89,7 @@ class APIResponse extends Model
         $fields = 'id, status, title, meta_description, slug, image';
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
-            ->where('status', '=', 'published')
+            ->where('status', '=', 'PUBLISHED')
             ->where('body', 'like', '%'.$input.'%')
             ->orWhere('title', 'like', '%'.$input.'%')
             ->limit($limit)
