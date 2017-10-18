@@ -18,10 +18,12 @@ class Roles
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $user = \Auth::user();
-        $role = Role::where('id', '=', $user->role_id)->first();
-        if($role->name == 'Administrator' OR $role->name == 'Developer'OR $role->name == 'Writer') {
-            return $next($request);
+        if (Auth::guard($guard)->check()) {
+            $user = \Auth::user();
+            $role = Role::where('id', '=', $user->role_id)->first();
+            if ($role->name == 'Administrator' OR $role->name == 'Developer' OR $role->name == 'Writer') {
+                return $next($request);
+            }
         }
         else { return redirect('/'); }
     }

@@ -6,7 +6,7 @@
     <meta name="robots" content="none" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="admin login">
-    <title>Login - {{ setting('site.title') }}</title>
+    <title>Admin - {{ Voyager::setting("admin.title") }}</title>
     <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
     <style>
         body {
@@ -28,9 +28,6 @@
         .login-button, .bar:before, .bar:after{
             background:{{ config('voyager.primary_color','#22A7F0') }};
         }
-        input:-webkit-autofill {
-            -webkit-box-shadow: inset 0 0 0px 9999px white !important;
-        }
     </style>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
@@ -45,9 +42,9 @@
                     <div class="logo-title-container">
                         <?php $admin_logo_img = Voyager::setting('admin.icon_image', ''); ?>
                         @if($admin_logo_img == '')
-                            <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="{{ voyager_asset('images/logo-icon-light.png') }}" alt="Logo Icon">
+                        <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="{{ voyager_asset('images/logo-icon-light.png') }}" alt="Logo Icon">
                         @else
-                            <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon">
+                        <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon">
                         @endif
                         <div class="copy animated fadeIn">
                             <h1>{{ Voyager::setting('admin.title', 'Voyager') }}</h1>
@@ -59,18 +56,18 @@
         </div>
 
         <div class="col-xs-12 col-sm-5 col-md-4 login-sidebar">
-
+            
             <div class="login-container">
-
+                
                 <p>{{ __('voyager.login.signin_below') }}</p>
 
-                <form action="/login" method="POST">
+                <form action="{{ route('voyager.login') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default" id="emailGroup">
                         <label>Email</label>
                         <div class="controls">
                             <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="{{ __('voyager.generic.email') }}" class="form-control" required>
-                        </div>
+                         </div>
                     </div>
 
                     <div class="form-group form-group-default" id="passwordGroup">
@@ -85,19 +82,19 @@
                         <span class="signin">{{ __('voyager.generic.login') }}</span>
                     </button>
 
-                </form>
+              </form>
 
-                <div style="clear:both"></div>
+              <div style="clear:both"></div>
 
-                @if(!$errors->isEmpty())
-                    <div class="alert alert-red">
-                        <ul class="list-unstyled">
-                            @foreach($errors->all() as $err)
-                                <li>{{ $err }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+              @if(!$errors->isEmpty())
+              <div class="alert alert-red">
+                <ul class="list-unstyled">
+                    @foreach($errors->all() as $err)
+                    <li>{{ $err }}</li>
+                    @endforeach
+                </ul>
+              </div>
+              @endif
 
             </div> <!-- .login-container -->
 
@@ -119,20 +116,20 @@
     });
     email.focus();
     document.getElementById('emailGroup').classList.add("focused");
-
+    
     // Focus events for email and password fields
     email.addEventListener('focusin', function(e){
         document.getElementById('emailGroup').classList.add("focused");
     });
     email.addEventListener('focusout', function(e){
-        document.getElementById('emailGroup').classList.remove("focused");
+       document.getElementById('emailGroup').classList.remove("focused");
     });
 
     password.addEventListener('focusin', function(e){
         document.getElementById('passwordGroup').classList.add("focused");
     });
     password.addEventListener('focusout', function(e){
-        document.getElementById('passwordGroup').classList.remove("focused");
+       document.getElementById('passwordGroup').classList.remove("focused");
     });
 
 </script>
