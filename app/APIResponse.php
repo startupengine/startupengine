@@ -39,7 +39,40 @@ class APIResponse extends Model
         $type = $request->input('type');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-        $fields = '*';
+        if($limit == null) { $limit = 10; }
+        $fields = 'id, status';
+        if(\Schema::hasColumn($type, 'meta_description'))
+        {
+            $fields = $fields.', meta_description';
+        }
+        if(\Schema::hasColumn($type, 'description'))
+        {
+            $fields = $fields.', description';
+        }
+        if(\Schema::hasColumn($type, 'excerpt'))
+        {
+            $fields = $fields.', excerpt';
+        }
+        if(\Schema::hasColumn($type, 'body'))
+        {
+            $fields = $fields.', body';
+        }
+        if(\Schema::hasColumn($type, 'image'))
+        {
+            $fields = $fields.', image';
+        }
+        if(\Schema::hasColumn($type, 'background_image'))
+        {
+            $fields = $fields.', background_image';
+        }
+        if(\Schema::hasColumn($type, 'name'))
+        {
+            $fields = $fields.', name';
+        }
+        if(\Schema::hasColumn($type, 'title'))
+        {
+            $fields = $fields.', title';
+        }
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
@@ -47,9 +80,11 @@ class APIResponse extends Model
             ->orderBy('created_at')
             ->get();
 
+
+
         $items->transform(function ($item, $key) {
-            $item->image = \Storage::disk('public')->url($item->image);
-            $item->slug = '/content/'.$item->slug;
+            if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
+            if(isset($item->slug)) { $item->slug = '/content/'.$item->slug; }
             return $item;
         });
 
@@ -123,6 +158,7 @@ class APIResponse extends Model
         }
 
         $response = (json_decode(json_encode($items->toArray())));
+
 
         return response()
             ->json($items);
