@@ -19,6 +19,12 @@ class APIController extends Controller
         $items = new APIResponse();
         return $items->getItem($request);
     }
+
+    public function getRandomItem(Request $request){
+        $items = new APIResponse();
+        return $items->getRandomItem($request);
+    }
+
     public function search(Request $request){
         $items = new APIResponse();
         return $items->search($request);
