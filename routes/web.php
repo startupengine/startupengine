@@ -13,9 +13,11 @@
 
 
 Route::group(['middleware' => ['roles']], function () {
+    //Voyager
     Route::group(['prefix' => 'admin'], function () {
         Voyager::routes();
     });
+
 });
 
 //Web Middleware
@@ -28,11 +30,13 @@ Route::group(['middleware' => ['web']], function () {
     //Pages
     Route::get('/', 'PageController@getHomepage');
     Route::get('/home', 'PageController@getHomepage');
+
     Route::get('/{slug}', 'PageController@getPage');
     Route::get('/content/{slug}', ['uses' => 'PostController@getPost', 'as' => 'page']);
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'page']);
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
 
+    Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\LoginController@logout', 'as' => 'page']);
 
 });
 

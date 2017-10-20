@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\ContentItem;
 use Illuminate\Http\Request;
-use Contentful\Delivery\Client as DeliveryClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use TCG\Voyager\Models\Category;
