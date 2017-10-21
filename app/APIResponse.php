@@ -15,7 +15,7 @@ class APIResponse extends Model
         $category = $request->input('category');
         $category = Category::where('slug', '=', $category)->first();
         $fields = 'id, status';
-        if(\Schema::hasColumn($type, 'meta_description'))
+        if(\Schema::hasColumn($type, 'meta_descxription'))
         {
             $fields = $fields.', meta_description';
         }
@@ -54,15 +54,14 @@ class APIResponse extends Model
             ->limit($limit)
             ->orderBy('created_at')
             ->get();
-
         $items->transform(function ($item, $key) {
-            $item->image = \Storage::disk('public')->url($item->image);
-            $item->slug = '/content/'.$item->slug;
+            if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
+            if(isset($item->slug)) { $item->slug = '/content/'.$item->slug; }
             return $item;
         });
 
         $response = (json_decode(json_encode($items->toArray())));
-
+        
         return response()
             ->json($response);
     }
@@ -110,8 +109,6 @@ class APIResponse extends Model
             ->limit($limit)
             ->orderBy('created_at')
             ->get();
-
-
 
         $items->transform(function ($item, $key) {
             if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
