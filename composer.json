@@ -13,6 +13,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "ext-gd": "*",
         "fideloper/proxy": "~3.3",
         "lanin/laravel-api-debugger": "^3.0",
         "laravel/framework": "5.5.*",
@@ -20,7 +21,7 @@
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "tcg/voyager": "^1.0",
-        "ext-gd": "*"
+        "voyager-themes": "^0.3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

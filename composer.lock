@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fe71a93baa834036dfb9e273f9ed99c",
+    "content-hash": "aed11e069ee8fa42629cb42295e481ab",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3959,6 +3959,34 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "voyager-themes",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/voyager-themes.git",
+                "reference": "0.3"
+            },
+            "require": {
+                "larapack/hooks": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "hook": {
+                    "providers": [
+                        "VoyagerThemes\\VoyagerThemesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "VoyagerThemes\\": "src/"
+                }
+            },
+            "notification-url": "https://larapack.io/downloads",
+            "description": "This hook will add support for Voyager front-end themes",
+            "time": "2017-10-20T19:10:08+00:00"
         }
     ],
     "packages-dev": [
