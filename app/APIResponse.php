@@ -15,7 +15,7 @@ class APIResponse extends Model
         $category = $request->input('category');
         $category = Category::where('slug', '=', $category)->first();
         $fields = 'id, status';
-        if(\Schema::hasColumn($type, 'meta_descxription'))
+        if(\Schema::hasColumn($type, 'meta_description'))
         {
             $fields = $fields.', meta_description';
         }
@@ -61,7 +61,7 @@ class APIResponse extends Model
         });
 
         $response = (json_decode(json_encode($items->toArray())));
-        
+
         return response()
             ->json($response);
     }
