@@ -14,7 +14,7 @@ class APIResponse extends Model
         if($limit == null) { $limit = 10; }
         $category = $request->input('category');
         $category = Category::where('slug', '=', $category)->first();
-        $fields = 'id, status';
+        $fields = 'id, status, slug';
         if(\Schema::hasColumn($type, 'meta_description'))
         {
             $fields = $fields.', meta_description';
@@ -70,7 +70,7 @@ class APIResponse extends Model
         $type = $request->input('type');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-        $fields = 'id, status';
+        $fields = 'id, status, slug';
         if(\Schema::hasColumn($type, 'meta_description'))
         {
             $fields = $fields.', meta_description';
@@ -126,7 +126,7 @@ class APIResponse extends Model
         $type = $request->input('type');
         $limit = $request->input('limit');
         if($limit == null) { $limit = 10; }
-        $fields = 'id, status';
+        $fields = 'id, status, slug';
         if(\Schema::hasColumn($type, 'meta_description'))
         {
             $fields = $fields.', meta_description';
