@@ -15,11 +15,13 @@
         "php": ">=7.0.0",
         "ext-gd": "*",
         "fideloper/proxy": "~3.3",
+        "graham-campbell/github": "^6.1",
         "lanin/laravel-api-debugger": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "php-http/guzzle6-adapter": "^1.1",
         "tcg/voyager": "^1.0",
         "voyager-themes": "^0.3.0"
     },
