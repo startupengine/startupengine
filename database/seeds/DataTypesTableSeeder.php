@@ -36,23 +36,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 2,
-                'name' => 'pages',
-                'slug' => 'pages',
-                'display_name_singular' => 'Page',
-                'display_name_plural' => 'Pages',
-                'icon' => 'voyager-file-text',
-                'model_name' => 'TCG\\Voyager\\Models\\Page',
-                'description' => '',
-                'generate_permissions' => true,
-                'created_at' => '2017-10-22 02:25:04',
-                'updated_at' => '2017-10-22 02:25:04',
-                'server_side' => 0,
-                'controller' => '',
-                'policy_name' => NULL,
-            ),
-            2 => 
-            array (
                 'id' => 3,
                 'name' => 'users',
                 'slug' => 'users',
@@ -68,7 +51,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller' => '',
                 'policy_name' => 'TCG\\Voyager\\Policies\\UserPolicy',
             ),
-            3 => 
+            2 => 
             array (
                 'id' => 4,
                 'name' => 'categories',
@@ -85,7 +68,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller' => '',
                 'policy_name' => NULL,
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 5,
                 'name' => 'menus',
@@ -102,7 +85,7 @@ class DataTypesTableSeeder extends Seeder
                 'controller' => '',
                 'policy_name' => NULL,
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 6,
                 'name' => 'roles',
@@ -117,23 +100,6 @@ class DataTypesTableSeeder extends Seeder
                 'updated_at' => '2017-10-22 02:25:04',
                 'server_side' => 0,
                 'controller' => '',
-                'policy_name' => NULL,
-            ),
-            6 => 
-            array (
-                'id' => 7,
-                'name' => 'campaigns',
-                'slug' => 'campaigns',
-                'display_name_singular' => 'Campaign',
-                'display_name_plural' => 'Campaigns',
-                'icon' => NULL,
-                'model_name' => 'App\\Campaign',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2017-10-22 02:28:42',
-                'updated_at' => '2017-10-22 02:28:42',
-                'server_side' => 0,
-                'controller' => NULL,
                 'policy_name' => NULL,
             ),
         ));

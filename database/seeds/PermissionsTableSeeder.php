@@ -98,51 +98,6 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => '2017-10-22 02:31:10',
                 'permission_group_id' => NULL,
             ),
-            9 => 
-            array (
-                'id' => 10,
-                'key' => 'browse_pages',
-                'table_name' => 'pages',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            10 => 
-            array (
-                'id' => 11,
-                'key' => 'read_pages',
-                'table_name' => 'pages',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            11 => 
-            array (
-                'id' => 12,
-                'key' => 'edit_pages',
-                'table_name' => 'pages',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            12 => 
-            array (
-                'id' => 13,
-                'key' => 'add_pages',
-                'table_name' => 'pages',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            13 => 
-            array (
-                'id' => 14,
-                'key' => 'delete_pages',
-                'table_name' => 'pages',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
             14 => 
             array (
                 'id' => 15,
@@ -364,51 +319,6 @@ class PermissionsTableSeeder extends Seeder
                 'id' => 39,
                 'key' => 'delete_settings',
                 'table_name' => 'settings',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            39 => 
-            array (
-                'id' => 40,
-                'key' => 'browse_campaigns',
-                'table_name' => 'campaigns',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            40 => 
-            array (
-                'id' => 41,
-                'key' => 'read_campaigns',
-                'table_name' => 'campaigns',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            41 => 
-            array (
-                'id' => 42,
-                'key' => 'edit_campaigns',
-                'table_name' => 'campaigns',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            42 => 
-            array (
-                'id' => 43,
-                'key' => 'add_campaigns',
-                'table_name' => 'campaigns',
-                'created_at' => '2017-10-22 02:31:10',
-                'updated_at' => '2017-10-22 02:31:10',
-                'permission_group_id' => NULL,
-            ),
-            43 => 
-            array (
-                'id' => 44,
-                'key' => 'delete_campaigns',
-                'table_name' => 'campaigns',
                 'created_at' => '2017-10-22 02:31:10',
                 'updated_at' => '2017-10-22 02:31:10',
                 'permission_group_id' => NULL,
