@@ -9,7 +9,7 @@ class GithubController extends Controller
 {
 
     public function json($path) {
-        $repo = GitHub::repo()->contents()->show(env('GITHUB_USERNAME'), env('GITHUB_REPOSITORY'), $path);
+        $repo = GitHub::repo()->contents()->show(config('app.template_git_username'), config('app.template_git_repository'), $path);
         $url = $repo['download_url'];
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
@@ -24,7 +24,7 @@ class GithubController extends Controller
     public function raw($path) {
         //$repo = GitHub::repo()->contents()->show(, , $path);
         //$url = $repo['download_url'];
-        $url = "https://raw.githubusercontent.com/".env('GITHUB_USERNAME')."/".env('GITHUB_REPOSITORY')."/".env("GITHUB_REPOSITORY_BRANCH")."/".$path;
+        $url = "https://raw.githubusercontent.com/".config('app.template_git_username')."/".config('app.template_git_repository')."/".config("app.template_git_branch")."/".$path;
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         $output = curl_exec($curl);
@@ -33,7 +33,7 @@ class GithubController extends Controller
     }
 
     public function info($path) {
-        $repo = GitHub::repo()->contents()->show(env('GITHUB_USERNAME'), env('GITHUB_REPOSITORY'), $path);
+        $repo = GitHub::repo()->contents()->show(config('app.template_git_username'), config('app.template_git_repository'), $path);
         return response()
             ->json($repo);
     }

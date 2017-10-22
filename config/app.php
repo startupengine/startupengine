@@ -241,6 +241,7 @@ return [
     'template_git_repository' => env('TEMPLATE_GIT_RESPOSITORY', 'startup-engine-template'),
     'template_git_username' => env('TEMPLATE_GIT_USERNAME', 'luckyrabbitllc'),
     'template_git_password' => env('TEMPLATE_GIT_PASSWORD', null),
+    'template_git_branch' => env('TEMPLATE_GIT_BRANCH', 'master'),
     'github_username' => env('GITHUB_USERNAME', null),
     'github_password' => env('GITHUB_PASSWORD', null),
 
