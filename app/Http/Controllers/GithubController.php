@@ -22,8 +22,6 @@ class GithubController extends Controller
     }
 
     public function raw($path) {
-        //$repo = GitHub::repo()->contents()->show(, , $path);
-        //$url = $repo['download_url'];
         $url = "https://raw.githubusercontent.com/".config('app.template_git_username')."/".config('app.template_git_repository')."/".config("app.template_git_branch")."/".$path;
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
