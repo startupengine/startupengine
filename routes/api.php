@@ -18,3 +18,12 @@ Route::get('/items/', 'APIController@getItems');
 Route::get('/item/', 'APIController@getItem');
 Route::get('/random/', 'APIController@getRandomItem');
 Route::get('/search/', 'APIController@search');
+
+Route::get('repo/github/json/{filepath?}', 'GithubController@json')
+    ->where('filepath', '(.*)');
+
+Route::get('repo/github/raw/{filepath?}', 'GithubController@raw')
+    ->where('filepath', '(.*)');
+
+Route::get('repo/github/info/{filepath?}', 'GithubController@info')
+    ->where('filepath', '(.*)');

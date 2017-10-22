@@ -60,7 +60,7 @@ return [
         ],
 
         'jwt' => [
-            'token'        => env('GITHUB_JWT_TOKEN'),,
+            'token'        => env('GITHUB_JWT_TOKEN'),
             'method'       => 'jwt',
             // 'backoff'      => false,
             // 'cache'        => false,

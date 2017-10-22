@@ -26,10 +26,10 @@
 @endsection
 
 @section('styles')
-    {!! html_entity_decode($page->css) !!}
+    {!! $page->raw($page->slug.'/css.blade.php') !!}
 @endsection
 
 @section('content')
-    {!! html_entity_decode($page->body) !!}
-    {!! html_entity_decode($page->scripts) !!}
+    {!! $page->raw($page->slug.'/body.blade.php') !!}
+    {!! $page->raw($page->slug.'/scripts.blade.php') !!}
 @endsection

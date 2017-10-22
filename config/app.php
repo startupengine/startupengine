@@ -230,4 +230,19 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Git Repo
+    |--------------------------------------------------------------------------
+    |
+    | These values are used to pull in your templates from a git repository.
+    |
+    */
+    'template_git_repository' => env('TEMPLATE_GIT_RESPOSITORY', 'startup-engine-template'),
+    'template_git_username' => env('TEMPLATE_GIT_USERNAME', 'luckyrabbitllc'),
+    'template_git_password' => env('TEMPLATE_GIT_PASSWORD', null),
+    'github_username' => env('GITHUB_USERNAME', null),
+    'github_password' => env('GITHUB_PASSWORD', null),
+
+
 ];

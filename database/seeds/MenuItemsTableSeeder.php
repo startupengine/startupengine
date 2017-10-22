@@ -27,7 +27,7 @@ class MenuItemsTableSeeder extends Seeder
             if (!$menuItem->exists) {
                 $menuItem->fill([
                     'target'     => '_self',
-                    'icon_class' => 'voyager-bar-chart',
+                    'icon_class' => 'voyager-boat',
                     'color'      => null,
                     'parent_id'  => null,
                     'order'      => 1,
@@ -114,7 +114,6 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
-            /*
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
                 'title'      => 'Roles',
@@ -130,7 +129,6 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => 2,
                 ])->save();
             }
-            */
 
             $toolsMenuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
@@ -147,7 +145,6 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
-            /*
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
                 'title'      => 'Menu Builder',
@@ -163,16 +160,13 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => 10,
                 ])->save();
             }
-            */
 
-            /*
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
                 'title'      => 'Database',
                 'url'        => '',
                 'route'      => 'voyager.database.index',
             ]);
-
             if (!$menuItem->exists) {
                 $menuItem->fill([
                     'target'     => '_self',
@@ -182,15 +176,12 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => 11,
                 ])->save();
             }
-            */
 
-            /*
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
                 'title'      => 'Compass',
                 'url'        => route('voyager.compass.index', [], false),
             ]);
-
             if (!$menuItem->exists) {
                 $menuItem->fill([
                     'target'     => '_self',
@@ -200,7 +191,6 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => 12,
                 ])->save();
             }
-            */
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,

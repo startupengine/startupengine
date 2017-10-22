@@ -10,10 +10,12 @@
 
     <title>{{ $post->title }} - {{ config('app.name', 'StartupEngine') }}</title>
 
-    {!! html_entity_decode(setting('site.global_header')) !!}
+    <?php $template = new \App\Template(); ?>
+    {!! $template->raw('/templates/global/header.blade.php')  !!}
 
     <!-- Styles -->
-    {!! html_entity_decode(setting('site.global_css')) !!}
+    {!! $template->raw('/templates/global/css.blade.php')  !!}
+
     @yield('styles')
 
     <!-- FAVICONS -->
@@ -24,9 +26,9 @@
     <!-- Meta -->
     @yield('meta')
 </head>
-    <?php echo setting('post.header_html'); ?>
+    {!! $template->raw('/templates/post/header.blade.php')  !!}
     @yield('content')
-    {!! html_entity_decode(setting('site.menu_html')) !!}
-    {!! html_entity_decode(setting('site.global_scripts')) !!}
-    <?php echo setting('post.footer_html'); ?>
+    {!! $template->raw('/templates/global/menu.blade.php')  !!}
+    {!! $template->raw('/templates/global/scripts.blade.php')  !!}
+    {!! $template->raw('/templates/post/footer.blade.php')  !!}
 </html>

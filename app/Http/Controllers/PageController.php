@@ -13,18 +13,19 @@ class PageController extends Controller
 {
 
     public function getHomepage() {
-        $page =  Page::where('slug', '=', 'home')->first();
-        if ($page == null) {
-            abort(404);
-        }
+        $page =  \App\Page::where('slug', '=', 'home')->first();
+        //$page = new \App\Page();
+        $page->slug = 'home';
         return view('pages.view')->with('page', $page);
+
     }
 
     public function getPage($slug) {
-        $page =  Page::where('slug', '=', $slug)->first();
+        $page =  \App\Page::where('slug', '=', $slug)->first();
         if ($page == null) {
             abort(404);
         }
+
         return view('pages.view')->with('page', $page);
     }
 
