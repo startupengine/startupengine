@@ -26,10 +26,16 @@
 @endsection
 
 @section('styles')
-    {!! $page->raw($page->slug.'/css.blade.php') !!}
+    @if(View::exists('templates.pages.'.$page->slug.'.css'))
+        @include('templates.pages.'.$page->slug.'.css')
+    @endif
 @endsection
 
 @section('content')
-    {!! $page->raw($page->slug.'/body.blade.php') !!}
-    {!! $page->raw($page->slug.'/scripts.blade.php') !!}
+    @if(View::exists('templates.pages.'.$page->slug.'.body'))
+        @include('templates.pages.'.$page->slug.'.body')
+    @endif
+    @if(View::exists('templates.pages.'.$page->slug.'.scripts'))
+        @include('templates.pages.'.$page->slug.'.scripts')
+    @endif
 @endsection

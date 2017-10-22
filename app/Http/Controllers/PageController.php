@@ -14,10 +14,8 @@ class PageController extends Controller
 
     public function getHomepage() {
         $page =  \App\Page::where('slug', '=', 'home')->first();
-        //$page = new \App\Page();
         $page->slug = 'home';
         return view('pages.view')->with('page', $page);
-
     }
 
     public function getPage($slug) {
@@ -25,7 +23,6 @@ class PageController extends Controller
         if ($page == null) {
             abort(404);
         }
-
         return view('pages.view')->with('page', $page);
     }
 
