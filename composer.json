@@ -68,16 +68,18 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
-    "repositories": [
-        {
+    "repositories": {
+        "0": {
             "type": "composer",
             "url": "https://larapack.io"
         },
-        {
+        "1": {
             "type": "path",
             "url": "./laravel-comments"
+        },
+        "hooks": {
+            "type": "composer",
+            "url": "https://larapack.io"
         }
-    ]
-
-
+    }
 }

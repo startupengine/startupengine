@@ -38,7 +38,7 @@ class LoginController extends Controller
     }
 
     public function signin() {
-        return view('auth.login');
+        return view('auth.voyager_login');
     }
 
     public function logout() {
