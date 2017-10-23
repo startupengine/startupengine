@@ -28,59 +28,7 @@ class PostsTableSeeder extends Seeder
             ])->save();
         }
 
-        $post = $this->findPost('my-sample-post');
-        if (!$post->exists) {
-            $post->fill([
-                'title'     => 'My Sample Post',
-                'category_id' => 1,
-                'author_id' => 0,
-                'seo_title'        => null,
-                'excerpt'          => 'This is a test post.',
-                'body'             => '<p>This is the body of the post.</p>',
-                'image'            => null,
-                'slug'             => 'lorem-ipsum-post',
-                'meta_description' => 'Startup Engine is a CMS designed for startups.',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
-                'status'           => 'PUBLISHED',
-                'featured'         => 0,
-            ])->save();
-        }
 
-        $post = $this->findPost('latest-post');
-        if (!$post->exists) {
-            $post->fill([
-                'title'            => 'Latest Post',
-                'category_id' => 1,
-                'author_id'        => 0,
-                'seo_title'        => null,
-                'excerpt'          => 'This is a test post.',
-                'body'             => '<p>This is the body of the post.</p>',
-                'image'            => null,
-                'slug'             => 'lorem-ipsum-post',
-                'meta_description' => 'Startup Engine is a CMS designed for startups.',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
-                'status'           => 'PUBLISHED',
-                'featured'         => 0,
-            ])->save();
-        }
-
-        $post = $this->findPost('yarr-post');
-        if (!$post->exists) {
-            $post->fill([
-                'title'     => 'Yarr Post',
-                'category_id' => 1,
-                'author_id' => 0,
-                'seo_title'        => null,
-                'excerpt'          => 'This is a test post.',
-                'body'             => '<p>This is the body of the post.</p>',
-                'image'            => null,
-                'slug'             => 'lorem-ipsum-post',
-                'meta_description' => 'Startup Engine is a CMS designed for startups.',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
-                'status'           => 'PUBLISHED',
-                'featured'         => 0,
-            ])->save();
-        }
     }
 
     /**
