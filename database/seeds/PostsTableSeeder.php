@@ -74,7 +74,7 @@ class PostsTableSeeder extends Seeder
                 'excerpt'          => 'This is a test post.',
                 'body'             => '<p>This is the body of the post.</p>',
                 'image'            => null,
-                'slug'             => 'pricing',
+                'slug'             => 'contributing',
                 'meta_description' => 'Contribute to Startup Engine on Github.',
                 'meta_keywords'    => 'startup engine, pen-source, contribute, github',
                 'status'           => 'PUBLISHED',
