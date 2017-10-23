@@ -37,6 +37,8 @@ class SyncGit extends Command
      */
     public function handle()
     {
+        $path = \Config::get('view.paths')[0].'/theme';
+        exec('rm -rf '.escapeshellarg($path));
         if(config('app.template_git_username') !== null && config('app.template_git_password') !== null) {
             exec("git clone https://" . config('app.template_git_username') . ":" . config('app.template_git_password') . "@github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/templates");
         }

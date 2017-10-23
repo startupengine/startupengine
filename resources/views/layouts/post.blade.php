@@ -26,9 +26,15 @@
     <!-- Meta -->
     @yield('meta')
 </head>
-    {!! $template->raw('/templates/post/header.blade.php')  !!}
+    @include('theme.templates.global.header')
+    @if(View::exists('theme.templates.post.header'))
+        @include('theme.templates.post.header')
+    @endif
     @yield('content')
-    {!! $template->raw('/templates/global/menu.blade.php')  !!}
-    {!! $template->raw('/templates/global/scripts.blade.php')  !!}
-    {!! $template->raw('/templates/post/footer.blade.php')  !!}
+    @include('theme.templates.global.menu')
+    @include('theme.templates.global.scripts')
+    @if(View::exists('theme.templates.post.footer'))
+        @include('theme.templates.post.footer')
+    @endif
+    @include('theme.templates.global.footer')
 </html>
