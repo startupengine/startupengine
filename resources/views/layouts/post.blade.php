@@ -10,11 +10,14 @@
 
     <title>{{ $post->title }} - {{ config('app.name', 'StartupEngine') }}</title>
 
-    <?php $template = new \App\Template(); ?>
-    {!! $template->raw('/templates/global/header.blade.php')  !!}
-
     <!-- Styles -->
-    {!! $template->raw('/templates/global/css.blade.php')  !!}
+    @if(View::exists('theme.templates.global.css'))
+        @include('theme.templates.global.css')
+    @endif
+
+    @if(View::exists('theme.templates.post.css'))
+        @include('theme.templates.post.css')
+    @endif
 
     @yield('styles')
 
@@ -35,6 +38,7 @@
     @include('theme.templates.global.scripts')
     @if(View::exists('theme.templates.post.footer'))
         @include('theme.templates.post.footer')
+    @elseif(View::exists('theme.templates.global.footer'))
+        @include('theme.templates.post.footer')
     @endif
-    @include('theme.templates.global.footer')
 </html>

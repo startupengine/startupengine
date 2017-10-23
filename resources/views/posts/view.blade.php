@@ -26,16 +26,20 @@
 @endsection
 
 @section('styles')
-    {!! html_entity_decode($post->css) !!}
+    @if(View::exists('theme.templates.post.css'))
+        @include('theme.templates.post.css')
+    @endif
 @endsection
 
 @section('content')
+
     {!! html_entity_decode($post->body) !!}
     @if($post->comments_enabled)
-        <div id="comments-container">
-            {!! html_entity_decode(setting('site.comments_code')) !!}
-        </div>
+        @if(View::exists('theme.global.elements.comments'))
+            @include('theme.global.elements.comments')
+        @endif
     @endif
-    {!! html_entity_decode(setting('site.menu_html')) !!}
-    {!! html_entity_decode($post->scripts) !!}
+    @if(View::exists('theme.templates.post.scripts'))
+        @include('theme.templates.post.scripts')
+    @endif
 @endsection

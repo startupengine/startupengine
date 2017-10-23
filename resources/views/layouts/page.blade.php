@@ -10,10 +10,6 @@
 
     <title>{{ $page->title }} - {{ config('app.name', 'StartupEngine') }}</title>
 
-    @if(View::exists('theme.templates.global.header'))
-        @include('theme.templates.global.header')
-    @endif
-
     <!-- Styles -->
     @if(View::exists('theme.templates.global.css'))
         @include('theme.templates.global.css')
