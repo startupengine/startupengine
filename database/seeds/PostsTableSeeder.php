@@ -10,7 +10,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        $post = $this->findPost('lorem-ipsum-post');
+        $post = $this->findPost('intro');
         if (!$post->exists) {
             $post->fill([
                 'title'            => 'Introducing Startup Engine',
@@ -20,9 +20,9 @@ class PostsTableSeeder extends Seeder
                 'excerpt'          => 'This is a test post.',
                 'body'             => '<p>This is the body of the post.</p>',
                 'image'            => null,
-                'slug'             => 'lorem-ipsum-post',
+                'slug'             => 'intro',
                 'meta_description' => 'Startup Engine is a CMS designed for startups.',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
+                'meta_keywords'    => 'startup, cms, headless, api, theme, php, laravel',
                 'status'           => 'PUBLISHED',
                 'featured'         => 0,
             ])->save();
