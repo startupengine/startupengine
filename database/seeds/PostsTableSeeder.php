@@ -28,6 +28,59 @@ class PostsTableSeeder extends Seeder
             ])->save();
         }
 
+        $post = $this->findPost('deploying');
+        if (!$post->exists) {
+            $post->fill([
+                'title'            => 'How to deploy Startup Engine to Heroku',
+                'category_id' => 2,
+                'author_id'        => 0,
+                'seo_title'        => null,
+                'excerpt'          => 'This is a test post.',
+                'body'             => '<p>This is the body of the post.</p>',
+                'image'            => null,
+                'slug'             => 'deploying',
+                'meta_description' => 'Deploying Startup Engine to the cloud is easy.',
+                'meta_keywords'    => 'startup, cms, headless, api, theme, php, laravel, heroku',
+                'status'           => 'PUBLISHED',
+                'featured'         => 0,
+            ])->save();
+        }
+
+        $post = $this->findPost('pricing');
+        if (!$post->exists) {
+            $post->fill([
+                'title'            => 'What does Startup Engine cost?',
+                'category_id' => 3,
+                'author_id'        => 0,
+                'seo_title'        => null,
+                'excerpt'          => 'This is a test post.',
+                'body'             => '<p>This is the body of the post.</p>',
+                'image'            => null,
+                'slug'             => 'pricing',
+                'meta_description' => 'Startup Engine is 100% free and open-source.',
+                'meta_keywords'    => 'startup, cms, open-source, pricing',
+                'status'           => 'PUBLISHED',
+                'featured'         => 0,
+            ])->save();
+        }
+
+        $post = $this->findPost('contributing');
+        if (!$post->exists) {
+            $post->fill([
+                'title'            => 'How to contribute to Startup Engine',
+                'category_id' => 4,
+                'author_id'        => 0,
+                'seo_title'        => null,
+                'excerpt'          => 'This is a test post.',
+                'body'             => '<p>This is the body of the post.</p>',
+                'image'            => null,
+                'slug'             => 'pricing',
+                'meta_description' => 'Contribute to Startup Engine on Github.',
+                'meta_keywords'    => 'startup engine, pen-source, contribute, github',
+                'status'           => 'PUBLISHED',
+                'featured'         => 0,
+            ])->save();
+        }
 
     }
 
