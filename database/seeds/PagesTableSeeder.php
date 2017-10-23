@@ -101,7 +101,7 @@ class PagesTableSeeder extends Seeder
                 'meta_keywords'    => 'startup engine, help, documentation, blog, articles',
                 'status'           => 'ACTIVE',
             ])->save();
-        },
+        }
 
         //Products
         $page = Page::firstOrNew([
