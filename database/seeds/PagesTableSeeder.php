@@ -15,7 +15,7 @@ class PagesTableSeeder extends Seeder
 
         //Home
         $page = Page::firstOrNew([
-            'slug' => 'hello-world',
+            'slug' => 'home',
         ]);
         if (!$page->exists) {
             $page->fill([
