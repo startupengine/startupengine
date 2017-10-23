@@ -103,5 +103,23 @@ class PagesTableSeeder extends Seeder
             ])->save();
         }
 
+        //Products
+        $page = Page::firstOrNew([
+            'slug' => 'products',
+        ]);
+        if (!$page->exists) {
+            $page->fill([
+                'author_id' => 0,
+                'title'     => 'Products',
+                'slug'     => 'products',
+                'excerpt'   => 'Tools for the modern startup.',
+                'body'      => null,
+                'image'            => null,
+                'meta_description' => 'Tools for the modern startup.',
+                'meta_keywords'    => 'startup engine CMS, psychoanalytics, startup tools, open-source, software',
+                'status'           => 'ACTIVE',
+            ])->save();
+        }
+
     }
 }
