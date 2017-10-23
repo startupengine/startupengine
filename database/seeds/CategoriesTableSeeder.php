@@ -13,20 +13,42 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $category = Category::firstOrNew([
-            'slug' => 'category-1',
+            'slug' => 'articles',
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name'       => 'Category 1',
+                'name'       => 'Articles',
+                'status'       => 'PUBLISHED',
             ])->save();
         }
 
         $category = Category::firstOrNew([
-            'slug' => 'category-2',
+            'slug' => 'tutorials',
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name'       => 'Category 2',
+                'name'       => 'Tutorials',
+                'status'       => 'PUBLISHED',
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'frequently-asked-questions',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'       => 'Frequently Asked Questions',
+                'status'       => 'PUBLISHED',
+            ])->save();
+        }
+
+        $category = Category::firstOrNew([
+            'slug' => 'documentation',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name'       => 'Documentation',
+                'status'       => 'PUBLISHED',
             ])->save();
         }
     }
