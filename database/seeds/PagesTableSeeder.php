@@ -121,5 +121,23 @@ class PagesTableSeeder extends Seeder
             ])->save();
         }
 
+        //Products
+        $page = Page::firstOrNew([
+            'slug' => 'getting-started',
+        ]);
+        if (!$page->exists) {
+            $page->fill([
+                'author_id' => 0,
+                'title'     => 'Getting Started with Startup Engine CMS',
+                'slug'     => 'getting-started',
+                'excerpt'   => 'Tools for the modern startup.',
+                'body'      => null,
+                'image'            => null,
+                'meta_description' => 'You can be up and running in under 5 minutes.',
+                'meta_keywords'    => 'startup engine CMS, install, quick start, beginner\'s guide',
+                'status'           => 'ACTIVE',
+            ])->save();
+        }
+
     }
 }
