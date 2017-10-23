@@ -41,7 +41,7 @@ class SyncGit extends Command
             exec("git clone https://" . config('app.template_git_username') . ":" . config('app.template_git_password') . "@github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/templates");
         }
         else {
-            exec("git clone https://github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/templates");
+            exec("git clone https://github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/theme");
         }
     }
 }

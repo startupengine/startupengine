@@ -10,13 +10,13 @@
 
     <title>{{ $page->title }} - {{ config('app.name', 'StartupEngine') }}</title>
 
-    @if(View::exists('templates.templates.global.header'))
-        @include('templates.templates.global.header')
+    @if(View::exists('theme.templates.global.header'))
+        @include('theme.templates.global.header')
     @endif
 
     <!-- Styles -->
-    @if(View::exists('templates.templates.global.css'))
-        @include('templates.templates.global.css')
+    @if(View::exists('theme.templates.global.css'))
+        @include('theme.templates.global.css')
     @endif
 
     @yield('styles')
@@ -29,15 +29,15 @@
     <!-- Meta -->
     @yield('meta')
 </head>
-    @include('templates.templates.global.header')
-    @if(View::exists('templates.pages.'.$page->slug.'.header'))
-        @include('templates.pages.'.$page->slug.'.header')
+    @include('theme.templates.global.header')
+    @if(View::exists('theme.pages.'.$page->slug.'.header'))
+        @include('theme.pages.'.$page->slug.'.header')
     @endif
     @yield('content')
-    @include('templates.templates.global.menu')
-    @include('templates.templates.global.scripts')
-    @if(View::exists('templates.pages.'.$page->slug.'.footer'))
-        @include('templates.pages.'.$page->slug.'.footer')
+    @include('theme.templates.global.menu')
+    @include('theme.templates.global.scripts')
+    @if(View::exists('theme.pages.'.$page->slug.'.footer'))
+        @include('theme.pages.'.$page->slug.'.footer')
     @endif
-    @include('templates.templates.global.footer')
+    @include('theme.templates.global.footer')
 </html>

@@ -8,7 +8,7 @@
 !/storage/app/docs/*
 /storage/app/google/*
 !/storage/app/google/dummy.json
-/resources/views/templates
+/resources/views/theme
 /vendor
 /.idea
 /.vagrant

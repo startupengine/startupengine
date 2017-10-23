@@ -26,16 +26,16 @@
 @endsection
 
 @section('styles')
-    @if(View::exists('templates.pages.'.$page->slug.'.css'))
-        @include('templates.pages.'.$page->slug.'.css')
+    @if(View::exists('theme.pages.'.$page->slug.'.css'))
+        @include('theme.pages.'.$page->slug.'.css')
     @endif
 @endsection
 
 @section('content')
-    @if(View::exists('templates.pages.'.$page->slug.'.body'))
-        @include('templates.pages.'.$page->slug.'.body')
+    @if(View::exists('theme.pages.'.$page->slug.'.body'))
+        @include('theme.pages.'.$page->slug.'.body')
     @endif
-    @if(View::exists('templates.pages.'.$page->slug.'.scripts'))
-        @include('templates.pages.'.$page->slug.'.scripts')
+    @if(View::exists('theme.pages.'.$page->slug.'.scripts'))
+        @include('theme.pages.'.$page->slug.'.scripts')
     @endif
 @endsection
