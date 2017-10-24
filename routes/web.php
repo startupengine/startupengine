@@ -27,6 +27,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/signin', '\App\Http\Controllers\Auth\LoginController@signin');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+    //App
+    Route::get('/app', 'AppController@index');
+    Route::get('/app/content', 'AppController@content');
+
     //Pages
     Route::get('/', 'PageController@getHomepage');
     Route::get('/home', 'PageController@getHomepage');
@@ -38,9 +42,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\LoginController@logout', 'as' => 'page']);
 
+
+
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
