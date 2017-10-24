@@ -74,7 +74,7 @@ class SettingsTableSeeder extends Seeder
         if (!$setting->exists) {
             $setting->fill([
                 'display_name' => 'Admin Title',
-                'value'        => 'Voyager',
+                'value'        => 'Startup Engine',
                 'details'      => '',
                 'type'         => 'text',
                 'order'        => 1,
@@ -86,7 +86,7 @@ class SettingsTableSeeder extends Seeder
         if (!$setting->exists) {
             $setting->fill([
                 'display_name' => 'Admin Description',
-                'value'        => 'Welcome to Voyager. The Missing Admin for Laravel',
+                'value'        => 'Welcome to Startup Engine, the CMS for startups.',
                 'details'      => '',
                 'type'         => 'text',
                 'order'        => 2,
@@ -121,7 +121,7 @@ class SettingsTableSeeder extends Seeder
         $setting = $this->findSetting('admin.google_analytics_client_id');
         if (!$setting->exists) {
             $setting->fill([
-                'display_name' => 'Google Analytics Client ID (used for admin dashboard)',
+                'display_name' => 'Google Analytics Client ID (for dashboard)',
                 'value'        => '',
                 'details'      => '',
                 'type'         => 'text',

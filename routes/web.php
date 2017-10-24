@@ -30,6 +30,8 @@ Route::group(['middleware' => ['web']], function () {
     //App
     Route::get('/app', 'AppController@index');
     Route::get('/app/content', 'AppController@content');
+    Route::get('/app/users', 'AppController@users');
+    Route::get('/app/settings', 'AppController@settings');
 
     //Pages
     Route::get('/', 'PageController@getHomepage');
