@@ -52,7 +52,7 @@
                                 </form>
                             </div>
                             <div style="margin-bottom:10px;" align="right">
-                                <a href="/app/content/new" class="btn btn-secondary-outline btn-round">New Post &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                                <a href="/app/new/post" class="btn btn-secondary-outline btn-round">New Post &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
                             <table class="table">
                                 <thead>
@@ -61,6 +61,7 @@
                                     <th scope="col">Title</th>
                                     <th scope="col" class="hiddenOnMobile">Excerpt</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col" class="hiddenOnMobile">Last Activity</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
@@ -71,6 +72,7 @@
                                     <td>{{ $post->title }}</td>
                                     <td class="hiddenOnMobile">{{ $post->excerpt }}</td>
                                     <td>{{ $post->status }}</td>
+                                    <td class="hiddenOnMobile">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</td>
                                     <td align="right">
                                         <button type="button" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</button>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">

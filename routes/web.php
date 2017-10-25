@@ -11,6 +11,7 @@
 |
 */
 
+Auth::routes();
 
 Route::group(['middleware' => ['roles']], function () {
     //Voyager
@@ -23,13 +24,16 @@ Route::group(['middleware' => ['roles']], function () {
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
 
-    Auth::routes();
-    Route::get('/signin', '\App\Http\Controllers\Auth\LoginController@signin');
+    //Auth
+    Route::get('/login', 'AppController@login')->name('login');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
     //App
     Route::get('/app', 'AppController@index');
+    Route::get('/app/login', 'AppController@login');
     Route::get('/app/content', 'AppController@content');
+    Route::get('/app/new/post', 'PostController@addPost');
+    Route::post('/app/new/post', 'PostController@savePost');
     Route::get('/app/users', 'AppController@users');
     Route::get('/app/settings', 'AppController@settings');
 
@@ -48,4 +52,4 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Auth::routes();
+

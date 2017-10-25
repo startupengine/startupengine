@@ -21,6 +21,8 @@
     "dependencies": {
         "hiraku": "^1.0.5",
         "mysqldump": "^1.4.2",
-        "slideout": "^1.0.1"
+        "slideout": "^1.0.1",
+        "vue-quill-editor": "^2.3.3",
+        "vue2-editor": "^2.0.26"
     }
 }

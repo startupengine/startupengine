@@ -46,13 +46,10 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom:40px;">
                                 <form>
-                                    <input type="text" value="" placeholder="Search content..." class="form-control" id="s" name="s">
+                                    <input type="text" value="" placeholder="Search settings..." class="form-control" id="s" name="s">
                                 </form>
-                            </div>
-                            <div style="margin-bottom:10px;" align="right">
-                                <a href="/app/settings/new" class="btn btn-secondary-outline btn-round">New Setting &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
                             <table class="table">
                                 <thead>
@@ -70,11 +67,7 @@
                                     <td class="hiddenOnMobile">{{ $setting->value }}</td>
                                     <td>{{ $setting->type }}</td>
                                     <td align="right">
-                                        <button type="button" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</button>
-                                        <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-sm btn-secondary-outline">View</button>
-                                            <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</button>
-                                        </div>
+                                        <a href="/app/edit/post/{{ $setting->id }}" class="btn btn-sm btn-secondary-outline" style="">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach

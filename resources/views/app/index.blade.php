@@ -20,6 +20,16 @@
                 display:none;
             }
         }
+        @media(max-width:991px) {
+            .hiddenOnMobile {
+                display: none !important;
+            }
+        }
+        @media(min-width:991px) {
+            .hiddenOnDesktop {
+                display: none !important;
+            }
+        }
     </style>
 @endsection
 
@@ -36,30 +46,75 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12 card-deck">
-                            <div class="col-md-3">
+                            <div class="col-md-12" style="margin-bottom:40px;">
+                                <h5 align="center" style="margin-bottom:40px;">Recent Activity</h5>
+                                <div id="chart">
+                                    <line-chart :data="chartData" width="100%" height="400px"></line-chart>
+                                </div>
+
+                                <script>
+                                    var app = new Vue({
+                                        el: "#chart",
+                                        data: {
+                                            chartData: [
+                                                <?php
+                                                    $count = 1;
+                                                    $string = "name: 'Users', data: {";
+                                                    foreach($userlist as $key => $value) {
+                                                        $string = $string.'"'.$key.'": '.$value;
+                                                        if($count <= count($userlist)) {
+                                                            $string = $string.",";
+                                                        }
+                                                        $count = $count + 1;
+                                                    }
+                                                $string = "{" . $string . "}}";
+                                                echo $string;
+                                                ?>,
+                                                <?php
+                                                $count = 1;
+                                                $string = "name: 'Posts', data: {";
+                                                foreach($postlist as $key => $value) {
+                                                    $string = $string.'"'.$key.'": '.$value;
+                                                    if($count <= count($userlist)) {
+                                                        $string = $string.",";
+                                                    }
+                                                    $count = $count + 1;
+                                                }
+                                                $string = "{" . $string . "}}";
+                                                echo $string;
+                                                ?>
+                                                //{name: 'Workout', data: {'2013-02-10 00:00:00 -0800': 3, '2013-02-17 00:00:00 -0800': 4}},
+                                                //{name: 'Call parents', data: {'2013-02-10 00:00:00 -0800': 5, '2013-02-17 00:00:00 -0800': 3}}
+                                            ]
+                                        }
+                                    })
+                                </script>
+                            </div>
+                            <div class="col-md-3 hiddenOnMobile">
                                 <div class="card" style="box-shadow:none;">
                                     <h5 align="center" style="margin-bottom:0px;">{{ count($users) }}</h5>
                                     <h4 align="center">Users</h4>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 hiddenOnMobile">
                                 <div class="card" style="box-shadow:none;">
                                     <h5 align="center" style="margin-bottom:0px;">{{ count($pages) }}</h5>
                                     <h4 align="center">Pages</h4>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 hiddenOnMobile">
                                 <div class="card" style="box-shadow:none;">
                                     <h5 align="center" style="margin-bottom:0px;">{{ count($posts) }}</h5>
                                     <h4 align="center">Posts</h4>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 hiddenOnMobile">
                                 <div class="card" style="box-shadow:none;">
                                     <h5 align="center" style="margin-bottom:0px;">{{ count($categories) }}</h5>
                                     <h4 align="center">Categories</h4>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </main>

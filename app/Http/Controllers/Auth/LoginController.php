@@ -37,10 +37,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function signin() {
-        return view('auth.voyager_login');
-    }
-
     public function logout() {
         \Auth::logout();
         return redirect('/');

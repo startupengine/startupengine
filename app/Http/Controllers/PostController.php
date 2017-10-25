@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Post;
+use TCG\Voyager\Models\Role;
 
 class PostController extends Controller
 {
@@ -21,6 +22,31 @@ class PostController extends Controller
             abort(404);
         }
         return view('posts.view')->with('post', $post);
+    }
+
+    public function addPost() {
+        $categories = \App\Category::all();
+        return view('app.post.add')->with('categories', $categories);
+    }
+
+    public function savePost(Request $request) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            $post = new \App\Post;
+            $post->title = $request->input('title');
+            $post->slug = $request->input('slug');
+            $post->excerpt = $request->input('excerpt');
+            $post->body = $request->input('body');
+            $post->author_id = \Auth::user()->id;
+            if($request->input('publish') == "on") {
+                $post->status = "PUBLISHED";
+            }
+            $post->save();
+            return redirect('/app/content');
+        }
+
+
+        return view('app.post.add')->with('categories', $categories);
     }
 
     public function getCategory($slug) {

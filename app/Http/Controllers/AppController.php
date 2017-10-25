@@ -15,14 +15,34 @@ class AppController extends Controller
         $categories =  \App\Category::all();
         $users = \App\User::all();
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        $userlist = [];
+        foreach($users as $user) {
+            if (!isset($userlist[$user->created_at->toFormattedDateString()])) {
+                $userlist[$user->created_at->toFormattedDateString()] = 1;
+            } else {
+                $userlist[$user->created_at->toFormattedDateString()] = $userlist[$user->created_at->toFormattedDateString()] + 1;
+            }
+        }
+        $postlist = [];
+        foreach($posts as $post) {
+            if (!isset($postlist[$post->created_at->toFormattedDateString()])) {
+                $postlist[$post->created_at->toFormattedDateString()] = 1;
+            } else {
+                $postlist[$post->created_at->toFormattedDateString()] = $postlist[$post->created_at->toFormattedDateString()] + 1;
+            }
+        }
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            return view('app.index')->with('pages', $pages)->with('posts', $posts)->with('categories', $categories)->with('users', $users);
+            return view('app.index')->with('pages', $pages)->with('posts', $posts)->with('postlist', $postlist)->with('categories', $categories)->with('users', $users)->with('userlist', $userlist);
         }
 
         else {
             abort(404);
         }
 
+    }
+
+    public function login() {
+        return view('app.login');
     }
 
     public function content(Request $request) {

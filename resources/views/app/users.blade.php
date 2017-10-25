@@ -52,13 +52,14 @@
                                 </form>
                             </div>
                             <div style="margin-bottom:10px;" align="right">
-                                <a href="/app/users/new" class="btn btn-secondary-outline btn-round">New User &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                                <a href="/app/users/invite" class="btn btn-secondary-outline btn-round">Invite Collaborators&nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col" class="hiddenOnMobile">Last Activity</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
@@ -67,6 +68,7 @@
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td class="hiddenOnMobile">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->updated_at))->diffForHumans() }}</td>
                                     <td align="right">
                                         <button type="button" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</button>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">

@@ -17,6 +17,7 @@
         "fideloper/proxy": "~3.3",
         "graham-campbell/github": "^6.1",
         "lanin/laravel-api-debugger": "^3.0",
+        "laracasts/utilities": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
