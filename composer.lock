@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c01e74d8bf9bfe5c3db3461c3d0e9720",
+    "content-hash": "07358178e983749e0c0b1d4be2f1e39b",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -1507,6 +1507,54 @@
                 "watermark"
             ],
             "time": "2017-09-21T16:29:17+00:00"
+        },
+        {
+            "name": "jaam/mixpanel-data-export-api",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/letsjaam/mixpanel-data-export-api.git",
+                "reference": "439bba4a6e5072afb15160e0e2d1a706883b43fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/letsjaam/mixpanel-data-export-api/zipball/439bba4a6e5072afb15160e0e2d1a706883b43fc",
+                "reference": "439bba4a6e5072afb15160e0e2d1a706883b43fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2",
+                "silex/silex": "^2.0",
+                "vlucas/phpdotenv": "^2.4"
+            },
+            "suggest": {
+                "silex/silex": "for the integration with your Silex application"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaam\\Mixpanel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Mustill",
+                    "email": "adam@letsjaam.com"
+                }
+            ],
+            "description": "Wrapper for the Mixpanel Data Export API.",
+            "homepage": "https://github.com/letsjaam/mixpanel-data-export-api",
+            "keywords": [
+                "mixpanel"
+            ],
+            "time": "2017-08-10T11:31:32+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
