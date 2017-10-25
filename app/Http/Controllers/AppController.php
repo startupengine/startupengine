@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Role;
 use TCG\Voyager\Voyager;
+use Jaam\Mixpanel\DataExportApi;
+use Jaam\Mixpanel\DataExportApiException;
 
 class AppController extends Controller
 {
+
     public function index() {
         $pages =  \App\Page::all();
         $posts =  \App\Post::all();
@@ -55,6 +59,30 @@ class AppController extends Controller
                 $posts = \App\Post::limit(100)->orderBy('updated_at', 'desc')->get();
             }
             return view('app.content')->with('posts', $posts);
+        }
+
+        else {
+            abort(404);
+        }
+
+    }
+
+    public function analytics(Request $request) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            return view('app.analytics');
+        }
+
+        else {
+            abort(404);
+        }
+
+    }
+
+    public function mixpanel(Request $request) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            return view('app.analytics.mixpanel');
         }
 
         else {
