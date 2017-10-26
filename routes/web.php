@@ -17,7 +17,6 @@ Route::group(['middleware' => ['roles']], function () {
 
     //App
     Route::get('/app', 'AppController@index');
-    Route::get('/app/login', 'AppController@login');
     Route::get('/app/content', 'AppController@content');
     Route::get('/app/new/post', 'PostController@addPost');
     Route::post('/app/new/post', 'PostController@savePost');
@@ -40,6 +39,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/login', 'AppController@login')->name('login');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\LoginController@logout', 'as' => 'page']);
+    Route::get('/app/login', 'AppController@login');
 
     //Pages
     Route::get('/', 'PageController@getHomepage');
@@ -49,5 +49,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/content/{slug}', ['uses' => 'PostController@getPost', 'as' => 'page']);
     Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'page']);
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
-    
+
 });
