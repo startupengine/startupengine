@@ -47,7 +47,7 @@
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12 card-deck">
                             <div class="col-md-12 hiddenOnMobile">
-                            <h5 style="margin-bottom:25px;">Quick Stats</h5>
+                            <h5 style="margin-bottom:25px;">Overview</h5>
                             </div>
                             <div class="col-md-3 hiddenOnMobile">
                                 <div class="card" style="box-shadow:none;">
