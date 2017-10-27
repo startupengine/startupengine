@@ -69,21 +69,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="postBody">Content</label>
-                                        <textarea type="text" class="form-control" id="body" aria-describedby="postBody" placeholder="Type the content" name="body" rows="6"></textarea>
+                                        <textarea id="body" name="body"></textarea>
+                                        <script>
+                                            var simplemde = new SimpleMDE({ element: document.getElementById("body") });
+                                        </script>
                                     </div>
-                                    <div class="form-check" style="margin-top:25px;">
+                                    <div class="form-check">
                                         <div class="checkbox">
                                             <input id="publish" type="checkbox" name="publish">
                                             <label for="publish">
                                                 Publish immediately
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-check" style="margin-top:25px;">
-                                        <div class="checkbox">
-                                            <input id="comments" type="checkbox" name="comments">
-                                            <label for="comments">
-                                                Allow comments
                                             </label>
                                         </div>
                                     </div>

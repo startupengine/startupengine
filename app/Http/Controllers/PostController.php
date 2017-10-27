@@ -61,8 +61,11 @@ class PostController extends Controller
         else { abort(500); }
     }
 
-    public function viewPost(Request $request, $slug) {
-        $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+    public function viewPost(Request $request, $id) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            $post = Post::find($id);
+        }
         if($post->status !== null) {
             return view('app.post.view')->with('post', $post);
         }

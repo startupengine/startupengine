@@ -69,14 +69,9 @@
                                     <div class="form-group">
                                         <label for="postStatus">Status</label><br>
                                         <select class="custom-select" id="status" name="status" aria-describedby="postStatus" style="width:100%;">
-                                            <?php if($post->status !== null ) { ?>
-                                            <option selected disabled value="{{$post->status}}">{{$post->status}}</option>
-                                            <?php } else { ?>
-                                            <option selected disabled value="DRAFT">Choose a status</option>
-                                            <?php } ?>
-                                            <option value="PUBLISHED">Published</option>
-                                            <option value="DRAFT">Draft</option>
-                                            <option value="PENDING">Pending</option>
+                                            <option <?php if($post->status == "PUBLISHED" ) { echo "selected"; } ?> value="PUBLISHED">Published</option>
+                                            <option <?php if($post->status == "DRAFT" ) { echo "selected"; } ?> value="DRAFT">Draft</option>
+                                            <option <?php if($post->status == "PENDING" ) { echo "selected"; } ?> value="PENDING">Pending</option>
                                         </select>
                                     </div>
                                 </div>
