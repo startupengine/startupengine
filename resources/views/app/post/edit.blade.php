@@ -88,9 +88,9 @@
                                     <div class="form-group">
                                         <label for="postBody">Content</label>
 
-                                        <textarea id="body" name="body" style="display: none;"></textarea>
+                                        <textarea id="body" name="body"><?php echo $post->body; ?></textarea>
                                         <script>
-                                            var simplemde = new SimpleMDE({ element: document.getElementById("body") }).value('<?php echo $post->body; ?>');
+                                            var simplemde = new SimpleMDE({ element: document.getElementById("body") });
                                         </script>
                                     </div>
                                     <input type="hidden" name="id" id="id" value="{{$post->id}}"?>
