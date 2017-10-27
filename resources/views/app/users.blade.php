@@ -51,9 +51,11 @@
                                     <input type="text" value="" placeholder="Search users..." class="form-control" name="s" id="s">
                                 </form>
                             </div>
+                            <?php /*
                             <div style="margin-bottom:10px;" align="right">
                                 <a href="/app/users/invite" class="btn btn-secondary-outline btn-round">Invite Collaborators&nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
+                            */ ?>
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -72,9 +74,9 @@
                                     <td align="right">
                                         <button type="button" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</button>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-sm btn-secondary-outline">View</button>
-                                            <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</button>
-                                            <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Delete</button>
+                                            <a href="/app/view/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline">View</a>
+                                            <?php /* <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</button> */?>
+                                            <?php /* <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Delete</button>*/?>
                                         </div>
                                     </td>
                                 </tr>
