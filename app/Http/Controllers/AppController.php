@@ -125,7 +125,7 @@ class AppController extends Controller
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             if($request->input('s') !== null) {
-                $settings = \App\Setting::where('key', 'LIKE', '%'.$request->input('s').'%')->orWhere('display_name', 'ILIKE', '%'.$request->input('s').'%')->limit(100)->orderBy('display_name', 'asc')->get();
+                $settings = \App\Setting::where('key', 'LIKE', '%'.$request->input('s').'%')->orWhere('display_name', 'ILIKE', '%'.$request->input('s').'%')->orWhere('value', 'ILIKE', '%'.$request->input('s').'%')->limit(100)->orderBy('display_name', 'asc')->get();
             }
             else {
                 $settings =  new \App\Setting();
