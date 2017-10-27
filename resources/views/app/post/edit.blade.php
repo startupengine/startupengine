@@ -70,9 +70,9 @@
                                         <label for="postStatus">Status</label><br>
                                         <select class="custom-select" id="status" name="status" aria-describedby="postStatus" style="width:100%;">
                                             <?php if($post->status !== null ) { ?>
-                                            <option selected disabled>{{$post->status}}</option>
+                                            <option selected disabled value="{{$post->status}}">{{$post->status}}</option>
                                             <?php } else { ?>
-                                            <option selected disabled>Choose a status</option>
+                                            <option selected disabled value="DRAFT">Choose a status</option>
                                             <?php } ?>
                                             <option value="PUBLISHED">Published</option>
                                             <option value="DRAFT">Draft</option>
@@ -87,7 +87,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="postBody">Content</label>
-                                        <textarea type="text"  class="form-control" id="body" aria-describedby="postBody" placeholder="Type the content" name="body" rows="6">{{$post->body}}</textarea>
+
+                                        <textarea id="body" name="body" style="display: none;"></textarea>
+                                        <script>
+                                            var simplemde = new SimpleMDE({ element: document.getElementById("body") }).value('<?php echo $post->body; ?>');
+                                        </script>
                                     </div>
                                     <input type="hidden" name="id" id="id" value="{{$post->id}}"?>
                                     <div align="right" style="margin-bottom:35px;">

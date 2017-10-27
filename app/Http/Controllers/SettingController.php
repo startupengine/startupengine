@@ -22,7 +22,13 @@ class SettingController extends Controller
 
             $setting->display_name= $request->input('display_name');
             $setting->value = $request->input('value');
-            $setting->status = $request->input('status');
+            if($request->input == null) {
+                $setting->status = 'PRIVATE';
+            }
+            else {
+                $setting->status = $request->input('status');
+            }
+
             if($request->input('publish') == "on") {
                 $setting->status = "PUBLISHED";
             }

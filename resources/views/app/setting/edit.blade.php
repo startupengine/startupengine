@@ -38,7 +38,7 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="card" style="box-shadow:none;">
-                                    <h5>View Post</h5>
+                                    <h5>Edit Setting</h5>
                                 </div>
                             </div>
                             <form action="/app/edit/setting" method="post">
@@ -62,7 +62,7 @@
                                             <?php if($setting->status !== null ) { ?>
                                             <option selected disabled>{{$setting->status}}</option>
                                             <?php } else { ?>
-                                            <option selected disabled>Choose a status</option>
+                                            <option selected disabled value="PRIVATE">Choose a status</option>
                                             <?php } ?>
                                             <option value="PRIVATE">Private</option>
                                             <option value="PUBLISHED">Published</option>

@@ -45,6 +45,9 @@ class PostController extends Controller
             $post->body = $request->input('body');
             $post->status = $request->input('status');
             $post->author_id = \Auth::user()->id;
+            if($request->input('status') == null) {
+                $post->status = 'DRAFT';
+            }
             if($request->input('publish') == "on") {
                 $post->status = "PUBLISHED";
             }
