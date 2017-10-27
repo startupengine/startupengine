@@ -33,7 +33,7 @@
 
 @section('content')
 
-    {!! html_entity_decode($post->body) !!}
+    {!! $post->bodyHtml() !!}
     @if($post->comments_enabled)
         @if(View::exists('theme.global.elements.comments'))
             @include('theme.global.elements.comments')

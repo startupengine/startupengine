@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Post extends Model
 {
@@ -15,4 +16,9 @@ class Post extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function bodyHtml()
+    {
+        return Markdown::convertToHtml($this->body);
+    }
 }

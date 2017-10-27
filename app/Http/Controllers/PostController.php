@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use TCG\Voyager\Models\Post;
+use App\Post;
 use TCG\Voyager\Models\Role;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class PostController extends Controller
 {
@@ -16,12 +17,14 @@ class PostController extends Controller
         return view('pages.view')->with('page', $page)->with('template', 'help');
     }
 
-    public function getPost($slug) {
-        $post =  Post::where('slug', '=', $slug)->first();
-        if ($post == null) {
+    public function getPost(Request $request, $slug) {
+        $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+        if($post->status !== null) {
+            return view('posts.view')->with('post', $post);
+        }
+        else {
             abort(404);
         }
-        return view('posts.view')->with('post', $post);
     }
 
     public function addPost() {
@@ -58,9 +61,14 @@ class PostController extends Controller
         else { abort(500); }
     }
 
-    public function viewPost(Request $request, $id) {
-        $post = \App\Post::find($id);
-        return view('app.post.view')->with('post', $post);
+    public function viewPost(Request $request, $slug) {
+        $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+        if($post->status !== null) {
+            return view('app.post.view')->with('post', $post);
+        }
+        else {
+            abort(404);
+        }
     }
 
     public function editPost(Request $request, $id) {
