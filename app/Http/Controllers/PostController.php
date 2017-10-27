@@ -32,11 +32,18 @@ class PostController extends Controller
     public function savePost(Request $request) {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            $post = new \App\Post;
+
+            if($request->input('id') !== null ){
+                $post = \App\Post::find($request->input('id'));
+            }
+            else {
+                $post = new \App\Post;
+            }
             $post->title = $request->input('title');
             $post->slug = $request->input('slug');
             $post->excerpt = $request->input('excerpt');
             $post->body = $request->input('body');
+            $post->status = $request->input('status');
             $post->author_id = \Auth::user()->id;
             if($request->input('publish') == "on") {
                 $post->status = "PUBLISHED";
@@ -45,10 +52,33 @@ class PostController extends Controller
             return redirect('/app/content');
         }
 
-
-        return view('app.post.add')->with('categories', $categories);
+        else { abort(500); }
     }
 
+    public function viewPost(Request $request, $id) {
+        $post = \App\Post::find($id);
+        return view('app.post.view')->with('post', $post);
+    }
+
+    public function editPost(Request $request, $id) {
+        $post = \App\Post::find($id);
+        $categories = \App\Category::all();
+        return view('app.post.edit')->with('post', $post)->with('categories', $categories);
+    }
+
+    public function deletePost(Request $request, $id) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+
+            if($id !== null ){
+                $post = \App\Post::find($id);
+                $post->delete();
+            }
+            return redirect('/app/content');
+        }
+
+        else { abort(500); }
+    }
     public function getCategory($slug) {
         $category = Category::where('slug', '=', $slug)->first();
         if ($category == null) {

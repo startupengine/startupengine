@@ -21,10 +21,16 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/content', 'AppController@content');
     Route::get('/app/new/post', 'PostController@addPost');
     Route::post('/app/new/post', 'PostController@savePost');
+    Route::get('/app/view/post/{id}', 'PostController@viewPost');
+    Route::get('/app/edit/post/{id}', 'PostController@editPost');
+    Route::get('/app/delete/post/{id}', 'PostController@deletePost');
+    Route::post('/app/edit/post', 'PostController@savePost');
     Route::get('/app/analytics', 'AppController@analytics');
     Route::get('/app/analytics/mixpanel', 'AppController@mixpanel');
     Route::get('/app/users', 'AppController@users');
     Route::get('/app/settings', 'AppController@settings');
+    Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
+    Route::post('/app/edit/setting', 'SettingController@saveSetting');
 
     //Voyager
     Route::group(['prefix' => 'admin'], function () {

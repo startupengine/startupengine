@@ -67,7 +67,7 @@
                                     <td class="hiddenOnMobile">{{ $setting->value }}</td>
                                     <td>{{ $setting->type }}</td>
                                     <td align="right">
-                                        <a href="/app/edit/post/{{ $setting->id }}" class="btn btn-sm btn-secondary-outline" style="">Edit</a>
+                                        <a href="/app/edit/setting/{{ $setting->id }}" class="btn btn-sm btn-secondary-outline" style="">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -52,14 +52,12 @@
                                     <li class="list-group-item">Views</li>
                                     <li class="list-group-item">Engagements</li>
                                     <li class="list-group-item">Conversions</li>
-                                    <li class="list-group-item">Mentions</li>
                                 </ul>
                             </div>
                             <div class="col-md-3 pull-left"  style="margin-bottom:15px;">
                                 <h5><i class="now-ui-icons business_badge"></i>&nbsp; Users</h5>
                                 <ul class="list-group">
                                     <li class="list-group-item">Signups</li>
-                                    <li class="list-group-item">Churn Rate</li>
                                     <li class="list-group-item">Sources</li>
                                     <li class="list-group-item">Countries</li>
                                     <li class="list-group-item">Ages</li>

@@ -57,7 +57,7 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col" class="hiddenOnMobile">#</th>
                                     <th scope="col">Title</th>
                                     <th scope="col" class="hiddenOnMobile">Excerpt</th>
                                     <th scope="col">Status</th>
@@ -68,7 +68,7 @@
                                 <tbody>
                                 @foreach($posts as $post)
                                 <tr>
-                                    <th scope="row">{{ $post->id }}</th>
+                                    <th scope="row" class="hiddenOnMobile">{{ $post->id }}</th>
                                     <td>{{ $post->title }}</td>
                                     <td class="hiddenOnMobile">{{ $post->excerpt }}</td>
                                     <td>{{ $post->status }}</td>
@@ -76,9 +76,9 @@
                                     <td align="right">
                                         <button type="button" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</button>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-sm btn-secondary-outline">View</button>
-                                            <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</button>
-                                            <button type="button" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Delete</button>
+                                            <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline">View</a>
+                                            <a href="/app/edit/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</a>
+                                            <a href="/app/delete/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
