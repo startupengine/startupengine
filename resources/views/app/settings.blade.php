@@ -56,7 +56,7 @@
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col" class="hiddenOnMobile">Value</th>
-                                    <th scope="col">Type</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
@@ -65,7 +65,7 @@
                                 <tr>
                                     <td>{{ $setting->display_name }}</td>
                                     <td class="hiddenOnMobile">{{ $setting->value }}</td>
-                                    <td>{{ $setting->type }}</td>
+                                    <td>{{ $setting->status }}</td>
                                     <td align="right">
                                         <a href="/app/edit/setting/{{ $setting->id }}" class="btn btn-sm btn-secondary-outline" style="">Edit</a>
                                     </td>
