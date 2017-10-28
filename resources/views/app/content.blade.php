@@ -59,7 +59,6 @@
                                 <tr>
                                     <th scope="col" class="hiddenOnMobile">#</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col" class="hiddenOnMobile">Excerpt</th>
                                     <th scope="col">Status</th>
                                     <th scope="col" class="hiddenOnMobile">Last Activity</th>
                                     <th scope="col">&nbsp;</th>
@@ -70,7 +69,6 @@
                                 <tr>
                                     <th scope="row" class="hiddenOnMobile">{{ $post->id }}</th>
                                     <td>{{ $post->title }}</td>
-                                    <td class="hiddenOnMobile">{{ $post->excerpt }}</td>
                                     <td>{{ $post->status }}</td>
                                     <td class="hiddenOnMobile">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</td>
                                     <td align="right">
