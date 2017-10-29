@@ -61,6 +61,18 @@ class AppController extends Controller
 
     }
 
+    public function research(Request $request) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            return view('app.research');
+        }
+
+        else {
+            abort(404);
+        }
+
+    }
+
     public function content(Request $request) {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {

@@ -18,6 +18,7 @@ Route::group(['middleware' => ['roles']], function () {
     //App
     Route::get('/app', 'AppController@index');
     Route::get('/app/insights', 'AppController@insights');
+    Route::get('/app/research', 'AppController@research');
     Route::get('/app/content', 'AppController@content');
     Route::get('/app/new/post', 'PostController@addPost');
     Route::post('/app/new/post', 'PostController@savePost');

@@ -93,6 +93,7 @@ class PostController extends Controller
 
         else { abort(500); }
     }
+
     public function getCategory($slug) {
         $category = Category::where('slug', '=', $slug)->first();
         if ($category == null) {

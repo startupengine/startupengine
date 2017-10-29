@@ -76,7 +76,7 @@
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
                                             <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline">View</a>
                                             <a href="/app/edit/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</a>
-                                            <a href="/app/delete/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Delete</a>
+                                            <a href="/app/delete/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;"  data-toggle="modal" data-target="#deletePost" onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -90,6 +90,28 @@
         </div>
     </div>
 
+        <!-- Modal Core -->
+        <div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        {{ csrf_field() }}
+                        <div class="col-md-12">
+                            <p>Once you delete this post, it will be unavailable unless an administrator un-deletes it.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
+                        <a href="#" class="btn btn-danger" id="deleteButton">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
 @endsection
