@@ -46,27 +46,40 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-3 pull-left"  style="margin-bottom:15px;">
+                            <div class="col-md-4 pull-left"  style="margin-bottom:15px;">
+                                <h5><i class="now-ui-icons location_bookmark"></i>&nbsp; Items</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item" style="text-align:center;"><a href="/app/new/item" class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#newItem">New Item &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></li>
+                                    <?php foreach($researchitems as $item) { ?>
+                                    <li class="list-group-item" style="text-align:center;"><a href="/app/research/item/{{$item->id}}" class="btn btn-link" >{{ $item->url }}</a></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 pull-left"  style="margin-bottom:15px;">
                                 <h5><i class="now-ui-icons education_agenda-bookmark"></i>&nbsp; Collections</h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item" style="text-align:center;"><a href="/app/new/research/item" class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#newCollection">New Collection &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></li>
-
+                                    <li class="list-group-item" style="text-align:center;"><a href="/app/new/collection" class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#newCollection">New Collection &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></li>
+                                    <?php foreach($researchcollections as $collection) { ?>
+                                    <li class="list-group-item" style="text-align:center;"><a href="/app/research/item/{{$collection->id}}" class="btn btn-link">{{ $collection->name }}</a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
-                            <div class="col-md-3 pull-left"  style="margin-bottom:15px;">
-                                <h5><i class="now-ui-icons education_paper"></i>&nbsp; RSS Feeds</h5>
+                            <div class="col-md-4 pull-left"  style="margin-bottom:15px;">
+                                <h5><i class="now-ui-icons education_paper"></i>&nbsp; Feeds</h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item" style="text-align:center;"><a href="/app/new/research/feed" class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#newFeed">New Feed &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></li>
+                                    <li class="list-group-item" style="text-align:center;"><a href="/app/new/feed" class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#newFeed">New Feed &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></li>
+                                    <?php foreach($researchfeeds as $feed) { ?>
+                                    <li class="list-group-item" style="text-align:center;"><a href="/app/research/feed/{{$feed->id}}" class="btn btn-link">{{ $feed->url }}</a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </main>
             </div>
         </div>
     </div>
-    <form action="/app/new/collection" method="post">
+    <form action="/app/new/research/collection" method="post">
     <!-- Modal Core -->
     <div class="modal fade" id="newCollection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -76,12 +89,11 @@
                     <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">New Collection</h4>
                 </div>
                 <div class="modal-body">
-
                         {{ csrf_field() }}
                         <div class="col-md-12">
                             <div class="form-group" style="margin-bottom:25px;">
-                                <label for="collectionTitle">Title</label>
-                                <input type="text" class="form-control" id="title" aria-describedby="collectionTitle" placeholder="Enter a title" name="title">
+                                <label for="collectionName">Name</label>
+                                <input type="text" class="form-control" id="name" aria-describedby="collectionName" placeholder="Enter a name" name="name">
                             </div>
                         </div>
                 </div>
@@ -94,7 +106,7 @@
     </div>
     </form>
 
-    <form action="/app/new/feed" method="post">
+    <form action="/app/new/research/feed" method="post">
         <!-- Modal Core -->
         <div class="modal fade" id="newFeed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -104,7 +116,33 @@
                         <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">New RSS Feed</h4>
                     </div>
                     <div class="modal-body">
+                        {{ csrf_field() }}
+                        <div class="col-md-12">
+                            <div class="form-group" style="margin-bottom:25px;">
+                                <label for="feedUrl">URL</label>
+                                <input type="text" class="form-control" id="url" aria-describedby="feedUrl" placeholder="Enter a url" name="url">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary-outline">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
+    <form action="/app/new/research/item" method="post">
+        <!-- Modal Core -->
+        <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">New Research Item</h4>
+                    </div>
+                    <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="col-md-12">
                             <div class="form-group" style="margin-bottom:25px;">

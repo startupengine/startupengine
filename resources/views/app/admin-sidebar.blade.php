@@ -8,9 +8,11 @@
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/insights"><i class="now-ui-icons business_bulb-63"></i>&nbsp; Insights</a>
         </li>
         */ ?>
+        <?php /*
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/research"><i class="now-ui-icons education_glasses"></i>&nbsp; Research</a>
         </li>
+        */ ?>
         <?php /*
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/sprints"><i class="now-ui-icons sport_user-run"></i>&nbsp; Sprints</a>

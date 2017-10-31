@@ -19,6 +19,9 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app', 'AppController@index');
     Route::get('/app/insights', 'AppController@insights');
     Route::get('/app/research', 'AppController@research');
+    Route::post('/app/new/research/item', 'ResearchController@saveResearchItem');
+    Route::post('/app/new/research/collection', 'ResearchController@saveResearchCollection');
+    Route::post('/app/new/research/feed', 'ResearchController@saveResearchFeed');
     Route::get('/app/content', 'AppController@content');
     Route::get('/app/new/post', 'PostController@addPost');
     Route::post('/app/new/post', 'PostController@savePost');

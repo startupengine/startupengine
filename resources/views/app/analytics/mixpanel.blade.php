@@ -7,25 +7,25 @@
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
     <style>
         .mixpanel-platform-select.event_selector_theme .select_menu .options_list .select_option:hover {
-            background-color: #7777dd;
+            background-color: royalblue;
         }
         .mixpanel-platform-select.event_selector_theme .select_button:hover {
-            border: 1px solid #7777dd;
+            border: 1px solid royalblue;
         }
         .select_menu {
             border-radius: 0px 0px 4px 4px !important;
         }
         .mixpanel-platform-input .rounded_dropdown_label:hover, .mixpanel-platform-output .rounded_dropdown_label:hover, .mixpanel-platform-input .icon_textless_label:hover, .mixpanel-platform-output .icon_textless_label:hover {
-            border: 1px solid #7777dd;
+            border: 1px solid royalblue;
         }
         .mixpanel-platform-input .rounded_dropdown_item:hover, .mixpanel-platform-output .rounded_dropdown_item:hover {
-            background-color: #7777dd;
+            background-color: royalblue;
         }
         .mixpanel-platform-select.event_selector_theme .select_menu .search_box_container .search_box:focus {
             -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 3px 1px rgba(68,68,221,0.5);
             -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 3px 1px rgba(68,68,221,0.5);
             box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 3px 1px rgba(68,68,221,0.5);
-            border-color: #7777dd;
+            border-color: royalblue;
             outline: 0;
         }
         .mixpanel-platform-select.event_selector_theme .select_menu .search_box_container .search_box {
@@ -58,7 +58,7 @@
             border: 1px solid #eee !important;
         }
         .mixpanel-platform-calendar .body table.ui-datepicker-calendar td.ui-datepicker-current-day {
-            background-color: #7777dd !important;
+            background-color: royalblue !important;
             background-image:none !important;
             color:#fff !important;
         }
@@ -66,27 +66,27 @@
             color: #fff !important;
         }
         .mixpanel-platform-calendar .body {
-            border-color: #7777dd !important;
+            border-color: royalblue !important;
             box-shadow:0px 5px 30px rgba(0,0,0,0.1);
         }
         .mixpanel-platform-calendar .body .triangle {
-            border-bottom-color: #7777dd;
+            border-bottom-color: royalblue;
         }
         .mixpanel-platform-calendar .label.active {
-            border-color: #7777dd !important;
+            border-color: royalblue !important;
         }
         .mixpanel-platform-button_primary, .mixpanel-platform-button_primary:visited {
-            background-color: #7777dd;
-            background-image: -moz-linear-gradient(top, #7777dd, #5555dd);
-            background-image: -ms-linear-gradient(top, #7777dd, #53a0ee);
-            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7777dd), to(#5555dd));
-            background-image: -webkit-linear-gradient(top, #7777dd, #5555dd);
-            background-image: -o-linear-gradient(top, #7777dd 0, #5555dd 0);
-            background-image: linear-gradient(top, #7777dd 0, #5555dd 0);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7777dd', endColorstr='#5555dd', GradientType=0);
-            -webkit-box-shadow: inset 0 1px 1px #7777dd, 0 2px 2px -1px rgba(0,0,0,0.2);
-            -moz-box-shadow: inset 0 1px 1px #7777dd,0 2px 2px -1px rgba(0,0,0,0.2);
-            box-shadow: inset 0 1px 1px #7777dd, 0 2px 2px -1px rgba(0,0,0,0.2);
+            background-color: royalblue;
+            background-image: -moz-linear-gradient(top, royalblue, #5555dd);
+            background-image: -ms-linear-gradient(top, royalblue, #53a0ee);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(royalblue), to(#5555dd));
+            background-image: -webkit-linear-gradient(top, royalblue, #5555dd);
+            background-image: -o-linear-gradient(top, royalblue 0, #5555dd 0);
+            background-image: linear-gradient(top, royalblue 0, #5555dd 0);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='royalblue', endColorstr='#5555dd', GradientType=0);
+            -webkit-box-shadow: inset 0 1px 1px royalblue, 0 2px 2px -1px rgba(0,0,0,0.2);
+            -moz-box-shadow: inset 0 1px 1px royalblue,0 2px 2px -1px rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 1px royalblue, 0 2px 2px -1px rgba(0,0,0,0.2);
             border: 1px solid #5555dd;
         }
         .mixpanel-platform-button_primary:hover, .mixpanel-platform-button_primary:visited:hover, .mixpanel-platform-button_primary.hover, .mixpanel-platform-button_primary:visited.hover {

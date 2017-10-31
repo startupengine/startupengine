@@ -64,7 +64,11 @@ class AppController extends Controller
     public function research(Request $request) {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            return view('app.research');
+            $categories = \App\Category::all();
+            $researchitems = \App\ResearchItem::where('user_id', '=', \Auth::user()->id)->orderBy('created_at', 'desc')->limit(3)->get();
+            $researchcollections = \App\ResearchCollection::where('user_id', '=', \Auth::user()->id)->orderBy('created_at', 'desc')->limit(3)->get();
+            $researchfeeds = \App\ResearchFeed::where('user_id', '=', \Auth::user()->id)->orderBy('created_at', 'desc')->limit(3)->get();
+            return view('app.research')->with('categories', $categories)->with('researchitems', $researchitems)->with('researchcollections', $researchcollections)->with('researchfeeds', $researchfeeds);
         }
 
         else {

@@ -30,6 +30,12 @@
                 display: none !important;
             }
         }
+        .badge-category {
+            background:royalblue;
+            padding:3px 8px;
+            font-weight:400;
+            border-radius:4px;
+        }
     </style>
 @endsection
 
@@ -46,6 +52,9 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
+                            <div class="col-md-12">
+                                <h5 style="margin-bottom:25px;">Content</h5>
+                            </div>
                             <div class="form-group" >
                                 <form>
                                     <input type="text" value="" placeholder="Search content..." class="form-control" name="s" id="s">
@@ -57,7 +66,6 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="hiddenOnMobile">#</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Status</th>
                                     <th scope="col" class="hiddenOnMobile">Last Activity</th>
@@ -67,8 +75,7 @@
                                 <tbody>
                                 @foreach($posts as $post)
                                 <tr>
-                                    <th scope="row" class="hiddenOnMobile">{{ $post->id }}</th>
-                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->title }}<?php if($post->category() !== null && $post->category()->name !== null) { ?><br><span class="badge badge-category">{{ $post->category()->name }}</span><?php } ?></td>
                                     <td>{{ $post->status }}</td>
                                     <td class="hiddenOnMobile">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</td>
                                     <td align="right">

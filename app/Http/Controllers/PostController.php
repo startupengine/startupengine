@@ -67,7 +67,8 @@ class PostController extends Controller
             $post = Post::find($id);
         }
         if($post->status !== null) {
-            return view('app.post.view')->with('post', $post);
+            $categories = \App\Category::all();
+            return view('app.post.view')->with('post', $post)->with('categories', $categories);
         }
         else {
             abort(404);

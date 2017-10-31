@@ -21,4 +21,9 @@ class Post extends Model
     {
         return Markdown::convertToHtml($this->body);
     }
+
+    public function category() {
+        $category = \App\Category::where('id', '=', $this->category_id)->first();
+        return $category;
+    }
 }

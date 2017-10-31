@@ -36,30 +36,40 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="card" style="box-shadow:none;">
-                                    <h5>New Post</h5>
-                                </div>
+                            <div class="col-md-12">
+                                <h5>New Post</h5>
                             </div>
                             <form action="/app/new/post" method="post">
                                 {{ csrf_field() }}
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="postTitle">Title</label>
-                                        <input type="text" class="form-control" id="title" aria-describedby="postTitle" placeholder="Enter a title" name="title">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="postTitle">Title</label>
+                                            <input  value="" type="text" class="form-control" id="title" aria-describedby="postTitle" placeholder="Enter a title" name="title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="postSlug">Slug</label>
+                                            <input  value="" type="text" class="form-control" id="slug" aria-describedby="postSlug" placeholder="example-slug" name="slug">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="postSlug">Slug</label>
-                                        <input type="text" class="form-control" id="slug" aria-describedby="postSlug" placeholder="example-slug" name="slug">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="postCategory">Category</label><br>
-                                        <select class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
-                                            <option selected disabled>Choose a category</option>
-                                            <?php foreach($categories as $category) { ?>
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            <?php } ?>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="postCategory">Category</label><br>
+
+                                            <select class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
+                                                <option selected disabled>Choose a category</option>
+                                                <?php foreach($categories as $category) { ?>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="postStatus">Status</label><br>
+                                            <select class="custom-select" id="status" name="status" aria-describedby="postStatus" style="width:100%;">
+                                                <option value="PUBLISHED">Published</option>
+                                                <option selected value="DRAFT">Draft</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -73,14 +83,6 @@
                                         <script>
                                             var simplemde = new SimpleMDE({ element: document.getElementById("body") });
                                         </script>
-                                    </div>
-                                    <div class="form-check">
-                                        <div class="checkbox">
-                                            <input id="publish" type="checkbox" name="publish">
-                                            <label for="publish">
-                                                Publish immediately
-                                            </label>
-                                        </div>
                                     </div>
                                     <div align="right" style="margin-bottom:35px;">
                                         <button type="submit" class="btn btn-secondary-outline ">Save</button>

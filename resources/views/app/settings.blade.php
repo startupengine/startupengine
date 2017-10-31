@@ -46,6 +46,9 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
+                            <h5 style="margin-bottom:25px;">Settings</h5>
+                        </div>
+                        <div class="col-md-12">
                             <div class="form-group" style="margin-bottom:40px;">
                                 <form>
                                     <input type="text" value="" placeholder="Search settings..." class="form-control" id="s" name="s">

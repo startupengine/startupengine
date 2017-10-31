@@ -38,41 +38,45 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="card" style="box-shadow:none;">
-                                    <h5>View Post</h5>
+                                    <h5>Edit Post</h5>
                                 </div>
                             </div>
                             <form action="/app/edit/post" method="post">
                                 {{ csrf_field() }}
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="postTitle">Title</label>
-                                        <input  value="{{$post->title}}" type="text" class="form-control" id="title" aria-describedby="postTitle" placeholder="Enter a title" name="title">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="postTitle">Title</label>
+                                            <input  value="{{$post->title}}" type="text" class="form-control" id="title" aria-describedby="postTitle" placeholder="Enter a title" name="title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="postSlug">Slug</label>
+                                            <input  value="{{$post->slug}}" type="text" class="form-control" id="slug" aria-describedby="postSlug" placeholder="example-slug" name="slug">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="postSlug">Slug</label>
-                                        <input  value="{{$post->slug}}" type="text" class="form-control" id="slug" aria-describedby="postSlug" placeholder="example-slug" name="slug">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="postCategory">Category</label><br>
-                                        <?php $category = \App\Category::find($post->category_id);?>
-                                        <select class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
-                                            <?php if($category!== null ) { ?>
-                                                <option selected disabled>{{$category->name}}</option>
-                                            <?php } else { ?>
-                                                <option selected disabled>Choose a category</option>
-                                            <?php } ?>
-                                            <?php foreach($categories as $category) { ?>
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="postStatus">Status</label><br>
-                                        <select class="custom-select" id="status" name="status" aria-describedby="postStatus" style="width:100%;">
-                                            <option <?php if($post->status == "PUBLISHED" ) { echo "selected"; } ?> value="PUBLISHED">Published</option>
-                                            <option <?php if($post->status == "DRAFT" ) { echo "selected"; } ?> value="DRAFT">Draft</option>
-                                            <option <?php if($post->status == "PENDING" ) { echo "selected"; } ?> value="PENDING">Pending</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="postCategory">Category</label><br>
+                                            <?php $category = \App\Category::find($post->category_id);?>
+                                            <select class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
+                                                <?php if($category!== null ) { ?>
+                                                    <option selected disabled>{{$category->name}}</option>
+                                                <?php } else { ?>
+                                                    <option selected disabled>Choose a category</option>
+                                                <?php } ?>
+                                                <?php foreach($categories as $category) { ?>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="postStatus">Status</label><br>
+                                            <select class="custom-select" id="status" name="status" aria-describedby="postStatus" style="width:100%;">
+                                                <option <?php if($post->status == "PUBLISHED" ) { echo "selected"; } ?> value="PUBLISHED">Published</option>
+                                                <option <?php if($post->status == "DRAFT" ) { echo "selected"; } ?> value="DRAFT">Draft</option>
+                                                <option <?php if($post->status == "PENDING" ) { echo "selected"; } ?> value="PENDING">Pending</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
