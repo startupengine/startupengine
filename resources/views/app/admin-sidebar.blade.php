@@ -24,6 +24,9 @@
         </li>
         */ ?>
         <li class="nav-item">
+            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/pages"><i class="now-ui-icons files_paper"></i>&nbsp; Pages</a>
+        </li>
+        <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/content"><i class="now-ui-icons files_single-copy-04"></i>&nbsp; Content</a>
         </li>
         <li class="nav-item">

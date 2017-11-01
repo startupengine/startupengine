@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class SyncGit extends Command
 {
@@ -44,6 +45,23 @@ class SyncGit extends Command
         }
         else {
             exec("git clone https://github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/theme");
+        }
+        $pagepath = \Config::get('view.paths')[0].'/theme/pages/*';
+        $pages = [];
+        foreach (glob($pagepath) as $filename) {
+            $filename = substr($filename, strrpos($filename, '/') + 1);
+            $pages[] = $filename;
+            $page = \App\Page::where('slug', '=', $filename)->first();
+            if($page == null) {
+                $page = new \App\Page();
+                $page->slug = $filename;
+                $page->title = ucfirst($filename);
+                $page->body = null;
+                $page->excerpt = null;
+                $page->status = 'INACTIVE';
+                $page->author_id = 0;
+                $page->save();
+            }
         }
     }
 }
