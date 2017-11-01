@@ -41,7 +41,7 @@
                                     <h5>Edit Post</h5>
                                 </div>
                             </div>
-                            <form action="/app/edit/post" method="post">
+                            <form action="/app/edit/page" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6">

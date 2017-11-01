@@ -38,6 +38,33 @@ class PageController extends Controller
         }
     }
 
+    public function savePage(Request $request) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+
+            if($request->input('id') !== null ){
+                $page = \App\Page::find($request->input('id'));
+            }
+            else {
+                $page = new \App\Post;
+            }
+            $page->title = $request->input('title');
+            $page->slug = $request->input('slug');
+            $page->excerpt = $request->input('excerpt');
+            $page->status = $request->input('status');
+            if($request->input('status') == null) {
+                $page->status = 'DRAFT';
+            }
+            if($request->input('publish') == "on") {
+                $page->status = "PUBLISHED";
+            }
+            $page->save();
+            return redirect('/app/pages');
+        }
+
+        else { abort(500); }
+    }
+
     public function index(Request $request) {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
@@ -45,7 +72,7 @@ class PageController extends Controller
                 $pages = \App\Page::where('body', 'LIKE', '%'.$request->input('s').'%')->orWhere('title', 'ILIKE', '%'.$request->input('s').'%')->orWhere('excerpt', 'ILIKE', '%'.$request->input('s').'%')->limit(100)->orderBy('updated_at', 'desc')->get();
             }
             else {
-                $pages = Page::all();
+                $pages = Page::orderBy('created_at', 'desc')->get();
             }
             return view('app.page.index')->with('pages', $pages);
         }
