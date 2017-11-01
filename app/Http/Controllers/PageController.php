@@ -20,7 +20,7 @@ class PageController extends Controller
     }
 
     public function getPage($slug) {
-        $page =  \App\Page::where('slug', '=', $slug)->first();
+        $page =  \App\Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->first();
         if ($page == null) {
             abort(404);
         }

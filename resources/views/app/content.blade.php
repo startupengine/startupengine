@@ -52,9 +52,7 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-12">
-                                <h5 style="margin-bottom:25px;">Content</h5>
-                            </div>
+                            <h5 style="margin-bottom:25px;">Content</h5>
                             <div class="form-group" >
                                 <form>
                                     <input type="text" value="" placeholder="Search content..." class="form-control" name="s" id="s">
