@@ -51,6 +51,7 @@ class PageController extends Controller
             $page->title = $request->input('title');
             $page->slug = $request->input('slug');
             $page->excerpt = $request->input('excerpt');
+            $page->meta_description = $request->input('meta_description');
             $page->status = $request->input('status');
             if($request->input('status') == null) {
                 $page->status = 'DRAFT';

@@ -36,11 +36,7 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="card" style="box-shadow:none;">
-                                    <h5>Edit Post</h5>
-                                </div>
-                            </div>
+                            <h5>Edit Page</h5>
                             <form action="/app/edit/page" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
@@ -67,7 +63,11 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="postExcerpt">Excerpt</label>
-                                        <textarea type="text"  class="form-control" id="excerpt" aria-describedby="postExcerpt" placeholder="Describe the post" name="excerpt" rows="2">{{$page->excerpt}}</textarea>
+                                        <textarea type="text"  class="form-control" id="excerpt" aria-describedby="postExcerpt" placeholder="Describe the page" name="excerpt" rows="2">{{$page->excerpt}}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="postExcerpt">Meta Description</label>
+                                        <textarea type="text"  class="form-control" id="meta_description" name="meta_description" aria-describedby="postMetaDescription" placeholder="Describe the page for search engines." name="excerpt" rows="2">{{$page->meta_description}}</textarea>
                                     </div>
                                     <input type="hidden" name="id" id="id" value="{{$page->id}}"?>
                                     <div align="right" style="margin-bottom:35px;">
