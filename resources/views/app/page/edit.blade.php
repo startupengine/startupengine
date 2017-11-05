@@ -113,7 +113,7 @@
                                                     @foreach($page->json()->sections as $key => $value)
                                                         <div class="tab-pane <?php if($count == 0) { echo "active"; } ?>" id="{{$key}}" role="tabpanel">
                                                             @foreach($value as $key => $value)
-                                                                <div class="form-group">
+                                                                <div class="form-group" align="left">
                                                                     <label for="{{$key}}">{{ucfirst($value->description)}}</label>
                                                                     <input type="{{$value->type}}" class="form-control"
                                                                            id="{{$key}}" aria-describedby="{{$key}}"
