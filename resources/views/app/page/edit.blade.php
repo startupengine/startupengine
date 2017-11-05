@@ -102,7 +102,7 @@
                                                 @foreach($page->json()->sections as $key => $value)
                                                     <li class="nav-item">
                                                         <a class="nav-link <?php if($count == 0) { echo "active"; } ?>" data-toggle="tab" href="#{{$key}}"
-                                                           role="tab" aria-expanded="false">{{ucfirst($key)}}</a>
+                                                           role="tab" aria-expanded="false">{{ucfirst($value->title)}}</a>
                                                     </li>
                                                     <?php $count = $count + 1; ?>
                                                 @endforeach
@@ -110,15 +110,26 @@
                                             <div class="card-body">
                                                 <div class="tab-content text-center">
                                                     <?php $count = 0; ?>
-                                                    @foreach($page->json()->sections as $key => $value)
+                                                    @foreach($page->json()->sections as $key => $section)
                                                         <div class="tab-pane <?php if($count == 0) { echo "active"; } ?>" id="{{$key}}" role="tabpanel">
-                                                            @foreach($value as $key => $value)
+                                                            @foreach($section->fields as $key => $value)
                                                                 <div class="form-group" align="left">
                                                                     <label for="{{$key}}"><b>{{ucfirst($key)}}</b> - {{ucfirst($value->description)}}</label>
                                                                     <input type="{{$value->type}}" class="form-control"
                                                                            id="{{$key}}" aria-describedby="{{$key}}"
                                                                            placeholder="{{$value->placeholder}}"
-                                                                           name="{{$key}}" rows="2"></input>
+                                                                           name="json[{{$section->slug}}][{{$key}}]" rows="2"
+                                                                            <?php
+                                                                                if($page->json !== null) {
+                                                                                    $json = json_decode($page->json);
+                                                                                    $slug = $section->slug;
+                                                                                    if ($json->$slug->$key !== null) {
+                                                                                        echo 'value="'.$json->$slug->$key.'"';
+                                                                                    }
+                                                                                }
+                                                                            ?>
+                                                                    }
+                                                                    ></input>
                                                                 </div>
                                                             @endforeach
                                                             <?php $count = $count + 1; ?>

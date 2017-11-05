@@ -53,6 +53,9 @@ class PageController
             $page->excerpt = $request->input('excerpt');
             $page->meta_description = $request->input('meta_description');
             $page->status = $request->input('status');
+            if($request->input('json') !== null ){
+                $page->json = json_encode($request->input('json'));
+            }
             if ($request->input('status') == null) {
                 $page->status = 'DRAFT';
             }
