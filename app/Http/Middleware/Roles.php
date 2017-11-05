@@ -39,7 +39,7 @@ class Roles
             $role = Role::where('id', '=', $user->role_id)->first();
             
             //And they have been assigned a staff role
-            if ($role->name == 'admin' OR $role->name == 'developer' OR $role->name == 'writer') {
+            if ($role !== null && ($role->name == 'admin' OR $role->name == 'developer' OR $role->name == 'writer')) {
                 //continue...
                 return $next($request);
 

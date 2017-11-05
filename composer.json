@@ -14,6 +14,8 @@
     "require": {
         "php": ">=7.0.0",
         "ext-gd": "*",
+        "appstract/laravel-meta": "^0.2.0",
+        "caffeinated/modules": "^4.2",
         "fideloper/proxy": "~3.3",
         "graham-campbell/github": "^6.1",
         "graham-campbell/markdown": "^8.0",
@@ -26,7 +28,8 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "php-http/guzzle6-adapter": "^1.1",
         "tcg/voyager": "^1.0",
-        "voyager-themes": "^0.3.0"
+        "voyager-themes": "^0.3.0",
+        "wikimedia/composer-merge-plugin": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
@@ -54,6 +57,11 @@
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "app/Modules/*/composer.json"
+            ]
         }
     },
     "scripts": {

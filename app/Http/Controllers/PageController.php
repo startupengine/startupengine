@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\ContentItem;
+use Auth0\Login\Auth0User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -10,7 +13,7 @@ use TCG\Voyager\Models\Page;
 use TCG\Voyager\Models\Post;
 use TCG\Voyager\Models\Role;
 
-class PageController extends Controller
+class PageController
 {
 
     public function getHomepage() {

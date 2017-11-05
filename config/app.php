@@ -169,6 +169,8 @@ return [
          */
         //Way\Generators\GeneratorsServiceProvider::class,
         //Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+        Caffeinated\Modules\ModulesServiceProvider::class,
+        Appstract\Meta\MetaServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -227,7 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Module' => Caffeinated\Modules\Facades\Module::class,
     ],
 
     /*

@@ -3,12 +3,12 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends \TCG\Voyager\Models\User
+class User extends Authenticatable implements  \Illuminate\Contracts\Auth\Authenticatable
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -17,7 +17,6 @@ class User extends \TCG\Voyager\Models\User
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -26,22 +25,4 @@ class User extends \TCG\Voyager\Models\User
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * Return the user attributes.
-
-     * @return array
-     */
-    public static function getAuthor($id)
-    {
-        $user = self::find($id);
-        return [
-            'id'     => $user->id,
-            'name'   => $user->name,
-            'email'  => $user->email,
-            'url'    => '',  // Optional
-            'avatar' => 'gravatar',  // Default avatar
-            'admin'  => $user->role === 'admin', // bool
-        ];
-    }
 }

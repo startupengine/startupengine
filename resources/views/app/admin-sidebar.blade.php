@@ -38,6 +38,9 @@
         </li>
         */ ?>
         <li class="nav-item">
+            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/modules"><i class="now-ui-icons design_app"></i>&nbsp; Modules</a>
+        </li>
+        <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/settings"><i class="now-ui-icons ui-1_settings-gear-63"></i>&nbsp; Settings</a>
         </li>
         <?php /*

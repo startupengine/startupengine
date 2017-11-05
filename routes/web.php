@@ -11,6 +11,8 @@
 |
 */
 
+use Caffeinated\Modules\Facades\Module;
+
 Auth::routes();
 
 Route::group(['middleware' => ['roles']], function () {
@@ -35,6 +37,7 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/analytics', 'AppController@analytics');
     Route::get('/app/analytics/mixpanel', 'AppController@mixpanel');
     Route::get('/app/users', 'AppController@users');
+    Route::get('/app/modules', 'ModuleController@index');
     Route::get('/app/settings', 'AppController@settings');
     Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
     Route::post('/app/edit/setting', 'SettingController@saveSetting');
@@ -65,3 +68,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
 
 });
+
+//Modules
+foreach (Module::enabled() as $module){
+    $file = 'app/Modules/'.$module['name'].'/Http/routes.php';
+    if (file_exists($file)){
+        include $file;
+    }
+}
