@@ -41,20 +41,22 @@
                             <form action="/app/edit/page" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postTitle">Title</label>
                                             <input value="{{$page->title}}" type="text" class="form-control" id="title"
                                                    aria-describedby="postTitle" placeholder="Enter a title"
                                                    name="title">
                                         </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postSlug">Slug</label>
                                             <input value="{{$page->slug}}" type="text" class="form-control" id="slug"
                                                    aria-describedby="postSlug" placeholder="example-slug" name="slug">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postStatus">Status</label><br>
                                             <select class="custom-select" id="status" name="status"
