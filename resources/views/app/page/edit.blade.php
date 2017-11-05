@@ -96,8 +96,8 @@
 
                                     @if($page->json() !== null && $page->json()->sections !== null)
                                         <div class="card" style="margin-top:25px;">
-                                            <ul class="nav nav-tabs nav-tabs-neutral justify-content-center"
-                                                role="tablist" data-background-color="black">
+                                            <ul class="nav nav-tabs nav-tabs-neutral justify-content-center" style="background:#444;"
+                                                role="tablist">
                                                 <?php $count = 0; ?>
                                                 @foreach($page->json()->sections as $key => $value)
                                                     <li class="nav-item">
@@ -114,7 +114,7 @@
                                                         <div class="tab-pane <?php if($count == 0) { echo "active"; } ?>" id="{{$key}}" role="tabpanel">
                                                             @foreach($value as $key => $value)
                                                                 <div class="form-group" align="left">
-                                                                    <label for="{{$key}}">{{ucfirst($value->description)}}</label>
+                                                                    <label for="{{$key}}"><b>{{ucfirst($key)}}</b> - {{ucfirst($value->description)}}</label>
                                                                     <input type="{{$value->type}}" class="form-control"
                                                                            id="{{$key}}" aria-describedby="{{$key}}"
                                                                            placeholder="{{$value->placeholder}}"
