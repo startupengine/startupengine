@@ -21,6 +21,11 @@
                 display: none;
             }
         }
+
+        .nav-tabs {
+            padding-left:15px;
+            padding-right:15px;
+        }
     </style>
 @endsection
 
@@ -93,11 +98,13 @@
                                         <div class="card" style="margin-top:25px;">
                                             <ul class="nav nav-tabs nav-tabs-neutral justify-content-center"
                                                 role="tablist" data-background-color="black">
+                                                <?php $count = 0; ?>
                                                 @foreach($page->json()->sections as $key => $value)
                                                     <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#{{$key}}"
+                                                        <a class="nav-link <?php if($count == 0) { echo "active"; } ?>" data-toggle="tab" href="#{{$key}}"
                                                            role="tab" aria-expanded="false">{{ucfirst($key)}}</a>
                                                     </li>
+                                                    <?php $count = $count + 1; ?>
                                                 @endforeach
                                             </ul>
                                             <div class="card-body">
