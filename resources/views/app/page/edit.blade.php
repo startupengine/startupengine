@@ -26,6 +26,10 @@
             padding-left: 15px;
             padding-right: 15px;
         }
+
+        .variation:first-of-type .delete-button {
+            display: none !important;
+        }
     </style>
 @endsection
 
@@ -78,9 +82,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-
-
+                                <div style="margin-top:15px;">
                                     @if($page->json() !== null && $page->json()->sections !== null)
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
@@ -88,7 +90,7 @@
                                         <?php $versioncount = 1; ?>
                                         <?php foreach (range(1, $versions) as $version) {?>
 
-                                        <div class="card" style="margin-top:20px;">
+                                        <div class="card variation">
                                             <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
                                                 style="background:#fff;border-bottom:1px solid #ddd;"
                                                 role="tablist">
@@ -142,7 +144,8 @@
                                                             <?php $count = $count + 1; ?>
                                                         </div>
                                                     @endforeach
-                                                    <div class="tab-pane" id="meta{{$versioncount}}" role="tabpanel" align="left">
+                                                    <div class="tab-pane" id="meta{{$versioncount}}" role="tabpanel"
+                                                         align="left">
                                                         <div class="form-group">
                                                             <label for="postExcerpt"><b>Excerpt</b></label>
                                                             <textarea type="text" class="form-control" id="excerpt"
@@ -164,12 +167,21 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="card-footer" align="right">
+                                                <a href="#deleteVariation{{$versioncount}}"
+                                                   onclick="selectVariation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
+                                                   class="btn btn-danger btn-simple btn-round pull-left delete-button"
+                                                   style="padding: 10px 12px;">
+                                                    <i class="now-ui-icons ui-1_simple-remove"></i></a>
+                                                <a href="#duplicate"
+                                                   onclick="duplicateVariation($(this));"
+                                                   class="btn btn-default btn-simple btn-round duplicate-button">Add
+                                                    another variation &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                                            </div>
                                         </div>
                                         <?php $versioncount = $versioncount + 1; ?>
                                         <?php } ?>
                                     @endif
-
-
                                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
                                     <div align="right" style="margin-bottom:35px;">
                                         <button type="submit" class="btn btn-secondary-outline ">Save</button>
@@ -183,6 +195,42 @@
         </div>
     </div>
 
+    <!-- Modal Core -->
+    <div class="modal fade" id="deleteVariation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
+                </div>
+                <div class="modal-body">
 
+                    {{ csrf_field() }}
+                    <div class="col-md-12">
+                        <p>Once you delete a variation, you can't get it back.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
+                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function duplicateVariation(object) {
+            var currentCard = object.parent().closest('.variation');
+            currentCard.clone().insertAfter(currentCard);
+        }
+        function selectVariation(object) {
+            var currentCard = object.parent().closest('.variation');
+            currentCard.remove();
+        }
+        function deleteVariation(object) {
+            currentCard.remove();
+        }
+    </script>
     </body>
 @endsection
