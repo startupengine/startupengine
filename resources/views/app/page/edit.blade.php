@@ -169,7 +169,7 @@
                                             </div>
                                             <div class="card-footer" align="right">
                                                 <a href="#deleteVariation{{$versioncount}}"
-                                                   onclick="selectVariation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
+                                                   onclick="deleteConfirmation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
                                                    class="btn btn-danger btn-simple btn-round pull-left delete-button"
                                                    style="padding: 10px 12px;">
                                                     <i class="now-ui-icons ui-1_simple-remove"></i></a>
@@ -208,7 +208,7 @@
 
                     {{ csrf_field() }}
                     <div class="col-md-12">
-                        <p>Once you delete a variation, you can't get it back.</p>
+                        <p>Deleting a variation cannot be undone.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -220,16 +220,23 @@
     </div>
 
     <script>
+        var currentCard;
         function duplicateVariation(object) {
-            var currentCard = object.parent().closest('.variation');
+            currentCard = object.parent().closest('.variation');
             currentCard.clone().insertAfter(currentCard);
         }
         function selectVariation(object) {
-            var currentCard = object.parent().closest('.variation');
+            currentCard = object.parent().closest('.variation');
             currentCard.remove();
         }
+        function deleteConfirmation(object) {
+            $("#deleteVariation").modal("toggle");
+            currentCard = object.parent().closest('.variation');
+        }
+
         function deleteVariation(object) {
             currentCard.remove();
+            $("#deleteVariation").modal("toggle");
         }
     </script>
     </body>
