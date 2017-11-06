@@ -23,8 +23,8 @@
         }
 
         .nav-tabs {
-            padding-left:15px;
-            padding-right:15px;
+            padding-left: 15px;
+            padding-right: 15px;
         }
     </style>
 @endsection
@@ -78,66 +78,95 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="postExcerpt">Excerpt</label>
-                                        <textarea type="text" class="form-control" id="excerpt"
-                                                  aria-describedby="postExcerpt" placeholder="Describe the page"
-                                                  name="excerpt" rows="2">{{$page->excerpt}}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="postExcerpt">Meta Description</label>
-                                        <textarea type="text" class="form-control" id="meta_description"
-                                                  name="meta_description" aria-describedby="postMetaDescription"
-                                                  placeholder="Describe the page for search engines." name="excerpt"
-                                                  rows="2">{{$page->meta_description}}</textarea>
-                                    </div>
+                                <div>
 
 
                                     @if($page->json() !== null && $page->json()->sections !== null)
-                                        <div class="card" style="margin-top:25px;">
-                                            <ul class="nav nav-tabs nav-tabs-neutral justify-content-center" style="background:#444;"
+                                        <?php $versions = $page->versions(); if ($versions == 0) {
+                                            $versions = 1;
+                                        }?>
+                                        <?php $versioncount = 1; ?>
+                                        <?php foreach (range(1, $versions) as $version) {?>
+
+                                        <div class="card" style="margin-top:20px;">
+                                            <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
+                                                style="background:#fff;border-bottom:1px solid #ddd;"
                                                 role="tablist">
                                                 <?php $count = 0; ?>
                                                 @foreach($page->json()->sections as $key => $value)
                                                     <li class="nav-item">
-                                                        <a class="nav-link <?php if($count == 0) { echo "active"; } ?>" data-toggle="tab" href="#{{$key}}"
-                                                           role="tab" aria-expanded="false">{{ucfirst($value->title)}}</a>
+                                                        <a class="nav-link <?php if ($count == 0) {
+                                                            echo "active";
+                                                        } ?>" data-toggle="tab" href="#{{$key.$versioncount}}"
+                                                           role="tab"
+                                                           aria-expanded="false">{{ucfirst($value->title)}}</a>
                                                     </li>
                                                     <?php $count = $count + 1; ?>
                                                 @endforeach
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#meta{{$versioncount}}"
+                                                       role="tab" aria-expanded="false">Meta</a>
+                                                </li>
                                             </ul>
+
+
                                             <div class="card-body">
                                                 <div class="tab-content text-center">
                                                     <?php $count = 0; ?>
                                                     @foreach($page->json()->sections as $key => $section)
-                                                        <div class="tab-pane <?php if($count == 0) { echo "active"; } ?>" id="{{$key}}" role="tabpanel">
+                                                        <div class="tab-pane <?php if ($count == 0) {
+                                                            echo "active";
+                                                        } ?>" id="{{$key.$versioncount}}" role="tabpanel">
                                                             @foreach($section->fields as $key => $value)
                                                                 <div class="form-group" align="left">
-                                                                    <label for="{{$key}}"><b>{{ucfirst($key)}}</b> - {{ucfirst($value->description)}}</label>
+                                                                    <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
+                                                                        - {{ucfirst($value->description)}}</label>
                                                                     <input type="{{$value->type}}" class="form-control"
                                                                            id="{{$key}}" aria-describedby="{{$key}}"
                                                                            placeholder="{{$value->placeholder}}"
-                                                                           name="json[{{$section->slug}}][{{$key}}]" rows="2"
-                                                                            <?php
-                                                                                if($page->json !== null) {
-                                                                                    $json = json_decode($page->json);
-                                                                                    $slug = $section->slug;
-                                                                                    if ($json->$slug->$key !== null) {
-                                                                                        echo 'value="'.$json->$slug->$key.'"';
-                                                                                    }
-                                                                                }
-                                                                            ?>
-                                                                    }
-                                                                    ></input>
+                                                                           name="json[versions][{{ $versioncount }}][{{$section->slug}}][{{$key}}]"
+                                                                           rows="2"
+                                                                           <?php
+                                                                           if ($page->json !== null) {
+                                                                               $json = json_decode($page->json);
+                                                                               $slug = $section->slug;
+                                                                               if ($json->versions->$versioncount->$slug->$key !== null) {
+                                                                                   echo 'value="' . $json->versions->$versioncount->$slug->$key . '"';
+                                                                               }
+                                                                           }
+                                                                           ?>
+                                                                           }
+                                                                    />
                                                                 </div>
                                                             @endforeach
                                                             <?php $count = $count + 1; ?>
                                                         </div>
                                                     @endforeach
+                                                    <div class="tab-pane" id="meta{{$versioncount}}" role="tabpanel" align="left">
+                                                        <div class="form-group">
+                                                            <label for="postExcerpt"><b>Excerpt</b></label>
+                                                            <textarea type="text" class="form-control" id="excerpt"
+                                                                      aria-describedby="postExcerpt"
+                                                                      placeholder="Describe the page"
+                                                                      name="excerpt"
+                                                                      rows="2">{{$page->excerpt}}</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="postExcerpt"><b>Meta Description</b></label>
+                                                            <textarea type="text" class="form-control"
+                                                                      id="meta_description"
+                                                                      name="meta_description"
+                                                                      aria-describedby="postMetaDescription"
+                                                                      placeholder="Describe the page for search engines."
+                                                                      name="excerpt"
+                                                                      rows="2">{{$page->meta_description}}</textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php $versioncount = $versioncount + 1; ?>
+                                        <?php } ?>
                                     @endif
 
 

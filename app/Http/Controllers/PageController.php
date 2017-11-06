@@ -28,10 +28,12 @@ class PageController
 
     public function editPage(Request $request, $id)
     {
+
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             $page = \App\Page::find($id);
-            //dd($page->json()->sections);
+            //$json = json_decode($page->json);
+            //dd($json->versions);
             return view('app.page.edit')->with('page', $page);
         } else {
             abort(404);

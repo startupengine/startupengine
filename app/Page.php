@@ -33,4 +33,12 @@ class Page extends Model
         }
 
     }
+
+    public function versions() {
+        $json = json_decode($this->json, TRUE);
+        $versions = count($json['versions']);
+        if($versions == null) { $versions = 0; }
+
+        return $versions;
+    }
 }
