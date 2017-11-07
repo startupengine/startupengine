@@ -109,8 +109,9 @@
                                                       rows="2">{{$page->meta_description}}</textarea>
                                         </div>
                                     </div>
-                                    <label style="margin-bottom:25px;">Content</label>
+
                                     @if($page->json() !== null && $page->json()->sections !== null)
+                                        <label style="margin-bottom:25px;">Content</label>
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
                                         }?>
