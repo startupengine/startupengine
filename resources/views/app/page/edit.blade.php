@@ -108,7 +108,7 @@
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
                                         }?>
-                                        <?php $versioncount = 1; ?>
+                                        <?php $variationcount = 1; ?>
                                         <?php foreach (range(1, $versions) as $version) {?>
 
                                         <div class="card variation">
@@ -120,7 +120,7 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link <?php if ($count == 0) {
                                                             echo "active";
-                                                        } ?>" data-toggle="tab" href="#{{$key.$versioncount}}"
+                                                        } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
                                                            role="tab"
                                                            aria-expanded="false">{{ucfirst($value->title)}}</a>
                                                     </li>
@@ -128,14 +128,16 @@
                                                 @endforeach
                                             </ul>
 
-
+                                            <div class="card-header">
+                                                Variation {{ $variationcount }}
+                                            </div>
                                             <div class="card-body">
                                                 <div class="tab-content text-center">
                                                     <?php $count = 0; ?>
                                                     @foreach($page->json()->sections as $key => $section)
                                                         <div class="tab-pane <?php if ($count == 0) {
                                                             echo "active";
-                                                        } ?>" id="{{$key.$versioncount}}" role="tabpanel">
+                                                        } ?>" id="{{$key.$variationcount}}" role="tabpanel">
                                                             @foreach($section->fields as $key => $value)
                                                                 <div class="form-group" align="left">
                                                                     <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
@@ -143,7 +145,7 @@
                                                                     <input type="{{$value->type}}" class="form-control"
                                                                            id="{{$key}}" aria-describedby="{{$key}}"
                                                                            placeholder="{{$value->placeholder}}"
-                                                                           name="json[versions][{{ $versioncount }}][{{$section->slug}}][{{$key}}]"
+                                                                           name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
                                                                            rows="2"
                                                                            data-field="{{$key}}"
                                                                            data-section="{{$section->slug}}"
@@ -151,8 +153,8 @@
                                                                            if ($page->json !== null) {
                                                                                $json = json_decode($page->json);
                                                                                $slug = $section->slug;
-                                                                               if ($json->versions->$versioncount->$slug->$key !== null) {
-                                                                                   echo 'value="' . $json->versions->$versioncount->$slug->$key . '"';
+                                                                               if ($json->versions->$variationcount->$slug->$key !== null) {
+                                                                                   echo 'value="' . $json->versions->$variationcount->$slug->$key . '"';
                                                                                }
                                                                            }
                                                                            ?>
@@ -166,7 +168,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-footer" align="right">
-                                                <a href="#deleteVariation{{$versioncount}}"
+                                                <a href="#deleteVariation{{$variationcount}}"
                                                    onclick="deleteConfirmation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
                                                    class="btn btn-danger btn-simple btn-round pull-left delete-button"
                                                    style="padding: 10px 12px;">
@@ -177,7 +179,7 @@
                                                     another variation &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                                             </div>
                                         </div>
-                                        <?php $versioncount = $versioncount + 1; ?>
+                                        <?php $variationcount = $variationcount + 1; ?>
                                         <?php } ?>
                                     @endif
                                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
@@ -246,6 +248,7 @@
             $( ".variation" ).each(function( ) {
                 variation = variation + 1;
                 $( this ).attr('data-variation', variation);
+                $( this ).children().closest('.card-header').html('Variation ' + variation);
             });
             updateInputs();
         }
