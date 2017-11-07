@@ -83,6 +83,27 @@
                                     </div>
                                 </div>
                                 <div style="margin-top:15px;">
+                                    <div class="meta-fields" id="meta" role="tabpanel"
+                                         align="left" style="margin-bottom:25px;">
+                                        <div class="form-group">
+                                            <label for="postExcerpt"><b>Excerpt</b></label>
+                                            <textarea type="text" class="form-control" id="excerpt"
+                                                      aria-describedby="postExcerpt"
+                                                      placeholder="Describe the page"
+                                                      name="excerpt"
+                                                      rows="2">{{$page->excerpt}}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="postExcerpt"><b>Meta Description</b></label>
+                                            <textarea type="text" class="form-control"
+                                                      id="meta_description"
+                                                      name="meta_description"
+                                                      aria-describedby="postMetaDescription"
+                                                      placeholder="Describe the page for search engines."
+                                                      name="excerpt"
+                                                      rows="2">{{$page->meta_description}}</textarea>
+                                        </div>
+                                    </div>
                                     @if($page->json() !== null && $page->json()->sections !== null)
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
@@ -105,10 +126,6 @@
                                                     </li>
                                                     <?php $count = $count + 1; ?>
                                                 @endforeach
-                                                <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#meta{{$versioncount}}"
-                                                       role="tab" aria-expanded="false">Meta</a>
-                                                </li>
                                             </ul>
 
 
@@ -146,27 +163,6 @@
                                                             <?php $count = $count + 1; ?>
                                                         </div>
                                                     @endforeach
-                                                    <div class="tab-pane" id="meta{{$versioncount}}" role="tabpanel"
-                                                         align="left">
-                                                        <div class="form-group">
-                                                            <label for="postExcerpt"><b>Excerpt</b></label>
-                                                            <textarea type="text" class="form-control" id="excerpt"
-                                                                      aria-describedby="postExcerpt"
-                                                                      placeholder="Describe the page"
-                                                                      name="excerpt"
-                                                                      rows="2">{{$page->excerpt}}</textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="postExcerpt"><b>Meta Description</b></label>
-                                                            <textarea type="text" class="form-control"
-                                                                      id="meta_description"
-                                                                      name="meta_description"
-                                                                      aria-describedby="postMetaDescription"
-                                                                      placeholder="Describe the page for search engines."
-                                                                      name="excerpt"
-                                                                      rows="2">{{$page->meta_description}}</textarea>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card-footer" align="right">
