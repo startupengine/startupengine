@@ -128,6 +128,8 @@
                                                                            placeholder="{{$value->placeholder}}"
                                                                            name="json[versions][{{ $versioncount }}][{{$section->slug}}][{{$key}}]"
                                                                            rows="2"
+                                                                           data-field="{{$key}}"
+                                                                           data-section="{{$section->slug}}"
                                                                            <?php
                                                                            if ($page->json !== null) {
                                                                                $json = json_decode($page->json);
@@ -224,6 +226,7 @@
         function duplicateVariation(object) {
             currentCard = object.parent().closest('.variation');
             currentCard.clone().insertAfter(currentCard);
+            updateIndexes();
         }
         function selectVariation(object) {
             currentCard = object.parent().closest('.variation');
@@ -237,6 +240,29 @@
         function deleteVariation(object) {
             currentCard.remove();
             $("#deleteVariation").modal("toggle");
+            updateIndexes();
+        }
+
+        function updateIndexes(){
+            count = $('.variation').length;
+            console.log(count);
+            var variation = 0;
+            $( ".variation" ).each(function( ) {
+                variation = variation + 1;
+                $( this ).attr('data-variation', variation);
+            });
+            updateInputs();
+        }
+
+        function updateInputs(){
+            $( ".variation :input" ).each(function( ) {
+                //console.log($(this).attr('name'));
+                var variation = $(this).parents().closest('.variation').attr('data-variation');
+                var section = $(this).attr('data-section');
+                var field = $(this).attr('data-field');
+                var string = ('json[versions][' + variation + '][' + section + '][' + field + ']');
+                $(this).attr('name', string);
+            });
         }
     </script>
     </body>
