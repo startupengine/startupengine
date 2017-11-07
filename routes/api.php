@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::get('/browse/', 'APIController@getItemsByCategory');
 Route::get('/items/', 'APIController@getItems');
 Route::get('/item/', 'APIController@getItem');
+Route::get('/page/{slug}', 'APIController@getPage');
+Route::get('/page/{slug}/random', 'APIController@getRandomPageVariation');
 Route::get('/random/', 'APIController@getRandomItem');
 Route::get('/search/', 'APIController@search');
 

@@ -277,4 +277,22 @@ class APIResponse extends Model
         return response()
             ->json($response);
     }
+
+    public function getPage($slug) {
+        $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+        if($page !== null) {
+            return $page;
+        }
+    }
+
+    public function getRandomPageVariation($slug) {
+        $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+        if($page !== null) {
+            $versions = json_decode($page->json, true)['versions'];
+            $random = $versions[rand(1, count($versions))];
+            $page->json = $random;
+            return response()
+                ->json($page);
+        }
+    }
 }

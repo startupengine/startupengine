@@ -111,7 +111,7 @@
                                     </div>
 
                                     @if($page->json() !== null && $page->json()->sections !== null)
-                                        <label style="margin-bottom:25px;">Content</label>
+                                        <label style="margin-bottom:10px;">Content</label>
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
                                         }?>
@@ -160,7 +160,7 @@
                                                                            if ($page->json !== null) {
                                                                                $json = json_decode($page->json);
                                                                                $slug = $section->slug;
-                                                                               if ($json->versions->$variationcount->$slug->$key !== null) {
+                                                                               if (isset($json->versions->$variationcount->$slug->$key)) {
                                                                                    echo 'value="' . $json->versions->$variationcount->$slug->$key . '"';
                                                                                }
                                                                            }
