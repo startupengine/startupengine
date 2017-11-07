@@ -30,6 +30,11 @@
         .variation:first-of-type .delete-button {
             display: none !important;
         }
+
+        .nav-link.active {
+            border-color:#ddd !important;
+            color:#444 !important;
+        }
     </style>
 @endsection
 
@@ -86,7 +91,7 @@
                                     <div class="meta-fields" id="meta" role="tabpanel"
                                          align="left" style="margin-bottom:25px;">
                                         <div class="form-group">
-                                            <label for="postExcerpt"><b>Excerpt</b></label>
+                                            <label for="postExcerpt">Excerpt</label>
                                             <textarea type="text" class="form-control" id="excerpt"
                                                       aria-describedby="postExcerpt"
                                                       placeholder="Describe the page"
@@ -94,7 +99,7 @@
                                                       rows="2">{{$page->excerpt}}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="postExcerpt"><b>Meta Description</b></label>
+                                            <label for="postExcerpt">Meta Description</label>
                                             <textarea type="text" class="form-control"
                                                       id="meta_description"
                                                       name="meta_description"
@@ -104,6 +109,7 @@
                                                       rows="2">{{$page->meta_description}}</textarea>
                                         </div>
                                     </div>
+                                    <label style="margin-bottom:25px;">Content</label>
                                     @if($page->json() !== null && $page->json()->sections !== null)
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
@@ -112,6 +118,10 @@
                                         <?php foreach (range(1, $versions) as $version) {?>
 
                                         <div class="card variation">
+
+                                            <div class="card-header">
+                                                Variation {{ $variationcount }}
+                                            </div>
                                             <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
                                                 style="background:#fff;border-bottom:1px solid #ddd;"
                                                 role="tablist">
@@ -127,10 +137,6 @@
                                                     <?php $count = $count + 1; ?>
                                                 @endforeach
                                             </ul>
-
-                                            <div class="card-header">
-                                                Variation {{ $variationcount }}
-                                            </div>
                                             <div class="card-body">
                                                 <div class="tab-content text-center">
                                                     <?php $count = 0; ?>
@@ -241,20 +247,20 @@
             updateIndexes();
         }
 
-        function updateIndexes(){
+        function updateIndexes() {
             count = $('.variation').length;
             console.log(count);
             var variation = 0;
-            $( ".variation" ).each(function( ) {
+            $(".variation").each(function () {
                 variation = variation + 1;
-                $( this ).attr('data-variation', variation);
-                $( this ).children().closest('.card-header').html('Variation ' + variation);
+                $(this).attr('data-variation', variation);
+                $(this).children().closest('.card-header').html('Variation ' + variation);
             });
             updateInputs();
         }
 
-        function updateInputs(){
-            $( ".variation :input" ).each(function( ) {
+        function updateInputs() {
+            $(".variation :input").each(function () {
                 //console.log($(this).attr('name'));
                 var variation = $(this).parents().closest('.variation').attr('data-variation');
                 var section = $(this).attr('data-section');
