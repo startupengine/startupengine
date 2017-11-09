@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use OwenIt\Auditing\Contracts\UserResolver;
 
-class User extends Authenticatable implements  \Illuminate\Contracts\Auth\Authenticatable
+class User extends Authenticatable implements AuditableContract, UserResolver, \Illuminate\Contracts\Auth\Authenticatable
 {
+    use Auditable;
+
     use Notifiable;
     /**
      * The attributes that are mass assignable.
@@ -26,8 +30,18 @@ class User extends Authenticatable implements  \Illuminate\Contracts\Auth\Authen
         'password', 'remember_token',
     ];
 
-    public function role(){
-        $role = Role::where('id','=',\Auth::user()->role_id)->first();
+    public function role()
+    {
+        $role = Role::where('id', '=', \Auth::user()->role_id)->first();
         return $role;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function resolveId()
+    {
+        return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
+    }
+
 }

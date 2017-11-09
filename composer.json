@@ -26,6 +26,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "owen-it/laravel-auditing": "^4.1",
         "php-http/guzzle6-adapter": "^1.1",
         "tcg/voyager": "^1.0",
         "voyager-themes": "^0.3.0",
