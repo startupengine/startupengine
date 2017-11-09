@@ -13,6 +13,34 @@ class Page extends Model implements AuditableContract
     use Rememberable;
     use Auditable;
 
+    /**
+     * Attributes to include in the Audit.
+     *
+     * @var array
+     */
+    protected $auditInclude = [
+        'title',
+        'meta_excerpt',
+        'meta_description',
+        'json',
+        'user_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    /**
+     * Auditable events.
+     *
+     * @var array
+     */
+    protected $auditableEvents = [
+        'created',
+        'updated',
+        'deleted',
+        'restored',
+    ];
+
     public function raw($path)
     {
         $url = "https://raw.githubusercontent.com/" . env('GITHUB_USERNAME') . "/" . env('GITHUB_REPOSITORY') . "/" . env("GITHUB_REPOSITORY_BRANCH") . "/pages/" . $path;

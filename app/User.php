@@ -13,6 +13,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, \
     use Auditable;
 
     use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +22,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, \
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -28,6 +30,32 @@ class User extends Authenticatable implements AuditableContract, UserResolver, \
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * Attributes to include in the Audit.
+     *
+     * @var array
+     */
+    protected $auditInclude = [
+        'name',
+        'email',
+        'password',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    /**
+     * Auditable events.
+     *
+     * @var array
+     */
+    protected $auditableEvents = [
+        'created',
+        'updated',
+        'deleted',
+        'restored',
     ];
 
     public function role()
@@ -41,7 +69,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, \
      */
     public static function resolveId()
     {
-        return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
+        return \Auth::check() ? \Auth::user()->getAuthIdentifier() : null;
     }
 
 }
