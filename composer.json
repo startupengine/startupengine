@@ -29,6 +29,7 @@
         "php-http/guzzle6-adapter": "^1.1",
         "tcg/voyager": "^1.0",
         "voyager-themes": "^0.3.0",
+        "watson/rememberable": "^2.0",
         "wikimedia/composer-merge-plugin": "^1.4"
     },
     "require-dev": {
@@ -38,7 +39,8 @@
         "mockery/mockery": "0.9.*",
         "orangehill/iseed": "^2.5",
         "phpunit/phpunit": "~6.0",
-        "xethron/migrations-generator": "^2.0"
+        "xethron/migrations-generator": "^2.0",
+        "barryvdh/laravel-httpcache": "*"
     },
     "autoload": {
         "classmap": [

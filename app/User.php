@@ -25,4 +25,9 @@ class User extends Authenticatable implements  \Illuminate\Contracts\Auth\Authen
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role(){
+        $role = Role::where('id','=',\Auth::user()->role_id)->first();
+        return $role;
+    }
 }

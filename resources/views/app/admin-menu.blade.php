@@ -13,6 +13,7 @@
         <?php /* <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/users';"><i class="now-ui-icons users_single-02"></i>&nbsp; Users</button> */ ?>
         <?php /* <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/help';"><i class="now-ui-icons business_bulb-63"></i>&nbsp; Help</button> */ ?>
         <div class="dropdown-divider"></div>
+        <button class="dropdown-item" type="button" onclick="location.href='/';"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp; Site</button>
         <button class="dropdown-item" type="button" onclick="location.href='/app/profile';"><i class="now-ui-icons users_circle-08"></i>&nbsp; Profile</button>
         <button class="dropdown-item" type="button" onclick="location.href='/logout';"><i class="now-ui-icons ui-1_lock-circle-open"></i>&nbsp; Sign Out</button>
     </div>
@@ -22,6 +23,7 @@
         Account
     </button>
     <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button" onclick="location.href='/';"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp; Site</button>
         <button class="dropdown-item" type="button" onclick="location.href='/app/profile';"><i class="now-ui-icons users_circle-08"></i>&nbsp; Profile</button>
         <button class="dropdown-item" type="button" onclick="location.href='/logout';"><i class="now-ui-icons ui-1_lock-circle-open"></i>&nbsp; Sign Out</button>
     </div>
