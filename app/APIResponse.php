@@ -291,7 +291,6 @@ class APIResponse extends Model
             $versions = json_decode($page->json, true)['versions'];
             $random = $versions[rand(1, count($versions))];
             $page->json = $random;
-            dd($page->audits());
             return response()
                 ->json($page);
         }
