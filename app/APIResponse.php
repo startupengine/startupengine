@@ -290,11 +290,11 @@ class APIResponse extends Model
             $cache = $request->input('cache');
         }
         if( isset($cache) && $cache !== null ) {
-            $page = Page::remember($cache)->cacheTags('page_queries')->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+            $page = Page::remember($cache)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
         }
         else {
-            Page::flushCache('page_queries');
-            $page = Page::remember(0)->cacheTags('page_queries')->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+            Page::flushCache();
+            $page = Page::remember(0)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
         }
         if($page !== null) {
             $versions = json_decode($page->json, true)['versions'];
