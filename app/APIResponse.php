@@ -286,8 +286,8 @@ class APIResponse extends Model
     }
 
     public function getRandomPageVariation($request, $slug) {
-        if($request->exists('cache')) {
-            $cache = $request->input('cache');
+        if($request->exists('remember')) {
+            $cache = $request->input('remember');
         }
         if( isset($cache) && $cache !== null ) {
             $page = Page::remember($cache)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
