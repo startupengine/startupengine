@@ -3,16 +3,20 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
+use TCG\Voyager\Traits\VoyagerUser;
+use TCG\Voyager\Contracts\User as UserContract;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
-class User extends Authenticatable implements AuditableContract, UserResolver, \Illuminate\Contracts\Auth\Authenticatable
+class User extends AuthUser implements AuditableContract, UserResolver, UserContract
 {
     use Auditable;
 
     use Notifiable;
+
+    use VoyagerUser;
 
     /**
      * The attributes that are mass assignable.

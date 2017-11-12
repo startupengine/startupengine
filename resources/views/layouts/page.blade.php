@@ -25,7 +25,9 @@
     <!-- Meta -->
     @yield('meta')
 </head>
-    @include('theme.templates.global.header')
+    @if(View::exists('theme.templates.global.css'))
+        @include('theme.templates.global.header')
+    @endif
     @if(View::exists('theme.pages.'.$page->slug.'.header'))
         @include('theme.pages.'.$page->slug.'.header')
     @endif
