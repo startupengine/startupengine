@@ -25,17 +25,24 @@
     <!-- Meta -->
     @yield('meta')
 </head>
-    @if(View::exists('theme.templates.global.css'))
+    @if(View::exists('theme.templates.global.header'))
         @include('theme.templates.global.header')
     @endif
     @if(View::exists('theme.pages.'.$page->slug.'.header'))
         @include('theme.pages.'.$page->slug.'.header')
     @endif
     @yield('content')
-    @include('theme.templates.global.menu')
-    @include('theme.templates.global.scripts')
+    @if(View::exists('theme.templates.global.menu'))
+        @include('theme.templates.global.menu')
+    @endif
+    @if(View::exists('theme.templates.global.scripts'))
+        @include('theme.templates.global.scripts')
+    @endif
     @if(View::exists('theme.pages.'.$page->slug.'.footer'))
         @include('theme.pages.'.$page->slug.'.footer')
     @endif
-    @include('theme.templates.global.footer')
+    @if(View::exists('theme.templates.global.footer'))
+        @include('theme.templates.global.footer')
+    @endif
+
 </html>
