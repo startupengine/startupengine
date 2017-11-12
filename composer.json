@@ -79,7 +79,7 @@
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
-            
+            "@php artisan command:SyncGit"
         ],
         "post-update-cmd": [
             "@php artisan command:SyncGit"
