@@ -34,7 +34,7 @@ class APIController extends Controller
     public function getRandomPageVariation(Request $request, $slug)
     {
         $items = new APIResponse();
-        return $items->getRandomPageVariation($slug);
+        return $items->getRandomPageVariation($request, $slug);
     }
 
     public function getRandomItem(Request $request)
