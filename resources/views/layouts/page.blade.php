@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $page->title }} - {{ config('app.name', 'StartupEngine') }}</title>
+    <title>{{ $page->title }} - {{ setting('site.title') }}</title>
 
     <!-- Styles -->
     @if(View::exists('theme.templates.global.css'))
