@@ -285,8 +285,13 @@ class APIResponse extends Model
         }
     }
 
-    public function getRandomPageVariation($slug) {
-        $page = Page::remember(5)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+    public function getRandomPageVariation(Request $request, $slug) {
+        if($request->input('cache') == 'true') {
+            $page = Page::remember(5)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+        }
+        else {
+            $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+        }
         if($page !== null) {
             $versions = json_decode($page->json, true)['versions'];
             $random = $versions[rand(1, count($versions))];
