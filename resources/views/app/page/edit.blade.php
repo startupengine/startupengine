@@ -126,12 +126,12 @@
                                             <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
                                                 style="background:#fff;border-bottom:1px solid #ddd;"
                                                 role="tablist">
-                                                <?php $count = 0; ?>
+                                                <?php $count = 1; ?>
                                                 @foreach($page->json()->sections as $key => $value)
                                                     <li class="nav-item">
                                                         <a class="nav-link <?php if ($count == 0) {
                                                             echo "active";
-                                                        } ?>" data-toggle="tab" href="#{{$key.$count}}"
+                                                        } ?>" data-toggle="tab" href="#{{$key.$variationcount.$count}}"
                                                            role="tab"
                                                            aria-expanded="false">{{ucfirst($value->title)}}</a>
                                                     </li>
@@ -140,11 +140,11 @@
                                             </ul>
                                             <div class="card-body">
                                                 <div class="tab-content text-center">
-                                                    <?php $count = 0; ?>
+                                                    <?php $count = 1; ?>
                                                     @foreach($page->json()->sections as $key => $section)
                                                         <div class="tab-pane <?php if ($count == 0) {
                                                             echo "active";
-                                                        } ?>" id="{{$key.$variationcount}}" role="tabpanel">
+                                                        } ?>" id="{{$key.$variationcount.$count}}" role="tabpanel">
                                                             @foreach($section->fields as $key => $value)
                                                                 <div class="form-group" align="left">
                                                                     <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
