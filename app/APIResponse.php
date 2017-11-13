@@ -294,7 +294,7 @@ class APIResponse extends Model
         }
         else {
             Page::flushCache();
-            $page = Page::remember(0)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+            $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
         }
         if($page !== null) {
             $versions = json_decode($page->json, true)['versions'];

@@ -6,9 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use TCG\Voyager\Traits\VoyagerUser;
 use TCG\Voyager\Contracts\User as UserContract;
-use Illuminate\Foundation\Auth\User as AuthUser;
 
 class User extends AuthUser implements AuditableContract, UserResolver, UserContract
 {
