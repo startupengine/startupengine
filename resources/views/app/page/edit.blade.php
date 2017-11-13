@@ -32,8 +32,8 @@
         }
 
         .nav-link.active {
-            border-color:#ddd !important;
-            color:#444 !important;
+            border-color: #ddd !important;
+            color: #444 !important;
         }
     </style>
 @endsection
@@ -129,9 +129,10 @@
                                                 <?php $count = 1; ?>
                                                 @foreach($page->json()->sections as $key => $value)
                                                     <li class="nav-item">
-                                                        <a class="nav-link <?php if ($count == 0) {
+                                                        <a class="nav-link <?php if ($count == 1) {
                                                             echo "active";
-                                                        } ?>" data-toggle="tab" href="#{{$key.$variationcount.$count}}"
+                                                        } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
+                                                           data-section="{{$key}}"
                                                            role="tab"
                                                            aria-expanded="false">{{ucfirst($value->title)}}</a>
                                                     </li>
@@ -142,9 +143,10 @@
                                                 <div class="tab-content text-center">
                                                     <?php $count = 1; ?>
                                                     @foreach($page->json()->sections as $key => $section)
-                                                        <div class="tab-pane <?php if ($count == 0) {
-                                                            echo "active";
-                                                        } ?>" id="{{$key.$variationcount.$count}}" role="tabpanel">
+                                                        <div class="tab-pane <?php if ($count == 1) { echo "active";} ?>"
+                                                             id="{{$key.$variationcount}}"
+                                                             role="tabpanel"
+                                                             data-section="{{$key}}">
                                                             @foreach($section->fields as $key => $value)
                                                                 <div class="form-group" align="left">
                                                                     <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
@@ -258,17 +260,43 @@
                 $(this).children().closest('.card-header').html('Variation ' + variation);
             });
             updateInputs();
+            updateButtons();
+            updateTabPanes();
         }
 
         function updateInputs() {
             $(".variation :input").each(function () {
-                //console.log($(this).attr('name'));
                 var variation = $(this).parents().closest('.variation').attr('data-variation');
                 var section = $(this).attr('data-section');
                 var field = $(this).attr('data-field');
                 var string = ('json[versions][' + variation + '][' + section + '][' + field + ']');
                 $(this).attr('name', string);
             });
+        }
+
+        function updateButtons() {
+            $(".variation .nav-link").each(function () {
+                var variation = $(this).parents().closest('.variation').attr('data-variation');
+                var section = $(this).attr('data-section');
+                var string = ('#' + variation + section);
+                $(this).attr('href', string);
+            });
+        }
+
+        function updateTabPanes() {
+            $(".variation .tab-pane").each(function () {
+                var variation = $(this).parents().closest('.variation').attr('data-variation');
+                var section = $(this).attr('data-section');
+                var string = (variation + section);
+                $(this).attr('id', string);
+            });
+        }
+
+        function enableTabs() {
+            $('.variation a.nav-link').on('click', function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
         }
     </script>
     </body>
