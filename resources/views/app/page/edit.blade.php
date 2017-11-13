@@ -131,7 +131,7 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link <?php if ($count == 0) {
                                                             echo "active";
-                                                        } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
+                                                        } ?>" data-toggle="tab" href="#{{$key.$count}}"
                                                            role="tab"
                                                            aria-expanded="false">{{ucfirst($value->title)}}</a>
                                                     </li>
