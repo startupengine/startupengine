@@ -177,12 +177,14 @@ class APIResponse extends Model
 
         $items = collect($items->random());
 
+        /*
         if(\Schema::hasColumn($type, 'image')) {
             $items->transform(function ($item, $key) {
                 if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
                 return $item;
             });
         }
+        */
 
         if(\Schema::hasColumn($type, 'body')) {
             $items->transform(function ($item) {
