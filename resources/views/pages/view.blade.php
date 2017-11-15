@@ -32,7 +32,7 @@
     @endif
 
     @if($page->css !== null)
-        {{ $page->css }}
+        <?php echo $page->css; ?>
     @endif
 
 @endsection
@@ -48,7 +48,7 @@
     @endif
 
     @if($page->scripts !== null)
-        {{ $page->scripts }}
+        <?php echo $page->scripts; ?>
     @endif
 
 @endsection
