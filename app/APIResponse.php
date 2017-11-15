@@ -112,8 +112,8 @@ class APIResponse extends Model
 
         $items->transform(function ($item, $key) {
 
-            if($item->image !== null) {
-                if(substr($item->image, 0, 4) == "http") {
+            if(isset($item->image)) {
+                if(strpos($item->image, 'http') === 0) {
                 }
                 else {
                     $item->image = \Storage::disk('public')->url($item->image);
