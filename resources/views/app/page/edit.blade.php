@@ -143,7 +143,9 @@
                                                 <div class="tab-content text-center">
                                                     <?php $count = 1; ?>
                                                     @foreach($page->json()->sections as $key => $section)
-                                                        <div class="tab-pane <?php if ($count == 1) { echo "active";} ?>"
+                                                        <div class="tab-pane <?php if ($count == 1) {
+                                                            echo "active";
+                                                        } ?>"
                                                              id="{{$key.$variationcount}}"
                                                              role="tabpanel"
                                                              data-section="{{$key}}">
@@ -191,6 +193,32 @@
                                         <?php $variationcount = $variationcount + 1; ?>
                                         <?php } ?>
                                     @endif
+
+                                    <div style="margin-top:15px;">
+                                        <div class="meta-fields" id="meta2" role="tabpanel"
+                                             align="left" style="margin-bottom:25px;">
+                                            <div class="form-group">
+                                                <label for="postCSS">CSS</label>
+                                                <textarea type="text" class="form-control"
+                                                          id="css"
+                                                          name="css"
+                                                          aria-describedby="postCSS"
+                                                          placeholder=""
+                                                          name="css"
+                                                          rows="2">{{$page->css}}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="postScripts">Scripts</label>
+                                                <textarea type="text" class="form-control"
+                                                          id="scripts"
+                                                          name="scripts"
+                                                          aria-describedby="postScripts"
+                                                          placeholder=""
+                                                          name="scripts"
+                                                          rows="2">{{$page->scripts}}</textarea>
+                                            </div>
+                                        </div>
+
                                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
                                     <div align="right" style="margin-bottom:35px;">
                                         <button type="submit" class="btn btn-secondary-outline ">Save</button>
