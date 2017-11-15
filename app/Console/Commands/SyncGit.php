@@ -47,21 +47,22 @@ class SyncGit extends Command
         }
         $pagepath = \Config::get('view.paths')[0] . '/theme/pages/*';
         $pages = [];
-
-        if (count(\App\Page::all()) > 1) {
-            foreach (glob($pagepath) as $filename) {
-                $filename = substr($filename, strrpos($filename, '/') + 1);
-                $pages[] = $filename;
-                $page = \App\Page::where('slug', '=', $filename)->first();
-                if ($page == null) {
-                    $page = new \App\Page();
-                    $page->slug = $filename;
-                    $page->title = ucfirst($filename);
-                    $page->body = null;
-                    $page->excerpt = null;
-                    $page->status = 'INACTIVE';
-                    $page->author_id = 0;
-                    $page->save();
+        if (Schema::hasTable('pages')) {
+            if (count(\App\Page::all()) > 1) {
+                foreach (glob($pagepath) as $filename) {
+                    $filename = substr($filename, strrpos($filename, '/') + 1);
+                    $pages[] = $filename;
+                    $page = \App\Page::where('slug', '=', $filename)->first();
+                    if ($page == null) {
+                        $page = new \App\Page();
+                        $page->slug = $filename;
+                        $page->title = ucfirst($filename);
+                        $page->body = null;
+                        $page->excerpt = null;
+                        $page->status = 'INACTIVE';
+                        $page->author_id = 0;
+                        $page->save();
+                    }
                 }
             }
         }
