@@ -45,6 +45,7 @@ class PostController extends Controller
             $post->title = $request->input('title');
             $post->slug = $request->input('slug');
             $post->excerpt = $request->input('excerpt');
+            $post->meta_description = $request->input('meta_description');
             $post->body = $request->input('body');
             $post->status = $request->input('status');
             $post->author_id = \Auth::user()->id;
