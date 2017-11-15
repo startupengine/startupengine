@@ -79,9 +79,11 @@
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
+            "@php artisan migrate:refresh --seed --force",
             "@php artisan command:SyncGit"
         ],
         "post-update-cmd": [
+            "@php artisan migrate:refresh",
             "@php artisan command:SyncGit"
         ]
     },
