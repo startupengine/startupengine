@@ -198,32 +198,46 @@
                                         <div class="meta-fields" id="meta2" role="tabpanel"
                                              align="left" style="margin-bottom:25px;">
                                             <div class="form-group">
-                                                <label for="postCSS">CSS</label>
+                                                <label for="pageCSS">CSS</label>
                                                 <textarea type="text" class="form-control"
                                                           id="css"
                                                           name="css"
-                                                          aria-describedby="postCSS"
+                                                          aria-describedby="pageCSS"
                                                           placeholder=""
                                                           name="css"
                                                           rows="2">{{$page->css}}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="postScripts">Scripts</label>
+                                                <label for="pageScripts">Scripts</label>
                                                 <textarea type="text" class="form-control"
                                                           id="scripts"
                                                           name="scripts"
-                                                          aria-describedby="postScripts"
+                                                          aria-describedby="pageScripts"
                                                           placeholder=""
                                                           name="scripts"
                                                           rows="2">{{$page->scripts}}</textarea>
                                             </div>
+
+                                            <div class="form-group" style="margin-top:25px !important;">
+
+
+
+                                                <input type="checkbox" name="show_footer" class="bootstrap-switch"
+                                                       data-on-label="YES"
+                                                       data-off-label="NO"
+                                                       <?php if($page->show_footer == true) { ?> checked="" <?php } ?>
+                                                />
+                                                <label for="show_footer">Show footer?</label>
+                                                </div>
+
+
                                         </div>
 
-                                    <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
-                                    <div align="right" style="margin-bottom:35px;">
-                                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
+                                        <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
+                                        <div align="right" style="margin-bottom:35px;">
+                                            <button type="submit" class="btn btn-secondary-outline ">Save</button>
+                                        </div>
                                     </div>
-                                </div>
                             </form>
                         </div>
                     </div>

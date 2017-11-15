@@ -41,8 +41,8 @@
     @if(View::exists('theme.pages.'.$page->slug.'.footer'))
         @include('theme.pages.'.$page->slug.'.footer')
     @endif
-    @if(View::exists('theme.templates.global.footer'))
+
+    @if(View::exists('theme.templates.global.footer') && $page->show_footer == true)
         @include('theme.templates.global.footer')
     @endif
-
 </html>

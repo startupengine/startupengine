@@ -57,6 +57,7 @@ class PageController
             $page->status = $request->input('status');
             $page->css = $request->input('css');
             $page->scripts = $request->input('scripts');
+            $page->show_footer = $request->input('show_footer');
             if($request->input('json') !== null ){
                 $page->json = json_encode($request->input('json'));
             }
@@ -65,6 +66,12 @@ class PageController
             }
             if ($request->input('publish') == "on") {
                 $page->status = "PUBLISHED";
+            }
+            if ($request->input('show_footer') == "on") {
+                $page->show_footer = true;
+            }
+            else {
+                $page->show_footer = false;
             }
             $page->save();
             return redirect('/app/pages');

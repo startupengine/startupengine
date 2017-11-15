@@ -14,7 +14,7 @@ class AddGlobalFooterToPages extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->binary('show_footer')->nullable();
+            $table->boolean('show_footer')->nullable();
         });
     }
 
