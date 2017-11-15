@@ -111,7 +111,15 @@ class APIResponse extends Model
             ->get();
 
         $items->transform(function ($item, $key) {
-            if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
+
+            if($item->image !== null) {
+                if(strpos($item->image, 'http') === 0) {
+                }
+                else {
+                    $item->image = \Storage::disk('public')->url($item->image);
+                }
+            }
+
             if(isset($item->slug)) { $item->slug = '/content/'.$item->slug; }
             return $item;
         });
