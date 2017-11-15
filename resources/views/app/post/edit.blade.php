@@ -85,6 +85,10 @@
                                         <textarea type="text"  class="form-control" id="excerpt" aria-describedby="postExcerpt" placeholder="Describe the post" name="excerpt" rows="2">{{$post->excerpt}}</textarea>
                                     </div>
                                     <div class="form-group">
+                                        <label for="postMetaDescription">Meta Description</label>
+                                        <textarea type="text"  class="form-control" id="meta_description" aria-describedby="postMetaDescription" placeholder="Describe the post" name="meta_description" rows="2">{{$post->meta_description}}</textarea>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="postBody">Content</label>
 
                                         <textarea id="body" name="body"><?php echo $post->body; ?></textarea>
