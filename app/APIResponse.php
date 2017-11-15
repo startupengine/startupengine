@@ -55,7 +55,9 @@ class APIResponse extends Model
             ->orderBy('created_at')
             ->get();
         $items->transform(function ($item, $key) {
-            if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
+            if(isset($item->image)) {
+                //$item->image = \Storage::disk('public')->url($item->image);
+            }
             if(isset($item->slug)) { $item->slug = '/content/'.$item->slug; }
             return $item;
         });
