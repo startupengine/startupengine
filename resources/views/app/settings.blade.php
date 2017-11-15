@@ -67,7 +67,7 @@
                                 @foreach($settings as $setting)
                                 <tr>
                                     <td>{{ $setting->display_name }}</td>
-                                    <td class="hiddenOnMobile">{{ $setting->value }}</td>
+                                    <td class="hiddenOnMobile">{{ substr($setting->value, 0, 25)}}...</td>
                                     <td>{{ $setting->status }}</td>
                                     <td align="right">
                                         <a href="/app/edit/setting/{{ $setting->id }}" class="btn btn-sm btn-secondary-outline" style="">Edit</a>
