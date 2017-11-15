@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="postCategory">Category</label><br>
                                             <?php $category = \App\Category::find($post->category_id);?>
-                                            <select class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
+                                            <select class="custom-select" id="category_id" name="category_id" aria-describedby="potCategory" style="width:100%;">
                                                 <?php if($category!== null ) { ?>
                                                     <option selected disabled>{{$category->name}}</option>
                                                 <?php } else { ?>

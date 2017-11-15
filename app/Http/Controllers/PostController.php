@@ -44,6 +44,7 @@ class PostController extends Controller
             }
             $post->title = $request->input('title');
             $post->slug = $request->input('slug');
+            $post->category_id = $request->input('category_id');
             $post->excerpt = $request->input('excerpt');
             $post->meta_description = $request->input('meta_description');
             $post->image = $request->input('image');
