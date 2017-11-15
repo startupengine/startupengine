@@ -59,13 +59,11 @@
                                             <label for="postCategory">Category</label><br>
                                             <?php $category = \App\Category::find($post->category_id);?>
                                             <select class="custom-select" id="category_id" name="category_id" aria-describedby="potCategory" style="width:100%;">
-                                                <?php if($category!== null ) { ?>
-                                                    <option value="{{ $category->id }}" selected disabled>{{$category->name}}</option>
-                                                <?php } else { ?>
+                                                <?php if($category == null ) { ?>
                                                     <option selected disabled>Choose a category</option>
                                                 <?php } ?>
                                                 <?php foreach($categories as $category) { ?>
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}" <?php if($category->id == $post->category_id) { echo "selected"; }?>>{{ $category->name }}</option>
                                                 <?php } ?>
                                             </select>
                                         </div>
