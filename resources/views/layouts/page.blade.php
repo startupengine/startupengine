@@ -17,7 +17,7 @@
 
     @yield('styles')
 
-    <!-- FAVICONS -->
+<!-- FAVICONS -->
     <?php if( setting('site.favicon') !== null) { ?>
     <link rel="icon" sizes="180x180" href="{{ \Storage::disk('public')->url( setting('site.favicon') ) }}">
     <?php }  ?>

@@ -26,16 +26,29 @@
 @endsection
 
 @section('styles')
+
     @if(View::exists('theme.pages.'.$page->slug.'.css'))
         @include('theme.pages.'.$page->slug.'.css')
     @endif
+
+    @if($page->css !== null)
+        {{ $page->css }}
+    @endif
+
 @endsection
 
 @section('content')
+
     @if(View::exists('theme.pages.'.$page->slug.'.body'))
         @include('theme.pages.'.$page->slug.'.body')
     @endif
+
     @if(View::exists('theme.pages.'.$page->slug.'.scripts'))
         @include('theme.pages.'.$page->slug.'.scripts')
     @endif
+
+    @if($page->scripts !== null)
+        {{ $page->scripts }}
+    @endif
+
 @endsection
