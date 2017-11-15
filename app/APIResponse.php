@@ -244,7 +244,7 @@ class APIResponse extends Model
             ->get();
 
         $items->transform(function ($item, $key) {
-            if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
+            //if(isset($item->image)) { $item->image = \Storage::disk('public')->url($item->image); }
             if(isset($item->body)) { $item->body= json_encode($item->body); }
             return $item;
         });
