@@ -58,6 +58,9 @@ class SyncGit extends Command
                 if($existingsetting == null) {
                     $newsetting = new Setting();
                 }
+                else {
+                    $newsetting = $existingsetting;
+                }
                 $newsetting->key = $setting->key;
                 $newsetting->display_name = $setting->display_name;
                 $newsetting->status = $setting->status;
