@@ -36,11 +36,9 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="card" style="box-shadow:none;">
-                                    <h5>Edit Post</h5>
-                                </div>
-                            </div>
+
+                            <h5>Edit Post</h5>
+
                             <form action="/app/edit/post" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">

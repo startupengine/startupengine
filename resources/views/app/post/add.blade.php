@@ -36,9 +36,9 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-12">
+
                                 <h5>New Post</h5>
-                            </div>
+
                             <form action="/app/new/post" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
@@ -56,8 +56,8 @@
                                         <div class="form-group">
                                             <label for="postCategory">Category</label><br>
 
-                                            <select class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
-                                                <option selected disabled>Choose a category</option>
+                                            <select class="custom-select" id="category_id" name="category_id" aria-describedby="potCategory" style="width:100%;">
+                                                <option disabled>Choose a category</option>
                                                 <?php foreach($categories as $category) { ?>
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 <?php } ?>
@@ -76,6 +76,10 @@
                                     <div class="form-group">
                                         <label for="postExcerpt">Excerpt</label>
                                         <textarea type="text" class="form-control" id="excerpt" aria-describedby="postExcerpt" placeholder="Describe the post" name="excerpt" rows="2"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="postImage">Image</label>
+                                        <input type="text"  class="form-control" id="image" aria-describedby="postImage" placeholder="Image for the post" name="image" />
                                     </div>
                                     <div class="form-group">
                                         <label for="postBody">Content</label>

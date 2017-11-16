@@ -54,9 +54,6 @@ class PostController extends Controller
             if($request->input('status') == null) {
                 $post->status = 'DRAFT';
             }
-            if($request->input('publish') == "on") {
-                $post->status = "PUBLISHED";
-            }
             $post->save();
             return redirect('/app/content');
         }
