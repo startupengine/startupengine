@@ -57,12 +57,12 @@ class SyncGit extends Command
                 $existingsetting = Setting::where('key', '=', $setting->key)->first();
                 if($existingsetting == null) {
                     $newsetting = new Setting();
-                    $newsetting->key = $setting->key;
-                    $newsetting->display_name = $setting->display_name;
-                    $newsetting->status = $setting->status;
-                    $newsetting->type = $setting->type;
-                    $newsetting->save();
                 }
+                $newsetting->key = $setting->key;
+                $newsetting->display_name = $setting->display_name;
+                $newsetting->status = $setting->status;
+                $newsetting->type = $setting->type;
+                $newsetting->save();
             }
         }
 

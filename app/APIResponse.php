@@ -202,7 +202,16 @@ class APIResponse extends Model
 
     public function getItem($request){
         $type = $request->input('type');
-        $slug = $request->input('slug');
+
+        if($request->input('slug') !== null) {
+            $field = "slug";
+            $slug = $request->input('slug');
+        }
+        if($request->input('key') !== null) {
+            $field = "key";
+            $slug = $request->input('key');
+        }
+
         $fields = 'id, status';
         if(\Schema::hasColumn($type, 'meta_description'))
         {
@@ -236,10 +245,26 @@ class APIResponse extends Model
         {
             $fields = $fields.', title';
         }
+        if(\Schema::hasColumn($type, 'key'))
+        {
+            $fields = $fields.', key';
+        }
+        if(\Schema::hasColumn($type, 'value'))
+        {
+            $fields = $fields.', value';
+        }
+        if(\Schema::hasColumn($type, 'display_name'))
+        {
+            $fields = $fields.', display_name';
+        }
+        if(\Schema::hasColumn($type, 'type'))
+        {
+            $fields = $fields.', type';
+        }
 
         $items = \DB::table($type)
             ->select(\DB::raw($fields))
-            ->where('slug', '=', $slug)
+            ->where($field, '=', $slug)
             ->where('status', '=', 'PUBLISHED')
             ->get();
 
