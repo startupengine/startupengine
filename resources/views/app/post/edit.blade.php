@@ -73,6 +73,11 @@
                                                 <option <?php if($post->status == "PENDING" ) { echo "selected"; } ?> value="PENDING">Pending</option>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="postBody">Publish Date</label>
+                                            <?php $now = new \Carbon\Carbon(); ?>
+                                            <input type="text" class="form-control date-picker" value="{{ $now->format('m/d/Y') }}" data-date-format="mm/dd/yyyy" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -108,7 +113,25 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.date-picker').each(function(){
+            $(this).datepicker({
+                templates:{
+                    leftArrow: '<i class="now-ui-icons arrows-1_minimal-left"></i>',
+                    rightArrow: '<i class="now-ui-icons arrows-1_minimal-right"></i>'
+                }
+            }).on('show', function() {
+                $('.datepicker').addClass('open');
 
+                datepicker_color = $(this).data('datepicker-color');
+                if( datepicker_color.length != 0){
+                    $('.datepicker').addClass('datepicker-'+ datepicker_color +'');
+                }
+            }).on('hide', function() {
+                $('.datepicker').removeClass('open');
+            });
+        });
+    </script>
 
     </body>
 @endsection
