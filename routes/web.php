@@ -19,6 +19,9 @@ Route::group(['middleware' => ['roles']], function () {
 
     //App
     Route::get('/app', 'AppController@index');
+    Route::get('/app/profile', 'ProfileController@index');
+    Route::get('/app/edit/profile', 'ProfileController@editProfile');
+    Route::post('/app/edit/profile', 'ProfileController@saveProfile');
     Route::get('/app/insights', 'AppController@insights');
     Route::get('/app/research', 'AppController@research');
     Route::post('/app/new/research/item', 'ResearchController@saveResearchItem');
