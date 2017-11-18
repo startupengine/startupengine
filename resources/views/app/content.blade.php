@@ -59,7 +59,15 @@
                                 </form>
                             </div>
                             <div style="margin-bottom:10px;" align="right">
-                                <a href="/app/new/post" class="btn btn-secondary-outline btn-round">New Post &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                                <button type="button" class="btn btn-round btn-secondary-outline " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    New Item <i class="now-ui-icons ui-1_simple-add"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" align="center">
+                                    <?php foreach($postTypes as $postType) { ?>
+                                    <a href="/app/new/{{$postType->slug}}"
+                                       class="dropdown-item"> <i class="now-ui-icons ui-1_simple-add"></i> &nbsp; New {{$postType->title}}</a>
+                                    <?php } ?>
+                                </div>
                             </div>
                             <table class="table">
                                 <thead>

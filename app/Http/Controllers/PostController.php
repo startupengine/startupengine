@@ -42,6 +42,16 @@ class PostController extends Controller
             else {
                 $post = new \App\Post;
             }
+            if($request->input('published_at') == null) {
+                if($post->published_at == null) {
+                    $post->published_at = \Carbon\Carbon::now();
+                }
+            }
+            else {
+                $date = $request->input('published_at');
+                $published_at = \Carbon\Carbon::createFromFormat('m/d/Y', $date);
+                $post->published_at = $published_at->toDateTimeString();
+            }
             $post->title = $request->input('title');
             $post->slug = $request->input('slug');
             $post->category_id = $request->input('category_id');

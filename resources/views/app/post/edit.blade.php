@@ -76,7 +76,8 @@
                                         <div class="form-group">
                                             <label for="postBody">Publish Date</label>
                                             <?php $now = new \Carbon\Carbon(); ?>
-                                            <input type="text" class="form-control date-picker" value="{{ $now->format('m/d/Y') }}" data-date-format="mm/dd/yyyy" />
+                                            <?php if(!isset($post->published_at)) { $date = $now->format('m/d/Y'); } else { $date = $post->published_at->format('m/d/Y'); } ?>
+                                            <input type="text" class="form-control date-picker" value="{{ $date }}" data-date-format="mm/dd/yyyy" name="published_at" />
                                         </div>
                                     </div>
                                 </div>

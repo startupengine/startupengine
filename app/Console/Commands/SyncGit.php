@@ -6,6 +6,7 @@ use App\Setting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use App\PostType;
 
 class SyncGit extends Command
 {
@@ -51,14 +52,13 @@ class SyncGit extends Command
         $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
 
         if (Schema::hasTable('settings')) {
-            $json = json_decode(file_get_contents($themepath.'/theme.json'));
+            $json = json_decode(file_get_contents($themepath . '/theme.json'));
 
-            foreach($json->settings as $setting){
+            foreach ($json->settings as $setting) {
                 $existingsetting = Setting::where('key', '=', $setting->key)->first();
-                if($existingsetting == null) {
+                if ($existingsetting == null) {
                     $newsetting = new Setting();
-                }
-                else {
+                } else {
                     $newsetting = $existingsetting;
                 }
                 $newsetting->key = $setting->key;
@@ -69,10 +69,28 @@ class SyncGit extends Command
             }
         }
 
+        if (Schema::hasTable('post_types')) {
+            $json = json_decode(file_get_contents($themepath . '/theme.json'));
+            $schemas = $json->schemas;
+            foreach ($schemas as $schema) {
+                $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
+                $contents = json_decode(file_get_contents($schemapath));
+                $entry = PostType::where('slug', '=', $schema)->first();
+                if($entry == null) {
+                    $entry = new \App\PostType();
+                }
+                $entry->json = json_encode($contents);
+                $entry->slug = $schema;
+                $entry->title = $contents->title;
+                $entry->enabled = true;
+                $entry->save();
+            }
+        }
+
         $pages = [];
         if (Schema::hasTable('pages')) {
             if (count(\App\Page::all()) > 1) {
-                foreach (glob($pagepath."/*") as $filename) {
+                foreach (glob($pagepath . "/*") as $filename) {
                     $filename = substr($filename, strrpos($filename, '/') + 1);
                     $pages[] = $filename;
                     $page = \App\Page::where('slug', '=', $filename)->first();

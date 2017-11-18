@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PostType;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -80,13 +81,14 @@ class AppController extends Controller
     public function content(Request $request) {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            $postTypes = PostType::all();
             if($request->input('s') !== null) {
                 $posts = \App\Post::where('body', 'LIKE', '%'.$request->input('s').'%')->orWhere('title', 'ILIKE', '%'.$request->input('s').'%')->orWhere('excerpt', 'ILIKE', '%'.$request->input('s').'%')->limit(100)->orderBy('updated_at', 'desc')->get();
             }
             else {
                 $posts = \App\Post::limit(100)->orderBy('updated_at', 'desc')->get();
             }
-            return view('app.content')->with('posts', $posts);
+            return view('app.content')->with('posts', $posts)->with('postTypes', $postTypes);
         }
 
         else {
