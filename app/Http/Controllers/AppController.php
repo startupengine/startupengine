@@ -149,7 +149,10 @@ class AppController extends Controller
                 $settings =  new \App\Setting();
                 $settings = $settings->appSettings();
             }
-            return view('app.settings')->with('settings', $settings);
+            $postTypes = PostType::all();
+            $settingsGroups = Setting::all()->groupBy('group');
+            dd($settingsGroups);
+            return view('app.settings')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
         }
 
         else {

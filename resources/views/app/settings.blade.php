@@ -54,6 +54,36 @@
                                     <input type="text" value="" placeholder="Search settings..." class="form-control" id="s" name="s">
                                 </form>
                             </div>
+                            @if($request->input('s') == null)
+                            <div>
+                                @foreach($postTypes as $postType)
+                                    <div class="col-md-4" style="float:left;">
+                                        <div class="card">
+                                            <div class="card-header" align="center">
+                                                {{ $postType->title }}
+                                            </div>
+                                            <div class="card-body" align="center" style="min-height:125px;">
+                                                <p>{{ $postType->json()->description }}</p>
+                                                <a href="#" class="btn btn-secondary-outline btn-round">Edit {{ $postType->title }} Settings</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                @foreach($settingsGroups as $group)
+                                    <div class="col-md-4" style="float:left;">
+                                        <div class="card">
+                                            <div class="card-header" align="center">
+                                                {{ ucfirst($group->group) }}
+                                            </div>
+                                            <div class="card-body" align="center" style="min-height:125px;">
+                                                <a href="#" class="btn btn-secondary-outline btn-round">Edit {{ $group->group }} Settings</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @endif
+                            @if($request->input('s') !== null)
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -76,6 +106,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            @endif
                         </div>
                     </div>
                 </main>

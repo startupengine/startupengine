@@ -21,4 +21,8 @@ class PostType extends Model implements AuditableContract
 
     protected $dates = ['deleted_at', 'published_at'];
 
+    public function json() {
+        return json_decode($this->json);
+    }
+
 }
