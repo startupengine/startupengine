@@ -83,7 +83,7 @@
             "@php artisan command:SyncGit"
         ],
         "post-update-cmd": [
-            "@php artisan migrate:refresh",
+            "@php artisan migrate",
             "@php artisan command:SyncGit"
         ]
     },
