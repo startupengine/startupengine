@@ -65,6 +65,12 @@ class SyncGit extends Command
                 $newsetting->display_name = $setting->display_name;
                 $newsetting->status = $setting->status;
                 $newsetting->type = $setting->type;
+                $newsetting->group = $setting->group;
+                if ($existingsetting !== null) {
+                    if ($existingsetting->value == null && isset($setting->value)) {
+                        $newsetting->value = $setting->value;
+                    }
+                }
                 $newsetting->save();
             }
         }
@@ -76,7 +82,7 @@ class SyncGit extends Command
                 $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
                 $contents = json_decode(file_get_contents($schemapath));
                 $entry = PostType::where('slug', '=', $schema)->first();
-                if($entry == null) {
+                if ($entry == null) {
                     $entry = new \App\PostType();
                 }
                 $entry->json = json_encode($contents);

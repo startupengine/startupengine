@@ -54,36 +54,39 @@
                                     <input type="text" value="" placeholder="Search settings..." class="form-control" id="s" name="s">
                                 </form>
                             </div>
-                            @if($request->input('s') == null)
+                            @if($request->input('s') == null && $request->input('group') == null)
                             <div>
-                                @foreach($postTypes as $postType)
-                                    <div class="col-md-4" style="float:left;">
-                                        <div class="card">
-                                            <div class="card-header" align="center">
-                                                {{ $postType->title }}
-                                            </div>
-                                            <div class="card-body" align="center" style="min-height:125px;">
-                                                <p>{{ $postType->json()->description }}</p>
-                                                <a href="#" class="btn btn-secondary-outline btn-round">Edit {{ $postType->title }} Settings</a>
-                                            </div>
+                                <div class="col-md-4" style="float:left;">
+                                    <div class="card">
+                                        <div class="card-header" align="center">
+                                            Content Types
+                                        </div>
+                                        <div class="card-body" align="center" style="min-height: 100px;">
+                                            <p>Add or edit content types.</p>
+                                        </div>
+                                        <div class="card-footer" align="center">
+                                            <a href="/app/schema" class="btn btn-secondary-outline btn-round">Content Types</a>
                                         </div>
                                     </div>
-                                @endforeach
-                                @foreach($settingsGroups as $group)
+                                </div>
+                                @foreach($settingsGroups as $key => $value)
                                     <div class="col-md-4" style="float:left;">
                                         <div class="card">
                                             <div class="card-header" align="center">
-                                                {{ ucfirst($group->group) }}
+                                                {{ ucfirst($key) }}
                                             </div>
-                                            <div class="card-body" align="center" style="min-height:125px;">
-                                                <a href="#" class="btn btn-secondary-outline btn-round">Edit {{ $group->group }} Settings</a>
+                                            <div class="card-body" align="center" style="min-height: 100px;">
+                                                <?php $filtered = $value->where('key', strtolower($key).'.settings_description')->first(); if($filtered !== null) { echo "<p>".$filtered->value."</p>"; } if($filtered == null ) { echo "Settings for ".strtolower(str_plural($key)); } ?>
+                                            </div>
+                                            <div class="card-footer" align="center">
+                                                <a href="/app/settings?group={{$key}}" class="btn btn-secondary-outline btn-round" >{{ $key }} Settings</a>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                             @endif
-                            @if($request->input('s') !== null)
+                            @if($request->input('s') !== null or $request->input('group') !== null)
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -94,6 +97,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $postType = $request->input('group'); ?>
+                                <?php $postType = $postTypes->where('title', '=', $postType)->first(); ?>
+                                @if($postType !== null)
+
+                                    <tr>
+                                        <td>Content Type: {{ $postType->title }}</td>
+                                        <td class="hiddenOnMobile"></td>
+                                        <td><?php if($postType->enabled) echo "ENABLED"; else { echo "DISABLED"; } ?></td>
+                                        <td align="right">
+                                            <a href="/app/edit/schema/{{ $postType->slug }}" class="btn btn-sm btn-secondary-outline" style="">Edit Schema</a>
+                                        </td>
+                                    </tr>
+                                @endif
                                 @foreach($settings as $setting)
                                 <tr>
                                     <td>{{ $setting->display_name }}</td>

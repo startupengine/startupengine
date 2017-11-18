@@ -145,13 +145,15 @@ class AppController extends Controller
             if($request->input('s') !== null) {
                 $settings = \App\Setting::where('key', 'LIKE', '%'.$request->input('s').'%')->orWhere('display_name', 'ILIKE', '%'.$request->input('s').'%')->orWhere('value', 'ILIKE', '%'.$request->input('s').'%')->limit(100)->orderBy('display_name', 'asc')->get();
             }
+            elseif($request->input('group') !== null) {
+                $settings = \App\Setting::where('group', '=', $request->input('group'))->limit(100)->orderBy('display_name', 'asc')->get();
+            }
             else {
                 $settings =  new \App\Setting();
                 $settings = $settings->appSettings();
             }
             $postTypes = PostType::all();
             $settingsGroups = Setting::all()->groupBy('group');
-            dd($settingsGroups);
             return view('app.settings')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
         }
 

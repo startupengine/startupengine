@@ -42,6 +42,9 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/users', 'AppController@users');
     Route::get('/app/modules', 'ModuleController@index');
     Route::get('/app/settings', 'AppController@settings');
+    Route::get('/app/schema', 'SchemaController@index');
+    Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
+    Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
     Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
     Route::post('/app/edit/setting', 'SettingController@saveSetting');
 
