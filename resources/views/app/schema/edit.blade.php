@@ -25,7 +25,7 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-orange">
+    <body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">
@@ -52,38 +52,34 @@
                                                placeholder="What should this setting be called?" name="title">
                                         <div class="form-group">
                                             <label for="settingKey">Slug</label>
-                                            <input value="{{$postType->slug}}" type="text" class="form-control" id="slug"
+                                            <input value="{{$postType->slug}}" type="text" class="form-control"
+                                                   id="slug"
                                                    aria-describedby="settingKey" placeholder="site.main_color"
-                                                   name="slug">
+                                                   name="slug"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="settingValue">Schema</label>
-
-
                                             <textarea name="json"></textarea>
                                             <div id="json" style="min-height:350px;"></div>
-
                                             <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js"
-                                                    type="text/javascript" charset="utf-8"></script>
-
+                                                    type="text/javascript" charset="utf-8">
+                                            </script>
                                             <script>
-                                                <?php if($postType->custom_json !== null) { $input = $postType->custom_json; } else { $input = $postType->json; } ?>
-
+                                                    <?php if ($postType->custom_json !== null) {
+                                                        $input = $postType->custom_json;
+                                                    } else {
+                                                        $input = $postType->json;
+                                                    } ?>
                                                 var editor = ace.edit("json");
                                                 var textarea = $('textarea[name="json"]').hide();
-
                                                 editor.setTheme("ace/theme/github");
                                                 editor.getSession().setMode("ace/mode/json");
-
                                                 editor.getSession().setValue(textarea.val());
                                                 editor.getSession().on('change', function () {
                                                     textarea.val(editor.getSession().getValue());
                                                 });
-
                                                 editor.setValue(JSON.stringify({!! $input !!}, null, '\t'));
-
                                             </script>
-
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -92,6 +88,7 @@
                                             <button type="submit" class="btn btn-secondary-outline ">Save</button>
                                         </div>
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>

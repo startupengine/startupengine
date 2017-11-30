@@ -19,39 +19,61 @@ Route::group(['middleware' => ['roles']], function () {
 
     //App
     Route::get('/app', 'AppController@index');
+
+    //Profile
     Route::get('/app/profile', 'ProfileController@index');
     Route::get('/app/edit/profile', 'ProfileController@editProfile');
     Route::post('/app/edit/profile', 'ProfileController@saveProfile');
+
+    /*
+    //Research
     Route::get('/app/insights', 'AppController@insights');
     Route::get('/app/research', 'AppController@research');
     Route::post('/app/new/research/item', 'ResearchController@saveResearchItem');
     Route::post('/app/new/research/collection', 'ResearchController@saveResearchCollection');
     Route::post('/app/new/research/feed', 'ResearchController@saveResearchFeed');
+    */
+
+    //Pages
     Route::get('/app/pages', 'PageController@index');
     Route::get('/app/edit/page/{id}', 'PageController@editPage');
     Route::post('/app/edit/page', 'PageController@savePage');
+
+    //Content
     Route::get('/app/content', 'AppController@content');
-    Route::get('/app/new/post', 'PostController@addPost');
+    Route::get('/app/new/{slug}', 'PostController@addPost');
     Route::post('/app/new/post', 'PostController@savePost');
     Route::get('/app/view/post/{id}', 'PostController@viewPost');
     Route::get('/app/edit/post/{id}', 'PostController@editPost');
     Route::get('/app/delete/post/{id}', 'PostController@deletePost');
     Route::post('/app/edit/post', 'PostController@savePost');
+
+    //Design
+    Route::get('/app/design', 'DesignController@index');
+
+    //Analytics
     Route::get('/app/analytics', 'AppController@analytics');
     Route::get('/app/analytics/mixpanel', 'AppController@mixpanel');
-    Route::get('/app/users', 'AppController@users');
-    Route::get('/app/modules', 'ModuleController@index');
-    Route::get('/app/settings', 'AppController@settings');
+
+    //Packages
+    Route::get('/app/packages', 'PackageController@index');
+    Route::post('/app/new/package', 'PackageController@savePackage');
+    Route::get('/app/delete/package/{id}', 'PackageController@deletePackage');
+    Route::get('/app/update/package/{id}', 'PackageController@updatePackage');
+    Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
+    //Route::get('/app/modules', 'ModuleController@index');
+
+    //Route::get('/app/users', 'AppController@users');
+
+    //Schema
     Route::get('/app/schema', 'SchemaController@index');
     Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
     Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
+
+    //Settings
+    Route::get('/app/settings', 'AppController@settings');
     Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
     Route::post('/app/edit/setting', 'SettingController@saveSetting');
-
-    //Voyager
-    Route::group(['prefix' => 'admin'], function () {
-        Voyager::routes();
-    });
 
 });
 

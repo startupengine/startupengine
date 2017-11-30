@@ -29,13 +29,20 @@
     <!-- Meta -->
     @yield('meta')
 </head>
-    @include('theme.templates.global.header')
+    @if(View::exists('theme.templates.global.header'))
+        @include('theme.templates.global.header')
+    @endif
+
     @if(View::exists('theme.templates.post.header'))
         @include('theme.templates.post.header')
     @endif
+
     @yield('content')
-    @include('theme.templates.global.menu')
-    @include('theme.templates.global.scripts')
+
+    @if(View::exists('theme.templates.global.scripts'))
+        @include('theme.templates.global.scripts')
+    @endif
+
     @if(View::exists('theme.templates.post.footer'))
         @include('theme.templates.post.footer')
     @elseif(View::exists('theme.templates.global.footer'))

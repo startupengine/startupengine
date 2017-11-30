@@ -50,7 +50,7 @@
 @endsection
 
 @section('content')
-<body class="index-page sidebar-collapse bg-gradient-orange">
+<body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">
@@ -61,15 +61,13 @@
                 @include('app.admin-sidebar')
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
-                        <div class="col-md-12 card-deck">
-                            <div class="col-md-12">
-                                <h5 style="margin-bottom:25px;">Analytics</h5>
-                            </div>
-                            <div class="col-md-12" style="margin-bottom:40px;">
-                                <div class="fluidMedia">
-                                    <iframe src="/app/analytics/mixpanel" frameborder="0" style="min-height:100%;">
-                                    </iframe>
-                                </div>
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom:25px;">Analytics</h5>
+                        </div>
+                        <div class="col-md-12" style="margin-bottom:40px;">
+                            <div class="fluidMedia">
+                                <iframe src="/app/analytics/mixpanel" frameborder="0" style="min-height:100%;">
+                                </iframe>
                             </div>
                         </div>
                     </div>

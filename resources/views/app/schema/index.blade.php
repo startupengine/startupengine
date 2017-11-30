@@ -30,11 +30,38 @@
                 display: none !important;
             }
         }
+        .badge-status {
+            background:#555;
+            border:1px solid #555;
+            color:#fff;
+            min-width:100px;
+            padding:3px 8px;
+            font-weight:400;
+            border-radius:4px;
+        }
+        .badge-status-disabled {
+            background:#999;
+            border:1px solid #999;
+            color:#fff;
+            min-width:100px;
+            padding:3px 8px;
+            font-weight:400;
+            border-radius:4px;
+        }
+        .badge-date, .badge-category {
+            background:#fff;
+            border:1px solid #999;
+            color:#999;
+            min-width:100px;
+            padding:3px 8px;
+            font-weight:400;
+            border-radius:4px;
+        }
     </style>
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-orange">
+    <body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">
@@ -51,7 +78,7 @@
                         <div class="col-md-12">
                             <div class="form-group" style="margin-bottom:40px;">
                                 <form>
-                                    <input type="text" value="" placeholder="Search settings..." class="form-control" id="s" name="s">
+                                    <input type="text" value="" placeholder="Search content types..." class="form-control" id="s" name="s">
                                 </form>
                             </div>
 
@@ -59,17 +86,18 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th scope="col" class="hiddenOnMobile">Slug</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col"> </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($postTypes as $postType)
                                     <tr>
-                                        <td>Content Type: {{ $postType->title }}</td>
-                                        <td class="hiddenOnMobile">{{$postType->slug}}</td>
-                                        <td><?php if($postType->enabled) echo "ENABLED"; else { echo "DISABLED"; } ?></td>
+                                        <td>{{ $postType->title }}</td>
+                                        <td scope="col" class="hiddenOnMobile"><span
+                                                    class="badge badge-status<?php if ($postType->enabled !== true) {
+                                                        echo "-disabled";
+                                                    } ?>"><?php if($postType->enabled) echo "ENABLED"; else { echo "DISABLED"; } ?></span></td>
                                         <td align="right">
                                             <a href="/app/edit/schema/{{ $postType->slug }}" class="btn btn-sm btn-secondary-outline" style="">Edit Schema</a>
                                         </td>

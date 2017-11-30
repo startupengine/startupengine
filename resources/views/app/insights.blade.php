@@ -34,7 +34,7 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-orange">
+    <body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">

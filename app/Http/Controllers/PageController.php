@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ContentItem;
+use App\Setting;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Page;
 use TCG\Voyager\Models\Role;
@@ -12,9 +13,19 @@ class PageController
 
     public function getHomepage()
     {
-        $page = \App\Page::where('slug', '=', 'home')->first();
-        $page->slug = 'home';
-        return view('pages.view')->with('page', $page);
+        $homepagesetting = Setting::where('key', '=', 'site.homepage')->first();
+        if($homepagesetting !== null){
+            $page = \App\Page::where('slug', '=', $homepagesetting->value)->first();
+        }
+        else {
+            $page = \App\Page::where('slug', '=', 'home')->first();
+        }
+        if($page == null) {
+            abort(404);
+        }
+        else {
+            return view('pages.view')->with('page', $page);
+        }
     }
 
     public function getPage($slug)
@@ -54,15 +65,21 @@ class PageController
             $page->slug = $request->input('slug');
             $page->excerpt = $request->input('excerpt');
             $page->meta_description = $request->input('meta_description');
-            $page->status = $request->input('status');
             $page->css = $request->input('css');
             $page->scripts = $request->input('scripts');
+            $page->html = $request->input('html');
             $page->show_footer = $request->input('show_footer');
             if($request->input('json') !== null ){
                 $page->json = json_encode($request->input('json'));
             }
+            if($request->input('schema') !== null ){
+                $page->schema = json_encode($request->input('schema'));
+            }
             if ($request->input('status') == null) {
                 $page->status = 'DRAFT';
+            }
+            else {
+                $page->status = $request->input('status');
             }
             if ($request->input('publish') == "on") {
                 $page->status = "PUBLISHED";
@@ -87,7 +104,7 @@ class PageController
             if ($request->input('s') !== null) {
                 $pages = \App\Page::where('body', 'LIKE', '%' . $request->input('s') . '%')->orWhere('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('excerpt', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
             } else {
-                $pages = Page::orderBy('created_at', 'desc')->get();
+                $pages = Page::orderBy('created_at', 'desc')->limit(100)->get();
             }
             return view('app.page.index')->with('pages', $pages);
         } else {

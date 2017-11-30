@@ -10,21 +10,22 @@
 
 @section('styles')
     <style>
-        @media(max-width:991px) {
+        @media (max-width: 991px) {
             .sidebar {
-                display:none;
+                display: none;
             }
         }
-        @media(min-width:991px) {
+
+        @media (min-width: 991px) {
             .mobile-nav {
-                display:none;
+                display: none;
             }
         }
     </style>
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-orange">
+    <body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">
@@ -36,61 +37,64 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="card" style="box-shadow:none;">
-                                    <h5>View Post</h5>
-                                </div>
-                            </div>
-                            <form>
+
+                            <h5>View {{ $postType->title }}</h5>
+
+                            <form action="/app/new/post" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="postTitle">Title</label>
-                                            <input disabled value="{{$post->title}}" type="text" class="form-control" id="title" aria-describedby="postTitle" placeholder="Enter a title" name="title">
+                                            <input disabled value="{{$post->title}}" type="text" class="form-control" id="title"
+                                                   aria-describedby="postTitle" placeholder="Enter a title"
+                                                   name="title">
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="postSlug">Slug</label>
-                                            <input disabled value="{{$post->slug}}" type="text" class="form-control" id="slug" aria-describedby="postSlug" placeholder="example-slug" name="slug">
+                                            <input disabled value="{{$post->slug}}" type="text" class="form-control" id="slug"
+                                                   aria-describedby="postSlug" placeholder="example-slug" name="slug">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="postCategory">Category</label><br>
-                                            <?php $category = \App\Category::find($post->category_id);?>
-                                            <select disabled class="custom-select" id="category" name="category" aria-describedby="potCategory" style="width:100%;">
-                                                <?php if($category!== null ) { ?>
-                                                <option selected disabled>{{$category->name}}</option>
-                                                <?php } else { ?>
-                                                <option selected disabled>Choose a category</option>
-                                                <?php } ?>
-                                                <?php foreach($categories as $category) { ?>
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="postStatus">Status</label><br>
-                                            <select disabled class="custom-select" id="status" name="status" aria-describedby="postStatus" style="width:100%;">
-                                                <option <?php if($post->status == "PUBLISHED" ) { echo "selected"; } ?> value="PUBLISHED">Published</option>
-                                                <option <?php if($post->status == "DRAFT" ) { echo "selected"; } ?> value="DRAFT">Draft</option>
-                                                <option <?php if($post->status == "PENDING" ) { echo "selected"; } ?> value="PENDING">Pending</option>
+                                            <select disabled class="custom-select" id="status" name="status"
+                                                    aria-describedby="postStatus" style="width:100%;">
+                                                <option <?php if ($post->status == "PUBLISHED") {
+                                                    echo "selected";
+                                                } ?> value="PUBLISHED">Published
+                                                </option>
+                                                <option <?php if ($post->status == "DRAFT") {
+                                                    echo "selected";
+                                                } ?> selected value="DRAFT">Draft
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="postExcerpt">Excerpt</label>
-                                            <textarea type="text" disabled class="form-control" id="excerpt" aria-describedby="postExcerpt" placeholder="Describe the post" name="excerpt" rows="2">{{$post->excerpt}}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="postBody">Content</label>
-                                            <textarea type="text" disabled class="form-control" id="body" aria-describedby="postBody" placeholder="Type the content" name="body" rows="6">{{$post->body}}</textarea>
-                                        </div>
-                                        <div align="right" style="margin-bottom:35px;">
-                                            <a href="/app/edit/post/{{$post->id}}" class="btn btn-secondary-outline ">Edit</a>
+                                            <label for="postStatus">Publish Date</label><br>
+                                            <?php if ($post->published_at == null) {
+                                                $date = \Carbon\Carbon::now()->format("m/d/Y");
+                                            } else {
+                                                $date = $post->published_at->format("m/d/Y");
+                                            } ?>
+                                            <input disabled type="text" class="form-control date-picker" value="{{$date}}"
+                                                   name="published_at">
                                         </div>
                                     </div>
+
+
+                                </div>
+
+                                @include('app.partials.fields')
+
+                                <div align="right" style="margin-bottom:35px;">
+                                    <a href="/app/edit/post/{{$post->id}}"
+                                       class="btn btn-secondary-outline">Edit</a>
                                 </div>
                             </form>
                         </div>
@@ -99,7 +103,25 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.date-picker').each(function () {
+            $(this).datepicker({
+                templates: {
+                    leftArrow: '<i class="now-ui-icons arrows-1_minimal-left"></i>',
+                    rightArrow: '<i class="now-ui-icons arrows-1_minimal-right"></i>'
+                }
+            }).on('show', function () {
+                $('.datepicker').addClass('open');
 
+                datepicker_color = $(this).data('datepicker-color');
+                if (datepicker_color.length != 0) {
+                    $('.datepicker').addClass('datepicker-' + datepicker_color + '');
+                }
+            }).on('hide', function () {
+                $('.datepicker').removeClass('open');
+            });
+        });
+    </script>
 
     </body>
 @endsection

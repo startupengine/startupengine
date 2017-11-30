@@ -99,11 +99,33 @@
         @media (max-width:500px) {
             .mixpanel-platform-date_picker {
                 margin-top: 10px !important;
+                margin-left:0px;
                 margin-bottom: 7px !important;
             }
         }
         .mixpanel-platform-chart_header {
             max-height: 100% !important;
+        }
+        #eventSelect {
+            min-width:225px !important;
+        }
+        .rounded_dropdown_label {
+            min-width:255px !important;
+        }
+        @media (max-width:500px) {
+            #by {
+                margin-left: 0px;
+                margin-top: 10px;
+            }
+        }
+        @media (min-width:500px) {
+            #by {
+                margin-left:35px !important;
+                margin-top: 0px;
+            }
+        }
+        .select_button {
+            min-width:237px !important;
         }
     </style>
 </head>

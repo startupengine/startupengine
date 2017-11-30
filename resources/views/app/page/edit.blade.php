@@ -39,7 +39,7 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-orange">
+    <body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">
@@ -87,29 +87,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin-top:15px;">
-                                    <div class="meta-fields" id="meta" role="tabpanel"
-                                         align="left" style="margin-bottom:25px;">
-                                        <div class="form-group">
-                                            <label for="postExcerpt">Excerpt</label>
-                                            <textarea type="text" class="form-control" id="excerpt"
-                                                      aria-describedby="postExcerpt"
-                                                      placeholder="Describe the page"
-                                                      name="excerpt"
-                                                      rows="2">{{$page->excerpt}}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="postExcerpt">Meta Description</label>
-                                            <textarea type="text" class="form-control"
-                                                      id="meta_description"
-                                                      name="meta_description"
-                                                      aria-describedby="postMetaDescription"
-                                                      placeholder="Describe the page for search engines."
-                                                      name="excerpt"
-                                                      rows="2">{{$page->meta_description}}</textarea>
-                                        </div>
-                                    </div>
-
+                                <div>
                                     @if($page->json() !== null && $page->json()->sections !== null)
                                         <label style="margin-bottom:10px;">Content</label>
                                         <?php $versions = $page->versions(); if ($versions == 0) {
@@ -194,67 +172,197 @@
                                         <?php } ?>
                                     @endif
 
-                                    <div style="margin-top:15px;">
-                                        <div class="meta-fields" id="meta2" role="tabpanel"
-                                             align="left" style="margin-bottom:25px;">
-                                            <div class="form-group">
-                                                <label for="pageCSS">CSS</label>
-                                                <textarea type="text" class="form-control"
-                                                          id="css"
-                                                          name="css"
-                                                          aria-describedby="pageCSS"
-                                                          placeholder=""
-                                                          name="css"
-                                                          rows="2">{{$page->css}}</textarea>
-                                                <script>
-                                                    var simplemde = new SimpleMDE({
-                                                        element: document.getElementById("css"),
-                                                        status: false,
-                                                        toolbar: false
-                                                    });
-                                                </script>
+                                    <div>
+                                        <div class="meta-fields" id="meta2" role="tabpanel"  align="left">
+
+                                            <label style="margin-bottom:10px;">Code</label>
+
+                                            <div class="card variation">
+
+                                                <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
+                                                    style="background:#fff;border-bottom:1px solid #ddd;"
+                                                    role="tablist">
+                                                    <li class="nav-item">
+                                                        <a href="#cssCode" class="nav-link active" data-section="css"
+                                                           data-toggle="tab" role="tab" aria-expanded="true">CSS</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#layoutCode" class="nav-link" data-section="layout"
+                                                           data-toggle="tab" role="tab" aria-expanded="true">Layout</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#scriptsCode" class="nav-link " data-section="scripts"
+                                                           data-toggle="tab" role="tab" aria-expanded="true">Scripts</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="#schemaCode" class="nav-link " data-section="schema"
+                                                           data-toggle="tab" role="tab" aria-expanded="true">Schema</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="card-body">
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active"
+                                                             id="cssCode"
+                                                             role="tabpanel"
+                                                             data-section="designCode">
+                                                            <div class="form-group">
+                                                                <label for="pageCSS"><strong>CSS</strong></label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="css"
+                                                                          name="css"
+                                                                          aria-describedby="pageCSS"
+                                                                          placeholder=""
+                                                                          name="css"
+                                                                          rows="2">{{$page->css}}</textarea>
+                                                                <script>
+                                                                    var simplemde = new SimpleMDE({
+                                                                        element: document.getElementById("css"),
+                                                                        status: false,
+                                                                        toolbar: false
+                                                                    });
+                                                                </script>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane"
+                                                             id="layoutCode"
+                                                             role="tabpanel"
+                                                             data-section="layout">
+                                                            <div class="form-group">
+                                                                <label for="pageScripts"><strong>HTML</strong></label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="html"
+                                                                          name="html"
+                                                                          aria-describedby="pageScripts"
+                                                                          placeholder=""
+                                                                          name="scripts"
+                                                                          rows="2">{{$page->html}}</textarea>
+                                                                <script>
+                                                                    var htmlEditor = new SimpleMDE({
+                                                                        element: document.getElementById("html"),
+                                                                        status: false,
+                                                                        toolbar: false
+                                                                    });
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group" style="margin-top:25px !important;">
+                                                                <input type="checkbox" name="show_footer"
+                                                                       class="bootstrap-switch"
+                                                                       data-on-label="YES"
+                                                                       data-off-label="NO"
+                                                                       <?php if($page->show_footer == true) { ?> checked="" <?php } ?>
+                                                                />
+                                                                <label for="show_footer">Show footer?</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane"
+                                                             id="scriptsCode"
+                                                             role="tabpanel"
+                                                             data-section="scripts">
+
+                                                            <div class="form-group">
+                                                                <label for="pageScripts"><strong>Scripts</strong></label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="scripts"
+                                                                          name="scripts"
+                                                                          aria-describedby="pageScripts"
+                                                                          placeholder=""
+                                                                          name="scripts"
+                                                                          rows="2">{{$page->scripts}}</textarea>
+                                                                <script>
+                                                                    var scriptsEditor = new SimpleMDE({
+                                                                        element: document.getElementById("scripts"),
+                                                                        status: false,
+                                                                        toolbar: false
+                                                                    });
+                                                                </script>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="tab-pane"
+                                                             id="schemaCode"
+                                                             role="tabpanel"
+                                                             data-section="schema">
+
+                                                            <div class="form-group">
+                                                                <label for="pageScripts"><strong>Schema</strong></label>
+                                                                <textarea type="text" class="form-control"
+                                                                          id="schema"
+                                                                          name="schema"
+                                                                          aria-describedby="pageScripts"
+                                                                          placeholder=""
+                                                                          name="schema"
+                                                                          rows="2">{{$page->schema}}</textarea>
+                                                                <script>
+                                                                    var schemaEditor = new SimpleMDE({
+                                                                        element: document.getElementById("schema"),
+                                                                        status: false,
+                                                                        toolbar: false
+                                                                    });
+                                                                </script>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="pageScripts">Scripts</label>
-                                                <textarea type="text" class="form-control"
-                                                          id="scripts"
-                                                          name="scripts"
-                                                          aria-describedby="pageScripts"
-                                                          placeholder=""
-                                                          name="scripts"
-                                                          rows="2">{{$page->scripts}}</textarea>
-                                                <script>
-                                                    var simplemde = new SimpleMDE({
-                                                        element: document.getElementById("scripts"),
-                                                        status: false,
-                                                        toolbar: false
-                                                    });
-                                                </script>
-                                            </div>
-
-                                            <div class="form-group" style="margin-top:25px !important;">
-                                                <input type="checkbox" name="show_footer" class="bootstrap-switch"
-                                                       data-on-label="YES"
-                                                       data-off-label="NO"
-                                                       <?php if($page->show_footer == true) { ?> checked="" <?php } ?>
-                                                />
-                                                <label for="show_footer">Show footer?</label>
-                                            </div>
-
-
-                                        </div>
-
-                                        <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
-                                        <div align="right" style="margin-bottom:35px;">
-                                            <button type="submit" class="btn btn-secondary-outline ">Save</button>
                                         </div>
                                     </div>
-                            </form>
+                                </div>
+                                <div>
+                                    <label style="margin-bottom:10px;">Meta</label>
+                                    <div class="card">
+                                        <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
+                                            style="background:#fff;border-bottom:1px solid #ddd;"
+                                            role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#seo"
+                                                   data-section="excerpt"
+                                                   role="tab"
+                                                   aria-expanded="false">Search Engine Optimization</a>
+                                            </li>
+                                        </ul>
+                                        <div class="meta-fields card-body" id="meta" role="tabpanel"
+                                             align="left" style="margin-bottom:25px;">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active"
+                                                     id="seo"
+                                                     role="tabpanel"
+                                                     data-section="meta">
+                                                    <div class="form-group">
+                                                        <label for="postExcerpt"><strong>Excerpt</strong></label>
+                                                        <textarea type="text" class="form-control" id="excerpt"
+                                                                  aria-describedby="postExcerpt"
+                                                                  placeholder="Describe the page"
+                                                                  name="excerpt"
+                                                                  rows="2">{{$page->excerpt}}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="postMetaDescription"><strong>Meta Description</strong></label>
+                                                        <textarea type="text" class="form-control" id="meta_description"
+                                                                  aria-describedby="postMetaDescription"
+                                                                  placeholder="Describe the page"
+                                                                  name="meta_description"
+                                                                  rows="2">{{$page->meta_description}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
+                                <div align="right" style="margin-bottom:35px;">
+                                    <button type="submit" class="btn btn-secondary-outline ">Save</button>
+                                </div>
                         </div>
+                        </form>
                     </div>
-                </main>
             </div>
+            </main>
         </div>
+    </div>
     </div>
 
     <!-- Modal Core -->

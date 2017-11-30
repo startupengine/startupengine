@@ -1,7 +1,7 @@
 <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar" style="padding-left:35px;padding-right:25px;min-height:100vh;border-right:1px solid #eee;">
     <ul class="nav flex-column" style="margin-top:15px;">
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Dashboard</a>
+            <?php /*<a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Dashboard</a> */ ?>
         </li>
         <?php /*
         <li>
@@ -27,21 +27,22 @@
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/pages"><i class="now-ui-icons files_paper"></i>&nbsp; Pages</a>
         </li>
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/content"><i class="now-ui-icons files_single-copy-04"></i>&nbsp; Content</a>
+            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/content"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Content</a>
         </li>
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/analytics"><i class="now-ui-icons business_chart-bar-32"></i>&nbsp; Analytics</a>
+            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/design"><i class="now-ui-icons objects_diamond"></i>&nbsp; Design</a>
         </li>
         <?php /*
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/media"><i class="now-ui-icons design_image"></i>&nbsp; Media</a>
         </li>
         */ ?>
-        <?php /*
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/modules"><i class="now-ui-icons design_app"></i>&nbsp; Modules</a>
+            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/packages"><i class="now-ui-icons design_app"></i>&nbsp; Packages</a>
         </li>
-        */ ?>
+        <li class="nav-item">
+            <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/analytics"><i class="now-ui-icons business_chart-bar-32"></i>&nbsp; Analytics</a>
+        </li>
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block" style="text-align: left;border-color:#eee !important;" href="/app/settings"><i class="now-ui-icons ui-1_settings-gear-63"></i>&nbsp; Settings</a>
         </li>

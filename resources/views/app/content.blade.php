@@ -30,8 +30,29 @@
                 display: none !important;
             }
         }
-        .badge-category {
-            background:royalblue;
+        .badge-status {
+            background:#555;
+            border:1px solid #555;
+            color:#fff;
+            min-width:100px;
+            padding:3px 8px;
+            font-weight:400;
+            border-radius:4px;
+        }
+        .badge-status-disabled {
+            background:#999;
+            border:1px solid #999;
+            color:#fff;
+            min-width:100px;
+            padding:3px 8px;
+            font-weight:400;
+            border-radius:4px;
+        }
+        .badge-date, .badge-category {
+            background:#fff;
+            border:1px solid #999;
+            color:#999;
+            min-width:100px;
             padding:3px 8px;
             font-weight:400;
             border-radius:4px;
@@ -40,7 +61,7 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-orange">
+    <body class="index-page sidebar-collapse bg-gradient">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="min-height: calc(100vh - 30px);">
             <div class="card-header" style="padding-left:25px;" align="right">
@@ -70,22 +91,22 @@
                                 </div>
                             </div>
                             <table class="table">
-                                <thead>
+                                <thead class="hiddenOnMobile">
                                 <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col" class="hiddenOnMobile">Last Activity</th>
+                                    <th scope="col" class="hiddenOnMobile">Last Updated</th>
+                                    <th scope="col" >Title</th>
+                                    <th scope="col" class="hiddenOnMobile">Status</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($posts as $post)
                                 <tr>
-                                    <td>{{ $post->title }}<?php if($post->category() !== null && $post->category()->name !== null) { ?><br><span class="badge badge-category">{{ $post->category()->name }}</span><?php } ?></td>
-                                    <td>{{ $post->status }}</td>
-                                    <td class="hiddenOnMobile">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</td>
+                                    <td class="hiddenOnMobile"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</span></td>
+                                    <td>{{ ucfirst($post->title) }}<span><br><span style="opacity: 0.4;">{{ $post->postType()->title }}<span class="hiddenOnDesktop"> ({{ ucfirst(strtolower($post->status)) }})</span></span></span></td>
+                                    <td scope="col" class="hiddenOnMobile"><span class="badge badge-status<?php if($post->status !== "PUBLISHED") { echo "-disabled"; } ?>">{{ $post->status }}</span></td>
                                     <td align="right">
-                                        <button type="button" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</button>
+                                        <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
                                             <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline">View</a>
                                             <a href="/app/edit/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</a>

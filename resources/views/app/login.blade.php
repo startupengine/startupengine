@@ -9,15 +9,27 @@
 @endsection
 
 @section('styles')
+    <style>
+        .card-header {
+            width:100% !important;
+            min-width:100% !important;
+            position:relative !important;
+            left:0px !important;
+            top:0px !important;
+        }
+        .card {
+            background:#fff !important;
+        }
+    </style>
 
 @endsection
 
 
 @section('content')
-<body class="index-page sidebar-collapse bg-gradient-orange" style="height:100vh;">
+<body class="index-page sidebar-collapse bg-gradient" style="height:100vh;">
     <div class="container" style="margin-top:15px;">
         <div class="col-md-12" align="center">
-            <div class="card" style="max-width:500px;width:100%;margin-top:150px;">
+            <div class="card" style="max-width:500px;width:100%;margin-top:15vh !important;">
                 <div class="card-header">Login</div>
                 <div class="card-body">
                     <form class="form-horizontal " method="POST" action="{{ route('login') }}">
@@ -46,7 +58,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <div class="form-check" style="margin-top:25px;">
+                                <div class="form-check" style="margin-top:15px;">
                                     <div class="checkbox">
                                         <input id="remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                         <label for="remember">

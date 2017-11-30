@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Package;
 use App\Setting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
@@ -15,14 +16,14 @@ class SyncGit extends Command
      *
      * @var string
      */
-    protected $signature = 'command:SyncGit';
+    protected $signature = 'command:SyncGit {mode=add}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Clone remote git repositories and sync their contents to the database.';
 
     /**
      * Create a new command instance.
@@ -41,16 +42,26 @@ class SyncGit extends Command
      */
     public function handle()
     {
+        $mode = $this->argument('mode');
+
         $path = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
-        if (config('app.template_git_username') !== null && config('app.template_git_password') !== null) {
-            exec("git clone https://" . config('app.template_git_username') . ":" . config('app.template_git_password') . "@github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/theme");
-        } else {
-            exec("git clone https://github.com/" . config('app.template_git_username') . "/" . config('app.template_git_repository') . ".git resources/views/theme");
+
+        $packages = Package::all();
+        if ($packages->isEmpty()) {
+            $defaultpackage = new Package();
+            $defaultpackage->url = "https://github.com/luckyrabbitllc/Startup-Engine-Template.git";
+            $defaultpackage->save();
+            $packages = Package::all();
         }
+        foreach ($packages as $package) {
+            exec("git clone $package->url resources/views/theme");
+        }
+
         $themepath = \Config::get('view.paths')[0] . '/theme';
         $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
 
+        //Inject settings if they don't yet exist
         if (Schema::hasTable('settings')) {
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
 
@@ -58,42 +69,55 @@ class SyncGit extends Command
                 $existingsetting = Setting::where('key', '=', $setting->key)->first();
                 if ($existingsetting == null) {
                     $newsetting = new Setting();
-                } else {
-                    $newsetting = $existingsetting;
-                }
-                $newsetting->key = $setting->key;
-                $newsetting->display_name = $setting->display_name;
-                $newsetting->status = $setting->status;
-                $newsetting->type = $setting->type;
-                $newsetting->group = $setting->group;
-                if ($existingsetting !== null) {
-                    if ($existingsetting->value == null && isset($setting->value)) {
+                    if(property_exists($setting, 'value')) {
                         $newsetting->value = $setting->value;
                     }
+                    $newsetting->key = $setting->key;
+                    $newsetting->display_name = $setting->display_name;
+                    $newsetting->status = $setting->status;
+                    $newsetting->type = $setting->type;
+                    $newsetting->group = $setting->group;
+                    $newsetting->save();
                 }
-                $newsetting->save();
+
+                if ($existingsetting !== null && $mode == "reset") {
+                    if(property_exists($setting, 'value')) {
+                        $existingsetting->value = $setting->value;
+                    }
+                    $existingsetting->key = $setting->key;
+                    $existingsetting->display_name = $setting->display_name;
+                    $existingsetting->status = $setting->status;
+                    $existingsetting->type = $setting->type;
+                    $existingsetting->group = $setting->group;
+                    $existingsetting->save();
+                }
+
             }
         }
 
+        //Inject Post Types if they don't yet exist
         if (Schema::hasTable('post_types')) {
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
             $schemas = $json->schemas;
             foreach ($schemas as $schema) {
                 $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
-                $contents = json_decode(file_get_contents($schemapath));
-                $entry = PostType::where('slug', '=', $schema)->first();
-                if ($entry == null) {
-                    $entry = new \App\PostType();
+                if (file_exists($themepath . '/templates/' . $schema . '/schema.json')) {
+                    $contents = json_decode(file_get_contents($schemapath));
+                    $entry = PostType::where('slug', '=', $schema)->first();
+                    if ($entry == null) {
+                        $entry = new \App\PostType();
+                        $entry->json = json_encode($contents);
+                        $entry->slug = $schema;
+                        $entry->title = $contents->title;
+                        $entry->enabled = true;
+                        $entry->save();
+                    }
                 }
-                $entry->json = json_encode($contents);
-                $entry->slug = $schema;
-                $entry->title = $contents->title;
-                $entry->enabled = true;
-                $entry->save();
             }
         }
 
         $pages = [];
+        //Inject Pages if they don't yet exist
         if (Schema::hasTable('pages')) {
             if (count(\App\Page::all()) > 1) {
                 foreach (glob($pagepath . "/*") as $filename) {

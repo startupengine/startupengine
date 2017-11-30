@@ -20,6 +20,7 @@ class PostController extends Controller
     public function getPost(Request $request, $slug) {
         $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
         if($post->status !== null) {
+            //dd($post->image());
             return view('posts.view')->with('post', $post);
         }
         else {
@@ -27,9 +28,11 @@ class PostController extends Controller
         }
     }
 
-    public function addPost() {
+    public function addPost(Request $request, $slug) {
         $categories = \App\Category::all();
-        return view('app.post.add')->with('categories', $categories);
+        $post = null;
+        $postType = \App\PostType::where('slug', '=', $slug)->where('enabled', '=', true)->firstOrFail();
+        return view('app.post.add')->with('categories', $categories)->with('postType', $postType)->with('post', $post);
     }
 
     public function savePost(Request $request) {
@@ -55,12 +58,10 @@ class PostController extends Controller
             $post->title = $request->input('title');
             $post->slug = $request->input('slug');
             $post->category_id = $request->input('category_id');
-            $post->excerpt = $request->input('excerpt');
-            $post->meta_description = $request->input('meta_description');
-            $post->image = $request->input('image');
-            $post->body = $request->input('body');
             $post->status = $request->input('status');
             $post->author_id = \Auth::user()->id;
+            $post->json = json_encode($request->input('json'));
+            $post->post_type = $request->input('post_type');
             if($request->input('status') == null) {
                 $post->status = 'DRAFT';
             }
@@ -78,7 +79,8 @@ class PostController extends Controller
         }
         if($post->status !== null) {
             $categories = \App\Category::all();
-            return view('app.post.view')->with('post', $post)->with('categories', $categories);
+            $postType = $post->postType();
+            return view('app.post.view')->with('post', $post)->with('categories', $categories)->with('postType', $postType);
         }
         else {
             abort(404);
@@ -88,7 +90,7 @@ class PostController extends Controller
     public function editPost(Request $request, $id) {
         $post = \App\Post::find($id);
         $categories = \App\Category::all();
-        return view('app.post.edit')->with('post', $post)->with('categories', $categories);
+        return view('app.post.edit')->with('post', $post)->with('categories', $categories)->with('postType', $post->postType());
     }
 
     public function deletePost(Request $request, $id) {
