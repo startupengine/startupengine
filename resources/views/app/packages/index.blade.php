@@ -86,7 +86,7 @@
                                            name="s" id="s">
                                 </form>
                             </div>
-                            <div style="margin-bottom:10px;" align="right">
+                            <div align="right">
                                 <a href="/app/new/package" class="btn btn-round btn-secondary-outline "
                                    data-toggle="modal" data-target="#newPackage">
                                     Add Package &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
@@ -95,27 +95,28 @@
                             <table class="table">
                                 <thead class="hiddenOnMobile">
                                 <tr>
-                                    <th scope="col" class="hiddenOnMobile">Last Updated</th>
-                                    <th scope="col">URL</th>
+                                    <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                                    <th scope="col">Info</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($packages as $package)
                                     <tr>
-                                        <td class="hiddenOnMobile"><span
+                                        <td class="hiddenOnMobile updated_at_column"><span
                                                     class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($package->updated_at))->diffForHumans() }}</span>
                                         </td>
-                                        <td><span style="display:inline-block;opacity:0.5;">{{ parse_url($package->url)['host'] }}</span><span style="display:inline-block;">{{ parse_url($package->url)['path'] }}</span></td>
+                                        <td>{{$package->json()->name}}<br>Version {{$package->json()->version}}</td>
                                         <td align="right">
                                             <a href="/app/view/package/{{ $package->id }}"
                                                class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
                                             <div class="btn-group hiddenOnMobile" role="group"
                                                  aria-label="Basic example">
-                                                <a href="{{  $package->url }}"
+                                                <a href="/app/update/package/{{ $package->id }}"
                                                    class="btn btn-sm btn-secondary-outline"
-                                                   target="_blank"
-                                                   >Info</a>
+                                                   data-toggle="modal"
+                                                   data-target="#packageInfo"
+                                                   onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');">Details</a>
                                                 <a href="/app/update/package/{{ $package->id }}"
                                                    class="btn btn-sm btn-secondary-outline"
                                                    style="border-left:none!important;" data-toggle="modal"
@@ -244,6 +245,26 @@
         </div>
     </div>
 
+    <!-- Modal Core -->
+    <div class="modal fade" id="packageInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 style="margin-top:0px;" class="modal-title" id="packageName"></h4>
+                </div>
+                <div class="modal-body">
+
+                    {{ csrf_field() }}
+                    <div class="col-md-12">
+                        <p id="packageVersion" class="badge badge-category"></p>
+                        <p id="packageDescription" style="margin-top:10px;"></p>
+                        <p><a href="#" id="packageUrl" target="_blank" style="text-decoration: none;">View Package Repository</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </body>
 @endsection

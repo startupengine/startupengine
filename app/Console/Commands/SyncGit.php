@@ -54,12 +54,16 @@ class SyncGit extends Command
             $defaultpackage->save();
             $packages = Package::all();
         }
-        foreach ($packages as $package) {
-            exec("git clone $package->url resources/views/theme");
-        }
 
         $themepath = \Config::get('view.paths')[0] . '/theme';
         $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
+        foreach ($packages as $package) {
+            exec("git clone $package->url resources/views/theme");
+            if (Schema::hasTable('packages')) {
+                $package->json = file_get_contents($themepath . '/theme.json');
+                $package->save();
+            }
+        }
 
         //Inject settings if they don't yet exist
         if (Schema::hasTable('settings')) {

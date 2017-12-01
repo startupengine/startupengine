@@ -458,6 +458,10 @@
             margin-top:10px !important;
             margin-bottom:10px !important;
         }
+
+        tr:first-of-type td {
+            border-top:none !important;
+        }
     </style>
 
     @yield('styles')
