@@ -20,6 +20,9 @@
         .card {
             background:#fff !important;
         }
+        #gradient{
+            display: none;
+        }
     </style>
 
 @endsection
@@ -29,7 +32,7 @@
 <body class="index-page sidebar-collapse bg-gradient" style="height:100vh;">
     <div class="container" style="margin-top:15px;">
         <div class="col-md-12" align="center">
-            <div class="card" style="max-width:500px;width:100%;margin-top:15vh !important;">
+            <div class="card" style="max-width:500px;width:100%;margin-top:10% !important;">
                 <div class="card-header">Login</div>
                 <div class="card-body">
                     <form class="form-horizontal " method="POST" action="{{ route('login') }}">

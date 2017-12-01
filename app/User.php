@@ -64,7 +64,7 @@ class User extends AuthUser implements AuditableContract, UserResolver, UserCont
 
     public function role()
     {
-        $role = Role::where('id', '=', \Auth::user()->role_id)->first();
+        $role = Role::where('id', '=', $this->role_id)->first();
         return $role;
     }
 

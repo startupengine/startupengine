@@ -127,6 +127,10 @@
         .select_button {
             min-width:237px !important;
         }
+
+        .select_menu {
+            min-width:283px !important;
+        }
     </style>
 </head>
 <body class="mixpanel-platform-body" >

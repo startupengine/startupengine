@@ -25,19 +25,18 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/edit/profile', 'ProfileController@editProfile');
     Route::post('/app/edit/profile', 'ProfileController@saveProfile');
 
-    /*
-    //Research
-    Route::get('/app/insights', 'AppController@insights');
-    Route::get('/app/research', 'AppController@research');
-    Route::post('/app/new/research/item', 'ResearchController@saveResearchItem');
-    Route::post('/app/new/research/collection', 'ResearchController@saveResearchCollection');
-    Route::post('/app/new/research/feed', 'ResearchController@saveResearchFeed');
-    */
-
     //Pages
     Route::get('/app/pages', 'PageController@index');
     Route::get('/app/edit/page/{id}', 'PageController@editPage');
     Route::post('/app/edit/page', 'PageController@savePage');
+
+    //Users
+    Route::get('/app/users', 'AppController@users');
+    Route::get('/app/new/user', 'UserController@newUser');
+    Route::post('/app/new/user', 'UserController@saveUser');
+    Route::get('/app/view/user/{id}', 'UserController@viewUser');
+    Route::get('/app/edit/user/{id}', 'UserController@editUser');
+    Route::post('/app/edit/user', 'UserController@saveUser');
 
     //Content
     Route::get('/app/content', 'AppController@content');
@@ -61,9 +60,9 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/delete/package/{id}', 'PackageController@deletePackage');
     Route::get('/app/update/package/{id}', 'PackageController@updatePackage');
     Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
-    //Route::get('/app/modules', 'ModuleController@index');
 
-    //Route::get('/app/users', 'AppController@users');
+    //Modules
+    //Route::get('/app/modules', 'ModuleController@index');
 
     //Schema
     Route::get('/app/schema', 'SchemaController@index');

@@ -49,7 +49,17 @@ class AppController extends Controller
 
     public function login()
     {
-        return view('app.login');
+        if (\Auth::user()) {
+            $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+            if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+                return redirect('/app');
+            }
+            else {
+                return redirect('/');
+            }
+        } else {
+            return view('app.login');
+        }
     }
 
     public function insights(Request $request)

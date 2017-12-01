@@ -56,7 +56,7 @@
                     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                         <div class="main col-md-12" style="background:none;margin-top:25px;">
                             <div class="col-md-12">
-                                <h5 style="margin-bottom:25px;">Profile</h5>
+                                <h5 style="margin-bottom:25px;">Profile for {{$user->name}}</h5>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

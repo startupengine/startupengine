@@ -12,7 +12,7 @@ class ProfileController extends Controller
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             $user = \Auth::user();
-            return view('app.profile.view')->with('user', $user);
+            return view('app.profile.view')->with('user', $user)->with('disabled', 'disabled');
         }
         else {
             abort(404);
@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             $user = \Auth::user();
-            return view('app.profile.edit')->with('user', $user);
+            return view('app.profile.edit')->with('user', $user)->with('disabled', null);
         }
         else {
             abort(404);

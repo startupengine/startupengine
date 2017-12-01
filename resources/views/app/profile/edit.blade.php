@@ -56,34 +56,42 @@
                     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                         <div class="main col-md-12" style="background:none;margin-top:25px;">
                             <div class="col-md-12">
-                                <h5 style="margin-bottom:25px;">Profile</h5>
+                                <h5 style="margin-bottom:25px;">Profile for {{$user->name}}</h5>
                             </div>
-                            <form action="/app/edit/profile" method="post">
+                            <form action="/app/edit/user" method="post">
                                 {{ csrf_field() }}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input class="form-control"  type="text" value="{{ $user->name }}" name="name"/>
+                                        <input class="form-control" @if($disabled == 'disabled') disabled @endif type="text" value="{{ $user->name }}" name="name"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Role</label>
-                                        <input class="form-control" disabled type="text" value="{{ ucfirst($user->role()->name) }}" />
+                                        <select class="custom-select" id="role_id" name="role_id" @if($disabled == 'disabled') disabled @endif
+                                        aria-describedby="postStatus" style="width:100%;">
+                                            <?php $roles = \App\Role::all(); ?>
+                                            @foreach($roles as $role)
+                                            <option <?php if($user->role()->id == $role->id)  { echo "SELECTED"; } ?> value="{{$role->id}}">{{ucfirst($role->name)}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>E-mail</label>
-                                        <input class="form-control"  type="text" value="{{ $user->email }}" name="email" />
+                                        <input class="form-control" @if($disabled == 'disabled') disabled @endif type="text" value="{{ $user->email }}" name="email" />
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input class="form-control"  type="password" value="" name="password" />
+                                        <input class="form-control" @if($disabled == 'disabled') disabled @endif type="password" value="" name="password" />
                                     </div>
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input class="form-control"  type="password" value="" name="confirm_password" />
+                                        <input class="form-control"  @if($disabled == 'disabled') disabled @endif type="password" value="" name="confirm_password" />
                                     </div>
                                 </div>
                                 <div align="right" style="margin-bottom:35px;">
-                                    <button type="submit" class="btn btn-secondary-outline ">Save</button>
+                                    @if(!$disabled) <input type="hidden" name="user_id" value="{{$user->id}}"/>@endif
+                                    @if($disabled == 'disabled') <a href="/app/edit/user/{{$user->id}}" class="btn btn-secondary-outline">Edit</a> @endif
+                                    @if(!$disabled)<button type="submit" class="btn btn-secondary-outline ">Save</button> @endif
                                 </div>
                             </form>
                         </div>

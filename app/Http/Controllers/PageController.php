@@ -15,13 +15,13 @@ class PageController
     {
         $homepagesetting = Setting::where('key', '=', 'site.homepage')->first();
         if($homepagesetting !== null){
-            $page = \App\Page::where('slug', '=', $homepagesetting->value)->first();
+            $page = \App\Page::where('slug', '=', $homepagesetting->value)->where('status','=', 'ACTIVE')->first();
         }
         else {
-            $page = \App\Page::where('slug', '=', 'home')->first();
+            $page = \App\Page::where('slug', '=', 'home')->where('status', '=', 'ACTIVE')->first();
         }
         if($page == null) {
-            abort(404);
+            return redirect('/login');
         }
         else {
             return view('pages.view')->with('page', $page);

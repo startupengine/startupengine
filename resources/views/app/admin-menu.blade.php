@@ -10,8 +10,8 @@
         <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/settings?group=Theme';"><i class="now-ui-icons objects_diamond"></i>&nbsp; Design</button>
         <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/analytics';"><i class="now-ui-icons business_chart-bar-32"></i>&nbsp; Analytics</button>
         <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/packages';"><i class="now-ui-icons design_app"></i>&nbsp; Packages</button>
+            <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/users';"><i class="now-ui-icons users_single-02"></i>&nbsp; Users</button>
         <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/settings';"><i class="now-ui-icons ui-1_settings-gear-63"></i>&nbsp; Settings</button>
-        <?php /* <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/users';"><i class="now-ui-icons users_single-02"></i>&nbsp; Users</button> */ ?>
         <?php /* <button class="dropdown-item" style="text-align: left;border-color:#eee !important;" onclick="location.href='/app/help';"><i class="now-ui-icons business_bulb-63"></i>&nbsp; Help</button> */ ?>
         <div class="dropdown-divider"></div>
         <button class="dropdown-item" type="button" onclick="location.href='/';"><i class="now-ui-icons arrows-1_share-66"></i>&nbsp; Site</button>
