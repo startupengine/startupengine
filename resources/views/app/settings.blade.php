@@ -50,7 +50,7 @@
                                 </form>
                             </div>
                             @if($request->input('s') == null && $request->input('group') == null)
-                                <div>
+                                <div style="margin-top:25px;">
                                     <div class="col-md-4" style="float:left;">
                                         <div class="card">
                                             <div class="card-header" align="center">
