@@ -68,16 +68,6 @@ class Post extends Model implements AuditableContract
         }
     }
 
-    public function excerpt() {
-        $array = json_decode(json_encode($this->content()), true);
-        if(isset($array['meta']['excerpt'])) {
-            return $array['meta']['excerpt'];
-        }
-        else {
-            return null;
-        }
-    }
-
     public function postType() {
         $postType = $this->post_type;
         $postType = PostType::where('slug', '=', $postType)->firstOrFail();

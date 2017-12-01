@@ -9,6 +9,7 @@ use OwenIt\Auditing\Contracts\UserResolver;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use TCG\Voyager\Traits\VoyagerUser;
 use TCG\Voyager\Contracts\User as UserContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends AuthUser implements AuditableContract, UserResolver, UserContract
 {
@@ -17,6 +18,8 @@ class User extends AuthUser implements AuditableContract, UserResolver, UserCont
     use Notifiable;
 
     use VoyagerUser;
+
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

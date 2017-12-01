@@ -20,43 +20,6 @@
                 display:none;
             }
         }
-        @media(max-width:991px) {
-            .hiddenOnMobile {
-                display: none !important;
-            }
-        }
-        @media(min-width:991px) {
-            .hiddenOnDesktop {
-                display: none !important;
-            }
-        }
-        .badge-status {
-            background:#555;
-            border:1px solid #555;
-            color:#fff;
-            min-width:100px;
-            padding:3px 8px;
-            font-weight:400;
-            border-radius:4px;
-        }
-        .badge-status-disabled {
-            background:#999;
-            border:1px solid #999;
-            color:#fff;
-            min-width:100px;
-            padding:3px 8px;
-            font-weight:400;
-            border-radius:4px;
-        }
-        .badge-date, .badge-category {
-            background:#fff;
-            border:1px solid #999;
-            color:#999;
-            min-width:100px;
-            padding:3px 8px;
-            font-weight:400;
-            border-radius:4px;
-        }
     </style>
 @endsection
 
@@ -79,7 +42,7 @@
                                     <input type="text" value="" placeholder="Search content..." class="form-control" name="s" id="s">
                                 </form>
                             </div>
-                            <div style="margin-bottom:10px;" align="right">
+                            <div align="right">
                                 <button type="button" class="btn btn-round btn-secondary-outline " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     New Item <i class="now-ui-icons ui-1_simple-add"></i>
                                 </button>
@@ -93,18 +56,18 @@
                             <table class="table">
                                 <thead class="hiddenOnMobile">
                                 <tr>
-                                    <th scope="col" class="hiddenOnMobile">Last Updated</th>
+                                    <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                                    <th scope="col" class="status_column">Status</th>
                                     <th scope="col" >Title</th>
-                                    <th scope="col" class="hiddenOnMobile">Status</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($posts as $post)
                                 <tr>
-                                    <td class="hiddenOnMobile"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</span></td>
+                                    <td class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</span></td>
+                                    <td scope="col" class="hiddenOnMobile status_column"><span class="badge badge-status<?php if($post->status !== "PUBLISHED") { echo "-disabled"; } ?>">{{ $post->status }}</span></td>
                                     <td>{{ ucfirst($post->title) }}<span><br><span style="opacity: 0.4;">{{ $post->postType()->title }}<span class="hiddenOnDesktop"> ({{ ucfirst(strtolower($post->status)) }})</span></span></span></td>
-                                    <td scope="col" class="hiddenOnMobile"><span class="badge badge-status<?php if($post->status !== "PUBLISHED") { echo "-disabled"; } ?>">{{ $post->status }}</span></td>
                                     <td align="right">
                                         <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">

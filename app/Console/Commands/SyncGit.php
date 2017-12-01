@@ -116,10 +116,10 @@ class SyncGit extends Command
             }
         }
 
-        $pages = [];
         //Inject Pages if they don't yet exist
+        $pages = [];
         if (Schema::hasTable('pages')) {
-            if (count(\App\Page::all()) > 1) {
+            if (count(\App\Page::all()) > 1 OR $mode == 'reset') {
                 foreach (glob($pagepath . "/*") as $filename) {
                     $filename = substr($filename, strrpos($filename, '/') + 1);
                     $pages[] = $filename;

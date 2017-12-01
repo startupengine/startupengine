@@ -27,8 +27,12 @@ class AddCssAndScriptsToPages extends Migration
     public function down()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->dropColumn('css');
-            $table->dropColumn('scripts');
+            if (Schema::hasColumn('pages', 'css')) {
+                $table->dropColumn('css');
+            }
+            if (Schema::hasColumn('pages', 'scripts')) {
+                $table->dropColumn('scripts');
+            }
         });
     }
 }

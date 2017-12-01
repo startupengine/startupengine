@@ -28,11 +28,6 @@ class RemoveExtraneousFieldsFromPosts extends Migration
                 $table->dropColumn('seo_title');
             });
         }
-        if (Schema::hasColumn('posts', 'excerpt')) {
-            Schema::table('posts', function (Blueprint $table) {
-                $table->dropColumn('excerpt');
-            });
-        }
         if (Schema::hasColumn('posts', 'meta_description')) {
             Schema::table('posts', function (Blueprint $table) {
                 $table->dropColumn('meta_description');

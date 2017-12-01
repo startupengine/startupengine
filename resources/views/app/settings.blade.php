@@ -22,47 +22,6 @@
             }
         }
 
-        @media (max-width: 991px) {
-            .hiddenOnMobile {
-                display: none !important;
-            }
-        }
-
-        @media (min-width: 991px) {
-            .hiddenOnDesktop {
-                display: none !important;
-            }
-        }
-
-        .badge-status {
-            background: #555;
-            border: 1px solid #555;
-            color: #fff;
-            min-width: 100px;
-            padding: 3px 8px;
-            font-weight: 400;
-            border-radius: 4px;
-        }
-
-        .badge-status-disabled {
-            background: #999;
-            border: 1px solid #999;
-            color: #fff;
-            min-width: 100px;
-            padding: 3px 8px;
-            font-weight: 400;
-            border-radius: 4px;
-        }
-
-        .badge-date, .badge-category {
-            background: #fff;
-            border: 1px solid #999;
-            color: #999;
-            min-width: 100px;
-            padding: 3px 8px;
-            font-weight: 400;
-            border-radius: 4px;
-        }
     </style>
 @endsection
 
@@ -84,7 +43,7 @@
                                 } ?>Settings</h5>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group" style="margin-bottom:40px;">
+                            <div class="form-group" >
                                 <form>
                                     <input type="text" value="" placeholder="Search settings..." class="form-control"
                                            id="s" name="s">
@@ -129,12 +88,16 @@
                                     @endforeach
                                 </div>
                             @endif
+                            <div align="right">
+                                <a href="/app/new/setting" class="btn btn-secondary-outline btn-round">New Setting &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                            </div>
                             @if($request->input('s') !== null or $request->input('group') !== null)
                                 <table class="table">
-                                    <thead>
+                                    <thead class="hiddenOnMobile">
                                     <tr>
+                                        <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                                        <th scope="col" class="status_column">Status</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                     </thead>
@@ -144,12 +107,11 @@
                                     @if($postType !== null)
 
                                         <tr>
-
-                                            <td>Content Type: {{ $postType->title }}</td>
-                                            <td class="hiddenOnMobile"></td>
-                                            <td><?php if ($postType->enabled) echo "ENABLED"; else {
+                                            <td class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($postType->updated_at))->diffForHumans() }}</span></td>
+                                            <td class="hiddenOnMobile status_column"><?php if ($postType->enabled) echo "ENABLED"; else {
                                                     echo "DISABLED";
                                                 } ?></td>
+                                            <td>Content Type: {{ $postType->title }}</td>
                                             <td align="right">
                                                 <a href="/app/edit/schema/{{ $postType->slug }}"
                                                    class="btn btn-sm btn-secondary-outline" style="">Edit Schema</a>
@@ -158,11 +120,12 @@
                                     @endif
                                     @foreach($settings as $setting)
                                         <tr>
-                                            <td>{{ $setting->display_name }}</td>
-                                            <td scope="col" class="hiddenOnMobile"><span
+                                            <td class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($setting->updated_at))->diffForHumans() }}</span></td>
+                                            <td scope="col" class="hiddenOnMobile status_column"><span
                                                         class="badge badge-status<?php if ($setting->status !== "PUBLISHED") {
                                                             echo "-disabled";
                                                         } ?>">{{ $setting->status }}</span></td>
+                                            <td>{{ $setting->display_name }}</td>
                                             <td align="right">
                                                 <a href="/app/edit/setting/{{ $setting->id }}"
                                                    class="btn btn-sm btn-secondary-outline" style="">Edit</a>

@@ -402,6 +402,62 @@
             color:royalblue;
             cursor: pointer;
         }
+
+
+
+
+        @media (max-width: 991px) {
+            .hiddenOnMobile {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 991px) {
+            .hiddenOnDesktop {
+                display: none !important;
+            }
+        }
+
+        .badge-status {
+            background: #555;
+            border: 1px solid #555;
+            color: #fff;
+            min-width: 100px;
+            padding: 3px 8px;
+            font-weight: 400;
+            border-radius: 4px;
+        }
+
+        .badge-status-disabled {
+            background: #999;
+            border: 1px solid #999;
+            color: #fff;
+            min-width: 100px;
+            padding: 3px 8px;
+            font-weight: 400;
+            border-radius: 4px;
+        }
+
+        .badge-date, .badge-category {
+            background: #fff;
+            border: 1px solid #999;
+            color: #999;
+            min-width: 100px;
+            padding: 3px 8px;
+            font-weight: 400;
+            border-radius: 4px;
+        }
+
+        .updated_at_column, .status_column{
+            width:150px !important;
+            border-right:1px solid #eee;
+            text-align: center;
+        }
+
+        .badge-date, .badge-status, .badge-status-disabled, .badge-category {
+            margin-top:10px !important;
+            margin-bottom:10px !important;
+        }
     </style>
 
     @yield('styles')

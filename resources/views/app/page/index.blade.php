@@ -20,43 +20,6 @@
                 display:none;
             }
         }
-        @media(max-width:991px) {
-            .hiddenOnMobile {
-                display: none !important;
-            }
-        }
-        @media(min-width:991px) {
-            .hiddenOnDesktop {
-                display: none !important;
-            }
-        }
-        .badge-status {
-            background:#555;
-            border:1px solid #555;
-            color:#fff;
-            min-width:100px;
-            padding:3px 8px;
-            font-weight:400;
-            border-radius:4px;
-        }
-        .badge-date  {
-            background:#fff;
-            border:1px solid #999;
-            color:#999;
-            min-width:100px;
-            padding:3px 8px;
-            font-weight:400;
-            border-radius:4px;
-        }
-        .badge-status-disabled {
-            background:#999;
-            border:1px solid #999;
-            color:#fff;
-            min-width:100px;
-            padding:3px 8px;
-            font-weight:400;
-            border-radius:4px;
-        }
     </style>
 @endsection
 
@@ -79,21 +42,24 @@
                                     <input type="text" value="" placeholder="Search pages..." class="form-control" name="s" id="s">
                                 </form>
                             </div>
-                            <table class="table" style="margin-top:35px;">
+                            <div align="right">
+                                <a href="/app/new/page" class="btn btn-secondary-outline btn-round">New Page &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                            </div>
+                            <table class="table" >
                                 <thead class="hiddenOnMobile">
                                 <tr>
-                                    <th scope="col" class="hiddenOnMobile">Last Updated</th>
+                                    <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                                    <th scope="col" class="status_column">Status</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col">Status</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($pages as $page)
                                 <tr>
-                                    <td class="hiddenOnMobile"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($page->updated_at))->diffForHumans() }}</span></td>
-                                    <td>{{ $page->title }}<span class="hiddenOnDesktop"><br><span style="opacity: 0.4;">{{ ucfirst(strtolower($page->status)) }}</span></span></td>
-                                    <td class="hiddenOnMobile"><span class="badge badge-status<?php if($page->status !== "ACTIVE") { echo "-disabled"; } ?>">{{ $page->status }}</span></td>
+                                    <td class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($page->updated_at))->diffForHumans() }}</span></td>
+                                    <td class="hiddenOnMobile status_column"><span class="badge badge-status<?php if($page->status !== "ACTIVE") { echo "-disabled"; } ?>">{{ $page->status }}</span></td>
+                                    <td>{{ $page->title }}<span class="hiddenOnMobile" style="opacity:0.5;display:block;">{{config('app.url')}}/{{ $page->slug }}</span><span class="hiddenOnDesktop"><br><span style="opacity: 0.4;">{{ ucfirst(strtolower($page->status)) }}</span></span></td>
                                     <td align="right">
                                         <a href="/app/edit/page/{{ $page->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">Edit</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
