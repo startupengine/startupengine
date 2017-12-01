@@ -37,6 +37,7 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/view/user/{id}', 'UserController@viewUser');
     Route::get('/app/edit/user/{id}', 'UserController@editUser');
     Route::post('/app/edit/user', 'UserController@saveUser');
+    Route::get('/app/delete/user/{id}', 'UserController@deleteUser');
 
     //Content
     Route::get('/app/content', 'AppController@content');

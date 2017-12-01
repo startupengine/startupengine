@@ -397,6 +397,11 @@
         .main th:first-of-type, .main td:first-of-type {
             width: 150px !important;
         }
+        .dropdown-item:hover {
+            background:none !important;
+            color:royalblue;
+            cursor: pointer;
+        }
     </style>
 
     @yield('styles')

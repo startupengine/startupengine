@@ -44,6 +44,20 @@ class UserController extends Controller
         }
     }
 
+    public function deleteUser($id)
+    {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            $user = User::where('id', '=', $id)->firstOrFail();
+            $user->delete();
+            return redirect('/app/users');
+        }
+        else {
+            abort(404);
+        }
+    }
+
+
     public function saveUser(Request $request)
     {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
