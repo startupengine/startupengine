@@ -37,6 +37,19 @@ class PageController
         return view('pages.view')->with('page', $page);
     }
 
+    public function addPage(Request $request)
+    {
+
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            $page = new \App\Page();
+            return view('app.page.edit')->with('page', $page);
+        } else {
+            abort(404);
+        }
+    }
+
+
     public function editPage(Request $request, $id)
     {
 
@@ -55,11 +68,14 @@ class PageController
     {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-
+            //dd($request->input());
             if ($request->input('id') !== null) {
                 $page = \App\Page::find($request->input('id'));
             } else {
-                $page = new \App\Post;
+                $page = new \App\Page;
+            }
+            if($page->author_id == null ) {
+                $page->author_id = \Auth::user()->id;
             }
             $page->title = $request->input('title');
             $page->slug = $request->input('slug');
@@ -72,8 +88,17 @@ class PageController
             if($request->input('json') !== null ){
                 $page->json = json_encode($request->input('json'));
             }
-            if($request->input('schema') !== null ){
+            if($request->has('schema')){
                 $page->schema = json_encode($request->input('schema'));
+            }
+            if($request->input('scripts') !== null ){
+                $page->scripts = $request->input('scripts');
+            }
+            if($request->input('css') !== null ){
+                $page->css = $request->input('css');
+            }
+            if($request->input('html') !== null ){
+                $page->html = $request->input('html');
             }
             if ($request->input('status') == null) {
                 $page->status = 'DRAFT';

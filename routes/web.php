@@ -27,6 +27,7 @@ Route::group(['middleware' => ['roles']], function () {
 
     //Pages
     Route::get('/app/pages', 'PageController@index');
+    Route::get('/app/new/page', 'PageController@addPage');
     Route::get('/app/edit/page/{id}', 'PageController@editPage');
     Route::post('/app/edit/page', 'PageController@savePage');
 
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['roles']], function () {
 
     //Schema
     Route::get('/app/schema', 'SchemaController@index');
+    Route::get('/app/new/schema', 'SchemaController@addSchema');
     Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
     Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
 

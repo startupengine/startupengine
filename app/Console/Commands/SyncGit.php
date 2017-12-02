@@ -61,6 +61,7 @@ class SyncGit extends Command
             exec("git clone $package->url resources/views/theme");
             if (Schema::hasTable('packages')) {
                 $package->json = file_get_contents($themepath . '/theme.json');
+                $package->description = json_decode(file_get_contents($themepath . '/theme.json'))->description;
                 $package->save();
             }
         }

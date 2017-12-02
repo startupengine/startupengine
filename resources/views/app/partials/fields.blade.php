@@ -146,13 +146,13 @@ else {
                                           name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
                                           rows="2"
                                           data-field="{{$key}}"
-                                          data-section="{{$section->slug}}">{{ $input }}</textarea>
+                                          data-section="{{$section->slug}}">{!!  $input !!}</textarea>
                                 <script>
                                     var simplemde{{$variablename}} = new SimpleMDE({
-                                        element: document.getElementById("<?php echo $textareaname; ?>"),
-                                        placeholder: '{!! htmlentities($input) !!}'
+                                        element: document.getElementById("<?php echo $textareaname; ?>")
+                                        //, placeholder: '{!! ($input) !!}'
                                     });
-                                    simplemde{{$variablename}}.value('{{$input}}');
+                                    //simplemde{{$variablename}}.value('{{$input}}');
                                 </script>
 
                             @endif

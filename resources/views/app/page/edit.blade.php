@@ -51,14 +51,14 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <h5>Edit Page</h5>
+                            <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page</h5>
                             <form action="/app/edit/page" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postTitle">Title</label>
-                                            <input value="{{$page->title}}" type="text" class="form-control" id="title"
+                                            <input required value="{{$page->title}}" type="text" class="form-control" id="title"
                                                    aria-describedby="postTitle" placeholder="Enter a title"
                                                    name="title">
                                         </div>
@@ -66,14 +66,14 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postSlug">Slug</label>
-                                            <input value="{{$page->slug}}" type="text" class="form-control" id="slug"
+                                            <input required value="{{$page->slug}}" type="text" class="form-control" id="slug"
                                                    aria-describedby="postSlug" placeholder="example-slug" name="slug">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postStatus">Status</label><br>
-                                            <select class="custom-select" id="status" name="status"
+                                            <select required class="custom-select" id="status" name="status"
                                                     aria-describedby="postStatus" style="width:100%;">
                                                 <option <?php if ($page->status == "ACTIVE") {
                                                     echo "selected";
@@ -173,7 +173,7 @@
                                     @endif
 
                                     <div>
-                                        <div class="meta-fields" id="meta2" role="tabpanel"  align="left">
+                                        <div class="meta-fields" id="meta2" role="tabpanel" align="left">
 
                                             <label style="margin-bottom:10px;">Code</label>
 
@@ -213,7 +213,7 @@
                                                                           aria-describedby="pageCSS"
                                                                           placeholder=""
                                                                           name="css"
-                                                                          rows="2">{{$page->css}}</textarea>
+                                                                          rows="2">{!! html_entity_decode($page->css) !!}</textarea>
                                                                 <script>
                                                                     var simplemde = new SimpleMDE({
                                                                         element: document.getElementById("css"),
@@ -286,20 +286,33 @@
 
                                                             <div class="form-group">
                                                                 <label for="pageScripts"><strong>Schema</strong></label>
-                                                                <textarea type="text" class="form-control"
-                                                                          id="schema"
-                                                                          name="schema"
-                                                                          aria-describedby="pageScripts"
-                                                                          placeholder=""
-                                                                          name="schema"
-                                                                          rows="2">{{$page->schema}}</textarea>
-                                                                <script>
-                                                                    var schemaEditor = new SimpleMDE({
-                                                                        element: document.getElementById("schema"),
-                                                                        status: false,
-                                                                        toolbar: false
-                                                                    });
+
+
+                                                                <textarea name="schema"></textarea>
+                                                                <div id="schema" style="min-height:350px;"></div>
+                                                                <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js"
+                                                                        type="text/javascript" charset="utf-8">
                                                                 </script>
+                                                                <script>
+                                                                        <?php if ($page->schema !== null) {
+                                                                            $input = $page->schema;
+                                                                        } else {
+                                                                            $input = null;
+                                                                        } ?>
+                                                                    var editor = ace.edit("schema");
+                                                                    var textarea = $('textarea[name="schema"]').hide();
+                                                                    editor.setTheme("ace/theme/github");
+                                                                    editor.getSession().setMode("ace/mode/json");
+                                                                    editor.getSession().setValue(textarea.val());
+                                                                    editor.getSession().on('change', function () {
+                                                                        textarea.val(editor.getSession().getValue());
+                                                                    });
+                                                                    @if($input !== null)
+                                                                    editor.setValue({!! $input !!}, null, '\t');
+                                                                    @endif
+                                                                </script>
+
+
                                                             </div>
 
                                                         </div>
@@ -339,7 +352,8 @@
                                                                   rows="2">{{$page->excerpt}}</textarea>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="postMetaDescription"><strong>Meta Description</strong></label>
+                                                        <label for="postMetaDescription"><strong>Meta
+                                                                Description</strong></label>
                                                         <textarea type="text" class="form-control" id="meta_description"
                                                                   aria-describedby="postMetaDescription"
                                                                   placeholder="Describe the page"

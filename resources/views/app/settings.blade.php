@@ -88,16 +88,18 @@
                                     @endforeach
                                 </div>
                             @endif
+                            @if($request->input('s') !== null or $request->input('group') !== null)
                             <div align="right">
                                 <a href="/app/new/setting" class="btn btn-secondary-outline btn-round">New Setting &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
+                            @endif
                             @if($request->input('s') !== null or $request->input('group') !== null)
-                                <table class="table">
+                                <table class="table clickable">
                                     <thead class="hiddenOnMobile">
                                     <tr>
                                         <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
                                         <th scope="col" class="status_column">Status</th>
-                                        <th scope="col">Name</th>
+                                        <th scope="col">Info</th>
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                     </thead>
@@ -108,10 +110,17 @@
 
                                         <tr>
                                             <td class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($postType->updated_at))->diffForHumans() }}</span></td>
-                                            <td class="hiddenOnMobile status_column"><?php if ($postType->enabled) echo "ENABLED"; else {
+                                            <td class="hiddenOnMobile status_column">
+                                                <span
+                                                        class="badge badge-status<?php if ($postType->enabled !== true) {
+                                                            echo "-disabled";
+                                                        } ?>">
+                                                <?php if ($postType->enabled) echo "ENABLED"; else {
                                                     echo "DISABLED";
-                                                } ?></td>
-                                            <td>Content Type: {{ $postType->title }}</td>
+                                                } ?>
+                                                </span>
+                                            </td>
+                                            <td>Content Type: {{ $postType->title }}<br><span style="opacity:0.5;">{{$postType->slug}}</span></td>
                                             <td align="right">
                                                 <a href="/app/edit/schema/{{ $postType->slug }}"
                                                    class="btn btn-sm btn-secondary-outline" style="">Edit Schema</a>
@@ -125,10 +134,10 @@
                                                         class="badge badge-status<?php if ($setting->status !== "PUBLISHED") {
                                                             echo "-disabled";
                                                         } ?>">{{ $setting->status }}</span></td>
-                                            <td>{{ $setting->display_name }}</td>
+                                            <td>{{ $setting->display_name }}<br><span style="opacity:0.5;">{{$setting->key}}</span></td>
                                             <td align="right">
                                                 <a href="/app/edit/setting/{{ $setting->id }}"
-                                                   class="btn btn-sm btn-secondary-outline" style="">Edit</a>
+                                                   class="btn btn-sm btn-secondary-outline defaultClick" style="">Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach

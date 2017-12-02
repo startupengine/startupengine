@@ -80,25 +80,23 @@
                                 </form>
                             </div>
 
-                            <div style="margin-bottom:10px;" align="right">
+                            <div align="right">
                                 <a href="/app/new/user" class="btn btn-secondary-outline btn-round">New User &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
 
                             <table class="table">
-                                <thead>
+                                <thead class="hiddenOnMobile">
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col" class="hiddenOnMobile">Last Activity</th>
+                                    <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                                    <th scope="col">User</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td scope="col" class="hiddenOnMobile"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->updated_at))->diffForHumans() }}</span></td>
+                                    <td scope="col" class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->updated_at))->diffForHumans() }}</span></td>
+                                    <td>{{ $user->name }}<br><span style="opacity:0.5;">{{ $user->email }}</span></td>
                                     <td align="right">
                                         <a href="/app/view/user/{{$user->id}}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">

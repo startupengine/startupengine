@@ -14,7 +14,7 @@ class PackageController extends Controller
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             if ($request->input('s') !== null) {
-                $packages = \App\Package::where('url', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
+                $packages = \App\Package::where('url', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('description', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
             } else {
                 $packages = \App\Package::limit(100)->orderBy('updated_at', 'desc')->get();
             }

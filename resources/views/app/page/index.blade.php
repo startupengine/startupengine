@@ -45,7 +45,7 @@
                             <div align="right">
                                 <a href="/app/new/page" class="btn btn-secondary-outline btn-round">New Page &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
-                            <table class="table" >
+                            <table class="table clickable" >
                                 <thead class="hiddenOnMobile">
                                 <tr>
                                     <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
@@ -61,7 +61,7 @@
                                     <td class="hiddenOnMobile status_column"><span class="badge badge-status<?php if($page->status !== "ACTIVE") { echo "-disabled"; } ?>">{{ $page->status }}</span></td>
                                     <td>{{ $page->title }}<span class="hiddenOnMobile" style="opacity:0.5;display:block;">{{config('app.url')}}/{{ $page->slug }}</span><span class="hiddenOnDesktop"><br><span style="opacity: 0.4;">{{ ucfirst(strtolower($page->status)) }}</span></span></td>
                                     <td align="right">
-                                        <a href="/app/edit/page/{{ $page->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">Edit</a>
+                                        <a href="/app/edit/page/{{ $page->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop defaultClick">Edit</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
                                             <a href="/{{ $page->slug }}" class="btn btn-sm btn-secondary-outline" target="_blank">View</a>
                                             <a href="/app/edit/page/{{ $page->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</a>

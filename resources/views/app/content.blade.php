@@ -53,7 +53,7 @@
                                     <?php } ?>
                                 </div>
                             </div>
-                            <table class="table">
+                            <table class="table clickable">
                                 <thead class="hiddenOnMobile">
                                 <tr>
                                     <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
@@ -69,7 +69,7 @@
                                     <td scope="col" class="hiddenOnMobile status_column"><span class="badge badge-status<?php if($post->status !== "PUBLISHED") { echo "-disabled"; } ?>">{{ $post->status }}</span></td>
                                     <td>{{ ucfirst($post->title) }}<span><br><span style="opacity: 0.4;">{{ $post->postType()->title }}<span class="hiddenOnDesktop"> ({{ ucfirst(strtolower($post->status)) }})</span></span></span></td>
                                     <td align="right">
-                                        <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
+                                        <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop defaultClick">View</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
                                             <a href="/app/view/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline">View</a>
                                             <a href="/app/edit/post/{{ $post->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none!important;">Edit</a>

@@ -92,7 +92,7 @@
                                     Add Package &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
                                 </a>
                             </div>
-                            <table class="table">
+                            <table class="table ">
                                 <thead class="hiddenOnMobile">
                                 <tr>
                                     <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
@@ -103,17 +103,21 @@
                                 <tbody>
                                 @foreach($packages as $package)
                                     <tr>
-                                        <td class="hiddenOnMobile updated_at_column"><span
+                                        <td class="hiddenOnMobile updated_at_column clickable"><span
                                                     class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($package->updated_at))->diffForHumans() }}</span>
                                         </td>
-                                        <td>{{$package->json()->name}}<br>Version {{$package->json()->version}}</td>
+                                        <td class="clickable">{{$package->json()->name}}<br><span style="opacity:0.5;">Version {{$package->json()->version}}</span></td>
                                         <td align="right">
                                             <a href="/app/view/package/{{ $package->id }}"
-                                               class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
+                                               class="btn btn-sm btn-secondary-outline hiddenOnDesktop"
+                                               data-toggle="modal"
+                                               data-target="#packageInfo"
+                                               onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');"
+                                            >View</a>
                                             <div class="btn-group hiddenOnMobile" role="group"
                                                  aria-label="Basic example">
                                                 <a href="/app/update/package/{{ $package->id }}"
-                                                   class="btn btn-sm btn-secondary-outline"
+                                                   class="btn btn-sm btn-secondary-outline defaultClick"
                                                    data-toggle="modal"
                                                    data-target="#packageInfo"
                                                    onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');">Details</a>
@@ -259,7 +263,7 @@
                     <div class="col-md-12">
                         <p id="packageVersion" class="badge badge-category"></p>
                         <p id="packageDescription" style="margin-top:10px;"></p>
-                        <p><a href="#" id="packageUrl" target="_blank" style="text-decoration: none;">View Package Repository</a></p>
+                        <p><a href="#" id="packageUrl" target="_blank" style="text-decoration: none;">View the git repository for this package</a></p>
                     </div>
                 </div>
             </div>
