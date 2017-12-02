@@ -58,7 +58,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postTitle">Title</label>
-                                            <input required value="{{$page->title}}" type="text" class="form-control" id="title"
+                                            <input required value="{{$page->title}}" type="text" class="form-control"
+                                                   id="title"
                                                    aria-describedby="postTitle" placeholder="Enter a title"
                                                    name="title">
                                         </div>
@@ -66,7 +67,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postSlug">Slug</label>
-                                            <input required value="{{$page->slug}}" type="text" class="form-control" id="slug"
+                                            <input required value="{{$page->slug}}" type="text" class="form-control"
+                                                   id="slug"
                                                    aria-describedby="postSlug" placeholder="example-slug" name="slug">
                                         </div>
                                     </div>
@@ -88,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    @if($page->json() !== null && $page->json()->sections !== null)
+                                    @if($page->schema() !== null)
                                         <label style="margin-bottom:10px;">Content</label>
                                         <?php $versions = $page->versions(); if ($versions == 0) {
                                             $versions = 1;
@@ -105,7 +107,7 @@
                                                 style="background:#fff;border-bottom:1px solid #ddd;"
                                                 role="tablist">
                                                 <?php $count = 1; ?>
-                                                @foreach($page->json()->sections as $key => $value)
+                                                @foreach($page->schema()->sections as $key => $value)
                                                     <li class="nav-item">
                                                         <a class="nav-link <?php if ($count == 1) {
                                                             echo "active";
@@ -120,7 +122,7 @@
                                             <div class="card-body">
                                                 <div class="tab-content text-center">
                                                     <?php $count = 1; ?>
-                                                    @foreach($page->json()->sections as $key => $section)
+                                                    @foreach($page->schema()->sections as $key => $section)
                                                         <div class="tab-pane <?php if ($count == 1) {
                                                             echo "active";
                                                         } ?>"

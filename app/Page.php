@@ -59,13 +59,15 @@ class Page extends Model implements AuditableContract
 
     public function json()
     {
-        $json = \Config::get('view.paths')[0] . '/theme/pages/' . $this->slug . '/page.json';
+        $json = json_decode($this->json);
+        return $json;
 
-        if (file_exists($json)) {
-            return json_decode(file_get_contents($json));
-        } else {
-            return null;
-        }
+    }
+
+    public function schema()
+    {
+        $schema = json_decode(json_decode($this->schema));
+        return $schema;
 
     }
 

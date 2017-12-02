@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Package;
+use App\Page;
 use App\Setting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
@@ -140,14 +141,17 @@ class SyncGit extends Command
                         $page->save();
                     }
                     //If page.json exists, push it to the DB
-                    /*
+
                     if(file_exists($pagepath.'/'.$filename.'/page.json')) {
                         $json = json_decode(file_get_contents($pagepath.'/'.$filename.'/page.json'));
-                        if($json->title == "Home") {
-                            dd($json);
+                        $page = Page::where('slug', '=', $json->slug)->first();
+                        if($page == null){
+                            $page = new Page();
                         }
+                        $page->schema = json_encode($json);
+                        $page->save();
                     };
-                    */
+
                 }
             }
         }
