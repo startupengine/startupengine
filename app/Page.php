@@ -66,7 +66,12 @@ class Page extends Model implements AuditableContract
 
     public function schema()
     {
-        $schema = json_decode(json_decode($this->schema));
+        if($this->schema !== null) {
+            $schema = json_decode(json_decode($this->schema));
+        }
+        else {
+            $schema = null;
+        }
         return $schema;
 
     }
