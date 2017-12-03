@@ -75,7 +75,7 @@ class SyncGit extends Command
                 $existingsetting = Setting::where('key', '=', $setting->key)->first();
                 if ($existingsetting == null) {
                     $newsetting = new Setting();
-                    if(property_exists($setting, 'value')) {
+                    if (property_exists($setting, 'value')) {
                         $newsetting->value = $setting->value;
                     }
                     $newsetting->key = $setting->key;
@@ -87,7 +87,7 @@ class SyncGit extends Command
                 }
 
                 if ($existingsetting !== null && $mode == "reset") {
-                    if(property_exists($setting, 'value')) {
+                    if (property_exists($setting, 'value')) {
                         $existingsetting->value = $setting->value;
                     }
                     $existingsetting->key = $setting->key;
@@ -140,17 +140,47 @@ class SyncGit extends Command
                         $page->author_id = 0;
                         $page->save();
                     }
-                    //If page.json exists, push it to the DB
 
-                    if(file_exists($pagepath.'/'.$filename.'/page.json')) {
-                        $json = json_decode(file_get_contents($pagepath.'/'.$filename.'/page.json'));
+                    //If page.json exists, push the page to the DB
+                    if (file_exists($pagepath . '/' . $filename . '/page.json')) {
+                        $json = json_decode(file_get_contents($pagepath . '/' . $filename . '/page.json'));
                         $page = Page::where('slug', '=', $json->slug)->first();
-                        if($page == null){
+                        if ($page == null) {
                             $page = new Page();
                         }
                         $page->schema = json_encode($json);
                         $page->save();
                     };
+
+                }
+
+                foreach($pages as $page) {
+                    $page = Page::where('slug', '=', $page)->first();
+                    if($page == null){
+                        $page = new Page();
+                    }
+                    $html = file_exists($pagepath . '/' . $page->slug . '/body.html');
+                    if ($html == true) {
+                        $html = file_get_contents($pagepath . '/' . $page->slug . '/body.html');
+                        if ($html !== null) {
+                            $page->html = $html;
+                        }
+                    }
+                    $css = file_exists($pagepath . '/' . $page->slug . '/css.html');
+                    if ($css == true) {
+                        $css = file_get_contents($pagepath . '/' . $page->slug . '/css.html');
+                        if ($css !== null) {
+                            $page->css = $css;
+                        }
+                    }
+                    $scripts = file_exists($pagepath . '/' . $page->slug . '/scripts.html');
+                    if ($scripts == true) {
+                        $scripts = file_get_contents($pagepath . '/' . $page->slug . '/scripts.html');
+                        if ($scripts !== null) {
+                            $page->scripts = $scripts;
+                        }
+                    }
+                    $page->save();
 
                 }
             }

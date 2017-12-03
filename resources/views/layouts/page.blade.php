@@ -31,7 +31,11 @@
     @if(View::exists('theme.pages.'.$page->slug.'.header'))
         @include('theme.pages.'.$page->slug.'.header')
     @endif
-    @yield('content')
+    @if(isset($page->html))
+        {{ $page->html }}
+    @else
+        @yield('content')
+    @endif
     @if(View::exists('theme.templates.global.menu'))
         @include('theme.templates.global.menu')
     @endif
