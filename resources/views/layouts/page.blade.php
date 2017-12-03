@@ -32,7 +32,7 @@
         @include('theme.pages.'.$page->slug.'.header')
     @endif
     @if(isset($page->html))
-        {{ $page->html }}
+        {!! $page->html !!}
     @else
         @yield('content')
     @endif
