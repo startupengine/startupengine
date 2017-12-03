@@ -296,8 +296,8 @@
                                                                     editor.getSession().on('change', function () {
                                                                         textarea.val(editor.getSession().getValue());
                                                                     });
-                                                                    @if($page->schema !== null)
-                                                                    editor.setValue({!! $page->schema !!}, null, '\t');
+                                                                    @if($page->schema !== null && $page->schema !== 'null')
+                                                                        editor.setValue({!! $page->schema !!}, null, '\t');
                                                                     @endif
                                                                 </script>
 
