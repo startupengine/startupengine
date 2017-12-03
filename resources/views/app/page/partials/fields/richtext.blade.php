@@ -39,8 +39,8 @@ if ($page->json !== null) {
     <script>
         var simplemde{{$variablename}} = new SimpleMDE({
             element: document.getElementById("<?php echo $textareaname; ?>")
-            //, placeholder: '{!! ($input) !!}'
+            , placeholder: '{!! ($input) !!}'
         });
-        //simplemde{{$variablename}}.value('{{$input}}');
+        simplemde{{$variablename}}.value('{{$input}}');
     </script>
 </div>

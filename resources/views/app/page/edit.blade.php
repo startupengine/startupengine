@@ -287,11 +287,7 @@
                                                                         type="text/javascript" charset="utf-8">
                                                                 </script>
                                                                 <script>
-                                                                        <?php if ($page->schema !== null) {
-                                                                            $input = $page->schema;
-                                                                        } else {
-                                                                            $input = null;
-                                                                        } ?>
+
                                                                     var editor = ace.edit("schema");
                                                                     var textarea = $('textarea[name="schema"]').hide();
                                                                     editor.setTheme("ace/theme/github");
@@ -300,8 +296,8 @@
                                                                     editor.getSession().on('change', function () {
                                                                         textarea.val(editor.getSession().getValue());
                                                                     });
-                                                                    @if($input !== null)
-                                                                    editor.setValue({!! $input !!}, null, '\t');
+                                                                    @if($page->schema !== null)
+                                                                    editor.setValue({!! $page->schema !!}, null, '\t');
                                                                     @endif
                                                                 </script>
 
