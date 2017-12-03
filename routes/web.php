@@ -25,6 +25,12 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/edit/profile', 'ProfileController@editProfile');
     Route::post('/app/edit/profile', 'ProfileController@saveProfile');
 
+    //Settings
+    Route::get('/app/settings', 'AppController@settings');
+    Route::get('/app/new/setting', 'SettingController@addSetting');
+    Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
+    Route::post('/app/edit/setting', 'SettingController@saveSetting');
+
     //Pages
     Route::get('/app/pages', 'PageController@index');
     Route::get('/app/new/page', 'PageController@addPage');
@@ -72,10 +78,6 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
     Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
 
-    //Settings
-    Route::get('/app/settings', 'AppController@settings');
-    Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
-    Route::post('/app/edit/setting', 'SettingController@saveSetting');
 
 });
 

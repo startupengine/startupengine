@@ -79,7 +79,7 @@
                                 </div>
 
 
-                                @include('app.partials.fields')
+                                @include('app.partials.post-fields')
 
                                 <div align="right" style="margin-bottom:35px;">
                                     <input type="hidden" name="id" value="{{$post->id}}" />

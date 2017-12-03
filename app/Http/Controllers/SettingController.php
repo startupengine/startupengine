@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Role;
 
 class SettingController extends Controller
 {
+    public function addSetting(Request $request) {
+        $setting = new Setting();
+        return view('app.setting.edit')->with('setting', $setting);
+    }
+
     public function editSetting(Request $request, $id) {
         $setting = \App\Setting::find($id);
         return view('app.setting.edit')->with('setting', $setting);

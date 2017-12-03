@@ -90,7 +90,7 @@
 
                                 </div>
 
-                                @include('app.partials.fields')
+                                @include('app.partials.post-fields')
 
                                 <div align="right" style="margin-bottom:35px;">
                                     <a href="/app/edit/post/{{$post->id}}"

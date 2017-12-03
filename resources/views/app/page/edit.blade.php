@@ -123,38 +123,29 @@
                                                 <div class="tab-content text-center">
                                                     <?php $count = 1; ?>
                                                     @foreach($page->schema()->sections as $key => $section)
-                                                        <div class="tab-pane <?php if ($count == 1) {
-                                                            echo "active";
-                                                        } ?>"
-                                                             id="{{$key.$variationcount}}"
-                                                             role="tabpanel"
-                                                             data-section="{{$key}}">
-                                                            @foreach($section->fields as $key => $value)
-                                                                <div class="form-group" align="left">
-                                                                    <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
-                                                                        - {{ucfirst($value->description)}}</label>
-                                                                    <input type="{{$value->type}}" class="form-control"
-                                                                           id="{{$key}}" aria-describedby="{{$key}}"
-                                                                           placeholder="{{$value->placeholder}}"
-                                                                           name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
-                                                                           rows="2"
-                                                                           data-field="{{$key}}"
-                                                                           data-section="{{$section->slug}}"
-                                                                           <?php
-                                                                           if ($page->json !== null) {
-                                                                               $json = json_decode($page->json);
-                                                                               $slug = $section->slug;
-                                                                               if (isset($json->versions->$variationcount->$slug->$key)) {
-                                                                                   echo 'value="' . $json->versions->$variationcount->$slug->$key . '"';
-                                                                               }
-                                                                           }
-                                                                           ?>
-                                                                           }
-                                                                    />
-                                                                </div>
-                                                            @endforeach
-                                                            <?php $count = $count + 1; ?>
-                                                        </div>
+                                                        @if(isset($section->title))
+                                                            <div class="tab-pane <?php if ($count == 1) {
+                                                                echo "active";
+                                                            } ?>"
+                                                                 id="{{$key.$variationcount}}"
+                                                                 role="tabpanel"
+                                                                 data-section="{{$key}}">
+                                                                @foreach($section->fields as $key => $value)
+
+                                                                    @if($value->type == "text")
+                                                                        @include('app.page.partials.fields.text')
+                                                                    @endif
+                                                                    @if($value->type == "textarea")
+                                                                        @include('app.page.partials.fields.textarea')
+                                                                    @endif
+                                                                    @if($value->type == "richtext")
+                                                                        @include('app.page.partials.fields.richtext')
+                                                                    @endif
+
+                                                                @endforeach
+                                                                <?php $count = $count + 1; ?>
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
