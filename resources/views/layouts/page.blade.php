@@ -11,42 +11,50 @@
     <title>{{ $page->title }} - {{ setting('site.title') }}</title>
 
     <!-- Styles -->
-    @if(View::exists('theme.templates.global.css'))
-        @include('theme.templates.global.css')
-    @endif
+@if(View::exists('theme.templates.global.css'))
+    @include('theme.templates.global.css')
+@endif
 
-    @yield('styles')
+@yield('styles')
 
 <!-- FAVICONS -->
     <?php if( setting('site.favicon') !== null) { ?>
     <link rel="icon" sizes="180x180" href="{{ \Storage::disk('public')->url( setting('site.favicon') ) }}">
     <?php }  ?>
 
-    <!-- Meta -->
+<!-- Meta -->
     @yield('meta')
 </head>
-    @if(View::exists('theme.templates.global.header'))
-        @include('theme.templates.global.header')
-    @endif
-    @if(View::exists('theme.pages.'.$page->slug.'.header'))
-        @include('theme.pages.'.$page->slug.'.header')
-    @endif
-    @if(isset($page->html))
-        {!! $page->html !!}
-    @else
-        @yield('content')
-    @endif
-    @if(View::exists('theme.templates.global.menu'))
-        @include('theme.templates.global.menu')
-    @endif
-    @if(View::exists('theme.templates.global.scripts'))
-        @include('theme.templates.global.scripts')
-    @endif
-    @if(View::exists('theme.pages.'.$page->slug.'.footer'))
-        @include('theme.pages.'.$page->slug.'.footer')
-    @endif
+@if(View::exists('theme.templates.global.header'))
+    @include('theme.templates.global.header')
+@endif
+@if(View::exists('theme.pages.'.$page->slug.'.header'))
+    @include('theme.pages.'.$page->slug.'.header')
+@endif
 
-    @if(View::exists('theme.templates.global.footer') && $page->show_footer == true)
-        @include('theme.templates.global.footer')
-    @endif
+@if(isset($page->html))
+    {!! $page->html !!}
+@else
+    @yield('content')
+@endif
+
+@if(View::exists('theme.templates.global.menu'))
+    @include('theme.templates.global.menu')
+@endif
+@if(View::exists('theme.templates.global.scripts'))
+    @include('theme.templates.global.scripts')
+@endif
+@if(View::exists('theme.pages.'.$page->slug.'.footer'))
+    @include('theme.pages.'.$page->slug.'.footer')
+@endif
+
+@if($page->scripts !== null)
+    <?php echo $page->scripts; ?>
+    {!! $page->scripts !!}
+@endif
+
+@if(View::exists('theme.templates.global.footer') && $page->show_footer == true)
+    @include('theme.templates.global.footer')
+@endif
+
 </html>

@@ -57,7 +57,8 @@ class PageController
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             $page = \App\Page::find($id);
-            //dd($page->schema);
+            //$page = json_decode(json_encode($page->json()), true);
+            //dd($page);
             return view('app.page.edit')->with('page', $page);
         } else {
             abort(404);

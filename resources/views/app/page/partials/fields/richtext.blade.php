@@ -3,15 +3,15 @@
 if ($page->json !== null) {
     $json = json_decode($page->json);
     $slug = $section->slug;
-    if (isset($json->versions->$variationcount->$slug->$key)) {
-        $input = $json->versions->$variationcount->$slug->$key;
+    if (isset($json->versions->$variationcount->$key->$field)) {
+        $input = $json->versions->$variationcount->$key->$field;
     } else {
         $input = null;
     }
 }
 ?>
-<?php $textareaname = "json[versions][$variationcount][$value->slug][$key]"; ?>
-<?php $variablename = "simplemde" . $variationcount . $value->slug . $key; ?>
+<?php $textareaname = "json[versions][$variationcount][$key][$value->slug]"; ?>
+<?php $variablename = "simplemde" . $variationcount . $key . $value->slug; ?>
 <div class="form-group" align="left">
     <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
         - {{ucfirst($value->description)}}
@@ -19,11 +19,11 @@ if ($page->json !== null) {
     <textarea type="{{$value->type}}"
               class="form-control"
               id="{{$textareaname}}"
-              aria-describedby="{{$key}}"
+              aria-describedby="{{$field}}"
               placeholder="{{$value->placeholder}}"
-              name="json[versions][{{ $variationcount }}][{{$value->slug}}][{{$key}}]"
+              name="json[versions][{{ $variationcount }}][{{$key}}][{{$value->slug}}]"
               rows="2"
-              data-field="{{$key}}"
+              data-field="{{$field}}"
               data-section="{{$value->slug}}"
               }>
         <?php

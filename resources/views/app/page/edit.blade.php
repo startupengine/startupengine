@@ -130,7 +130,7 @@
                                                                  id="{{$key.$variationcount}}"
                                                                  role="tabpanel"
                                                                  data-section="{{$key}}">
-                                                                @foreach($section->fields as $key => $value)
+                                                                @foreach($section->fields as $field => $value)
 
                                                                     @if($value->type == "text")
                                                                         @include('app.page.partials.fields.text')
@@ -297,7 +297,7 @@
                                                                         textarea.val(editor.getSession().getValue());
                                                                     });
                                                                     @if($page->schema !== null && $page->schema !== 'null')
-                                                                        editor.setValue({!! $page->schema !!}, null, '\t');
+                                                                        editor.setValue(JSON.stringify({!! $page->schemaToString() !!}, null, '\t'));
                                                                     @endif
                                                                 </script>
 

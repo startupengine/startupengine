@@ -1,19 +1,24 @@
 <?php
 if (\Request::is('app/view/*')) {
     $disabled = "disabled";
-}
-else {
+} else {
     $disabled = "";
 }
 
 ?>
 <?php $variationcount = 1; ?>
-<div class="card variation" style="margin-top:25px;<?php if($disabled == "disabled") { echo "background:rgba(0,0,0,0.04);"; } ?>">
-    <div class="card-header" style="<?php if($disabled == "disabled") { echo "background:rgba(0,0,0,0.0);"; } ?>">
+<div class="card variation" style="margin-top:25px;<?php if ($disabled == "disabled") {
+    echo "background:rgba(0,0,0,0.04);";
+} ?>">
+    <div class="card-header" style="<?php if ($disabled == "disabled") {
+        echo "background:rgba(0,0,0,0.0);";
+    } ?>">
         Content
     </div>
     <ul class="nav nav-tabs justify-content-center text-black"
-        style="background:#fff;<?php if($disabled == "disabled") { echo "background:rgba(0,0,0,0.0);"; } ?>border-bottom:1px solid #ddd;padding:10px;"
+        style="background:#fff;<?php if ($disabled == "disabled") {
+            echo "background:rgba(0,0,0,0.0);";
+        } ?>border-bottom:1px solid #ddd;padding:10px;"
         role="tablist">
         <?php $count = 1; ?>
         @foreach($postType->json()->sections as $key => $value)
@@ -126,7 +131,6 @@ else {
                                         textarea{{$variablename}}.val(editor{{$variablename}}.getSession().getValue());
                                     });
                                     editor{{$variablename}}.setValue('{!! $input !!}');
-
                                 </script>
 
                             @endif

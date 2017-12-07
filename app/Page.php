@@ -66,24 +66,38 @@ class Page extends Model implements AuditableContract
 
     public function schema()
     {
-        if($this->schema !== null) {
+        if ($this->schema !== null) {
             $schema = json_decode($this->schema);
-            if(gettype($schema) == "string") {
+            if (gettype($schema) == "string") {
                 $schema = json_decode($schema);
             }
-        }
-        else {
+        } else {
             $schema = null;
         }
         return $schema;
 
     }
 
-    public function versions() {
-        $json = json_decode($this->json, TRUE);
-        $versions = count($json['versions']);
-        if($versions == null) { $versions = 0; }
-
-        return $versions;
+    public function schemaToString()
+    {
+        {
+            if ($this->schema() !== null) {
+                return json_encode($this->schema());
+            } else {
+                return null;
+            }
+        }
     }
-}
+
+        public
+        function versions()
+        {
+            $json = json_decode($this->json, TRUE);
+            $versions = count($json['versions']);
+            if ($versions == null) {
+                $versions = 0;
+            }
+
+            return $versions;
+        }
+    }
