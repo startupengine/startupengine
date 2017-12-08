@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $page->title }} - {{ setting('site.title') }}</title>
+    <title>{{ $page->title }} - {{ setting('site.name') }}</title>
 
     <!-- Styles -->
 @if(View::exists('theme.templates.global.css'))
@@ -32,7 +32,10 @@
     @include('theme.pages.'.$page->slug.'.header')
 @endif
 
-@if(isset($page->html))
+
+@if(View::exists('theme.pages.'.$page->slug.'.body'))
+    @include('theme.pages.'.$page->slug.'.body')
+@elseif(isset($page->html))
     {!! $page->html !!}
 @else
     @yield('content')
@@ -49,7 +52,6 @@
 @endif
 
 @if($page->scripts !== null)
-    <?php echo $page->scripts; ?>
     {!! $page->scripts !!}
 @endif
 

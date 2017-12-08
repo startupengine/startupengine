@@ -58,7 +58,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="postTitle">Title</label>
-                                            <input required value="{{$page->title}}" type="text" class="form-control"
+                                            <input required value="@if($page->title !== null){{$page->title}}"@endif type="text" class="form-control"
                                                    id="title"
                                                    aria-describedby="postTitle" placeholder="Enter a title"
                                                    name="title">

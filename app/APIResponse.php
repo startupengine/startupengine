@@ -103,17 +103,6 @@ class APIResponse extends Model
             ->get();
 
         $items->transform(function ($item, $key) {
-
-            if ($item->image() !== null) {
-                $item->image = $item->content()->body->image;
-            }
-            if ($item->content() !== null) {
-                $item->content = $item->content();
-            }
-            if ($item->excerpt() !== null) {
-                $item->excerpt = $item->excerpt();
-            }
-
             if (isset($item->slug)) {
                 $item->slug = '/content/' . $item->slug;
             }
@@ -121,6 +110,8 @@ class APIResponse extends Model
         });
 
         $response = (json_decode(json_encode($items->toArray())));
+
+
 
         return response()
             ->json($response);

@@ -52,7 +52,7 @@
                                         <label for="settingKey">Key</label>
                                         <input disabled value="{{$setting->key}}" type="text" class="form-control" id="key" aria-describedby="settingKey" placeholder="site.main_color" name="key">
                                     </div>
-                                    @if($setting->value !== null)
+
                                     <div class="form-group">
                                         <label for="settingValue">Value</label>
                                         @if($setting->type == "text")
@@ -66,7 +66,7 @@
                                             </script>
                                         @endif
                                     </div>
-                                    @endif
+
                                     <div class="form-group">
                                         <label for="settingStatus">Status</label><br>
                                         <select class="custom-select" id="status" name="status" aria-describedby="settingStatus" style="width:100%;">

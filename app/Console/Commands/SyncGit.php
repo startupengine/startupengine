@@ -141,6 +141,8 @@ class SyncGit extends Command
                         $page->save();
                     }
 
+
+                    $jsons = [];
                     //If page.json exists, push the page to the DB
                     if (file_exists($pagepath . '/' . $filename . '/page.json')) {
                         $json = json_decode(file_get_contents($pagepath . '/' . $filename . '/page.json'));
@@ -154,10 +156,23 @@ class SyncGit extends Command
 
                 }
 
-                foreach($pages as $page) {
+                foreach ($pages as $page) {
                     $page = Page::where('slug', '=', $page)->first();
-                    if($page == null){
+                    if ($page == null) {
                         $page = new Page();
+                    }
+                    $json= file_exists($pagepath . '/' . $page->slug . '/page.json');
+                    if($json == true) {
+                        $json = json_decode(file_get_contents($pagepath . '/' . $page->slug . '/page.json'));
+                        if($mode == "reset"){
+                            if(isset($json->default)) {
+                                $json = json_encode($json->default);
+                            }
+                            else {
+                                $json = null;
+                            }
+                            $page->json = $json;
+                        }
                     }
                     $html = file_exists($pagepath . '/' . $page->slug . '/body.html');
                     if ($html == true) {

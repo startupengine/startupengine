@@ -8,7 +8,10 @@ if ($page->json !== null) {
     } else {
         $input = null;
     }
+} else {
+    $input = null;
 }
+
 ?>
 <?php $textareaname = "json[versions][$variationcount][$key][$value->slug]"; ?>
 <?php $variablename = "simplemde" . $variationcount . $key . $value->slug; ?>
@@ -36,11 +39,13 @@ if ($page->json !== null) {
         }
         ?></textarea>
 
-    <script>
-        var simplemde{{$variablename}} = new SimpleMDE({
-            element: document.getElementById("<?php echo $textareaname; ?>")
-            , placeholder: '{!! ($input) !!}'
-        });
-        simplemde{{$variablename}}.value('{{$input}}');
-    </script>
+    @if($input !== null)
+        <script>
+            var simplemde{{$variablename}} = new SimpleMDE({
+                element: document.getElementById("<?php echo $textareaname; ?>")
+                , placeholder: '{!! ($input) !!}'
+            });
+            simplemde{{$variablename}}.value('{{$input}}');
+        </script>
+    @endif
 </div>
