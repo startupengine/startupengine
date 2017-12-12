@@ -141,6 +141,12 @@
                                                                     @if($value->type == "richtext")
                                                                         @include('app.page.partials.fields.richtext')
                                                                     @endif
+                                                                    @if($value->type == "code")
+                                                                        @include('app.page.partials.fields.code')
+                                                                    @endif
+                                                                    @if($value->type == "select")
+                                                                        @include('app.page.partials.fields.select')
+                                                                    @endif
 
                                                                 @endforeach
                                                                 <?php $count = $count + 1; ?>

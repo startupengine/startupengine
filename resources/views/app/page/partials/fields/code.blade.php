@@ -40,13 +40,15 @@ if ($page->json !== null) {
         ?></textarea>
 
 
-        <script>
-            var simplemde{{$variablename}} = new SimpleMDE({
-                element: document.getElementById("<?php echo $textareaname; ?>")
-            });
-            @if($input !== null)
-            simplemde{{$variablename}}.value('{!! $input !!}');
-            @endif
-        </script>
+    <script>
+        var simplemde{{$variablename}} = new SimpleMDE({
+            element: document.getElementById("<?php echo $textareaname; ?>"),
+            status: false,
+            toolbar: false
+        });
+        @if($input !== null)
+        simplemde{{$variablename}}.value('{!! $input !!}');
+        @endif
+    </script>
 
 </div>

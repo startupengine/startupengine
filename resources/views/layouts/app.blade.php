@@ -471,6 +471,9 @@
         th {
             background: #fff !important;
         }
+        .CodeMirror, .CodeMirror-scroll {
+            min-height: 100px;
+        }
     </style>
 
     @yield('styles')
