@@ -472,7 +472,7 @@
             background: #fff !important;
         }
         .CodeMirror, .CodeMirror-scroll {
-            min-height: 100px;
+            min-height: 30px;
         }
     </style>
 
