@@ -55,15 +55,16 @@ class SyncGit extends Command
             $defaultpackage->save();
             $packages = Package::all();
         }
+        if (Schema::hasTable('packages')) {
+            $themepath = \Config::get('view.paths')[0] . '/theme';
+            $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
+            foreach ($packages as $package) {
+                exec("git clone $package->url resources/views/theme");
 
-        $themepath = \Config::get('view.paths')[0] . '/theme';
-        $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
-        foreach ($packages as $package) {
-            exec("git clone $package->url resources/views/theme");
-            if (Schema::hasTable('packages')) {
                 $package->json = file_get_contents($themepath . '/theme.json');
                 $package->description = json_decode(file_get_contents($themepath . '/theme.json'))->description;
                 $package->save();
+
             }
         }
 
@@ -161,14 +162,13 @@ class SyncGit extends Command
                     if ($page == null) {
                         $page = new Page();
                     }
-                    $json= file_exists($pagepath . '/' . $page->slug . '/page.json');
-                    if($json == true) {
+                    $json = file_exists($pagepath . '/' . $page->slug . '/page.json');
+                    if ($json == true) {
                         $json = json_decode(file_get_contents($pagepath . '/' . $page->slug . '/page.json'));
-                        if($mode == "reset"){
-                            if(isset($json->default)) {
+                        if ($mode == "reset") {
+                            if (isset($json->default)) {
                                 $json = json_encode($json->default);
-                            }
-                            else {
+                            } else {
                                 $json = null;
                             }
                             $page->json = $json;
