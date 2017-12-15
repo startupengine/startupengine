@@ -48,6 +48,8 @@ class SyncGit extends Command
         $path = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
 
+        //Install Packages
+        if (Schema::hasTable('packages')) {
         $packages = Package::all();
         if ($packages->isEmpty()) {
             $defaultpackage = new Package();
@@ -55,7 +57,6 @@ class SyncGit extends Command
             $defaultpackage->save();
             $packages = Package::all();
         }
-        if (Schema::hasTable('packages')) {
             $themepath = \Config::get('view.paths')[0] . '/theme';
             $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
             foreach ($packages as $package) {
