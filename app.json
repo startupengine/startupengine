@@ -27,12 +27,10 @@
             "php artisan command:SyncGit reset"
         ],
         "post-update-cmd": [
-            "php artisan migrate --force",
-            "php artisan command:SyncGit"
+            "php artisan migrate --force"
         ],
         "postdeploy": [
-            "php artisan migrate --force",
-            "php artisan command:SyncGit"
+            "php artisan migrate --force"
         ]
     },
     "env": {
