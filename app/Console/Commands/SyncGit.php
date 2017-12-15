@@ -17,7 +17,7 @@ class SyncGit extends Command
      *
      * @var string
      */
-    protected $signature = 'command:SyncGit {mode=add}';
+    protected $signature = 'command:SyncGit {mode?}';
 
     /**
      * The console command description.
