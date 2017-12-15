@@ -28,11 +28,11 @@
         ],
         "post-update-cmd": [
             "php artisan migrate --force",
-            "php artisan command:SyncGit"
+            "php artisan command:SyncGit default"
         ],
         "postdeploy": [
             "php artisan migrate --force",
-            "php artisan command:SyncGit"
+            "php artisan command:SyncGit default"
         ]
     },
     "env": {
