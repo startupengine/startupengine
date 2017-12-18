@@ -26,6 +26,11 @@ class Post extends Model implements AuditableContract
         return Markdown::convertToHtml($this->content()->body->body);
     }
 
+    public function markdown($content)
+    {
+        return Markdown::convertToHtml($content);
+    }
+
     public function category() {
         $category = \App\Category::where('id', '=', $this->category_id)->first();
         return $category;

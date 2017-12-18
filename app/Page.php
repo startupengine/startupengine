@@ -7,6 +7,7 @@ use Watson\Rememberable\Rememberable;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Page extends Model implements AuditableContract
 {
@@ -85,6 +86,12 @@ class Page extends Model implements AuditableContract
         return json_decode(json_encode($array));
     }
 
+
+    public function markdown($content)
+    {
+        return Markdown::convertToHtml($content);
+    }
+
     public function schemaToString()
     {
         {
@@ -96,15 +103,15 @@ class Page extends Model implements AuditableContract
         }
     }
 
-        public
-        function versions()
-        {
-            $json = json_decode($this->json, TRUE);
-            $versions = count($json['versions']);
-            if ($versions == null) {
-                $versions = 0;
-            }
-
-            return $versions;
+    public
+    function versions()
+    {
+        $json = json_decode($this->json, TRUE);
+        $versions = count($json['versions']);
+        if ($versions == null) {
+            $versions = 0;
         }
+
+        return $versions;
     }
+}
