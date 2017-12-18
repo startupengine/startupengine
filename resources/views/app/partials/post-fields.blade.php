@@ -160,6 +160,34 @@ if (\Request::is('app/view/*')) {
                                 </script>
 
                             @endif
+
+                            @if($value->type == 'checkbox')
+                                <?php $sec = $section->slug; ?>
+                                <?php if ($post !== null) {
+                                    $input = $post->json()->versions->$variationcount->$sec->$key;
+                                } else {
+                                    $input = null;
+                                } ?>
+                                <?php $textareaname = "json[versions][$variationcount][$section->slug][$key]"; ?>
+                                <?php $variablename = "simplemde" . $variationcount . $section->slug . $key; ?>
+                                <textarea {{$disabled}} class="form-control"
+                                          id="{{$textareaname}}"
+                                          aria-describedby="{{$key}}"
+                                          placeholder="{{$value->placeholder}}"
+                                          name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
+                                          rows="2"
+                                          data-field="{{$key}}"
+                                          data-section="{{$section->slug}}">{!!  $input !!}</textarea>
+                                <script>
+                                    var simplemde{{$variablename}} = new SimpleMDE({
+                                        element: document.getElementById("<?php echo $textareaname; ?>")
+                                        //, placeholder: '{!! ($input) !!}'
+                                    });
+                                    //simplemde{{$variablename}}.value('{{$input}}');
+                                </script>
+
+                            @endif
+
                         </div>
                     @endforeach
                     <?php $count = $count + 1; ?>

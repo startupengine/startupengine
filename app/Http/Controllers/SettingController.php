@@ -28,7 +28,7 @@ class SettingController extends Controller
 
             $setting->display_name= $request->input('display_name');
             $setting->value = $request->input('value');
-            if($request->input == null) {
+            if($request->input('status') == null) {
                 $setting->status = 'PRIVATE';
             }
             else {
