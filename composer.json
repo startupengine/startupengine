@@ -80,11 +80,11 @@
         ],
         "post-install-cmd": [
             "@php artisan migrate",
-            "@php artisan command:SyncGit"
+            "@php artisan command:SyncGit default"
         ],
         "post-update-cmd": [
             "@php artisan migrate",
-            "@php artisan command:SyncGit"
+            "@php artisan command:SyncGit default"
         ]
     },
     "config": {
