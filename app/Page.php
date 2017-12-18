@@ -78,6 +78,13 @@ class Page extends Model implements AuditableContract
 
     }
 
+    public function content()
+    {
+        $json = $this->json;
+        $array = json_decode($json, true)['versions'][1];
+        return json_decode(json_encode($array));
+    }
+
     public function schemaToString()
     {
         {

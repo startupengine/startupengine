@@ -106,6 +106,9 @@ class APIResponse extends Model
             if (isset($item->slug)) {
                 $item->slug = '/content/' . $item->slug;
             }
+            if($item->content() !== null){
+                $item->content = $item->content();
+            }
             return $item;
         });
 

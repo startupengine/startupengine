@@ -50,13 +50,13 @@ class SyncGit extends Command
 
         //Install Packages
         if (Schema::hasTable('packages')) {
-        $packages = Package::all();
-        if ($packages->isEmpty()) {
-            $defaultpackage = new Package();
-            $defaultpackage->url = "https://github.com/luckyrabbitllc/Startup-Engine-Template.git";
-            $defaultpackage->save();
             $packages = Package::all();
-        }
+            if ($packages->isEmpty()) {
+                $defaultpackage = new Package();
+                $defaultpackage->url = "https://github.com/luckyrabbitllc/Startup-Engine-Template.git";
+                $defaultpackage->save();
+                $packages = Package::all();
+            }
             $themepath = \Config::get('view.paths')[0] . '/theme';
             $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
             foreach ($packages as $package) {
@@ -130,19 +130,20 @@ class SyncGit extends Command
             if (count(\App\Page::all()) > 1 OR $mode == 'reset') {
                 foreach (glob($pagepath . "/*") as $filename) {
                     $filename = substr($filename, strrpos($filename, '/') + 1);
-                    $pages[] = $filename;
-                    $page = \App\Page::where('slug', '=', $filename)->first();
-                    if ($page == null) {
-                        $page = new \App\Page();
-                        $page->slug = $filename;
-                        $page->title = ucfirst($filename);
-                        $page->body = null;
-                        $page->excerpt = null;
-                        $page->status = 'INACTIVE';
-                        $page->author_id = 0;
-                        $page->save();
+                    if (file_exists($pagepath . '/' . $filename . '/page.json')) {
+                        $pages[] = $filename;
+                        $page = \App\Page::where('slug', '=', $filename)->first();
+                        if ($page == null) {
+                            $page = new \App\Page();
+                            $page->slug = $filename;
+                            $page->title = ucfirst($filename);
+                            $page->body = null;
+                            $page->excerpt = null;
+                            $page->status = 'INACTIVE';
+                            $page->author_id = 0;
+                            $page->save();
+                        }
                     }
-
 
                     $jsons = [];
                     //If page.json exists, push the page to the DB
