@@ -48,9 +48,6 @@ class SyncGit extends Command
         $path = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
 
-        $themepath = \Config::get('view.paths')[0] . '/theme';
-        $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
-
         //Install Packages
         if (Schema::hasTable('packages')) {
             $packages = Package::all();
@@ -62,7 +59,7 @@ class SyncGit extends Command
             }
             foreach ($packages as $package) {
                 exec("git clone $package->url resources/views/theme");
-
+                $themepath = \Config::get('view.paths')[0] . '/theme';
                 $package->json = file_get_contents($themepath . '/theme.json');
                 $package->description = json_decode(file_get_contents($themepath . '/theme.json'))->description;
                 $package->save();
@@ -72,6 +69,7 @@ class SyncGit extends Command
 
         //Inject settings if they don't yet exist
         if (Schema::hasTable('settings')) {
+            $themepath = \Config::get('view.paths')[0] . '/theme';
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
 
             foreach ($json->settings as $setting) {
@@ -106,6 +104,7 @@ class SyncGit extends Command
 
         //Inject Post Types if they don't yet exist
         if (Schema::hasTable('post_types')) {
+            $themepath = \Config::get('view.paths')[0] . '/theme';
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
             $schemas = $json->schemas;
             foreach ($schemas as $schema) {
@@ -129,6 +128,8 @@ class SyncGit extends Command
         $pages = [];
         if (Schema::hasTable('pages')) {
             if (count(\App\Page::all()) > 1 OR $mode == 'reset') {
+                $themepath = \Config::get('view.paths')[0] . '/theme';
+                $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
                 foreach (glob($pagepath . "/*") as $filename) {
                     $filename = substr($filename, strrpos($filename, '/') + 1);
                     if (file_exists($pagepath . '/' . $filename . '/page.json')) {
