@@ -48,6 +48,9 @@ class SyncGit extends Command
         $path = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
 
+        $themepath = \Config::get('view.paths')[0] . '/theme';
+        $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
+
         //Install Packages
         if (Schema::hasTable('packages')) {
             $packages = Package::all();
@@ -57,8 +60,6 @@ class SyncGit extends Command
                 $defaultpackage->save();
                 $packages = Package::all();
             }
-            $themepath = \Config::get('view.paths')[0] . '/theme';
-            $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
             foreach ($packages as $package) {
                 exec("git clone $package->url resources/views/theme");
 
