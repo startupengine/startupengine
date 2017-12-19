@@ -24,7 +24,7 @@ A beautiful & open-source platform for launching startups.
 
 # Demo
 
-See it in action at http://www.startupengine.io/
+See it in action at http://startupenginedemo.herokuapp.com
 
 # Features 
 * [x] 1-Click Install
