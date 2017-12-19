@@ -51,6 +51,12 @@ Click the button below to deploy a new instance of StartupEngine to Heroku insta
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
 
+Run the following commands on your instance via the Heroku CLI:
+
+`php artisan migrate:refresh --seed --force`
+
+`php artisan command:SyncGit reset`
+
 # License
 
 StartupEngine is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

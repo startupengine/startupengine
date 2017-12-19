@@ -370,6 +370,7 @@
         }
 
         #gradient {
+            /*
             background-image: linear-gradient(to top, rgba(0, 0, 70, 0.1) -35%, #ffd1ff00 75%), linear-gradient(to top, rgba(0, 0, 70, 0.2) -70%, #ffd1ff00 100%);
             width: calc(100% - 30px);
             height: 125px;
@@ -379,6 +380,8 @@
             left: 15px;
             border-radius: 5px;
             z-index: 9999999999;
+            */
+            display:none;
         }
 
         tr {
