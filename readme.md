@@ -33,17 +33,13 @@ See it in action at http://startupenginedemo.herokuapp.com
 * [x] Create pages, blog posts, and documentation, or make your own custom content types.
 * [x] Display your content anywhere using the content API.
 * [x] Define who can see and edit your content with role-based access control.
-* [x] Use the pre-installed Boostrap 4 theme, or build your own with the framework of your choice. 
+* [x] Use the pre-installed Boostrap 4/Vue.js theme, or build your own with the framework of your choice. 
 
 ##### Pre-Installed Pages
 * [x] Landing page
-* [x] Features
 * [x] Blog
-* [x] Help / Search
-* [x] Frequently Asked Questions
-* [x] Documentation
-* [x] Tutorials
-
+* [x] Search
+* [x] Help / Frequently Asked Questions
 
 # Deploying
 
