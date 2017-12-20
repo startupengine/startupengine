@@ -114,6 +114,8 @@ class SyncGit extends Command
                     $entry = PostType::where('slug', '=', $schema)->first();
                     if ($entry == null) {
                         $entry = new \App\PostType();
+                    }
+                    if ($entry == null OR $mode == 'reset') {
                         $entry->json = json_encode($contents);
                         $entry->slug = $schema;
                         $entry->title = $contents->title;
