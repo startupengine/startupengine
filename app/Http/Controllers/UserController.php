@@ -81,7 +81,7 @@ class UserController extends Controller
                 $user->status = $request->input('status');
             }
             if($request->input('password') !== null && $request->input('confirm_password') !== null && $request->input('password') == $request->input('confirm_password')) {
-                $user->password = $request->input('password');
+                $user->password = bcrypt($request->input('password'));
             }
             if($user->password == null){
                 $user->password = Hash::make(str_random(8));
