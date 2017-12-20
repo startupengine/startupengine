@@ -11,20 +11,22 @@
     <title>{{ $page->title }} - {{ setting('site.name') }}</title>
 
     <!-- Styles -->
-@if(View::exists('theme.templates.global.css'))
-    @include('theme.templates.global.css')
-@endif
+    @if(View::exists('theme.templates.global.css'))
+        @include('theme.templates.global.css')
+    @endif
 
-@yield('styles')
+    @yield('styles')
 
-<!-- FAVICONS -->
+    <!-- FAVICONS -->
     <?php if( setting('site.favicon') !== null) { ?>
     <link rel="icon" sizes="180x180" href="{{ \Storage::disk('public')->url( setting('site.favicon') ) }}">
     <?php }  ?>
 
-<!-- Meta -->
+    <!-- Meta -->
     @yield('meta')
+
 </head>
+
 @if(View::exists('theme.templates.global.header'))
     @include('theme.templates.global.header')
 @endif

@@ -38,9 +38,9 @@ class SettingController extends Controller
                 $setting->key = $request->input('key');
             }
 
-            if($request->input('value') !== null ) {
-                $setting->value = $request->input('value');
-            }
+
+            $setting->value = $request->input('value');
+
 
             if($request->input('status') == null) {
                 $setting->status = 'PRIVATE';
