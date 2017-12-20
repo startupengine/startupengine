@@ -50,6 +50,7 @@ Click the button below to deploy a new instance of StartupEngine to Heroku insta
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
 
 First, make sure the APP_KEY config variable is set.
+
 Then run the following commands on your instance via the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
 
 `php artisan migrate:refresh --seed --force`
