@@ -48,6 +48,8 @@ if (\Request::is('app/view/*')) {
                             <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
                                 - {{ucfirst($value->description)}}</label>
                             @if($value->type == 'text')
+                                <?php $sec = $section->slug; ?>
+
                                 <input {{$disabled}} type="{{$value->type}}" class="form-control"
                                        id="{{$key}}" aria-describedby="{{$key}}"
                                        placeholder="{{$value->placeholder}}"
@@ -64,12 +66,15 @@ if (\Request::is('app/view/*')) {
                                            }
                                        }
                                        ?>
+
                                        }
+
                                 />
                             @endif
+
                             @if($value->type == 'textarea')
                                 <?php $sec = $section->slug; ?>
-                                <?php if ($post !== null) {
+                                <?php if ($post !== null && isset($post->json()->versions->$variationcount->$sec->$key)) {
                                     $input = $post->json()->versions->$variationcount->$sec->$key;
                                 } else {
                                     $input = null;
@@ -136,7 +141,7 @@ if (\Request::is('app/view/*')) {
                             @endif
                             @if($value->type == 'richtext')
                                 <?php $sec = $section->slug; ?>
-                                <?php if ($post !== null) {
+                                <?php if ($post !== null && isset($post->json()->versions->$variationcount->$sec->$key)) {
                                     $input = $post->json()->versions->$variationcount->$sec->$key;
                                 } else {
                                     $input = null;
@@ -163,7 +168,7 @@ if (\Request::is('app/view/*')) {
 
                             @if($value->type == 'checkbox')
                                 <?php $sec = $section->slug; ?>
-                                <?php if ($post !== null) {
+                                <?php if ($post !== null && isset($post->json()->versions->$variationcount->$sec->$key)) {
                                     $input = $post->json()->versions->$variationcount->$sec->$key;
                                 } else {
                                     $input = null;
