@@ -13,7 +13,6 @@ class PageController
 
     public function getHomepage()
     {
-        dd(bcrypt('***REMOVED***'));
         $homepagesetting = Setting::where('key', '=', 'site.homepage')->first();
         if($homepagesetting !== null){
             $page = \App\Page::where('slug', '=', $homepagesetting->value)->where('status','=', 'ACTIVE')->first();
