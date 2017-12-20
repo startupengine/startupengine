@@ -95,7 +95,7 @@ if (\Request::is('app/view/*')) {
                             @endif
                             @if($value->type == 'code')
                                 <?php $sec = $section->slug; ?>
-                                <?php if ($post !== null) {
+                                <?php if ($post !== null && isset($post->json()->versions->$variationcount->$sec->$key)) {
                                     $input = $post->json()->versions->$variationcount->$sec->$key;
                                 } else {
                                     $input = null;
