@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="settingKey">Key</label>
-                                        <input disabled value="{{$setting->key}}" type="text" class="form-control" id="key" aria-describedby="settingKey" placeholder="site.main_color" name="key">
+                                        <input @if(isset($setting->key)) disabled @endif value="{{$setting->key}}" type="text" class="form-control" id="key" aria-describedby="settingKey" placeholder="site.main_color" name="key">
                                     </div>
 
                                     <div class="form-group">

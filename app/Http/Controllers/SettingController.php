@@ -19,15 +19,29 @@ class SettingController extends Controller
     }
 
     public function saveSetting(Request $request) {
+
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
 
             if($request->input('id') !== null ){
                 $setting = \App\Setting::find($request->input('id'));
             }
+            else {
+                $setting = new Setting();
+            }
 
-            $setting->display_name= $request->input('display_name');
-            $setting->value = $request->input('value');
+            if($request->input('display_name') !== null ) {
+                $setting->display_name = $request->input('display_name');
+            }
+
+            if($request->input('key') !== null ) {
+                $setting->key = $request->input('key');
+            }
+
+            if($request->input('value') !== null ) {
+                $setting->value = $request->input('value');
+            }
+
             if($request->input('status') == null) {
                 $setting->status = 'PRIVATE';
             }
@@ -38,6 +52,14 @@ class SettingController extends Controller
             if($request->input('publish') == "on") {
                 $setting->status = "PUBLISHED";
             }
+
+            if($request->input('type') == null) {
+                $setting->type = 'text';
+            }
+            else {
+                $setting->type = $request->input('type');
+            }
+
             $setting->save();
             return redirect('/app/settings');
         }
