@@ -66,7 +66,9 @@ class SyncPage extends Command
                 $page->slug = $slug;
                 $page->body = null;
                 $page->excerpt = null;
-                $page->status = 'INACTIVE';
+                if($page->status == null) {
+                    $page->status = 'INACTIVE';
+                }
                 $page->author_id = 0;
                 $page->save();
             }
