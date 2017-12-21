@@ -7,6 +7,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
+
 
 class SyncPage extends Command
 {
@@ -110,6 +112,9 @@ class SyncPage extends Command
         }
 
         $page->save();
+        $file = new Filesystem();
+        File::deleteDirectory($themepath."/pages/$slug");
+        $file->moveDirectory($temppath."/pages/$slug", $themepath."/pages/$slug");
         File::deleteDirectory($temppath);
     }
 }
