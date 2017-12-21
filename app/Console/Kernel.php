@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\SyncGit::class,
-        \App\Console\Commands\SyncModules::class,
+        \App\Console\Commands\SyncPage::class,
+        \App\Console\Commands\SyncModules::class
     ];
 
     /**
