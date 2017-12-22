@@ -157,7 +157,7 @@ if (\Request::is('app/view/*')) {
                                           data-field="{{$key}}"
                                           data-section="{{$section->slug}}">{!!  $input !!}</textarea>
                                 <script>
-                                    var simplemde{{$variablename}} = new SimpleMDE({
+                                    var <?php echo $variablename; ?> = new SimpleMDE({
                                         element: document.getElementById("<?php echo $textareaname; ?>")
                                         //, placeholder: '{{ ($input) }}'
                                     });
