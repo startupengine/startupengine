@@ -168,40 +168,42 @@ class SyncGit extends Command
                     if ($page == null) {
                         $page = new Page();
                     }
-                    $json = file_exists($pagepath . '/' . $page->slug . '/page.json');
-                    if ($json == true) {
-                        $json = json_decode(file_get_contents($pagepath . '/' . $page->slug . '/page.json'));
-                        if ($mode == "reset") {
-                            if (isset($json->default)) {
-                                $json = json_encode($json->default);
-                            } else {
-                                $json = null;
+                    if ($page->id == null OR $mode == 'reset') {
+                        $json = file_exists($pagepath . '/' . $page->slug . '/page.json');
+                        if ($json == true) {
+                            $json = json_decode(file_get_contents($pagepath . '/' . $page->slug . '/page.json'));
+                            if ($mode == "reset") {
+                                if (isset($json->default)) {
+                                    $json = json_encode($json->default);
+                                } else {
+                                    $json = null;
+                                }
+                                $page->json = $json;
                             }
-                            $page->json = $json;
                         }
-                    }
-                    $html = file_exists($pagepath . '/' . $page->slug . '/body.html');
-                    if ($html == true) {
-                        $html = file_get_contents($pagepath . '/' . $page->slug . '/body.html');
-                        if ($html !== null) {
-                            $page->html = $html;
+                        $html = file_exists($pagepath . '/' . $page->slug . '/body.html');
+                        if ($html == true) {
+                            $html = file_get_contents($pagepath . '/' . $page->slug . '/body.html');
+                            if ($html !== null) {
+                                $page->html = $html;
+                            }
                         }
-                    }
-                    $css = file_exists($pagepath . '/' . $page->slug . '/css.html');
-                    if ($css == true) {
-                        $css = file_get_contents($pagepath . '/' . $page->slug . '/css.html');
-                        if ($css !== null) {
-                            $page->css = $css;
+                        $css = file_exists($pagepath . '/' . $page->slug . '/css.html');
+                        if ($css == true) {
+                            $css = file_get_contents($pagepath . '/' . $page->slug . '/css.html');
+                            if ($css !== null) {
+                                $page->css = $css;
+                            }
                         }
-                    }
-                    $scripts = file_exists($pagepath . '/' . $page->slug . '/scripts.html');
-                    if ($scripts == true) {
-                        $scripts = file_get_contents($pagepath . '/' . $page->slug . '/scripts.html');
-                        if ($scripts !== null) {
-                            $page->scripts = $scripts;
+                        $scripts = file_exists($pagepath . '/' . $page->slug . '/scripts.html');
+                        if ($scripts == true) {
+                            $scripts = file_get_contents($pagepath . '/' . $page->slug . '/scripts.html');
+                            if ($scripts !== null) {
+                                $page->scripts = $scripts;
+                            }
                         }
+                        $page->save();
                     }
-                    $page->save();
 
                 }
             }
