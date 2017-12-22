@@ -32,14 +32,6 @@
 @endsection
 
 @section('content')
-    <?php if($post->bodyHtml() !== null) { ?>
-        <div style="margin-top:25px">{!! $post->bodyHtml() !!}</div>
-    <?php } ?>
-    @if($post->comments_enabled)
-        @if(View::exists('theme.global.elements.comments'))
-            @include('theme.global.elements.comments')
-        @endif
-    @endif
     @if(View::exists('theme.templates.post.scripts'))
         @include('theme.templates.post.scripts')
     @endif
