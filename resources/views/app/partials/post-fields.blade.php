@@ -159,7 +159,7 @@ if (\Request::is('app/view/*')) {
                                 <script>
                                     var simplemde{{$variablename}} = new SimpleMDE({
                                         element: document.getElementById("<?php echo $textareaname; ?>")
-                                        //, placeholder: '{!! ($input) !!}'
+                                        //, placeholder: '{{ ($input) }}'
                                     });
                                     //simplemde{{$variablename}}.value('{{$input}}');
                                 </script>
