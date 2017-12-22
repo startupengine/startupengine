@@ -155,12 +155,11 @@ if (\Request::is('app/view/*')) {
                                           name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
                                           rows="2"
                                           data-field="{{$key}}"
-                                          data-section="{{$section->slug}}"></textarea>
+                                          data-section="{{$section->slug}}">{!! $input !!}</textarea>
                                 <script>
                                     var <?php echo $variablename; ?> = new SimpleMDE({
                                         element: document.getElementById("<?php echo $textareaname; ?>")
                                     });
-                                    {{$variablename}}.value('{!! $input !!}');
                                 </script>
 
                             @endif
