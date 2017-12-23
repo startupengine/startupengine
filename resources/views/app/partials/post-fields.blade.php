@@ -81,7 +81,7 @@ if (\Request::is('app/view/*')) {
                                 } ?>
                                 <textarea {{$disabled}} type="{{$value->type}}" class="form-control"
                                           id="{{$key}}" aria-describedby="{{$key}}"
-                                          placeholder="{{$value->placeholder}}"
+                                          placeholder="Click to edit."
                                           name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
                                           rows="2"
                                           data-field="{{$key}}"
@@ -160,6 +160,7 @@ if (\Request::is('app/view/*')) {
                                     var <?php echo $variablename; ?> = new SimpleMDE({
                                         element: document.getElementById("<?php echo $textareaname; ?>")
                                     });
+
                                 </script>
 
                             @endif
