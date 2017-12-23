@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Page;
+use App\PostType;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -48,12 +49,13 @@ class SyncSchema extends Command
 
         $temppath = "resources/temp/$slug";
 
+        $themepath = \Config::get('view.paths')[0] . '/theme';
+        File::deleteDirectory($themepath . "/templates/$slug");
         exec("git clone $url $temppath");
 
         //Inject Post Type Schema
         if (Schema::hasTable('post_types')) {
 
-            $themepath = \Config::get('view.paths')[0] . '/theme';
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
             $schemas = $json->schemas;
 

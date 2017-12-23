@@ -45,7 +45,7 @@ class SchemaController extends Controller
                 $postType->title = $request->input('title');
                 $postType->slug = $request->input('slug');
                 if(json_decode($request->input('json'))) {
-                    $postType->custom_json = json_encode(json_decode($request->input('json')));
+                    $postType->json = json_encode(json_decode($request->input('json')));
                 }
                 $postType->save();
                 return redirect('/app/schema');

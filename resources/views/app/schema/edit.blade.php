@@ -65,8 +65,8 @@
                                                     type="text/javascript" charset="utf-8">
                                             </script>
                                             <script>
-                                                    <?php if ($postType->custom_json !== null) {
-                                                        $input = $postType->custom_json;
+                                                    <?php if ($postType->json !== null) {
+                                                        $input = $postType->json;
                                                     } else {
                                                         $input = $postType->json;
                                                     } ?>
