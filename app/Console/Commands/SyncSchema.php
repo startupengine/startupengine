@@ -16,14 +16,14 @@ class SyncSchema extends Command
      *
      * @var string
      */
-    protected $signature = 'command:SyncPage {slug} {url?} {mode?}';
+    protected $signature = 'command:SyncSchema {slug} {url?} {mode?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Sync Post Type schemas & templates individually';
 
     /**
      * Create a new command instance.
@@ -49,7 +49,6 @@ class SyncSchema extends Command
         $temppath = "resources/temp/$slug";
 
         exec("git clone $url $temppath");
-
 
         //Inject Post Type Schema
         if (Schema::hasTable('post_types')) {
