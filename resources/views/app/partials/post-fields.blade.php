@@ -188,6 +188,32 @@ if (\Request::is('app/view/*')) {
                                     </label>
                                 </div>
                             @endif
+
+                            @if($value->type == 'select')
+                                <?php $sec = $section->slug; ?>
+                                <?php if ($post !== null && isset($post->json()->versions->$variationcount->$sec->$key)) {
+                                    $input = $post->json()->versions->$variationcount->$sec->$key;
+                                } else {
+                                    $input = null;
+                                } ?>
+                                <?php $textareaname = "json[versions][$variationcount][$section->slug][$key]"; ?>
+                                <?php $variablename = "simplemde" . $variationcount . $section->slug . $key; ?>
+                                <select {{$disabled}} class="form-control" style="max-width:250px;"
+                                          id="{{$textareaname}}"
+                                          aria-describedby="{{$key}}"
+                                          placeholder="{{$value->placeholder}}"
+                                          name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
+                                          rows="2"
+                                          data-field="{{$key}}"
+                                          data-section="{{$section->slug}}">
+                                    @foreach($value->options as $optionKey => $optionValue)
+                                            <option value="{{$optionValue}}"> {{ ucfirst($optionValue) }}</option>
+                                    @endforeach
+                                </select>
+
+
+                            @endif
+
                         </div>
                     @endforeach
                     <?php $count = $count + 1; ?>
