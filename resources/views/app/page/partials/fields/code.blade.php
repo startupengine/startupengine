@@ -40,5 +40,4 @@ if ($page->json !== null) {
         {{$variablename}}.placeholder('Click to edit');
         @endif
     </script>
-
 </div>

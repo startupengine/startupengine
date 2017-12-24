@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Page;
+use App\Package;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -59,6 +60,15 @@ class SyncPage extends Command
         exec("git clone $url $tempdir");
 
         File::copyDirectory($temppath, $pagepath);
+
+        if (Schema::hasTable('packages')) {
+            $package = Package::where('url', '=', $url)->first();
+            if($package == null) {
+                $package = new Package();
+                $package->url = $url;
+                $package->save();
+            }
+        }
 
         //Inject Pages if they don't yet exist
         if (Schema::hasTable('pages')) {
