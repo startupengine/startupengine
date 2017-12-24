@@ -66,8 +66,11 @@ class SyncPage extends Command
             if($package == null) {
                 $package = new Package();
                 $package->url = $url;
-                $package->save();
             }
+            if(file_exists($tempdir.'/theme.json')) {
+                $package->json = file_get_contents($tempdir.'/theme.json');
+            }
+            $package->save();
         }
 
         //Inject Pages if they don't yet exist
