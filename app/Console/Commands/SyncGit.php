@@ -63,7 +63,6 @@ class SyncGit extends Command
                 $package->json = file_get_contents($themepath . '/theme.json');
                 $package->description = json_decode(file_get_contents($themepath . '/theme.json'))->description;
                 $package->save();
-
             }
         }
 

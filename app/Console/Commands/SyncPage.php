@@ -59,7 +59,7 @@ class SyncPage extends Command
 
         exec("git clone $url $tempdir");
 
-        File::copyDirectory($temppath, $pagepath);
+        File::moveDirectory($temppath, $pagepath);
 
         if (Schema::hasTable('packages')) {
             $package = Package::where('url', '=', $url)->first();
