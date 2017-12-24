@@ -24,22 +24,11 @@ if ($page->json !== null) {
               id="{{$textareaname}}"
               aria-describedby="{{$field}}"
               placeholder="{{$value->placeholder}}"
-              name="json[versions][{{ $variationcount }}][{{$key}}][{{$value->slug}}]"
-              rows="1"
+              name="{{$textareaname}}"
+              rows="2"
               data-field="{{$field}}"
               data-section="{{$value->slug}}"
-              }>
-        <?php
-        if ($page->json !== null) {
-            $json = json_decode($page->json);
-            $slug = $value->slug;
-            if (isset($json->versions->$variationcount->$slug->$key)) {
-                echo $input;
-            }
-        }
-        ?></textarea>
-
-
+              }></textarea>
     <script>
         var {{$variablename}} = new SimpleMDE({
             element: document.getElementById("<?php echo $textareaname; ?>"),
@@ -48,6 +37,7 @@ if ($page->json !== null) {
         });
         @if($input !== null)
         {{$variablename}}.value('{!! $input !!}');
+        {{$variablename}}.placeholder('Click to edit');
         @endif
     </script>
 

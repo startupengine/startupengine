@@ -13,8 +13,8 @@ if ($page->json !== null) {
 }
 
 ?>
-<?php $textareaname = "json[versions][$variationcount][$field][$value->slug]"; ?>
-<?php $variablename = "simplemde" . $variationcount . $field . $value->slug; ?>
+<?php $textareaname = "json[versions][$variationcount][$key][$field]"; ?>
+<?php $variablename = "simplemde" . $variationcount . $key . $field; ?>
 <div class="form-group" align="left">
     <label for="{{$key}}"><b>{{ucfirst($field)}}</b>
         - {{ucfirst($value->description)}}
@@ -24,29 +24,17 @@ if ($page->json !== null) {
               id="{{$textareaname}}"
               aria-describedby="{{$field}}"
               placeholder="{{$value->placeholder}}"
-              name="json[versions][{{ $variationcount }}][{{$key}}][{{$value->slug}}]"
+              name="{{$textareaname}}"
               rows="2"
               data-field="{{$field}}"
               data-section="{{$value->slug}}"
-              }>
-        <?php
-        if ($page->json !== null) {
-            $json = json_decode($page->json);
-            $slug = $value->slug;
-            if (isset($json->versions->$variationcount->$slug->$key)) {
-                echo $input;
-            }
-        }
-        ?></textarea>
-
-
-        <script>
-            var simplemde{{$variablename}} = new SimpleMDE({
-                element: document.getElementById("<?php echo $textareaname; ?>")
-            });
-            @if($input !== null)
-            simplemde{{$variablename}}.value('{!! $input !!}');
-            @endif
-        </script>
-
+              }></textarea>
+    <script>
+        var {{$variablename}} = new SimpleMDE({
+            element: document.getElementById("<?php echo $textareaname; ?>")
+        });
+        @if($input !== null)
+            {{$variablename}}.value('{!! $input !!}');
+        @endif
+    </script>
 </div>
