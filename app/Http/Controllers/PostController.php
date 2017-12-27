@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function getPost(Request $request, $slug) {
         $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
-        if($post->status !== null) {
+        if($post->status !== null && $post->published_at->isPast()) {
             //dd($post->image());
             return view('posts.view')->with('post', $post);
         }
@@ -77,7 +77,7 @@ class PostController extends Controller
         if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             $post = Post::find($id);
         }
-        if($post->status !== null && $post->published_at->isPast()) {
+        if($post->status !== null) {
             $categories = \App\Category::all();
             $postType = $post->postType();
             return view('app.post.view')->with('post', $post)->with('categories', $categories)->with('postType', $postType);
