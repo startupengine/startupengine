@@ -57,7 +57,11 @@ class SyncPage extends Command
         File::deleteDirectory($tempdir);
         File::deleteDirectory($pagepath);
 
-        exec("git clone $url $tempdir");
+        //exec("git clone $url $tempdir");
+        exec("cd $themepath");
+        exec("git remote add origin $url");
+        exec("git fetch");
+        exec("git checkout -t origin/master");
 
         File::moveDirectory($temppath, $pagepath);
 

@@ -28,13 +28,10 @@ if ($page->json !== null) {
               rows="2"
               data-field="{{$field}}"
               data-section="{{$value->slug}}"
-              }></textarea>
+              }>@if($input !== null){{ $input }}@endif</textarea>
     <script>
         var {{$variablename}} = new SimpleMDE({
             element: document.getElementById("<?php echo $textareaname; ?>")
         });
-        @if($input !== null)
-            {{$variablename}}.value('{!! $input !!}');
-        @endif
     </script>
 </div>

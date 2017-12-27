@@ -37,6 +37,7 @@
         @include('theme.templates.post.header')
     @endif
 
+
     @yield('content')
 
     @if(View::exists('theme.templates.global.scripts'))

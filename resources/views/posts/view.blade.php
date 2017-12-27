@@ -29,10 +29,16 @@
     @if(View::exists('theme.templates.post.css'))
         @include('theme.templates.post.css')
     @endif
+    @if(isset($post->content()->code->css))
+        {!! $post->content()->code->css !!}
+    @endif
 @endsection
 
 @section('content')
     @if(View::exists('theme.templates.post.scripts'))
         @include('theme.templates.post.scripts')
+    @endif
+    @if(isset($post->content()->code->scripts))
+        {!! $post->content()->code->scripts !!}
     @endif
 @endsection
