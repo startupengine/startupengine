@@ -112,7 +112,7 @@ if (\Request::is('app/view/*')) {
                                           name="{{$textareaname}}"
                                           rows="3"
                                           data-field="{{$key}}"
-                                          data-section="{{$section->slug}}"></textarea>
+                                          data-section="{{$section->slug}}">@if($input !== null){!! $input !!}@endif</textarea>
                                 <div id="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
                                      aria-describedby="{{$key}}"
                                      name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
@@ -135,7 +135,7 @@ if (\Request::is('app/view/*')) {
                                     editor{{$variablename}}.getSession().on('change', function () {
                                         textarea{{$variablename}}.val(editor{{$variablename}}.getSession().getValue());
                                     });
-                                    editor{{$variablename}}.setValue('{!! $input !!}');
+
                                 </script>
 
                             @endif
@@ -155,7 +155,7 @@ if (\Request::is('app/view/*')) {
                                           name="json[versions][{{ $variationcount }}][{{$section->slug}}][{{$key}}]"
                                           rows="2"
                                           data-field="{{$key}}"
-                                          data-section="{{$section->slug}}">{!! $input !!}</textarea>
+                                          data-section="{{$section->slug}}">@if($input !== null){!! $input !!}@endif</textarea>
                                 <script>
                                     var <?php echo $variablename; ?> = new SimpleMDE({
                                         element: document.getElementById("<?php echo $textareaname; ?>")
