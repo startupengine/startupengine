@@ -18,9 +18,9 @@ class PostController extends Controller
     }
 
     public function getPost(Request $request, $slug) {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
-        if($post->status !== null && $post->published_at->isPast()) {
-            //dd($post->image());
+        if(($post->status !== null && $post->published_at->isPast()) OR (\Auth::user() && \Auth::user()->role_id == $adminrole->id)) {
             return view('posts.view')->with('post', $post);
         }
         else {
