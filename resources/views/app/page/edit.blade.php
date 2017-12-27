@@ -55,7 +55,7 @@
                             <form action="/app/edit/page" method="post">
                                 {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="postTitle">Title</label>
                                             <input required value="@if($page->title !== null){{$page->title}}"@endif type="text" class="form-control"
@@ -64,7 +64,7 @@
                                                    name="title">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="postSlug">Slug</label>
                                             <input required value="{{$page->slug}}" type="text" class="form-control"
@@ -72,7 +72,7 @@
                                                    aria-describedby="postSlug" placeholder="example-slug" name="slug">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="postStatus">Status</label><br>
                                             <select required class="custom-select" id="status" name="status"
@@ -86,6 +86,13 @@
                                                 } ?> value="INACTIVE">Inactive
                                                 </option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="postStatus">Publish Date</label><br>
+                                            <?php if($page->published_at == null) { $date = \Carbon\Carbon::now()->format("m/d/Y"); } else { $date = $page->published_at->format("m/d/Y"); } ?>
+                                            <input autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}" name="published_at" >
                                         </div>
                                     </div>
                                 </div>

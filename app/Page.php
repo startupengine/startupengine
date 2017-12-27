@@ -15,6 +15,13 @@ class Page extends Model implements AuditableContract
     use Auditable;
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at', 'published_at'];
+
+    /**
      * Attributes to include in the Audit.
      *
      * @var array

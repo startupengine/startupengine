@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use TCG\Voyager\Models\Category;
 
@@ -100,6 +101,7 @@ class APIResponse extends Model
             ->where('status', '=', 'PUBLISHED')
             ->limit($limit)
             ->orderBy('created_at')
+            ->where('published_at', '<', Carbon::now()->toDateTimeString())
             ->get();
 
         $items->transform(function ($item, $key) {
@@ -158,6 +160,7 @@ class APIResponse extends Model
             ->select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
             ->whereIn('id', $ids)
+            ->where('published_at', '<', Carbon::now()->toDateTimeString())
             ->limit($limit)
             ->orderBy('created_at')
             ->get();
@@ -224,10 +227,10 @@ class APIResponse extends Model
             $fields = $fields . ', json';
         }
 
-
         $items = Post::select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
             ->where($field, '=', $slug)
+            ->where('published_at', '<', Carbon::now()->toDateTimeString())
             ->get();
 
         $items->transform(function ($item, $key) {
