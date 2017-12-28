@@ -25,7 +25,7 @@ class SyncPage extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Pull the latest version of a page from a git repo.';
 
     /**
      * Create a new command instance.
