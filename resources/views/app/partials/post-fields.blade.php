@@ -45,8 +45,8 @@ if (\Request::is('app/view/*')) {
                      data-section="{{$key}}">
                     @foreach($section->fields as $key => $value)
                         <div class="form-group" align="left">
-                            <label for="{{$key}}"><b>{{ucfirst($key)}}</b>
-                                - {{ucfirst($value->description)}}</label>
+                            <label for="{{$key}}"><b><?php echo ucwords(str_replace('_', ' ', $key)); ?></b>
+                               @if($value->type !== "checkbox") - <?php echo ucfirst($value->description); ?> @endif</label>
                             @if($value->type == 'text')
                                 <?php $sec = $section->slug; ?>
 
@@ -184,7 +184,7 @@ if (\Request::is('app/view/*')) {
                                             data-section="{{$section->slug}}"
                                             @if($input == true) checked="" @endif />
                                     <label for="{{$textareaname}}">
-                                        Featured
+                                        {{ucfirst($value->description)}}
                                     </label>
                                 </div>
                             @endif

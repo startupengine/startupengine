@@ -297,7 +297,7 @@
             top: 15px;
             left: 15px;
             width: calc(100% - 30px) !important;
-            z-index: 999 !important;
+            z-index: 3 !important;
         }
 
         .main .card-header {
