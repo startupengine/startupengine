@@ -27,29 +27,32 @@
 
 @section('content')
     <body class="index-page sidebar-collapse bg-gradient">
-    <div class="container-fluid" style="margin-top:15px;">
-        <div class="card" style="min-height: calc(100vh - 30px);">
-            <div class="card-header" style="padding-left:25px;" align="right">
-                <div style="position:absolute;left:25px;top:25px;">Admin Panel</div>
-                @include('app.admin-menu')
-            </div>
-            <div class="row">
-                @include('app.admin-sidebar')
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                    <div class="main col-md-12" style="background:none;margin-top:25px;">
-                        <div class="col-md-12">
-                            <h5 style="margin-bottom:25px;">API Settings</h5>
-                        </div>
-                        <div class="col-md-12">
+    <div id="app"
+         style="display: block; overflow-y: scroll !important; position: absolute;top: 0px; left: 0px; width: 100%; height: 100%;margin:0px !important;padding:0px !important;">
+        <div class="container-fluid" style="margin-top:15px;">
+            <div class="card" style="min-height: calc(100vh - 30px);">
+                <div class="card-header" style="padding-left:25px;" align="right">
+                    <div style="position:absolute;left:25px;top:25px;">Admin Panel</div>
+                    @include('app.admin-menu')
+                </div>
+                <div class="row">
+                    @include('app.admin-sidebar')
+                    <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                        <div class="main col-md-12" style="background:none;margin-top:25px;">
+                            <div class="col-md-12">
+                                <h5 style="margin-bottom:25px;">API Settings</h5>
+                            </div>
+                            <div class="col-md-12">
 
-                            <!-- API Authentication -->
-                            <passport-clients></passport-clients>
-                            <passport-authorized-clients></passport-authorized-clients>
-                            <passport-personal-access-tokens></passport-personal-access-tokens>
+                                <!-- API Authentication -->
+                                <passport-clients></passport-clients>
+                                <passport-authorized-clients></passport-authorized-clients>
+                                <passport-personal-access-tokens></passport-personal-access-tokens>
 
+                            </div>
                         </div>
-                    </div>
-                </main>
+                    </main>
+                </div>
             </div>
         </div>
     </div>

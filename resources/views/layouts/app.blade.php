@@ -486,10 +486,10 @@
 
     @yield('styles')
 </head>
-<body class="index-page sidebar-collapse">
-<div id="app" style="display: block; overflow-y: scroll !important; position: absolute;top: 0px; left: 0px; width: 100%; height: 100%;margin:0px !important;padding:0px !important;">
+<body>
+
     @yield('content')
-</div>
+
 
 <!-- UX -->
 <script type="text/javascript">
