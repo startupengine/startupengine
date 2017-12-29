@@ -351,8 +351,7 @@
         .dropdown-menu {
             z-index: 999999 !important;
             width: auto !important;
-            left;
-            0px;
+            left: 0px;
             top: 0px;
             position: absolute;
             transition: left 0s, top 0s;
@@ -366,31 +365,14 @@
             color: #111 !important;
         }
 
-        #gradient {
-            /*
-            background-image: linear-gradient(to top, rgba(0, 0, 70, 0.1) -35%, #ffd1ff00 75%), linear-gradient(to top, rgba(0, 0, 70, 0.2) -70%, #ffd1ff00 100%);
-            width: calc(100% - 30px);
-            height: 125px;
-            pointer-events: none;
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            border-radius: 5px;
-            z-index: 9999999999;
-            */
-            display:none;
-        }
-
         tr {
-            -webkit-transition: box-shadow 0.5s;
-            transition: box-shadow 0.5s;
+            -webkit-transition: background 0.5s;
+            transition: background 0.5s;
         }
 
         .card tr:hover {
             color: #111 !important;
-            -webkit-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+            background:#f7f9fd !important;
         }
 
         table th {

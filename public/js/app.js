@@ -43723,7 +43723,7 @@ var render = function() {
                       {
                         staticStyle: {
                           "vertical-align": "middle",
-                          "min-width": "100px"
+                          "min-width": "200px"
                         }
                       },
                       [
@@ -44171,17 +44171,13 @@ var staticRenderFns = [
             "a",
             {
               staticClass:
-                "action-link btn btn-sm btn-default btn-simple btn-round",
+                "action-link btn btn-sm btn-default btn-secondary text-white btn-round",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-client"
               }
             },
-            [
-              _vm._v(
-                "\n                    Create New Client\n                "
-              )
-            ]
+            [_vm._v("\n                    New Client\n                ")]
           )
         ]
       )
@@ -45291,7 +45287,8 @@ var staticRenderFns = [
           staticStyle: {
             display: "flex",
             "justify-content": "space-between",
-            "align-items": "center"
+            "align-items": "center",
+            "text-align": "left"
           }
         },
         [
@@ -45305,7 +45302,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass:
-                "action-link btn btn-sm btn-default btn-simple btn-round",
+                "action-link btn btn-sm btn-secondary text-white btn-round",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-token"
@@ -45313,7 +45310,7 @@ var staticRenderFns = [
             },
             [
               _vm._v(
-                "\n                        Create New Token\n                    "
+                "\n                        New Token\n                    "
               )
             ]
           )

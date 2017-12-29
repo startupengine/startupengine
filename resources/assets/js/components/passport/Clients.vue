@@ -17,8 +17,8 @@
                         OAuth Clients
                     </span>
 
-                    <a class="action-link btn btn-sm btn-default btn-simple btn-round" data-toggle="modal" data-target="#modal-create-client">
-                        Create New Client
+                    <a class="action-link btn btn-sm btn-default btn-secondary text-white btn-round" data-toggle="modal" data-target="#modal-create-client">
+                        New Client
                     </a>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                             </td>
 
                             <!-- Name -->
-                            <td style="vertical-align: middle;min-width:100px;">
+                            <td style="vertical-align: middle;min-width:200px;">
                                 {{ client.name }}
                             </td>
 

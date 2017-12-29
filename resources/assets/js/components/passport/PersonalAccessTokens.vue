@@ -13,13 +13,13 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;text-align:left;">
                         <span>
                             Personal Access Tokens
                         </span>
 
-                        <a class="action-link btn btn-sm btn-default btn-simple btn-round" data-toggle="modal" data-target="#modal-create-token">
-                            Create New Token
+                        <a class="action-link btn btn-sm btn-secondary text-white btn-round" data-toggle="modal" data-target="#modal-create-token">
+                            New Token
                         </a>
                     </div>
                 </div>
