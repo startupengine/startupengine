@@ -466,11 +466,16 @@
             padding:0px !important;
         }
 
+        #app > .container-fluid:first-of-type > .card > .card-header {
+            z-index:999 !important;
+        }
+
         #app .container-fluid > .card {
             border-radius:0px !important;
             margin-bottom:0px !important;
             height:100vh !important;
             padding:0px !important;
+            float:left;
         }
 
         #app .container-fluid > .card > .row {
@@ -482,7 +487,7 @@
     @yield('styles')
 </head>
 <body>
-<div id="app" style="display: block; overflow-y: scroll !important; position: absolute;top: 0px; left: 0px; width: 100%; height: 100vh;">
+<div id="app" style="display: block; overflow-y: scroll !important; position: absolute;top: 0px; left: 0px; width: 100%; height: 100%;margin:0px !important;padding:0px !important;">
     @yield('content')
 </div>
 
