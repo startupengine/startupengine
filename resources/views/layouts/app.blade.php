@@ -310,10 +310,6 @@
             font-weight: 600;
         }
 
-        .main .card-body {
-            min-height:75px !important;
-        }
-
         nav:first-of-type, main {
             margin-top: 65px !important;
         }

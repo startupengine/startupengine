@@ -22,6 +22,9 @@
             }
         }
 
+        .main .card-body {
+            min-height:150px !important;
+        }
     </style>
 @endsection
 
@@ -35,7 +38,7 @@
             </div>
             <div class="row">
                 @include('app.admin-sidebar')
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                <main class="col-sm-12 col-md-12 col-lg-9 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
                             <h5 style="margin-bottom:25px;"><?php if ($request->input('group') !== null) {
@@ -50,9 +53,9 @@
                                 </form>
                             </div>
                             @if($request->input('s') == null && $request->input('group') == null)
-                                <div style="margin-top:25px;">
-                                    <div class="col-md-4" style="float:right;">
-                                        <div class="card">
+                                <div style="margin-top:25px;" class="row row-eq-height">
+                                    <div class="col-md-4" style="display:inline-block !important;">
+                                        <div class="card" style="margin-bottom:25px;">
                                             <div class="card-header" align="center">
                                                 Content Types
                                             </div>
@@ -65,8 +68,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4" style="float:right;">
-                                        <div class="card">
+                                    <div class="col-md-4" style="display:inline-block !important;">
+                                        <div class="card" style="margin-bottom:25px;">
                                             <div class="card-header" align="center">
                                                 API Settings
                                             </div>
@@ -79,25 +82,27 @@
                                         </div>
                                     </div>
                                     @foreach($settingsGroups as $key => $value)
-                                        <div class="col-md-4" style="float:right;">
-                                            <div class="card">
-                                                <div class="card-header" align="center">
-                                                    {{ ucfirst($key) }}
-                                                </div>
-                                                <div class="card-body" align="center" style="min-height: 100px;">
-                                                    <?php $filtered = $value->where('key', strtolower($key) . '.settings_description')->first(); if ($filtered !== null) {
-                                                        echo "<p>" . $filtered->value . "</p>";
-                                                    } if ($filtered == null) {
-                                                        echo "Settings for " . strtolower(str_plural($key));
-                                                    } ?>
-                                                </div>
-                                                <div class="card-footer" align="center">
-                                                    <a href="/app/settings?group={{$key}}"
-                                                       class="btn btn-secondary-outline btn-round">{{ $key }}
-                                                        Settings</a>
+                                        @if($key !== '' && %key !== null)
+                                            <div class="col-md-4" style="display:inline-block !important;">
+                                                <div class="card" style="margin-bottom:25px;">
+                                                    <div class="card-header" align="center">
+                                                        {{ ucfirst($key) }}
+                                                    </div>
+                                                    <div class="card-body" align="center" style="min-height: 100px;">
+                                                        <?php $filtered = $value->where('key', strtolower($key) . '.settings_description')->first(); if ($filtered !== null) {
+                                                            echo "<p>" . $filtered->value . "</p>";
+                                                        } if ($filtered == null) {
+                                                            echo "Settings for " . strtolower(str_plural($key));
+                                                        } ?>
+                                                    </div>
+                                                    <div class="card-footer" align="center">
+                                                        <a href="/app/settings?group={{$key}}"
+                                                           class="btn btn-secondary-outline btn-round">{{ $key }}
+                                                            Settings</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             @endif
