@@ -283,12 +283,10 @@
             min-height: 100%;
         }
 
-        .card-header:nth-of-type(1) {
-            background: rgba(40, 20, 0, 0.93);
-            -webkit-box-shadow: 0px 0px 45px rgba(0, 0, 0, 0.25);
-            -moz-box-shadow: 0px 0px 45px rgba(0, 0, 0, 0.25);
-            box-shadow: 0px 0px 45px rgba(0, 0, 0, 0.25);
-            border-bottom: 3px solid #fff;
+        #app > .container-fluid > .card .card-header{
+            background: linear-gradient(-90deg, #ffc107de, #ff0000de);
+            font-weight:600 !important;
+            border-bottom:none !important;
             color: #fff;
             position: fixed;
             top: 0px;
@@ -299,17 +297,21 @@
         }
 
         .main .card-header {
+            background: #fff !important;
             position: relative !important;
             box-shadow: none;
             border-bottom: 1px solid #ddd;
             width: 100% !important;
-            background: #fff;
+            color: #333 !important;
             top: 0px !important;
             text-align: center;
             left: 0px !important;
             z-index: auto !important;
-            color: #111;
             font-weight: 600;
+        }
+
+        .main .card-body {
+            min-height:75px !important;
         }
 
         nav:first-of-type, main {
@@ -469,6 +471,11 @@
             margin-bottom:0px !important;
             height:100vh !important;
             padding:0px !important;
+        }
+
+        #app .container-fluid > .card > .row {
+            overflow: scroll !important;
+            height: 100vh !important;
         }
     </style>
 

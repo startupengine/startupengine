@@ -109,12 +109,12 @@ class SyncGit extends Command
             foreach ($schemas as $schema) {
                 $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
                 if (file_exists($themepath . '/templates/' . $schema . '/schema.json')) {
-                    $contents = json_decode(file_get_contents($schemapath));
                     $entry = PostType::where('slug', '=', $schema)->first();
-                    if ($entry == null && $mode == 'default') {
+                    if ($entry == null OR $mode == 'default') {
                         $entry = new \App\PostType();
                     }
                     if ($entry == null OR $mode == 'reset' OR $mode == 'schema') {
+                        $contents = json_decode(file_get_contents($schemapath));
                         $entry->json = json_encode($contents);
                         $entry->slug = $schema;
                         $entry->title = $contents->title;
