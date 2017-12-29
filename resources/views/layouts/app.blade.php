@@ -467,7 +467,7 @@
         }
 
         #app > .container-fluid:first-of-type > .card > .card-header {
-            z-index:99;
+            z-index:99 !important;
         }
 
         #app .container-fluid > .card {
