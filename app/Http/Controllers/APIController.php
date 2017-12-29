@@ -3,10 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\APIResponse;
+use App\AnalyticEvent;
 use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
+    public function saveEvent(Request $request)
+    {
+        $event = new AnalyticEvent();
+        $event->instance = json_encode($request->instance());
+        $event->server = json_encode($request->server);
+        $event->segments = json_encode($request->segments());
+        $event->decoded_path = $request->decodedPath();
+        $event->full_url = $request->fullUrl();
+        $event->fingerprint = $request->fingerprint();
+        $event->headers = json_encode($request->headers);
+        $event->input = json_encode($request->input());
+        $event->content = $request->getContent();
+        $event->query_string = $request->getQueryString();
+        $event->request_uri = $request->getRequestUri();
+        $event->scheme = $request->getScheme();
+        $event->scheme_and_host = $request->getSchemeAndHttpHost();
+        $event->encodings = json_encode($request->getEncodings());
+        $event->attributes = json_encode($request->attributes);
+        $event->base_path = $request->getBasePath();
+        $event->cookies = json_encode($request->getBasePath());
+        $event->json = json_encode($request->json());
+        if ($request->user() !== null) {
+            $event->user_id = $request->user()->id;
+        } else {
+            $event->user_id = null;
+        }
+        if ($request->user() !== null) {
+            $event->user_email = $request->user()->email;
+        } else {
+            $event->user_email = null;
+        }
+        if ($request->user() !== null) {
+            $event->user_name = $request->user()->name;
+        } else {
+            $event->user_name = null;
+        }
+        $event->user_agent = $request->userAgent();
+        $event->client_ip = $request->getClientIp();
+        $event->client_ips = json_encode($request->getClientIps());
+        $event->client_locale = $request->getLocale();
+        $event->languages = json_encode($request->getLanguages());
+        $event->script_name = $request->getScriptName();
+        $event->event_data = json_encode($request->input('data'));
+        if($request->input('event_type') !== null) {
+            $event->event_type = $request->input('event_type');
+        }
+        $event->save();
+
+        return response()
+            ->json($event);
+    }
+
     public function getItems(Request $request)
     {
         $items = new APIResponse();

@@ -14,7 +14,7 @@ class AddPublishedAtToPagesTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamps('published_at')->nullable();
+            $table->timestamp('published_at')->nullable();
         });
     }
 

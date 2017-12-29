@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/analytics/event/', 'APIController@saveEvent');
+Route::post('/analytics/event/', 'APIController@saveEvent');
 Route::get('/browse/', 'APIController@getItemsByCategory');
 Route::get('/items/', 'APIController@getItems');
 Route::get('/item/', 'APIController@getItem');
