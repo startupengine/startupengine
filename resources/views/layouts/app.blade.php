@@ -284,7 +284,7 @@
         }
 
         #app > .container-fluid > .card .card-header{
-            background: linear-gradient(-90deg, #ffc107de, #ff0000de);
+            background: linear-gradient(-90deg, #9e58fbde, #3a92ffde);
             font-weight:600 !important;
             border-bottom:none !important;
             color: #fff;

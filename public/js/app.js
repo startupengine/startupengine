@@ -43723,7 +43723,7 @@ var render = function() {
                       {
                         staticStyle: {
                           "vertical-align": "middle",
-                          "min-width": "200px"
+                          "min-width": "120px"
                         }
                       },
                       [
