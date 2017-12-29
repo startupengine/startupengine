@@ -48,7 +48,7 @@
                             </td>
 
                             <!-- Name -->
-                            <td style="vertical-align: middle;min-width:200px;">
+                            <td style="vertical-align: middle;min-width:120px;">
                                 {{ client.name }}
                             </td>
 
