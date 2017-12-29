@@ -467,7 +467,7 @@
         }
 
         #app > .container-fluid:first-of-type > .card > .card-header {
-            z-index:99 !important;
+            z-index:99;
         }
 
         #app .container-fluid > .card {
@@ -487,9 +487,9 @@
     @yield('styles')
 </head>
 <body>
-
+<div id="app" style="display: block; overflow-y: scroll !important; position: absolute;top: 0px; left: 0px; width: 100%; height: 100%;margin:0px !important;padding:0px !important;">
     @yield('content')
-
+</div>
 
 <!-- UX -->
 <script type="text/javascript">

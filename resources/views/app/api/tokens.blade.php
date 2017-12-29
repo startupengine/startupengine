@@ -27,8 +27,6 @@
 
 @section('content')
     <body class="index-page sidebar-collapse bg-gradient">
-    <div id="app"
-         style="display: block; overflow-y: scroll !important; position: absolute;top: 0px; left: 0px; width: 100%; height: 100%;margin:0px !important;padding:0px !important;">
         <div class="container-fluid" style="margin-top:15px;">
             <div class="card" style="min-height: calc(100vh - 30px);">
                 <div class="card-header" style="padding-left:25px;" align="right">
@@ -55,6 +53,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </body>
 @endsection
