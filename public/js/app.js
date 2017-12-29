@@ -43676,39 +43676,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _c(
-          "div",
-          {
-            staticStyle: {
-              display: "flex",
-              "justify-content": "space-between",
-              "align-items": "center"
-            }
-          },
-          [
-            _c("span", [
-              _vm._v("\n                    OAuth Clients\n                ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "action-link",
-                on: { click: _vm.showCreateClientForm }
-              },
-              [
-                _vm._v(
-                  "\n                    Create New Client\n                "
-                )
-              ]
-            )
-          ]
-        )
-      ]),
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "card-body" }, [
         _vm.clients.length === 0
           ? _c("p", { staticClass: "m-b-none" }, [
               _vm._v(
@@ -43719,7 +43690,7 @@ var render = function() {
         _vm._v(" "),
         _vm.clients.length > 0
           ? _c("table", { staticClass: "table table-borderless m-b-none" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -43799,12 +43770,12 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _vm.createForm.errors.length > 0
                 ? _c("div", { staticClass: "alert alert-danger" }, [
-                    _vm._m(2),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("br"),
                     _vm._v(" "),
@@ -43828,11 +43799,11 @@ var render = function() {
                 { staticClass: "form-horizontal", attrs: { role: "form" } },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-md-3 control-label" }, [
+                    _c("label", { staticClass: "col-md-6 control-label" }, [
                       _vm._v("Name")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
                         directives: [
                           {
@@ -43877,11 +43848,11 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-md-3 control-label" }, [
+                    _c("label", { staticClass: "col-md-6 control-label" }, [
                       _vm._v("Redirect URL")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
                         directives: [
                           {
@@ -43966,12 +43937,12 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(3),
+            _vm._m(4),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _vm.editForm.errors.length > 0
                 ? _c("div", { staticClass: "alert alert-danger" }, [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("br"),
                     _vm._v(" "),
@@ -43995,11 +43966,11 @@ var render = function() {
                 { staticClass: "form-horizontal", attrs: { role: "form" } },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-md-3 control-label" }, [
+                    _c("label", { staticClass: "col-md-6 control-label" }, [
                       _vm._v("Name")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
                         directives: [
                           {
@@ -44040,11 +44011,11 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-md-3 control-label" }, [
+                    _c("label", { staticClass: "col-md-6 control-label" }, [
                       _vm._v("Redirect URL")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
                         directives: [
                           {
@@ -44122,6 +44093,44 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c(
+        "div",
+        {
+          staticStyle: {
+            display: "flex",
+            "justify-content": "space-between",
+            "align-items": "center"
+          }
+        },
+        [
+          _c("span", [
+            _vm._v("\n                    OAuth Clients\n                ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "action-link",
+              attrs: {
+                "data-toggle": "modal",
+                "data-target": "#modal-create-client"
+              }
+            },
+            [
+              _vm._v(
+                "\n                    Create New Client\n                "
+              )
+            ]
+          )
+        ]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -44440,12 +44449,12 @@ var render = function() {
   return _c("div", [
     _vm.tokens.length > 0
       ? _c("div", [
-          _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "panel-heading" }, [
               _vm._v("Authorized Applications")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "card-body" }, [
               _c("table", { staticClass: "table table-borderless m-b-none" }, [
                 _vm._m(0),
                 _vm._v(" "),
@@ -44965,41 +44974,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _c("div", { staticClass: "panel panel-default" }, [
-        _c("div", { staticClass: "panel-heading" }, [
-          _c(
-            "div",
-            {
-              staticStyle: {
-                display: "flex",
-                "justify-content": "space-between",
-                "align-items": "center"
-              }
-            },
-            [
-              _c("span", [
-                _vm._v(
-                  "\n                        Personal Access Tokens\n                    "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "action-link",
-                  on: { click: _vm.showCreateTokenForm }
-                },
-                [
-                  _vm._v(
-                    "\n                        Create New Token\n                    "
-                  )
-                ]
-              )
-            ]
-          )
-        ]),
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "panel-body" }, [
+        _c("div", { staticClass: "card-body" }, [
           _vm.tokens.length === 0
             ? _c("p", { staticClass: "m-b-none" }, [
                 _vm._v(
@@ -45010,7 +44988,7 @@ var render = function() {
           _vm._v(" "),
           _vm.tokens.length > 0
             ? _c("table", { staticClass: "table table-borderless m-b-none" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -45068,12 +45046,12 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _vm.form.errors.length > 0
                 ? _c("div", { staticClass: "alert alert-danger" }, [
-                    _vm._m(2),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("br"),
                     _vm._v(" "),
@@ -45106,11 +45084,11 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-md-4 control-label" }, [
+                    _c("label", { staticClass: "col-md-12 control-label" }, [
                       _vm._v("Name")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
                         directives: [
                           {
@@ -45141,13 +45119,15 @@ var render = function() {
                   _vm._v(" "),
                   _vm.scopes.length > 0
                     ? _c("div", { staticClass: "form-group" }, [
-                        _c("label", { staticClass: "col-md-4 control-label" }, [
-                          _vm._v("Scopes")
-                        ]),
+                        _c(
+                          "label",
+                          { staticClass: "col-md-12 control-label" },
+                          [_vm._v("Scopes")]
+                        ),
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "col-md-6" },
+                          { staticClass: "col-md-12" },
                           _vm._l(_vm.scopes, function(scope) {
                             return _c("div", [
                               _c("div", { staticClass: "checkbox" }, [
@@ -45217,7 +45197,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(3),
+            _vm._m(4),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
@@ -45229,7 +45209,7 @@ var render = function() {
               _c("pre", [_c("code", [_vm._v(_vm._s(_vm.accessToken))])])
             ]),
             _vm._v(" "),
-            _vm._m(4)
+            _vm._m(5)
           ])
         ])
       ]
@@ -45237,6 +45217,46 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c(
+        "div",
+        {
+          staticStyle: {
+            display: "flex",
+            "justify-content": "space-between",
+            "align-items": "center"
+          }
+        },
+        [
+          _c("span", [
+            _vm._v(
+              "\n                        Personal Access Tokens\n                    "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "action-link",
+              attrs: {
+                "data-toggle": "modal",
+                "data-target": "#modal-create-token"
+              }
+            },
+            [
+              _vm._v(
+                "\n                        Create New Token\n                    "
+              )
+            ]
+          )
+        ]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

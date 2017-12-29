@@ -10,20 +10,20 @@
 
 <template>
     <div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>
                         OAuth Clients
                     </span>
 
-                    <a class="action-link" @click="showCreateClientForm">
+                    <a class="action-link" data-toggle="modal" data-target="#modal-create-client">
                         Create New Client
                     </a>
                 </div>
             </div>
 
-            <div class="panel-body">
+            <div class="card-body">
                 <!-- Current Clients -->
                 <p class="m-b-none" v-if="clients.length === 0">
                     You have not created any OAuth clients.
@@ -77,7 +77,7 @@
         </div>
 
         <!-- Create Client Modal -->
-        <div class="modal fade" id="modal-create-client" tabindex="-1" role="dialog">
+        <div class="modal fade"  id="modal-create-client" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -104,9 +104,9 @@
                         <form class="form-horizontal" role="form">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Name</label>
+                                <label class="col-md-6 control-label">Name</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-12">
                                     <input id="create-client-name" type="text" class="form-control"
                                                                 @keyup.enter="store" v-model="createForm.name">
 
@@ -118,9 +118,9 @@
 
                             <!-- Redirect URL -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Redirect URL</label>
+                                <label class="col-md-6 control-label">Redirect URL</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-12">
                                     <input type="text" class="form-control" name="redirect"
                                                     @keyup.enter="store" v-model="createForm.redirect">
 
@@ -172,9 +172,9 @@
                         <form class="form-horizontal" role="form">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Name</label>
+                                <label class="col-md-6 control-label">Name</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-12">
                                     <input id="edit-client-name" type="text" class="form-control"
                                                                 @keyup.enter="update" v-model="editForm.name">
 
@@ -186,9 +186,9 @@
 
                             <!-- Redirect URL -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Redirect URL</label>
+                                <label class="col-md-6 control-label">Redirect URL</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-12">
                                     <input type="text" class="form-control" name="redirect"
                                                     @keyup.enter="update" v-model="editForm.redirect">
 

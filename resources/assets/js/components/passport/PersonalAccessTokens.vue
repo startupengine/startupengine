@@ -11,20 +11,20 @@
 <template>
     <div>
         <div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-header">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span>
                             Personal Access Tokens
                         </span>
 
-                        <a class="action-link" @click="showCreateTokenForm">
+                        <a class="action-link" data-toggle="modal" data-target="#modal-create-token">
                             Create New Token
                         </a>
                     </div>
                 </div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     <!-- No Tokens Notice -->
                     <p class="m-b-none" v-if="tokens.length === 0">
                         You have not created any personal access tokens.
@@ -87,18 +87,18 @@
                         <form class="form-horizontal" role="form" @submit.prevent="store">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-12 control-label">Name</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input id="create-token-name" type="text" class="form-control" name="name" v-model="form.name">
                                 </div>
                             </div>
 
                             <!-- Scopes -->
                             <div class="form-group" v-if="scopes.length > 0">
-                                <label class="col-md-4 control-label">Scopes</label>
+                                <label class="col-md-12 control-label">Scopes</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div v-for="scope in scopes">
                                         <div class="checkbox">
                                             <label>
