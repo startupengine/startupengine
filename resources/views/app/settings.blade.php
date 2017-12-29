@@ -65,6 +65,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-4" style="float:left;">
+                                        <div class="card">
+                                            <div class="card-header" align="center">
+                                                API Settings
+                                            </div>
+                                            <div class="card-body" align="center" style="min-height: 100px;">
+                                                <p>Manage clients & personal access tokens.</p>
+                                            </div>
+                                            <div class="card-footer" align="center">
+                                                <a href="/app/settings/api" class="btn btn-secondary-outline btn-round">API Settings</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @foreach($settingsGroups as $key => $value)
                                         <div class="col-md-4" style="float:left;">
                                             <div class="card">
