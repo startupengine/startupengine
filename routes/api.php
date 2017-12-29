@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/analytics/events/{type}', 'APIController@getEvents');
+Route::get('/analytics/events/{type}/{key}', 'APIController@getEventsWithKey');
+Route::get('/analytics/events/{type}/{key}/{value}', 'APIController@getEventsByKeyAndValue');
 Route::get('/analytics/event/', 'APIController@saveEvent');
 Route::post('/analytics/event/', 'APIController@saveEvent');
 Route::get('/browse/', 'APIController@getItemsByCategory');

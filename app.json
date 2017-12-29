@@ -24,6 +24,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan migrate:refresh --seed --force",
+            "php artisan passport:install",
             "php artisan command:SyncGit default"
         ],
         "post-update-cmd": [

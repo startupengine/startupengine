@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
@@ -20,6 +21,8 @@ class User extends AuthUser implements AuditableContract, UserResolver, UserCont
     use VoyagerUser;
 
     use SoftDeletes;
+
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

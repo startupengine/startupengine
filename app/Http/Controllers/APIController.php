@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
+    public function getEvents($type) {
+        $events = AnalyticEvent::where('event_type', '=', $type)->get();
+        return response()->json($events);
+    }
+
+    public function getEventsWithKey($type, $key) {
+        $events = AnalyticEvent::where('event_type', '=', $type)->whereNotNull("event_data->$key")->get();
+        return response()->json($events);
+    }
+
+    public function getEventsByKeyAndValue($type, $key, $value) {
+        $events = AnalyticEvent::where('event_type', '=', $type)->where("event_data->$key", $value)->get();
+        return response()->json($events);
+    }
+
     public function saveEvent(Request $request)
     {
         $event = new AnalyticEvent();
@@ -55,6 +70,9 @@ class APIController extends Controller
             $event->event_type = $request->input('event_type');
         }
         $event->save();
+        if($event !== null) {
+            $event->status = 'success';
+        }
 
         return response()
             ->json($event);

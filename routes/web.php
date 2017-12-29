@@ -27,6 +27,7 @@ Route::group(['middleware' => ['roles']], function () {
 
     //Settings
     Route::get('/app/settings', 'AppController@settings');
+    Route::get('/app/settings/api', 'AppController@api');
     Route::get('/app/new/setting', 'SettingController@addSetting');
     Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
     Route::post('/app/edit/setting', 'SettingController@saveSetting');

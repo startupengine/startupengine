@@ -164,4 +164,16 @@ class AppController extends Controller
 
     }
 
+
+    public function api(Request $request)
+    {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            return view('app.api.tokens');
+        } else {
+            abort(404);
+        }
+
+    }
+
 }
