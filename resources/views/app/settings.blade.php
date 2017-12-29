@@ -51,7 +51,7 @@
                             </div>
                             @if($request->input('s') == null && $request->input('group') == null)
                                 <div style="margin-top:25px;">
-                                    <div class="col-md-4" style="float:left;">
+                                    <div class="col-md-4" style="float:right;">
                                         <div class="card">
                                             <div class="card-header" align="center">
                                                 Content Types
@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4" style="float:left;">
+                                    <div class="col-md-4" style="float:right;">
                                         <div class="card">
                                             <div class="card-header" align="center">
                                                 API Settings
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                     @foreach($settingsGroups as $key => $value)
-                                        <div class="col-md-4" style="float:left;">
+                                        <div class="col-md-4" style="float:right;">
                                             <div class="card">
                                                 <div class="card-header" align="center">
                                                     {{ ucfirst($key) }}

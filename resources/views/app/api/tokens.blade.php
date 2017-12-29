@@ -26,7 +26,6 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient">
         <div class="container-fluid" style="margin-top:15px;">
             <div class="card" style="min-height: calc(100vh - 30px);">
                 <div class="card-header" style="padding-left:25px;" align="right">
@@ -40,7 +39,7 @@
                             <div class="col-md-12">
                                 <h5 style="margin-bottom:25px;">API Settings</h5>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" id="vue-app">
 
                                 <!-- API Authentication -->
                                 <passport-clients></passport-clients>
@@ -53,5 +52,4 @@
                 </div>
             </div>
         </div>
-    </body>
 @endsection
