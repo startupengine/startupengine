@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                     @foreach($settingsGroups as $key => $value)
-                                        @if($key !== '' && %key !== null)
+                                        @if($key !== '' && $key !== null)
                                             <div class="col-md-4" style="display:inline-block !important;">
                                                 <div class="card" style="margin-bottom:25px;">
                                                     <div class="card-header" align="center">
