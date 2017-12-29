@@ -43612,11 +43612,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
          * Edit the given client.
          */
         edit: function edit(client) {
+            console.log('edit');
             this.editForm.id = client.id;
+            console.log(client.id);
             this.editForm.name = client.name;
+            console.log(client.name);
             this.editForm.redirect = client.redirect;
+            console.log(client.redirect);
 
-            $('#modal-edit-client').modal('show');
+            /*$('#modal-edit-client').modal('show');*/
         },
 
 
@@ -43696,63 +43700,114 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.clients, function(client) {
                   return _c("tr", [
-                    _c("td", { staticStyle: { "vertical-align": "middle" } }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(client.id) +
-                          "\n                        "
-                      )
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "hiddenOnMobile",
+                        staticStyle: {
+                          "vertical-align": "middle",
+                          "min-width": "100px"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(client.id) +
+                            "\n                        "
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticStyle: { "vertical-align": "middle" } }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(client.name) +
-                          "\n                        "
-                      )
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          "vertical-align": "middle",
+                          "min-width": "100px"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(client.name) +
+                            "\n                        "
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticStyle: { "vertical-align": "middle" } }, [
-                      _c("code", [_vm._v(_vm._s(client.secret))])
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "hiddenOnMobile",
+                        staticStyle: {
+                          "vertical-align": "middle",
+                          width: "100%"
+                        }
+                      },
+                      [_c("code", [_vm._v(_vm._s(client.secret))])]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticStyle: { "vertical-align": "middle" } }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "action-link",
-                          on: {
-                            click: function($event) {
-                              _vm.edit(client)
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          "vertical-align": "middle",
+                          width: "75px !important"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "action-link btn btn-sm btn-default btn-simple btn-round",
+                            attrs: {
+                              "data-toggle": "modal",
+                              "data-target": "#modal-edit-client"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.edit(client)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                Edit\n                            "
-                          )
-                        ]
-                      )
-                    ]),
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Edit\n                            "
+                            )
+                          ]
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticStyle: { "vertical-align": "middle" } }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "action-link text-danger",
-                          on: {
-                            click: function($event) {
-                              _vm.destroy(client)
+                    _c(
+                      "td",
+                      {
+                        staticStyle: {
+                          "vertical-align": "middle",
+                          width: "75px !important"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "action-link btn btn-sm btn-danger btn-simple btn-round text-danger",
+                            on: {
+                              click: function($event) {
+                                _vm.destroy(client)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                Delete\n                            "
-                          )
-                        ]
-                      )
-                    ])
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Delete\n                            "
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   ])
                 })
               )
@@ -44115,7 +44170,8 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "action-link",
+              staticClass:
+                "action-link btn btn-sm btn-default btn-simple btn-round",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-client"
@@ -44137,11 +44193,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Client ID")]),
+        _c("th", { staticClass: "hiddenOnMobile" }, [_vm._v("Client ID")]),
         _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Secret")]),
+        _c("th", { staticClass: "hiddenOnMobile" }, [_vm._v("Secret")]),
         _vm._v(" "),
         _c("th"),
         _vm._v(" "),
@@ -44454,7 +44510,7 @@ var render = function() {
               _vm._v("Authorized Applications")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "panel-body" }, [
               _c("table", { staticClass: "table table-borderless m-b-none" }, [
                 _vm._m(0),
                 _vm._v(" "),
@@ -44497,7 +44553,8 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              staticClass: "action-link text-danger",
+                              staticClass:
+                                "action-link btn btn-sm btn-danger btn-simple btn-round text-danger",
                               on: {
                                 click: function($event) {
                                   _vm.revoke(token)
@@ -44996,7 +45053,12 @@ var render = function() {
                     return _c("tr", [
                       _c(
                         "td",
-                        { staticStyle: { "vertical-align": "middle" } },
+                        {
+                          staticStyle: {
+                            "vertical-align": "middle",
+                            width: "100% !important"
+                          }
+                        },
                         [
                           _vm._v(
                             "\n                                " +
@@ -45013,7 +45075,8 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              staticClass: "action-link text-danger",
+                              staticClass:
+                                "action-link btn btn-sm btn-danger btn-simple btn-round text-danger",
                               on: {
                                 click: function($event) {
                                   _vm.revoke(token)
@@ -45241,7 +45304,8 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "action-link",
+              staticClass:
+                "action-link btn btn-sm btn-default btn-simple btn-round",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-token"

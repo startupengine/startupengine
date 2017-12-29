@@ -18,7 +18,7 @@
                             Personal Access Tokens
                         </span>
 
-                        <a class="action-link" data-toggle="modal" data-target="#modal-create-token">
+                        <a class="action-link btn btn-sm btn-default btn-simple btn-round" data-toggle="modal" data-target="#modal-create-token">
                             Create New Token
                         </a>
                     </div>
@@ -42,13 +42,13 @@
                         <tbody>
                             <tr v-for="token in tokens">
                                 <!-- Client Name -->
-                                <td style="vertical-align: middle;">
+                                <td style="vertical-align: middle;width:100% !important;">
                                     {{ token.name }}
                                 </td>
 
                                 <!-- Delete Button -->
                                 <td style="vertical-align: middle;">
-                                    <a class="action-link text-danger" @click="revoke(token)">
+                                    <a class="action-link btn btn-sm btn-danger btn-simple btn-round text-danger" @click="revoke(token)">
                                         Delete
                                     </a>
                                 </td>

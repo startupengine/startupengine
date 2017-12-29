@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="panel-heading">Authorized Applications</div>
 
-                <div class="card-body">
+                <div class="panel-body">
                     <!-- Authorized Tokens -->
                     <table class="table table-borderless m-b-none">
                         <thead>
@@ -41,7 +41,7 @@
 
                                 <!-- Revoke Button -->
                                 <td style="vertical-align: middle;">
-                                    <a class="action-link text-danger" @click="revoke(token)">
+                                    <a class="action-link btn btn-sm btn-danger btn-simple btn-round text-danger" @click="revoke(token)">
                                         Revoke
                                     </a>
                                 </td>

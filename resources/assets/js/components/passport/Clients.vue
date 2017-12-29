@@ -17,7 +17,7 @@
                         OAuth Clients
                     </span>
 
-                    <a class="action-link" data-toggle="modal" data-target="#modal-create-client">
+                    <a class="action-link btn btn-sm btn-default btn-simple btn-round" data-toggle="modal" data-target="#modal-create-client">
                         Create New Client
                     </a>
                 </div>
@@ -32,9 +32,9 @@
                 <table class="table table-borderless m-b-none" v-if="clients.length > 0">
                     <thead>
                         <tr>
-                            <th>Client ID</th>
+                            <th class="hiddenOnMobile">Client ID</th>
                             <th>Name</th>
-                            <th>Secret</th>
+                            <th class="hiddenOnMobile">Secret</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -43,30 +43,30 @@
                     <tbody>
                         <tr v-for="client in clients">
                             <!-- ID -->
-                            <td style="vertical-align: middle;">
+                            <td style="vertical-align: middle;min-width:100px;" class="hiddenOnMobile">
                                 {{ client.id }}
                             </td>
 
                             <!-- Name -->
-                            <td style="vertical-align: middle;">
+                            <td style="vertical-align: middle;min-width:100px;">
                                 {{ client.name }}
                             </td>
 
                             <!-- Secret -->
-                            <td style="vertical-align: middle;">
+                            <td style="vertical-align: middle;width:100%;" class="hiddenOnMobile">
                                 <code>{{ client.secret }}</code>
                             </td>
 
                             <!-- Edit Button -->
-                            <td style="vertical-align: middle;">
-                                <a class="action-link" @click="edit(client)">
+                            <td style="vertical-align: middle;width:75px !important;">
+                                <a class="action-link btn btn-sm btn-default btn-simple btn-round" @click="edit(client)"  data-toggle="modal" data-target="#modal-edit-client" >
                                     Edit
                                 </a>
                             </td>
 
                             <!-- Delete Button -->
-                            <td style="vertical-align: middle;">
-                                <a class="action-link text-danger" @click="destroy(client)">
+                            <td style="vertical-align: middle;width:75px !important;">
+                                <a class="action-link btn btn-sm btn-danger btn-simple btn-round text-danger" @click="destroy(client)">
                                     Delete
                                 </a>
                             </td>
@@ -298,11 +298,15 @@
              * Edit the given client.
              */
             edit(client) {
+                console.log('edit');
                 this.editForm.id = client.id;
+                console.log(client.id);
                 this.editForm.name = client.name;
+                console.log(client.name);
                 this.editForm.redirect = client.redirect;
+                console.log(client.redirect);
 
-                $('#modal-edit-client').modal('show');
+                /*$('#modal-edit-client').modal('show');*/
             },
 
             /**
