@@ -464,9 +464,10 @@
             padding:0px !important;
         }
 
-        #app > .card:first-of-type {
+        #app .container-fluid > .card {
             border-radius:0px !important;
-            margin:0px !important;
+            margin-bottom:0px !important;
+            height:100vh !important;
             padding:0px !important;
         }
     </style>

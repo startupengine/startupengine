@@ -47,6 +47,9 @@
                                     New Item <i class="now-ui-icons ui-1_simple-add"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" align="center">
+                                    @if($postTypes->isEmpty())
+                                        <a href="#" class="dropdown-item">No content types</a>
+                                    @endif
                                     <?php foreach($postTypes as $postType) { ?>
                                     <a href="/app/new/{{$postType->slug}}"
                                        class="dropdown-item"> <i class="now-ui-icons ui-1_simple-add"></i> &nbsp; New {{$postType->title}}</a>
