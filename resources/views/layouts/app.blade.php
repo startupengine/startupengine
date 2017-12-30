@@ -18,6 +18,7 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
     <!-- jQuery -->
     <script src="/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -286,13 +287,15 @@
         #app > .container-fluid > .card .card-header{
             background: linear-gradient(90deg, #2d32cede, #3a92ffde);
             font-weight:600 !important;
-            border-bottom:none !important;
+            border-bottom:none;
             color: #fff;
             position: fixed;
             top: 0px;
             left: 0px;
+            border-radius:0px;
             width: 100% !important;
             z-index: 3 !important;
+            box-shadow:0px 3px 10px rgba(0,0,0,0.2);
         }
 
         .main .card-header {
@@ -300,12 +303,14 @@
             position: relative !important;
             box-shadow: none;
             border-bottom: 1px solid #ddd;
+            border-bottom:2px solid rgb(255, 209, 133) !important;
             width: 100% !important;
             color: #333 !important;
             top: 0px !important;
             text-align: center;
             left: 0px !important;
             z-index: auto !important;
+            box-shadow:none !important;
             font-weight: 600;
         }
 
