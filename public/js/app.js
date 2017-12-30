@@ -43516,13 +43516,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -43752,57 +43745,51 @@ var render = function() {
                       {
                         staticStyle: {
                           "vertical-align": "middle",
-                          width: "75px !important"
+                          width: "100px !important"
                         }
                       },
                       [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass:
-                              "action-link btn btn-sm btn-default btn-simple btn-round",
+                            staticClass: "btn-group hiddenOnMobile",
                             attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#modal-edit-client"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.edit(client)
-                              }
+                              role: "group",
+                              "aria-label": "Basic example"
                             }
                           },
                           [
-                            _vm._v(
-                              "\n                                Edit\n                            "
-                            )
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {
-                        staticStyle: {
-                          "vertical-align": "middle",
-                          width: "75px !important"
-                        }
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "action-link btn btn-sm btn-danger btn-simple btn-round text-danger",
-                            on: {
-                              click: function($event) {
-                                _vm.destroy(client)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                Delete\n                            "
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-sm btn-secondary-outline",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#modal-edit-client"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.edit(client)
+                                  }
+                                }
+                              },
+                              [_vm._v("Edit")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-sm btn-secondary-outline",
+                                staticStyle: {
+                                  "border-left": "none !important"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.destroy(client)
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
                             )
                           ]
                         )
@@ -43958,7 +43945,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-default",
+                  staticClass: "btn btn-default btn-simple",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Close")]
@@ -43967,7 +43954,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "btn btn-secondary",
                   attrs: { type: "button" },
                   on: { click: _vm.store }
                 },
@@ -44121,7 +44108,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-default",
+                  staticClass: "btn btn-default btn-simple",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Close")]
@@ -44130,7 +44117,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "btn btn-secondary",
                   attrs: { type: "button" },
                   on: { click: _vm.update }
                 },
@@ -44170,14 +44157,16 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "action-link btn btn-sm btn-default btn-secondary text-white btn-round",
+              staticClass: "btn btn-secondary-outline btn-round",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-client"
               }
             },
-            [_vm._v("\n                    New Client\n                ")]
+            [
+              _vm._v("\n                    New Client  "),
+              _c("i", { staticClass: "now-ui-icons ui-1_simple-add" })
+            ]
           )
         ]
       )
@@ -44194,8 +44183,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { staticClass: "hiddenOnMobile" }, [_vm._v("Secret")]),
-        _vm._v(" "),
-        _c("th"),
         _vm._v(" "),
         _c("th")
       ])
@@ -45071,8 +45058,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              staticClass:
-                                "action-link btn btn-sm btn-danger btn-simple btn-round text-danger",
+                              staticClass: "btn btn-sm btn-secondary-outline",
                               on: {
                                 click: function($event) {
                                   _vm.revoke(token)
@@ -45222,7 +45208,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-default",
+                  staticClass: "btn btn-default btn-simple",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Close")]
@@ -45231,7 +45217,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "btn btn-secondary",
                   attrs: { type: "button" },
                   on: { click: _vm.store }
                 },
@@ -45301,17 +45287,15 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass:
-                "action-link btn btn-sm btn-secondary text-white btn-round",
+              staticClass: "btn btn-secondary-outline btn-round",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-token"
               }
             },
             [
-              _vm._v(
-                "\n                        New Token\n                    "
-              )
+              _vm._v("\n                        New Token  "),
+              _c("i", { staticClass: "now-ui-icons ui-1_simple-add" })
             ]
           )
         ]
@@ -45391,7 +45375,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-default",
+          staticClass: "btn btn-default btn-simple",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Close")]

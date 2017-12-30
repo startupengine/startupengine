@@ -38,9 +38,9 @@
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
                             <div class="col-md-6">
-                                <div class="card" style="box-shadow:none;">
-                                    <h5>Edit Content Type: {{ $postType->title }}</h5>
-                                </div>
+
+                                <h5>Edit Content Type: {{ $postType->title }}</h5>
+                                
                             </div>
                             <form action="/app/edit/schema/{{ $postType->slug }}" method="post">
                                 {{ csrf_field() }}

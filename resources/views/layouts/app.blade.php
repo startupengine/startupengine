@@ -284,14 +284,13 @@
         }
 
         #app > .container-fluid > .card .card-header{
-            background: linear-gradient(-90deg, #9e58fbde, #3a92ffde);
+            background: linear-gradient(-90deg, #2d32cede, #3a92ffde);
             font-weight:600 !important;
             border-bottom:none !important;
             color: #fff;
             position: fixed;
             top: 0px;
             left: 0px;
-            border-radius:0px !important;
             width: 100% !important;
             z-index: 3 !important;
         }
@@ -324,8 +323,9 @@
             position: absolute !important;
             right: -20px !important;
             top: 5px !important;
-            transition: top 0.25s, opacity 0.5s, margin-top 0.5s;
-            -webkit-transition: top 0.25s, opacity 0.5s, margin-top 0.5s;
+            top: 5px !important;
+            transition: top 0s, opacity 0.5s, margin-top 0.5s;
+            -webkit-transition: top 0s, opacity 0.5s, margin-top 0.5s;
             margin-top: 15px;
             opacity: 0;
         }
@@ -384,6 +384,15 @@
 
         .main th:first-of-type, .main td:first-of-type {
             width: 150px !important;
+        }
+
+        .main .card {
+            border:1px solid #ddd !important;
+            box-shadow:none !important;
+        }
+
+        .main .card > .card-header {
+            border-radius:5px 5px 0px 0px !important;
         }
 
         .dropdown-item:hover {

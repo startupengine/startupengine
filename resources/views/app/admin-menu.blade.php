@@ -1,5 +1,5 @@
 <div class="btn-group btn-xs mobile-nav hiddenOnDesktop">
-    <button type="button" class="btn btn-secondary-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn-secondary-outline dropdown-toggle btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Menu
     </button>
     <div class="dropdown-menu dropdown-menu-right">
@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="btn-group btn-xs hiddenOnMobile">
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn-secondary dropdown-toggle btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Account
     </button>
     <div class="dropdown-menu dropdown-menu-right">

@@ -17,8 +17,8 @@
                         OAuth Clients
                     </span>
 
-                    <a class="action-link btn btn-sm btn-default btn-secondary text-white btn-round" data-toggle="modal" data-target="#modal-create-client">
-                        New Client
+                    <a class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#modal-create-client">
+                        New Client &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
                     </a>
                 </div>
             </div>
@@ -35,7 +35,6 @@
                             <th class="hiddenOnMobile">Client ID</th>
                             <th>Name</th>
                             <th class="hiddenOnMobile">Secret</th>
-                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -57,18 +56,12 @@
                                 <code>{{ client.secret }}</code>
                             </td>
 
-                            <!-- Edit Button -->
-                            <td style="vertical-align: middle;width:75px !important;">
-                                <a class="action-link btn btn-sm btn-default btn-simple btn-round" @click="edit(client)"  data-toggle="modal" data-target="#modal-edit-client" >
-                                    Edit
-                                </a>
-                            </td>
-
-                            <!-- Delete Button -->
-                            <td style="vertical-align: middle;width:75px !important;">
-                                <a class="action-link btn btn-sm btn-danger btn-simple btn-round text-danger" @click="destroy(client)">
-                                    Delete
-                                </a>
+                            <!-- Action Buttons -->
+                            <td style="vertical-align: middle;width:100px !important;">
+                                <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
+                                <a class="btn btn-sm btn-secondary-outline" @click="edit(client)"  data-toggle="modal" data-target="#modal-edit-client" >Edit</a>
+                                <a class="btn btn-sm btn-secondary-outline" @click="destroy(client)" style="border-left:none !important;">Delete</a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -134,9 +127,9 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
 
-                        <button type="button" class="btn btn-primary" @click="store">
+                        <button type="button" class="btn btn-secondary" @click="store">
                             Create
                         </button>
                     </div>
@@ -202,9 +195,9 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
 
-                        <button type="button" class="btn btn-primary" @click="update">
+                        <button type="button" class="btn btn-secondary" @click="update">
                             Save Changes
                         </button>
                     </div>

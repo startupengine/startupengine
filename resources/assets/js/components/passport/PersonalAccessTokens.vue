@@ -18,8 +18,8 @@
                             Personal Access Tokens
                         </span>
 
-                        <a class="action-link btn btn-sm btn-secondary text-white btn-round" data-toggle="modal" data-target="#modal-create-token">
-                            New Token
+                        <a class="btn btn-secondary-outline btn-round" data-toggle="modal" data-target="#modal-create-token">
+                            New Token &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
                         </a>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
 
                                 <!-- Delete Button -->
                                 <td style="vertical-align: middle;">
-                                    <a class="action-link btn btn-sm btn-danger btn-simple btn-round text-danger" @click="revoke(token)">
+                                    <a class="btn btn-sm btn-secondary-outline" @click="revoke(token)">
                                         Delete
                                     </a>
                                 </td>
@@ -117,9 +117,9 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
 
-                        <button type="button" class="btn btn-primary" @click="store">
+                        <button type="button" class="btn btn-secondary" @click="store">
                             Create
                         </button>
                     </div>
@@ -150,7 +150,7 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
