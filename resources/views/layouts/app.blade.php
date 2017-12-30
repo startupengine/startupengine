@@ -18,7 +18,6 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
     <!-- jQuery -->
     <script src="/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -65,6 +64,10 @@
 
         .btn-secondary {
             background: royalblue !important;
+        }
+
+        .btn-raised {
+            box-shadow: 0px 5px 7px rgba(0,0,0,0.15) !important;
         }
 
         .btn-secondary-outline {
@@ -287,7 +290,7 @@
         #app > .container-fluid > .card .card-header{
             background: linear-gradient(90deg, #2d32cede, #3a92ffde);
             font-weight:600 !important;
-            border-bottom:none;
+            border-bottom:2px solid #fff;
             color: #fff;
             position: fixed;
             top: 0px;
@@ -295,7 +298,7 @@
             border-radius:0px;
             width: 100% !important;
             z-index: 3 !important;
-            box-shadow:0px 3px 10px rgba(0,0,0,0.2);
+            box-shadow:0px 3px 5px rgba(16, 25, 186, 0.15);
         }
 
         .main .card-header {
@@ -492,6 +495,21 @@
             overflow: scroll !important;
             height: 100vh !important;
         }
+
+        .btn-group .btn-round{
+            border-radius:0px !important;
+            border-left-width:0px!important;
+        }
+
+        .btn-group .btn-round:first-of-type {
+            border-radius:25px 0px 0px 25px !important;
+            border-left-width:1px!important;
+        }
+
+        .btn-group .btn-round:last-of-type {
+            border-radius:0px 25px 25px 0px !important;
+        }
+
     </style>
 
     @yield('styles')

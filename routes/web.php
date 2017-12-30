@@ -47,6 +47,10 @@ Route::group(['middleware' => ['roles']], function () {
     Route::post('/app/edit/user', 'UserController@saveUser');
     Route::get('/app/delete/user/{id}', 'UserController@deleteUser');
 
+    //Roles
+    Route::get('/app/roles', 'RoleController@index');
+    Route::get('/app/edit/role/{id}', 'RoleController@edit');
+
     //Content
     Route::get('/app/content', 'AppController@content');
     Route::get('/app/new/{slug}', 'PostController@addPost');

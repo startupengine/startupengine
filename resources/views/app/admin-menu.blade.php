@@ -1,5 +1,5 @@
-<div class="btn-group btn-xs mobile-nav hiddenOnDesktop">
-    <button type="button" class="btn btn-secondary-outline dropdown-toggle btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="mobile-nav hiddenOnDesktop">
+    <button type="button" class="btn btn-secondary-outline dropdown-toggle btn-round btn-raised" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Menu
     </button>
     <div class="dropdown-menu dropdown-menu-right">
@@ -19,8 +19,8 @@
         <button class="dropdown-item" type="button" onclick="location.href='/logout';"><i class="now-ui-icons ui-1_lock-circle-open"></i>&nbsp; Sign Out</button>
     </div>
 </div>
-<div class="btn-group btn-xs hiddenOnMobile">
-    <button type="button" class="btn btn-secondary dropdown-toggle btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="hiddenOnMobile">
+    <button type="button" class="btn btn-secondary dropdown-toggle btn-round btn-raised" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Account
     </button>
     <div class="dropdown-menu dropdown-menu-right">

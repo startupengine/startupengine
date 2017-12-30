@@ -73,19 +73,19 @@
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
                     <div class="main col-md-12" style="background:none;margin-top:25px;">
                         <div class="col-md-12">
-                            <h5 style="margin-bottom:25px;">Users</h5>
+                            <h5 style="margin-bottom:25px;">Roles</h5>
                             <div class="form-group">
                                 <form>
-                                    <input type="text" value="" placeholder="Search users..." class="form-control" name="s" id="s">
+                                    <input type="text" value="" placeholder="Search roles..." class="form-control" name="s" id="s">
                                 </form>
                             </div>
 
                             <div align="left">
                                 <div class="btn-group">
-                                <a href="/app/users" class="btn btn-secondary  ">Users</a>
-                                <a href="/app/roles" class="btn btn-secondary-outline ">Roles</a>
+                                <a href="/app/users" class="btn btn-secondary-outline  ">Users</a>
+                                <a href="/app/roles" class="btn btn-secondary ">Roles</a>
                                 </div>
-                                <a href="/app/new/user" class="btn btn-secondary-outline btn-round pull-right">New User &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                                <a href="/app/new/role" class="btn btn-secondary-outline btn-round pull-right">New Role &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                             </div>
 
 
@@ -93,21 +93,21 @@
                                 <thead class="hiddenOnMobile">
                                 <tr>
                                     <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
-                                    <th scope="col">User</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                @foreach($roles as $role)
                                 <tr>
-                                    <td scope="col" class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->updated_at))->diffForHumans() }}</span></td>
-                                    <td>{{ $user->name }}<br><span style="opacity:0.5;">{{ $user->email }}</span></td>
+                                    <td scope="col" class="hiddenOnMobile updated_at_column"><span class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($role->updated_at))->diffForHumans() }}</span></td>
+                                    <td>{{ $role->display_name }}<br><span style="opacity:0.5;">{{ $role->email }}</span></td>
                                     <td align="right">
-                                        <a href="/app/view/user/{{$user->id}}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
+                                        <a href="/app/view/role/{{$role->id}}" class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
                                         <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
-                                            <a href="/app/view/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline">View</a>
-                                            <a href="/app/edit/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none !important;">Edit</a>
-                                            <a href="/app/delete/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none !important;" data-toggle="modal" data-target="#deleteUser" onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
+                                            <a href="/app/view/role/{{ $role->id }}" class="btn btn-sm btn-secondary-outline">View</a>
+                                            <a href="/app/edit/role/{{ $role->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none !important;">Edit</a>
+                                            <a href="/app/delete/role/{{ $role->id }}" class="btn btn-sm btn-secondary-outline" style="border-left:none !important;" data-toggle="modal" data-target="#deleteUser" onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
