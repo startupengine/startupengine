@@ -3,11 +3,11 @@
     "description": "The Laravel Framework.",
     "keywords": [
         "CMS",
-        "Blog",
         "Startup",
         "Marketing",
+        "Framework",
         "Laravel",
-        "Framework"
+        "Vue"
     ],
     "license": "MIT",
     "type": "project",
@@ -17,6 +17,7 @@
         "appstract/laravel-meta": "^0.2.0",
         "caffeinated/modules": "^4.2",
         "fideloper/proxy": "~3.3",
+        "folklore/graphql": "^1.0",
         "graham-campbell/github": "^6.1",
         "graham-campbell/markdown": "^8.0",
         "jaam/mixpanel-data-export-api": "^0.1.2",
@@ -32,7 +33,8 @@
         "tcg/voyager": "^1.0",
         "voyager-themes": "^0.3.0",
         "watson/rememberable": "^2.0",
-        "wikimedia/composer-merge-plugin": "^1.4"
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "folklore/graphql": "~1.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

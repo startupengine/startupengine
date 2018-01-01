@@ -290,7 +290,7 @@
         #app > .container-fluid > .card .card-header{
             background: linear-gradient(90deg, #2d32cede, #3a92ffde);
             font-weight:600 !important;
-            border-bottom:2px solid #fff;
+            border-bottom:2px solid #eaeaea;
             color: #fff;
             position: fixed;
             top: 0px;
