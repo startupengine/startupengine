@@ -134,6 +134,7 @@
     @media screen and (max-width: 991px) {
         #navigation {
             overflow-y:scroll !important;
+            scroll-behavior: smooth !important;
         }
         #navigation .nav-link:not(.btn) {
             color: royalblue;
@@ -217,6 +218,7 @@
     body > .container-fluid > .card {
         max-height: 90vh;
         overflow-y: scroll !important;
+        scroll-behavior: smooth !important;
     }
 
     td .btn-group {
