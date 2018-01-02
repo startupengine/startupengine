@@ -292,12 +292,7 @@ class APIResponse extends Model
         if ($request->exists('remember')) {
             $cache = $request->input('remember');
         }
-        if (isset($cache) && $cache !== null) {
-            $page = Page::remember($cache)->where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
-        } else {
-            Page::flushCache();
-            $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
-        }
+        $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
         if ($page !== null) {
             $versions = json_decode($page->json, true)['versions'];
             $random = $versions[rand(1, count($versions))];
