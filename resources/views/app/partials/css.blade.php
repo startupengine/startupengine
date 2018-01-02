@@ -211,7 +211,7 @@
 
     body {
         min-height: 100vh;
-        overflow: hidden;
+        background:#fff !important;
     }
 
     body > .container-fluid > .card {

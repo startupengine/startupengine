@@ -11,12 +11,17 @@
     @include('app.partials.css')
     @yield('styles')
 </head>
-<body class="index-page sidebar-collapse bg-gradient">
+<body class="index-page sidebar-collapse">
 @include('app.partials.menu')
 <div id="app">
     <div class="container-fluid" style="margin-top:15px;">
         <div class="card" style="margin-top:75px !important;min-height: calc(100vh - 30px);">
             <div class="row">
+            @if(isset($flash) && $flash !== null)
+                    <div style="width:100%;background:#eee;text-align:center;padding:15px;">
+                        {{ $flash }}
+                    </div>
+            @endif
             @include('app.partials.admin-sidebar')
             @yield('content')
             </div>
