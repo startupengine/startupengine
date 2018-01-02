@@ -95,7 +95,7 @@
                     <div class="header text-center">
                         @if(setting('site.logo') !== null)
                             <div>
-                                <img src="{{ setting('site.logo') }}" style="max-height:70px;margin-bottom:25px;" class="shadowed"/>
+                                <img src="{{ setting('site.logo') }}" style="max-height:70px;margin-bottom:15px;" class="shadowed"/>
                             </div>
                         @endif
                         <h4 class="title title-up">Sign In</h4>
