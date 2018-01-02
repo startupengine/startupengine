@@ -132,6 +132,9 @@
     }
 
     @media screen and (max-width: 991px) {
+        #navigation {
+            overflow-y:scroll !important;
+        }
         #navigation .nav-link:not(.btn) {
             color: royalblue;
             background: #fff;
@@ -140,7 +143,6 @@
             border-radius: 3px !important;
             box-shadow: 0px 7px 18px rgba(0, 0, 0, 0.1);
             text-align: center !important;
-            overflow-y:scroll !important;
         }
 
         #nav-cta {
