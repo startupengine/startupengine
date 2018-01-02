@@ -31,8 +31,8 @@
                 </a>
             </div>
             <ul class="navbar-nav">
-                <?php echo setting('admin.menu'); ?>
-                <?php if(\Auth::user() !== null && \Auth::user()->role()->name == 'admin'){  ?>
+                <?php //dd(\Auth::user()->roles()); ?>
+                <?php if(\Auth::user() !== null) {  ?>
                 <li class="nav-item">
                     <a href="/" class="nav-link hiddenOnDesktop"><i class="now-ui-icons arrows-1_share-66"></i> Site</a>
                 </li>
@@ -43,19 +43,6 @@
                 <li class="nav-item">
                     <a class="nav-link hiddenOnDesktop" style="text-align: left;border-color:#eee !important;"
                        href="/app/content"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Content</a>
-                </li>
-                <li class="nav-item hiddenOnDesktop">
-                    <a class="nav-link" style="text-align: left;border-color:#eee !important;"
-                       href="/app/design"><i class="now-ui-icons objects_diamond"></i>&nbsp; Design</a>
-                </li>
-
-                <li class="nav-item hiddenOnDesktop">
-                    <a class="nav-link" style="text-align: left;border-color:#eee !important;"
-                       href="/app/packages"><i class="now-ui-icons design_app"></i>&nbsp; Packages</a>
-                </li>
-                <li class="nav-item hiddenOnDesktop">
-                    <a class="nav-link" style="text-align: left;border-color:#eee !important;"
-                       href="/app/analytics"><i class="now-ui-icons business_chart-bar-32"></i>&nbsp; Analytics</a>
                 </li>
                 <li class="nav-item hiddenOnDesktop">
                     <a class="nav-link" style="text-align: left;border-color:#eee !important;"

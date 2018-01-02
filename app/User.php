@@ -11,14 +11,16 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use TCG\Voyager\Traits\VoyagerUser;
 use TCG\Voyager\Contracts\User as UserContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends AuthUser implements AuditableContract, UserResolver, UserContract
+class User extends AuthUser implements AuditableContract, UserResolver
 {
+
+    use HasRoles;
+
     use Auditable;
 
     use Notifiable;
-
-    use VoyagerUser;
 
     use SoftDeletes;
 
@@ -68,11 +70,6 @@ class User extends AuthUser implements AuditableContract, UserResolver, UserCont
         'restored',
     ];
 
-    public function role()
-    {
-        $role = Role::where('id', '=', $this->role_id)->first();
-        return $role;
-    }
 
     /**
      * {@inheritdoc}
@@ -80,6 +77,11 @@ class User extends AuthUser implements AuditableContract, UserResolver, UserCont
     public static function resolveId()
     {
         return \Auth::check() ? \Auth::user()->getAuthIdentifier() : null;
+    }
+
+    public function roles()
+    {
+        return $this->hasMany('\App\Role', 'user_roles');
     }
 
 }

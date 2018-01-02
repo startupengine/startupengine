@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f79a9816e86056a51aec9c200912835",
+    "content-hash": "109867b5bac9172224be4eee5b21b08b",
     "packages": [
         {
             "name": "appstract/laravel-meta",
@@ -4665,6 +4665,71 @@
                 "phra"
             ],
             "time": "2015-10-13T18:44:15+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "2.7.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "afce2b8892877af2fe80c31670a102a36016fb32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/afce2b8892877af2fe80c31670a102a36016fb32",
+                "reference": "afce2b8892877af2fe80c31670a102a36016fb32",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "~5.3.0|~5.4.0|~5.5.0",
+                "illuminate/container": "~5.3.0|~5.4.0|~5.5.0",
+                "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0",
+                "illuminate/database": "~5.4.0|~5.5.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "^1.22",
+                "orchestra/testbench": "~3.3.0|~3.4.2|~3.5.0",
+                "phpunit/phpunit": "^5.7|6.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 5.4 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "security",
+                "spatie"
+            ],
+            "time": "2017-12-31T21:28:46+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

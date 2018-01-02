@@ -60,8 +60,8 @@ class SyncGit extends Command
             foreach ($packages as $package) {
                 exec("git clone $package->url resources/views/theme");
                 $themepath = \Config::get('view.paths')[0] . '/theme';
-                $package->json = file_get_contents($themepath . '/theme.json');
-                $package->description = json_decode(file_get_contents($themepath . '/theme.json'))->description;
+                $package->json = file_get_contents($themepath . '/startup.json');
+                $package->description = json_decode(file_get_contents($themepath . '/startup.json'))->description;
                 $package->save();
             }
         }
@@ -69,7 +69,7 @@ class SyncGit extends Command
         //Inject settings if they don't yet exist
         if (Schema::hasTable('settings')) {
             $themepath = \Config::get('view.paths')[0] . '/theme';
-            $json = json_decode(file_get_contents($themepath . '/theme.json'));
+            $json = json_decode(file_get_contents($themepath . '/startup.json'));
 
             foreach ($json->settings as $setting) {
                 $existingsetting = Setting::where('key', '=', $setting->key)->first();
@@ -104,9 +104,9 @@ class SyncGit extends Command
         //Inject Post Types if they don't yet exist
         if (Schema::hasTable('post_types')) {
             $themepath = \Config::get('view.paths')[0] . '/theme';
-            $json = json_decode(file_get_contents($themepath . '/theme.json'));
-            $schemas = $json->schemas;
-            foreach ($schemas as $schema) {
+            $json = json_decode(file_get_contents($themepath . '/startup.json'));
+            $schemas = $json->content_types;
+            foreach ($schemas as $schema => $schemaValue) {
                 $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
                 if (file_exists($themepath . '/templates/' . $schema . '/schema.json')) {
                     $entry = PostType::where('slug', '=', $schema)->first();
