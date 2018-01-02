@@ -251,7 +251,7 @@
         border-radius: 0px;
         width: 100% !important;
         z-index: 3 !important;
-        box-shadow: none;
+        box-shadow: 0px 5px 5px rgba(0,0,0,0.15);
     }
 
     @media screen and (max-width: 991px) {
