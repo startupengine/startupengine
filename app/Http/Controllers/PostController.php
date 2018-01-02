@@ -16,9 +16,9 @@ class PostController extends Controller
         if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
             $postTypes = PostType::all();
             if ($request->input('s') !== null) {
-                $posts = \App\Post::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(5)->orderBy('updated_at', 'desc')->get();
+                $posts = \App\Post::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
             } else {
-                $posts = \App\Post::limit(5)->orderBy('updated_at', 'desc')->get();
+                $posts = \App\Post::limit(100)->orderBy('updated_at', 'desc')->get();
             }
             return view('app.post.index')->with('posts', $posts)->with('postTypes', $postTypes);
         } else {
