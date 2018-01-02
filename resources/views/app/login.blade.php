@@ -76,6 +76,10 @@
                 margin-right:10px;
             }
         }
+
+        .btn-icon:hover, #signin:hover {
+            transform: scale(1.1); /* Equal to scaleX(0.7) scaleY(0.7) */
+        }
     </style>
 
 @endsection
@@ -97,17 +101,17 @@
                         <h4 class="title title-up">Sign In</h4>
                         <div class="social-line">
                             @if(setting('auth.enable-twitter-login') == 'true')
-                            <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-lg  btn-round">
+                            <a href="#login" class="btn btn-neutral btn-twitter btn-icon btn-lg  btn-round">
                                 <i class="fa fa-twitter"></i>
                             </a>
                             @endif
                             @if(setting('auth.enable-facebook-login') == 'true')
-                            <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-lg  btn-round">
+                            <a href="#login" class="btn btn-neutral btn-facebook btn-icon btn-lg  btn-round">
                                 <i class="fa fa-facebook-square"></i>
                             </a>
                             @endif
                             @if(setting('auth.enable-google-login') == 'true')
-                            <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-lg  btn-round">
+                            <a href="#login" class="btn btn-neutral btn-google btn-icon btn-lg  btn-round">
                                 <i class="fa fa-google-plus"></i>
                             </a>
                             @endif
