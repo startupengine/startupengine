@@ -87,9 +87,11 @@
                 <form class="form-horizontal " method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
                     <div class="header text-center">
-                        <div>
-                            <img src="{{ setting('site.logo') }}" style="max-height:70px;margin-bottom:25px;" class="shadowed"/>
-                        </div>
+                        @if(setting('site.logo') !== null)
+                            <div>
+                                <img src="{{ setting('site.logo') }}" style="max-height:70px;margin-bottom:25px;" class="shadowed"/>
+                            </div>
+                        @endif
                         <h4 class="title title-up">Sign In</h4>
                         <div class="social-line">
                             @if(setting('auth.enable-twitter-login') == 'true')
