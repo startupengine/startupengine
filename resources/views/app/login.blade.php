@@ -62,6 +62,18 @@
             text-align: center;
             margin-bottom:15px;
         }
+
+        .shadowed {
+            -webkit-filter: drop-shadow(0px 6px 3px rgba(15,15,150,0.15)) !important;
+            filter: url(#drop-shadow);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=6, Color='#444')";
+            filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=6, Color='#444')";
+        }
+        @media(max-width: 991px) {
+            .row{
+                margin-top:25px !important;
+            }
+        }
     </style>
 
 @endsection
@@ -75,20 +87,26 @@
                 <form class="form-horizontal " method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
                     <div class="header text-center">
+                        <div>
+                            <img src="{{ setting('site.logo') }}" style="max-height:70px;margin-bottom:25px;" class="shadowed"/>
+                        </div>
                         <h4 class="title title-up">Sign In</h4>
                         <div class="social-line">
-
-                            <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-round">
+                            @if(setting('enable-twitter-login') == 'true')
+                            <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-lg  btn-round">
                                 <i class="fa fa-twitter"></i>
                             </a>
+                            @endif
+                            @if(setting('enable-facebook-login') == 'true')
                             <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-lg  btn-round">
                                 <i class="fa fa-facebook-square"></i>
                             </a>
-                            <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-round">
+                            @endif
+                            @if(setting('enable-google-login') == 'true')
+                            <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-lg  btn-round">
                                 <i class="fa fa-google-plus"></i>
                             </a>
-
-
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
