@@ -3,11 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use App\PostType;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Role;
 
 class SettingController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            if ($request->input('s') !== null) {
+                $settings = \App\Setting::where('key', 'LIKE', '%' . $request->input('s') . '%')->orWhere('display_name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('value', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('display_name', 'asc')->get();
+            } elseif ($request->input('group') !== null) {
+                $settings = \App\Setting::where('group', '=', $request->input('group'))->limit(100)->orderBy('display_name', 'asc')->get();
+            } else {
+                $settings = new \App\Setting();
+                $settings = $settings->appSettings();
+            }
+            $postTypes = PostType::all();
+            $settingsGroups = Setting::all()->groupBy('group');
+            return view('app.setting.index')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
+        } else {
+            abort(404);
+        }
+
+    }
+
     public function addSetting(Request $request) {
         $setting = new Setting();
         return view('app.setting.edit')->with('setting', $setting);

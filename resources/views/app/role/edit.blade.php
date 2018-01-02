@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     New Post
@@ -9,160 +9,105 @@
 @endsection
 
 @section('styles')
-    <style>
-        @media (max-width: 991px) {
-            .sidebar {
-                display: none;
-            }
-        }
-
-        @media (min-width: 991px) {
-            .mobile-nav {
-                display: none;
-            }
-        }
-
-        .nav-tabs {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        .variation:first-of-type .delete-button {
-            display: none !important;
-        }
-
-        .nav-link.active {
-            border-color: #ddd !important;
-            color: #444 !important;
-        }
-    </style>
 @endsection
 
 @section('content')
+    <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
+        <div class="main col-md-12" style="background:none;margin-top:25px;">
+            <div class="col-md-12">
+                <h5>@if($role->id == null) Add @endif @if($role->id !== null) Edit @endif Role</h5>
+                <form action="/app/edit/page" method="post">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="postTitle">Display Name</label>
+                                <input required value="@if($role->display_name !== null){{$role->display_name}}"
+                                       @endif type="text" class="form-control"
+                                       id="title"
+                                       aria-describedby="postTitle" placeholder="Enter a title"
+                                       name="title">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="postSlug">Name (slug)</label>
+                                <input required value="{{$role->name}}" type="text" class="form-control"
+                                       id="slug"
+                                       aria-describedby="postSlug" placeholder="example-slug" name="slug">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="postStatus">Status</label><br>
+                                <select required class="custom-select" id="status" name="status"
+                                        aria-describedby="postStatus" style="width:100%;">
+                                    <option <?php if ($role->status == "ACTIVE") {
+                                        echo "selected";
+                                    } ?> value="ACTIVE">Active
+                                    </option>
+                                    <option <?php if ($role->status == "INACTIVE") {
+                                        echo "selected";
+                                    } ?> value="INACTIVE">Inactive
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="postStatus">Publish Date</label><br>
+                                <?php if ($role->published_at == null) {
+                                    $date = \Carbon\Carbon::now()->format("m/d/Y");
+                                } else {
+                                    $date = $role->published_at->format("m/d/Y");
+                                } ?>
+                                <input autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}"
+                                       name="published_at">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="margin-bottom:10px;">Permissions</label>
+                        @foreach($permissions->groupBy('table_name') as $key => $array)
+                            @if($key !== null && $key !== '')
 
-    <div class="container-fluid" style="margin-top:15px;">
-        <div class="card" style="min-height: calc(100vh - 30px);">
-            <div class="card-header" style="padding-left:25px;" align="right">
-                <div style="position:absolute;left:25px;top:25px;">Admin Panel</div>
-                @include('app.admin-menu')
-            </div>
-            <div class="row">
-                @include('app.admin-sidebar')
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                    <div class="main col-md-12" style="background:none;margin-top:25px;">
-                        <div class="col-md-12">
-                            <h5>@if($role->id == null) Add @endif @if($role->id !== null) Edit @endif Role</h5>
-                            <form action="/app/edit/page" method="post">
-                                {{ csrf_field() }}
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="postTitle">Display Name</label>
-                                            <input required value="@if($role->display_name !== null){{$role->display_name}}"@endif type="text" class="form-control"
-                                                   id="title"
-                                                   aria-describedby="postTitle" placeholder="Enter a title"
-                                                   name="title">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="postSlug">Name (slug)</label>
-                                            <input required value="{{$role->name}}" type="text" class="form-control"
-                                                   id="slug"
-                                                   aria-describedby="postSlug" placeholder="example-slug" name="slug">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="postStatus">Status</label><br>
-                                            <select required class="custom-select" id="status" name="status"
-                                                    aria-describedby="postStatus" style="width:100%;">
-                                                <option <?php if ($role->status == "ACTIVE") {
-                                                    echo "selected";
-                                                } ?> value="ACTIVE">Active
-                                                </option>
-                                                <option <?php if ($role->status == "INACTIVE") {
-                                                    echo "selected";
-                                                } ?> value="INACTIVE">Inactive
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="postStatus">Publish Date</label><br>
-                                            <?php if($role->published_at == null) { $date = \Carbon\Carbon::now()->format("m/d/Y"); } else { $date = $role->published_at->format("m/d/Y"); } ?>
-                                            <input autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}" name="published_at" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label style="margin-bottom:10px;">Permissions</label>
-                                @foreach($permissions->groupBy('table_name') as $key => $array)
-                                    @if($key !== null && $key !== '')
+                                <div class="card">
+                                    <div class="card-header" align="left"
+                                         style="text-align:left;">{{ ucfirst($key) }}</div>
 
-                                            <div class="card">
-                                                <div class="card-header" align="left" style="text-align:left;">{{ ucfirst($key) }}</div>
-
-                                                    <div class="meta-fields card-body" id="meta" role="tabpanel"
-                                                     align="left" style="min-height:50px !important;">
-                                                    @foreach($array as $item)
-                                                            <div class="checkbox">
-                                                                <?php $fieldname = $item->name; $input = null;?>
-                                                                <input
-                                                                        id="{{$fieldname}}"
-                                                                        type="checkbox"
-                                                                        aria-describedby="{{$key}}"
-                                                                        name="{{$fieldname}}"
-                                                                        @if($input == true) checked="" @endif />
-                                                                <label for="{{$fieldname}}">
-                                                                    {{ ucwords(str_replace('_', ' ', $item->key )) }}<br>
-                                                                </label>
-                                                            </div>
-
-                                                    @endforeach
-                                                </div>
+                                    <div class="meta-fields card-body" id="meta" role="tabpanel"
+                                         align="left" style="min-height:50px !important;">
+                                        @foreach($array as $item)
+                                            <div class="checkbox">
+                                                <?php $fieldname = $item->name; $input = null;?>
+                                                <input
+                                                        id="{{$fieldname}}"
+                                                        type="checkbox"
+                                                        aria-describedby="{{$key}}"
+                                                        name="{{$fieldname}}"
+                                                        @if($input == true) checked="" @endif />
+                                                <label for="{{$fieldname}}">
+                                                    {{ ucwords(str_replace('_', ' ', $item->key )) }}<br>
+                                                </label>
                                             </div>
 
-                                    @endif
-                                @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <input type="hidden" name="id" id="id" value="{{$role->id}}" ?>
-                                <div align="right" style="margin-bottom:35px;">
-                                    <button type="submit" class="btn btn-secondary-outline ">Save</button>
-                                </div>
-                        </div>
-                        </form>
+
+                            @endif
+                        @endforeach
+                    </div>
+                    <input type="hidden" name="id" id="id" value="{{$role->id}}" ?>
+                    <div align="right" style="margin-bottom:35px;">
+                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
                     </div>
             </div>
-            </main>
+            </form>
         </div>
-    </div>
-    </div>
-
-    <!-- Modal Core -->
-    <div class="modal fade" id="deleteVariation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
-                </div>
-                <div class="modal-body">
-
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        <p>Deleting a variation cannot be undone.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();">Delete</a>
-                </div>
-            </div>
         </div>
-    </div>
+    </main>
+
 
     <script>
         var currentCard;
@@ -236,4 +181,31 @@
         }
     </script>
 
+@endsection
+
+@section('modals')
+
+    <!-- Modal Core -->
+    <div class="modal fade" id="deleteVariation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
+                </div>
+                <div class="modal-body">
+
+                    {{ csrf_field() }}
+                    <div class="col-md-12">
+                        <p>Deleting a variation cannot be undone.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
+                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

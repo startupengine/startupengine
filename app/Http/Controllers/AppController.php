@@ -105,66 +105,6 @@ class AppController extends Controller
 
     }
 
-    public function analytics(Request $request)
-    {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            return view('app.analytics');
-        } else {
-            abort(404);
-        }
-
-    }
-
-    public function mixpanel(Request $request)
-    {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            return view('app.analytics.mixpanel');
-        } else {
-            abort(404);
-        }
-
-    }
-
-    public function users(Request $request)
-    {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            if ($request->input('s') !== null) {
-                $users = \App\User::where('name', 'LIKE', '%' . $request->input('s') . '%')->orWhere('email', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
-            } else {
-                $users = \App\User::limit(100)->get();
-            }
-            return view('app.users')->with('users', $users);
-        } else {
-            abort(404);
-        }
-
-    }
-
-    public function settings(Request $request)
-    {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            if ($request->input('s') !== null) {
-                $settings = \App\Setting::where('key', 'LIKE', '%' . $request->input('s') . '%')->orWhere('display_name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('value', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('display_name', 'asc')->get();
-            } elseif ($request->input('group') !== null) {
-                $settings = \App\Setting::where('group', '=', $request->input('group'))->limit(100)->orderBy('display_name', 'asc')->get();
-            } else {
-                $settings = new \App\Setting();
-                $settings = $settings->appSettings();
-            }
-            $postTypes = PostType::all();
-            $settingsGroups = Setting::all()->groupBy('group');
-            return view('app.settings')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
-        } else {
-            abort(404);
-        }
-
-    }
-
-
     public function api(Request $request)
     {
         $adminrole = Role::where('name', '=', 'admin')->firstOrFail();

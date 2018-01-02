@@ -26,7 +26,7 @@ Route::group(['middleware' => ['roles']], function () {
     Route::post('/app/edit/profile', 'ProfileController@saveProfile');
 
     //Settings
-    Route::get('/app/settings', 'AppController@settings');
+    Route::get('/app/settings', 'SettingController@index');
     Route::get('/app/settings/api', 'AppController@api');
     Route::get('/app/new/setting', 'SettingController@addSetting');
     Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
@@ -39,7 +39,7 @@ Route::group(['middleware' => ['roles']], function () {
     Route::post('/app/edit/page', 'PageController@savePage');
 
     //Users
-    Route::get('/app/users', 'AppController@users');
+    Route::get('/app/users', 'UserController@index');
     Route::get('/app/new/user', 'UserController@newUser');
     Route::post('/app/new/user', 'UserController@saveUser');
     Route::get('/app/view/user/{id}', 'UserController@viewUser');
@@ -52,7 +52,7 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/edit/role/{id}', 'RoleController@edit');
 
     //Content
-    Route::get('/app/content', 'AppController@content');
+    Route::get('/app/content', 'PostController@index');
     Route::get('/app/new/{slug}', 'PostController@addPost');
     Route::post('/app/new/post', 'PostController@savePost');
     Route::get('/app/view/post/{id}', 'PostController@viewPost');
@@ -64,8 +64,8 @@ Route::group(['middleware' => ['roles']], function () {
     Route::get('/app/design', 'DesignController@index');
 
     //Analytics
-    Route::get('/app/analytics', 'AppController@analytics');
-    Route::get('/app/analytics/mixpanel', 'AppController@mixpanel');
+    Route::get('/app/analytics', 'AnalyticsController@index');
+    Route::get('/app/analytics/mixpanel', 'AnalyticsController@mixpanel');
 
     //Packages
     Route::get('/app/packages', 'PackageController@index');

@@ -6,15 +6,25 @@ use Illuminate\Http\Request;
 use App\Post;
 use TCG\Voyager\Models\Role;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use App\PostType;
 
 class PostController extends Controller
 {
-    public function index() {
-        $page =  Page::where('slug', '=', 'help')->first();
-        if ($page == null) {
+    public function index(Request $request)
+    {
+        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
+        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+            $postTypes = PostType::all();
+            if ($request->input('s') !== null) {
+                $posts = \App\Post::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(5)->orderBy('updated_at', 'desc')->get();
+            } else {
+                $posts = \App\Post::limit(5)->orderBy('updated_at', 'desc')->get();
+            }
+            return view('app.post.index')->with('posts', $posts)->with('postTypes', $postTypes);
+        } else {
             abort(404);
         }
-        return view('pages.view')->with('page', $page)->with('template', 'help');
+
     }
 
     public function getPost(Request $request, $slug) {

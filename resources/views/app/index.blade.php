@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     <?php echo setting('admin.title') ?>
@@ -41,49 +41,36 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient">
-    <div class="container-fluid" style="margin-top:15px;">
-        <div class="card" style="min-height: calc(100vh - 30px);">
-            <div class="card-header" style="padding-left:25px;" align="right">
-                <div style="position:absolute;left:25px;top:25px;">Admin Panel</div>
-                @include('app.admin-menu')
-            </div>
-            <div class="row">
-                @include('app.admin-sidebar')
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                    <div class="main col-md-12" style="background:none;margin-top:25px;">
-                        <div class="col-md-12 card-deck">
-                            <div class="col-md-12" style="margin-bottom:40px;">
-                                <div id="chart">
-                                    <column-chart :data="chartData" width="100%" height="75vh"
-                                                :colors="['#eee', '#eee']"></column-chart>
-                                </div>
-                                <script>
-                                    var app = new Vue({
-                                        el: "#chart",
-                                        data: {
-                                            chartData: [
-                                                ['Users', {{count($users)}}],
-                                                ['Pages', {{count($pages)}}],
-                                                <?php
-                                                $postTypes = \App\PostType::all();
-                                                foreach($postTypes as $postType) {
-                                                    $count = \App\Post::where('post_type', '=', $postType->slug)->get();
-                                                    $count = count($count);
-                                                    echo "['$postType->title Items', $count ],";
-                                                } ?>
-                                            ]
-                                        }
-                                    })
-                                </script>
-                            </div>
-                        </div>
+
+    <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
+        <div class="main col-md-12" style="background:none;margin-top:25px;">
+            <div class="col-md-12 card-deck">
+                <div class="col-md-12" style="margin-bottom:40px;">
+                    <div id="chart">
+                        <column-chart :data="chartData" width="100%" height="75vh"
+                                      :colors="['#eee', '#eee']"></column-chart>
                     </div>
-                </main>
+                    <script>
+                        var app = new Vue({
+                            el: "#chart",
+                            data: {
+                                chartData: [
+                                    ['Users', {{count($users)}}],
+                                    ['Pages', {{count($pages)}}],
+                                    <?php
+                                    $postTypes = \App\PostType::all();
+                                    foreach ($postTypes as $postType) {
+                                        $count = \App\Post::where('post_type', '=', $postType->slug)->get();
+                                        $count = count($count);
+                                        echo "['$postType->title Items', $count ],";
+                                    } ?>
+                                ]
+                            }
+                        })
+                    </script>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
-
-    </body>
 @endsection

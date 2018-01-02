@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     <?php echo setting('admin.title') ?>
@@ -67,87 +67,82 @@
 @endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient">
-    <div class="container-fluid" style="margin-top:15px;">
-        <div class="card" style="min-height: calc(100vh - 30px);">
-            <div class="card-header" style="padding-left:25px;" align="right">
-                <div style="position:absolute;left:25px;top:25px;">Admin Panel</div>
-                @include('app.admin-menu')
-            </div>
-            <div class="row">
-                @include('app.admin-sidebar')
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                    <div class="main col-md-12" style="background:none;margin-top:25px;">
-                        <div class="col-md-12">
-                            <h5 style="margin-bottom:25px;">Packages</h5>
-                            <div class="form-group">
-                                <form>
-                                    <input type="text" value="" placeholder="Search packages..." class="form-control"
-                                           name="s" id="s">
-                                </form>
-                            </div>
-                            <div align="right">
-                                <a href="/app/new/package" class="btn btn-round btn-secondary-outline "
-                                   data-toggle="modal" data-target="#newPackage">
-                                    Add Package &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
-                                </a>
-                            </div>
-                            <table class="table ">
-                                <thead class="hiddenOnMobile">
-                                <tr>
-                                    <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
-                                    <th scope="col">Info</th>
-                                    <th scope="col">&nbsp;</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($packages as $package)
-                                    <tr>
-                                        <td class="hiddenOnMobile updated_at_column clickable"><span
-                                                    class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($package->updated_at))->diffForHumans() }}</span>
-                                        </td>
-                                        <td class="clickable">{{$package->json()->name}}<br><span style="opacity:0.5;">Version {{$package->json()->version}}</span></td>
-                                        <td align="right">
-                                            <a href="/app/view/package/{{ $package->id }}"
-                                               class="btn btn-sm btn-secondary-outline hiddenOnDesktop"
-                                               data-toggle="modal"
-                                               data-target="#packageInfo"
-                                               onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');"
-                                            >View</a>
-                                            <div class="btn-group hiddenOnMobile" role="group"
-                                                 aria-label="Basic example">
-                                                <a href="/app/update/package/{{ $package->id }}"
-                                                   class="btn btn-sm btn-secondary-outline defaultClick"
-                                                   data-toggle="modal"
-                                                   data-target="#packageInfo"
-                                                   onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');">Details</a>
-                                                <a href="/app/update/package/{{ $package->id }}"
-                                                   class="btn btn-sm btn-secondary-outline"
-                                                   style="border-left:none!important;" data-toggle="modal"
-                                                   data-target="#updatePackage"
-                                                   onclick=" $('#syncButton').attr('href', $(this).attr('href'));this.href='#';">Update</a>
-                                                <a href="/app/reset/package/{{ $package->id }}"
-                                                   class="btn btn-sm btn-secondary-outline"
-                                                   style="border-left:none!important;" data-toggle="modal"
-                                                   data-target="#syncPackage"
-                                                   onclick=" $('#resetButton').attr('href', $(this).attr('href'));this.href='#';">Reset</a>
-                                                <a href="/app/delete/package/{{ $package->id }}"
-                                                   class="btn btn-sm btn-secondary-outline"
-                                                   style="border-left:none!important;" data-toggle="modal"
-                                                   data-target="#deletePackage"
-                                                   onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </main>
+
+    <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
+        <div class="main col-md-12" style="background:none;margin-top:25px;">
+            <div class="col-md-12">
+                <h5 style="margin-bottom:25px;">Packages</h5>
+                <div class="form-group">
+                    <form>
+                        <input type="text" value="" placeholder="Search packages..." class="form-control"
+                               name="s" id="s">
+                    </form>
+                </div>
+                <div align="right">
+                    <a href="/app/new/package" class="btn btn-round btn-secondary-outline "
+                       data-toggle="modal" data-target="#newPackage">
+                        Add Package &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
+                    </a>
+                </div>
+                <table class="table ">
+                    <thead class="hiddenOnMobile">
+                    <tr>
+                        <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                        <th scope="col">Info</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($packages as $package)
+                        <tr>
+                            <td class="hiddenOnMobile updated_at_column clickable"><span
+                                        class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($package->updated_at))->diffForHumans() }}</span>
+                            </td>
+                            <td class="clickable">{{$package->json()->name}}<br><span
+                                        style="opacity:0.5;">Version {{$package->json()->version}}</span></td>
+                            <td align="right">
+                                <a href="/app/view/package/{{ $package->id }}"
+                                   class="btn btn-sm btn-secondary-outline hiddenOnDesktop"
+                                   data-toggle="modal"
+                                   data-target="#packageInfo"
+                                   onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');"
+                                >View</a>
+                                <div class="btn-group hiddenOnMobile" role="group"
+                                     aria-label="Basic example">
+                                    <a href="/app/update/package/{{ $package->id }}"
+                                       class="btn btn-sm btn-secondary-outline defaultClick"
+                                       data-toggle="modal"
+                                       data-target="#packageInfo"
+                                       onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');">Details</a>
+                                    <a href="/app/update/package/{{ $package->id }}"
+                                       class="btn btn-sm btn-secondary-outline"
+                                       style="border-left:none!important;" data-toggle="modal"
+                                       data-target="#updatePackage"
+                                       onclick=" $('#syncButton').attr('href', $(this).attr('href'));this.href='#';">Update</a>
+                                    <a href="/app/reset/package/{{ $package->id }}"
+                                       class="btn btn-sm btn-secondary-outline"
+                                       style="border-left:none!important;" data-toggle="modal"
+                                       data-target="#syncPackage"
+                                       onclick=" $('#resetButton').attr('href', $(this).attr('href'));this.href='#';">Reset</a>
+                                    <a href="/app/delete/package/{{ $package->id }}"
+                                       class="btn btn-sm btn-secondary-outline"
+                                       style="border-left:none!important;" data-toggle="modal"
+                                       data-target="#deletePackage"
+                                       onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
+    </main>
+
+
+@endsection
+
+@section('modals')
 
     <!-- Modal Core -->
     <div class="modal fade" id="newPackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -163,7 +158,8 @@
 
                         {{ csrf_field() }}
                         <div class="col-md-12">
-                            <p>Paste the url to a git repository containing a StartupEngine package, then click install.</p>
+                            <p>Paste the url to a git repository containing a StartupEngine package, then click
+                                install.</p>
                         </div>
                         <div class="form-group">
                             <label for="postStatus">URL</label><br>
@@ -181,7 +177,8 @@
     </div>
 
     <!-- Modal Core -->
-    <div class="modal fade" id="deletePackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deletePackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -204,7 +201,8 @@
     </div>
 
     <!-- Modal Core -->
-    <div class="modal fade" id="syncPackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="syncPackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -227,7 +225,8 @@
     </div>
 
     <!-- Modal Core -->
-    <div class="modal fade" id="updatePackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updatePackage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -238,7 +237,8 @@
 
                     {{ csrf_field() }}
                     <div class="col-md-12">
-                        <p>Updating the package may overwrite some of the settings you've tweaked. Be sure to double-check after the update completes from the settings panel.</p>
+                        <p>Updating the package may overwrite some of the settings you've tweaked. Be sure to
+                            double-check after the update completes from the settings panel.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -250,7 +250,8 @@
     </div>
 
     <!-- Modal Core -->
-    <div class="modal fade" id="packageInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="packageInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -263,12 +264,12 @@
                     <div class="col-md-12">
                         <p id="packageVersion" class="badge badge-category"></p>
                         <p id="packageDescription" style="margin-top:10px;"></p>
-                        <p><a href="#" id="packageUrl" target="_blank" style="text-decoration: none;">View the git repository for this package</a></p>
+                        <p><a href="#" id="packageUrl" target="_blank" style="text-decoration: none;">View the git
+                                repository for this package</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    </body>
 @endsection

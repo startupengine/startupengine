@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     API Settings
@@ -26,30 +26,21 @@
 @endsection
 
 @section('content')
-        <div class="container-fluid" style="margin-top:15px;">
-            <div class="card" style="min-height: calc(100vh - 30px);">
-                <div class="card-header" style="padding-left:25px;" align="right">
-                    <div style="position:absolute;left:25px;top:25px;">Admin Panel</div>
-                    @include('app.admin-menu')
-                </div>
-                <div class="row">
-                    @include('app.admin-sidebar')
-                    <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                        <div class="main col-md-12" style="background:none;margin-top:25px;">
-                            <div class="col-md-12">
-                                <h5 style="margin-bottom:25px;">API Settings</h5>
-                            </div>
-                            <div class="col-md-12" id="vue-app">
 
-                                <!-- API Authentication -->
-                                <passport-clients></passport-clients>
-                                <passport-authorized-clients></passport-authorized-clients>
-                                <passport-personal-access-tokens></passport-personal-access-tokens>
+    <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
+        <div class="main col-md-12" style="background:none;margin-top:25px;">
+            <div class="col-md-12">
+                <h5 style="margin-bottom:25px;">API Settings</h5>
+            </div>
+            <div class="col-md-12" id="vue-app">
 
-                            </div>
-                        </div>
-                    </main>
-                </div>
+                <!-- API Authentication -->
+                <passport-clients></passport-clients>
+                <passport-authorized-clients></passport-authorized-clients>
+                <passport-personal-access-tokens></passport-personal-access-tokens>
+
             </div>
         </div>
+    </main>
+
 @endsection
