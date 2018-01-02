@@ -140,6 +140,7 @@
             border-radius: 3px !important;
             box-shadow: 0px 7px 18px rgba(0, 0, 0, 0.1);
             text-align: center !important;
+            overflow-y:scroll !important;
         }
 
         #nav-cta {
