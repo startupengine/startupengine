@@ -5,7 +5,11 @@
             <a class="navbar-brand" href="/" rel="tooltip" title="{{ setting('site.description') }}"
                data-placement="bottom">
                 <?php if(setting('site.logo') !== null) { ?><img src="{{ setting('site.logo') }}" alt="Logo Icon"
-                                                                 style="max-width:40px;"><?php } ?>
+                                                                 style="max-width:40px;">
+                    <?php } else { ?>
+                    <img src="https://s3.us-east-2.amazonaws.com/startupengine/logos/startup-engine-icon.png" alt="Logo Icon"
+                         style="max-width:40px;">
+                    <?php } ?>
                 <div style="display:inline;">
                     <span>{{ setting('site.name') }}</span>&nbsp;
                     <span class="text400">{{ setting('admin.name') }}</span>
