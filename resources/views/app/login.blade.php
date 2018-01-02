@@ -92,17 +92,17 @@
                         </div>
                         <h4 class="title title-up">Sign In</h4>
                         <div class="social-line">
-                            @if(setting('enable-twitter-login') == 'true')
+                            @if(setting('auth.enable-twitter-login') == 'true')
                             <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-lg  btn-round">
                                 <i class="fa fa-twitter"></i>
                             </a>
                             @endif
-                            @if(setting('enable-facebook-login') == 'true')
+                            @if(setting('auth.enable-facebook-login') == 'true')
                             <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-lg  btn-round">
                                 <i class="fa fa-facebook-square"></i>
                             </a>
                             @endif
-                            @if(setting('enable-google-login') == 'true')
+                            @if(setting('auth.enable-google-login') == 'true')
                             <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-lg  btn-round">
                                 <i class="fa fa-google-plus"></i>
                             </a>
@@ -163,6 +163,9 @@
     </div>
     <div align="center" style="margin-top:15px;">
         <a href="/" class="btn btn-link">Back to {{setting('site.name')}}.</a>
+        @if(setting('auth.tos-link') !== null)
+        <a href="{{setting('auth.tos-link')}}" target="_blank" class="btn btn-link">Terms of Service</a>
+        @endif
     </div>
     </body>
 @endsection
