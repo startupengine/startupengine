@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-white fixed-top  " color-on-scroll="100" id="adminNav">
+<nav class="navbar navbar-expand-lg bg-white fixed-top" id="adminNav">
     <div class="container-fluid">
         <div class="navbar-translate">
             <a class="navbar-brand" href="/" rel="tooltip" title="{{ setting('site.description') }}"
