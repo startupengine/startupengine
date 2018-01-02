@@ -170,7 +170,7 @@
         </div>
     </div>
     <div align="center" style="margin-top:15px;">
-        <a href="/" class="btn btn-link">Back to {{setting('site.name')}}.</a>
+        <a href="/" class="btn btn-link">Back to {{setting('site.name')}}</a>
         @if(setting('auth.tos-link') !== null)
         <a href="{{setting('auth.tos-link')}}" target="_blank" class="btn btn-link">Terms of Service</a>
         @endif
