@@ -117,6 +117,9 @@
                                 <input type="password" placeholder="Password..." class="form-control" required
                                        name="password">
                             </div>
+                                <?php if(Request::path() == "app/login") {  ?>
+                                <input type="hidden" name="redirect" value="/app"/>
+                                <?php } ?>
                             <?php /*
                             <div class="form-group">
                                 <div class="col-md-12">
