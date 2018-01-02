@@ -72,6 +72,8 @@
         @media(max-width: 991px) {
             .row{
                 margin-top:25px !important;
+                margin-left:10px;
+                margin-right:10px;
             }
         }
     </style>
@@ -81,8 +83,8 @@
 
 @section('content')
     <body class="index-page sidebar-collapse bg-gradient-light" style="height:100vh;">
-    <div class="container" style="margin-top:15px;">
-        <div class="row" style="margin-top:10%;">
+    <div class="container">
+        <div class="row" style="margin-top:5%;">
             <div class="card card-signup bg-gradient">
                 <form class="form-horizontal " method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
