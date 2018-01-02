@@ -31,7 +31,7 @@
                 </a>
             </div>
             <ul class="navbar-nav">
-                <?php echo setting('site.menu'); ?>
+                <?php echo setting('admin.menu'); ?>
                 <?php if(\Auth::user() !== null && \Auth::user()->role()->name == 'admin'){  ?>
                 <li class="nav-item">
                     <a href="/" class="nav-link hiddenOnDesktop"><i class="now-ui-icons arrows-1_share-66"></i> Site</a>
