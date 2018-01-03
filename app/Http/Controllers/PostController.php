@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use TCG\Voyager\Models\Role;
+use App\Role;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use App\PostType;
 
@@ -12,25 +12,18 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            $postTypes = PostType::all();
-            if ($request->input('s') !== null) {
-                $posts = \App\Post::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
-            } else {
-                $posts = \App\Post::limit(100)->orderBy('updated_at', 'desc')->get();
-            }
-            return view('app.post.index')->with('posts', $posts)->with('postTypes', $postTypes);
+        $postTypes = PostType::all();
+        if ($request->input('s') !== null) {
+            $posts = \App\Post::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
         } else {
-            abort(404);
+            $posts = \App\Post::limit(100)->orderBy('updated_at', 'desc')->get();
         }
-
+        return view('app.post.index')->with('posts', $posts)->with('postTypes', $postTypes);
     }
 
     public function getPost(Request $request, $slug) {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
         $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
-        if(($post->status !== null && $post->published_at->isPast()) OR (\Auth::user() && \Auth::user()->role_id == $adminrole->id)) {
+        if(($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
             return view('posts.view')->with('post', $post);
         }
         else {
@@ -46,9 +39,8 @@ class PostController extends Controller
     }
 
     public function savePost(Request $request) {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
 
+        if(\Auth::user()->hasPermissionTo('edit posts')) {
             if($request->input('id') !== null ){
                 $post = \App\Post::find($request->input('id'));
             }
@@ -83,18 +75,13 @@ class PostController extends Controller
     }
 
     public function viewPost(Request $request, $id) {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            $post = Post::find($id);
-        }
-        if($post->status !== null) {
-            $categories = \App\Category::all();
-            $postType = $post->postType();
-            return view('app.post.view')->with('post', $post)->with('categories', $categories)->with('postType', $postType);
-        }
-        else {
+        $post = Post::find($id);
+        if($post == null) {
             abort(404);
         }
+        $categories = \App\Category::all();
+        $postType = $post->postType();
+        return view('app.post.view')->with('post', $post)->with('categories', $categories)->with('postType', $postType);
     }
 
     public function editPost(Request $request, $id) {

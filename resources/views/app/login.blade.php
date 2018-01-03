@@ -48,7 +48,7 @@
         }
 
         .input-group-addon {
-            padding-right: 13px !important;
+            padding-right: 20px !important;
             background: rgba(0, 0, 0, 0.3) !important;
         }
 
@@ -61,6 +61,8 @@
             color:#fff !important;
             text-align: center;
             margin-bottom:15px;
+            max-width:75%;
+            margin-top:-25px;
         }
 
         .shadowed {
@@ -79,6 +81,13 @@
 
         .btn-icon:hover, #signin:hover {
             transform: scale(1.1); /* Equal to scaleX(0.7) scaleY(0.7) */
+        }
+
+        .input-group input {
+            border-radius:0px 4px 4px 0px;
+        }
+        .input-group-addon {
+            border-radius:4px 0px 0px 4px;
         }
     </style>
 
@@ -118,7 +127,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group form-group{{ $errors->has('email') ? ' has-error' : '' }}" align="center">
                             @if ($errors->has('email'))
                                 <div class="help-block" style="width:100% !important;">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -170,7 +179,13 @@
         </div>
     </div>
     <div align="center" style="margin-top:15px;">
-        <a href="/" class="btn btn-link">Back to {{setting('site.name')}}</a>
+        <a href="/" class="btn btn-link">
+            @if(setting('site.name') !== null)
+            Back to {{setting('site.name')}}
+            @else
+            Back to {{ config('app.url') }}
+            @endif
+        </a>
         @if(setting('auth.tos-link') !== null)
         <a href="{{setting('auth.tos-link')}}" target="_blank" class="btn btn-link">Terms of Service</a>
         @endif

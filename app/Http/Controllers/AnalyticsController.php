@@ -9,29 +9,17 @@ class AnalyticsController extends Controller
 {
     public function index(Request $request)
     {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            if($request->input('view') !== null){
-                $view = $request->input;
-            }
-            else {
-                $view = 'mixpanel';
-            }
-            return view('app.analytics.index')->with('view', $view);
+        if ($request->input('view') !== null) {
+            $view = $request->input;
         } else {
-            abort(404);
+            $view = 'mixpanel';
         }
-
+        return view('app.analytics.index')->with('view', $view);
     }
+
     public function mixpanel(Request $request)
     {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            return view('app.analytics.mixpanel');
-        } else {
-            abort(404);
-        }
-
+        return view('app.analytics.mixpanel');
     }
 
 }

@@ -68,16 +68,15 @@
                     </div>
                     <div>
                         <label style="margin-bottom:10px;">Permissions</label>
-                        @foreach($permissions->groupBy('table_name') as $key => $array)
+                        @foreach($permissions->groupBy('guard_name') as $key => $value)
                             @if($key !== null && $key !== '')
-
                                 <div class="card">
                                     <div class="card-header" align="left"
                                          style="text-align:left;">{{ ucfirst($key) }}</div>
 
                                     <div class="meta-fields card-body" id="meta" role="tabpanel"
                                          align="left" style="min-height:50px !important;">
-                                        @foreach($array as $item)
+                                        @foreach($value as $item)
                                             <div class="checkbox">
                                                 <?php $fieldname = $item->name; $input = null;?>
                                                 <input
@@ -87,7 +86,7 @@
                                                         name="{{$fieldname}}"
                                                         @if($input == true) checked="" @endif />
                                                 <label for="{{$fieldname}}">
-                                                    {{ ucwords(str_replace('_', ' ', $item->key )) }}<br>
+                                                    {{ ucwords(str_replace('_', ' ', $item->name )) }}<br>
                                                 </label>
                                             </div>
 

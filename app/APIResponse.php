@@ -3,8 +3,8 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
-use TCG\Voyager\Models\Category;
 
 class APIResponse extends Model
 {
@@ -289,9 +289,6 @@ class APIResponse extends Model
 
     public function getRandomPageVariation($request, $slug)
     {
-        if ($request->exists('remember')) {
-            $cache = $request->input('remember');
-        }
         $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
         if ($page !== null) {
             $versions = json_decode($page->json, true)['versions'];

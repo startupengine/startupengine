@@ -36,22 +36,30 @@
                 <li class="nav-item">
                     <a href="/" class="nav-link hiddenOnDesktop"><i class="now-ui-icons arrows-1_share-66"></i> Site</a>
                 </li>
+                @if(\Auth::user()->hasPermissionTo('browse pages'))
                 <li class="nav-item">
                     <a class="nav-link hiddenOnDesktop" style="text-align: left;border-color:#eee !important;"
                        href="/app/pages"><i class="now-ui-icons files_paper"></i>&nbsp; Pages</a>
                 </li>
+                @endif
+                @if(\Auth::user()->hasPermissionTo('browse posts'))
                 <li class="nav-item">
                     <a class="nav-link hiddenOnDesktop" style="text-align: left;border-color:#eee !important;"
                        href="/app/content"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Content</a>
                 </li>
+                @endif
+                @if(\Auth::user()->hasPermissionTo('browse users'))
                 <li class="nav-item hiddenOnDesktop">
                     <a class="nav-link" style="text-align: left;border-color:#eee !important;"
                        href="/app/users"><i class="now-ui-icons users_single-02"></i>&nbsp; Users</a>
                 </li>
+                @endif
+                @if(\Auth::user()->hasPermissionTo('browse settings'))
                 <li class="nav-item hiddenOnDesktop">
                     <a class="nav-link" style="text-align: left;border-color:#eee !important;"
                        href="/app/settings"><i class="now-ui-icons ui-1_settings-gear-63"></i>&nbsp; Settings</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <div class="btn-group hiddenOnMobile">
                         <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
@@ -60,9 +68,11 @@
                             Account
                         </a>
                         <div class="dropdown-menu dropdown-menu-right ">
+                            @if(\Auth::user()->hasPermissionTo('edit own profile'))
                             <button class="dropdown-item" type="button" onclick="location.href='/app/profile';"><i
                                         class="now-ui-icons users_circle-08"></i>&nbsp; Profile
                             </button>
+                            @endif
                             <button class="dropdown-item" type="button" onclick="location.href='/logout';"><i
                                         class="now-ui-icons ui-1_lock-circle-open"></i>&nbsp; Sign Out
                             </button>

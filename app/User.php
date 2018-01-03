@@ -8,14 +8,11 @@ use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
 use Illuminate\Foundation\Auth\User as AuthUser;
-use TCG\Voyager\Traits\VoyagerUser;
-use TCG\Voyager\Contracts\User as UserContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends AuthUser implements AuditableContract, UserResolver
 {
-
     use HasRoles;
 
     use Auditable;
@@ -77,11 +74,6 @@ class User extends AuthUser implements AuditableContract, UserResolver
     public static function resolveId()
     {
         return \Auth::check() ? \Auth::user()->getAuthIdentifier() : null;
-    }
-
-    public function roles()
-    {
-        return $this->hasMany('\App\Role', 'user_roles');
     }
 
 }

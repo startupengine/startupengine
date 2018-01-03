@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Roles;
+use App\Http\Middleware\Backend;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -39,9 +39,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'roles' => [
-            \App\Http\Middleware\Roles::class
+        /*
+        'backend' => [
+            \App\Http\Middleware\Backend::class
         ],
+        */
 
         'api' => [
             'throttle:60,1',

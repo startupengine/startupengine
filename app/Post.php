@@ -83,7 +83,6 @@ class Post extends Model implements AuditableContract
         return json_decode($this->postType()->json);
     }
 
-
     public function videoType($url) {
         if (strpos($url, 'youtube') > 0) {
             return 'youtube';

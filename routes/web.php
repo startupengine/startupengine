@@ -15,74 +15,93 @@ use Caffeinated\Modules\Facades\Module;
 
 Auth::routes();
 
-Route::group(['middleware' => ['roles']], function () {
+Route::group(['middleware' => ['permission:view backend']], function () {
 
     //App
     Route::get('/app', 'AppController@index');
 
     //Profile
-    Route::get('/app/profile', 'ProfileController@index');
-    Route::get('/app/edit/profile', 'ProfileController@editProfile');
-    Route::post('/app/edit/profile', 'ProfileController@saveProfile');
+    Route::group(['middleware' => ['role:staff']], function () {
+        Route::get('/app/profile', 'ProfileController@index');
+        Route::get('/app/edit/profile', 'ProfileController@editProfile');
+        Route::post('/app/edit/profile', 'ProfileController@saveProfile');
+    });
 
     //Settings
-    Route::get('/app/settings', 'SettingController@index');
-    Route::get('/app/settings/api', 'AppController@api');
-    Route::get('/app/new/setting', 'SettingController@addSetting');
-    Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
-    Route::post('/app/edit/setting', 'SettingController@saveSetting');
+    Route::group(['middleware' => ['permission:edit settings']], function () {
+        Route::get('/app/settings', 'SettingController@index');
+        Route::get('/app/settings/api', 'AppController@api');
+        Route::get('/app/new/setting', 'SettingController@addSetting');
+        Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
+        Route::post('/app/edit/setting', 'SettingController@saveSetting');
+    });
 
     //Pages
-    Route::get('/app/pages', 'PageController@index');
-    Route::get('/app/new/page', 'PageController@addPage');
-    Route::get('/app/edit/page/{id}', 'PageController@editPage');
-    Route::post('/app/edit/page', 'PageController@savePage');
+    Route::group(['middleware' => ['permission:edit pages']], function () {
+        Route::get('/app/pages', 'PageController@index');
+        Route::get('/app/new/page', 'PageController@addPage');
+        Route::get('/app/edit/page/{id}', 'PageController@editPage');
+        Route::post('/app/edit/page', 'PageController@savePage');
+    });
 
     //Users
-    Route::get('/app/users', 'UserController@index');
-    Route::get('/app/new/user', 'UserController@newUser');
-    Route::post('/app/new/user', 'UserController@saveUser');
-    Route::get('/app/view/user/{id}', 'UserController@viewUser');
-    Route::get('/app/edit/user/{id}', 'UserController@editUser');
-    Route::post('/app/edit/user', 'UserController@saveUser');
-    Route::get('/app/delete/user/{id}', 'UserController@deleteUser');
+    Route::group(['middleware' => ['permission:edit users']], function () {
+        Route::get('/app/users', 'UserController@index');
+        Route::get('/app/new/user', 'UserController@newUser');
+        Route::post('/app/new/user', 'UserController@saveUser');
+        Route::get('/app/view/user/{id}', 'UserController@viewUser');
+        Route::get('/app/edit/user/{id}', 'UserController@editUser');
+        Route::post('/app/edit/user', 'UserController@saveUser');
+        Route::get('/app/delete/user/{id}', 'UserController@deleteUser');
+    });
 
     //Roles
-    Route::get('/app/roles', 'RoleController@index');
-    Route::get('/app/edit/role/{id}', 'RoleController@edit');
+    Route::group(['middleware' => ['permission:edit roles']], function () {
+        Route::get('/app/roles', 'RoleController@index');
+        Route::get('/app/edit/role/{id}', 'RoleController@edit');
+    });
 
     //Content
-    Route::get('/app/content', 'PostController@index');
-    Route::get('/app/new/{slug}', 'PostController@addPost');
-    Route::post('/app/new/post', 'PostController@savePost');
-    Route::get('/app/view/post/{id}', 'PostController@viewPost');
-    Route::get('/app/edit/post/{id}', 'PostController@editPost');
-    Route::get('/app/delete/post/{id}', 'PostController@deletePost');
-    Route::post('/app/edit/post', 'PostController@savePost');
+    Route::group(['middleware' => ['permission:browse posts|browse own posts']], function () {
+        Route::get('/app/content', 'PostController@index');
+        Route::get('/app/new/{slug}', 'PostController@addPost');
+        Route::post('/app/new/post', 'PostController@savePost');
+        Route::get('/app/view/post/{id}', 'PostController@viewPost');
+        Route::get('/app/edit/post/{id}', 'PostController@editPost');
+        Route::get('/app/delete/post/{id}', 'PostController@deletePost');
+        Route::post('/app/edit/post', 'PostController@savePost');
+    });
 
     //Design
-    Route::get('/app/design', 'DesignController@index');
+    Route::group(['middleware' => ['permission:edit settings']], function () {
+        Route::get('/app/design', 'DesignController@index');
+    });
 
     //Analytics
-    Route::get('/app/analytics', 'AnalyticsController@index');
-    Route::get('/app/analytics/mixpanel', 'AnalyticsController@mixpanel');
+    Route::group(['middleware' => ['permission:view analytics']], function () {
+        Route::get('/app/analytics', 'AnalyticsController@index');
+        Route::get('/app/analytics/mixpanel', 'AnalyticsController@mixpanel');
+    });
 
     //Packages
-    Route::get('/app/packages', 'PackageController@index');
-    Route::post('/app/new/package', 'PackageController@savePackage');
-    Route::get('/app/delete/package/{id}', 'PackageController@deletePackage');
-    Route::get('/app/update/package/{id}', 'PackageController@updatePackage');
-    Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
+    Route::group(['middleware' => ['permission:edit packages']], function () {
+        Route::get('/app/packages', 'PackageController@index');
+        Route::post('/app/new/package', 'PackageController@savePackage');
+        Route::get('/app/delete/package/{id}', 'PackageController@deletePackage');
+        Route::get('/app/update/package/{id}', 'PackageController@updatePackage');
+        Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
+    });
 
     //Modules
     //Route::get('/app/modules', 'ModuleController@index');
 
     //Schema
-    Route::get('/app/schema', 'SchemaController@index');
-    Route::get('/app/new/schema', 'SchemaController@addSchema');
-    Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
-    Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
-
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/app/schema', 'SchemaController@index');
+        Route::get('/app/new/schema', 'SchemaController@addSchema');
+        Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
+        Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
+    });
 
 });
 
@@ -96,7 +115,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/app/login', 'AppController@login');
 
     //Pages
-    Route::get('/', 'PageController@getHomepage');
+    Route::get('/', 'PageController@getHomepage')->name('home');
     Route::get('/home', 'PageController@getHomepage');
 
     Route::get('/{slug}', 'PageController@getPage');

@@ -5,22 +5,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\Contracts\Role as RoleContract;
 
-class Role extends Model implements AuditableContract
+class Role extends SpatieRole implements AuditableContract, RoleContract
 {
     use SoftDeletes;
 
     use Auditable;
 
-    protected $guarded = [];
+    public $guarded = ['id'];
 
-    public function users()
-    {
-        return $this->belongsToMany('\App\User', 'user_roles');
-    }
-
-    public function permissions()
-    {
-        return $this->belongsToMany('\App\Permission');
-    }
 }

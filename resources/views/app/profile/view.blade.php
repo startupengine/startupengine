@@ -22,10 +22,12 @@
                     <label>Name</label>
                     <input class="form-control" disabled type="text" value="{{ $user->name }}"/>
                 </div>
+                <?php /*
                 <div class="form-group">
                     <label>Role</label>
                     <input class="form-control" disabled type="text" value="{{ ucfirst($user->role()->name) }}"/>
                 </div>
+                */ ?>
                 <div class="form-group">
                     <label>E-mail</label>
                     <input class="form-control" disabled type="text" value="{{ $user->email }}"/>

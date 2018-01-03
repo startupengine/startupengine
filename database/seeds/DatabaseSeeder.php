@@ -11,13 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(VoyagerDatabaseSeeder::class);
-        //$this->call(VoyagerDummyDatabaseSeeder::class);
-        //$this->call(DataTypesTableSeeder::class);
-        //$this->call(DataRowsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
-        $this->call(PermissionRoleTableSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
     }
 }

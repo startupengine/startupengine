@@ -16,7 +16,33 @@ class AppController extends Controller
 
     public function index()
     {
-        return redirect('/app/pages');
+        $user = \Auth::user();
+        //dd($user->hasPermissionTo('view backend'));
+
+        if($user->hasPermissionTo('browse pages')){
+            return redirect('/app/pages');
+        }
+
+        if($user->hasPermissionTo('browse posts')){
+            return redirect('/app/content');
+        }
+
+        if($user->hasPermissionTo('browse own posts')){
+            return redirect('/app/content');
+        }
+
+        if($user->hasPermissionTo('browse settings')){
+            return redirect('/app/settings');
+        }
+
+        if($user->hasPermissionTo('browse packages')){
+            return redirect('/app/packages');
+        }
+
+        if($user->hasPermissionTo('view analytics')){
+            return redirect('/app/analytics');
+        }
+
     }
 
     public function login(Request $request)
@@ -25,8 +51,7 @@ class AppController extends Controller
             if (\Auth::user() && $request->input('redirect') !== null) {
                 dd($request->input('redirect'));
                 return redirect($request->input('redirect'));
-            }
-            else {
+            } else {
                 return redirect('/');
             }
         } else {
@@ -36,13 +61,7 @@ class AppController extends Controller
 
     public function api(Request $request)
     {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if (\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            return view('app.api.tokens');
-        } else {
-            abort(404);
-        }
-
+        return view('app.api.tokens');
     }
 
 }

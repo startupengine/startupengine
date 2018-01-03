@@ -57,6 +57,7 @@
                         <input class="form-control" @if($disabled == 'disabled') disabled @endif type="text"
                                value="{{ $user->name }}" name="name"/>
                     </div>
+                    <?php /*
                     <div class="form-group">
                         <label>Role</label>
                         <select class="custom-select" id="role_id" name="role_id" @if($disabled == 'disabled') disabled
@@ -70,6 +71,7 @@
                             @endforeach
                         </select>
                     </div>
+                    */?>
                     <div class="form-group">
                         <label>E-mail</label>
                         <input class="form-control" @if($disabled == 'disabled') disabled @endif type="text"

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Permission;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public function index(Request $request) {
-
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+        $user = \Auth::user();
+        if($user && $user->hasPermissionTo('view backend') && $user->hasPermissionTo('view own profile')) {
             $user = \Auth::user();
             return view('app.profile.view')->with('user', $user)->with('disabled', 'disabled');
         }
@@ -20,10 +20,8 @@ class ProfileController extends Controller
     }
 
     public function editProfile(Request $request) {
-
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-            $user = \Auth::user();
+        $user = \Auth::user();
+        if($user &&  $user->hasPermissionTo('view backend') && $user->hasPermissionTo('edit own profile')) {
             return view('app.profile.edit')->with('user', $user)->with('disabled', null);
         }
         else {
@@ -32,8 +30,8 @@ class ProfileController extends Controller
     }
 
     public function saveProfile(Request $request) {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
+        $user = \Auth::user();
+        if($user && $user->hasPermissionTo('edit own profile')) {
             $user = \Auth::user();
             $user->name = $request->input('name');
             $user->email = $request->input('email');

@@ -53,7 +53,7 @@ class CreateDataTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('data_rows');
-        Schema::drop('data_types');
+        Schema::dropIfExists('data_rows');
+        Schema::dropIfExists('data_types');
     }
 }

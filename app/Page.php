@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Watson\Rememberable\Rememberable;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
@@ -11,7 +10,6 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Page extends Model implements AuditableContract
 {
-    use Rememberable;
     use Auditable;
 
     /**

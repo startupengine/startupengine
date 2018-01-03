@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use TCG\Voyager\Models\Role;
+use App\Role;
 
-class Roles
+class Backend
 {
     /**
      * Handle an incoming request.
@@ -36,10 +36,9 @@ class Roles
 
         //If the user IS logged in
         else {
-            $role = Role::where('id', '=', $user->role_id)->first();
             
             //And they have been assigned a staff role
-            if ($role !== null && ($role->name == 'admin' OR $role->name == 'developer' OR $role->name == 'writer')) {
+            if ($user->hasPermissionTo('view backend')) {
                 //continue...
                 return $next($request);
 
