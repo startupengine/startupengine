@@ -118,7 +118,7 @@
                 @endif
                 @if($request->input('s') !== null or $request->input('group') !== null)
                     <div align="right">
-                        <a href="/app/new/setting" class="btn btn-secondary-outline btn-round">New Setting
+                        <a href="/app/new/setting" class="btn btn-secondary-outline btn-round btn-sm">New Setting
                             &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                     </div>
                 @endif

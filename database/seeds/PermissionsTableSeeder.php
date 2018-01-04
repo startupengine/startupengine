@@ -91,6 +91,13 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['guard_name' => 'web', 'name' => 'add roles']);
         Permission::create(['guard_name' => 'web', 'name' => 'delete roles']);
 
+        Permission::create(['guard_name' => 'web', 'name' => 'browse content types']);
+        Permission::create(['guard_name' => 'web', 'name' => 'read content types']);
+        Permission::create(['guard_name' => 'web', 'name' => 'edit content types']);
+        Permission::create(['guard_name' => 'web', 'name' => 'add content types']);
+        Permission::create(['guard_name' => 'web', 'name' => 'delete content types']);
+
+
         //Assign permissions to roles
 
         //Users
@@ -166,6 +173,12 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo('edit roles');
         $role->givePermissionTo('add roles');
         $role->givePermissionTo('delete roles');
+
+        $role->givePermissionTo('browse content types');
+        $role->givePermissionTo('read content types');
+        $role->givePermissionTo('edit content types');
+        $role->givePermissionTo('add content types');
+        $role->givePermissionTo('delete content types');
 
         //Editors
         $role = Role::where('name', '=', 'editor')->first();

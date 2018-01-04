@@ -23,7 +23,7 @@
                     </form>
                 </div>
                 <div align="right">
-                    <button type="button" class="btn btn-round btn-secondary-outline " data-toggle="dropdown"
+                    <button type="button" class="btn btn-round btn-secondary-outline btn-sm " data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         New Item <i class="now-ui-icons ui-1_simple-add"></i>
                     </button>

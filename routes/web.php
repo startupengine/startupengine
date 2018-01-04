@@ -30,10 +30,13 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
     //Settings
     Route::group(['middleware' => ['permission:edit settings']], function () {
         Route::get('/app/settings', 'SettingController@index');
-        Route::get('/app/settings/api', 'AppController@api');
         Route::get('/app/new/setting', 'SettingController@addSetting');
         Route::get('/app/edit/setting/{id}', 'SettingController@editSetting');
         Route::post('/app/edit/setting', 'SettingController@saveSetting');
+    });
+    //API Settings
+    Route::group(['middleware' => ['permission:manage api settings']], function () {
+        Route::get('/app/settings/api', 'AppController@api');
     });
 
     //Pages
@@ -96,7 +99,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
     //Route::get('/app/modules', 'ModuleController@index');
 
     //Schema
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['permission:edit content types']], function () {
         Route::get('/app/schema', 'SchemaController@index');
         Route::get('/app/new/schema', 'SchemaController@addSchema');
         Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');

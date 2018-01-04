@@ -24,10 +24,10 @@
 
                 <div align="left">
                     <div class="btn-group">
-                        <a href="/app/users" class="btn btn-secondary-outline  ">Users</a>
-                        <a href="/app/roles" class="btn btn-secondary ">Roles</a>
+                        <a href="/app/users" class="btn btn-secondary-outline btn-sm ">Users</a>
+                        <a href="/app/roles" class="btn btn-secondary btn-sm">Roles</a>
                     </div>
-                    <a href="/app/new/role" class="btn btn-secondary-outline btn-round pull-right">New Role &nbsp;<i
+                    <a href="/app/new/role" class="btn btn-secondary-outline btn-round btn-sm pull-right">New Role &nbsp;<i
                                 class="now-ui-icons ui-1_simple-add"></i></a>
                 </div>
 

@@ -35,7 +35,7 @@
                     </form>
                 </div>
                 <div align="right">
-                    <a href="/app/new/page" class="btn btn-secondary-outline btn-round">New Page &nbsp;&nbsp;<i
+                    <a href="/app/new/page" class="btn btn-secondary-outline btn-round btn-sm">New Page &nbsp;&nbsp;<i
                                 class="now-ui-icons ui-1_simple-add"></i></a>
                 </div>
                 <table class="table clickable">

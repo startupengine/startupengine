@@ -24,7 +24,7 @@
                     </form>
                 </div>
                 <div align="right">
-                    <a href="/app/new/schema" class="btn btn-secondary-outline btn-round">New Content Type
+                    <a href="/app/new/schema" class="btn btn-secondary-outline btn-round btn-sm">New Content Type
                         &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                 </div>
 
