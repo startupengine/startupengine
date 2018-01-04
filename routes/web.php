@@ -56,7 +56,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
     });
 
     //Roles
-    Route::group(['middleware' => ['permission:edit roles']], function () {
+    Route::group(['middleware' => ['permission:browse roles']], function () {
         Route::get('/app/roles', 'RoleController@index');
         Route::get('/app/edit/role/{id}', 'RoleController@edit');
     });

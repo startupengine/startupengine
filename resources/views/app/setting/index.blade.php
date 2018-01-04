@@ -75,6 +75,22 @@
                                 </div>
                             </div>
                         </div>
+                        @if(\Auth::user()->hasPermissionTo('browse packages'))
+                            <div class="col-md-4" style="display:inline-block !important;">
+                                <div class="card" style="margin-bottom:25px;">
+                                    <div class="card-header" align="center">
+                                        Packages
+                                    </div>
+                                    <div class="card-body" align="center" style="min-height: 100px;">
+                                        <p>Update, Sync, &amp; Manage your git packages.</p>
+                                    </div>
+                                    <div class="card-footer" align="center">
+                                        <a href="/app/packages" class="btn btn-secondary-outline btn-round">Manage
+                                            Packages</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         @foreach($settingsGroups as $key => $value)
                             @if($key !== '' && $key !== null)
                                 <div class="col-md-4" style="display:inline-block !important;">

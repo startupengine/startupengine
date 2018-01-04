@@ -47,30 +47,23 @@
                    href="/app/content"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Content</a>
             </li>
         @endif
-        @if(\Auth::user()->hasPermissionTo('browse settings'))
-            <li class="nav-item">
-                <a class="btn btn-secondary-outline btn-block btn-round"
-                   style="text-align: left;border-color:#eee !important;"
-                   href="/app/design"><i class="now-ui-icons objects_diamond"></i>&nbsp; Design</a>
-            </li>
-        @endif
         <?php /*
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round" style="text-align: left;border-color:#eee !important;" href="/app/media"><i class="now-ui-icons design_image"></i>&nbsp; Media</a>
         </li>
         */ ?>
-        @if(\Auth::user()->hasPermissionTo('browse packages'))
-            <li class="nav-item">
-                <a class="btn btn-secondary-outline btn-block btn-round"
-                   style="text-align: left;border-color:#eee !important;"
-                   href="/app/packages"><i class="now-ui-icons design_app"></i>&nbsp; Packages</a>
-            </li>
-        @endif
         @if(\Auth::user()->hasPermissionTo('view analytics'))
             <li class="nav-item">
                 <a class="btn btn-secondary-outline btn-block btn-round"
                    style="text-align: left;border-color:#eee !important;"
                    href="/app/analytics"><i class="now-ui-icons business_chart-bar-32"></i>&nbsp; Analytics</a>
+            </li>
+        @endif
+        @if(\Auth::user()->hasPermissionTo('browse settings'))
+            <li class="nav-item">
+                <a class="btn btn-secondary-outline btn-block btn-round"
+                   style="text-align: left;border-color:#eee !important;"
+                   href="/app/design"><i class="now-ui-icons objects_diamond"></i>&nbsp; UI / Design</a>
             </li>
         @endif
         @if(\Auth::user()->hasPermissionTo('browse settings'))

@@ -21,38 +21,39 @@
                 {{ csrf_field() }}
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="settingDisplayName">Display Name</label>
-                        <input value="{{$setting->display_name}}" type="text" class="form-control"
-                               id="display_name" aria-describedby="settingDisplayName"
-                               placeholder="What should this setting be called?" name="display_name">
-                    </div>
-                    <div class="form-group">
                         <label for="settingKey">Key</label>
                         <input @if(isset($setting->key)) disabled @endif value="{{$setting->key}}"
                                type="text" class="form-control" id="key" aria-describedby="settingKey"
                                placeholder="site.main_color" name="key">
                     </div>
+                    <div class="form-group">
+                        <label for="settingDisplayName">Display Name</label>
+                        <input value="{{$setting->display_name}}" type="text" class="form-control"
+                               id="display_name" aria-describedby="settingDisplayName"
+                               placeholder="What should this setting be called?" name="display_name">
+                    </div>
 
                     <div class="form-group">
-                        <label for="settingValue">Value</label>
-                        @if($setting->type == "text")
-                            <input value="{{$setting->value}}" type="text" class="form-control" id="value"
-                                   aria-describedby="settingValue" placeholder="Value goes here"
-                                   name="value">
-                        @endif
-                        @if($setting->type == "textarea")
-                            <textarea class="form-control" id="value" aria-describedby="settingValue"
-                                      placeholder="Value goes here"
-                                      name="value">{{$setting->value}}</textarea>
-
-                            <script>
-                                var simplemde = new SimpleMDE({
-                                    element: document.getElementById("value"),
-                                    status: false,
-                                    toolbar: false
-                                });
-                            </script>
-                        @endif
+                        <label for="settingDisplayName">Type</label>
+                        <select class="custom-select" id="type" name="type"
+                                 style="width:100%;">
+                            <option value="text" <?php if ($setting->type == "text") {
+                                echo "selected";
+                            } ?> >Text
+                            </option>
+                            <option value="textarea" <?php if ($setting->type == "textarea") {
+                                echo "selected";
+                            } ?> >Textarea
+                            </option>
+                            <option value="richtext" <?php if ($setting->type == "richtext") {
+                                echo "selected";
+                            } ?> >Rich Text
+                            </option>
+                            <option value="code" <?php if ($setting->type == "code") {
+                                echo "selected";
+                            } ?> >Code
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -69,6 +70,29 @@
                             </option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="settingValue">Value</label>
+                        @if($setting->type == "text")
+                            <input value="{{$setting->value}}" type="text" class="form-control" id="value"
+                                   aria-describedby="settingValue" placeholder="Value goes here"
+                                   name="value">
+                        @endif
+                        @if($setting->type == "textarea" OR $setting->type == "richtext" OR $setting->type == "code")
+                            <textarea class="form-control" id="value" aria-describedby="settingValue"
+                                      placeholder="Value goes here"
+                                      name="value">{{$setting->value}}</textarea>
+
+                            <script>
+                                var simplemde = new SimpleMDE({
+                                    element: document.getElementById("value"),
+                                    status: false,
+                                    toolbar: false
+                                });
+                            </script>
+                        @endif
+                    </div>
+
                 </div>
                 <div class="col-md-12">
                     <input type="hidden" name="id" id="id" value="{{$setting->id}}" ?>

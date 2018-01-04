@@ -155,6 +155,12 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo('add api clients');
         $role->givePermissionTo('delete api clients');
 
+        $role->givePermissionTo('browse roles');
+        $role->givePermissionTo('read roles');
+        $role->givePermissionTo('edit roles');
+        $role->givePermissionTo('add roles');
+        $role->givePermissionTo('delete roles');
+
         //Editors
         $role = Role::where('name', '=', 'editor')->first();
 
