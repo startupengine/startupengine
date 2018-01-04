@@ -84,7 +84,7 @@
                                                         type="checkbox"
                                                         aria-describedby="{{$key}}"
                                                         name="{{$fieldname}}"
-                                                        @if($input == true) checked="" @endif />
+                                                        @if($role->hasPermissionTo($item->name)) checked="" @endif />
                                                 <label for="{{$fieldname}}">
                                                     {{ ucwords(str_replace('_', ' ', $item->name )) }}<br>
                                                 </label>

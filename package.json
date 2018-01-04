@@ -21,6 +21,7 @@
     "dependencies": {
         "gulp": "^3.9.1",
         "hiraku": "^1.0.5",
+        "marked": "^0.3.9",
         "mysqldump": "^1.4.2",
         "slideout": "^1.0.1",
         "vue-quill-editor": "^2.3.3",

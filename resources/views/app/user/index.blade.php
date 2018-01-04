@@ -36,6 +36,7 @@
                     <thead class="hiddenOnMobile">
                     <tr>
                         <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                        <th scope="col" class="hiddenOnMobile updated_at_column">Status</th>
                         <th scope="col">User</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -46,6 +47,10 @@
                             <td scope="col" class="hiddenOnMobile updated_at_column"><span
                                         class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->updated_at))->diffForHumans() }}</span>
                             </td>
+                            <td class="hiddenOnMobile status_column"><span
+                                        class="badge badge-status<?php if ($user->status !== "ACTIVE") {
+                                            echo "-disabled";
+                                        } ?>">{{ $user->status }}</span></td>
                             <td>{{ $user->name }}<br><span style="opacity:0.5;">{{ $user->email }}</span></td>
                             <td align="right">
                                 <a href="/app/view/user/{{$user->id}}"
