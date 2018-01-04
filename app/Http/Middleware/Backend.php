@@ -37,7 +37,7 @@ class Backend
         //If the user IS logged in
         else {
 
-            if($user->status !== 'ACTIVE') {
+            if($user->status !== 'ACTIVE' OR $user->deleted_at !== null) {
                 return abort(404);
             }
 
