@@ -143,7 +143,6 @@ class SyncGit extends Command
                             $page->body = null;
                             $page->excerpt = null;
                             $page->status = 'INACTIVE';
-                            $page->author_id = 0;
                             $page->save();
                         }
                     }

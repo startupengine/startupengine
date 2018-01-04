@@ -56,9 +56,6 @@ class PageController
         } else {
             $page = new \App\Page;
         }
-        if ($page->author_id == null) {
-            $page->author_id = \Auth::user()->id;
-        }
         $page->title = $request->input('title');
         $page->slug = $request->input('slug');
         $page->excerpt = $request->input('excerpt');
@@ -89,11 +86,6 @@ class PageController
         }
         if ($request->input('publish') == "on") {
             $page->status = "PUBLISHED";
-        }
-        if ($request->input('show_footer') == "on") {
-            $page->show_footer = true;
-        } else {
-            $page->show_footer = false;
         }
         $page->save();
         return redirect('/app/pages');
