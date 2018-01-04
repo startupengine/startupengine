@@ -513,6 +513,12 @@
     #admin-sidebar {
         /*display:none;*/
     }
+
+    .btn-label {
+        min-width:60px;
+        display:inline-block;
+        text-align: center;
+    }
 </style>
 
 <!-- Core CSS Files -->

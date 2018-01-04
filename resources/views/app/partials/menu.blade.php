@@ -34,30 +34,30 @@
                 <?php //dd(\Auth::user()->roles()); ?>
                 <?php if(\Auth::user() !== null) {  ?>
                 <li class="nav-item">
-                    <a href="/" class="nav-link hiddenOnDesktop"><i class="now-ui-icons arrows-1_share-66"></i> Site</a>
+                    <a href="/" class="nav-link hiddenOnDesktop"><i class="now-ui-icons arrows-1_share-66"></i> <span class="btn-label">Site</span></a>
                 </li>
+                @if(\Auth::user()->hasPermissionTo('browse users'))
+                    <li class="nav-item hiddenOnDesktop">
+                        <a class="nav-link" style="text-align: left;border-color:#eee !important;"
+                           href="/app/users"><i class="now-ui-icons users_single-02"></i>&nbsp; <span class="btn-label">Users</span></a>
+                    </li>
+                @endif
                 @if(\Auth::user()->hasPermissionTo('browse pages'))
                 <li class="nav-item">
                     <a class="nav-link hiddenOnDesktop" style="text-align: left;border-color:#eee !important;"
-                       href="/app/pages"><i class="now-ui-icons files_paper"></i>&nbsp; Pages</a>
+                       href="/app/pages"><i class="now-ui-icons files_paper"></i>&nbsp; <span class="btn-label">Pages</span></a>
                 </li>
                 @endif
                 @if(\Auth::user()->hasPermissionTo('browse posts'))
                 <li class="nav-item">
                     <a class="nav-link hiddenOnDesktop" style="text-align: left;border-color:#eee !important;"
-                       href="/app/content"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; Content</a>
-                </li>
-                @endif
-                @if(\Auth::user()->hasPermissionTo('browse users'))
-                <li class="nav-item hiddenOnDesktop">
-                    <a class="nav-link" style="text-align: left;border-color:#eee !important;"
-                       href="/app/users"><i class="now-ui-icons users_single-02"></i>&nbsp; Users</a>
+                       href="/app/content"><i class="now-ui-icons design_bullet-list-67"></i>&nbsp; <span class="btn-label">Content</span></a>
                 </li>
                 @endif
                 @if(\Auth::user()->hasPermissionTo('browse settings'))
                 <li class="nav-item hiddenOnDesktop">
                     <a class="nav-link" style="text-align: left;border-color:#eee !important;"
-                       href="/app/settings"><i class="now-ui-icons ui-1_settings-gear-63"></i>&nbsp; Settings</a>
+                       href="/app/settings"><i class="now-ui-icons ui-1_settings-gear-63"></i>&nbsp; <span class="btn-label">Settings</span></a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -81,7 +81,7 @@
                 </li>
                 <li class="nav-item hiddenOnDesktop">
                     <a class="nav-link" style="text-align: left;border-color:#eee !important;"
-                       href="/logout"><i class="now-ui-icons ui-1_lock-circle-open"></i>&nbsp; Logout</a>
+                       href="/logout"><i class="now-ui-icons ui-1_lock-circle-open"></i>&nbsp; <span class="btn-label">Logout</span></a>
                 </li>
                 <?php } ?>
             </ul>

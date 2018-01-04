@@ -15,7 +15,7 @@ use Caffeinated\Modules\Facades\Module;
 
 Auth::routes();
 
-Route::group(['middleware' => ['permission:view backend']], function () {
+Route::group(['middleware' => ['permission:view backend', 'backend']], function () {
 
     //App
     Route::get('/app', 'AppController@index');

@@ -77,6 +77,7 @@
                         <input class="form-control" @if($disabled == 'disabled') disabled @endif type="text"
                                value="{{ $user->email }}" name="email"/>
                     </div>
+                    @if($disabled !== 'disabled')
                     <div class="form-group">
                         <label>Password</label>
                         <input class="form-control" @if($disabled == 'disabled') disabled @endif type="password"
@@ -87,6 +88,7 @@
                         <input class="form-control" @if($disabled == 'disabled') disabled @endif type="password"
                                value="" name="confirm_password"/>
                     </div>
+                    @endif
                 </div>
                 <div align="right" style="margin-bottom:35px;">
                     @if(!$disabled) <input type="hidden" name="user_id" value="{{$user->id}}"/>@endif

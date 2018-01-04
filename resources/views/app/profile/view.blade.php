@@ -32,10 +32,6 @@
                     <label>E-mail</label>
                     <input class="form-control" disabled type="text" value="{{ $user->email }}"/>
                 </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" disabled type="text" value="**********"/>
-                </div>
             </div>
             <div align="right" style="margin-bottom:35px;">
                 <a href="/app/edit/profile" class="btn btn-secondary-outline">Edit</a>

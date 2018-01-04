@@ -36,7 +36,11 @@ class Backend
 
         //If the user IS logged in
         else {
-            
+
+            if($user->status !== 'ACTIVE') {
+                return abort(404);
+            }
+
             //And they have been assigned a staff role
             if ($user->hasPermissionTo('view backend')) {
                 //continue...

@@ -15,7 +15,11 @@ class AddStatusToPackages extends Migration
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->text('description')->nullable();
+        });
+        Schema::table('packages', function (Blueprint $table) {
             $table->decimal('version')->nullable();
+        });
+        Schema::table('packages', function (Blueprint $table) {
             $table->json('json')->nullable();
         });
     }

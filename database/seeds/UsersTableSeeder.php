@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Admin',
                 'email' => 'admin@example.com',
+                'status' => 'ACTIVE',
                 'password' => bcrypt('password'),
                 'remember_token' => str_random(60),
             ]);
@@ -33,7 +34,7 @@ class UsersTableSeeder extends Seeder
 
             //Regular user
             $user = User::create([
-                'name' => 'Kevin Mitnick',
+                'name' => 'Kevin Flynn',
                 'email' => 'user@example.com',
                 'password' => bcrypt('password'),
                 'remember_token' => str_random(60),

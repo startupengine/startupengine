@@ -14,7 +14,8 @@ class MakeAuthorIdNullable extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->integer('author_id')->nullable()->default(null)->change();
+            //$table->integer('author_id')->nullable()->default(null)->change();
+            $table->dropColumn('author_id');
         });
     }
 

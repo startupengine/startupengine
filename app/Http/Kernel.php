@@ -39,11 +39,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        /*
+
         'backend' => [
             \App\Http\Middleware\Backend::class
         ],
-        */
+
 
         'api' => [
             'throttle:60,1',
