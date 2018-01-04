@@ -27,7 +27,7 @@ class UserController extends Controller
     public function viewUser($id)
     {
         $user = User::where('id', '=', $id)->firstOrFail();
-        return view('app.profile.edit')->with('user', $user)->with('disabled', 'disabled');
+        return view('app.profile.view')->with('user', $user)->with('disabled', 'disabled');
     }
 
     public function editUser($id)
