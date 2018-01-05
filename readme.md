@@ -35,7 +35,7 @@ A beautiful & open-source platform for launching startups.
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/permissions.png" width="400" /><br>
 
 ### API Management
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/api-manager.png" width="400" /><br>
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/api-manager.png?refresh" width="400" /><br>
 
 # Demo
 
