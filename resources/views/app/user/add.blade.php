@@ -30,6 +30,8 @@
                                        name="name">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="postSlug">E-Mail</label>
@@ -37,20 +39,8 @@
                                        aria-describedby="postSlug" placeholder="example@example.com" name="email">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Role</label>
-                                <select required class="custom-select" id="role_id" name="role_id"
-                                        aria-describedby="postStatus" style="width:100%;">
-                                    <?php $roles = \App\Role::all(); ?>
-                                    <?php $user = new \App\User(); ?>
-                                    <option disabled selected>Select a role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{$role->id}}">{{ucfirst($role->name)}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="postStatus">Status</label><br>
@@ -60,11 +50,11 @@
                                     <option selected value="INACTIVE">Inactive</option>
                                 </select>
                             </div>
+                            <div align="right" style="margin-bottom:35px;">
+                                <button type="submit" class="btn btn-secondary-outline ">Save</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div align="right" style="margin-bottom:35px;">
-                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
                     </div>
                 </form>
             </div>

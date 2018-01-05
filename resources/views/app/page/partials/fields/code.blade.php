@@ -35,8 +35,5 @@ if ($page->json !== null) {
             status: false,
             toolbar: false
         });
-        @if($input !== null)
-        {{$variablename}}.placeholder('Click to edit');
-        @endif
     </script>
 </div>

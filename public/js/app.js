@@ -1408,7 +1408,7 @@ Vue.component('passport-authorized-clients', __webpack_require__(47));
 Vue.component('passport-personal-access-tokens', __webpack_require__(52));
 
 var app = new Vue({
-    el: '#vue-app'
+    el: '#passport'
 });
 
 /***/ }),

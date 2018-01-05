@@ -32,7 +32,7 @@
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">API Settings</h5>
             </div>
-            <div class="col-md-12" id="vue-app">
+            <div class="col-md-12" id="passport">
 
                 <!-- API Authentication -->
                 <passport-clients></passport-clients>
@@ -42,5 +42,5 @@
             </div>
         </div>
     </main>
-
+    
 @endsection
