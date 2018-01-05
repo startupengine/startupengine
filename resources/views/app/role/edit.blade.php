@@ -68,7 +68,7 @@
                     </div>
                     <div>
                         <label style="margin-bottom:10px;">Permissions</label>
-                        @foreach($permissions->groupBy('guard_name') as $key => $value)
+                        @foreach($permissions as $key => $value)
                             @if($key !== null && $key !== '')
                                 <div class="card">
                                     <div class="card-header" align="left"
@@ -84,7 +84,7 @@
                                                         type="checkbox"
                                                         aria-describedby="{{$key}}"
                                                         name="{{$fieldname}}"
-                                                        @if($role->hasPermissionTo($item->name)) checked="" @endif />
+                                                        @if($role->hasPermissionTo($item->name, $key)) checked="" @endif />
                                                 <label for="{{$fieldname}}">
                                                     {{ ucwords(str_replace('_', ' ', $item->name )) }}<br>
                                                 </label>

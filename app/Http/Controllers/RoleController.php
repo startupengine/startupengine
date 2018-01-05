@@ -21,7 +21,7 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        $permissions = Permission::all();
+        $permissions = Permission::all()->groupBy('guard_name');
         $role = Role::find($id);
         return view('app.role.edit')->with('role', $role)->with('permissions', $permissions);
     }
