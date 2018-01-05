@@ -16,26 +16,40 @@ A beautiful & open-source platform for launching startups.
 
 # Screenshots
 
+### Landing Page
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/home.png" width="400" /><br>
-       
+
+### Blog
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/blog.png" width="400" /><br>
 
+### Content Editor
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/editor.png" width="400" /><br>
 
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/analytics.png" width="400" /><br>
+### User Management
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/users.png" width="400" /><br>
+
+### Role Management
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/roles.png" width="400" /><br>
+
+### Permission Management
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/permissions.png" width="400" /><br>
+
+### API Management
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/api-manager.png" width="400" /><br>
 
 # Demo
 
-See it in action at http://startupenginedemo.herokuapp.com
+See it in action at https://www.startupengine.io
 
 # Features 
 * [x] 1-Click Install
 * [x] Completely plug-and-play - coding is optional.
 * [x] Completely open-source - you can change and distribute the code.
 * [x] Create pages, blog posts, and documentation, or make your own custom content types.
-* [x] Display your content anywhere using the content API.
-* [x] Define who can see and edit your content with role-based access control.
-* [x] Use the pre-installed Boostrap 4/Vue.js theme, or build your own with the framework of your choice. 
+* [x] Display your content anywhere using the API.
+* [x] Define who can browse/read/edit/add/delete content with role-based access control.
+* [x] Use the pre-installed Boostrap 4 + Vue.js theme, or build your own with the tools of your choice.
+* [x] Developer friendly: Manage users, settings, content, and features from the command line. Version-control everything with the optional git-based workflow.  
 
 ##### Pre-Installed Pages
 * [x] Landing page
@@ -55,7 +69,13 @@ Then run the following commands on your instance via the [Heroku CLI](https://de
 
 `php artisan migrate:refresh --seed --force`
 
+`php artisan passport:install`
+
 `php artisan command:SyncGit reset`
+
+The default user email is **admin@example.com** and the default password is **password**.
+
+Change these after logging in.
 
 # License
 
