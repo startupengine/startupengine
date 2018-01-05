@@ -23,7 +23,7 @@ A beautiful & open-source platform for launching startups.
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/blog.png" width="400" /><br>
 
 ### Content Editor
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/editor.png" width="400" /><br>
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/editor.png?refresh" width="400" /><br>
 
 ### User Management
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/users.png" width="400" /><br>
