@@ -47,6 +47,7 @@ class SyncGit extends Command
 
         $path = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
+        //dd(json_decode(file_get_contents('/resources/views/theme/startup.json')));
 
         //Install Packages
         if (Schema::hasTable('packages')) {
@@ -61,7 +62,8 @@ class SyncGit extends Command
                 exec("git clone $package->url resources/views/theme");
                 $themepath = \Config::get('view.paths')[0] . '/theme';
                 $package->json = file_get_contents($themepath . '/startup.json');
-                $package->description = json_decode(file_get_contents($themepath . '/startup.json'))->description;
+                $contents = json_decode(file_get_contents($themepath . '/startup.json'));
+                $package->description = $contents->description;
                 $package->save();
             }
         }
@@ -105,11 +107,11 @@ class SyncGit extends Command
         if (Schema::hasTable('post_types')) {
             $themepath = \Config::get('view.paths')[0] . '/theme';
             $json = json_decode(file_get_contents($themepath . '/startup.json'));
-            $schemas = $json->content_types;
+            $schemas = $json->content_types->active;
             foreach ($schemas as $schema => $schemaValue) {
-                $schemapath = $themepath . '/templates/' . $schema->slug . '/schema.json';
-                if (file_exists($themepath . '/templates/' . $schema->slug . '/schema.json')) {
-                    $entry = PostType::where('slug', '=', $schema->slug)->first();
+                $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
+                if (file_exists($themepath . '/templates/' . $schema . '/schema.json')) {
+                    $entry = PostType::where('slug', '=', $schema )->first();
                     if ($entry == null OR $mode == 'default') {
                         $entry = new \App\PostType();
                     }
