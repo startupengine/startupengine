@@ -25,6 +25,9 @@ A beautiful & open-source platform for launching startups.
 ### Content Editor
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/editor.png?refresh" width="400" /><br>
 
+### Content Type Editor
+<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/content-type.png" width="400" /><br>
+
 ### User Management
 <img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/users.png" width="400" /><br>
 
