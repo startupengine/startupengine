@@ -12,7 +12,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         if ($request->input('s') !== null) {
-            $roles = \App\Role::where('name', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
+            $roles = \App\Role::where('name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('display_name', 'ILIKE', '%'.$request->input('s').'%')->limit(100)->orderBy('updated_at', 'desc')->get();
         } else {
             $roles = Role::withCount('users')->get();
         }

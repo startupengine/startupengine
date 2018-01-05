@@ -19,7 +19,7 @@
                                 class="now-ui-icons ui-1_simple-add"></i></a></h5>
                 <div class="form-group">
                     <form>
-                        <input type="text" value="" placeholder="Search roles..." class="form-control" name="s" id="s">
+                        <input type="text" value="" placeholder="Search permissions..." class="form-control" name="s" id="s">
                     </form>
                 </div>
 

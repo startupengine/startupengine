@@ -12,7 +12,7 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         if ($request->input('s') !== null) {
-            $permissions = \App\Permission::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
+            $permissions = \App\Permission::where('name', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
         } else {
             $permissions = \App\Permission::limit(100)->orderBy('updated_at', 'desc')->get();
         }
