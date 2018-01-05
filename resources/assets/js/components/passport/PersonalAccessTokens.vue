@@ -18,7 +18,7 @@
                             Personal Access Tokens
                         </span>
 
-                        <a class="btn btn-secondary-outline btn-round btn-sm" data-toggle="modal" data-target="#modal-create-token">
+                        <a class="btn btn-secondary-outline  btn-sm" data-toggle="modal" data-target="#modal-create-token">
                             New Token &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
                         </a>
                     </div>

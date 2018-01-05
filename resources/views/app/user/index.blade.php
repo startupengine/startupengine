@@ -15,20 +15,20 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Users</h5>
+                <h5 style="margin-bottom:25px;">Users <a href="/app/new/user" class="btn btn-secondary-outline pull-right btn-sm">New User &nbsp;<i
+                                class="now-ui-icons ui-1_simple-add"></i></a></h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search users..." class="form-control" name="s" id="s">
                     </form>
                 </div>
 
-                <div align="left">
+                <div align="center">
                     <div class="btn-group">
                         <a href="/app/users" class="btn btn-secondary btn-sm ">Users</a>
-                        <a href="/app/roles" class="btn btn-secondary-outline btn-sm ">Roles</a>
+                        <a href="/app/roles" class="btn btn-secondary-outline btn-sm "  style="border-left:none !important;">Roles</a>
+                        <a href="/app/permissions" class="btn btn-secondary-outline btn-sm " style="border-left:none !important;">Permissions</a>
                     </div>
-                    <a href="/app/new/user" class="btn btn-secondary-outline btn-round pull-right btn-sm">New User &nbsp;<i
-                                class="now-ui-icons ui-1_simple-add"></i></a>
                 </div>
 
 

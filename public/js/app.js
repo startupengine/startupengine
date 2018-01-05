@@ -44157,7 +44157,7 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "btn btn-secondary-outline btn-round btn-sm",
+              staticClass: "btn btn-secondary-outline btn-sm",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-client"
@@ -45287,7 +45287,7 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "btn btn-secondary-outline btn-round btn-sm",
+              staticClass: "btn btn-secondary-outline  btn-sm",
               attrs: {
                 "data-toggle": "modal",
                 "data-target": "#modal-create-token"

@@ -64,6 +64,13 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/edit/role/{id}', 'RoleController@edit');
     });
 
+    //Permissions
+    Route::group(['middleware' => ['permission:edit permissions']], function () {
+        Route::get('/app/permissions', 'PermissionController@index');
+        Route::get('/app/new/permission', 'PermissionController@addPermission');
+        Route::post('/app/new/permission', 'PermissionController@savePermission');
+    });
+
     //Content
     Route::group(['middleware' => ['permission:browse posts|browse own posts']], function () {
         Route::get('/app/content', 'PostController@index');

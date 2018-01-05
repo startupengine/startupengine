@@ -14,7 +14,7 @@ class RoleController extends Controller
         if ($request->input('s') !== null) {
             $roles = \App\Role::where('name', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
         } else {
-            $roles = \App\Role::limit(100)->get();
+            $roles = Role::withCount('users')->get();
         }
         return view('app.role.index')->with('roles', $roles);
     }

@@ -15,7 +15,7 @@
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Roles  <a href="/app/new/role" class="btn btn-secondary-outline btn-sm pull-right">New Role &nbsp;<i
+                <h5 style="margin-bottom:25px;">Permissions  <a href="/app/new/permission" class="btn btn-secondary-outline btn-sm pull-right">New Permission &nbsp;<i
                                 class="now-ui-icons ui-1_simple-add"></i></a></h5>
                 <div class="form-group">
                     <form>
@@ -26,8 +26,8 @@
                 <div align="center">
                     <div class="btn-group">
                         <a href="/app/users" class="btn btn-secondary-outline btn-sm ">Users</a>
-                        <a href="/app/roles" class="btn btn-secondary btn-sm"  style="border-left:none !important;">Roles</a>
-                        <a href="/app/permissions" class="btn btn-secondary-outline btn-sm " style="border-left:none !important;">Permissions</a>
+                        <a href="/app/roles" class="btn btn-secondary-outline btn-sm"  style="border-left:none !important;">Roles</a>
+                        <a href="/app/permissions" class="btn btn-secondary btn-sm " style="border-left:none !important;">Permissions</a>
                     </div>
 
                 </div>
@@ -37,27 +37,20 @@
                     <thead class="hiddenOnMobile">
                     <tr>
                         <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
-                        <th scope="col">Role</th>
+                        <th scope="col">Permission</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($roles as $role)
+                    @foreach($permissions as $permission)
                         <tr>
                             <td scope="col" class="hiddenOnMobile updated_at_column"><span
-                                        class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($role->updated_at))->diffForHumans() }}</span>
+                                        class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($permission->updated_at))->diffForHumans() }}</span>
                             </td>
-                            <td>{{ $role->display_name }}<br><span style="opacity:0.5;">{{ $role->users_count }} Users</span></td>
+                            <td>{{ ucwords($permission->name) }}<br><span style="opacity:0.5;">{{$permission->guard_name}}</span></td>
                             <td align="right">
-                                <a href="/app/edit/role/{{$role->id}}"
-                                   class="btn btn-sm btn-secondary-outline hiddenOnDesktop">Edit</a>
-                                <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
-                                    <a href="/app/edit/role/{{ $role->id }}" class="btn btn-sm btn-secondary-outline">Edit</a>
-                                    <a href="/app/delete/role/{{ $role->id }}" class="btn btn-sm btn-secondary-outline"
-                                       style="border-left:none !important;" data-toggle="modal"
-                                       data-target="#deleteUser"
-                                       onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
-                                </div>
+
+
                             </td>
                         </tr>
                     @endforeach

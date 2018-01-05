@@ -240,8 +240,12 @@
         min-height: 100%;
     }
 
+    input.form-control {
+        z-index:0 !important;
+    }
+
     #adminNav {
-        background: linear-gradient(90deg, rgb(83, 41, 214) 50%, #2960ff) !important;
+        background: linear-gradient(45deg, #5719dc, #4286ff) !important;
         font-weight: 600 !important;
         border-bottom: 0px solid #eaeaea;
         color: #fff;
@@ -394,6 +398,12 @@
         }
     }
 
+    .dropdown-menu {
+        z-index: 999999999999999999999999999999 !important;
+        background:#fff !important;
+        transition: transform 0s !important;
+    }
+
     .badge-status {
         background: #555 !important;
         border: 1px solid #555;
@@ -519,6 +529,12 @@
         display:inline-block;
         text-align: center;
     }
+
+    .btn-group .btn-secondary-outline:hover {
+        background:#f7f9fd !important;
+        color:#2023c5 !important;
+    }
+
 </style>
 
 <!-- Core CSS Files -->

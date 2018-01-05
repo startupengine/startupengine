@@ -15,19 +15,11 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Content</h5>
-                <div class="form-group">
-                    <form>
-                        <input type="text" value="" placeholder="Search content..." class="form-control" name="s"
-                               id="s">
-                    </form>
-                </div>
-                <div align="right">
-                    <button type="button" class="btn btn-round btn-secondary-outline btn-sm " data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                <h5 style="margin-bottom:25px;">Content <button type="button" class="btn btn-secondary-outline btn-sm pull-right" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
                         New Item <i class="now-ui-icons ui-1_simple-add"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" align="center">
+                    <div class="dropdown-menu dropdown-menu-right" align="center" style="opacity:1;z-index:999 !important;background:#fff;">
                         @if($postTypes->isEmpty())
                             <a href="#" class="dropdown-item">No content types</a>
                         @endif
@@ -36,7 +28,12 @@
                            class="dropdown-item"> <i class="now-ui-icons ui-1_simple-add"></i> &nbsp;
                             New {{$postType->title}}</a>
                         <?php } ?>
-                    </div>
+                    </div></h5>
+                <div class="form-group">
+                    <form>
+                        <input type="text" value="" placeholder="Search content..." class="form-control" name="s"
+                               id="s">
+                    </form>
                 </div>
                 <table class="table clickable">
                     <thead class="hiddenOnMobile">

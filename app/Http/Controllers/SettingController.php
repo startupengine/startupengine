@@ -30,7 +30,7 @@ class SettingController extends Controller
     public function addSetting(Request $request)
     {
         $setting = new Setting();
-        return view('app.setting.edit')->with('setting', $setting);
+        return view('app.setting.add')->with('setting', $setting);
     }
 
     public function editSetting(Request $request, $id)

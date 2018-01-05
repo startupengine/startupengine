@@ -28,15 +28,11 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Pages</h5>
+                <h5 style="margin-bottom:25px;">Pages <a href="/app/new/page" class="btn btn-secondary-outline btn-sm pull-right">New Page &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search pages..." class="form-control" name="s" id="s">
                     </form>
-                </div>
-                <div align="right">
-                    <a href="/app/new/page" class="btn btn-secondary-outline btn-round btn-sm">New Page &nbsp;&nbsp;<i
-                                class="now-ui-icons ui-1_simple-add"></i></a>
                 </div>
                 <table class="table clickable">
                     <thead class="hiddenOnMobile">

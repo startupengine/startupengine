@@ -36,7 +36,8 @@
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;"><?php if ($request->input('group') !== null) {
                         echo ucfirst($request->input('group')) . ' ';
-                    } ?>Settings</h5>
+                    } ?>Settings <a href="/app/new/setting" class="btn btn-secondary-outline btn-sm pull-right">New Setting
+                        &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></h5>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
@@ -114,12 +115,6 @@
                                 </div>
                             @endif
                         @endforeach
-                    </div>
-                @endif
-                @if($request->input('s') !== null or $request->input('group') !== null)
-                    <div align="right">
-                        <a href="/app/new/setting" class="btn btn-secondary-outline btn-round btn-sm">New Setting
-                            &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                     </div>
                 @endif
                 @if($request->input('s') !== null or $request->input('group') !== null)

@@ -15,7 +15,7 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-6">
-                <h5>Edit Setting</h5>
+                <h5>Add Setting</h5>
             </div>
             <form action="/app/edit/setting" method="post">
                 {{ csrf_field() }}
@@ -55,7 +55,6 @@
                             </option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="settingStatus">Status</label><br>
                         <select class="custom-select" id="status" name="status"
@@ -70,28 +69,6 @@
                             </option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        @if($setting->type == "text")
-                            <input value="{{$setting->value}}" type="text" class="form-control" id="value"
-                                   aria-describedby="settingValue" placeholder="Value goes here"
-                                   name="value">
-                        @endif
-                        @if($setting->type == "textarea" OR $setting->type == "richtext" OR $setting->type == "code")
-                            <textarea class="form-control" id="value" aria-describedby="settingValue"
-                                      placeholder="Value goes here"
-                                      name="value">{{$setting->value}}</textarea>
-
-                            <script>
-                                var simplemde = new SimpleMDE({
-                                    element: document.getElementById("value"),
-                                    status: false,
-                                    toolbar: false
-                                });
-                            </script>
-                        @endif
-                    </div>
-
                 </div>
                 <div class="col-md-12">
                     <input type="hidden" name="id" id="id" value="{{$setting->id}}" ?>
