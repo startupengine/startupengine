@@ -48,8 +48,9 @@ See it in action at https://www.startupengine.io
 * [x] Create pages, blog posts, and documentation, or make your own custom content types.
 * [x] Display your content anywhere using the API.
 * [x] Define who can browse/read/edit/add/delete content with role-based access control.
+* [x] Manage users, settings, content, features, & more from the command line. 
+* [x] Version-control everything with the optional git-based workflow.
 * [x] Use the pre-installed Boostrap 4 + Vue.js theme, or build your own with the tools of your choice.
-* [x] Developer friendly: Manage users, settings, content, and features from the command line. Version-control everything with the optional git-based workflow.  
 
 ##### Pre-Installed Pages
 * [x] Landing page
