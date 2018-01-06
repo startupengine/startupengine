@@ -12,6 +12,7 @@ A beautiful & open-source platform for launching startups.
 - [Demo](#demo)
 - [Features](#features)   
 - [Deploying](#deploying)
+- [Support](#support)
 - [License](#license)
 
 # Screenshots
