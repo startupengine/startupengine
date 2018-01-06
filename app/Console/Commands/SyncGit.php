@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use App\PostType;
+use Illuminate\Support\Facades\File;
 
 class SyncGit extends Command
 {
@@ -46,6 +47,8 @@ class SyncGit extends Command
         $mode = $this->argument('mode');
 
         $path = \Config::get('view.paths')[0] . '/theme';
+        $tempdir = "resources/temp";
+        $themepath = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
         //dd(json_decode(file_get_contents('/resources/views/theme/startup.json')));
 
@@ -59,8 +62,11 @@ class SyncGit extends Command
                 $packages = Package::all();
             }
             foreach ($packages as $package) {
-                exec("git clone $package->url resources/views/theme");
-                $themepath = \Config::get('view.paths')[0] . '/theme';
+                File::deleteDirectory($themepath . "/.git");
+                exec("git clone $package->url $tempdir");
+                File::copyDirectory($tempdir, $themepath);
+                File::deleteDirectory($tempdir);
+                File::deleteDirectory($themepath . "/.git");
                 $package->json = file_get_contents($themepath . '/startup.json');
                 $contents = json_decode(file_get_contents($themepath . '/startup.json'));
                 $package->description = $contents->description;
