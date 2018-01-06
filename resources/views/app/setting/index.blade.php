@@ -97,6 +97,9 @@
                                 <div class="col-md-4" style="display:inline-block !important;">
                                     <div class="card" style="margin-bottom:25px;">
                                         <div class="card-header" align="center">
+
+
+                                            {!! setting(strtolower($key).'.icon') !!}
                                             {{ ucfirst($key) }}
                                         </div>
                                         <div class="card-body" align="center" style="min-height: 100px;">
