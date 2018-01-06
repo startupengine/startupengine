@@ -74,6 +74,6 @@ class SettingController extends Controller
         }
 
         $setting->save();
-        return redirect('/app/settings');
+        return redirect("/app/edit/setting/$setting->id");
     }
 }
