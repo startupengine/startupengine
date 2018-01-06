@@ -32,9 +32,9 @@
                 <div class="form-group">
                     <label>Image</label><br>
                     @if($user->avatar == 'users/default.png' OR $user->avatar == null)
-                        <img src="/images/avatar.png" id="avatar"/>
+                        <div style="width:50px; height:50px; background:url('/images/avatar.png');background-size:cover;background-position:center center;" id="avatar"></div></br>
                     @else
-                        <img src="{{$user->avatar}}" id="avatar"/>
+                        <div style="width:50px; height:50px; background:url('{{ $user->avatar }}');background-size:cover;background-position:center center;" id="avatar"></div></br>
                     @endif
                 </div>
                 <div class="form-group">

@@ -16,7 +16,7 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5>@if($role->id == null) Add @endif @if($role->id !== null) Edit @endif Role</h5>
-                <form action="/app/edit/page" method="post">
+                <form action="/app/edit/role" method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-3">
@@ -55,14 +55,13 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="postStatus">Publish Date</label><br>
+                                <label for="postStatus">Created </label><br>
                                 <?php if ($role->published_at == null) {
                                     $date = \Carbon\Carbon::now()->format("m/d/Y");
                                 } else {
                                     $date = $role->published_at->format("m/d/Y");
                                 } ?>
-                                <input autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}"
-                                       name="published_at">
+                                <input disabled autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}"/>
                             </div>
                         </div>
                     </div>
@@ -80,10 +79,10 @@
                                             <div class="checkbox">
                                                 <?php $fieldname = $item->name; $input = null;?>
                                                 <input
-                                                        id="{{$fieldname}}"
+                                                        id="permissions[{{$fieldname}}]"
                                                         type="checkbox"
                                                         aria-describedby="{{$key}}"
-                                                        name="{{$fieldname}}"
+                                                        name="permissions[{{$fieldname}}]"
                                                         @if($role->hasPermissionTo($item->name, $key)) checked="" @endif />
                                                 <label for="{{$fieldname}}">
                                                     {{ ucwords(str_replace('_', ' ', $item->name )) }}<br>

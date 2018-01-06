@@ -25,4 +25,16 @@ class RoleController extends Controller
         $role = Role::find($id);
         return view('app.role.edit')->with('role', $role)->with('permissions', $permissions);
     }
+
+    public function saveRole(Request $request) {
+        $role = Role::where('id', '=', $request->input('id'))->firstOrFail();
+
+        foreach($request->input('permissions') as $permission => $value) {
+            if($value == "on"){
+                $permissions[] = $permission;
+            }
+        }
+        $role->syncPermissions($permissions);
+        return redirect('/app/roles');
+    }
 }

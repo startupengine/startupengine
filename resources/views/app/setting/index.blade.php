@@ -51,7 +51,7 @@
                         <div class="col-md-4" style="display:inline-block !important;">
                             <div class="card" style="margin-bottom:25px;">
                                 <div class="card-header" align="center">
-                                    Content Types
+                                    <i class="now-ui-icons design_bullet-list-67"></i> &nbsp;Content Types
                                 </div>
                                 <div class="card-body" align="center" style="min-height: 100px;">
                                     <p>Add or edit content types.</p>
@@ -65,7 +65,7 @@
                         <div class="col-md-4" style="display:inline-block !important;">
                             <div class="card" style="margin-bottom:25px;">
                                 <div class="card-header" align="center">
-                                    API Settings
+                                    <i class="now-ui-icons arrows-1_refresh-69"></i> &nbsp;API Settings
                                 </div>
                                 <div class="card-body" align="center" style="min-height: 100px;">
                                     <p>Manage clients & personal access tokens.</p>
@@ -80,7 +80,7 @@
                             <div class="col-md-4" style="display:inline-block !important;">
                                 <div class="card" style="margin-bottom:25px;">
                                     <div class="card-header" align="center">
-                                        Packages
+                                        <i class="now-ui-icons shopping_box"></i> &nbsp;Packages
                                     </div>
                                     <div class="card-body" align="center" style="min-height: 100px;">
                                         <p>Update, Sync, &amp; Manage your git packages.</p>

@@ -8,6 +8,7 @@ use App\PostType;
 
 class SchemaController extends Controller
 {
+
     public function index(Request $request)
     {
         if ($request->input('s') !== null) {
@@ -18,23 +19,29 @@ class SchemaController extends Controller
         return view('app.schema.index')->with('postTypes', $postTypes)->with('request', $request);
     }
 
+    public function addSchema()
+    {
+        return view('app.schema.add');
+    }
+
     public function editSchema(Request $request, $slug)
     {
         $postType = PostType::where('slug', '=', $slug)->first();
         return view('app.schema.edit')->with('postType', $postType)->with('request', $request);
     }
 
-    public function saveSchema(Request $request, $slug)
+    public function saveSchema(Request $request)
     {
-        $postType = PostType::where('slug', '=', $slug)->first();
-        if ($postType !== null) {
-            $postType->title = $request->input('title');
-            $postType->slug = $request->input('slug');
-            if (json_decode($request->input('json'))) {
-                $postType->json = json_encode(json_decode($request->input('json')));
-            }
-            $postType->save();
-            return redirect('/app/schema');
+        $postType = PostType::where('slug', '=', $request->input('slug'))->first();
+        if ($postType == null) {
+            $postType = new PostType();
         }
+        $postType->title = $request->input('title');
+        $postType->slug = $request->input('slug');
+        if (json_decode($request->input('json'))) {
+            $postType->json = json_encode(json_decode($request->input('json')));
+        }
+        $postType->save();
+        return redirect('/app/schema');
     }
 }

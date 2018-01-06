@@ -30,5 +30,6 @@
     </div>
     @yield('modals')
     </div>
+
 </body>
 </html>

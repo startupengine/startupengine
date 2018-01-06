@@ -21,18 +21,17 @@
                 {{ csrf_field() }}
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="settingKey">Key</label>
-                        <input @if(isset($setting->key)) disabled @endif value="{{$setting->key}}"
-                               type="text" class="form-control" id="key" aria-describedby="settingKey"
-                               placeholder="site.main_color" name="key">
-                    </div>
-                    <div class="form-group">
-                        <label for="settingDisplayName">Display Name</label>
+                        <label for="settingDisplayName">Name</label>
                         <input value="{{$setting->display_name}}" type="text" class="form-control"
                                id="display_name" aria-describedby="settingDisplayName"
                                placeholder="What should this setting be called?" name="display_name">
                     </div>
-
+                    <div class="form-group">
+                        <label for="settingKey">Key</label>
+                        <input  value="{{$setting->key}}"
+                                type="text" class="form-control" id="key" aria-describedby="settingKey"
+                                placeholder="site.main_color" name="key">
+                    </div>
                     <div class="form-group">
                         <label for="settingDisplayName">Type</label>
                         <select class="custom-select" id="type" name="type"
@@ -72,6 +71,7 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="settingStatus">Value</label><br>
                         @if($setting->type == "text")
                             <input value="{{$setting->value}}" type="text" class="form-control" id="value"
                                    aria-describedby="settingValue" placeholder="Value goes here"

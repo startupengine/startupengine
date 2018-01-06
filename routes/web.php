@@ -27,6 +27,15 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::post('/app/edit/profile', 'ProfileController@saveProfile');
     });
 
+    //Schema
+    Route::group(['middleware' => ['permission:edit content types']], function () {
+        Route::get('/app/schema', 'SchemaController@index');
+        Route::get('/app/new/schema', 'SchemaController@addSchema');
+        Route::post('/app/new/schema', 'SchemaController@saveSchema');
+        Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
+        Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
+    });
+
     //Settings
     Route::group(['middleware' => ['permission:edit settings']], function () {
         Route::get('/app/settings', 'SettingController@index');
@@ -62,6 +71,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
     Route::group(['middleware' => ['permission:browse roles']], function () {
         Route::get('/app/roles', 'RoleController@index');
         Route::get('/app/edit/role/{id}', 'RoleController@edit');
+        Route::post('/app/edit/role', 'RoleController@saveRole');
     });
 
     //Permissions
@@ -104,14 +114,6 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
 
     //Modules
     //Route::get('/app/modules', 'ModuleController@index');
-
-    //Schema
-    Route::group(['middleware' => ['permission:edit content types']], function () {
-        Route::get('/app/schema', 'SchemaController@index');
-        Route::get('/app/new/schema', 'SchemaController@addSchema');
-        Route::get('/app/edit/schema/{slug}', 'SchemaController@editSchema');
-        Route::post('/app/edit/schema/{slug}', 'SchemaController@saveSchema');
-    });
 
 });
 
