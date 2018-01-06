@@ -81,6 +81,12 @@ The default user email is **admin@example.com** and the default password is **pa
 
 Change these after logging in.
 
+# Support
+
+Questions/comments? Chime in on the official support chat at [support.startupengine.io](http://support.startupengine.io/)
+
+Found a bug? Submit an issue here on Github.
+
 # License
 
 StartupEngine is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
