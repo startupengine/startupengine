@@ -56,26 +56,19 @@ class SyncPage extends Command
 
         File::deleteDirectory($tempdir);
         File::deleteDirectory($pagepath);
+        File::deleteDirectory($themepath . "/.git");
 
         //exec("git clone $url $tempdir");
+        exec("git clone $url $tempdir");
+        /*
         exec("cd $themepath");
         exec("git remote add origin $url");
         exec("git fetch");
         exec("git checkout -t origin/master");
+        */
 
         File::moveDirectory($temppath, $pagepath);
-
-        if (Schema::hasTable('packages')) {
-            $package = Package::where('url', '=', $url)->first();
-            if($package == null) {
-                $package = new Package();
-                $package->url = $url;
-            }
-            if(file_exists($tempdir.'/theme.json')) {
-                $package->json = file_get_contents($tempdir.'/theme.json');
-            }
-            $package->save();
-        }
+        File::deleteDirectory($tempdir);
 
         //Inject Pages if they don't yet exist
         if (Schema::hasTable('pages')) {
@@ -86,20 +79,17 @@ class SyncPage extends Command
                 $page = new \App\Page();
                 $page->title = ucfirst($slug);
             }
-
             if (file_exists($pagejson)) {
                 $page->slug = $slug;
                 $page->body = null;
                 $page->excerpt = null;
                 if ($page->status == null) {
-                    if($mode == 'reset') {
+                    if ($mode == 'reset') {
                         $page->status = 'ACTIVE';
-                    }
-                    else {
+                    } else {
                         $page->status = 'INACTIVE';
                     }
                 }
-                $page->author_id = 0;
             }
 
             $json = file_exists($pagejson);
@@ -140,8 +130,5 @@ class SyncPage extends Command
             }
             $page->save();
         }
-
-        File::deleteDirectory($temppath);
-
     }
 }
