@@ -70,7 +70,7 @@ class SyncGit extends Command
 
                 foreach ($files as $file)
                 {
-                    File::copyDirectory((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                    File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
                     echo (string)$file, "\n";
                 }
                 File::copyDirectory($tempdir . "/resources/views/theme/pages", '/resources/views/theme/pages');
