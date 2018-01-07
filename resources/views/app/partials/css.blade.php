@@ -455,7 +455,7 @@
 
     .CodeMirror, .CodeMirror-scroll {
         min-height: 50px !important;
-        height: 50px !important;
+        height: auto !important;
     }
 
     #app > .container-fluid:first-of-type {
