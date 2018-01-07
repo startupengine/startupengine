@@ -454,7 +454,7 @@
     }
 
     .CodeMirror, .CodeMirror-scroll {
-        min-height: 50px !important;
+        min-height: 30px !important;
         height: auto !important;
     }
 
