@@ -50,7 +50,6 @@ class SyncGit extends Command
         $tempdir = "resources/temp";
         $themepath = \Config::get('view.paths')[0] . '/theme';
         exec('rm -rf ' . escapeshellarg($path));
-        //dd(json_decode(file_get_contents('/resources/views/theme/startup.json')));
 
         //Install Packages
         if (Schema::hasTable('packages')) {
@@ -67,26 +66,16 @@ class SyncGit extends Command
                 exec("git clone $package->url $tempdir");
                 File::copyDirectory($tempdir . "/resources/views/theme", $themepath);
 
-                /*
-                if(file_exists($tempdir."/resources/views/theme/pages")){
-                    $files = File::allFiles($tempdir . "/resources/views/theme/pages");
-                    foreach ($files as $file) {
-                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
-                        echo (string)$file, "\n";
-                    }
-                }
-
-                if(file_exists($tempdir."/resources/views/app")){
-                    $files = File::allFiles($tempdir . "/resources/views/app");
-                    foreach ($files as $file) {
-                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
-                        echo (string)$file, "\n";
-                    }
-                }
-                */
-
-                if(file_exists($tempdir."/resources/views")){
+                if(file_exists($tempdir."/resources/views") && ($mode == "default" OR $mode == "reset") ){
                     $files = File::allFiles($tempdir . "/resources/views");
+                    foreach ($files as $file) {
+                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                        echo (string)$file, "\n";
+                    }
+                }
+
+                if(file_exists($tempdir."/resources/views/theme/pages") && $mode == "pages"){
+                    $files = File::allFiles($tempdir . "/resources/views/theme/pages");
                     foreach ($files as $file) {
                         File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
                         echo (string)$file, "\n";
@@ -100,7 +89,7 @@ class SyncGit extends Command
                 $package->save();
 
 
-                //Inject settings if they don't yet exist
+                //Inject settings into the database if they don't yet exist
                 if (Schema::hasTable('settings')) {
                     $themepath = \Config::get('view.paths')[0] . '/theme';
                     $json = json_decode(file_get_contents($tempdir . '/startup.json'));
