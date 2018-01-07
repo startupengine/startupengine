@@ -66,15 +66,33 @@ class SyncGit extends Command
                 File::deleteDirectory($themepath . "/.git");
                 exec("git clone $package->url $tempdir");
                 File::copyDirectory($tempdir . "/resources/views/theme", $themepath);
-                $files = File::allFiles($tempdir."/resources/views/theme/pages");
 
-                foreach ($files as $file)
-                {
-                    File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
-                    echo (string)$file, "\n";
+                /*
+                if(file_exists($tempdir."/resources/views/theme/pages")){
+                    $files = File::allFiles($tempdir . "/resources/views/theme/pages");
+                    foreach ($files as $file) {
+                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                        echo (string)$file, "\n";
+                    }
                 }
-                File::copyDirectory($tempdir . "/resources/views/theme/pages", '/resources/views/theme/pages');
-                File::copyDirectory($tempdir . "/resources/views/app", '/resources/views/app');
+
+                if(file_exists($tempdir."/resources/views/app")){
+                    $files = File::allFiles($tempdir . "/resources/views/app");
+                    foreach ($files as $file) {
+                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                        echo (string)$file, "\n";
+                    }
+                }
+                */
+
+                if(file_exists($tempdir."/resources/views")){
+                    $files = File::allFiles($tempdir . "/resources/views");
+                    foreach ($files as $file) {
+                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                        echo (string)$file, "\n";
+                    }
+                }
+
                 File::deleteDirectory($themepath . "/.git");
                 $package->json = file_get_contents($tempdir . '/startup.json');
                 $contents = json_decode(file_get_contents($tempdir . '/startup.json'));
