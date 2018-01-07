@@ -49,7 +49,7 @@ class SyncPage extends Command
         $mode = $this->argument('mode');
 
         $tempdir = "resources/temp";
-        $temppath = "resources/temp/pages/$slug";
+        $temppath = "resources/temp/resources/views/pages/$slug";
         $themepath = \Config::get('view.paths')[0] . '/theme';
         $pagepath = \Config::get('view.paths')[0] . '/theme/pages/' . $slug;
         $pagejson = \Config::get('view.paths')[0] . '/theme/pages/' . $slug . '/page.json';
@@ -58,16 +58,9 @@ class SyncPage extends Command
         File::deleteDirectory($pagepath);
         File::deleteDirectory($themepath . "/.git");
 
-        //exec("git clone $url $tempdir");
         exec("git clone $url $tempdir");
-        /*
-        exec("cd $themepath");
-        exec("git remote add origin $url");
-        exec("git fetch");
-        exec("git checkout -t origin/master");
-        */
 
-        File::moveDirectory($temppath, $pagepath);
+        File::copyDirectory($temppath, $pagepath);
         File::deleteDirectory($tempdir);
 
         //Inject Pages if they don't yet exist
