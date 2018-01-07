@@ -64,7 +64,7 @@ class SyncGit extends Command
             foreach ($packages as $package) {
                 File::deleteDirectory($themepath . "/.git");
                 exec("git clone $package->url $tempdir");
-                File::copyDirectory($tempdir, $themepath);
+                File::copyDirectory($tempdir."/resources/views/theme", $themepath);
                 File::deleteDirectory($tempdir);
                 File::deleteDirectory($themepath . "/.git");
                 $package->json = file_get_contents($themepath . '/startup.json');
