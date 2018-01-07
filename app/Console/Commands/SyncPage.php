@@ -50,9 +50,8 @@ class SyncPage extends Command
 
         $tempdir = "resources/temp";
         $temppath = "resources/temp/resources/views/pages/$slug";
-        $themepath = \Config::get('view.paths')[0] . '/theme';
-        $pagepath = \Config::get('view.paths')[0] . '/theme/pages/' . $slug;
-        $pagejson = \Config::get('view.paths')[0] . '/theme/pages/' . $slug . '/page.json';
+        $themepath = "resources/views/theme";
+        $pagepath = "resources/views/theme/pages/$slug";
 
         File::deleteDirectory($tempdir);
         File::deleteDirectory($pagepath);
@@ -60,7 +59,10 @@ class SyncPage extends Command
 
         exec("git clone $url $tempdir");
 
-        File::copyDirectory($temppath, $pagepath);
+        File::copyDirectory("/resources/views/theme/pages/$slug", $pagepath);
+
+        $pagejson = "/resources/views/theme/pages/$slug/page.json";
+
         File::deleteDirectory($tempdir);
 
         //Inject Pages if they don't yet exist
@@ -72,8 +74,8 @@ class SyncPage extends Command
                 $page = new \App\Page();
                 $page->title = ucfirst($slug);
             }
+            $page->slug = $slug;
             if (file_exists($pagejson)) {
-                $page->slug = $slug;
                 $page->body = null;
                 $page->excerpt = null;
                 if ($page->status == null) {
