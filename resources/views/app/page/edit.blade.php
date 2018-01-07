@@ -151,6 +151,7 @@
                                     <a href="#deleteVariation{{$variationcount}}"
                                        onclick="deleteConfirmation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
                                        class="btn btn-danger btn-simple btn-round pull-left delete-button"
+                                       data-toggle="modal" data-target="#deleteVariation"
                                        style="padding: 10px 12px;">
                                         <i class="now-ui-icons ui-1_simple-remove"></i></a>
                                     <a href="#duplicate"
@@ -354,19 +355,24 @@
         </div>
     </main>
     <script>
+
         var currentCard;
+
         function duplicateVariation(object) {
             currentCard = object.parent().closest('.variation');
             currentCard.clone().insertAfter(currentCard);
             updateIndexes();
             console.log('duplicateVariation');
         }
+
         function selectVariation(object) {
             currentCard = object.parent().closest('.variation');
             currentCard.remove();
             console.log('selectVariation');
         }
+
         function deleteConfirmation(object) {
+            console.log(object);
             $("#deleteVariation").modal("toggle");
             currentCard = object.parent().closest('.variation');
             console.log('deleteConfirmation');
@@ -428,6 +434,25 @@
                 $(this).tab('show')
             })
         }
+
+        $(document).ready(function () {
+            $( ".nav-link" ).click(function() {
+                $(".nav-link").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $( ".duplicate-button" ).click(function() {
+                //$(this).addClass("active");
+                duplicateVariation($(this));
+                console.log($(this));
+            });
+
+            $( ".delete-button" ).click(function() {
+                //$(this).addClass("active");
+                deleteVariation($(this));
+                console.log($(this));
+            });
+        });
     </script>
 @endsection
 
@@ -450,7 +475,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();">Delete</a>
+                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();" data-toggle="modal" data-target="#deleteVariation">Delete</a>
                 </div>
             </div>
         </div>
