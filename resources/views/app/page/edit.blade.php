@@ -235,15 +235,6 @@
                                                         });
                                                     </script>
                                                 </div>
-                                                <div class="form-group" style="margin-top:25px !important;">
-                                                    <input type="checkbox" name="show_footer"
-                                                           class="bootstrap-switch"
-                                                           data-on-label="YES"
-                                                           data-off-label="NO"
-                                                           <?php if($page->show_footer == true) { ?> checked="" <?php } ?>
-                                                    />
-                                                    <label for="show_footer">Show footer?</label>
-                                                </div>
                                             </div>
                                             <div class="tab-pane"
                                                  id="scriptsCode"

@@ -546,12 +546,11 @@
 <script src="/js/core/popper.min.js" type="text/javascript"></script>
 <!-- Bootstrap -->
 <script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!-- Now UI Kit-->
-<script src="/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 <script src="/js/plugins/nouislider.min.js" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="/js/plugins/bootstrap-switch.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
+<?php /* <script src="/js/plugins/bootstrap-switch.js"></script> */?>
 <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker // http://www.eyecon.ro/bootstrap-datepicker/ -->
 <script src="/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Simple MDE -->
@@ -579,5 +578,5 @@
 <script src="https://unpkg.com/vue"></script>
  */ ?>
 
-
-
+<!-- Now UI Kit-->
+<script src="/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
