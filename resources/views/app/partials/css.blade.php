@@ -454,7 +454,8 @@
     }
 
     .CodeMirror, .CodeMirror-scroll {
-        min-height: 30px;
+        min-height: 50px !important;
+        height: 50px !important;
     }
 
     #app > .container-fluid:first-of-type {
@@ -535,44 +536,48 @@
         color:#2023c5 !important;
     }
 
-</style>
 
+
+</style>
 
 <!-- jQuery -->
 <script src="/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-
 <!--  Plugin for the popovers, full documentation here: https://popper.js.org/ -->
 <script src="/js/core/popper.min.js" type="text/javascript"></script>
-
 <!-- Bootstrap -->
-<link href="/css/bootstrap.min.css" rel="stylesheet"/>
 <script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
-
+<!-- Now UI Kit-->
+<script src="/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 <script src="/js/plugins/nouislider.min.js" type="text/javascript"></script>
-
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
 <script src="/js/plugins/bootstrap-switch.js"></script>
-
 <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker // http://www.eyecon.ro/bootstrap-datepicker/ -->
 <script src="/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800" rel="stylesheet"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-
-<!-- Vue -->
-<script src="https://unpkg.com/vue"></script>
-
 <!-- Simple MDE -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
 <!-- Vue Charts -->
 <script src="https://unpkg.com/chart.js@2.5.0/dist/Chart.bundle.js"></script>
 <script src="https://unpkg.com/chartkick@2.2.3"></script>
 <script src="https://unpkg.com/vue-chartkick@0.2.0/dist/vue-chartkick.js"></script>
 
+<!-- Bootstrap -->
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
 <!--   Now UI Kit   -->
 <link href="/css/now-ui-kit.css?v=1.1.0" rel="stylesheet"/>
-<script src="/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+
+
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
+<?php /*
+<!-- Vue -->
+<script src="https://unpkg.com/vue"></script>
+ */ ?>
+
+
+

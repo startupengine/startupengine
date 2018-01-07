@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    New Post
+    Edit Content Item
 @endsection
 
 @section('meta')
@@ -10,18 +10,6 @@
 
 @section('styles')
     <style>
-        @media (max-width: 991px) {
-            .sidebar {
-                display: none;
-            }
-        }
-
-        @media (min-width: 991px) {
-            .mobile-nav {
-                display: none;
-            }
-        }
-
         .nav-tabs {
             padding-left: 15px;
             padding-right: 15px;
@@ -380,20 +368,24 @@
             currentCard = object.parent().closest('.variation');
             currentCard.clone().insertAfter(currentCard);
             updateIndexes();
+            console.log('duplicateVariation');
         }
         function selectVariation(object) {
             currentCard = object.parent().closest('.variation');
             currentCard.remove();
+            console.log('selectVariation');
         }
         function deleteConfirmation(object) {
             $("#deleteVariation").modal("toggle");
             currentCard = object.parent().closest('.variation');
+            console.log('deleteConfirmation');
         }
 
         function deleteVariation(object) {
             currentCard.remove();
             $("#deleteVariation").modal("toggle");
             updateIndexes();
+            console.log('deleteVariation');
         }
 
         function updateIndexes() {
@@ -408,6 +400,7 @@
             updateInputs();
             updateButtons();
             updateTabPanes();
+            console.log('updateIndexes');
         }
 
         function updateInputs() {
