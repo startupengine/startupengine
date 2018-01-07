@@ -27,7 +27,7 @@ if ($page->json !== null) {
             name="json[versions][{{ $variationcount }}][{{$key}}][{{$value->slug}}]"
             rows="2"
             data-field="{{$field}}"
-            data-section="{{$value->slug}}"
+            data-section="{{$key}}"
     >
         <?php foreach($page->schema()->sections->$key->fields->$field->options as $option) {?>
         <option @if($input == $option) selected @endif value="{{$option}}">{{ucfirst($option)}}</option>

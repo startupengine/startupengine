@@ -89,77 +89,83 @@
                             }?>
                             <?php $variationcount = 1; ?>
                             <?php foreach (range(1, $versions) as $version) {?>
-
-                            <div class="card variation">
-
-                                <div class="card-header">
-                                    Variation {{ $variationcount }}
-                                </div>
-                                <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
-                                    style="background:#fff;border-bottom:1px solid #ddd;"
-                                    role="tablist">
-                                    <?php $count = 1; ?>
-                                    @foreach($page->schema()->sections as $key => $value)
-                                        <li class="nav-item">
-                                            <a class="nav-link <?php if ($count == 1) {
-                                                echo "active";
-                                            } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
-                                               data-section="{{$key}}"
-                                               role="tab"
-                                               aria-expanded="false">{{ucfirst($value->title)}}</a>
-                                        </li>
-                                        <?php $count = $count + 1; ?>
-                                    @endforeach
-                                </ul>
-                                <div class="card-body">
-                                    <div class="tab-content text-center">
+                                <?php foreach($page->schema()->sections as $section) {
+                                    $checkforslug = $section->slug;
+                                    if(isset($page->json()->versions->$version->$checkforslug)) {
+                                        $true[$version] = $checkforslug;
+                                    }
+                                }?>
+                                <?php if($true !== null && count($true) > 0) {?>
+                                <div class="card variation">
+                                    <div class="card-header">
+                                        Variation {{ $variationcount }}
+                                    </div>
+                                    <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
+                                        style="background:#fff;border-bottom:1px solid #ddd;"
+                                        role="tablist">
                                         <?php $count = 1; ?>
-                                        @foreach($page->schema()->sections as $key => $section)
-                                            @if(isset($section->title))
-                                                <div class="tab-pane <?php if ($count == 1) {
+                                        @foreach($page->schema()->sections as $key => $value)
+                                            <li class="nav-item">
+                                                <a class="nav-link <?php if ($count == 1) {
                                                     echo "active";
-                                                } ?>"
-                                                     id="{{$key.$variationcount}}"
-                                                     role="tabpanel"
-                                                     data-section="{{$key}}">
-                                                    @foreach($section->fields as $field => $value)
-
-                                                        @if($value->type == "text")
-                                                            @include('app.page.partials.fields.text')
-                                                        @endif
-                                                        @if($value->type == "textarea")
-                                                            @include('app.page.partials.fields.textarea')
-                                                        @endif
-                                                        @if($value->type == "richtext")
-                                                            @include('app.page.partials.fields.richtext')
-                                                        @endif
-                                                        @if($value->type == "code")
-                                                            @include('app.page.partials.fields.code')
-                                                        @endif
-                                                        @if($value->type == "select")
-                                                            @include('app.page.partials.fields.select')
-                                                        @endif
-
-                                                    @endforeach
-                                                    <?php $count = $count + 1; ?>
-                                                </div>
-                                            @endif
+                                                } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
+                                                   data-section="{{$key}}"
+                                                   role="tab"
+                                                   aria-expanded="false">{{ucfirst($value->title)}}</a>
+                                            </li>
+                                            <?php $count = $count + 1; ?>
                                         @endforeach
+                                    </ul>
+                                    <div class="card-body">
+                                        <div class="tab-content text-center">
+                                            <?php $count = 1; ?>
+                                            @foreach($page->schema()->sections as $key => $section)
+                                                @if(isset($section->title))
+                                                    <div class="tab-pane <?php if ($count == 1) {
+                                                        echo "active";
+                                                    } ?>"
+                                                         id="{{$key.$variationcount}}"
+                                                         role="tabpanel"
+                                                         data-section="{{$key}}">
+                                                        @foreach($section->fields as $field => $value)
+
+                                                            @if($value->type == "text")
+                                                                @include('app.page.partials.fields.text')
+                                                            @endif
+                                                            @if($value->type == "textarea")
+                                                                @include('app.page.partials.fields.textarea')
+                                                            @endif
+                                                            @if($value->type == "richtext")
+                                                                @include('app.page.partials.fields.richtext')
+                                                            @endif
+                                                            @if($value->type == "code")
+                                                                @include('app.page.partials.fields.code')
+                                                            @endif
+                                                            @if($value->type == "select")
+                                                                @include('app.page.partials.fields.select')
+                                                            @endif
+
+                                                        @endforeach
+                                                        <?php $count = $count + 1; ?>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="card-footer" align="right">
+                                        <a href="#deleteVariation{{$variationcount}}"
+                                           onclick="deleteConfirmation($(this));selectVariation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
+                                           class="btn btn-danger btn-simple btn-round pull-left delete-button"
+                                           data-toggle="modal" data-target="#deleteVariation"
+                                           style="padding: 10px 12px;">
+                                            <i class="now-ui-icons ui-1_simple-remove"></i></a>
+                                        <a href="#duplicate"
+                                           onclick="duplicateVariation($(this));"
+                                           class="btn btn-default btn-simple btn-round duplicate-button">Add
+                                            another variation &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                                     </div>
                                 </div>
-                                <div class="card-footer" align="right">
-                                    <a href="#deleteVariation{{$variationcount}}"
-                                       onclick="deleteConfirmation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
-                                       class="btn btn-danger btn-simple btn-round pull-left delete-button"
-                                       data-toggle="modal" data-target="#deleteVariation"
-                                       style="padding: 10px 12px;">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i></a>
-                                    <a href="#duplicate"
-                                       onclick="duplicateVariation($(this));"
-                                       class="btn btn-default btn-simple btn-round duplicate-button">Add
-                                        another variation &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
-                                </div>
-                            </div>
+                                <?php } ?>
                             <?php $variationcount = $variationcount + 1; ?>
                             <?php } ?>
                         @endif
@@ -359,27 +365,28 @@
         var currentCard;
 
         function duplicateVariation(object) {
-            currentCard = object.parent().closest('.variation');
+            currentCard = object.parents('.variation');
             currentCard.clone().insertAfter(currentCard);
             updateIndexes();
             console.log('duplicateVariation');
         }
 
         function selectVariation(object) {
-            currentCard = object.parent().closest('.variation');
-            currentCard.remove();
+            currentCard = object.parents('.variation');
+            //currentCard.remove();
             console.log('selectVariation');
         }
 
         function deleteConfirmation(object) {
             console.log(object);
             $("#deleteVariation").modal("toggle");
-            currentCard = object.parent().closest('.variation');
+            currentCard = object.parents().closest('.variation');
             console.log('deleteConfirmation');
         }
 
         function deleteVariation(object) {
             currentCard.remove();
+            //object.parents('.variation').remove();
             $("#deleteVariation").modal("toggle");
             updateIndexes();
             console.log('deleteVariation');
@@ -443,13 +450,13 @@
 
             $( ".duplicate-button" ).click(function() {
                 //$(this).addClass("active");
-                duplicateVariation($(this));
+                //duplicateVariation($(this));
                 console.log($(this));
             });
 
             $( ".delete-button" ).click(function() {
                 //$(this).addClass("active");
-                deleteVariation($(this));
+                //deleteVariation($(this));
                 console.log($(this));
             });
         });

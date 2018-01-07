@@ -12,7 +12,7 @@
            name="{{$textareaname}}"
            rows="2"
            data-field="{{$field}}"
-           data-section="{{$value->slug}}"
+           data-section="{{$key}}"
            <?php
            if ($page->json !== null) {
                $slug = $value->slug;

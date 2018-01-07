@@ -66,6 +66,15 @@ class PageController
         $page->show_footer = $request->input('show_footer');
         if ($request->input('json') !== null) {
             $page->json = json_encode($request->input('json'));
+            foreach($request->input('json')['versions'] as $entry => $value){
+                foreach($page->schema()->sections as $section){
+                    $search = $section->slug;
+                    if(array_key_exists($search,$value)) {
+                        $newjsonversions[$entry] = $value;
+                    }
+                }
+            }
+            $page->json = json_encode(["versions" => $newjsonversions]);
         }
         if ($request->has('schema')) {
             $page->schema = json_encode($request->input('schema'));
