@@ -73,7 +73,29 @@ class SettingController extends Controller
             $setting->type = $request->input('type');
         }
 
+
+        if($request->input('group') !== null) {
+            $group = $request->input('group');
+        }
+        else {
+            $group = explode(".", $request->input('key'), 2);
+            $group = ucfirst($group[0]);
+        }
+
+        $setting->group = $group;
+
+        if($setting->id == null) {
+            $redirect = 'new';
+        }
+        else {
+            $redirect = "/app/settings?group=$group";
+        }
+
         $setting->save();
-        return redirect("/app/edit/setting/$setting->id");
+
+        if($redirect == 'new') {
+            $redirect = "/app/edit/setting/$setting->id";
+        }
+        return redirect($redirect);
     }
 }

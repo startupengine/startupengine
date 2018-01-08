@@ -84,7 +84,7 @@ Change these after logging in.
 
 # Support
 
-Questions/comments? Chime in on the official support chat at [support.startupengine.io](http://support.startupengine.io/)
+Questions/comments? Chime in on [the official support chat](https://support.startupengine.io/).
 
 Found a bug? Submit an issue here on Github.
 

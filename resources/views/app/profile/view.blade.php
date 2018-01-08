@@ -25,8 +25,8 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;" class="hiddenOnMobile">Profile for {{$user->name}}  @if(\Auth::user()->hasPermissionTo('edit users'))<a href="/app/edit/user/{{$user->id}}" class="btn btn-sm btn-secondary-outline pull-right">Edit</a>@endif</h5>
-                <h5 style="margin-bottom:25px;" class="hiddenOnDesktop">User Profile @if(\Auth::user()->hasPermissionTo('edit users'))<a href="/app/edit/user/{{$user->id}}" class="btn btn-sm btn-secondary-outline pull-right">Edit</a>@endif</h5>
+                <h5 style="margin-bottom:25px;" class="hiddenOnMobile">Profile for {{$user->name}}  @if(\Auth::user()->hasPermissionTo('edit users')) {!! button("/app/edit/user/$user->id", "Edit", "new", "pull-right" ) !!} @endif</h5>
+                <h5 style="margin-bottom:25px;" class="hiddenOnDesktop">User Profile @if(\Auth::user()->hasPermissionTo('edit users')) {!! button("/app/edit/user/$user->id", "Edit", "new", "pull-right" ) !!} @endif</h5>
             </div>
             <div class="col-md-3" style="float:left;">
                 <div class="form-group">
