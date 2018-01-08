@@ -15,8 +15,9 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Users <a href="/app/new/user" class="btn btn-secondary-outline pull-right btn-sm">New User &nbsp;<i
-                                class="now-ui-icons ui-1_simple-add"></i></a></h5>
+                <h5 style="margin-bottom:25px;">Users
+                    {!! button("/app/new/user", "New User", "new", "pull-right") !!}
+                </h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search users..." class="form-control" name="s" id="s">

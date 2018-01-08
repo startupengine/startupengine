@@ -70,18 +70,14 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Packages</h5>
+                <h5 style="margin-bottom:25px;">Packages
+                    {!! button(null, "New Package", "new", "pull-right", null, 'data-toggle="modal" data-target="#newPackage"') !!}
+                </h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search packages..." class="form-control"
                                name="s" id="s">
                     </form>
-                </div>
-                <div align="right">
-                    <a href="/app/new/package" class="btn btn-sm btn-secondary-outline "
-                       data-toggle="modal" data-target="#newPackage">
-                        Add Package &nbsp;<i class="now-ui-icons ui-1_simple-add"></i>
-                    </a>
                 </div>
                 <table class="table ">
                     <thead class="hiddenOnMobile">

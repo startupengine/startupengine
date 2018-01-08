@@ -34,4 +34,9 @@
 @endsection
 
 @section('content')
+
+    @if(isset($page->html))
+        {!! $page->html !!}
+    @endif
+
 @endsection

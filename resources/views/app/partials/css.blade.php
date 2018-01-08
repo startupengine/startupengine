@@ -555,5 +555,10 @@
     .modal.show {
         display:block !important;
     }
+    .navbar a.nav-link {
+        border-radius: 25px !important;
+        padding: 5px 15px !important;
+        margin:7px 20px !important;
+    }
 
 </style>

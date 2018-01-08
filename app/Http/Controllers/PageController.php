@@ -39,7 +39,7 @@ class PageController
     {
         $page = new \App\Page();
         $page->schema = null;
-        return view('app.page.edit')->with('page', $page);
+        return view('app.page.add')->with('page', $page);
     }
 
 
@@ -58,13 +58,11 @@ class PageController
         }
         $page->title = $request->input('title');
         $page->slug = $request->input('slug');
+
         $page->excerpt = $request->input('excerpt');
         $page->meta_description = $request->input('meta_description');
-        $page->css = $request->input('css');
-        $page->scripts = $request->input('scripts');
-        $page->html = $request->input('html');
-        $page->show_footer = $request->input('show_footer');
-        if ($request->input('json') !== null) {
+
+        if ($request->input('json') !== null  && \Auth::user()->hasPermissionTo('edit pages')) {
             $page->json = json_encode($request->input('json'));
             foreach($request->input('json')['versions'] as $entry => $value){
                 foreach($page->schema()->sections as $section){
@@ -76,27 +74,26 @@ class PageController
             }
             $page->json = json_encode(["versions" => $newjsonversions]);
         }
-        if ($request->has('schema')) {
+        if ($request->has('schema')  && \Auth::user()->hasPermissionTo('write code fields')) {
             $page->schema = json_encode($request->input('schema'));
         }
-        if ($request->input('scripts') !== null) {
+        if ($request->has('scripts')  && \Auth::user()->hasPermissionTo('write code fields')) {
             $page->scripts = $request->input('scripts');
         }
-        if ($request->input('css') !== null) {
+        if ($request->has('css')  && \Auth::user()->hasPermissionTo('write code fields')) {
             $page->css = $request->input('css');
         }
-        if ($request->input('html') !== null) {
+        if ($request->has('html') && \Auth::user()->hasPermissionTo('write code fields')) {
             $page->html = $request->input('html');
         }
-        if ($request->input('status') == null) {
-            $page->status = 'DRAFT';
-        } else {
+        if ($request->has('status') && \Auth::user()->hasPermissionTo('publish pages')) {
             $page->status = $request->input('status');
+        } else {
+            $page->status = 'DRAFT';
         }
-        if ($request->input('publish') == "on") {
-            $page->status = "PUBLISHED";
+        if(\Auth::user()->hasPermissionTo('write code fields')) {
+            $page->save();
         }
-        $page->save();
         return redirect('/app/pages');
     }
 
