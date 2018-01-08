@@ -54,6 +54,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/new/page', 'PageController@addPage');
         Route::get('/app/edit/page/{id}', 'PageController@editPage');
         Route::post('/app/edit/page', 'PageController@savePage');
+        Route::get('/app/delete/page/{id}', 'PageController@deletePage');
     });
 
     //Users

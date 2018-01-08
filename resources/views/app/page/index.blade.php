@@ -9,26 +9,13 @@
 @endsection
 
 @section('styles')
-    <style>
-        @media (max-width: 991px) {
-            .sidebar {
-                display: none !important;
-            }
-        }
-
-        @media (min-width: 991px) {
-            .mobile-nav {
-                display: none;
-            }
-        }
-    </style>
 @endsection
 
 @section('content')
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Pages <a href="/app/new/page" class="btn btn-secondary-outline btn-sm pull-right">New Page &nbsp;&nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a></h5>
+                <h5 style="margin-bottom:25px;">Pages {!! button("/app/new/page", "New Page", "new", "pull-right" ) !!}</a> </h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search pages..." class="form-control" name="s" id="s">
@@ -65,6 +52,10 @@
                                        target="_blank">View</a>
                                     <a href="/app/edit/page/{{ $page->id }}" class="btn btn-sm btn-secondary-outline"
                                        style="border-left:none!important;">Edit</a>
+                                    <a href="/app/delete/page/{{ $page->id }}" class="btn btn-sm btn-secondary-outline"
+                                       style="border-left:none!important;" data-toggle="modal"
+                                       data-target="#deletePage"
+                                       onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
                                 </div>
                             </td>
                         </tr>
@@ -79,7 +70,7 @@
 
 @section('modals')
     <!-- Modal Core -->
-    <div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="deletePage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -91,7 +82,7 @@
 
                     {{ csrf_field() }}
                     <div class="col-md-12">
-                        <p>Once you delete this post, it will be unavailable unless an administrator un-deletes it.</p>
+                        <p>Once you delete this page, it will be unavailable unless an administrator un-deletes it.</p>
                     </div>
                 </div>
                 <div class="modal-footer">

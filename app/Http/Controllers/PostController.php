@@ -91,16 +91,13 @@ class PostController extends Controller
     }
 
     public function deletePost(Request $request, $id) {
-        $adminrole = Role::where('name', '=', 'admin')->firstOrFail();
-        if(\Auth::user() && \Auth::user()->role_id == $adminrole->id) {
-
+        if(\Auth::user()->hasPermissionTo('delete posts')) {
             if($id !== null ){
                 $post = \App\Post::find($id);
                 $post->delete();
             }
             return redirect('/app/content');
         }
-
         else { abort(500); }
     }
 

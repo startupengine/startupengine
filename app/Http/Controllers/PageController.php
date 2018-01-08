@@ -110,4 +110,14 @@ class PageController
         return view('app.page.index')->with('pages', $pages);
     }
 
+    public function deletePage(Request $request, $id) {
+        if(\Auth::user()->hasPermissionTo('delete pages')) {
+            if($id !== null ){
+                $page = \App\Page::find($id);
+                $page->delete();
+            }
+            return redirect('/app/pages');
+        }
+        else { abort(500); }
+    }
 }

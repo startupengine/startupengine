@@ -12,11 +12,16 @@ function setting($key)
     return $output;
 }
 
-function button($path, $text, $type = null, $classes = null)
+function button($path, $text, $type = null, $classes = null, $iconmarkup = null)
 {
-    if($type == null OR $type == 'new' OR $classes == null) {
-        $classes = $classes." btn btn-sm btn-secondary-outline ";
+    if($type == 'new') {
+        $classes = $classes." btn btn-sm btn-round btn-secondary-outline ";
+        $iconmarkup = "&nbsp; <i class=\"fa fa-sm fa-plus\"></i>";
     }
-    $output = "<a href='$path' class='$classes'>".ucwords($text)."</a>";
+    if($type == 'edit') {
+        $classes = $classes." btn btn-sm btn-round btn-secondary-outline ";
+        $iconmarkup = null;
+    }
+    $output = "<a href='$path' class='$classes'>".ucwords($text)." $iconmarkup</a>";
     return $output;
 }
