@@ -583,8 +583,12 @@
         transition:border 0.25s;
     }
 
+    .checkbox label::before, .checkbox label::after  {
+        border:1px solid #eee !important;
+    }
+
     select:hover, select:focus, textarea:focus, input:focus, textarea:hover, input:hover, .ace_editor:hover, .checkbox:hover label::before, .checkbox:hover label::after{
-        border:1px solid rgba(0, 0, 0, 0.35) !important;
+        border:1px solid rgba(0, 0, 0, 0.3) !important;
         transition:border 0.25s;
     }
 
