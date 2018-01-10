@@ -15,26 +15,26 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5>@if($role->id == null) Add @endif @if($role->id !== null) Edit @endif Role</h5>
                 <form action="/app/edit/role" method="post">
+                <h5>@if($role->id == null) Add @endif @if($role->id !== null) Edit @endif Role @if(\Auth::user()->hasPermissionTo('edit roles')){!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}@endif</h5>
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="postTitle">Display Name</label>
+                                <label for="roleDisplayName">Display Name</label>
                                 <input required value="@if($role->display_name !== null){{$role->display_name}}"
                                        @endif type="text" class="form-control"
-                                       id="title"
-                                       aria-describedby="postTitle" placeholder="Enter a title"
-                                       name="title">
+                                       id="display_name"
+                                       aria-describedby="roleDisplayName" placeholder="Examples: Administrator, Content Editor"
+                                       name="display_name">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="postSlug">Name (slug)</label>
+                                <label for="roleName">Name (slug)</label>
                                 <input required value="{{$role->name}}" type="text" class="form-control"
-                                       id="slug"
-                                       aria-describedby="postSlug" placeholder="example-slug" name="slug">
+                                       id="name"
+                                       aria-describedby="roleName" placeholder="Examples: admin, editor" name="name">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -97,9 +97,6 @@
                         @endforeach
                     </div>
                     <input type="hidden" name="id" id="id" value="{{$role->id}}" ?>
-                    <div align="right" style="margin-bottom:35px;">
-                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
-                    </div>
             </div>
             </form>
         </div>

@@ -46,11 +46,12 @@
 @section('content')
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
-            <div class="col-md-12">
-                <h5 style="margin-bottom:25px;" class="hiddenOnMobile">Profile for {{$user->name}}</h5>
-                <h5 style="margin-bottom:25px;" class="hiddenOnDesktop">User Profile</h5>
-            </div>
             <form action="/app/edit/user" method="post">
+            <div class="col-md-12">
+                <h5 style="margin-bottom:25px;" class="hiddenOnMobile">Profile for {{$user->name}} @if(!$disabled && \Auth::user()->hasPermissionTo('edit users')){!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}@endif</h5>
+                <h5 style="margin-bottom:25px;" class="hiddenOnDesktop">User Profile @if(!$disabled && \Auth::user()->hasPermissionTo('edit users')){!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}@endif</h5>
+            </div>
+
                 {{ csrf_field() }}
                 <div class="col-md-6">
                     <div class="form-group">
@@ -120,8 +121,6 @@
                     @if(!$disabled) <input type="hidden" name="user_id" value="{{$user->id}}"/>@endif
                     @if($disabled == 'disabled') <a href="/app/edit/user/{{$user->id}}"
                                                     class="btn btn-secondary-outline">Edit</a> @endif
-                    @if(!$disabled)
-                        <button type="submit" class="btn btn-secondary-outline ">Save</button> @endif
                 </div>
             </form>
         </div>
