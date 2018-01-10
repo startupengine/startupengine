@@ -74,6 +74,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/new/role', 'RoleController@addRole');
         Route::get('/app/edit/role/{id}', 'RoleController@edit');
         Route::post('/app/edit/role', 'RoleController@saveRole');
+        Route::post('/app/new/role', 'RoleController@saveRole');
     });
 
     //Permissions

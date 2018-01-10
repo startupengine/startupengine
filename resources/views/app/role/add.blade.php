@@ -15,7 +15,7 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <form action="/app/save/role" method="post">
+                <form action="/app/new/role" method="post">
                     <h5>@if($role->id == null) Add @endif @if($role->id !== null) Edit @endif Role @if(\Auth::user()->hasPermissionTo('edit roles')){!! button(null, "Save Item", "save", "pull-right", null, null, "button") !!}@endif</h5>
                     {{ csrf_field() }}
                     <div class="row">
