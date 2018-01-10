@@ -48,8 +48,11 @@
                                         } ?>"><?php if ($postType->enabled) echo "ENABLED"; else {
                                         echo "DISABLED";
                                     } ?></span></td>
-                            <td>{{ $postType->title }}<br><span
-                                        style="opacity:0.5;">{{$postType->json()->description}}</span></td>
+                            <td>{{ $postType->title }}<br>
+                                @if(isset($postType->json()->descrption))<span
+                                        style="opacity:0.5;">{{$postType->json()->description}}</span>
+                                @endif
+                            </td>
                             <td align="right">
                                 <a href="/app/edit/schema/{{ $postType->slug }}"
                                    class="btn btn-sm btn-secondary-outline defaultClick" style="">Edit Schema</a>

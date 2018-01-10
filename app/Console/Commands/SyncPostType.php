@@ -48,12 +48,7 @@ class SyncPostType extends Command
         $slug = $this->argument('slug');
         $url = $this->argument('url');
         $mode = $this->argument('mode');
-        $tempdir = "resources/temp";
-        $themepath = "resources/views/theme";
-        File::deleteDirectory($tempdir);
-        File::deleteDirectory($themepath . "/.git");
-        exec("git clone $url $tempdir");
-        $schema = file_get_contents("/resources/temp/resources/views/theme/templates/$slug/schema.json");
+        $schema = file_get_contents("$url");
         if (Schema::hasTable('pages')) {
             $postType = PostType::where('slug', '=', $slug)->first();
             if ($postType == null) {
@@ -62,6 +57,5 @@ class SyncPostType extends Command
             $postType->json = json_encode(json_decode($schema));
             $postType->save();
         }
-        File::deleteDirectory($tempdir);
     }
 }
