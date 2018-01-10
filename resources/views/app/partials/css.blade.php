@@ -587,7 +587,10 @@
         font-size:13px !important;
         resize: vertical !important;
         padding:10px !important;
-
+        background: #f9f9f9 !important;
+    }
+    textarea::placeholder, input::placeholder  {
+        color:rgba(0,0,0,0.4) !important;
     }
 
     select, input, textarea, .ace_editor, .CodeMirror, .checkbox label::before, .checkbox label::after {
