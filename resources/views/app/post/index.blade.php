@@ -16,19 +16,20 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">Content
-
-                    {!! button(null, "New Item", "new", "pull-right",  null, 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"', 'button') !!}
-
-                    <div class="dropdown-menu dropdown-menu-right" align="center" style="opacity:1;z-index:999 !important;background:#fff;">
-                        @if($postTypes->isEmpty())
-                            <a href="#" class="dropdown-item">No content types</a>
-                        @endif
-                        <?php foreach($postTypes as $postType) { ?>
-                        <a href="/app/new/{{$postType->slug}}"
-                           class="dropdown-item"> <i class="now-ui-icons ui-1_simple-add"></i> &nbsp;
-                            New {{$postType->title}}</a>
-                        <?php } ?>
-                    </div></h5>
+                    <div class="dropdown" style="inline-block;float:right;z-index:1;">
+                        {!! button(null, "New Item", "new", "pull-right",  null, 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"', 'button') !!}
+                        <div class="dropdown-menu dropdown-menu-right" align="center" style="opacity:1;z-index:999 !important;background:#fff;">
+                            @if($postTypes->isEmpty())
+                                <a href="#" class="dropdown-item">No content types</a>
+                            @endif
+                            <?php foreach($postTypes as $postType) { ?>
+                            <a href="/app/new/{{$postType->slug}}"
+                               class="dropdown-item"> <i class="now-ui-icons ui-1_simple-add"></i> &nbsp;
+                                New {{$postType->title}}</a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search content..." class="form-control" name="s"
