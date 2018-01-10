@@ -30,8 +30,8 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page</h5>
                 <form action="/app/edit/page" method="post">
+                <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page {!! button(null, "Save Page", "save", "pull-right", null, null, "button") !!}</h5>
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-3">
@@ -350,12 +350,7 @@
                             </div>
                         </div>
                     </div>
-
                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
-                    <div align="right" style="margin-bottom:35px;">
-                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
-                    </div>
-
                 </form>
             </div>
         </div>
