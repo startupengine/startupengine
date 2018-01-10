@@ -332,11 +332,6 @@
         opacity: 0;
     }
 
-    .dropdown-menu.show {
-        opacity: 1;
-        margin-top: 0px !important;
-    }
-
     .card-body .row {
         height: auto;
         min-height: inherit !important;
@@ -347,17 +342,32 @@
         background: #fff;
     }
 
+
+
     .dropdown-menu {
         z-index: 999999 !important;
         width: auto !important;
-        left: 0px;
-        top: 0px;
-        position: absolute;
+        right: 10px !important;
+        border-radius:3px !important;
+        top: 0px !important;
+        position: absolute !important;
         transition: left 0s, top 0s;
     }
 
+    .navbar .dropdown-menu.show {
+        top:45px !important;
+    }
+
     .dropdown-menu-right {
-        max-width: 200px;
+        max-width: 175px;
+    }
+
+    .dropdown-menu.show {
+        opacity: 1;
+        top:10px !important;
+        margin-top:0px !important;
+        z-index:999999 !important;
+        display:inline-table !important;
     }
 
     nav .btn-secondary-outline {
