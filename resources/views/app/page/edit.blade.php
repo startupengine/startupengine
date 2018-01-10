@@ -173,6 +173,7 @@
                             <?php } ?>
                         @endif
 
+                        @if(\Auth::user()->hasPermissionTo('write code fields') && \Auth::user()->hasPermissionTo('edit pages'))
                         <div>
                             <div class="meta-fields" id="meta2" role="tabpanel" align="left">
 
@@ -184,7 +185,11 @@
                                         style="background:#fff;border-bottom:1px solid #ddd;"
                                         role="tablist">
                                         <li class="nav-item">
-                                            <a href="#cssCode" class="nav-link active" data-section="css"
+                                            <a href="#codeSectionIntro" class="nav-link active" data-section="css"
+                                               data-toggle="tab" role="tab" aria-expanded="true">Info</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#cssCode" class="nav-link" data-section="css"
                                                data-toggle="tab" role="tab" aria-expanded="true">CSS</a>
                                         </li>
                                         <li class="nav-item">
@@ -199,10 +204,24 @@
                                             <a href="#schemaCode" class="nav-link " data-section="schema"
                                                data-toggle="tab" role="tab" aria-expanded="true">Schema</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="#seo" class="nav-link " data-section="schema"
+                                               data-toggle="tab" role="tab" aria-expanded="true">SEO</a>
+                                        </li>
                                     </ul>
-                                    <div class="card-body">
+                                    <div class="card-body" style="min-height:50px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active"
+                                                 id="codeSectionIntro"
+                                                 role="tabpanel"
+                                                 data-section="designCode">
+                                                <div class="form-group">
+                                                    <p align="center">
+                                                    You may edit the code of the page here, if it's been enabled.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane"
                                                  id="cssCode"
                                                  role="tabpanel"
                                                  data-section="designCode">
@@ -304,54 +323,35 @@
                                                 </div>
 
                                             </div>
+                                            <div class="tab-pane"
+                                                 id="seo"
+                                                 role="tabpanel"
+                                                 data-section="meta">
+                                                <div class="form-group">
+                                                    <label for="postExcerpt"><strong>Excerpt</strong></label>
+                                                    <textarea type="text" class="form-control" id="excerpt"
+                                                              aria-describedby="postExcerpt"
+                                                              placeholder="Describe the page"
+                                                              name="excerpt"
+                                                              rows="2">{{$page->excerpt}}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="postMetaDescription"><strong>Meta
+                                                            Description</strong></label>
+                                                    <textarea type="text" class="form-control" id="meta_description"
+                                                              aria-describedby="postMetaDescription"
+                                                              placeholder="Describe the page"
+                                                              name="meta_description"
+                                                              rows="2">{{$page->meta_description}}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <label style="margin-bottom:10px;">Meta</label>
-                        <div class="card">
-                            <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
-                                style="background:#fff;border-bottom:1px solid #ddd;"
-                                role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#seo"
-                                       data-section="excerpt"
-                                       role="tab"
-                                       aria-expanded="false">Search Engine Optimization</a>
-                                </li>
-                            </ul>
-                            <div class="meta-fields card-body" id="meta" role="tabpanel"
-                                 align="left" style="margin-bottom:25px;">
-                                <div class="tab-content">
-                                    <div class="tab-pane active"
-                                         id="seo"
-                                         role="tabpanel"
-                                         data-section="meta">
-                                        <div class="form-group">
-                                            <label for="postExcerpt"><strong>Excerpt</strong></label>
-                                            <textarea type="text" class="form-control" id="excerpt"
-                                                      aria-describedby="postExcerpt"
-                                                      placeholder="Describe the page"
-                                                      name="excerpt"
-                                                      rows="2">{{$page->excerpt}}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="postMetaDescription"><strong>Meta
-                                                    Description</strong></label>
-                                            <textarea type="text" class="form-control" id="meta_description"
-                                                      aria-describedby="postMetaDescription"
-                                                      placeholder="Describe the page"
-                                                      name="meta_description"
-                                                      rows="2">{{$page->meta_description}}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endif
                     </div>
 
                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
