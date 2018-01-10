@@ -53,7 +53,7 @@ class SyncPostType extends Command
         File::deleteDirectory($tempdir);
         File::deleteDirectory($themepath . "/.git");
         exec("git clone $url $tempdir");
-        $schema = file_get_contents("/resources/views/theme/templates/$slug/schema.json");
+        $schema = file_get_contents("/resources/temp/resources/views/theme/templates/$slug/schema.json");
         if (Schema::hasTable('pages')) {
             $postType = PostType::where('slug', '=', $slug)->first();
             if ($postType == null) {
