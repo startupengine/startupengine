@@ -588,7 +588,7 @@
         border:1px solid #eee !important;
     }
 
-    select:hover, select:focus, textarea:focus, input:focus, textarea:hover, input:hover, .ace_editor:hover, .checkbox:hover label::before, .checkbox:hover label::after{
+    select:hover, select:focus, textarea:focus, input:focus, textarea:hover, input:hover, .ace_editor:hover, .checkbox:hover label::before, .checkbox:hover label::after, .nav-tabs>.nav-item>.nav-link:hover{
         border:1px solid rgba(0, 0, 0, 0.3) !important;
         transition:border 0.25s;
     }
@@ -618,6 +618,13 @@
         border-radius:5px !important;
         font-size:13px !important;
         padding:10px !important;
+    }
+
+    .nav-tabs .nav-item {
+        display: inline-block;
+    }
+    .nav-tabs>.nav-item>.nav-link {
+        padding:5px 10px;
     }
 
 </style>
