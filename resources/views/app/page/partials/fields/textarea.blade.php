@@ -11,8 +11,7 @@
               rows="2"
               data-field="{{$field}}"
               data-section="{{$key}}"
-              }>
-       <?php
+              }><?php
         if ($page->json !== null) {
             $slug = $value->slug;
             if (isset($page->json()->versions->$variationcount->$key->$slug)) {

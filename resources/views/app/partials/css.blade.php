@@ -469,7 +469,7 @@
     }
 
     .CodeMirror, .CodeMirror-scroll {
-        min-height: 30px !important;
+        min-height: 25px !important;
         height: auto !important;
     }
 
@@ -559,6 +559,30 @@
         border-radius: 25px !important;
         padding: 5px 15px !important;
         margin:7px 20px !important;
+    }
+    .CodeMirror-line {
+        font-size:13px !important;
+    }
+    .CodeMirror {
+        border-radius: 5px !important;
+        font-size:13px !important;
+        min-height:40px !important;
+        padding:10px !important;
+    }
+    textarea {
+        border: 1px solid #eee !important;
+        border-radius: 5px !important;
+        min-height:30px;
+        font-size:13px !important;
+        resize: vertical !important;
+        padding:10px !important;
+
+    }
+
+    input {
+        border-radius:5px !important;
+        font-size:13px !important;
+        padding:10px !important;
     }
 
 </style>
