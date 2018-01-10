@@ -25,6 +25,7 @@
                                 <label for="postTitle">Title</label>
                                 <input value="" type="text" class="form-control" id="title"
                                        aria-describedby="postTitle" placeholder="Enter a title"
+                                       required
                                        name="title">
                             </div>
                         </div>
@@ -32,6 +33,7 @@
                             <div class="form-group">
                                 <label for="postSlug">Slug</label>
                                 <input value="" type="text" class="form-control" id="slug"
+                                       required
                                        aria-describedby="postSlug" placeholder="example-slug" name="slug">
                             </div>
                         </div>
@@ -39,6 +41,7 @@
                             <div class="form-group">
                                 <label for="postStatus">Status</label><br>
                                 <select class="custom-select" id="status" name="status"
+                                        required
                                         aria-describedby="postStatus" style="width:100%;">
                                     <option value="PUBLISHED">Published</option>
                                     <option selected value="DRAFT">Draft</option>

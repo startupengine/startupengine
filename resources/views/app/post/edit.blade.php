@@ -28,6 +28,7 @@
                                 <label for="postTitle">Title</label>
                                 <input autocomplete="off" value="{{$post->title}}" type="text" class="form-control"
                                        id="title"
+                                       required
                                        aria-describedby="postTitle" placeholder="Enter a title"
                                        name="title">
                             </div>
@@ -37,6 +38,7 @@
                                 <label for="postSlug">Slug</label>
                                 <input autocomplete="off" value="{{$post->slug}}" type="text" class="form-control"
                                        id="slug"
+                                       required
                                        aria-describedby="postSlug" placeholder="example-slug" name="slug">
                             </div>
                         </div>
