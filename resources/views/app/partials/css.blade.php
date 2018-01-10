@@ -579,8 +579,13 @@
 
     }
 
-    textarea:focus, input:focus, textarea:hover, input:hover, .ace_editor:hover {
+    select, input, textarea, .ace_editor, .CodeMirror, .checkbox label::before, .checkbox label::after {
+        transition:border 0.25s;
+    }
+
+    select:hover, select:focus, textarea:focus, input:focus, textarea:hover, input:hover, .ace_editor:hover, .checkbox:hover label::before, .checkbox:hover label::after{
         border:1px solid rgba(0, 0, 0, 0.35) !important;
+        transition:border 0.25s;
     }
 
     .editor-toolbar {
