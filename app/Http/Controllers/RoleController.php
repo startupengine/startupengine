@@ -19,6 +19,13 @@ class RoleController extends Controller
         return view('app.role.index')->with('roles', $roles);
     }
 
+    public function addRole(Request $request)
+    {
+        $permissions = Permission::all()->groupBy('guard_name');
+        $role = new Role();
+        return view('app.role.add')->with('role', $role)->with('permissions', $permissions);
+    }
+
     public function edit($id)
     {
         $permissions = Permission::all()->groupBy('guard_name');

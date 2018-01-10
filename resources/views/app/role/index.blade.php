@@ -15,8 +15,9 @@
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-                <h5 style="margin-bottom:25px;">Roles  <a href="/app/new/role" class="btn btn-secondary-outline btn-sm pull-right">New Role &nbsp;<i
-                                class="now-ui-icons ui-1_simple-add"></i></a></h5>
+                <h5 style="margin-bottom:25px;">Roles
+                    @if(\Auth::user()->hasPermissionTo('add roles')){!! button('/app/new/role', "New Role", "new", "pull-right", null, null, "a") !!}@endif
+                </h5>
                 <div class="form-group">
                     <form>
                         <input type="text" value="" placeholder="Search roles..." class="form-control" name="s" id="s">

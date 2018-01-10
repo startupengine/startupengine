@@ -16,10 +16,11 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
-
-                <h5>New User</h5>
-
                 <form action="/app/new/user" method="post">
+
+                <h5>New User @if(\Auth::user()->hasPermissionTo('edit roles')){!! button(null, "Save User", "save", "pull-right", null, null, "button") !!}@endif</h5>
+
+
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
@@ -49,9 +50,6 @@
                                     <option value="ACTIVE">Active</option>
                                     <option selected value="INACTIVE">Inactive</option>
                                 </select>
-                            </div>
-                            <div align="right" style="margin-bottom:35px;">
-                                <button type="submit" class="btn btn-secondary-outline ">Save</button>
                             </div>
                         </div>
 
