@@ -14,10 +14,13 @@
 @section('content')
 
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
+        <form action="/app/new/post" method="post" style="width:100%;">
         <div class="col-md-12 main">
             <div class="col-md-12">
-                <h5>Edit {{ $postType->title }}</h5>
-                <form action="/app/new/post" method="post">
+                <h5>Edit {{ $postType->title }}
+                    {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
+                </h5>
+
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-3">
@@ -75,11 +78,11 @@
                     <div align="right" style="margin-bottom:35px;">
                         <input type="hidden" name="id" value="{{$post->id}}"/>
                         <input type="hidden" name="post_type" value="{{$post->post_type}}"/>
-                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
                     </div>
-                </form>
+
             </div>
         </div>
+        </form>
     </main>
 
     <script>
@@ -108,4 +111,5 @@
             });
         });
     </script>
+
 @endsection

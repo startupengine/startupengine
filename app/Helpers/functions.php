@@ -22,7 +22,11 @@ function button($path, $text, $type = null, $classes = null, $iconmarkup = null,
         $classes = $classes." btn btn-sm btn-round btn-secondary-outline ";
         $iconmarkup = "&nbsp; <i class=\"fa fa-sm fa-edit\"></i>";
     }
-    if($element == null) {
+    if($type == 'save') {
+        $classes = $classes . " btn btn-sm btn-round btn-success ";
+        $iconmarkup = "&nbsp; <i class=\"fa fa-sm fa-check-circle-o\"></i>";
+    }
+        if($element == null) {
         $element = 'a';
     }
 
@@ -31,7 +35,7 @@ function button($path, $text, $type = null, $classes = null, $iconmarkup = null,
     }
 
     if($element == 'button') {
-        $elementMarkup = 'type="button"';
+        $elementMarkup = 'type="submit"';
     }
     else {
         $elementMarkup = null;

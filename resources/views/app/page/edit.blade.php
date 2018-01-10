@@ -29,9 +29,12 @@
 @section('content')
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
+            <form action="/app/edit/page" method="post">
             <div class="col-md-12">
-                <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page</h5>
-                <form action="/app/edit/page" method="post">
+                <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page
+                    {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
+                </h5>
+
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-3">
@@ -356,9 +359,10 @@
                         <button type="submit" class="btn btn-secondary-outline ">Save</button>
                     </div>
 
-                </form>
+
             </div>
         </div>
+        </form>
     </main>
     <script>
 

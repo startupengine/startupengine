@@ -627,4 +627,23 @@
         padding:5px 10px;
     }
 
+
+    .btn-success i {
+        color:#33d695;
+    }
+    .btn-success {
+        background: #fff;
+        color: #48a89a;
+        border: #33d695 solid 1px;
+    }
+    .btn-success:hover {
+        background: #33d695;
+        color:#fff !important;
+        border: #33d695 solid 1px;
+    }
+    .btn-success:hover i {
+        color:#fff;
+    }
+
+
 </style>
