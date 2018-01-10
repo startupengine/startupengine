@@ -355,11 +355,7 @@
                     </div>
 
                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
-                    <div align="right" style="margin-bottom:35px;">
-                        <button type="submit" class="btn btn-secondary-outline ">Save</button>
-                    </div>
-
-
+                
             </div>
         </div>
         </form>
