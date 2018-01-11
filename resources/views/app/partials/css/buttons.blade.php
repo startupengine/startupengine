@@ -96,4 +96,32 @@
         background:#f7f9fd !important;
         color:#2023c5 !important;
     }
+
+    .btn-pill, .btn-pill:visited  {
+        background:#fff !important;
+        border:1px solid royalblue !important;
+    }
+
+    .btn-pill:hover {
+        background:royalblue !important;
+    }
+    .btn-pill i {
+        color:royalblue;
+    }
+    .btn-pill:hover i {
+        color:#fff;
+    }
+
+    .btn-pill {
+        border-radius:15px;
+        height:30px;
+        width:30px;
+        padding: 1px;
+        margin-left:5px;
+    }
+
+    .btn-pill:active,.btn-pill:focus {
+        background: #3b61c4 !important;
+        color:#fff !important;
+    }
 </style>

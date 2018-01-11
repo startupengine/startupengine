@@ -71,6 +71,9 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">Packages
+
+                    <a href="#" class="btn btn-pill raised pull-right" data-toggle="modal"
+                       data-target="#help"><i class="fa fa-question fa-sm"></i></a>
                     {!! button(null, "New Package", "new", "pull-right", null, 'data-toggle="modal" data-target="#newPackage"') !!}
                 </h5>
                 <div class="form-group">
@@ -262,6 +265,29 @@
                         <p><a href="#" id="packageUrl" target="_blank" style="text-decoration: none;">View the git
                                 repository for this package</a></p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Core -->
+    <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">About Packages</h4>
+                </div>
+                <div class="modal-body">
+
+                    {{ csrf_field() }}
+                    <div class="col-md-12">
+                        <p>Packages are git repositories with Startup Engine pages, content models, permissions, and even entirely new functionality.<br><br> You can install a package by simply adding its url here. @if(env('APP_PLATFORM') == 'heroku') Package contents are installed when Startup Engine is deployed. @else Package contents will be available immediately. @endif</p>
+                    </div>
+                </div>
+                <div class="modal-footer" align="right">
+                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
