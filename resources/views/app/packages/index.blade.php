@@ -72,7 +72,7 @@
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">Packages
 
-                    <a href="#" class="btn btn-pill pull-right" data-toggle="modal"
+                    <a href="#" class="btn btn-secondary-outline btn-pill pull-right" data-toggle="modal"
                        data-target="#help"><i class="fa fa-question fa-sm"></i></a>
                     {!! button(null, "New Package", "new", "pull-right", null, 'data-toggle="modal" data-target="#newPackage"') !!}
                 </h5>

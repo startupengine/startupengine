@@ -99,17 +99,6 @@
 
     .btn-pill, .btn-pill:visited  {
         background:#fff !important;
-        border:1px solid royalblue !important;
-    }
-
-    .btn-pill:hover {
-        background:royalblue !important;
-    }
-    .btn-pill i {
-        color:royalblue;
-    }
-    .btn-pill:hover i {
-        color:#fff;
     }
 
     .btn-pill {
@@ -120,12 +109,4 @@
         margin-left:5px;
     }
 
-    .btn-pill:hover{
-        box-shadow:0px 5px 7px rgba(0,0,0,0.1);
-    }
-
-    .btn-pill:active,.btn-pill:focus {
-        background: #3b61c4 !important;
-        color:#fff !important;
-    }
 </style>
