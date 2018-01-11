@@ -207,7 +207,7 @@ if (\Request::is('app/view/*')) {
                                           data-field="{{$key}}"
                                           data-section="{{$section->slug}}">
                                     @foreach($value->options as $optionKey => $optionValue)
-                                            <option value="{{$optionValue}}"> {{ ucfirst($optionValue) }}</option>
+                                            <option value="{{$optionValue}}" @if($input == $optionValue) selected @endif > {{ ucfirst($optionValue) }}</option>
                                     @endforeach
                                 </select>
 
