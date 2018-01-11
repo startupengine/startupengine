@@ -44,6 +44,20 @@
         padding:5px 10px;
     }
 
+    .nav-tabs>.nav-item>.nav-link{
+        border: 1px solid transparent !important;
+        box-shadow:none !important;
+        background: #fff;
+        border-radius: 30px !important;
+    }
+
+    .nav-tabs>.nav-item>.nav-link.active {
+        border: 1px solid #bbb !important;
+        box-shadow:none !important;
+        background: #fff;
+        border-radius: 30px;
+    }
+
     @media screen and (max-width: 991px) {
         #navigation {
             overflow-y:scroll !important;
