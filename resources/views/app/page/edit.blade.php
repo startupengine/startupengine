@@ -355,7 +355,7 @@
                     </div>
 
                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
-                
+
             </div>
         </div>
         </form>

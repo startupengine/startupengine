@@ -151,7 +151,7 @@ class SyncGit extends Command
                             //Inject Pages if they don't yet exist
                             $pages = [];
                             if (Schema::hasTable('pages')) {
-                                if (count(\App\Page::all()) > 1 OR $mode == 'reset' OR $mode == 'pages') {
+                                if (count(\App\Page::all()) < 1 OR $mode == 'reset' OR $mode == 'pages') {
                                     $themepath = \Config::get('view.paths')[0] . '/theme';
                                     $pagepath = \Config::get('view.paths')[0] . '/theme/pages';
                                     foreach (glob($pagepath . "/*") as $filename) {
