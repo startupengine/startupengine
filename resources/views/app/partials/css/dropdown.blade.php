@@ -6,7 +6,7 @@
         border-radius:3px !important;
         top: 0px !important;
         position: absolute !important;
-        transition: left 0s, top 0s;
+        transition: transform 0s, position 0s, top 0s, right 0s !important;
     }
 
     .navbar .dropdown-menu.show {
@@ -44,6 +44,6 @@
     .dropdown-menu {
         z-index: 999999999999999999999999999999 !important;
         background:#fff !important;
-        transition: transform 0s !important;
+        transition: transform 0s, position 0s, top 0s, right 0s !important;
     }
 </style>

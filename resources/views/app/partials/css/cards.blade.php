@@ -24,7 +24,7 @@
     }
 
     #app .card-header:first-of-type {
-        background: #fff !important;
+        background: rgb(255, 250, 245) !important;
         position: relative !important;
         box-shadow: none;
         border-bottom: 1px solid #ddd;
