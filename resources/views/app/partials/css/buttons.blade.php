@@ -120,6 +120,10 @@
         margin-left:5px;
     }
 
+    .btn-pill:hover{
+        box-shadow:0px 5px 7px rgba(0,0,0,0.1);
+    }
+
     .btn-pill:active,.btn-pill:focus {
         background: #3b61c4 !important;
         color:#fff !important;
