@@ -283,7 +283,7 @@
 
                     {{ csrf_field() }}
                     <div class="col-md-12">
-                        <p>Packages are git repositories with Startup Engine pages, content models, permissions, and even entirely new functionality.<br><br> You can add a package by simply adding its url here. @if(env('APP_PLATFORM') == 'heroku') Package contents are installed when Startup Engine is deployed. @else Package contents will be available immediately. @endif</p>
+                        <p>Packages are git repositories with Startup Engine pages, content models, permissions, and even entirely new functionality.<br><br> @if(env('APP_PLATFORM') == 'heroku') Package contents are installed when Startup Engine is deployed. @else Package contents are available immediately after being added. @endif</p>
                     </div>
                 </div>
             </div>
