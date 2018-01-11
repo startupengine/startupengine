@@ -286,9 +286,6 @@
                         <p>Packages are git repositories with Startup Engine pages, content models, permissions, and even entirely new functionality.<br><br> You can add a package by simply adding its url here. @if(env('APP_PLATFORM') == 'heroku') Package contents are installed when Startup Engine is deployed. @else Package contents will be available immediately. @endif</p>
                     </div>
                 </div>
-                <div class="modal-footer" align="right">
-                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
-                </div>
             </div>
         </div>
     </div>
