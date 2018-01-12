@@ -135,14 +135,12 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/{slug}', 'PageController@getPage');
     Route::get('/content/{slug}', ['uses' => 'PostController@getPost', 'as' => 'page']);
-    Route::get('/help', ['uses' => 'HelpController@index', 'as' => 'page']);
-    Route::get('/help/{slug}', ['uses' => 'HelpController@getArticle', 'as' => 'page']);
 
 });
 
 //Modules
 foreach (Module::enabled() as $module){
-    $file = 'app/Modules/'.$module['name'].'/Http/routes.php';
+    $file = '/app/Modules/'.$module['name'].'/Http/routes.php';
     if (file_exists($file)){
         include $file;
     }
