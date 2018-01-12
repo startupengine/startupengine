@@ -40,7 +40,7 @@
         }
 
         .bg-gradient-light {
-            background: linear-gradient(-45deg, rgba(255, 235, 225, 0.71), #e7ecff);
+            background: linear-gradient(45deg, #ff6060, #ff42b3) !important;
         }
 
         .checkbox label::before, .checkbox label::after {
