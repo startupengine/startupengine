@@ -69,7 +69,7 @@ class SyncGit extends Command
                 if(file_exists($tempdir."/resources/views") && ($mode == "default" OR $mode == "reset") ){
                     $files = File::allFiles($tempdir . "/resources/views");
                     foreach ($files as $file) {
-                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                        File::copy((string)$file, str_replace('resources/temp/resources/', 'resources/', (string)$file));
                         echo (string)$file, "\n";
                     }
                 }
@@ -77,8 +77,18 @@ class SyncGit extends Command
                 if(file_exists($tempdir."/resources/views/theme/pages") && $mode == "pages"){
                     $files = File::allFiles($tempdir . "/resources/views/theme/pages");
                     foreach ($files as $file) {
-                        File::copy((string)$file, str_replace('/resources/temp/resources/', '/resources/', (string)$file));
+                        File::copy((string)$file, str_replace('resources/temp/resources/', 'resources/', (string)$file));
                         echo (string)$file, "\n";
+                    }
+                }
+
+                if(file_exists($tempdir."/app/modules") && ($mode == "modules" OR $mode == "reset")){
+                    $files = File::directories($tempdir . "/app/modules");
+                    foreach ($files as $file) {
+                        $oldPath = $file;
+                        $newPath = str_replace('resources/temp/', '', (string)$file);
+                        File::copyDirectory($oldPath, $newPath);
+                        echo "$oldPath copied to\n$newPath \n\n";
                     }
                 }
 

@@ -15,7 +15,7 @@
 @include('app.partials.menu')
 <div id="app">
     <div class="container-fluid" style="margin-top:15px;">
-        <div class="card" style="margin-top:75px !important;min-height: calc(100vh - 30px);">
+        <div class="card" style="margin-top:75px !important;">
             <div class="row">
             @if(isset($flash) && $flash !== null)
                     <div style="width:100%;background:#eee;text-align:center;padding:15px;">
