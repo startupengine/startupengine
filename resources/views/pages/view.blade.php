@@ -61,6 +61,8 @@
 
         @if(View::exists('theme.pages.'.$page->slug.'.scripts'))
             @include('theme.pages.'.$page->slug.'.scripts')
+        @elseif(isset($page->scripts))
+            {!! $page->scripts !!}
         @elseif(file_exists("/resources/views/theme/pages/$page->slug/scripts.html"))
             {!! file_get_contents(("/resources/views/theme/pages/$page->slug/scripts.html")) !!}
         @endif
