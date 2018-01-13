@@ -54,7 +54,6 @@
         @if(View::exists('theme.pages.'.$page->slug.'.body'))
             @include('theme.pages.'.$page->slug.'.body')
         @elseif(file_exists("/resources/views/theme/pages/$page->slug/body.html"))
-            <?php dd(file_get_contents(("/resources/views/theme/pages/$page->slug/body.html")) );?>
             {!! file_get_contents(("/resources/views/theme/pages/$page->slug/body.html?")) !!}
         @elseif(isset($page->html))
             {!! $page->html !!}
