@@ -40,7 +40,7 @@
         }
 
         .bg-gradient-light {
-            background: linear-gradient(45deg, #ff6060, #ff42b3) !important;
+            background: linear-gradient(45deg, #ff6060, #ff426e) !important;
         }
 
         .checkbox label::before, .checkbox label::after {
@@ -89,16 +89,20 @@
         .input-group-addon {
             border-radius:4px 0px 0px 4px;
         }
+
+        .bg-gradient {
+            background:linear-gradient(-45deg, #f1f8ff 0%, #95a7ff30 100%) !important;
+        }
     </style>
 
 @endsection
 
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient-light" style="height:100vh;">
+    <body class="index-page sidebar-collapse bg-gradient" style="height:100vh;">
     <div class="container">
         <div class="row" style="margin-top:5%;">
-            <div class="card card-signup bg-gradient">
+            <div class="card card-signup bg-gradient-light">
                 <form class="form-horizontal " method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
                     <div class="header text-center">

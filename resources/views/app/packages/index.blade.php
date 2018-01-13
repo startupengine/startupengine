@@ -111,12 +111,12 @@
                                        class="btn btn-sm btn-secondary-outline defaultClick"
                                        data-toggle="modal"
                                        data-target="#packageInfo"
-                                       onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');">Details</a>
+                                       onclick=" $('#packageUrl').attr('href', '{{$package->url}}'); $('#packageDescription').html('{{$package->json()->description}}'); $('#packageName').html('{{$package->json()->name}}');  $('#packageVersion').html('Version {{$package->json()->version}}');">View</a>
                                     <a href="/app/update/package/{{ $package->id }}"
                                        class="btn btn-sm btn-secondary-outline"
                                        style="border-left:none!important;" data-toggle="modal"
                                        data-target="#updatePackage"
-                                       onclick=" $('#syncButton').attr('href', $(this).attr('href'));this.href='#';">Update</a>
+                                       onclick=" $('#syncButton').attr('href', $(this).attr('href'));this.href='#';">Edit</a>
                                     <a href="/app/reset/package/{{ $package->id }}"
                                        class="btn btn-sm btn-secondary-outline"
                                        style="border-left:none!important;" data-toggle="modal"
@@ -235,8 +235,7 @@
 
                     {{ csrf_field() }}
                     <div class="col-md-12">
-                        <p>Updating the package may overwrite some of the settings you've tweaked. Be sure to
-                            double-check after the update completes from the settings panel.</p>
+                        <p>Editing the package will result in changes on your site. Be sure you know what you're installing. @if(env('APP_PLATFORM') == 'heroku') Changes will appear the next time the site is deployed.@endif</p>
                     </div>
                 </div>
                 <div class="modal-footer">

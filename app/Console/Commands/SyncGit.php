@@ -182,8 +182,11 @@ class SyncGit extends Command
 
                                         $jsons = [];
                                         //If page.json exists, push the page to the DB
-                                        if (file_exists($pagepath . '/' . $filename . '/page.json')) {
-                                            $json = json_decode(file_get_contents($pagepath . '/' . $filename . '/page.json'));
+                                        $schemaExists = file_exists($pagepath . '/' . $filename . '/page.json');
+                                        if ($schemaExists) {
+                                           echo "\n$filename schema exists. \n";
+                                            $json = file_get_contents($pagepath . '/' . $filename . '/page.json');
+                                            $json = json_decode($json);
                                             $page = Page::where('slug', '=', $json->slug)->first();
                                             if ($page == null) {
                                                 $page = new Page();

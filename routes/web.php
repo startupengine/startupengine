@@ -120,6 +120,23 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
 
 });
 
+
+
+
+//Modules
+foreach (Module::enabled() as $module){
+    $file = '/app/Modules/'.$module['name'].'/Http/Routes/web.php';
+    if (file_exists($file)){
+        include $file;
+    }
+    $file = null;
+    $file = '/app/Modules/'.$module['name'].'/Http/Routes/api.php';
+    if (file_exists($file)){
+        include $file;
+    }
+    $file = null;
+}
+
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
 
@@ -132,16 +149,7 @@ Route::group(['middleware' => ['web']], function () {
     //Pages
     Route::get('/', 'PageController@getHomepage')->name('home');
     Route::get('/home', 'PageController@getHomepage');
-
     Route::get('/{slug}', 'PageController@getPage');
     Route::get('/content/{slug}', ['uses' => 'PostController@getPost', 'as' => 'page']);
 
 });
-
-//Modules
-foreach (Module::enabled() as $module){
-    $file = '/app/Modules/'.$module['name'].'/Http/routes.php';
-    if (file_exists($file)){
-        include $file;
-    }
-}
