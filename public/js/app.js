@@ -1382,7 +1382,6 @@ module.exports = __webpack_require__(57);
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -1407,9 +1406,11 @@ Vue.component('passport-authorized-clients', __webpack_require__(47));
 
 Vue.component('passport-personal-access-tokens', __webpack_require__(52));
 
-var app = new Vue({
+/*
+const app = new Vue({
     el: '#passport'
 });
+*/
 
 /***/ }),
 /* 14 */

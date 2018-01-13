@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use Appstract\Meta\Metable;
 
 class Post extends Model implements AuditableContract
 {
     use SoftDeletes;
 
     use Auditable;
+
+    use Metable;
 
     /**
      * The attributes that should be mutated to dates.

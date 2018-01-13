@@ -10,6 +10,9 @@
     <title>{{ setting('site.title') }} {{ setting('admin.title') }}</title>
     @include('app.partials.css')
     @yield('styles')
+    <!-- Vue -->
+    <script src="https://unpkg.com/vue"></script>
+
 </head>
 <body class="index-page sidebar-collapse">
 @include('app.partials.menu')

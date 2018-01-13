@@ -93,10 +93,6 @@
 
 </script>
 
-<?php /*
-<!-- Vue -->
-<script src="https://unpkg.com/vue"></script>
- */ ?>
 
 <!--   Core JS Files   -->
 <script src="/js/core/popper.min.js" type="text/javascript"></script>

@@ -9,6 +9,8 @@
 @endsection
 
 @section('styles')
+    <script src="https://unpkg.com/vue-multiselect@2.0.6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
     <style>
         .nav-tabs {
             padding-left: 15px;
@@ -23,6 +25,17 @@
             border-color: #ddd !important;
             color: #444 !important;
         }
+
+        #tags {
+            overflow:visible !important;
+        }
+
+        #tags input {
+            height:20px !important;
+        }
+        #tags input:hover,#tags input:focus {
+            border:none !important;
+        }
     </style>
 @endsection
 
@@ -30,10 +43,10 @@
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <form action="/app/edit/page" method="post">
-            <div class="col-md-12">
-                <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page
-                    {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
-                </h5>
+                <div class="col-md-12">
+                    <h5>@if($page->id == null) Add @endif @if($page->id !== null) Edit @endif Page
+                        {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
+                    </h5>
 
                     {{ csrf_field() }}
                     <div class="row">
@@ -92,274 +105,325 @@
                             }?>
                             <?php $variationcount = 1; ?>
                             <?php foreach (range(1, $versions) as $version) {?>
-                                <?php foreach($page->schema()->sections as $section) {
-                                    $checkforslug = $section->slug;
-                                    if(isset($page->json()->versions->$version->$checkforslug)) {
-                                        $true[$version] = $checkforslug;
-                                    }
-                                }?>
-                                <?php if($true !== null && count($true) > 0) {?>
-                                <div class="card variation">
-                                    <div class="card-header">
-                                        Variation {{ $variationcount }}
-                                    </div>
-                                    <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
-                                        style="background:#fff;border-bottom:1px solid #ddd;"
-                                        role="tablist">
+                            <?php foreach ($page->schema()->sections as $section) {
+                                $checkforslug = $section->slug;
+                                if (isset($page->json()->versions->$version->$checkforslug)) {
+                                    $true[$version] = $checkforslug;
+                                }
+                            }?>
+                            <?php if($true !== null && count($true) > 0) {?>
+                            <div class="card variation">
+                                <div class="card-header">
+                                    Variation {{ $variationcount }}
+                                </div>
+                                <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
+                                    style="background:#fff;border-bottom:1px solid #ddd;"
+                                    role="tablist">
+                                    <?php $count = 1; ?>
+                                    @foreach($page->schema()->sections as $key => $value)
+                                        <li class="nav-item">
+                                            <a class="nav-link <?php if ($count == 1) {
+                                                echo "active";
+                                            } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
+                                               data-section="{{$key}}"
+                                               role="tab"
+                                               aria-expanded="false">{{ucfirst($value->title)}}</a>
+                                        </li>
+                                        <?php $count = $count + 1; ?>
+                                    @endforeach
+                                </ul>
+                                <div class="card-body">
+                                    <div class="tab-content text-center">
                                         <?php $count = 1; ?>
-                                        @foreach($page->schema()->sections as $key => $value)
-                                            <li class="nav-item">
-                                                <a class="nav-link <?php if ($count == 1) {
+                                        @foreach($page->schema()->sections as $key => $section)
+                                            @if(isset($section->title))
+                                                <div class="tab-pane <?php if ($count == 1) {
                                                     echo "active";
-                                                } ?>" data-toggle="tab" href="#{{$key.$variationcount}}"
-                                                   data-section="{{$key}}"
-                                                   role="tab"
-                                                   aria-expanded="false">{{ucfirst($value->title)}}</a>
-                                            </li>
-                                            <?php $count = $count + 1; ?>
+                                                } ?>"
+                                                     id="{{$key.$variationcount}}"
+                                                     role="tabpanel"
+                                                     data-section="{{$key}}">
+                                                    @foreach($section->fields as $field => $value)
+
+                                                        @if($value->type == "text")
+                                                            @include('app.page.partials.fields.text')
+                                                        @endif
+                                                        @if($value->type == "textarea")
+                                                            @include('app.page.partials.fields.textarea')
+                                                        @endif
+                                                        @if($value->type == "richtext")
+                                                            @include('app.page.partials.fields.richtext')
+                                                        @endif
+                                                        @if($value->type == "code")
+                                                            @include('app.page.partials.fields.code')
+                                                        @endif
+                                                        @if($value->type == "select")
+                                                            @include('app.page.partials.fields.select')
+                                                        @endif
+
+                                                    @endforeach
+                                                    <?php $count = $count + 1; ?>
+                                                </div>
+                                            @endif
                                         @endforeach
-                                    </ul>
-                                    <div class="card-body">
-                                        <div class="tab-content text-center">
-                                            <?php $count = 1; ?>
-                                            @foreach($page->schema()->sections as $key => $section)
-                                                @if(isset($section->title))
-                                                    <div class="tab-pane <?php if ($count == 1) {
-                                                        echo "active";
-                                                    } ?>"
-                                                         id="{{$key.$variationcount}}"
-                                                         role="tabpanel"
-                                                         data-section="{{$key}}">
-                                                        @foreach($section->fields as $field => $value)
-
-                                                            @if($value->type == "text")
-                                                                @include('app.page.partials.fields.text')
-                                                            @endif
-                                                            @if($value->type == "textarea")
-                                                                @include('app.page.partials.fields.textarea')
-                                                            @endif
-                                                            @if($value->type == "richtext")
-                                                                @include('app.page.partials.fields.richtext')
-                                                            @endif
-                                                            @if($value->type == "code")
-                                                                @include('app.page.partials.fields.code')
-                                                            @endif
-                                                            @if($value->type == "select")
-                                                                @include('app.page.partials.fields.select')
-                                                            @endif
-
-                                                        @endforeach
-                                                        <?php $count = $count + 1; ?>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="card-footer" align="right">
-                                        <a href="#deleteVariation{{$variationcount}}"
-                                           onclick="deleteConfirmation($(this));selectVariation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
-                                           class="btn btn-danger btn-simple btn-round pull-left delete-button"
-                                           data-toggle="modal" data-target="#deleteVariation"
-                                           style="padding: 10px 12px;">
-                                            <i class="now-ui-icons ui-1_simple-remove"></i></a>
-                                        <a href="#duplicate"
-                                           onclick="duplicateVariation($(this));"
-                                           class="btn btn-default btn-simple btn-round duplicate-button">Add
-                                            another variation &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
                                     </div>
                                 </div>
-                                <?php } ?>
+                                <div class="card-footer" align="right">
+                                    <a href="#deleteVariation{{$variationcount}}"
+                                       onclick="deleteConfirmation($(this));selectVariation($(this));//$('#deleteButton').attr('href', $(this).attr('href'));this.href='#';"
+                                       class="btn btn-danger btn-simple btn-round pull-left delete-button"
+                                       data-toggle="modal" data-target="#deleteVariation"
+                                       style="padding: 10px 12px;">
+                                        <i class="now-ui-icons ui-1_simple-remove"></i></a>
+                                    <a href="#duplicate"
+                                       onclick="duplicateVariation($(this));"
+                                       class="btn btn-default btn-simple btn-round duplicate-button">Add
+                                        another variation &nbsp;<i class="now-ui-icons ui-1_simple-add"></i></a>
+                                </div>
+                            </div>
+                            <?php } ?>
                             <?php $variationcount = $variationcount + 1; ?>
                             <?php } ?>
                         @endif
 
                         @if(\Auth::user()->hasPermissionTo('write code fields') && \Auth::user()->hasPermissionTo('edit pages'))
-                        <div>
-                            <div class="meta-fields" id="meta2" role="tabpanel" align="left">
+                            <div class="card" id="tags">
+                                <div class="card-header">Tags</div>
+                                <div class="card-footer" align="left">
+                                    <!-- Vue component -->
+                                    <multiselect v-model="value" tag-placeholder="Add this as new tag"
+                                                 placeholder="Search or add a tag" label="name" track-by="code"
+                                                 :options="options" :multiple="true" :taggable="true" @tag="addTag"
+                                    ></multiselect>
+                                    <textarea name="tags" style="display:none;"/>@{{ value  }}</textarea>
+                                     <?php /* <pre class="language-json"><code>@{{ value  }}</code></pre> */ ?>
 
-                                <label style="margin-bottom:10px;">Code</label>
 
-                                <div class="card variation">
+                                </div>
+                            </div>
+                        @endif
 
-                                    <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
-                                        style="background:#fff;border-bottom:1px solid #ddd;"
-                                        role="tablist">
-                                        <li class="nav-item">
-                                            <a href="#codeSectionIntro" class="nav-link active" data-section="css"
-                                               data-toggle="tab" role="tab" aria-expanded="true">Info</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#cssCode" class="nav-link" data-section="css"
-                                               data-toggle="tab" role="tab" aria-expanded="true">CSS</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#layoutCode" class="nav-link" data-section="layout"
-                                               data-toggle="tab" role="tab" aria-expanded="true">Layout</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#scriptsCode" class="nav-link " data-section="scripts"
-                                               data-toggle="tab" role="tab" aria-expanded="true">Scripts</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#schemaCode" class="nav-link " data-section="schema"
-                                               data-toggle="tab" role="tab" aria-expanded="true">Schema</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#seo" class="nav-link " data-section="schema"
-                                               data-toggle="tab" role="tab" aria-expanded="true">SEO</a>
-                                        </li>
-                                    </ul>
-                                    <div class="card-body" style="min-height:50px;">
-                                        <div class="tab-content">
-                                            <div class="tab-pane active"
-                                                 id="codeSectionIntro"
-                                                 role="tabpanel"
-                                                 data-section="designCode">
-                                                <div class="form-group">
-                                                    <p align="center">
-                                                    You may edit the code of the page here, if it's been enabled.
-                                                    </p>
+                        @if(\Auth::user()->hasPermissionTo('write code fields') && \Auth::user()->hasPermissionTo('edit pages'))
+                            <div>
+                                <div class="meta-fields" id="meta2" role="tabpanel" align="left">
+
+                                    <label style="margin-bottom:10px;">Code</label>
+
+                                    <div class="card variation">
+
+                                        <ul class="nav nav-tabs nav-tabs-primary justify-content-center text-black"
+                                            style="background:#fff;border-bottom:1px solid #ddd;"
+                                            role="tablist">
+                                            <li class="nav-item">
+                                                <a href="#codeSectionIntro" class="nav-link active" data-section="css"
+                                                   data-toggle="tab" role="tab" aria-expanded="true">Info</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#cssCode" class="nav-link" data-section="css"
+                                                   data-toggle="tab" role="tab" aria-expanded="true">CSS</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#layoutCode" class="nav-link" data-section="layout"
+                                                   data-toggle="tab" role="tab" aria-expanded="true">Layout</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#scriptsCode" class="nav-link " data-section="scripts"
+                                                   data-toggle="tab" role="tab" aria-expanded="true">Scripts</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#schemaCode" class="nav-link " data-section="schema"
+                                                   data-toggle="tab" role="tab" aria-expanded="true">Schema</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#seo" class="nav-link " data-section="schema"
+                                                   data-toggle="tab" role="tab" aria-expanded="true">SEO</a>
+                                            </li>
+                                        </ul>
+                                        <div class="card-body" style="min-height:50px;">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active"
+                                                     id="codeSectionIntro"
+                                                     role="tabpanel"
+                                                     data-section="designCode">
+                                                    <div class="form-group">
+                                                        <p align="center">
+                                                            You may edit the code of the page here, if it's been
+                                                            enabled.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane"
+                                                     id="cssCode"
+                                                     role="tabpanel"
+                                                     data-section="designCode">
+                                                    <div class="form-group">
+                                                        <label for="pageCSS"><strong>CSS</strong></label>
+                                                        <textarea type="text" class="form-control"
+                                                                  id="css"
+                                                                  name="css"
+                                                                  aria-describedby="pageCSS"
+                                                                  placeholder=""
+                                                                  name="css"
+                                                                  rows="2">{!! html_entity_decode($page->css) !!}</textarea>
+                                                        <script>
+                                                            var simplemde = new SimpleMDE({
+                                                                element: document.getElementById("css"),
+                                                                status: false,
+                                                                toolbar: false
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane"
+                                                     id="layoutCode"
+                                                     role="tabpanel"
+                                                     data-section="layout">
+                                                    <div class="form-group">
+                                                        <label for="pageScripts"><strong>HTML</strong></label>
+                                                        <textarea type="text" class="form-control"
+                                                                  id="html"
+                                                                  name="html"
+                                                                  aria-describedby="pageScripts"
+                                                                  placeholder=""
+                                                                  name="scripts"
+                                                                  rows="2">{{$page->html}}</textarea>
+                                                        <script>
+                                                            var htmlEditor = new SimpleMDE({
+                                                                element: document.getElementById("html"),
+                                                                status: false,
+                                                                toolbar: false
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane"
+                                                     id="scriptsCode"
+                                                     role="tabpanel"
+                                                     data-section="scripts">
+
+                                                    <div class="form-group">
+                                                        <label for="pageScripts"><strong>Scripts</strong></label>
+                                                        <textarea type="text" class="form-control"
+                                                                  id="scripts"
+                                                                  name="scripts"
+                                                                  aria-describedby="pageScripts"
+                                                                  placeholder=""
+                                                                  name="scripts"
+                                                                  rows="2">{{$page->scripts}}</textarea>
+                                                        <script>
+                                                            var scriptsEditor = new SimpleMDE({
+                                                                element: document.getElementById("scripts"),
+                                                                status: false,
+                                                                toolbar: false
+                                                            });
+                                                        </script>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="tab-pane"
+                                                     id="schemaCode"
+                                                     role="tabpanel"
+                                                     data-section="schema">
+
+                                                    <div class="form-group">
+                                                        <label for="pageScripts"><strong>Schema</strong></label>
+
+
+                                                        <textarea name="schema"></textarea>
+                                                        <div id="schema" style="min-height:350px;"></div>
+                                                        <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js"
+                                                                type="text/javascript" charset="utf-8">
+                                                        </script>
+                                                        <script>
+
+                                                            var editor = ace.edit("schema");
+                                                            var textarea = $('textarea[name="schema"]').hide();
+                                                            editor.setTheme("ace/theme/github");
+                                                            editor.getSession().setMode("ace/mode/json");
+                                                            editor.getSession().setValue(textarea.val());
+                                                            editor.getSession().on('change', function () {
+                                                                textarea.val(editor.getSession().getValue());
+                                                            });
+                                                            @if($page->schema !== null && $page->schema !== 'null')
+                                                                editor.setValue(JSON.stringify({!! $page->schemaToString() !!}, null, '\t'));
+                                                            @endif
+                                                        </script>
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="tab-pane"
+                                                     id="seo"
+                                                     role="tabpanel"
+                                                     data-section="meta">
+                                                    <div class="form-group">
+                                                        <label for="postExcerpt"><strong>Excerpt</strong></label>
+                                                        <textarea type="text" class="form-control" id="excerpt"
+                                                                  aria-describedby="postExcerpt"
+                                                                  placeholder="Describe the page"
+                                                                  name="excerpt"
+                                                                  rows="2">{{$page->excerpt}}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="postMetaDescription"><strong>Meta
+                                                                Description</strong></label>
+                                                        <textarea type="text" class="form-control" id="meta_description"
+                                                                  aria-describedby="postMetaDescription"
+                                                                  placeholder="Describe the page"
+                                                                  name="meta_description"
+                                                                  rows="2">{{$page->meta_description}}</textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane"
-                                                 id="cssCode"
-                                                 role="tabpanel"
-                                                 data-section="designCode">
-                                                <div class="form-group">
-                                                    <label for="pageCSS"><strong>CSS</strong></label>
-                                                    <textarea type="text" class="form-control"
-                                                              id="css"
-                                                              name="css"
-                                                              aria-describedby="pageCSS"
-                                                              placeholder=""
-                                                              name="css"
-                                                              rows="2">{!! html_entity_decode($page->css) !!}</textarea>
-                                                    <script>
-                                                        var simplemde = new SimpleMDE({
-                                                            element: document.getElementById("css"),
-                                                            status: false,
-                                                            toolbar: false
-                                                        });
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane"
-                                                 id="layoutCode"
-                                                 role="tabpanel"
-                                                 data-section="layout">
-                                                <div class="form-group">
-                                                    <label for="pageScripts"><strong>HTML</strong></label>
-                                                    <textarea type="text" class="form-control"
-                                                              id="html"
-                                                              name="html"
-                                                              aria-describedby="pageScripts"
-                                                              placeholder=""
-                                                              name="scripts"
-                                                              rows="2">{{$page->html}}</textarea>
-                                                    <script>
-                                                        var htmlEditor = new SimpleMDE({
-                                                            element: document.getElementById("html"),
-                                                            status: false,
-                                                            toolbar: false
-                                                        });
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane"
-                                                 id="scriptsCode"
-                                                 role="tabpanel"
-                                                 data-section="scripts">
 
-                                                <div class="form-group">
-                                                    <label for="pageScripts"><strong>Scripts</strong></label>
-                                                    <textarea type="text" class="form-control"
-                                                              id="scripts"
-                                                              name="scripts"
-                                                              aria-describedby="pageScripts"
-                                                              placeholder=""
-                                                              name="scripts"
-                                                              rows="2">{{$page->scripts}}</textarea>
-                                                    <script>
-                                                        var scriptsEditor = new SimpleMDE({
-                                                            element: document.getElementById("scripts"),
-                                                            status: false,
-                                                            toolbar: false
-                                                        });
-                                                    </script>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="tab-pane"
-                                                 id="schemaCode"
-                                                 role="tabpanel"
-                                                 data-section="schema">
-
-                                                <div class="form-group">
-                                                    <label for="pageScripts"><strong>Schema</strong></label>
-
-
-                                                    <textarea name="schema"></textarea>
-                                                    <div id="schema" style="min-height:350px;"></div>
-                                                    <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js"
-                                                            type="text/javascript" charset="utf-8">
-                                                    </script>
-                                                    <script>
-
-                                                        var editor = ace.edit("schema");
-                                                        var textarea = $('textarea[name="schema"]').hide();
-                                                        editor.setTheme("ace/theme/github");
-                                                        editor.getSession().setMode("ace/mode/json");
-                                                        editor.getSession().setValue(textarea.val());
-                                                        editor.getSession().on('change', function () {
-                                                            textarea.val(editor.getSession().getValue());
-                                                        });
-                                                        @if($page->schema !== null && $page->schema !== 'null')
-                                                            editor.setValue(JSON.stringify({!! $page->schemaToString() !!}, null, '\t'));
-                                                        @endif
-                                                    </script>
-
-
-                                                </div>
-
-                                            </div>
-                                            <div class="tab-pane"
-                                                 id="seo"
-                                                 role="tabpanel"
-                                                 data-section="meta">
-                                                <div class="form-group">
-                                                    <label for="postExcerpt"><strong>Excerpt</strong></label>
-                                                    <textarea type="text" class="form-control" id="excerpt"
-                                                              aria-describedby="postExcerpt"
-                                                              placeholder="Describe the page"
-                                                              name="excerpt"
-                                                              rows="2">{{$page->excerpt}}</textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="postMetaDescription"><strong>Meta
-                                                            Description</strong></label>
-                                                    <textarea type="text" class="form-control" id="meta_description"
-                                                              aria-describedby="postMetaDescription"
-                                                              placeholder="Describe the page"
-                                                              name="meta_description"
-                                                              rows="2">{{$page->meta_description}}</textarea>
-                                                </div>
-                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
                     </div>
 
                     <input type="hidden" name="id" id="id" value="{{$page->id}}" ?>
 
-            </div>
+                </div>
         </div>
         </form>
     </main>
+    <script>
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default
+            },
+            data: {
+                value: [
+                    @if($page->tagNames() !== null)
+                        <?php $total = count($page->tagNames()); ?>
+                        <?php $tagcount = 1;?>
+
+                        @foreach($page->tagNames() as $tag)
+                            { name: '{{$tag}}' }@if($count >= $total = 1) , @endif
+                            <?php $tagcount = $tagcount + 1;?>
+                        @endforeach
+
+                    @endif
+                ],
+                options: [
+                ]
+            },
+            methods: {
+                addTag (newTag) {
+                    const tag = {
+                        name: newTag,
+                        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+                    }
+                    this.options.push(tag)
+                    this.value.push(tag)
+                }
+            }
+        }).$mount('#tags')
+    </script>
     <script>
 
         var currentCard;
@@ -444,18 +508,18 @@
 
         $(document).ready(function () {
 
-            $( ".nav-link" ).click(function() {
+            $(".nav-link").click(function () {
                 $(".nav-link").removeClass("active");
                 $(this).addClass("active");
             });
 
-            $( ".duplicate-button" ).click(function() {
+            $(".duplicate-button").click(function () {
                 //$(this).addClass("active");
                 //duplicateVariation($(this));
                 console.log($(this));
             });
 
-            $( ".delete-button" ).click(function() {
+            $(".delete-button").click(function () {
                 //$(this).addClass("active");
                 //deleteVariation($(this));
                 console.log($(this));
@@ -483,7 +547,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();" data-toggle="modal" data-target="#deleteVariation">Delete</a>
+                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();"
+                       data-toggle="modal" data-target="#deleteVariation">Delete</a>
                 </div>
             </div>
         </div>

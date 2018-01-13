@@ -171,6 +171,7 @@ return [
         //Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
         Appstract\Meta\MetaServiceProvider::class,
+        \Conner\Tagging\Providers\TaggingServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Page;
 use App\Role;
 
+
 class PageController
 {
 
@@ -46,11 +47,13 @@ class PageController
     public function editPage(Request $request, $id)
     {
         $page = \App\Page::find($id);
+        //dd($page->tagNames());
         return view('app.page.edit')->with('page', $page);
     }
 
     public function savePage(Request $request)
     {
+        //dd(json_decode($request->input('tags')));
         if ($request->input('id') !== null) {
             $page = \App\Page::find($request->input('id'));
         } else {
@@ -61,6 +64,15 @@ class PageController
 
         $page->excerpt = $request->input('excerpt');
         $page->meta_description = $request->input('meta_description');
+
+        $tags = json_decode($request->input('tags'));
+        if($request->input('tags') !== null && $tags == true) {
+            $page->untag();
+            foreach($tags as $tag){
+                $page->tag($tag->name);
+            }
+        }
+        //dd($page->tagNames());
 
         if ($request->input('json') !== null  && \Auth::user()->hasPermissionTo('edit pages')) {
             $page->json = json_encode($request->input('json'));

@@ -35,6 +35,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "owen-it/laravel-auditing": "^4.1",
         "php-http/guzzle6-adapter": "^1.1",
+        "rtconner/laravel-tagging": "~2.2",
         "spatie/laravel-permission": "^2.7",
         "wikimedia/composer-merge-plugin": "^1.4"
     },

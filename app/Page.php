@@ -7,10 +7,17 @@ use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Appstract\Meta\Metable;
+use \Conner\Tagging\Taggable;
 
 class Page extends Model implements AuditableContract
 {
     use Auditable;
+
+    use Metable;
+
+    use Taggable;
+
 
     /**
      * The attributes that should be mutated to dates.
