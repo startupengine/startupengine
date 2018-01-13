@@ -34,7 +34,6 @@
     @include('theme.pages.'.$page->slug.'.header')
 @endif
 
-
 @if(View::exists('theme.pages.'.$page->slug.'.body'))
     @include('theme.pages.'.$page->slug.'.body')
 @endif
@@ -49,10 +48,6 @@
 @endif
 @if(View::exists('theme.pages.'.$page->slug.'.footer'))
     @include('theme.pages.'.$page->slug.'.footer')
-@endif
-
-@if($page->scripts !== null)
-    {!! $page->scripts !!}
 @endif
 
 @if(View::exists('theme.templates.global.footer') && $page->show_footer == true)
