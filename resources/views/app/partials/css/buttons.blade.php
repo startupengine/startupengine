@@ -56,17 +56,17 @@
     }
 
     .btn-success i {
-        color:#33d695;
+        color:#41b883;
     }
     .btn-success {
         background: #fff;
-        color: #48a89a;
-        border: #33d695 solid 1px;
+        color: #41b883;
+        border: #41b883 solid 1px;
     }
     .btn-success:hover {
-        background: #33d695;
+        background: #41b883;
         color:#fff !important;
-        border: #33d695 solid 1px;
+        border: #41b883 solid 1px;
     }
     .btn-success:hover i {
         color:#fff;
