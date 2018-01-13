@@ -60,13 +60,13 @@
     }
     .btn-success {
         background: #fff;
-        color: #41b883;
-        border: #41b883 solid 1px;
+        color: #41b883 !important;
+        border: #41b883 solid 1px !important;
     }
-    .btn-success:hover {
-        background: #41b883;
+    .btn-success:hover, .btn-success:focus {
+        background: #41b883 !important;
         color:#fff !important;
-        border: #41b883 solid 1px;
+        border: #41b883 solid 1px !important;
     }
     .btn-success:hover i {
         color:#fff;
