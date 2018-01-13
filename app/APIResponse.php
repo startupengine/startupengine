@@ -100,7 +100,7 @@ class APIResponse extends Model
         $items = Post::select(\DB::raw($fields))
             ->where('status', '=', 'PUBLISHED')
             ->limit($limit)
-            ->orderBy('created_at')
+            ->orderBy('published_at', 'desc')
             ->where('published_at', '<', Carbon::now()->toDateTimeString())
             ->get();
 

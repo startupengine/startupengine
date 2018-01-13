@@ -48,6 +48,7 @@
                     <tbody>
                     @foreach($posts as $post)
                         <tr>
+
                             <td class="hiddenOnMobile updated_at_column"><span
                                         class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</span>
                             </td>
@@ -55,8 +56,12 @@
                                         class="badge badge-status<?php if ($post->status !== "PUBLISHED") {
                                             echo "-disabled";
                                         } ?>">{{ $post->status }}</span></td>
-                            <td>{{ ucfirst($post->title) }}<span><br><span style="opacity: 0.4;">{{ $post->postType()->title }}
-                                        <span class="hiddenOnDesktop"> ({{ ucfirst(strtolower($post->status)) }})</span></span></span>
+                            <td>
+                                {{ ucfirst($post->title) }}<br>
+                                <span style="opacity: 0.5;">{{ $post->postType()->title }}</span>
+                                <span  style="opacity: 0.5;">published {{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->published_at))->format('j/d/Y') }}</span>
+
+
                             </td>
                             <td align="right">
 

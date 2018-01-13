@@ -35,4 +35,15 @@
         margin-top: 10px !important;
         margin-bottom: 10px !important;
     }
+
+    .badge-type {
+        min-width: 75px;
+        padding: 3px 8px;
+        font-weight: 400;
+        border-radius: 4px;
+
+        border-color: rgba(65, 105, 225, 0.63);
+        color:royalblue;
+        border-radius:4px;
+    }
 </style>
