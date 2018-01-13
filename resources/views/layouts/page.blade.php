@@ -30,27 +30,18 @@
 @if(View::exists('theme.templates.global.header'))
     @include('theme.templates.global.header')
 @endif
-@if(View::exists('theme.pages.'.$page->slug.'.header'))
-    @include('theme.pages.'.$page->slug.'.header')
-@endif
-
-@if(View::exists('theme.pages.'.$page->slug.'.body'))
-    @include('theme.pages.'.$page->slug.'.body')
-@endif
 
 @yield('content')
 
 @if(View::exists('theme.templates.global.menu'))
     @include('theme.templates.global.menu')
 @endif
+
 @if(View::exists('theme.templates.global.scripts'))
     @include('theme.templates.global.scripts')
 @endif
-@if(View::exists('theme.pages.'.$page->slug.'.footer'))
-    @include('theme.pages.'.$page->slug.'.footer')
-@endif
 
-@if(View::exists('theme.templates.global.footer') && $page->show_footer == true)
+@if(View::exists('theme.templates.global.footer'))
     @include('theme.templates.global.footer')
 @endif
 
