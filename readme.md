@@ -13,6 +13,7 @@ A beautiful & open-source platform for launching startups.
 - [Features](#features)   
 - [Deploying](#deploying)
 - [Support](#support)
+- [Security](#security)
 - [License](#license)
 
 # Screenshots
@@ -87,6 +88,12 @@ Change these after logging in.
 Questions/comments? Chime in on [the official support chat](https://support.startupengine.io/).
 
 Found a bug? Submit an issue here on Github.
+
+# Security 
+
+If you discover a security vulnerability within StartupEngine, please send an e-mail to startupengine.io@domainsbyproxy.com
+ 
+All security vulnerabilities will be promptly addressed.
 
 # License
 
