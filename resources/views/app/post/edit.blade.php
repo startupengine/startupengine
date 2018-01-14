@@ -90,22 +90,22 @@
 
                     @include('app.partials.post-fields')
 
-                    @if(\Auth::user()->hasPermissionTo('edit posts'))
-                        <div class="card" id="tags">
-                            <div class="card-header">Tags</div>
-                            <div class="card-footer" align="left">
-                                <!-- Vue component -->
-                                <multiselect v-model="value" tag-placeholder="Add this as new tag"
-                                             placeholder="Search or add a tag" label="name" track-by="code"
-                                             :options="options" :multiple="true" :taggable="true" @tag="addTag"
-                                ></multiselect>
-                                <textarea name="tags" style="display:none;"/>@{{ value  }}</textarea>
-                                <?php /* <pre class="language-json"><code>@{{ value  }}</code></pre> */ ?>
+
+                    <div class="card" id="tags">
+                        <div class="card-header">Tags</div>
+                        <div class="card-footer" align="left">
+                            <!-- Vue component -->
+                            <multiselect v-model="value" tag-placeholder="Add this as new tag"
+                                         placeholder="Search or add a tag" label="name" track-by="code"
+                                         :options="options" :multiple="true" :taggable="true" @tag="addTag"
+                            ></multiselect>
+                            <textarea name="tags" style="display:none;"/>@{{ value  }}</textarea>
+                            <?php /* <pre class="language-json"><code>@{{ value  }}</code></pre> */ ?>
 
 
-                            </div>
                         </div>
-                    @endif
+                    </div>
+
 
 
                 <div align="right" style="margin-bottom:35px;">
