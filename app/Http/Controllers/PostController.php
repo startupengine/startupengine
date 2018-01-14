@@ -67,6 +67,13 @@ class PostController extends Controller
             if($request->input('status') == null) {
                 $post->status = 'DRAFT';
             }
+            $tags = json_decode($request->input('tags'));
+            if($request->input('tags') !== null && $tags == true) {
+                $post->untag();
+                foreach($tags as $tag){
+                    $post->tag($tag->name);
+                }
+            }
             $post->save();
             return redirect('/app/content');
         }

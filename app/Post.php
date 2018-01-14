@@ -8,6 +8,7 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Appstract\Meta\Metable;
+use \Conner\Tagging\Taggable;
 
 class Post extends Model implements AuditableContract
 {
@@ -16,6 +17,8 @@ class Post extends Model implements AuditableContract
     use Auditable;
 
     use Metable;
+
+    use Taggable;
 
     /**
      * The attributes that should be mutated to dates.

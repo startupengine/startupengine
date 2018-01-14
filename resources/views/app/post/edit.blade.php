@@ -9,6 +9,20 @@
 @endsection
 
 @section('styles')
+    <script src="https://unpkg.com/vue-multiselect@2.0.6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
+    <style>
+        #tags {
+            overflow:visible !important;
+        }
+
+        #tags input {
+            height:20px !important;
+        }
+        #tags input:hover,#tags input:focus {
+            border:none !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -74,10 +88,27 @@
 
                     </div>
 
-
                     @include('app.partials.post-fields')
 
-                    <div align="right" style="margin-bottom:35px;">
+                    @if(\Auth::user()->hasPermissionTo('edit posts'))
+                        <div class="card" id="tags">
+                            <div class="card-header">Tags</div>
+                            <div class="card-footer" align="left">
+                                <!-- Vue component -->
+                                <multiselect v-model="value" tag-placeholder="Add this as new tag"
+                                             placeholder="Search or add a tag" label="name" track-by="code"
+                                             :options="options" :multiple="true" :taggable="true" @tag="addTag"
+                                ></multiselect>
+                                <textarea name="tags" style="display:none;"/>@{{ value  }}</textarea>
+                                <?php /* <pre class="language-json"><code>@{{ value  }}</code></pre> */ ?>
+
+
+                            </div>
+                        </div>
+                    @endif
+
+
+                <div align="right" style="margin-bottom:35px;">
                         <input type="hidden" name="id" value="{{$post->id}}"/>
                         <input type="hidden" name="post_type" value="{{$post->post_type}}"/>
                     </div>
@@ -86,6 +117,40 @@
         </div>
         </form>
     </main>
+
+    <script>
+        new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default
+            },
+            data: {
+                value: [
+                        @if($post->tagNames() !== null)
+                        <?php $total = count($post->tagNames()); ?>
+                        <?php $tagcount = 1;?>
+
+                        @foreach($post->tagNames() as $tag)
+                    { name: '{{$tag}}' }@if($tagcount >= $total = 1) , @endif
+                    <?php $tagcount = $tagcount + 1;?>
+                    @endforeach
+
+                    @endif
+                ],
+                options: [
+                ]
+            },
+            methods: {
+                addTag (newTag) {
+                    const tag = {
+                        name: newTag,
+                        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+                    }
+                    this.options.push(tag)
+                    this.value.push(tag)
+                }
+            }
+        }).$mount('#tags')
+    </script>
 
     <script>
 

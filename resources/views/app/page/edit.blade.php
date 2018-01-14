@@ -186,7 +186,7 @@
                             <?php } ?>
                         @endif
 
-                        @if(\Auth::user()->hasPermissionTo('write code fields') && \Auth::user()->hasPermissionTo('edit pages'))
+                        @if(\Auth::user()->hasPermissionTo('edit pages'))
                             <div class="card" id="tags">
                                 <div class="card-header">Tags</div>
                                 <div class="card-footer" align="left">
@@ -403,7 +403,7 @@
                         <?php $tagcount = 1;?>
 
                         @foreach($page->tagNames() as $tag)
-                            { name: '{{$tag}}' }@if($count >= $total = 1) , @endif
+                            { name: '{{$tag}}' }@if($tagcount >= $total = 1) , @endif
                             <?php $tagcount = $tagcount + 1;?>
                         @endforeach
 
