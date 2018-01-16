@@ -115,22 +115,11 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
     });
 
-    //Modules
-    //Route::get('/app/modules', 'ModuleController@index');
-
 });
-
-
-
 
 //Modules
 foreach (Module::enabled() as $module){
     $file = '/app/Modules/'.$module['name'].'/Http/Routes/web.php';
-    if (file_exists($file)){
-        include $file;
-    }
-    $file = null;
-    $file = '/app/Modules/'.$module['name'].'/Http/Routes/api.php';
     if (file_exists($file)){
         include $file;
     }
