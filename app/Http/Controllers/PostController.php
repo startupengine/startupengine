@@ -119,4 +119,23 @@ class PostController extends Controller
         }
         return view('help.category')->with('articles', $posts)->with('category', $category);
     }
+
+    public function getItem($slug) {
+        $item = Post::where('slug', '=',$slug)->where('post_type', '=', 'post')->where('status', '=', 'PUBLISHED')->first();
+        if ($item == null) {
+            abort(404);
+        }
+        return view('posts.view')->with('post', $item);
+    }
+
+    public function getItemsByTag($postType = null, $slug) {
+        if($postType == null) {
+            $postType = 'post';
+        }
+        $item = Post::where('type', '=', $postType)->andWhere('slug', '=', $slug)->first();
+        if ($item == null) {
+            abort(404);
+        }
+        return view('content::view')->with('item', $item);
+    }
 }
