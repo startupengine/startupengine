@@ -123,11 +123,13 @@ foreach (Module::enabled() as $module){
     if (file_exists($file)){
         include $file;
     }
-    $file = null;
 }
 
 //Web Middleware
 Route::group(['middleware' => ['web']], function () {
+
+    Route::get('/content/{slug}', 'PostController@getItem');
+    Route::get('/content/tag/{tag}', 'PostController@getItemsByTag');
 
     //Auth
     Route::get('/login', 'AppController@login')->name('login');
@@ -139,6 +141,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'PageController@getHomepage')->name('home');
     Route::get('/home', 'PageController@getHomepage');
     Route::get('/{slug}', 'PageController@getPage');
-    Route::get('/content/{slug}', ['uses' => 'PostController@getPost', 'as' => 'page']);
 
 });

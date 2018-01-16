@@ -24,13 +24,17 @@ Route::post('/analytics/event/', 'APIController@saveEvent');
 Route::get('/page/{slug}', 'APIController@getPage');
 Route::get('/page/{slug}/random', 'APIController@getRandomPageVariation');
 Route::get('/random/', 'APIController@getRandomItem');
+
+//Content
+Route::get('content/item', 'APIController@getItem');
+Route::get('content/items', 'APIController@getItems');
+
+//Search
 Route::get('/search/', 'APIController@search');
 
 //Github
 Route::get('repo/github/json/{filepath?}', 'GithubController@json')->where('filepath', '(.*)');
-
 Route::get('repo/github/raw/{filepath?}', 'GithubController@raw')->where('filepath', '(.*)');
-
 Route::get('repo/github/info/{filepath?}', 'GithubController@info')->where('filepath', '(.*)');
 
 //Modules
@@ -39,5 +43,4 @@ foreach (Module::enabled() as $module){
     if (file_exists($file)){
         include $file;
     }
-    $file = null;
 }
