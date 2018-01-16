@@ -9,62 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class APIResponse extends Model
 {
 
-    public function getItemsByCategory($request)
-    {
-        $type = $request->input('type');
-        $limit = $request->input('limit');
-        if ($limit == null) {
-            $limit = 10;
-        }
-        $category = $request->input('category');
-        $category = Category::where('slug', '=', $category)->first();
-        $fields = 'id, status, slug';
-        if (\Schema::hasColumn($type, 'name')) {
-            $fields = $fields . ', name';
-        }
-        if (\Schema::hasColumn($type, 'title')) {
-            $fields = $fields . ', title';
-        }
-        if (\Schema::hasColumn($type, 'key')) {
-            $fields = $fields . ', key';
-        }
-        if (\Schema::hasColumn($type, 'value')) {
-            $fields = $fields . ', value';
-        }
-        if (\Schema::hasColumn($type, 'display_name')) {
-            $fields = $fields . ', display_name';
-        }
-        if (\Schema::hasColumn($type, 'type')) {
-            $fields = $fields . ', type';
-        }
-        if (\Schema::hasColumn($type, 'post_type')) {
-            $fields = $fields . ', post_type';
-        }
-        if (\Schema::hasColumn($type, 'json')) {
-            $fields = $fields . ', json';
-        }
-        $items = Post::select(\DB::raw($fields))
-            ->where('status', '=', 'PUBLISHED')
-            ->where('category_id', '=', $category->id)
-            ->limit($limit)
-            ->orderBy('created_at')
-            ->get();
-        $items->transform(function ($item, $key) {
-            if ($item->image() !== null) {
-                $item->image = $item->content()->body->image;
-            }
-            if (isset($item->slug)) {
-                $item->slug = '/content/' . $item->slug;
-            }
-            return $item;
-        });
-
-        $response = (json_decode(json_encode($items->toArray())));
-
-        return response()
-            ->json($response);
-    }
-
     public function getItems($request)
     {
         $type = $request->input('type');
@@ -102,7 +46,7 @@ class APIResponse extends Model
             ->limit($limit)
             ->orderBy('published_at', 'desc')
             ->where('published_at', '<', Carbon::now()->toDateTimeString())
-            ->get();
+            ->jsonPaginate();
 
         $items->transform(function ($item, $key) {
             if (isset($item->slug)) {
@@ -115,8 +59,6 @@ class APIResponse extends Model
         });
 
         $response = (json_decode(json_encode($items->toArray())));
-
-
 
         return response()
             ->json($response);
