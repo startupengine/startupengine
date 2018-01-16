@@ -96,6 +96,7 @@ class SyncGit extends Command
                 $package->json = file_get_contents($tempdir . '/startup.json');
                 $contents = json_decode(file_get_contents($tempdir . '/startup.json'));
                 $package->description = $contents->description;
+
                 $package->save();
 
 
@@ -136,7 +137,7 @@ class SyncGit extends Command
                             if (Schema::hasTable('post_types')) {
                                 $themepath = \Config::get('view.paths')[0] . '/theme';
                                 $json = json_decode(file_get_contents($tempdir . '/startup.json'));
-                                if (isset($json->content_types)) {
+                                if (isset($json->content_types->active)) {
                                     $schemas = $json->content_types->active;
                                     foreach ($schemas as $schema => $schemaValue) {
                                         $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
@@ -147,9 +148,10 @@ class SyncGit extends Command
                                             }
                                             if ($entry == null OR $mode == 'reset' OR $mode == 'schema') {
                                                 $contents = json_decode(file_get_contents($schemapath));
-                                                $entry->json = json_encode($contents);
+                                                $title = $contents->title;
+                                                $entry->title = $title;
                                                 $entry->slug = $schema;
-                                                $entry->title = $contents->title;
+                                                $entry->json = json_encode($contents);
                                                 $entry->enabled = true;
                                                 $entry->save();
                                             }
