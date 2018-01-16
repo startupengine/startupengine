@@ -108,18 +108,6 @@ class PostController extends Controller
         else { abort(500); }
     }
 
-    public function getCategory($slug) {
-        $category = Category::where('slug', '=', $slug)->first();
-        if ($category == null) {
-            abort(404);
-        }
-        $posts =  Post::where('category_id', '=', $category->id)->get();
-        if ($posts == null) {
-            abort(404);
-        }
-        return view('help.category')->with('articles', $posts)->with('category', $category);
-    }
-
     public function getItem($slug) {
         $item = Post::where('slug', '=',$slug)->where('post_type', '=', 'post')->where('status', '=', 'PUBLISHED')->first();
         if ($item == null) {
