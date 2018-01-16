@@ -78,24 +78,6 @@ class APIController extends Controller
             ->json($event);
     }
 
-    public function getItems(Request $request)
-    {
-        $items = new APIResponse();
-        return $items->getItems($request);
-    }
-
-    public function getItemsByCategory(Request $request)
-    {
-        $items = new APIResponse();
-        return $items->getItemsByCategory($request);
-    }
-
-    public function getItem(Request $request)
-    {
-        $items = new APIResponse();
-        return $items->getItem($request);
-    }
-
     public function getPage(Request $request, $slug)
     {
         $items = new APIResponse();
