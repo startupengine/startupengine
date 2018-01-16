@@ -41,12 +41,33 @@ class APIResponse extends Model
         if (\Schema::hasColumn($type, 'json')) {
             $fields = $fields . ', json';
         }
-        $items = Post::select(\DB::raw($fields))
-            ->where('status', '=', 'PUBLISHED')
-            ->limit($limit)
-            ->orderBy('published_at', 'desc')
-            ->where('published_at', '<', Carbon::now()->toDateTimeString())
-            ->jsonPaginate();
+
+        if($request->input('tag') !== null) {
+            $tags = $request->input('tag');
+
+        }
+        else {
+            $tags = null;
+        }
+
+        if($tags !== null) {
+            $items = Post::select(\DB::raw($fields))
+                ->where('status', '=', 'PUBLISHED')
+                ->limit($limit)
+                ->orderBy('published_at', 'desc')
+                ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                ->withAnyTag($tags)
+                ->jsonPaginate();
+        }
+
+        else {
+            $items = Post::select(\DB::raw($fields))
+                ->where('status', '=', 'PUBLISHED')
+                ->limit($limit)
+                ->orderBy('published_at', 'desc')
+                ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                ->jsonPaginate();
+        }
 
         $items->transform(function ($item, $key) {
             if (isset($item->slug)) {

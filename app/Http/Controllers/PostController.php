@@ -7,6 +7,7 @@ use App\Post;
 use App\Role;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use App\PostType;
+use App\Page;
 
 class PostController extends Controller
 {
@@ -116,14 +117,9 @@ class PostController extends Controller
         return view('posts.view')->with('post', $item);
     }
 
-    public function getItemsByTag($postType = null, $slug) {
-        if($postType == null) {
-            $postType = 'post';
-        }
-        $item = Post::where('type', '=', $postType)->andWhere('slug', '=', $slug)->first();
-        if ($item == null) {
-            abort(404);
-        }
-        return view('content::view')->with('item', $item);
+
+    public function getItemsByTag($tag) {
+        $page = Page::where('slug', '=', 'articles')->where('status','=','ACTIVE')->firstOrFail();
+        return view('pages.view')->with('page', $page)->with('tag', $tag);
     }
 }
