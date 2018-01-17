@@ -17,6 +17,9 @@ class Tag extends Model
     public function content()
     {
         $post = \App\Post::where('slug', '=', $this->slug)->where('status', '=', 'PUBLISHED')->first();
-        return $post->content();
+        if($post !== null) {
+            return $post->content();
+        }
+        else { return null; }
     }
 }
