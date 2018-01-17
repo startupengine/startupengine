@@ -12,6 +12,11 @@ class APIResponse extends Model
     public function getItems($request)
     {
         $type = $request->input('type');
+        $posttype = $request->input('post_type');
+        if($type == null){$type =  'posts'; }
+        if($type == 'posts' && $posttype == null){
+            $posttype  = 'post';
+        }
         $limit = $request->input('limit');
         if ($limit == null) {
             $limit = 10;
@@ -50,9 +55,10 @@ class APIResponse extends Model
             $tags = null;
         }
 
-        if($tags !== null) {
+        if($tags !== null && $tags !== '') {
             $items = Post::select(\DB::raw($fields))
                 ->where('status', '=', 'PUBLISHED')
+                ->where('post_type', '=', $posttype)
                 ->limit($limit)
                 ->orderBy('published_at', 'desc')
                 ->where('published_at', '<', Carbon::now()->toDateTimeString())
@@ -63,6 +69,7 @@ class APIResponse extends Model
         else {
             $items = Post::select(\DB::raw($fields))
                 ->where('status', '=', 'PUBLISHED')
+                ->where('post_type', '=', $posttype)
                 ->limit($limit)
                 ->orderBy('published_at', 'desc')
                 ->where('published_at', '<', Carbon::now()->toDateTimeString())
@@ -87,7 +94,8 @@ class APIResponse extends Model
 
     public function getRandomItem($request)
     {
-        $type = $request->input('type');
+        $type = $request->input('post_type');
+        if($type == null){$type =  'posts'; }
         $limit = $request->input('limit');
         if ($limit == null) {
             $limit = 10;
