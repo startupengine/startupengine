@@ -26,14 +26,14 @@
             color: #444 !important;
         }
 
-        #tags {
+        .tag-select {
             overflow:visible !important;
         }
 
-        #tags input {
+        .tag-select input {
             height:20px !important;
         }
-        #tags input:hover,#tags input:focus {
+        .tag-select input:hover,.tag-select input:focus {
             border:none !important;
         }
     </style>
@@ -160,6 +160,9 @@
                                                         @if($value->type == "select")
                                                             @include('app.page.partials.fields.select')
                                                         @endif
+                                                        @if($value->type == "tags")
+                                                            @include('app.page.partials.fields.tags')
+                                                        @endif
 
                                                     @endforeach
                                                     <?php $count = $count + 1; ?>
@@ -189,7 +192,7 @@
                         @if(\Auth::user()->hasPermissionTo('edit pages'))
                             <div class="card" id="tags">
                                 <div class="card-header">Tags</div>
-                                <div class="card-footer" align="left">
+                                <div class="card-footer tag-select" align="left">
                                     <!-- Vue component -->
                                     <multiselect v-model="value" tag-placeholder="Add this as new tag"
                                                  placeholder="Search or add a tag" label="name" track-by="code"

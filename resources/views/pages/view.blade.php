@@ -35,7 +35,8 @@
 
         @if(View::exists('theme.pages.'.$page->slug.'.css'))
             @include('theme.pages.'.$page->slug.'.css')
-        @elseif($page->css !== null)
+        @endif
+        @if($page->css !== null)
             <?php echo $page->css; ?>
         @elseif(View::exists('theme.pages.'.$page->slug.'/css.html'))
             @include('theme.pages.'.$page->slug.'/css.html')
