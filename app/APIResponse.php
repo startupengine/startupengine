@@ -83,6 +83,7 @@ class APIResponse extends Model
             if($item->content() !== null){
                 $item->content = $item->content();
             }
+            $item->tags;
             return $item;
         });
 
