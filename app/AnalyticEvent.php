@@ -14,4 +14,5 @@ class AnalyticEvent extends Model
     protected $hidden = [
         'id', "segments", "decoded_path", 'cookies', "encodings", "base_path", "user_id", "client_ips", "languages", "script_name", "fingerprint", "headers", "input", "content", "attributes", "user_email", "user_name", "server", "instance", "json", "scheme_and_host", "query_string", "full_url", "deleted_at", "user_agent", "updated_at", "scheme", "request_uri", "session", "session_id", "client_ip", "client_locale", "event_data"
     ];
+
 }

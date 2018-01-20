@@ -212,7 +212,6 @@ class APIResponse extends Model
             return $item;
         });
 
-
         $response = (json_decode(json_encode($items->toArray())));
 
         return response()
