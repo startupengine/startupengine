@@ -44,17 +44,17 @@ class APIController extends Controller
         $event->base_path = $request->getBasePath();
         $event->cookies = json_encode($request->getBasePath());
         $event->json = json_encode($request->json());
-        if ($request->user() !== null) {
+        if ($request->input('user_id') !== null) {
             $event->user_id = $request->input('user_id');
         } else {
             $event->user_id = null;
         }
-        if ($request->user() !== null) {
+        if ($request->input('user_email') !== null) {
             $event->user_email = $request->input('user_email');
         } else {
             $event->user_email = null;
         }
-        if ($request->user() !== null) {
+        if ($request->input('user_name') !== null) {
             $event->user_name = $request->input('user_name');
         } else {
             $event->user_name = null;
