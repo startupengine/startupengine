@@ -26,23 +26,9 @@
             height: 100%;
         }
 
-        @media (min-width: 991px) {
-            .hiddenOnMobile {
-                display: block;
-            }
-
-            .hiddenOnDesktop {
-                display: none;
-            }
-        }
-
         @media (max-width: 991px) {
-            .hiddenOnMobile {
-                display: none;
-            }
-
-            .hiddenOnDesktop {
-                display: block;
+            .graphical-report__export{
+                display:none !important;
             }
         }
 
@@ -54,14 +40,14 @@
             padding-left: 5px !important;
         }
 
-        #chart, rect {
+        #chart, #chart-lg, #chart-sm, rect {
             background: #f9f9f9;
         }
 
-        #chart {
-            padding:15px;
-            border-radius:5px;
-            border:1px solid #eee;
+        #chart, #chart-lg, #chart-sm {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
         }
     </style>
 
@@ -89,7 +75,7 @@
                     </div>
                 @endif
                 @if($view == "default")
-                    <div id="chart" class="" style="height:500px;min-height:calc(100vh - 250px);"></div>
+                    <div id="chart" style="height:500px;min-height:calc(100vh - 250px);"></div>
                     <script>
                         var datasource = [
                             <?php
@@ -133,9 +119,9 @@
                         });
                         chart.renderTo('#chart');
                         document.querySelector('#save').addEventListener('click', function (e) {
-                            chart.fire('exportTo', 'png');
-                            e.preventDefault();
-                        });
+                         chart.fire('exportTo', 'png');
+                         e.preventDefault();
+                         });
                     </script>
                 @endif
             </div>
