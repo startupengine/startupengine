@@ -74,7 +74,11 @@
                                 $count = 1;
                                 foreach($analytics as $eventType => $collection) {
                                     foreach($collection as $date => $eventCount) {
-                                        echo "{type:'$eventType', date: '$date', count:'".count($eventCount)."'},";
+                                        foreach($eventCount as $event){
+
+                                        $newDate = \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('Y-m-d');//toDateTimeString();
+                                        echo "{type:'$event->event_type', date: '$newDate', count:".count($eventCount)."},";
+                                        }
                                     }
                                 } ?>
                                 ];
@@ -87,8 +91,13 @@
                                 color: 'type',
                                 plugins: [
                                     tauCharts.api.plugins.get('tooltip')(),
-                                    tauCharts.api.plugins.get('quick-filter')()
-                                ]
+                                    tauCharts.api.plugins.get('legend')(),
+                                    tauCharts.api.plugins.get('quick-filter')(),
+                                    tauCharts.api.plugins.get('floating-axes')(),
+                                ],
+                                guide: {
+                                    interpolate: 'smooth-keep-extremum'
+                                }
                             });
                             chart.renderTo('#chart');
                         </script>
