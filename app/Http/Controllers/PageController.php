@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnalyticEvent;
 use App\ContentItem;
 use App\Setting;
 use Illuminate\Http\Request;
@@ -103,9 +104,19 @@ class PageController
         } else {
             $page->status = 'DRAFT';
         }
+        $event = new AnalyticEvent();
         if(\Auth::user()->hasPermissionTo('write code fields')) {
+            $event = new AnalyticEvent();
+            if($page->id !== null) { $event->event_type = 'page edited'; }
+            else { $event->event_type = 'page added'; }
             $page->save();
+            $event->user_id = \Auth::user()->id;
+            $event->user_email = \Auth::user()->email;
+            $event->user_name = \Auth::user()->name;
+            $event->event_data = json_encode("{id:$page->id}");
+            $event->save();
         }
+
         return redirect('/app/pages');
     }
 
