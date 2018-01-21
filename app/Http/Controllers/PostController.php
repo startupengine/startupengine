@@ -75,7 +75,17 @@ class PostController extends Controller
                     $post->tag($tag->name);
                 }
             }
+
+            $event = new AnalyticEvent();
+            if($post->id !== null) { $event->event_type = 'content edited'; }
+            else { $event->event_type = 'content added'; }
             $post->save();
+            $event->user_id = \Auth::user()->id;
+            $event->user_email = \Auth::user()->email;
+            $event->user_name = \Auth::user()->name;
+            $event->event_data = json_encode("{id:$post->id}");
+            $event->save();
+
             return redirect('/app/content');
         }
 
