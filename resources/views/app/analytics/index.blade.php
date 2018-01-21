@@ -42,6 +42,14 @@
                 display:block;
             }
         }
+
+        .graphical-report__export {
+            height:25px!important;
+            width:75px !important;
+            margin-right:95px !important;
+            padding-top:2px !important;
+            padding-left:5px !important;
+        }
     </style>
 
     @if($view == "default")
@@ -73,12 +81,11 @@
                                 <?php
                                 $count = 1;
                                 foreach($analytics as $eventType => $collection) {
-                                    foreach($collection as $date => $eventCount) {
-                                        foreach($eventCount as $event){
-
-                                        $newDate = \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('Y-m-d');//toDateTimeString();
-                                        echo "{type:'$event->event_type', date: '$newDate', count:".count($eventCount)."},";
-                                        }
+                                    foreach($collection as $date => $events) {
+                                        //foreach($events as $event){
+                                        $newDate = \Carbon\Carbon::createFromFormat('m-d-Y', $date)->toDateTimeString();//->format("Y-m-d");
+                                        echo "{type:'$eventType', date: '$date', count:".count($events)."},";
+                                        //}
                                     }
                                 } ?>
                                 ];
@@ -89,17 +96,32 @@
                                 y: 'count',
                                 size: 'count',
                                 color: 'type',
+                                dimensions: {
+                                    count: { type: 'measure' },
+                                    date: {
+                                        type : 'measure',
+                                        scale: 'time'
+                                    },
+                                },
                                 plugins: [
                                     tauCharts.api.plugins.get('tooltip')(),
                                     tauCharts.api.plugins.get('legend')(),
                                     tauCharts.api.plugins.get('quick-filter')(),
                                     tauCharts.api.plugins.get('floating-axes')(),
+                                    tauCharts.api.plugins.get('trendline')(),
+                                    tauCharts.api.plugins.get('exportTo')({
+                                        cssPaths:['https://cdn.jsdelivr.net/taucharts/latest/tauCharts.min.css']
+                                    }),
                                 ],
                                 guide: {
                                     interpolate: 'smooth-keep-extremum'
                                 }
                             });
                             chart.renderTo('#chart');
+                            document.querySelector('#save').addEventListener('click',function(e){
+                                chart.fire('exportTo','png');
+                                e.preventDefault();
+                            });
                         </script>
                     </div>
                 @endif
