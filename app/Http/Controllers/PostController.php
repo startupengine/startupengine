@@ -8,6 +8,7 @@ use App\Role;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use App\PostType;
 use App\Page;
+use App\AnalyticEvent;
 
 class PostController extends Controller
 {
