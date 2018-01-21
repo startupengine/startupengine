@@ -84,7 +84,7 @@
                                 ];
                             var chart = new tauCharts.Chart({
                                 data: datasource,
-                                type: 'scatterplot',
+                                type: 'line',
                                 x: 'date',
                                 y: 'count',
                                 size: 'count',
