@@ -34,6 +34,19 @@ class PageController
         if ($page == null) {
             abort(404);
         }
+        $page->content = $page->content();
+        $event = new AnalyticEvent();
+        $event->event_type = 'page view';
+        if(\Auth::user()) {
+            $event->user_id = \Auth::user()->id;
+            $event->user_email = \Auth::user()->email;
+            $event->user_name = \Auth::user()->name;
+        }
+        if($page->content() !== null ){
+            $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title', variation:'".$page->content->meta->slug."'}");
+        }
+        $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title'}");
+        $event->save();
         return view('pages.view')->with('page', $page);
     }
 
