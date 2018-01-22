@@ -61,7 +61,6 @@
 @endsection
 
 @section('content')
-
     <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
@@ -75,7 +74,7 @@
                     </div>
                 @endif
                 @if($view == "default")
-                    <div id="chart" style="height:500px;min-height:calc(100vh - 250px);"></div>
+                    <div id="chart" style="height:500px;min-height:calc(100vh - 180px);"></div>
                     <script>
                         var datasource = [
                             <?php
