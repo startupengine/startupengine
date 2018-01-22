@@ -25,6 +25,7 @@ class PostController extends Controller
 
     public function getPost(Request $request, $slug) {
         $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+
         if(($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
             return view('posts.view')->with('post', $post);
         }
@@ -125,7 +126,18 @@ class PostController extends Controller
         if ($item == null) {
             abort(404);
         }
-        return view('posts.view')->with('post', $item);
+        else {
+            $event = new AnalyticEvent();
+            $event->event_type = 'content view';
+            if(\Auth::user()) {
+                $event->user_id = \Auth::user()->id;
+                $event->user_email = \Auth::user()->email;
+                $event->user_name = \Auth::user()->name;
+            }
+            $event->event_data = json_encode("{id:$item->id, slug:'$item->slug',title:'$item->title', content_type:'".$item->postType()->slug."'}");
+            $event->save();
+            return view('posts.view')->with('post', $item);
+        }
     }
 
 
