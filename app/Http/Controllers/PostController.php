@@ -128,7 +128,7 @@ class PostController extends Controller
         }
         else {
             $event = new AnalyticEvent();
-            $event->event_type = 'content view';
+            $event->event_type = 'content viewed';
             if(\Auth::user()) {
                 $event->user_id = \Auth::user()->id;
                 $event->user_email = \Auth::user()->email;

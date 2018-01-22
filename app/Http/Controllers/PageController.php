@@ -23,7 +23,7 @@ class PageController
         }
         $page->content = $page->content();
         $event = new AnalyticEvent();
-        $event->event_type = 'page view';
+        $event->event_type = 'page viewed';
         if(\Auth::user()) {
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
@@ -51,7 +51,7 @@ class PageController
         }
         $page->content = $page->content();
         $event = new AnalyticEvent();
-        $event->event_type = 'page view';
+        $event->event_type = 'page viewed';
         if(\Auth::user()) {
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
