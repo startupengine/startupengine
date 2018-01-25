@@ -122,7 +122,12 @@ class PostController extends Controller
     }
 
     public function getItem($slug) {
-        $item = Post::where('slug', '=',$slug)->where('post_type', '=', 'post')->where('status', '=', 'PUBLISHED')->first();
+        if(\Auth::user() && \Auth::user()->hasRole('admin')) {
+            $item = Post::where('slug', '=',$slug)->where('post_type', '=', 'post')->first();
+        }
+        else {
+            $item = Post::where('slug', '=', $slug)->where('post_type', '=', 'post')->where('status', '=', 'PUBLISHED')->first();
+        }
         if ($item == null) {
             abort(404);
         }
