@@ -57,7 +57,7 @@ class PageController
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
         }
-        if($page->content()->meta->slug !== null ){
+        if($page->content()->meta && $page->content()->meta->slug !== null ){
             $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title', variation:'".$page->content()->meta->slug."'}");
         }
         else {
