@@ -88,9 +88,7 @@ Change these after logging in.
 
 # Support
 
-Questions/comments? Chime in on [the official support chat](https://support.startupengine.io/).
-
-Found a bug? Submit an issue here on Github.
+Found a bug? [Submit an issue here on Github.](https://github.com/luckyrabbitllc/startupengine/issues)
 
 # Security 
 
