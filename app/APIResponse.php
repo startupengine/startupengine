@@ -50,10 +50,16 @@ class APIResponse extends Model
 
         if($request->input('tag') !== null) {
             $tags = $request->input('tag');
-
         }
         else {
             $tags = null;
+        }
+
+        if($request->input('excludeTag') !== null) {
+            $excludedTags = explode(',', $request->input('excludeTag'));
+        }
+        else {
+            $excludedTags = [];
         }
 
         if($tags !== null && $tags !== '' && $search !== null) {
@@ -65,6 +71,7 @@ class APIResponse extends Model
                 ->where('published_at', '<', Carbon::now()->toDateTimeString())
                 ->where('title', 'ILIKE', "%$search%")
                 ->withAnyTag($tags)
+                ->withoutTags($excludedTags)
                 ->jsonPaginate();
         }
         elseif($tags !== null && $tags !== '' && $search == null) {
@@ -75,6 +82,7 @@ class APIResponse extends Model
                 ->orderBy('published_at', 'desc')
                 ->where('published_at', '<', Carbon::now()->toDateTimeString())
                 ->withAnyTag($tags)
+                ->withoutTags($excludedTags)
                 ->jsonPaginate();
         }
         else {
