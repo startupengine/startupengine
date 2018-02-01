@@ -11,6 +11,7 @@ class APIResponse extends Model
 
     public function getItems($request)
     {
+        $search = $request->input('s');
         $type = $request->input('type');
         $posttype = $request->input('post_type');
         if($type == null){$type =  'posts'; }
@@ -55,7 +56,18 @@ class APIResponse extends Model
             $tags = null;
         }
 
-        if($tags !== null && $tags !== '') {
+        if($tags !== null && $tags !== '' && $search !== null) {
+            $items = Post::select(\DB::raw($fields))
+                ->where('status', '=', 'PUBLISHED')
+                ->where('post_type', '=', $posttype)
+                ->limit($limit)
+                ->orderBy('published_at', 'desc')
+                ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                ->where('title', 'ILIKE', "%$search%")
+                ->withAnyTag($tags)
+                ->jsonPaginate();
+        }
+        elseif($tags !== null && $tags !== '' && $search == null) {
             $items = Post::select(\DB::raw($fields))
                 ->where('status', '=', 'PUBLISHED')
                 ->where('post_type', '=', $posttype)
@@ -65,7 +77,6 @@ class APIResponse extends Model
                 ->withAnyTag($tags)
                 ->jsonPaginate();
         }
-
         else {
             $items = Post::select(\DB::raw($fields))
                 ->where('status', '=', 'PUBLISHED')
