@@ -99,4 +99,14 @@ class Post extends Model implements AuditableContract
         }
     }
 
+    public function user(){
+        $user = \App\User::where('id', '=', $this->author_id)->first();
+        if($user !== null) {
+            return $user;
+        }
+        else {
+            return null;
+        }
+    }
+
 }
