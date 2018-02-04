@@ -109,4 +109,16 @@ class Post extends Model implements AuditableContract
         }
     }
 
+    public function primaryTag(){
+        $tags = $this->tagNames();
+        if($tags !== null) {
+            $primaryTag = $tags[0];
+            $tag = \App\Post::where('post_type', '=', 'tag')->where('slug','=',strtolower($primaryTag))->first();
+            return $tag;
+        }
+        else {
+            return null;
+        }
+    }
+
 }
