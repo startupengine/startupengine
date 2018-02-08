@@ -77,27 +77,13 @@ class Page extends Model implements AuditableContract
 
     }
 
-    public function schema()
-    {
-        if ($this->schema !== null) {
-            $schema = json_decode($this->schema);
-            if (gettype($schema) == "string") {
-                $schema = json_decode($schema);
-            }
-        } else {
-            $schema = null;
-        }
-        return $schema;
-
-    }
-
     public function content()
     {
         $json = $this->json;
-        $array = json_decode($json, true)['versions'][1];
-        return json_decode(json_encode($array));
+        $random = array_rand(json_decode($json, true)['versions'], 1);
+        $content = json_decode($json, true)['versions'][$random];
+        return json_decode(json_encode($content));
     }
-
 
     public function markdown($content)
     {
@@ -115,8 +101,21 @@ class Page extends Model implements AuditableContract
         }
     }
 
-    public
-    function versions()
+    public function schema()
+    {
+        if ($this->schema !== null) {
+            $schema = json_decode($this->schema);
+            if (gettype($schema) == "string") {
+                $schema = json_decode($schema);
+            }
+        } else {
+            $schema = null;
+        }
+        return $schema;
+
+    }
+
+    public function versions()
     {
         $json = json_decode($this->json, TRUE);
         $versions = count($json['versions']);
