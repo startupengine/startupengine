@@ -102,7 +102,7 @@
     <body class="index-page sidebar-collapse bg-gradient" style="height:100vh;">
     <div class="container">
         <div class="row" style="margin-top:5%;">
-            <div class="card card-signup bg-gradient-light">
+            <div class="card card-signup bg-gradient-blue">
                 <form class="form-horizontal " method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
                     <div class="header text-center">

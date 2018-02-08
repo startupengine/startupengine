@@ -114,7 +114,7 @@ class Post extends Model implements AuditableContract
         if($tags !== null) {
             $primaryTag = $tags[0];
             $tag = \App\Post::where('post_type', '=', 'tag')->where('slug','=',strtolower($primaryTag))->first();
-            return $tag;
+            return $primaryTag;
         }
         else {
             return null;
