@@ -33,7 +33,7 @@
 
 @yield('content')
 
-@if(isset($page->content()->settings) && !isset($page->content()->settings->use_global_menu) OR (!isset($page->content()->settings->use_global_menu) && $page->content()->settings->use_global_menu !== false && View::exists('theme.templates.global.menu')))
+@if((!isset($page->content()->settings) OR (isset($page->content()->settings) && isset($page->content()->settings->use_global_menu) && $page->content()->settings->use_global_menu == "true") OR (isset($page->content()->settings->use_global_menu) && $page->content()->settings->use_global_menu !== "false") && View::exists('theme.templates.global.menu')))
     @include('theme.templates.global.menu')
 @endif
 
