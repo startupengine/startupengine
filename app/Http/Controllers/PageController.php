@@ -21,7 +21,9 @@ class PageController
         } else {
             $page = \App\Page::where('slug', '=', 'home')->where('status', '=', 'ACTIVE')->first();
         }
-        $page->content = $page->content();
+        if($page !== null) {
+            $page->content = $page->content();
+        }
         $event = new AnalyticEvent();
         $event->event_type = 'page viewed';
         if(\Auth::user()) {
@@ -29,11 +31,13 @@ class PageController
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
         }
-        if($page->content()->meta->slug !== null ){
+        if($page !== null && $page->content()->meta->slug !== null ){
             $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title', variation:'".$page->content()->meta->slug."'}");
         }
         else {
-            $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title'}");
+            if($page !== null) {
+                $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title'}");
+            }
         }
         $event->save();
         if ($page == null) {
