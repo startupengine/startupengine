@@ -11,3 +11,11 @@
 @include('app.partials.css.typography')
 @include('app.partials.css.modals')
 @include('app.partials.css.utilities')
+
+<style>
+    #admin-sidebar .btn.active{
+        border-color:#eee !important;
+        background:royalblue !important;
+        color:#fff !important;
+    }
+</style>

@@ -510,6 +510,7 @@
             border-radius:0px 25px 25px 0px !important;
         }
 
+
     </style>
 
     @yield('styles')
