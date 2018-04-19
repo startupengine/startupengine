@@ -10,11 +10,12 @@
 
 @section('styles')
     <style>
-        .card {
+        .card-deck .card {
             text-align:center;
+            margin-bottom:25px;
         }
         .card-body {
-            min-height:140px !important;
+            min-height:175px !important;
         }
         .card-body h3 {
             margin-bottom:10px;
@@ -44,7 +45,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h3><i class="fa fa-pencil-square-o" style="font-size:80%;color:#666;"></i><br>Content Items</h3>
+                            <h3><i class="fa fa-pencil-square-o" style="font-size:80%;color:#666;"></i><br>Posts</h3>
                             <span class="badge">{{ count(\App\Post::all()) }}</span>
                         </div>
                     </div>
@@ -64,7 +65,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h3><i class="fa fa-money" style="font-size:80%;color:#666;"></i><br>Pricing Plans</h3>
+                            <h3><i class="fa fa-money" style="font-size:80%;color:#666;"></i><br>Plans</h3>
                             <span class="badge">{{ count(\App\Plan::all()) }}</span>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                 <div class="card-deck">
                     <div class="card">
                         <div class="card-body">
-                            <h3><i class="fa fa-bar-chart" style="font-size:80%;color:#666;"></i><br>Analytic Events</h3>
+                            <h3><i class="fa fa-bar-chart" style="font-size:80%;color:#666;"></i><br>Events</h3>
                             <span class="badge">{{ count(\App\AnalyticEvent::all()) }}</span>
                         </div>
                     </div>

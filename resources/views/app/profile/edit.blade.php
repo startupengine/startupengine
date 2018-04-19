@@ -76,7 +76,7 @@
                             </option>
                             <option <?php if ($user->status == "INACTIVE") {
                                     echo "SELECTED";
-                                    } ?> value="INACTIVE">Inctive
+                                    } ?> value="INACTIVE">Inactive
                             </option>
                         </select>
                     </div>
