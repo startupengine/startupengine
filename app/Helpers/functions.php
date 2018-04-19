@@ -121,7 +121,6 @@ function getStripePlans($id = null){
 function newStripePlan($name, $productId){
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
     $plan = \Stripe\Plan::create(array("product" => $productId,"name" => $name));
-    dd($plan);
     return $plan;
 }
 

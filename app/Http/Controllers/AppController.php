@@ -16,32 +16,7 @@ class AppController extends Controller
 
     public function index()
     {
-        $user = \Auth::user();
-        //dd($user->hasPermissionTo('view backend'));
-
-        if($user->hasPermissionTo('browse pages')){
-            return redirect('/app/pages');
-        }
-
-        if($user->hasPermissionTo('browse posts')){
-            return redirect('/app/content');
-        }
-
-        if($user->hasPermissionTo('browse own posts')){
-            return redirect('/app/content');
-        }
-
-        if($user->hasPermissionTo('browse settings')){
-            return redirect('/app/settings');
-        }
-
-        if($user->hasPermissionTo('browse packages')){
-            return redirect('/app/packages');
-        }
-
-        if($user->hasPermissionTo('view analytics')){
-            return redirect('/app/analytics');
-        }
+        return view('app.dashboard.index');
 
     }
 

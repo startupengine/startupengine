@@ -36,6 +36,18 @@
         .tag-select input:hover,.tag-select input:focus {
             border:none !important;
         }
+
+        .input-group-focus > .input-group-addon, input:focus {
+            border-color:orangered !important;
+        }
+        .input-group-addon{
+            background:#eee;
+            padding-right:12px !important;
+        }
+        .input-group input:hover, .input-group input:focus {
+            border-left:none !important;
+            background:#fff;
+        }
     </style>
 @endsection
 
@@ -44,13 +56,13 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <form action="/app/edit/product" method="post">
                 <div class="col-md-12">
-                    <h5>@if($product->id == null) Add @endif @if($product->id !== null) Edit @endif Product
+                    <h5>@if($product->id == null) Add @endif @if($product->id !== null)  <span style="opacity:0.5;">Editing </span> @endif Product
                         {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
                     </h5>
 
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="postTitle">Title</label>
                                 <input required
@@ -61,7 +73,7 @@
                                        name="title">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="postSlug">Stripe ID</label>
                                 <input required value="{{$product->stripe_id}}" type="text" class="form-control"
@@ -69,7 +81,7 @@
                                        aria-describedby="postSlug" placeholder="example-slug" name="stripe_id" disabled>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="postStatus">Status</label><br>
                                 <select required class="custom-select" id="status" name="status"
@@ -85,34 +97,52 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="postStatus">Last Updated</label><br>
-                                <?php if ($product->updated_at == null) {
-                                    $date = \Carbon\Carbon::now()->format("m/d/Y");
-                                } else {
-                                    $date = $product->updated_at->format("m/d/Y");
-                                } ?>
-                                <input  disabled autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}"
-                                       name="published_at">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="postStatus">Product Details</label>
                             <div class="form-group">
-                                <label for="postStatus">Plans</label><br>
-                                <div class="list-group">
-                                    <a href="/app/new/subscription/{{$product->id}}/plan" class="list-group-item list-group-item-action" style="background:rgba(0,0,250,0.06);color:royalblue;">New Plan<i class="fa fa-plus pull-right" style="color:royalblue;margin-left:10px;margin-top:3px;"></i></a>
-                                @foreach(getStripePlans($product->stripe_id)->data as $plan)
 
 
-                                        <a href="/app/view/subscription/{{$product->id}}/plan/{{$plan->id}}" class="list-group-item list-group-item-action">{{ $plan->nickname }} {{ ucfirst($plan->interval)}}ly - ${{ $plan->amount }} <i class="fa fa-caret-right pull-right" style="margin-top:3px;"></i></a>
 
-                                @endforeach
 
+                                <a class="list-group-item list-group-item-action">
+
+
+                                    <label>Image</label>
+                                    <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-camera"></i>
+                                                </span>
+                                        <input id="image" placeholder="https://..." style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ $product->image }}"/>
                                     </div>
+
+
+
+                                </a>
+                                <a class="list-group-item list-group-item-action">
+
+
+                                    <label>Description</label>
+                                    <textarea class="form-control">{{ ucfirst($product->discription) }}</textarea>
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="postStatus">Pricing Plans</label><br>
+                                <div class="list-group">
+                                    <a href="/app/new/subscription/{{$product->id}}/plan" class="list-group-item list-group-item-action" style="border-bottom:2px solid green;background:rgba(151,255,169,0.06);color:green;">New Plan<i class="fa fa-plus pull-right" style="color:green;margin-left:10px;margin-top:3px;"></i></a>
+                                    @foreach(getStripePlans($product->stripe_id)->data as $plan)
+
+
+                                        <a href="/app/view/subscription/{{$product->id}}/plan/{{$plan->id}}" class="list-group-item list-group-item-action">{{ $plan->nickname }} {{ ucfirst($plan->interval)}}ly - ${{ $plan->amount/100 }} <i class="fa fa-caret-right pull-right" style="margin-top:3px;"></i></a>
+
+                                    @endforeach
+
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -64,8 +64,8 @@
                     <div class="btn-group hiddenOnMobile">
                         <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
-                            <i class="now-ui-icons users_circle-08"></i>&nbsp;
-                            Account
+                            <i class="now-ui-icons users_circle-08"></i>&nbsp
+                            {{ \Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right ">
                             @if(\Auth::user()->hasPermissionTo('edit own profile'))

@@ -34,7 +34,7 @@ class SubscriptionController extends Controller
         $plan = \Stripe\Plan::create(array(
             "interval" => "month",
             "currency" => "usd",
-            "amount" => 99,
+            "amount" => 9900,
             "product" => $product->stripe_id
         ));
         $record = new \App\Plan();

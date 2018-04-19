@@ -36,6 +36,18 @@
         .tag-select input:hover,.tag-select input:focus {
             border:none !important;
         }
+
+        .input-group input:hover, .input-group input:focus {
+            border-left:none !important;
+            background:#fff;
+        }
+        .input-group-focus > .input-group-addon, input:focus {
+            border-color:orangered !important;
+        }
+        .input-group-addon{
+            background:#eee;
+            padding-right:12px !important;
+        }
     </style>
 @endsection
 
@@ -44,15 +56,15 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <form action="/app/edit/product" method="post">
                 <div class="col-md-12">
-                    <h5>@if($product->id == null) Add @endif @if($product->id !== null) Edit @endif Subscription Plan for {{ ucfirst($product->name) }}
+                    <h5>@if($product->id == null) Add @endif @if($product->id !== null) <span style="opacity:0.5;">Editing </span>@endif Plan
                         {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
                     </h5>
 
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="postTitle">Nickname</label>
+                                <label for="postTitle">Plan Nickname</label>
                                 <input required
                                        value="{{$plan->nickname}}"
                                        class="form-control"
@@ -61,7 +73,7 @@
                                        name="title">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="postSlug">Stripe ID</label>
                                 <input required value="{{$product->stripe_id}}" type="text" class="form-control"
@@ -69,7 +81,7 @@
                                        aria-describedby="postSlug" placeholder="example-slug" name="stripe_id" disabled>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="postStatus">Status</label><br>
                                 <select required class="custom-select" id="status" name="status"
@@ -85,18 +97,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="postStatus">Last Updated</label><br>
-                                <?php if ($product->updated_at == null) {
-                                    $date = \Carbon\Carbon::now()->format("m/d/Y");
-                                } else {
-                                    $date = $product->updated_at->format("m/d/Y");
-                                } ?>
-                                <input  disabled autocomplete="off" type="text" class="form-control date-picker" value="{{$date}}"
-                                       name="published_at">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="row">
@@ -104,21 +104,18 @@
                             <label for="postStatus">Plan Details</label>
                             <div class="form-group">
 
-
-                                    <a class="list-group-item list-group-item-action">
-                                        <label>Interval</label>
-                                        <select class="form-control">
-                                            <option value="year" @if($plan->json()->interval == "year") selected @endif>Year</option>
-                                            <option value="month" @if($plan->json()->interval == "month") selected @endif>Month</option>
-                                            <option value="week" @if($plan->json()->interval == "week") selected @endif>Week</option>
-                                            <option value="day"@if($plan->json()->interval == "day") selected @endif>Day</option>
-                                        </select>
-                                    </a>
                                     <a class="list-group-item list-group-item-action">
 
 
-                                        <label>Cost</label>
-                                        <input class="form-control" value="{{ ucfirst($plan->json()->amount) }}"/>
+                                        <label>Image</label>
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-camera"></i>
+                                                </span>
+                                            <input id="image" style="border-radius:0px 25px 25px 0px !important;" class="form-control" placeholder="https://..." value="{{ $plan->image }}"/>
+                                        </div>
+
+
 
                                     </a>
                                     <a class="list-group-item list-group-item-action">
@@ -128,6 +125,37 @@
                                         <textarea class="form-control">{{ ucfirst($plan->discription) }}</textarea>
 
                                     </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="postStatus">Billing</label>
+                            <div class="form-group">
+
+
+                                <a class="list-group-item list-group-item-action">
+                                    <label>Bill the customer every...</label>
+                                    <select class="form-control">
+                                        <option value="year" @if($plan->json()->interval == "year") selected @endif>Year</option>
+                                        <option value="month" @if($plan->json()->interval == "month") selected @endif>Month</option>
+                                        <option value="week" @if($plan->json()->interval == "week") selected @endif>Week</option>
+                                        <option value="day"@if($plan->json()->interval == "day") selected @endif>Day</option>
+                                    </select>
+                                </a>
+                                <a class="list-group-item list-group-item-action">
+
+
+                                    <label>Cost</label>
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-dollar"></i>
+                                            </span>
+                                        <input id="amount" placeholder="$99.00" style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ ucfirst($plan->json()->amount/100) }}.00"/>
+                                    </div>
+
+
+
+                                </a>
+
                             </div>
                         </div>
                     </div>

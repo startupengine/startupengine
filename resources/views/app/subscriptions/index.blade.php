@@ -71,7 +71,7 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">
-                    Subscription Products
+                    Products
                     {!! button(null, "New Product", "new", "pull-right", null, 'data-toggle="modal" data-target="#newSubscription"') !!}
                 </h5>
                 <div class="form-group">
@@ -83,7 +83,7 @@
                 <table class="table ">
                     <thead class="hiddenOnMobile">
                     <tr>
-                        <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
+                        <th scope="col" class="hiddenOnMobile updated_at_column">Status</th>
                         <th scope="col">Info</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -92,9 +92,9 @@
                     @foreach($subscriptions as $subscription)
                         <tr>
                             <td class="hiddenOnMobile updated_at_column clickable"><span
-                                        class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($subscription->updated_at))->diffForHumans() }}</span>
+                                        class="badge badge-date">{{ $subscription->status }}</span>
                             </td>
-                            <td class="clickable">{{$subscription->json()->name}}</td>
+                            <td class="clickable">{{$subscription->json()->name}}<br><span style="opacity:0.5;">{{ucfirst($subscription->json()->type)}}</span></td>
                             <td align="right">
                                 <a href="/app/view/subscription/{{ $subscription->id }}"
                                    class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>

@@ -22,6 +22,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
 
     //Profile
     Route::group(['middleware' => ['role:staff']], function () {
+        Route::get('/app/dashboard', 'AppController@index');
         Route::get('/app/profile', 'ProfileController@index');
         Route::get('/app/edit/profile', 'ProfileController@editProfile');
         Route::post('/app/edit/profile', 'ProfileController@saveProfile');
