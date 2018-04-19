@@ -87,6 +87,7 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
 
     //Content
     Route::group(['middleware' => ['permission:browse posts|browse own posts']], function () {
+        Route::get('/app/tags', 'TagController@index');
         Route::get('/app/content', 'PostController@index');
         Route::get('/app/new/{slug}', 'PostController@addPost');
         Route::post('/app/new/post', 'PostController@savePost');
@@ -96,9 +97,9 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::post('/app/edit/post', 'PostController@savePost');
     });
 
-    //Design
+    //Brand
     Route::group(['middleware' => ['permission:edit settings']], function () {
-        Route::get('/app/design', 'DesignController@index');
+        Route::get('/app/brand', 'BrandController@index');
     });
 
     //Analytics
@@ -116,9 +117,10 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
     });
 
-    //Subscriptions
+    //Products & Services
     Route::group(['middleware' => ['permission:edit settings']], function () {
         Route::get('/app/subscriptions', 'SubscriptionController@index');
+        Route::get('/app/products', 'ProductController@index');
         Route::get('/app/view/subscription/{id}', 'SubscriptionController@viewSubscription');
         Route::get('/app/view/subscription/{id}/plan/{plan}', 'SubscriptionController@viewSubscriptionPlan');
         Route::get('/app/new/subscription/{id}/plan', 'SubscriptionController@newSubscriptionPlan');

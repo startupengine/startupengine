@@ -18,4 +18,10 @@
         background:royalblue !important;
         color:#fff !important;
     }
+
+    #admin-sidebar .btn:hover, #admin-sidebar .navbar .navbar-nav>a.btn:hover {
+        box-shadow:none;
+        background: #efefef !important;
+        color:#222 !important;
+    }
 </style>

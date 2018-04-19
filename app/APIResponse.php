@@ -56,13 +56,20 @@ class APIResponse extends Model
 
     public function createSubscription($request){
         $user = User::find($request->input('user_id'));
-        $plan_id = "plan_ChBLS3BmNRMIgx";
-        $newplan = $user->newSubscription('main', $plan_id)->create('tok_1CHmtMGQPPOg9Tbdz2UYxKsD');
+        $plan_id = $request->input('plan_id');
+        $newplan = $user->newSubscription('main', $plan_id)->create($request->input('token'));
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $stripeplan = \Stripe\Plan::retrieve("plan_ChBLS3BmNRMIgx");
+        $stripeplan = \Stripe\Plan::retrieve($plan_id);
         $newplan->price = $stripeplan->amount;
         $newplan->json = json_encode($stripeplan);
         $newplan->save();
+        $event = new AnalyticEvent();
+        $event->event_type = 'subscription purchased';
+        $event->user_id = $user->id;
+        $event->user_email = $user->email;
+        $event->user_name = $user->name;
+        $event->event_data = json_encode("{plan_id:$plan_id, amount:'".$newplan->amount."'}");
+        $event->save();
         return response()
             ->json($newplan);
     }

@@ -71,21 +71,20 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">
-                    Purchases
+                    Products
+                    {!! button(null, "New Product", "new", "pull-right", null, 'data-toggle="modal" data-target="#newSubscription"') !!}
                 </h5>
                 <div class="form-group">
                     <form>
-                        <input type="text" value="" placeholder="Search Active Subscriptions..." class="form-control"
+                        <input type="text" value="" placeholder="Search Subscriptions..." class="form-control"
                                name="s" id="s">
                     </form>
                 </div>
                 <table class="table ">
                     <thead class="hiddenOnMobile">
                     <tr>
-                        <th scope="col" class="hiddenOnMobile updated_at_column">Date</th>
-                        <th scope="col" style="width:125px;">Product</th>
-                        <th scope="col" style="width:125px;">Amount</th>
-                        <th scope="col" class="hiddenOnMobile">User</th>
+                        <th scope="col" class="hiddenOnMobile updated_at_column">Status</th>
+                        <th scope="col">Info</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
@@ -93,11 +92,9 @@
                     @foreach($subscriptions as $subscription)
                         <tr>
                             <td class="hiddenOnMobile updated_at_column clickable"><span
-                                        class="badge badge-date">{{ $subscription->created_at->diffForHumans() }}</span>
+                                        class="badge badge-date">{{ $subscription->status }}</span>
                             </td>
-                            <td class="clickable" style="width:125px !important;">{{$subscription->json()->nickname}}</td>
-                            <td class="clickable hiddenOnMobile" style="width:125px !important;">${{ucfirst($subscription->json()->amount/100)}} / {{ucfirst($subscription->json()->interval)}}</td>
-                            <td class="clickable hiddenOnMobile">{{ $subscription->user()->email }}</td>
+                            <td class="clickable">{{$subscription->json()->name}}<br><span style="opacity:0.5;">{{ucfirst($subscription->json()->type)}}</span></td>
                             <td align="right">
                                 <a href="/app/view/subscription/{{ $subscription->id }}"
                                    class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>

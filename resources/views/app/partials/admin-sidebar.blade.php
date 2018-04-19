@@ -14,9 +14,10 @@
             <li class="nav-item">
                 <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/ads*')) active @endif"
                    style="text-align: left;border-color:#eee !important;"
-                   href="/app/ads"><i class="now-ui-icons shopping_tag-content"></i>&nbsp; Ads</a>
+                   href="/app/tags"><i class="now-ui-icons shopping_tag-content"></i>&nbsp; Tags</a>
             </li>
         @endif
+
 
         @if(\Auth::user()->hasPermissionTo('browse users'))
             <li class="nav-item">
@@ -38,7 +39,7 @@
             <li class="nav-item">
                 <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/brand')) active @endif"
                    style="text-align: left;border-color:#eee !important;"
-                   href="/app/design"><i class="now-ui-icons objects_diamond"></i>&nbsp; Brand</a>
+                   href="/app/brand"><i class="now-ui-icons objects_diamond"></i>&nbsp; Brand</a>
             </li>
         @endif
 
@@ -67,14 +68,15 @@
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/subscriptions')) active @endif"
                style="text-align: left;border-color:#eee !important;"
-               href="/app/subscriptions"><i class="now-ui-icons shopping_credit-card"></i>&nbsp; Purchases</a>
+               href="/app/subscriptions"><i class="now-ui-icons shopping_credit-card"></i>&nbsp; Subscriptions</a>
         </li>
-
+        <?php /*
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/social')) active @endif"
                style="text-align: left;border-color:#eee !important;"
                href="/app/social"><i class="now-ui-icons ui-2_like"></i>&nbsp; Social Media</a>
         </li>
+        */ ?>
 
         @if(\Auth::user()->hasPermissionTo('browse settings'))
             <li class="nav-item">

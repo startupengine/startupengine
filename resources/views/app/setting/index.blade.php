@@ -58,8 +58,7 @@
                                     <p>Add or edit content types.</p>
                                 </div>
                                 <div class="card-footer" align="center">
-                                    <a href="/app/schema" class="btn btn-secondary-outline btn-round">Content
-                                        Types</a>
+                                    <a href="/app/schema" class="btn btn-secondary-outline btn-round">Content Types</a>
                                 </div>
                             </div>
                         </div>

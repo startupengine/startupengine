@@ -13,9 +13,16 @@
         .card-deck .card {
             text-align:center;
             margin-bottom:25px;
+            cursor:pointer;
+        }
+        .card-deck .card:hover {
+            border-color:royalblue !important;
+        }
+        .card-deck .card h3{
+            font-size:150%;
         }
         .card-body {
-            min-height:175px !important;
+            min-height:125px !important;
         }
         .card-body h3 {
             margin-bottom:10px;
@@ -37,39 +44,39 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12" style="padding-top:15px;">
                 <div class="card-deck">
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/pages';">
                         <div class="card-body">
                             <h3><i class="fa fa-desktop" style="font-size:80%;color:#666;"></i><br>Pages</h3>
                             <span class="badge">{{ count(\App\Page::all()) }}</span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/content';">
                         <div class="card-body">
                             <h3><i class="fa fa-pencil-square-o" style="font-size:80%;color:#666;"></i><br>Posts</h3>
                             <span class="badge">{{ count(\App\Post::all()) }}</span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/tags';">
                         <div class="card-body">
-                            <h3><i class="fa fa-hashtag" style="font-size:80%;color:#666;"></i><br>Topics</h3>
+                            <h3><i class="fa fa-hashtag" style="font-size:80%;color:#666;"></i><br>Tags</h3>
                             <span class="badge">{{ count(\App\Tag::all()) }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="card-deck">
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/products';">
                         <div class="card-body">
                             <h3><i class="fa fa-shopping-cart" style="font-size:80%;color:#666;"></i><br>Products</h3>
-                            <span class="badge">{{ count(\App\AnalyticEvent::all()) }}</span>
+                            <span class="badge">{{ count(\App\Product::all()) }}</span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/plans';">
                         <div class="card-body">
-                            <h3><i class="fa fa-money" style="font-size:80%;color:#666;"></i><br>Plans</h3>
+                            <h3><i class="fa fa-dollar" style="font-size:80%;color:#666;"></i><br>Plans</h3>
                             <span class="badge">{{ count(\App\Plan::all()) }}</span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/subscriptions';">
                         <div class="card-body">
                             <h3><i class="fa fa-credit-card" style="font-size:80%;color:#666;"></i><br>Purchases</h3>
                             <span class="badge">{{ count(\App\Subscription::all()) }}</span>
@@ -77,19 +84,19 @@
                     </div>
                 </div>
                 <div class="card-deck">
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/analytics';">
                         <div class="card-body">
                             <h3><i class="fa fa-bar-chart" style="font-size:80%;color:#666;"></i><br>Events</h3>
                             <span class="badge">{{ count(\App\AnalyticEvent::all()) }}</span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/users';">
                         <div class="card-body">
                             <h3><i class="fa fa-user" style="font-size:80%;color:#666;"></i><br>Users</h3>
                             <span class="badge">{{ count(\App\User::all()) }}</span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="location.href = '/app/settings';">
                         <div class="card-body">
                             <h3><i class="fa fa-cogs" style="font-size:80%;color:#666;"></i><br>Settings</h3>
                             <span class="badge">{{ count(\App\Setting::all()) }}</span>

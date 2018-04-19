@@ -10,10 +10,10 @@ class SubscriptionController extends Controller
     {
         $subscriptions = updateSubscriptionPlans();
         if ($request->input('s') !== null) {
-            $subscriptions = \App\Product::where('name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('description', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
+            $subscriptions = \App\Subscription::where('name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('description', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
         }
         else {
-            $subscriptions = \App\Product::where('status','=','ACTIVE')->get();
+            $subscriptions = \App\Subscription::all();
         }
         return view('app.subscriptions.index')->with('subscriptions', $subscriptions);
     }
