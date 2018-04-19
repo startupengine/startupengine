@@ -34,7 +34,7 @@
 @section('content')
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding-top:15px;">
                 <div class="card-deck">
                     <div class="card">
                         <div class="card-body">
