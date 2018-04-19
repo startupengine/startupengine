@@ -8,6 +8,36 @@ use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
+    public function getStripeProducts(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getStripeProducts($request));
+    }
+
+    public function createProductPlan(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->createProductPlan($request));
+    }
+
+    public function getStripePlans(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getStripePlans($request));
+    }
+
+    public function createProduct(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->createProduct($request));
+    }
+
+    public function createSubscription(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->createSubscription($request));
+    }
+
+    public function getInvoices(Request $request, $id) {
+        $response = new APIResponse();
+        return response()->json($response->getInvoices($id));
+    }
+
     public function getEvents($type) {
         $events = AnalyticEvent::where('event_type', '=', $type)->get();
         return response()->json($events);

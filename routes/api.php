@@ -32,6 +32,16 @@ Route::get('content/items', 'APIController@getItems');
 //Search
 Route::get('/search/', 'APIController@search');
 
+//Stripe
+Route::get('stripe/products/', 'APIController@getStripeProducts');
+Route::get('stripe/new/product/', 'APIController@createProduct');
+Route::post('stripe/new/product/', 'APIController@createProduct');
+Route::get('stripe/new/product/plan', 'APIController@createProductPlan');
+Route::post('stripe/new/product/plan', 'APIController@createProductPlan');
+Route::get('subscriptions/create', 'APIController@createSubscription');
+Route::get('stripe/plans/', 'APIController@getStripePlans');
+Route::get('invoices/user/{id}', 'APIController@getInvoices');
+
 //Github
 Route::get('repo/github/json/{filepath?}', 'GithubController@json')->where('filepath', '(.*)');
 Route::get('repo/github/raw/{filepath?}', 'GithubController@raw')->where('filepath', '(.*)');

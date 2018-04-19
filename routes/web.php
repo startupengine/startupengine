@@ -115,6 +115,18 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
     });
 
+    //Subscriptions
+    Route::group(['middleware' => ['permission:edit settings']], function () {
+        Route::get('/app/subscriptions', 'SubscriptionController@index');
+        Route::get('/app/view/subscription/{id}', 'SubscriptionController@viewSubscription');
+        Route::get('/app/view/subscription/{id}/plan/{plan}', 'SubscriptionController@viewSubscriptionPlan');
+        Route::get('/app/new/subscription/{id}/plan', 'SubscriptionController@newSubscriptionPlan');
+        Route::post('/app/new/subscription', 'SubscriptionController@saveSubscription');
+        Route::get('/app/delete/subscription/{id}', 'SubscriptionController@deleteSubscription');
+        Route::get('/app/update/subscription/{id}', 'SubscriptionController@updateSubscription');
+        Route::get('/app/reset/subscription/{id}', 'SubscriptionController@resetSubscription');
+    });
+
 });
 
 //Modules

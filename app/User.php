@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable;
@@ -13,6 +13,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends AuthUser implements AuditableContract, UserResolver
 {
+
+    use Billable;
+
     use HasRoles;
 
     use Auditable;

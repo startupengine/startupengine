@@ -32,14 +32,12 @@
     @endsection
 
     @section('styles')
-
         @if(View::exists('theme.pages.'.$page->slug.'.css'))
             @include('theme.pages.'.$page->slug.'.css')
-        @endif
-        @if($page->css !== null)
-            <?php echo $page->css; ?>
-        @elseif(View::exists('theme.pages.'.$page->slug.'/css.html'))
-            @include('theme.pages.'.$page->slug.'/css.html')
+        @elseif(file_exists(base_path()."/resources/views/theme/pages/$page->slug/css.html"))
+            {!! file_get_contents(base_path()."/resources/views/theme/pages/$page->slug/css.html") !!}
+        @elseif(isset($page->css))
+            {!! $page->css !!}
         @endif
 
     @endsection
@@ -48,30 +46,30 @@
 
         @if(View::exists('theme.pages.'.$page->slug.'.header'))
             @include('theme.pages.'.$page->slug.'.header')
-        @elseif(file_exists("/resources/views/theme/pages/$page->slug/header.html"))
-            {!! file_get_contents(("/resources/views/theme/pages/$page->slug/header.html")) !!}
+        @elseif(file_exists(base_path()."/resources/views/theme/pages/$page->slug/header.html"))
+            {!! file_get_contents(base_path()."/resources/views/theme/pages/$page->slug/header.html") !!}
         @endif
 
         @if(View::exists('theme.pages.'.$page->slug.'.body'))
             @include('theme.pages.'.$page->slug.'.body')
+        @elseif(file_exists(base_path()."/resources/views/theme/pages/$page->slug/body.html"))
+            {!! file_get_contents(base_path()."/resources/views/theme/pages/$page->slug/body.html") !!}
         @elseif(isset($page->html))
             {!! $page->html !!}
-        @elseif(file_exists("/resources/views/theme/pages/$page->slug/body.html"))
-            {!! file_get_contents(("/resources/views/theme/pages/$page->slug/body.html")) !!}
         @endif
 
         @if(View::exists('theme.pages.'.$page->slug.'.scripts'))
             @include('theme.pages.'.$page->slug.'.scripts')
-        @elseif(file_exists("/resources/views/theme/pages/$page->slug/scripts.html"))
-            {!! file_get_contents(("/resources/views/theme/pages/$page->slug/scripts.html")) !!}
+        @elseif(file_exists(base_path()."/resources/views/theme/pages/$page->slug/scripts.html"))
+            {!! file_get_contents(base_path()."/resources/views/theme/pages/$page->slug/scripts.html") !!}
         @elseif(isset($page->scripts))
             {!! $page->scripts !!}
         @endif
 
         @if(View::exists('theme.pages.'.$page->slug.'.footer'))
             @include('theme.pages.'.$page->slug.'.footer')
-        @elseif(file_exists("/resources/views/theme/pages/$page->slug/footer.html"))
-            {!! file_get_contents(("/resources/views/theme/pages/$page->slug/footer.html")) !!}
+        @elseif(file_exists(base_path()."/resources/views/theme/pages/$page->slug/footer.html"))
+            {!! file_get_contents(base_path()."/resources/views/theme/pages/$page->slug/footer.html") !!}
         @endif
 
     @endsection

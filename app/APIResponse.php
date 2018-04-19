@@ -2,12 +2,78 @@
 
 namespace App;
 
+use App\User;
 use Carbon\Carbon;
 use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class APIResponse extends Model
 {
+
+    public function getStripePlans($request){
+        if($request->input('product_id') !== null ){
+            $plans = getStripePlans($request->input('product_id'));
+        }
+        else {
+            $plans = getStripePlans();
+        }
+        return response()
+            ->json($plans);
+    }
+
+    public function getStripeProducts($request){
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        $products = \Stripe\Product::all(array("limit" => 100));
+        foreach($products->data as $product){
+            $item = \App\Product::where('stripe_id', '=', $product->id)->first();
+            if($item == null){
+                $item = new \App\Product();
+            }
+            $item->stripe_id = $product->id;
+            $item->name = $product->name;
+            $item->json = json_encode($product);
+            $item->save();
+        }
+        return response()
+            ->json($products);
+    }
+
+    public function createProduct($request){
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        $product = \Stripe\Product::create(array(
+            "name" => $request->input('name'),
+            "type" => "service"
+        ));
+        return response()
+            ->json($product);
+    }
+
+    public function createProductPlan($request){
+       $plan = createProductPlan($request);
+        return response()
+            ->json($plan);
+    }
+
+    public function createSubscription($request){
+        $user = User::find($request->input('user_id'));
+        $plan_id = "plan_ChBLS3BmNRMIgx";
+        $newplan = $user->newSubscription('main', $plan_id)->create('tok_1CHmtMGQPPOg9Tbdz2UYxKsD');
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        $stripeplan = \Stripe\Plan::retrieve("plan_ChBLS3BmNRMIgx");
+        $newplan->price = $stripeplan->amount;
+        $newplan->json = json_encode($stripeplan);
+        $newplan->save();
+        return response()
+            ->json($newplan);
+    }
+
+    public function getInvoices($id){
+        $user = User::find($id);
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        $invoices = \Stripe\Invoice::all(array("customer" => $user->stripe_id, "limit" => 10));
+        return response()
+            ->json($invoices);
+    }
 
     public function getItems($request)
     {

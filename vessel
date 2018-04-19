@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+
+UNAMEOUT="$(uname -s)"
+case "${UNAMEOUT}" in
+    Linux*)             MACHINE=linux;;
+    Darwin*)            MACHINE=mac;;
+    MINGW64_NT-10.0*)   MACHINE=mingw64;;
+    *)                  MACHINE="UNKNOWN"
+esac
+
+if [ "$MACHINE" == "UNKNOWN" ]; then
+    echo "Unsupported system type"
+    echo "System must be a Macintosh, Linux or Windows"
+    echo ""
+    echo "System detection determined via uname command"
+    echo "If the following is empty, could not find uname command: $(which uname)"
+    echo "Your reported uname is: $(uname -s)"
+fi
+
+# Set environment variables for dev
+if [ "$MACHINE" == "linux" ]; then
+    if grep -q Microsoft /proc/version; then # WSL
+        export XDEBUG_HOST=10.0.75.1
+    else
+        if [ "$(command -v ip)" ]; then
+            export XDEBUG_HOST=$(ip addr show docker0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+        else
+            export XDEBUG_HOST=$(ifconfig docker0 | grep "inet addr" | cut -d ':' -f 2 | cut -d ' ' -f 1)
+        fi
+    fi
+    SEDCMD="sed -i"
+elif [ "$MACHINE" == "mac" ]; then
+    export XDEBUG_HOST=$(ipconfig getifaddr en0) # Ethernet
+
+    if [ -z "$XDEBUG_HOST" ]; then
+        export XDEBUG_HOST=$(ipconfig getifaddr en1) # Wifi
+    fi
+    SEDCMD="sed -i .bak"
+elif [ "$MACHINE" == "mingw64" ]; then # Git Bash
+    export XDEBUG_HOST=10.0.75.1
+    SEDCMD="sed -i"
+fi
+
+export APP_PORT=${APP_PORT:-80}
+export MYSQL_PORT=${MYSQL_PORT:-3306}
+export WWWUSER=${WWWUSER:-$UID}
+
+# Is the environment running
+PSRESULT="$(docker-compose ps -q)"
+if [ ! -z "$PSRESULT" ]; then
+    EXEC="yes"
+else
+    EXEC="no"
+fi
+
+# Create base docker-compose command to run
+COMPOSE="docker-compose -f docker-compose.yml"
+
+# If we pass any arguments...
+if [ $# -gt 0 ]; then
+
+    # Source .env, which can over-ride env vars
+    # such as APP_PORT, MYSQL_PORT, and WWWUSER
+    if [ -f .env ]; then
+        source .env
+    fi
+
+
+    # Edit .env file to set correct hostnames for mysql/redis
+    if [ "$1" == "init" ]; then
+        echo "VESSEL: Initializing Vessel..."
+        COMPOSER=$(which composer)
+
+        echo "VESSEL: Installing Predis"
+        if [ -z "$COMPOSER" ]; then
+          docker run -u $UID --rm -it \
+            -v $(pwd):/opt \
+            -w /opt \
+            shippingdocker/php-composer:latest \
+            composer require predis/predis
+        else
+            $COMPOSER require predis/predis
+        fi
+
+        if [ ! -f .env ]; then
+            echo "No .env file found within current working directory $(pwd)"
+            echo "Create a .env file before re-initializing"
+            exit 0
+        fi
+
+        echo "VESSEL: Setting .env Variables"
+        cp .env .env.bak.vessel
+        $SEDCMD "s/DB_HOST=.*/DB_HOST=mysql/" .env
+        $SEDCMD "s/CACHE_DRIVER=.*/CACHE_DRIVER=redis/" .env
+        $SEDCMD "s/SESSION_DRIVER=.*/SESSION_DRIVER=redis/" .env
+        $SEDCMD "s/REDIS_HOST=.*/REDIS_HOST=redis/" .env
+
+        if [ -f .env.bak ]; then
+            rm .env.bak
+        fi
+
+        if [ ! -f vessel ]; then
+            echo "No vessel file found within current working directory $(pwd)"
+            echo "Have you run the artisan vendor:publish command yet?"
+            exit 0
+        fi
+
+        echo "VESSEL: Making vessel command available"
+        chmod +x vessel
+
+        echo ""
+        echo "VESSEL: Complete!"
+        echo "VESSEL: You can now use Vessel"
+        echo "VESSEL: Try starting it:"
+        echo "./vessel start"
+
+
+    # Start up containers
+    elif [ "$1" == "start" ]; then
+        $COMPOSE up -d
+
+    # Stop the containers
+    elif [ "$1" == "stop" ]; then
+        $COMPOSE down
+
+    # If "art" is used, pass-thru to "artisan"
+    # inside a new container
+    elif [ "$1" == "artisan" ] || [ "$1" == "art" ]; then
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec \
+                -u vessel \
+                app \
+                php artisan "$@"
+        else
+            $COMPOSE run --rm \
+                app \
+                php artisan "$@"
+        fi
+
+    # If "composer" is used, pass-thru to "composer"
+    # inside a new container
+    elif [ "$1" == "composer" ] || [ "$1" == "comp" ]; then
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec \
+                -u vessel \
+                app \
+                composer "$@"
+        else
+            $COMPOSE run --rm \
+                app \
+                composer "$@"
+        fi
+
+    # If "test" is used, run unit tests,
+    # pass-thru any extra arguments to php-unit
+    elif [ "$1" == "test" ]; then
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec \
+                -u vessel \
+                app \
+                ./vendor/bin/phpunit "$@"
+        else
+            $COMPOSE run --rm \
+                app \
+                ./vendor/bin/phpunit "$@"
+        fi
+
+    # If "tinker" is used, drop into the REPL
+    # inside a new container
+    elif [ "$1" == "tinker" ] ; then
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec \
+                -u vessel \
+                app \
+                php artisan tinker
+        else
+            $COMPOSE run --rm \
+                app \
+                php artisan tinker
+        fi
+
+    # If "npm" is used, run npm
+    # from our node container
+    elif [ "$1" == "npm" ]; then
+        shift 1
+        $COMPOSE run --rm \
+            node \
+            npm "$@"
+
+    # If "yarn" is used, run yarn
+    # from our node container
+    elif [ "$1" == "yarn" ]; then
+        shift 1
+        $COMPOSE run --rm \
+            node \
+            yarn "$@"
+
+    # If "gulp" is used, run gulp
+    # from our node container
+    elif [ "$1" == "gulp" ]; then
+        shift 1
+        $COMPOSE run --rm \
+            node \
+            ./node_modules/.bin/gulp "$@"
+
+    # If "dump" is used, run mysqldump
+    # from our mysql container
+    elif [ "$1" == "dump" ]; then
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec \
+                mysql \
+                mysqldump -u root -p$DB_PASSWORD --default-character-set=utf8mb4 $DB_DATABASE | grep -v "mysqldump: \[Warning\]"
+        else
+            $COMPOSE run --rm \
+                mysql \
+                mysqldump -h mysql -u root -p$DB_PASSWORD --default-character-set=utf8mb4 $DB_DATABASE | grep -v "mysqldump: \[Warning\]"
+        fi
+
+    # Else, pass-thru args to docker-compose
+    else
+        $COMPOSE "$@"
+    fi
+else
+    # Use the docker-compose ps command if nothing else passed through
+    $COMPOSE ps
+fi

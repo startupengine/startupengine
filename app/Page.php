@@ -82,7 +82,9 @@ class Page extends Model implements AuditableContract
         $json = $this->json;
         $random = array_rand(json_decode($json, true)['versions'], 1);
         $content = json_decode($json, true)['versions'][$random];
-        return json_decode(json_encode($content));
+        $json = json_decode(json_encode($content));
+        //dd($json);
+        return $json;
     }
 
     public function markdown($content)
