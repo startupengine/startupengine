@@ -71,7 +71,7 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">
-                    Purchases
+                    Subscriptions
                 </h5>
                 <div class="form-group">
                     <form>
@@ -125,7 +125,7 @@
     <div class="modal fade" id="newSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <form action="/app/new/Subscription" method="post">
+            <form action="/app/new/subscription" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="form-group">
                             <label for="productName">Name</label><br>
-                            <input name="url" class="form-control" placeholder="i.e. Basic Subscription" autocomplete="off"/>
+                            <input name="name" class="form-control" placeholder="i.e. Basic Subscription" autocomplete="off"/>
                         </div>
 
                     </div>
@@ -151,101 +151,5 @@
             </form>
         </div>
     </div>
-
-    <!-- Modal Core -->
-    <div class="modal fade" id="deleteSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
-                </div>
-                <div class="modal-body">
-
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        <p>Once you delete this post, it will be unavailable unless an administrator un-deletes it.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger" id="deleteButton">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Core -->
-    <div class="modal fade" id="syncSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
-                </div>
-                <div class="modal-body">
-
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        <p>Resetting the Subscription will change any settings you've tweaked to their default states.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-secondary" id="resetButton">Reset Subscription</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Core -->
-    <div class="modal fade" id="updateSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
-                </div>
-                <div class="modal-body">
-
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        <p>Editing the Subscription will result in changes on your site. Be sure you know what you're installing. @if(env('APP_PLATFORM') == 'heroku') Changes will appear the next time the site is deployed.@endif</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-secondary" id="syncButton">Update Subscription</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Core -->
-    <div class="modal fade" id="SubscriptionInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="margin-top:0px;" class="modal-title" id="SubscriptionName"></h4>
-                </div>
-                <div class="modal-body">
-
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        <p id="SubscriptionVersion" class="badge badge-category"></p>
-                        <p id="SubscriptionDescription" style="margin-top:10px;"></p>
-                        <p><a href="#" id="SubscriptionUrl" target="_blank" style="text-decoration: none;">View the git
-                                repository for this Subscription</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 @endsection

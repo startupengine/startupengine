@@ -68,8 +68,9 @@
                                 <td>{{ $tag->name }}<br><span style="opacity:0.5;">{{$tag->count}} Item<?php if($tag->count > 1) { ?>s<?php } ?></span>
                                 </td>
                                 <td align="right">
-                                    <a href="/app/edit/setting/{{ $tag->id }}"
-                                       class="btn btn-sm btn-secondary-outline defaultClick" style="">Edit</a>
+                                    <?php if($tag->post() !== null){ ?>
+                                        <a href="/app/edit/post/{{ $tag->post()->id }}"
+                                       class="btn btn-sm btn-secondary-outline defaultClick" style="">Edit</a>"; <?php } ?>
                                 </td>
                             </tr>
                         @endforeach

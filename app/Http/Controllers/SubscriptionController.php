@@ -20,10 +20,19 @@ class SubscriptionController extends Controller
 
     public function saveSubscription(Request $request)
     {
-        $package = new Package();
-        $package->url = $request->input('url');
-        $package->save();
-        return redirect('/app/subscriptions');
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        $product = \Stripe\Product::create(array(
+            "name" => $request->input('name'),
+            "type" => "service",
+            "description" => null,
+            "attributes" => []
+        ));
+        $record = new \App\Product();
+        $record->stripe_id = $product->id;
+        $record->name = $request->input("name");
+        $record->json = json_encode($product);
+        $record->save();
+        return redirect("/app/view/subscription/$record->id");
     }
 
 

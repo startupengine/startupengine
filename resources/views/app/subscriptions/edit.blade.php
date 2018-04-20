@@ -68,17 +68,17 @@
                                 <input required
                                        value="{{$product->name}}"
                                        class="form-control"
-                                       id="title"
+                                       id="name"
                                        aria-describedby="postTitle" placeholder="Enter a title"
-                                       name="title">
+                                       name="name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="postSlug">Stripe ID</label>
                                 <input required value="{{$product->stripe_id}}" type="text" class="form-control"
-                                       id="slug"
-                                       aria-describedby="postSlug" placeholder="example-slug" name="stripe_id" disabled>
+                                       id="stripe_id"
+                                       name="stripe_id" disabled>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -115,7 +115,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-camera"></i>
                                                 </span>
-                                        <input id="image" placeholder="https://..." style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ $product->image }}"/>
+                                        <input id="image" name="image" placeholder="https://..." style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ $product->image }}"/>
                                     </div>
 
 
@@ -124,8 +124,22 @@
                                 <a class="list-group-item list-group-item-action">
 
 
-                                    <label>Description</label>
-                                    <textarea class="form-control">{{ ucfirst($product->discription) }}</textarea>
+                                    <label>Description</label>{{ ucfirst($product->discription) }}
+                                    <textarea class="form-control" id="description" name="description">{{ ucfirst($product->description) }}</textarea>
+
+                                </a>
+                                <a class="list-group-item list-group-item-action">
+
+
+                                    <label>Priority</label>
+                                    <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                        <input id="priority" name="priority" placeholder="i.e. 1, 2, 3..." style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ $product->priority }}"/>
+                                    </div>
+
+
 
                                 </a>
                             </div>

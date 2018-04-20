@@ -106,12 +106,13 @@ function getStripePlans($id = null){
         $plans = \Stripe\Plan::all();
     }
     foreach($plans->data as $plan){
-        $item = \App\Plan::where('stripe_id', '=', $id)->first();
+        $item = \App\Plan::where('stripe_id', '=', $plan->id)->first();
         if($item == null){
             $item = new \App\Plan();
         }
         $item->stripe_id = $plan->id;
         $item->name = $plan->name;
+        $item->price = $plan->amount;
         $item->json = json_encode($plan);
         $item->save();
     }

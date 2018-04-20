@@ -65,18 +65,19 @@
                href="/app/products"><i class="now-ui-icons shopping_box"></i>&nbsp; Products</a>
         </li>
 
+        <?php /*
+        <li class="nav-item">
+            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/social')) active @endif"
+               style="text-align: left;border-color:#eee !important;"
+               href="/app/social"><i class="now-ui-icons ui-2_chat-round"></i>&nbsp; Activity Feed</a>
+        </li>
+       */ ?>
+
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/subscriptions')) active @endif"
                style="text-align: left;border-color:#eee !important;"
                href="/app/subscriptions"><i class="now-ui-icons shopping_credit-card"></i>&nbsp; Subscriptions</a>
         </li>
-        <?php /*
-        <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/social')) active @endif"
-               style="text-align: left;border-color:#eee !important;"
-               href="/app/social"><i class="now-ui-icons ui-2_like"></i>&nbsp; Social Media</a>
-        </li>
-        */ ?>
 
         @if(\Auth::user()->hasPermissionTo('browse settings'))
             <li class="nav-item">

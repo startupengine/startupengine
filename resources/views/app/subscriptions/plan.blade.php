@@ -54,7 +54,7 @@
 @section('content')
     <main class="col-sm-12 col-md-12 col-lg-10 offset-lg-2 pt-3">
         <div class="main col-md-12" style="background:none;margin-top:25px;">
-            <form action="/app/edit/product" method="post">
+            <form action="/app/edit/product/plan" method="post">
                 <div class="col-md-12">
                     <h5>@if($product->id == null) Add @endif @if($product->id !== null) <span style="opacity:0.5;">Editing </span>@endif Plan
                         {!! button(null, "Save Changes", "save", "pull-right", null, null, "button") !!}
@@ -66,19 +66,23 @@
                             <div class="form-group">
                                 <label for="postTitle">Plan Nickname</label>
                                 <input required
-                                       value="{{$plan->nickname}}"
+                                       value="{!!$plan->json()->nickname!!}"
                                        class="form-control"
                                        id="title"
-                                       aria-describedby="postTitle" placeholder="Enter a title"
-                                       name="title">
+                                       aria-describedby="postTitle" placeholder="Enter a nickname"
+                                       name="nickname">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="postSlug">Stripe ID</label>
-                                <input required value="{{$product->stripe_id}}" type="text" class="form-control"
-                                       id="slug"
-                                       aria-describedby="postSlug" placeholder="example-slug" name="stripe_id" disabled>
+                                <label for="postSlug">Plan ID</label>
+                                <input required value="{{$plan->stripe_id}}" type="text" class="form-control"
+
+                                       aria-describedby="postSlug" placeholder="example-slug"  disabled>
+                                <input required value="{{$plan->stripe_id}}" type="hidden" class="form-control"
+                                       id="plan_id"
+                                       name="plan_id"
+                                       aria-describedby="postSlug" placeholder="example-slug"  >
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -112,7 +116,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-camera"></i>
                                                 </span>
-                                            <input id="image" style="border-radius:0px 25px 25px 0px !important;" class="form-control" placeholder="https://..." value="{{ $plan->image }}"/>
+                                            <input name="image" id="image" style="border-radius:0px 25px 25px 0px !important;" class="form-control" placeholder="https://..." value="{{ $plan->image }}"/>
                                         </div>
 
 
@@ -122,7 +126,7 @@
 
 
                                         <label>Description</label>
-                                        <textarea class="form-control">{{ ucfirst($plan->discription) }}</textarea>
+                                        <textarea name="description" class="form-control">{{ ucfirst($plan->discription) }}</textarea>
 
                                     </a>
                             </div>

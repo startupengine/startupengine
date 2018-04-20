@@ -121,6 +121,8 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
     Route::group(['middleware' => ['permission:edit settings']], function () {
         Route::get('/app/subscriptions', 'SubscriptionController@index');
         Route::get('/app/products', 'ProductController@index');
+        Route::post('/app/edit/product/', 'ProductController@saveProduct');
+        Route::post('/app/edit/product/plan', 'ProductController@saveProductPlan');
         Route::get('/app/view/subscription/{id}', 'SubscriptionController@viewSubscription');
         Route::get('/app/view/subscription/{id}/plan/{plan}', 'SubscriptionController@viewSubscriptionPlan');
         Route::get('/app/new/subscription/{id}/plan', 'SubscriptionController@newSubscriptionPlan');
@@ -128,6 +130,16 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/delete/subscription/{id}', 'SubscriptionController@deleteSubscription');
         Route::get('/app/update/subscription/{id}', 'SubscriptionController@updateSubscription');
         Route::get('/app/reset/subscription/{id}', 'SubscriptionController@resetSubscription');
+    });
+
+    //Social
+    Route::group(['middleware' => ['permission:edit posts']], function () {
+        Route::get('/app/social/platforms', 'PlatformController@index');
+        Route::get('/app/new/social/platform', 'PlatformController@newSocialPlatform');
+        Route::post('/app/new/social/platform', 'PlatformController@saveSocialPlatform');
+        Route::get('/app/social/', 'SocialMediaController@index');
+        Route::get('/app/edit/social/post/{id}', 'SocialMediaController@viewSocialPost');
+        Route::post('/app/edit/social/platform', 'PlatformController@saveSocialPlatform');
     });
 
 });
