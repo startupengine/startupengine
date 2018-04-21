@@ -138,7 +138,7 @@
 
                                 <a class="list-group-item list-group-item-action">
                                     <label>Bill the customer every...</label>
-                                    <select class="form-control">
+                                    <select class="form-control" disabled>
                                         <option value="year" @if($plan->json()->interval == "year") selected @endif>Year</option>
                                         <option value="month" @if($plan->json()->interval == "month") selected @endif>Month</option>
                                         <option value="week" @if($plan->json()->interval == "week") selected @endif>Week</option>
@@ -153,7 +153,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-dollar"></i>
                                             </span>
-                                        <input id="amount" placeholder="$99.00" style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ ucfirst($plan->json()->amount/100) }}.00"/>
+                                        <input id="amount" disabled placeholder="$99.00" style="border-radius:0px 25px 25px 0px !important;" class="form-control" value="{{ ucfirst($plan->json()->amount/100) }}.00"/>
                                     </div>
 
 

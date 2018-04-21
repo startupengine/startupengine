@@ -45,7 +45,6 @@
             padding-right:12px !important;
         }
         .input-group input:hover, .input-group input:focus {
-            border-left:none !important;
             background:#fff;
         }
     </style>
@@ -148,7 +147,7 @@
                             <div class="form-group">
                                 <label for="postStatus">Pricing Plans</label><br>
                                 <div class="list-group">
-                                    <a href="/app/new/subscription/{{$product->id}}/plan" class="list-group-item list-group-item-action" style="border-bottom:2px solid green;background:rgba(151,255,169,0.06);color:green;">New Plan<i class="fa fa-plus pull-right" style="color:green;margin-left:10px;margin-top:3px;"></i></a>
+                                    <a href="#" class="list-group-item list-group-item-action" style="border-bottom:2px solid green;background:rgba(151,255,169,0.06);color:green;" data-toggle="modal" data-target="#newSubscription">New Plan <i class="fa fa-plus pull-right" style="color:green;margin-left:10px;margin-top:3px;"></i></a>
                                     @foreach(getStripePlans($product->stripe_id)->data as $plan)
 
 
@@ -296,28 +295,59 @@
 @endsection
 
 @section('modals')
+
     <!-- Modal Core -->
-    <div class="modal fade" id="deleteVariation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="newSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">Are you sure?</h4>
-                </div>
-                <div class="modal-body">
+            <form action="/app/new/subscription/plan" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">New Plan for {{ $product->name }}</h4>
+                    </div>
+                    <div class="modal-body">
 
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        <p>Deleting a variation cannot be undone.</p>
+                        {{ csrf_field() }}
+                        <div class="col-md-12">
+                            <p>Keep in mind that you will not be able to edit this plan's billing details after you create it.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Plan Nickname</label><br>
+                            <input name="nickname" class="form-control" placeholder="i.e. Basic" autocomplete="off"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bill the customer every...</label>
+                            <select class="form-control" name="interval">
+                                <option value="year">Year</option>
+                                <option value="month" selected>Month</option>
+                                <option value="week">Week</option>
+                                <option value="day">Day</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Amount</label><br>
+                            <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-dollar"></i>
+                                            </span>
+                                <input name="amount" id="amount" placeholder="99..." style="border-radius:0px !important;" class="form-control" />
+                                <span class="input-group-addon" style="padding-left:15px;padding-right:15px !important;font-size:80%;">
+                                    .00
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="product_id" value="{{$product->id}}" ?>
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-secondary" id="installButton">Continue &nbsp;<i class="fa fa-caret-right"></i></button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancel</button>
-                    <a href="#" class="btn btn-danger" id="deleteButton" onclick="deleteVariation();"
-                       data-toggle="modal" data-target="#deleteVariation">Delete</a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+
 @endsection

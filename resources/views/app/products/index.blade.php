@@ -63,6 +63,17 @@
             font-weight: 400;
             border-radius: 4px;
         }
+
+        .input-group input:hover, .input-group input:focus {
+            background:#fff;
+        }
+        .input-group-focus > .input-group-addon, input:focus {
+            border-color:orangered !important;
+        }
+        .input-group-addon{
+            background:#eee;
+            padding-right:12px !important;
+        }
     </style>
 @endsection
 
@@ -126,7 +137,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">New Subscription</h4>
+                        <h4 style="margin-top:0px;" class="modal-title" id="myModalLabel">New Product</h4>
                     </div>
                     <div class="modal-body">
 
@@ -136,8 +147,31 @@
                         </div>
                         <div class="form-group">
                             <label for="productName">Name</label><br>
-                            <input name="name" class="form-control" placeholder="i.e. Basic Subscription" autocomplete="off"/>
+                            <input name="name" class="form-control" placeholder="i.e. My Awesome SaaS" autocomplete="off"/>
                         </div>
+                        <?php /*
+                        <div class="form-group">
+                            <label>Bill the customer every...</label>
+                            <select class="form-control">
+                                <option value="year">Year</option>
+                                <option value="month">Month</option>
+                                <option value="week">Week</option>
+                                <option value="day">Day</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Amount</label><br>
+                            <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-dollar"></i>
+                                            </span>
+                                <input id="amount" placeholder="99..." style="border-radius:0px !important;" class="form-control" />
+                                <span class="input-group-addon" style="padding-left:15px;padding-right:15px !important;font-size:80%;">
+                                    .00
+                                </span>
+                            </div>
+                        </div>
+                        */ ?>
 
                     </div>
                     <div class="modal-footer">

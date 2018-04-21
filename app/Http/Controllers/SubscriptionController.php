@@ -35,23 +35,79 @@ class SubscriptionController extends Controller
         return redirect("/app/view/subscription/$record->id");
     }
 
+    public function confirmSubscription($id){
+        $plan = \App\Plan::where('stripe_id', '=', $id)->first();
+        if($plan !== null && $plan->json()->trial_period_days > 0) {
+            return redirect ("/subscribe?id=$plan->stripe_id");
+        }
+        else {
+            return redirect ("/pricing");
+        }
+    }
 
-    public function newSubscriptionPlan(Request $request, $id)
+    public function submitSubscription(Request $request)
     {
-        $product = \App\Product::where('id', '=',$id)->first();
+        dd($request->input());
+        $productId = $request->input('product_id');
+        $product = \App\Product::where('id', '=',$productId)->first();
+        if($request->input('amount') == null){
+            $amount = 0;
+        }
+        else {
+            $amount = $request->input('amount')*100;
+        }
+        if($request->input('interval') == null){
+            $interval = "month";
+        }
+        else {
+            $interval  = $request->input('interval');
+        }
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
         $plan = \Stripe\Plan::create(array(
-            "interval" => "month",
+            "interval" => $interval,
             "currency" => "usd",
-            "amount" => 9900,
-            "product" => $product->stripe_id
+            "amount" => $amount,
+            "product" => $product->stripe_id,
+            "nickname" => $request->input("nickname")
         ));
         $record = new \App\Plan();
         $record->stripe_id = $plan->id;
         $record->name = $plan->nickname;
         $record->json = json_encode($plan);
         $record->save();
-        return redirect("/app/view/subscription/$id/plan/$record->stripe_id");
+        return redirect("/app/view/subscription/$product->id/plan/$record->stripe_id");
+    }
+
+    public function newSubscriptionPlan(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $product = \App\Product::where('id', '=',$productId)->first();
+        if($request->input('amount') == null){
+            $amount = 0;
+        }
+        else {
+            $amount = $request->input('amount')*100;
+        }
+        if($request->input('interval') == null){
+            $interval = "month";
+        }
+        else {
+            $interval  = $request->input('interval');
+        }
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        $plan = \Stripe\Plan::create(array(
+            "interval" => $interval,
+            "currency" => "usd",
+            "amount" => $amount,
+            "product" => $product->stripe_id,
+            "nickname" => $request->input("nickname")
+        ));
+        $record = new \App\Plan();
+        $record->stripe_id = $plan->id;
+        $record->name = $plan->nickname;
+        $record->json = json_encode($plan);
+        $record->save();
+        return redirect("/app/view/subscription/$product->id/plan/$record->stripe_id");
     }
 
     public function viewSubscription(Request $request, $id)
