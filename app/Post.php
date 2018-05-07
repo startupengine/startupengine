@@ -111,14 +111,18 @@ class Post extends Model implements AuditableContract
 
     public function primaryTag(){
         $tags = $this->tagNames();
-        if($tags !== null) {
+        if($tags !== null && count($tags) !== 0) {
             $primaryTag = $tags[0];
             $tag = \App\Post::where('post_type', '=', 'tag')->where('slug','=',strtolower($primaryTag))->first();
-            return $primaryTag;
+            return $tag;
         }
         else {
             return null;
         }
+    }
+
+    public function views(){
+        return \App\AnalyticEvent::where("event_data->model", 'post')->where("event_data->id", $this->id)->get();
     }
 
 }

@@ -18,6 +18,7 @@ Auth::routes();
 //Products & Services
 Route::get('/subscribe/{id}', 'SubscriptionController@confirmSubscription');
 Route::get('/subscription/submit/', 'SubscriptionController@submitSubscription');
+Route::post('/subscription/submit/', 'SubscriptionController@submitSubscription');
 
 Route::group(['middleware' => ['permission:view backend', 'backend']], function () {
 
@@ -121,8 +122,10 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
     });
 
-
-
+    //Products & Services
+    Route::group(['middleware' => ['permission:edit settings']], function () {
+        Route::get('/app/research', 'ResearchController@index');
+    });
 
     //Products & Services
     Route::group(['middleware' => ['permission:edit settings']], function () {
@@ -165,6 +168,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/content/{slug}', 'PostController@getItem');
     Route::get('/content/tag/{tag}', 'PostController@getItemsByTag');
+    Route::get('/content/{postType}/{tag}', 'PostController@getPostByPostTypeAndSlug');
 
     //Auth
     Route::get('/login', 'AppController@login')->name('login');

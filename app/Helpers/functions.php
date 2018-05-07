@@ -77,7 +77,7 @@ function updateSubscriptionProducts(){
 function updateSubscriptionPlans(){
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
     $products = \Stripe\Product::all();
-    foreach(\App\Product::all() as $existing) {
+    foreach(\App\Product::where('status','=','ACTIVE') as $existing) {
         $existing->status = "INACTIVE";
         $existing->save();
     }
@@ -88,7 +88,7 @@ function updateSubscriptionPlans(){
         }
         $item->stripe_id = $product->id;
         $item->name = $product->name;
-        $item->status = "ACTIVE";
+        //$item->status = "ACTIVE";
         $item->json = json_encode($product);
         $item->save();
     }
@@ -139,4 +139,27 @@ function createProductPlan($request){
     $record->json = json_encode($plan);
     $record->save();
     return $record;
+}
+
+function valueExists($object, $array = null){
+    if(isset($object) !== null){
+        return $object;
+    }
+    else {
+        return null;
+    }
+}
+
+function mostPopularContent($postType, $limit = null){
+    if($limit == null) {
+        $posts = \App\Post::where('post_type', '=', $postType)->where('status', '=', 'PUBLISHED')->get();
+    }
+    else {
+        $posts = \App\Post::where('post_type', '=', $postType)->where('status', '=', 'PUBLISHED')->limit($limit)->get();
+    }
+    foreach ($posts as $post){
+        $post->views = count($post->views());
+    }
+    $posts = $posts->sortBy('views')->reverse();
+    return $posts;
 }

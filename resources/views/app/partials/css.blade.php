@@ -24,4 +24,9 @@
         background: #efefef !important;
         color:#222 !important;
     }
+
+    #adminNav {
+        background:#2b2b2b !important;
+        box-shadow:0px 5px 15px rgba(0,0,200,0.15) !important;
+    }
 </style>

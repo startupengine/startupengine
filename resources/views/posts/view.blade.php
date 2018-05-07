@@ -1,7 +1,7 @@
 @extends('layouts.post')
 
 @section('title')
-    <?php echo $post->title; ?>
+    <?php echo $post->title; ?> - <?php echo setting('site.name'); ?>
 @endsection
 
 @section('meta')
@@ -26,8 +26,8 @@
 @endsection
 
 @section('styles')
-    @if(View::exists('theme.templates.post.css'))
-        @include('theme.templates.post.css')
+    @if(View::exists("theme.templates.$postType.css"))
+        @include("theme.templates.$postType.css")
     @endif
     @if(isset($post->content()->code->css))
         {!! $post->content()->code->css !!}
@@ -35,8 +35,8 @@
 @endsection
 
 @section('content')
-    @if(View::exists('theme.templates.post.scripts'))
-        @include('theme.templates.post.scripts')
+    @if(View::exists("theme.templates.$postType.scripts"))
+        @include("theme.templates.$postType.scripts")
     @endif
     @if(isset($post->content()->code->scripts))
         {!! $post->content()->code->scripts !!}

@@ -25,9 +25,29 @@ class PostController extends Controller
 
     public function getPost(Request $request, $slug) {
         $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
-
+        $postType = 'post';
         if(($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
-            return view('posts.view')->with('post', $post);
+            return view('posts.view')->with('postType', $postType);
+        }
+        else {
+            abort(404);
+        }
+    }
+
+    public function getPostByPostTypeAndSlug(Request $request, $postType, $slug) {
+        $post =  Post::where('post_type','=',$postType)->where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+        $event = new AnalyticEvent();
+        $event->event_type = 'content viewed';
+        if(\Auth::user()) {
+            $event->user_id = \Auth::user()->id;
+            $event->user_email = \Auth::user()->email;
+            $event->user_name = \Auth::user()->name;
+        }
+        $array = ["id" => "$post->id", "model" => "post", "slug" => $post->slug];
+        $event->event_data = json_encode($array);
+        $event->save();
+        if(($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
+            return view('posts.view')->with('post', $post)->with('post', $post)->with('postType', $postType);
         }
         else {
             abort(404);
@@ -85,7 +105,7 @@ class PostController extends Controller
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
-            $event->event_data = json_encode("{id:$post->id}");
+            $event->event_data = json_encode("{\"id\":$post->id}");
             $event->save();
 
             return redirect('/app/content');
@@ -139,9 +159,10 @@ class PostController extends Controller
                 $event->user_email = \Auth::user()->email;
                 $event->user_name = \Auth::user()->name;
             }
-            $event->event_data = json_encode("{id:$item->id, slug:'$item->slug',title:'$item->title', content_type:'".$item->postType()->slug."'}");
+            $event->event_data = json_encode("{\"id\":$item->id, \"slug\":'$item->slug',\"title\":'$item->title', \"content_type\":'".$item->postType()->slug."'}");
             $event->save();
-            return view('posts.view')->with('post', $item);
+            $postType = 'post';
+            return view('posts.view')->with('post', $item)->with('postType', $postType);
         }
     }
 

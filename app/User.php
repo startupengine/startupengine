@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -77,6 +78,23 @@ class User extends AuthUser implements AuditableContract, UserResolver
     public static function resolveId()
     {
         return \Auth::check() ? \Auth::user()->getAuthIdentifier() : null;
+    }
+
+    public function stripeCustomer($token = null)
+    {
+        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
+        if ($token == null) {
+            return \Stripe\Customer::retrieve($this->stripe_id);
+
+        } else {
+
+            $customer = \Stripe\Customer::create(array(
+                "description" => "Customer for $this->email",
+                "source" => "$token" // obtained with Stripe.js
+            ));
+
+            return $customer;
+        }
     }
 
 }

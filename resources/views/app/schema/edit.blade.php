@@ -33,6 +33,21 @@
                                    name="slug"/>
                         </div>
                         <div class="form-group">
+                            <label for="postStatus">Status</label><br>
+                            <select class="custom-select" id="enabled" name="enabled"
+                                    aria-describedby="postStatus" style="width:100%;">
+                                <option <?php if ($postType->enabled == false) {
+                                    echo "SELECTED";
+                                } ?> value="FALSE">Disabled
+                                </option>
+                                <option <?php if ($postType->enabled == true) {
+                                    echo "SELECTED";
+                                } ?> value="TRUE">Enabled
+                                </option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="settingValue">Schema</label>
                             <textarea name="json"></textarea>
                             <div id="json" style="min-height:350px;"></div>

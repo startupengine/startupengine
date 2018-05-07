@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label for="settingDisplayName">Name</label>
-                        <input value="{{$setting->display_name}}" type="text" class="form-control"
+                        <input disabled value="{{$setting->display_name}}" type="text" class="form-control"
                                id="display_name" aria-describedby="settingDisplayName"
                                placeholder="What should this setting be called?" name="display_name">
                     </div>

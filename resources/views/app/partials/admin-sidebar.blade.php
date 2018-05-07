@@ -4,15 +4,23 @@
 
     <ul class="nav flex-column" style="margin-top:15px;">
 
-        <li class="nav-item">
 
+        <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app') OR \Request::is('app/dashboard')) active @endif"
                style="text-align: left;border-color:#eee !important;" href="/app/dashboard"><i class="fa fa-th"></i>&nbsp; Dashboard</a>
         </li>
 
+        <?php /*
+        <li class="nav-item">
+            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/research*')) active @endif"
+               style="text-align: left;border-color:#eee !important;"
+               href="/app/research"><i class="now-ui-icons education_glasses"></i>&nbsp; R + D</a>
+        </li>
+       */ ?>
+
         @if(\Auth::user()->hasPermissionTo('browse settings'))
             <li class="nav-item">
-                <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/ads*')) active @endif"
+                <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/tags*')) active @endif"
                    style="text-align: left;border-color:#eee !important;"
                    href="/app/tags"><i class="now-ui-icons shopping_tag-content"></i>&nbsp; Tags</a>
             </li>
@@ -60,23 +68,23 @@
         @endif
 
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/products')) active @endif"
+            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/subscriptions')) active @endif"
                style="text-align: left;border-color:#eee !important;"
-               href="/app/products"><i class="now-ui-icons shopping_box"></i>&nbsp; Products</a>
+               href="/app/subscriptions"><i class="now-ui-icons shopping_credit-card"></i>&nbsp; Revenue</a>
         </li>
 
         <?php /*
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/social')) active @endif"
                style="text-align: left;border-color:#eee !important;"
-               href="/app/social"><i class="now-ui-icons ui-2_chat-round"></i>&nbsp; Activity Feed</a>
+               href="/app/social"><i class="now-ui-icons ui-2_chat-round"></i>&nbsp; Social Media</a>
         </li>
-       */ ?>
+        */ ?>
 
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/subscriptions')) active @endif"
+            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/products')) active @endif"
                style="text-align: left;border-color:#eee !important;"
-               href="/app/subscriptions"><i class="now-ui-icons shopping_credit-card"></i>&nbsp; Subscriptions</a>
+               href="/app/products"><i class="now-ui-icons shopping_box"></i>&nbsp; Products & Plans</a>
         </li>
 
         @if(\Auth::user()->hasPermissionTo('browse settings'))

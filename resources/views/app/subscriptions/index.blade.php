@@ -71,7 +71,7 @@
         <div class="main col-md-12" style="background:none;margin-top:25px;">
             <div class="col-md-12">
                 <h5 style="margin-bottom:25px;">
-                    Subscriptions
+                    Revenue Streams
                 </h5>
                 <div class="form-group">
                     <form>
@@ -95,8 +95,9 @@
                             <td class="hiddenOnMobile updated_at_column clickable"><span
                                         class="badge badge-date">{{ $subscription->created_at->diffForHumans() }}</span>
                             </td>
-                            <td class="clickable" style="width:125px !important;">{{$subscription->json()->nickname}}</td>
-                            <td class="clickable hiddenOnMobile" style="width:125px !important;">${{ucfirst($subscription->json()->amount/100)}} / {{ucfirst($subscription->json()->interval)}}</td>
+                            <td class="clickable" style="width:125px !important;">{{$subscription->json()->plan->nickname}}</td>
+                            <td class="clickable hiddenOnMobile" style="width:125px !important;">${{ucfirst($subscription->json()->plan->amount/100)}} / {{ucfirst($subscription->json()->plan->interval)}}</td>
+
                             <td class="clickable hiddenOnMobile">{{ $subscription->user()->email }}</td>
                             <td align="right">
                                 <a href="/app/view/subscription/{{ $subscription->id }}"

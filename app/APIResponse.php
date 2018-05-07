@@ -68,7 +68,7 @@ class APIResponse extends Model
         $event->user_id = $user->id;
         $event->user_email = $user->email;
         $event->user_name = $user->name;
-        $event->event_data = json_encode("{plan_id:$plan_id, amount:'".$newplan->amount."'}");
+        $event->event_data = json_encode("{\"plan_id\":$plan_id, \"amount\":'".$newplan->amount."'}");
         $event->save();
         return response()
             ->json($newplan);
@@ -159,26 +159,50 @@ class APIResponse extends Model
                 ->jsonPaginate();
         }
         else {
-            $items = Post::select(\DB::raw($fields))
-                ->where('status', '=', 'PUBLISHED')
-                ->where('post_type', '=', $posttype)
-                ->limit($limit)
-                ->orderBy('published_at', 'desc')
-                ->where('published_at', '<', Carbon::now()->toDateTimeString())
-                ->jsonPaginate();
+            if(isset($search)) {
+
+                $items = Post::select(\DB::raw($fields))
+                    ->where('status', '=', 'PUBLISHED')
+                    ->where('post_type', '=', $posttype)
+                    ->where('title', 'ILIKE', "%$search%")
+                    ->limit($limit)
+                    ->orderBy('published_at', 'desc')
+                    ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                    ->jsonPaginate();
+            }
+            else {
+                $items = Post::select(\DB::raw($fields))
+                    ->where('status', '=', 'PUBLISHED')
+                    ->where('post_type', '=', $posttype)
+                    ->limit($limit)
+                    ->orderBy('published_at', 'desc')
+                    ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                    ->jsonPaginate();
+            }
         }
+
+        /*foreach($items as $item) {
+            $item->views = count($item->views());
+        }*/
+
+        //$items = $items->sortBy('views')->reverse();
 
         $items->transform(function ($item, $key) {
             if (isset($item->slug)) {
-                $item->slug = '/content/' . $item->slug;
+                $item->slug = $item->slug;
             }
             if($item->content() !== null){
                 $item->content = $item->content();
             }
+            $item->views = count($item->views());
             $item->user = $item->user();
             $item->tags;
             return $item;
         });
+
+        //$items = $items->sortBy('views')->reverse();
+
+        //$items = $items->sortBy('views')->reverse();
 
         $response = (json_decode(json_encode($items->toArray())));
 
@@ -333,7 +357,7 @@ class APIResponse extends Model
 
         $items->transform(function ($item, $key) {
             $item->image = \Storage::disk('public')->url($item->image);
-            $item->slug = '/content/' . $item->slug;
+            $item->slug = $item->slug;
             return $item;
         });
 

@@ -1,4 +1,4 @@
-# StartupEngine
+# Startup Engine
 
 A beautiful & open-source platform for launching startups.
 
@@ -50,37 +50,37 @@ A beautiful & open-source platform for launching startups.
 See it in action at https://www.startupengine.io
 
 # Features 
-* [x] 1-Click Install
-* [x] Completely plug-and-play - coding is optional.
-* [x] Completely open-source - you can change and distribute the code.
-* [x] Create pages, blog posts, and documentation, or make your own custom content types.
-* [x] Display your content anywhere using the API.
-* [x] Define who can browse/read/edit/add/delete content with role-based access control.
-* [x] Manage users, settings, content, features, & more from the command line. 
-* [x] Version-control everything with the optional git-based workflow.
-* [x] Use the pre-installed Boostrap 4 + Vue.js theme, or build your own with the tools of your choice.
 
-##### Pre-Installed Pages
-* [x] Landing page
-* [x] Blog
-* [x] Help / FAQ's
-* [x] Search
+* [x] Publish content, sell subscriptions & process payments.
+* [x] Completely plug-and-pla. Coding is optional.
+* [x] Supports any workflow, architecture, or framework.
+* [x] Content API allows you integrate with external sites/apps.
+* [x] Landing pages optimization powered by integrated analytics. No setup required.
+* [x] Completely open-source.
+* [x] 1-Click Install.
 
-# Deploying
+# Deploying on Heroku
 
-Click the button below to deploy a new instance of StartupEngine to Heroku instantly.
+Click the button below to deploy a new instance of Startup Engine to Heroku instantly.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
 
-First, make sure the `APP_KEY` config variable is set.
+Here's Heroku's [official guide](https://devcenter.heroku.com/articles/getting-started-with-laravel) for getting started with Laravel apps on Heroku.
 
-Then run the following commands on your instance via the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
+Once you've installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), run the following commands on your instance:
+
+First, generate an `APP_KEY` by running `php artisan key:generate`. 
+Then copy the newly generated key and run `heroku config:set APP_KEY=YOURKEYGOESHERE`. 
+
+Followed by...
 
 `php artisan migrate:refresh --seed --force`
 
 `php artisan passport:install`
 
 `php artisan command:SyncGit reset`
+
+You may log in by going to https://www.herokuapp.com/YOURAPPNAME/login
 
 The default user email is **admin@example.com** and the default password is **password**.
 
@@ -92,10 +92,10 @@ Found a bug? [Submit an issue here on Github.](https://github.com/luckyrabbitllc
 
 # Security 
 
-If you discover a security vulnerability within StartupEngine, please send an e-mail to startupengine.io@domainsbyproxy.com
+If you discover a security vulnerability within Startup Engine, please send an e-mail to startupengine.io@domainsbyproxy.com
  
 All security vulnerabilities will be promptly addressed.
 
 # License
 
-StartupEngine is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Startup Engine is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

@@ -32,11 +32,13 @@ class PageController
             $event->user_name = \Auth::user()->name;
         }
         if($page !== null && $page->content()->meta->slug !== null ){
-            $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title', variation:'".$page->content()->meta->slug."'}");
+            $array = ["id" => "$page->id", "model" => "page", "slug" => $page->slug, "variation" => $page->content()->meta->slug];
+            $event->event_data = json_encode($array);
         }
         else {
             if($page !== null) {
-                $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title'}");
+                $array = ["id" => "$page->id", "model" => "page", "slug" => $page->slug];
+                $event->event_data = json_encode($array);
             }
         }
         $event->save();
@@ -63,10 +65,11 @@ class PageController
         }
 
         if($page->content() !== null && $page->content()->meta && $page->content()->meta->slug !== null ){
-            $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title', variation:'".$page->content()->meta->slug."'}");
+            $array = ["id" => "$page->id", "model" => "page", "slug" => $page->slug, "variation" => $page->content()->meta->slug];
+            $event->event_data = json_encode($array);
         }
         else {
-            $event->event_data = json_encode("{id:$page->id, slug:'$page->slug',title:'$page->title'}");
+            $array = ["id" => "$page->id", "model" => "page", "slug" => $page->slug];
         }
         $event->save();
         return view('pages.view')->with('page', $page);
@@ -148,7 +151,8 @@ class PageController
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
-            $event->event_data = json_encode("{id:$page->id}");
+            $array = ["id" => "$page->id", "model" => "page", "slug" => $page->slug, "variation" => $page->content()->meta->slug];
+            $event->event_data = json_encode($array);
             $event->save();
         }
 

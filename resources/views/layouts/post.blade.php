@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $post->title }} - {{ setting('site.title') }}</title>
+    <title>{{ $post->title }} - {{ setting('site.name') }}</title>
 
     <!-- Styles -->
     @if(View::exists('theme.templates.global.css'))
@@ -16,7 +16,7 @@
     @endif
 
     @if(View::exists('theme.templates.post.css'))
-        @include('theme.templates.post.css')
+        @include("theme.templates.$postType.css")
     @endif
 
     @yield('styles')
@@ -33,8 +33,8 @@
         @include('theme.templates.global.header')
     @endif
 
-    @if(View::exists('theme.templates.post.header'))
-        @include('theme.templates.post.header')
+    @if(View::exists("theme.templates.$postType.header"))
+        @include("theme.templates.$postType.header")
     @endif
 
 
@@ -44,8 +44,8 @@
         @include('theme.templates.global.scripts')
     @endif
 
-    @if(View::exists('theme.templates.post.footer'))
-        @include('theme.templates.post.footer')
+    @if(View::exists("theme.templates.$postType.footer"))
+        @include("theme.templates.$postType.footer")
     @elseif(View::exists('theme.templates.global.footer'))
         @include('theme.templates.post.footer')
     @endif

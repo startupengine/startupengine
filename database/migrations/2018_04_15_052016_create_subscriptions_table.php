@@ -20,7 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->string('slug')->nullable();
             $table->decimal('price')->nullable();
             $table->integer('user_id')->nullable();
-            $table->integer('user_email')->nullable();
+            $table->text('user_email')->nullable();
             $table->string('stripe_id');
             $table->string('stripe_plan');
             $table->integer('quantity');

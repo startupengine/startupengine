@@ -13,12 +13,13 @@ class ProductController extends Controller
             $subscriptions = \App\Product::where('name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('description', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
         }
         else {
-            $subscriptions = \App\Product::where('status','=','ACTIVE')->get();
+            $subscriptions = \App\Product::all();
         }
         return view('app.products.index')->with('subscriptions', $subscriptions);
     }
 
     public function saveProduct(Request $request) {
+
         $product = \App\Product::where('id', '=', $request->input('id'))->first();
         if($product == null){
             $product = new \App\Product();
@@ -27,7 +28,6 @@ class ProductController extends Controller
         $product->image = $request->input('image');
         $product->description = $request->input('description');
         $product->status = $request->input('status');
-
         $product->priority = $request->input('priority');
         $product->save();
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);

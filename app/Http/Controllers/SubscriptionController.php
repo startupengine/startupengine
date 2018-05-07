@@ -15,6 +15,7 @@ class SubscriptionController extends Controller
         else {
             $subscriptions = \App\Subscription::all();
         }
+        //dd($subscriptions[8]->json()->plan);
         return view('app.subscriptions.index')->with('subscriptions', $subscriptions);
     }
 
@@ -47,35 +48,45 @@ class SubscriptionController extends Controller
 
     public function submitSubscription(Request $request)
     {
-        dd($request->input());
-        $productId = $request->input('product_id');
-        $product = \App\Product::where('id', '=',$productId)->first();
-        if($request->input('amount') == null){
-            $amount = 0;
-        }
-        else {
-            $amount = $request->input('amount')*100;
-        }
-        if($request->input('interval') == null){
-            $interval = "month";
-        }
-        else {
-            $interval  = $request->input('interval');
-        }
+        //Fetch Objects
+        //dd($request->input());
+        $user = \App\User::where('id','=',$request->input('user_id'))->first();
+        $plan = \App\Plan::where('stripe_id','=',$request->input('plan'))->first();
+        $product = \App\Product::where('stripe_id', '=', $plan->json()->product)->first();
+
+
+        //Stripe Logic
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $plan = \Stripe\Plan::create(array(
-            "interval" => $interval,
-            "currency" => "usd",
-            "amount" => $amount,
-            "product" => $product->stripe_id,
-            "nickname" => $request->input("nickname")
+        $subscription = \Stripe\Subscription::create(array(
+            "customer" => $user->stripeCustomer()->id,
+            "items" => array(
+                array(
+                    "plan" => $request->input('plan'),
+                ),
+            )
         ));
-        $record = new \App\Plan();
-        $record->stripe_id = $plan->id;
-        $record->name = $plan->nickname;
-        $record->json = json_encode($plan);
+
+        $record = new \App\Subscription();
+        $record->price = $plan->price;
+        $record->name = $product->name .' '.$plan->nickname;
+        $record->stripe_id = $product->stripe_id;
+        $record->stripe_plan = $plan->stripe_id;
+        $record->description = $plan->json()->interval;
+        $record->quantity = 1;
+        $record->user_email = $user->email;
+        $record->user_id = $user->id;
+        $record->json = json_encode($subscription);
         $record->save();
-        return redirect("/app/view/subscription/$product->id/plan/$record->stripe_id");
+
+        //Analytic Events
+        $event = new \App\AnalyticEvent();
+        $event->event_type = 'subscription purchased';
+        $event->user_id = $user->id;
+        $event->user_email = $user->email;
+        $event->user_name = $user->name;
+        $event->event_data = json_encode("{plan_id:$plan->id, amount:'".$plan->price."'}");
+        $event->save();
+        return redirect("/account");
     }
 
     public function newSubscriptionPlan(Request $request)

@@ -70,7 +70,7 @@
                                 <td align="right">
                                     <?php if($tag->post() !== null){ ?>
                                         <a href="/app/edit/post/{{ $tag->post()->id }}"
-                                       class="btn btn-sm btn-secondary-outline defaultClick" style="">Edit</a>"; <?php } ?>
+                                       class="btn btn-sm btn-secondary-outline defaultClick" style="">Edit</a> <?php } ?>
                                 </td>
                             </tr>
                         @endforeach

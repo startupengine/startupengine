@@ -38,6 +38,8 @@ class SchemaController extends Controller
         }
         $postType->title = $request->input('title');
         $postType->slug = $request->input('slug');
+        $postType->enabled = $request->input('enabled');
+
         if (json_decode($request->input('json'))) {
             $postType->json = json_encode(json_decode($request->input('json')));
         }
