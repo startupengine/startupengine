@@ -52,7 +52,7 @@ See it in action at https://www.startupengine.io
 # Features 
 
 * [x] Publish content, sell subscriptions & process payments.
-* [x] Completely plug-and-pla. Coding is optional.
+* [x] Completely plug-and-play. Coding is optional.
 * [x] Supports any workflow, architecture, or framework.
 * [x] Content API allows you integrate with external sites/apps.
 * [x] Landing pages optimization powered by integrated analytics. No setup required.
