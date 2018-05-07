@@ -33,6 +33,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "nexuspoint/laravel-versioned": "1.0.2",
         "owen-it/laravel-auditing": "^4.1",
         "php-http/guzzle6-adapter": "^1.1",
         "rtconner/laravel-tagging": "~2.2",

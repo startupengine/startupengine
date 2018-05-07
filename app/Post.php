@@ -9,6 +9,8 @@ use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Appstract\Meta\Metable;
 use \Conner\Tagging\Taggable;
+use NexusPoint\Versioned\Versioned;
+
 
 class Post extends Model implements AuditableContract
 {
@@ -19,6 +21,14 @@ class Post extends Model implements AuditableContract
     use Metable;
 
     use Taggable;
+
+    use Versioned;
+
+    /**
+     * Field from the model to use as the versions name
+     * @var string
+     */
+    protected $versionNameColumn = 'slug';
 
     /**
      * The attributes that should be mutated to dates.

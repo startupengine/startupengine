@@ -9,6 +9,7 @@ use OwenIt\Auditing\Contracts\UserResolver;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Appstract\Meta\Metable;
 use \Conner\Tagging\Taggable;
+use NexusPoint\Versioned\Versioned;
 
 class Page extends Model implements AuditableContract
 {
@@ -18,6 +19,13 @@ class Page extends Model implements AuditableContract
 
     use Taggable;
 
+    use Versioned;
+
+    /**
+     * Field from the model to use as the versions name
+     * @var string
+     */
+    protected $versionNameColumn = 'slug';
 
     /**
      * The attributes that should be mutated to dates.
