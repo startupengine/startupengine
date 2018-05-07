@@ -28,7 +28,7 @@ class Post extends Model implements AuditableContract
      * Field from the model to use as the versions name
      * @var string
      */
-    protected $versionNameColumn = 'slug';
+    protected $versionNameColumn = 'title';
 
     /**
      * The attributes that should be mutated to dates.
