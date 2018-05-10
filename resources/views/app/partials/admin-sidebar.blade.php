@@ -73,13 +73,12 @@
                href="/app/subscriptions"><i class="now-ui-icons shopping_credit-card"></i>&nbsp; Revenue</a>
         </li>
 
-        <?php /*
         <li class="nav-item">
-            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/social')) active @endif"
+            <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/demographics*')) active @endif"
                style="text-align: left;border-color:#eee !important;"
-               href="/app/social"><i class="now-ui-icons ui-2_chat-round"></i>&nbsp; Social Media</a>
+               href="/app/demographics"><i class="fa fa-users"></i>&nbsp; Demographics</a>
         </li>
-        */ ?>
+
 
         <li class="nav-item">
             <a class="btn btn-secondary-outline btn-block btn-round @if (\Request::is('app/products')) active @endif"

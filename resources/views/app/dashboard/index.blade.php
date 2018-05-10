@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <h3><i class="fa fa-shopping-cart" style="font-size:80%;color:#666;"></i><br>Products</h3>
                             <span class="badge">{{ count(\App\Product::where('status','=', 'ACTIVE')->get()) }} Products</span><br>
-                            <span class="badge">{{ count(\App\Plan::where('status','=', 'ACTIVE')->get()) }} Plans</span>
+                            <span class="badge">{{ count(\App\Plan::where('status','=', 'ACTIVE')->get()) }} <span class="hiddenOnMobile">Subscription</span> Plans</span>
                         </div>
                     </div>
                     <div class="card" onclick="location.href = '/app/users';">
@@ -92,7 +92,7 @@
                 <div class="card-deck">
                     <div class="card" onclick="location.href = '/app/analytics';">
                         <div class="card-body">
-                            <h3><i class="fa fa-bar-chart" style="font-size:80%;color:#666;"></i><br>Weekly Engagement</h3>
+                            <h3><i class="fa fa-bar-chart" style="font-size:80%;color:#666;"></i><br>Analytics</h3>
                             <?php $nowDate = \Carbon\Carbon::now(); ?>
                             <?php $agoDate = $nowDate->subDays($nowDate->dayOfWeek)->subWeek();// gives 2016-01-31 ?>
                             <?php $clicks = \App\AnalyticEvent::where('event_type','=','click')->where('created_at', '>', $agoDate->toDateTimeString())->get();  ?>
@@ -101,11 +101,10 @@
                             <span class="badge">{{ count($views) }} Page Views</span>
                         </div>
                     </div>
-                    <div class="card" onclick="location.href = '/app/plans';">
+                    <div class="card" onclick="location.href = '/app/demographic';">
                         <div class="card-body">
                             <h3><i class="fa fa-users" style="font-size:80%;color:#666;"></i><br>Demo<span class="hiddenOnMobile">graphic</span>s</h3>
                             <span class="badge">{{ count(\App\Demographic::all()) }} Defined</span><br>
-                            <span class="badge">{{ count(\App\Demographic::all()) }} Active</span>
                         </div>
                     </div>
                     <div class="card" onclick="location.href = '/app/subscriptions';">

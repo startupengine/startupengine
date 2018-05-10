@@ -90,6 +90,16 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::post('/app/new/permission', 'PermissionController@savePermission');
     });
 
+    //Demographics
+    Route::group(['middleware' => ['permission:edit users']], function () {
+        Route::get('/app/demographics', 'DemographicController@index');
+        Route::get('/app/new/demographic', 'DemographicController@addDemographic');
+        Route::post('/app/new/demographic', 'DemographicController@saveDemographic');
+        Route::get('/app/edit/demographic/{id}', 'DemographicController@editDemographic');
+        Route::post('/app/edit/demographic', 'DemographicController@saveDemographic');
+        Route::get('/app/delete/demographic/{id}', 'DemographicController@deleteDemographic');
+    });
+
     //Content
     Route::group(['middleware' => ['permission:browse posts|browse own posts']], function () {
         Route::get('/app/tags', 'TagController@index');
@@ -120,11 +130,6 @@ Route::group(['middleware' => ['permission:view backend', 'backend']], function 
         Route::get('/app/delete/package/{id}', 'PackageController@deletePackage');
         Route::get('/app/update/package/{id}', 'PackageController@updatePackage');
         Route::get('/app/reset/package/{id}', 'PackageController@resetPackage');
-    });
-
-    //Products & Services
-    Route::group(['middleware' => ['permission:edit settings']], function () {
-        Route::get('/app/research', 'ResearchController@index');
     });
 
     //Products & Services

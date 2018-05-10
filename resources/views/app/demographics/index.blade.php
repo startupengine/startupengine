@@ -20,49 +20,37 @@
                 </h5>
                 <div class="form-group">
                     <form>
-                        <input type="text" value="" placeholder="Search users..." class="form-control" name="s" id="s">
+                        <input type="text" value="" placeholder="Search demographics..." class="form-control" name="s" id="s">
                     </form>
                 </div>
-
-                <div align="center">
-                    <div class="btn-group">
-                        <a href="/app/users" class="btn btn-secondary btn-sm ">Users</a>
-                        <a href="/app/roles" class="btn btn-secondary-outline btn-sm "  style="border-left:none !important;">Roles</a>
-                        <a href="/app/permissions" class="btn btn-secondary-outline btn-sm " style="border-left:none !important;">Permissions</a>
-                    </div>
-                </div>
-
 
                 <table class="table">
                     <thead class="hiddenOnMobile">
                     <tr>
                         <th scope="col" class="hiddenOnMobile updated_at_column">Last Updated</th>
-                        <th scope="col" class="hiddenOnMobile updated_at_column">Status</th>
-                        <th scope="col">User</th>
+                        <th scope="col">Demo</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    <?php $demographics = \App\Demographic::all(); ?>
+                    @foreach($demographics as $demo)
                         <tr>
                             <td scope="col" class="hiddenOnMobile updated_at_column"><span
-                                        class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->updated_at))->diffForHumans() }}</span>
+                                        class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($demo->updated_at))->diffForHumans() }}</span>
                             </td>
-                            <td class="hiddenOnMobile status_column"><span
-                                        class="badge badge-status<?php if ($user->status !== "ACTIVE") {
-                                            echo "-disabled";
-                                        } ?>">{{ $user->status }}</span></td>
-                            <td>{{ $user->name }}<br><span style="opacity:0.5;">{{ $user->email }}</span></td>
+
+                            <td>{{ $demo->name }}</td>
                             <td align="right">
-                                <a href="/app/view/user/{{$user->id}}"
+                                <a href="/app/view/demographic/{{$demo->id}}"
                                    class="btn btn-sm btn-secondary-outline hiddenOnDesktop">View</a>
                                 <div class="btn-group hiddenOnMobile" role="group" aria-label="Basic example">
-                                    <a href="/app/view/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline">View</a>
-                                    <a href="/app/edit/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline"
+                                    <a href="/app/view/demographic/{{ $demo->id }}" class="btn btn-sm btn-secondary-outline">View</a>
+                                    <a href="/app/edit/demographic/{{ $demo->id }}" class="btn btn-sm btn-secondary-outline"
                                        style="border-left:none !important;">Edit</a>
-                                    <a href="/app/delete/user/{{ $user->id }}" class="btn btn-sm btn-secondary-outline"
+                                    <a href="/app/delete/demographic/{{ $demo->id }}" class="btn btn-sm btn-secondary-outline"
                                        style="border-left:none !important;" data-toggle="modal"
-                                       data-target="#deleteUser"
+                                       data-target="#deleteDemographic"
                                        onclick=" $('#deleteButton').attr('href', $(this).attr('href'));this.href='#';">Delete</a>
                                 </div>
                             </td>
@@ -79,7 +67,7 @@
 @section('modals')
 
     <!-- Modal Core -->
-    <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="deleteDemographic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -91,9 +79,7 @@
 
                     {{ csrf_field() }}
                     <div class="col-md-12">
-                        <p>Once you delete this user, it will be unavailable unless an administrator un-deletes it.
-                            Since an e-mail address can only be used once, it will also be impossible for a new account
-                            to be created with this user's e-mail.</p>
+                        <p>Once you delete this demographic, it will be unavailable unless an administrator un-deletes it.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
