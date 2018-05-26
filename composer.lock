@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "abe29b539995557d6483694765a94ead",
+    "content-hash": "914264d348581ff3fef88dcd0af3ce0f",
     "packages": [
         {
             "name": "appstract/laravel-meta",
@@ -61,16 +61,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.55.7",
+            "version": "3.55.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6cda2e7c4b2e7e61feea2e8b4d950c8e6ab6b82e"
+                "reference": "5177cbe73c96d25ff759e406ac81b8e25557482c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6cda2e7c4b2e7e61feea2e8b4d950c8e6ab6b82e",
-                "reference": "6cda2e7c4b2e7e61feea2e8b4d950c8e6ab6b82e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5177cbe73c96d25ff759e406ac81b8e25557482c",
+                "reference": "5177cbe73c96d25ff759e406ac81b8e25557482c",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-05-04T20:11:35+00:00"
+            "time": "2018-05-10T23:23:00+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -315,6 +315,57 @@
                 "modules"
             ],
             "time": "2018-03-27T23:39:44+00:00"
+        },
+        {
+            "name": "codewizz/laravel-reddit-api",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codewizz/laravel-reddit-api.git",
+                "reference": "b9a8132403e4d1c33e78d587f2eadf3fd5a16aad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codewizz/laravel-reddit-api/zipball/b9a8132403e4d1c33e78d587f2eadf3fd5a16aad",
+                "reference": "b9a8132403e4d1c33e78d587f2eadf3fd5a16aad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "illuminate/support": "^5.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeWizz\\RedditAPI\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Darius Šilkaitis",
+                    "email": "darius@codewizz.com",
+                    "homepage": "https://codewizz.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Reddit API wrapper",
+            "homepage": "https://github.com/codewizz/laravel-reddit-api",
+            "keywords": [
+                "api",
+                "codewizz",
+                "laravel",
+                "laravel-reddit-api",
+                "reddit"
+            ],
+            "time": "2017-02-08T16:20:12+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -1838,16 +1889,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.6.20",
+            "version": "v5.6.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3c11e7acc6ad14dd86e2f9e4bf3230010c3e611c"
+                "reference": "458a89b1c5ff73072c27308566f444c790f76f28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3c11e7acc6ad14dd86e2f9e4bf3230010c3e611c",
-                "reference": "3c11e7acc6ad14dd86e2f9e4bf3230010c3e611c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/458a89b1c5ff73072c27308566f444c790f76f28",
+                "reference": "458a89b1c5ff73072c27308566f444c790f76f28",
                 "shasum": ""
             },
             "require": {
@@ -1973,7 +2024,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-05-02T15:22:18+00:00"
+            "time": "2018-05-08T13:30:15+00:00"
         },
         {
             "name": "laravel/passport",
@@ -2046,16 +2097,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v3.0.9",
+            "version": "v3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "fc1c8d415699e502f3e61cbc61e3250d5bd942eb"
+                "reference": "647ee1b1b7520e16c661b4df5cdff1d7f6902eee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/fc1c8d415699e502f3e61cbc61e3250d5bd942eb",
-                "reference": "fc1c8d415699e502f3e61cbc61e3250d5bd942eb",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/647ee1b1b7520e16c661b4df5cdff1d7f6902eee",
+                "reference": "647ee1b1b7520e16c661b4df5cdff1d7f6902eee",
                 "shasum": ""
             },
             "require": {
@@ -2104,7 +2155,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2017-11-06T16:02:48+00:00"
+            "time": "2017-12-05T13:46:36+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2348,16 +2399,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.44",
+            "version": "1.0.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "168dbe519737221dc87d17385cde33073881fd02"
+                "reference": "a99f94e63b512d75f851b181afcdf0ee9ebef7e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/168dbe519737221dc87d17385cde33073881fd02",
-                "reference": "168dbe519737221dc87d17385cde33073881fd02",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a99f94e63b512d75f851b181afcdf0ee9ebef7e6",
+                "reference": "a99f94e63b512d75f851b181afcdf0ee9ebef7e6",
                 "shasum": ""
             },
             "require": {
@@ -2428,7 +2479,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-04-06T09:58:14+00:00"
+            "time": "2018-05-07T08:44:23+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
@@ -7332,11 +7383,65 @@
                 "migrations"
             ],
             "time": "2017-09-19T17:31:57+00:00"
+        },
+        {
+            "name": "zetaphor/reddit-api-client",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zetaphor/reddit-api-client.git",
+                "reference": "69ab5ae84187a1c7f10dc04209f10829cf4e7a15"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zetaphor/reddit-api-client/zipball/69ab5ae84187a1c7f10dc04209f10829cf4e7a15",
+                "reference": "69ab5ae84187a1c7f10dc04209f10829cf4e7a15",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "3.7.*@dev",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Reddit\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Henry Smith",
+                    "email": "henry@henrysmith.org",
+                    "homepage": "http://henrysmith.org"
+                },
+                {
+                    "name": "Gary Daigle",
+                    "email": "zetaphor@gmail.com"
+                }
+            ],
+            "description": "Provides an interface to the API at reddit.com",
+            "keywords": [
+                "api",
+                "client",
+                "reddit"
+            ],
+            "time": "2017-05-25T23:39:03+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zetaphor/reddit-api-client": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

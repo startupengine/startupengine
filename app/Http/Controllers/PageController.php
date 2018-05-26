@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Page;
 use App\Role;
 
-
 class PageController
 {
 

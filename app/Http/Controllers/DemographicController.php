@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Subreddit;
 use Illuminate\Http\Request;
+
 
 class DemographicController extends Controller
 {
@@ -26,7 +28,6 @@ class DemographicController extends Controller
         }
     }
 
-
     public function editDemographic(Request $request, $id) {
         $user = \Auth::user();
         if($user && $user->hasPermissionTo('view backend')) {
@@ -44,6 +45,16 @@ class DemographicController extends Controller
             $name = $request->input('name');
             $description = $request->input('description');
             $json = json_encode(["subreddits" => $request->input('subreddits')]);
+
+            foreach($request->input('subreddits') as $subreddit) {
+                $existing = \App\SocialChannel::where('slug', '=', $subreddit)->first();
+                if($existing == null) {
+                    $new = new \App\SocialChannel();
+                    $new->slug = $subreddit;
+                    $new->platform = "reddit";
+                    $new->save();
+                }
+            }
 
             if($request->input('id') !== null) {
                 $demo = \App\Demographic::find($request->input('id'));

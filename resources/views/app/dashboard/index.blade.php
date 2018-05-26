@@ -51,13 +51,6 @@
                             <span class="badge">{{ count(\App\Page::where('status','=','INACTIVE')->get()) }} Inactive</span>
                         </div>
                     </div>
-                    <div class="card" onclick="location.href = '/app/content';">
-                        <div class="card-body">
-                            <h3><i class="fa fa-list" style="font-size:80%;color:#666;"></i><br>Content</h3>
-                            <span class="badge">{{ count(\App\PostType::all()) }} Types</span><br>
-                            <span class="badge"><?php $contentCount = count(\App\Post::all()); echo $contentCount; ?> Item<?php if($contentCount > 1) { echo "s"; } ?></span>
-                        </div>
-                    </div>
                     <div class="card" onclick="location.href = '/app/tags';">
                         <div class="card-body">
                             <h3><i class="fa fa-hashtag" style="font-size:80%;color:#666;"></i><br>Tags</h3>
@@ -65,27 +58,11 @@
                             <span class="badge">{{ count(\App\Post::where('post_type','=','tag')->get()) }} Customized</span>
                         </div>
                     </div>
-                </div>
-                <div class="card-deck">
-                    <div class="card" onclick="location.href = '/app/products';">
+                    <div class="card" onclick="location.href = '/app/content';">
                         <div class="card-body">
-                            <h3><i class="fa fa-shopping-cart" style="font-size:80%;color:#666;"></i><br>Products</h3>
-                            <span class="badge">{{ count(\App\Product::where('status','=', 'ACTIVE')->get()) }} Products</span><br>
-                            <span class="badge">{{ count(\App\Plan::where('status','=', 'ACTIVE')->get()) }} <span class="hiddenOnMobile">Subscription</span> Plans</span>
-                        </div>
-                    </div>
-                    <div class="card" onclick="location.href = '/app/users';">
-                        <div class="card-body">
-                            <h3><i class="fa fa-user" style="font-size:80%;color:#666;"></i><br>Users</h3>
-                            <span class="badge">{{ count(\App\User::all()) }} Trialing</span><br>
-                            <span class="badge">{{ count(\App\User::all()) }} Paying</span>
-                        </div>
-                    </div>
-                    <div class="card" onclick="location.href = '/app/ads';">
-                        <div class="card-body">
-                            <h3><i class="fa fa-bullhorn" style="font-size:80%;color:#666;"></i><br>Ads</h3>
-                            <span class="badge">0 Total</span><br>
-                            <span class="badge">0 Running</span>
+                            <h3><i class="fa fa-list" style="font-size:80%;color:#666;"></i><br>Content</h3>
+                            <span class="badge">{{ count(\App\PostType::all()) }} Types</span><br>
+                            <span class="badge"><?php $contentCount = count(\App\Post::all()); echo $contentCount; ?> Item<?php if($contentCount > 1) { echo "s"; } ?></span>
                         </div>
                     </div>
                 </div>
@@ -101,15 +78,16 @@
                             <span class="badge">{{ count($views) }} Page Views</span>
                         </div>
                     </div>
-                    <div class="card" onclick="location.href = '/app/demographic';">
+                    <div class="card" onclick="location.href = '/app/ads';">
                         <div class="card-body">
-                            <h3><i class="fa fa-users" style="font-size:80%;color:#666;"></i><br>Demo<span class="hiddenOnMobile">graphic</span>s</h3>
-                            <span class="badge">{{ count(\App\Demographic::all()) }} Defined</span><br>
+                            <h3><i class="fa fa-bullhorn" style="font-size:80%;color:#666;"></i><br>Ads</h3>
+                            <span class="badge">0 Total</span><br>
+                            <span class="badge">0 Running</span>
                         </div>
                     </div>
                     <div class="card" onclick="location.href = '/app/subscriptions';">
                         <div class="card-body">
-                            <h3><i class="fa fa-credit-card" style="font-size:80%;color:#666;"></i><br>Revenue</h3>
+                            <h3><i class="fa fa-credit-card" style="font-size:80%;color:#666;"></i><br>Subscribers</h3>
                             <?php  $customers = \App\Subscription::where('ends_at','=',null)->get()->groupBy('user_id'); ?>
                             <?php foreach($customers as $customer) {
                                 $values  = collect($customer->sum('price'));
@@ -121,6 +99,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-deck">
+                    <div class="card" onclick="location.href = '/app/products';">
+                        <div class="card-body">
+                            <h3><i class="fa fa-shopping-cart" style="font-size:80%;color:#666;"></i><br>Products</h3>
+                            <span class="badge">{{ count(\App\Product::where('status','=', 'ACTIVE')->get()) }} Products</span><br>
+                            <span class="badge">{{ count(\App\Plan::where('status','=', 'ACTIVE')->get()) }} <span class="hiddenOnMobile">Subscription</span> Plans</span>
+                        </div>
+                    </div>
+                    <div class="card" onclick="location.href = '/app/demographics';">
+                        <div class="card-body">
+                            <h3><i class="fa fa-users" style="font-size:80%;color:#666;"></i><br>Demo<span class="hiddenOnMobile">graphic</span>s</h3>
+                            <span class="badge">{{ count(\App\Demographic::all()) }} Defined</span><br>
+                        </div>
+                    </div>
+                    <div class="card" onclick="location.href = '/app/users';">
+                        <div class="card-body">
+                            <h3><i class="fa fa-user" style="font-size:80%;color:#666;"></i><br>Users</h3>
+                            <span class="badge">{{ count(\App\User::all()) }} Trialing</span><br>
+                            <span class="badge">{{ count(\App\User::all()) }} Paying</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>

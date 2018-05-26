@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubredditsTable extends Migration
+class CreateSocialChannelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateSubredditsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subreddits', function (Blueprint $table) {
+        Schema::create('social_channels', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->text('subreddit');
-            $table->integer('demographic_id')->nullable();
-            $table->json('json');
+            $table->softDeletes();
+            $table->text('slug');
+            $table->text('platform');
+            $table->json('json')->nullable();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateSubredditsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subreddits');
+        Schema::dropIfExists('social_channels');
     }
 }
