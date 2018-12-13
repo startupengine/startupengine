@@ -165,8 +165,10 @@
                          class="card-post__image"
                          v-bind:style="{ backgroundImage: 'url(' + item.thumbnail + ')' }"
                          style="background: #333; );">
+                        <span style="float:right;">
                         <span v-for="tag in item.tags.slice(0,3)" class="badge badge-dark badge-pill mt-2 mr-2"
-                              v-if="tag != null" style="float:right;">@{{ tag.name }}</span>
+                              v-if="tag != null" >@{{ tag.name }}</span>
+                            </span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title mb-2">
@@ -192,8 +194,8 @@
                                     <i class="material-icons">search</i> View
                                 </a>
                                 <?php /*
-                                        <a href="" class="btn btn-white" v-bind:href="'/admin/content/edit/' + item.post_type + '/' + item.id">
-                                <i class="material-icons">bar_chart</i> Analytics
+                                <a href="" class="btn btn-white" v-bind:href="'/admin/content/edit/' + item.post_type + '/' + item.id">
+                                    <i class="material-icons">bar_chart</i> Analytics
                                 </a> */ ?>
                             </div>
                         </div>
