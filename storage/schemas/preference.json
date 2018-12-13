@@ -1,0 +1,24 @@
+{
+  "namespace": "App\\Preference",
+  "lang": {
+    "en": {
+      "singular": "preference",
+      "plural": "preference"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "title_key": "id",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "Preference ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+  },
+  "sections": {
+  }
+}

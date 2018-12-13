@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Traits\IsApiResource;
+use App\Traits\RelationshipsTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
@@ -10,16 +13,30 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use Appstract\Meta\Metable;
 use \Conner\Tagging\Taggable;
 use NexusPoint\Versioned\Versioned;
+use App\Traits\hasJsonSchema;
+use App\Traits\validateInputAgainstJsonSchema;
+use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 
-class Page extends Model implements AuditableContract
+class Page extends Model
 {
-    use Auditable;
+
+    use EloquentJoin;
+
+    use IsApiResource;
 
     use Metable;
 
     use Taggable;
 
     use Versioned;
+
+    use IsApiResource;
+
+    use hasJsonSchema;
+
+    use RelationshipsTrait;
+
+    use validateInputAgainstJsonSchema;
 
     /**
      * Field from the model to use as the versions name
@@ -62,6 +79,10 @@ class Page extends Model implements AuditableContract
         'restored',
     ];
 
+    public function searchFields(){
+        return ['title', 'slug', 'json'];
+    }
+
     public function raw($path)
     {
         $url = "https://raw.githubusercontent.com/" . env('GITHUB_USERNAME') . "/" . env('GITHUB_REPOSITORY') . "/" . env("GITHUB_REPOSITORY_BRANCH") . "/pages/" . $path;
@@ -88,11 +109,36 @@ class Page extends Model implements AuditableContract
     public function content()
     {
         $json = $this->json;
-        $random = array_rand(json_decode($json, true)['versions'], 1);
-        $content = json_decode($json, true)['versions'][$random];
-        $json = json_decode(json_encode($content));
-        //dd($json);
+        if($json != null && gettype($json) != 'object'){
+            $array = json_decode($json, true);
+        }
+        else { $array = []; }
+
+
         return $json;
+    }
+
+    public function thumbnail(){
+        //$json = $this->content();
+        if($this->content() != null && $this->content()->sections != null){
+            foreach($this->schema()->sections as $section){
+                if($section->fields != null){
+                    foreach ($section->fields as $field => $value) {
+
+                        if(isset($value->isThumbnail) && $value->isThumbnail == true) {
+                            $slug = $section->slug;
+                            $string = "sections->".$slug."->fields->".$field;
+                            if(isset($this->content()->sections->$slug->fields->$field)) {
+                                    return $this->content()->sections->$slug->fields->$field;
+                            }
+                            else { return null; }
+
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     public function markdown($content)
@@ -111,20 +157,6 @@ class Page extends Model implements AuditableContract
         }
     }
 
-    public function schema()
-    {
-        if ($this->schema !== null) {
-            $schema = json_decode($this->schema);
-            if (gettype($schema) == "string") {
-                $schema = json_decode($schema);
-            }
-        } else {
-            $schema = null;
-        }
-        return $schema;
-
-    }
-
     public function versions()
     {
         $json = json_decode($this->json, TRUE);
@@ -135,4 +167,32 @@ class Page extends Model implements AuditableContract
 
         return $versions;
     }
+
+    public function views(){
+        $request = request();
+        if($request->input('startDate') != null){
+            $startDate = \Carbon\Carbon::parse($request->input('startDate'));
+        }
+        else {
+            $startDate = new Carbon();
+            $startDate = $startDate->subDays(30);
+        }
+        if($request->input('endDate') != null){
+            $endDate = \Carbon\Carbon::parse($request->input('endDate'));
+        }
+        else {
+            $endDate = new Carbon();
+        }
+            /*
+          $startDate = \Carbon\Carbon::now()->subDays(30)->toDateTimeString();
+          $endDate = \Carbon\Carbon::now()->subDays(0)->toDateTimeString();
+          $views = $item->views()->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate)->get();
+          dd($views);
+          */
+        //dd($endDate);
+        $views = $this->hasMany('App\AnalyticEvent', 'model_id')->where('event_type', '=', 'page viewed')->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);
+        return $views;
+    }
+
+
 }

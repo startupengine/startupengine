@@ -1,0 +1,638 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Startup Engine: the all-in-one platform for launching your startup</title>
+    <meta name="description"
+          content="A demo landing page for agencies or product oriented businesses built using Shards, a free, modern and lightweight UI toolkit based on Bootstrap 4.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/shards.min.css">
+    <link rel="stylesheet" href="https://designrevision.com/demo/shards/extra/css/shards-extras.min.css">
+    <style>
+        .card-header {
+            background: none;
+            border: none;
+            text-align: center;
+            font-size: 150%;
+            font-weight: 200;
+            padding-top: 30px;
+        }
+
+        .nav-item {
+            border-radius: 4px;
+        }
+
+        .nav-item.active {
+            background: rgba(0, 0, 0, 0.025) !important;
+        }
+
+        .card {
+            border: none;
+            border-radius: 5px !important;
+            height: 100%;
+        }
+
+        .blog .card-body {
+            border-radius: 5px;
+        }
+
+        .card-post__image {
+            border-radius: 5px !important;
+        }
+
+        h4.card-title {
+            margin-bottom: 30px;
+        }
+
+        .blog .card .card-body .card-text {
+            color: #777 !important;
+            font-weight: 300 !important;
+            text-align: center;
+        }
+
+        .avatar {
+            min-height: 100px;
+            min-width: 100px;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat;
+            border-radius: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .hiddenOnDesktop {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hiddenOnMobile {
+                display: none;
+            }
+
+            .nav-link {
+                text-align: center;
+            }
+        }
+
+        .raised {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.125);
+        }
+
+        .card-post.raised {
+            box-shadow: 0px 10px 40px rgba(0, 0, 100, 0.125), 0px 4px 10px rgba(0, 0, 100, 0.125);
+        }
+
+        .blog .card {
+            background-color: #fff !important;
+        }
+
+        .blog .card .card-body {
+            background: #fff;
+        }
+
+        .blog .card:hover .card-header {
+            opacity: 0.75;
+            -webkit-transition: opacity 0.4s;
+            -moz-transition: opacity 0.4s;
+            -ms-transition: opacity 0.4s;
+            -o-transition: opacity 0.4s;
+            transition: opacity 0.4s;
+        }
+
+        .blog .card:hover .btn .fa {
+            color: #ffc107 !important;
+        }
+
+        .blog .card:hover .btn {
+            background-color: #333 !important;
+            border-color: #333 !important;
+        }
+
+        .card .btn {
+            border: transparent;
+            border-radius: 25px;
+            padding-left: 20px;
+            padding-right: 20px;
+            box-shadow: none;
+            transition: box-shadow 0.5s !important;
+        }
+
+        .card:hover .btn {
+            box-shadow: 0px 7px 15px rgba(0, 0, 100, 0.2);
+            transform: scale(1.05);
+            transition: all 0.25s !important;
+        }
+    </style>
+    <style>
+        .shards-landing-page--1 .welcome {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            background-size: cover
+        }
+
+        .shards-landing-page--1 .welcome:before {
+            position: absolute;
+            z-index: 0;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .8;
+            background: #007bff
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-landing-page--1 .welcome .inner-wrapper {
+                text-align: center
+            }
+        }
+
+        @media (max-width: 400px) {
+            .shards-landing-page--1 .welcome .welcome-heading {
+                font-size: 2.415rem
+            }
+        }
+
+        .shards-landing-page--1 .section-title {
+            position: relative
+        }
+
+        .shards-landing-page--1 .section-title:after {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: #007bff;
+            position: absolute;
+            left: 50%;
+            margin-left: -15px;
+            bottom: -20px
+        }
+
+        .shards-landing-page--1 .feature .icon {
+            border-radius: 50%;
+            min-width: 65px;
+            height: 65px;
+            line-height: 65px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(33, 37, 41, .1), 0 7px 14px rgba(33, 37, 41, .1);
+            font-size: 27px
+        }
+
+        .shards-landing-page--1 .section {
+            border-bottom: 1px solid #eaebed
+        }
+
+        .shards-landing-page--1 .section-invert {
+            background: #f9fafc
+        }
+
+        .shards-landing-page--1 .testimonials .avatar {
+            max-width: 80px;
+            overflow: hidden
+        }
+
+        .shards-app-promo-page--1 .welcome:before {
+            position: absolute;
+            z-index: 0;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .9;
+            background: #007bff;
+        }
+
+        @media (max-width: 991.98px) {
+            .shards-app-promo-page--1 .welcome {
+                height: auto
+            }
+
+            .shards-app-promo-page--1 .welcome .header-social-icons {
+                display: none
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-app-promo-page--1 .welcome {
+                height: auto
+            }
+
+            .shards-app-promo-page--1 .welcome .inner-wrapper {
+                padding-top: 4.5rem;
+                text-align: center
+            }
+        }
+
+        @media (max-width: 400px) {
+            .shards-app-promo-page--1 .welcome .welcome-heading {
+                font-size: 2.415rem
+            }
+        }
+
+        .shards-app-promo-page--1 .welcome .iphone-mockup {
+            max-width: 85%
+        }
+
+        .shards-app-promo-page--1 .section-title {
+            position: relative
+        }
+
+        .shards-app-promo-page--1 .section-title:after {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: #007bff;
+            position: absolute;
+            left: 50%;
+            margin-left: -15px;
+            bottom: -20px
+        }
+
+        .shards-app-promo-page--1 .section-title.underline--left:after {
+            left: 0;
+            margin-left: 0
+        }
+
+        .shards-app-promo-page--1 .app-screenshot {
+            background: url('https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c8b71c14f30ad8a2c4c0e2acb611702&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed !important;
+            background-size: cover !important;
+        }
+
+        .shards-app-promo-page--1 .app-screenshot:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #007bff;
+            opacity: .6
+        }
+
+        .shards-app-promo-page--1 .app-screenshot img {
+            max-width: 300px;
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 100%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            box-shadow: none !important;
+        }
+
+        @media (min-width: 768px) {
+            .shards-app-promo-page--1 .app-screenshot img {
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .shards-app-promo-page--1 .app-screenshot img {
+                display: table;
+                position: static;
+                -webkit-transform: translate(0);
+                transform: translate(0);
+                margin: 0 auto
+            }
+        }
+
+        .shards-app-promo-page--1 .feature .icon {
+            border-radius: 50%;
+            min-width: 65px;
+            height: 65px;
+            line-height: 65px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(33, 37, 41, .1), 0 7px 14px rgba(33, 37, 41, .1);
+            font-size: 27px
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-app-promo-page--1 .feature .icon {
+                margin-right: 1.5rem !important
+            }
+        }
+
+        .shards-app-promo-page--1 .blog .card-img-top {
+            height: 100%
+        }
+
+        .shards-app-promo-page--1 .section {
+            border-bottom: 1px solid #eaebed
+        }
+
+        .shards-app-promo-page--1 .section-invert {
+            background: #f9fafc
+        }
+
+        .shards-app-promo-page--1 .testimonials .avatar {
+            max-width: 80px;
+            overflow: hidden
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-app-promo-page--1 .subscribe button, .shards-app-promo-page--1 .subscribe input {
+                width: 100%
+            }
+        }
+
+    </style>
+    <style>
+        .blog .card .card-body {
+            min-height: 250px;
+        }
+
+        .blog .card .card-header {
+            padding-top: 15px;
+        }
+
+        .blog .card .card-body {
+            padding: 0px;
+            background: linear-gradient(180deg, #fff 50%, rgba(224, 229, 248, 0.48) 100%);
+            border-radius: 0px;
+        }
+
+        .blog .card .card-footer {
+            background: rgba(224, 229, 248, 0.48);
+            border-top: none;
+            padding-top: 0px;
+            padding-bottom: 15px;
+        }
+
+        .blog .card .card-body .card-text {
+            padding-bottom: 10px;
+            padding-top: 0px;
+            margin: 0px;
+        }
+
+        .blog .card .card-body h4 {
+            margin-bottom: 20px !important;
+        }
+
+        .blog .col-md-12 .card {
+            margin-bottom: 15px;
+        }
+
+        .btn-white-3d {
+            background: linear-gradient(#fff, #d6d6ff);
+            border: none;
+            letter-spacing: .5px;
+            border-radius: 25px;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 10px 25px;
+            font-weight: 900;
+            box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1), 0px 8px 12px rgba(0, 0, 0, 0.2), 0px 12px 12px rgba(0, 0, 100, 0.1);
+            -webkit-transition: all 200ms;
+            transition: all 200ms;
+            color: #444 !important;
+            border: 1px solid #d6d6ff !important;
+        }
+
+        .col-md-12:nth-of-type(1) .card {
+            border-top: 1px solid #b6c4ff;
+        }
+
+        .col-md-12:nth-of-type(2) .card {
+            border-top: 1px solid #6e8ae1;
+        }
+
+        .col-md-12:nth-of-type(3) .card {
+            border-top: 1px solid royalblue;
+        }
+
+        .col-md-12:nth-of-type(4) .card, .col-md-12:nth-of-type(5) .card, .col-md-12:nth-of-type(6) .card {
+            border-top: 1px solid #000;
+        }
+
+        .blog .card:hover .card-body .card-text {
+            color: #000 !important;
+            opacity: 1 !important;
+            transition: all 0.25s;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+
+        .card .list-group, .card .list-group-item {
+            background: none !important;
+        }
+
+
+        #footer p, #footer a {
+            padding:0px !important;
+            margin:5px !important;
+            text-decoration:none !important;
+        }
+
+        #footer strong a {
+            color:#007bff !important;
+        }
+
+        #footer a {
+            opacity:0.7 !important;
+        }
+
+        #footer a:hover {
+            opacity:1 !important;
+            color:#007bff !important;
+        }
+
+        @media(max-width:768px) {
+            #footer .col-md-3 {
+                margin-bottom: 15px !important;
+            }
+        }
+
+    </style>
+
+</head>
+<body class="shards-app-promo-page--1 shards-landing-page--1" style="background:#f9fafc;">
+<div class="container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0">
+        <a class="navbar-brand mr-1" href="#" style="margin-right:0px;font-size:100%;padding-top:10px;">
+            <img src="images/startup-engine-logo.png" class="mr-1"
+                 alt="Startup Engine: the all-in-one platform for launching your startup"
+                 style="max-height:40px;margin-right:0px;">
+            Startup Engine
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item hiddenOnDesktop">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/startupengine"><i class="fa fa-twitter"></i> <span
+                            class="hiddenOnDesktop">Twitter</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/startupengine"><i class="fa fa-facebook"></i>
+                        <span class="hiddenOnDesktop">Facebook</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/startupengineio"><i class="fa fa-github"></i> <span
+                            class="hiddenOnDesktop">Github</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-dark btn-block ml-1 mr-2" href="signup.html"><span>Start Free Trial</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- / Navigation -->
+</div> <!-- .container -->
+
+<div class="blog section section-invert py-4" style="border:none;">
+    <h3 class="section-title text-center m-5">Account</h3>
+
+    <div class="container px-4">
+        <div class="pb-4" align="center">
+            <div class="mt-2 pt-0" align="center">
+                <div class="card-deck justify-content-center" style="width:100%;">
+                    <div class="col-md-12 col-lg-4 mb-4 px-0">
+                        <div class="card card-post mb-4 raised">
+                            <div class="card-header">Jennifer Lynn</div>
+                            <div class="card-body">
+                                <div class="avatar"
+                                     style="background-image:url('https://images.unsplash.com/photo-1476493279419-b785d41e38d8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4920987ab334960a4d39b9db70555ef5&auto=format&fit=crop&w=800&q=60');"></div>
+                                <p class="card-text">Signed Up<br>3 Months Ago</p>
+                                <p class="card-text"><i class="fa fa-fw fa-envelope mr-2"></i>jennifer@example.com</p>
+                            </div>
+                            <div class="card-footer" align="center">
+                                <p class="card-text">
+                                    <a href="signup.html" class="btn btn-white-3d raised">Edit Profile</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-4 mb-4 px-0">
+                        <div class="card card-post mb-4 raised card-emphasis">
+                            <div class="card-header">Subscriptions</div>
+                            <div class="card-body">
+                                <span class="badge badge-light badge-pill mb-4">3 Active</span>
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item list-group-item-action">Startup Engine</div>
+                                    <div class="list-group-item list-group-item-action">Technical Support</div>
+                                    <div class="list-group-item list-group-item-action">Marketing Strategy</div>
+                                </div>
+                            </div>
+                            <div class="card-footer" align="center">
+                                <p class="card-text">
+                                    <a href="signup.html" class="btn btn-white-3d raised">Edit Subscriptions</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-4 mb-4 px-0">
+                        <div class="card card-post mb-4 raised">
+                            <div class="card-header">Billing</div>
+                            <div class="card-body">
+                                <p class="card-text"><i class="fa fa-fw fa-credit-card mr-2 text-dark"></i>Card on file
+                                    ends in 5423</p>
+                                <p class="card-text"><i class="fa fa-fw fa-check mr-2 text-success"></i>$49.99 received
+                                    3 days ago</p>
+                                <p class="card-text">
+                                    <a href="#" class="btn-link"><i class="fa fa-fw fa-history mr-2"></i>View Payment
+                                        History</a>
+                                </p>
+                            </div>
+                            <div class="card-footer" align="center">
+                                <p class="card-text">
+                                    <a href="signup.html" class="btn btn-white-3d raised">Edit Payment Method</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="footer" class="contact section-invert py-3 bg-white" style="border-top:1px solid #eee;box-shadow:0px 0px 60px rgba(0,0,100,0.05);">
+    <div class="container px-5 py-5 " align="center">
+        <div class="row" align="center">
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Features</a></strong></p>
+                <p><a href="#" class="text-dark">Landing Pages</a></p>
+                <p><a href="#" class="text-dark">Content Management</a></p>
+                <p><a href="#" class="text-dark">Integrated Analytics</a></p>
+                <p><a href="#" class="text-dark">Marketing Automation</a></p>
+                <p><a href="#" class="text-dark">Subscription Billing</a></p>
+                <p><a href="#" class="text-dark">3rd Party Plugins</a></p>
+                <p><a href="#" class="text-dark">Help & Documentation</a></p>
+                <p><a href="#" class="text-dark">Platform Architecture</a></p>
+                <p><a href="#" class="text-dark">Open-Source</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Solutions</a></strong></p>
+                <p><a href="#" class="text-dark">Content Platforms</a></p>
+                <p><a href="#" class="text-dark">Software Platforms</a></p>
+                <p><a href="#" class="text-dark">Service Platforms</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Resources</a></strong></p>
+                <p><a href="#" class="text-dark">Help Center</a></p>
+                <p><a href="#" class="text-dark">Documentation</a></p>
+                <p><a href="#" class="text-dark">Company Blog</a></p>
+                <p><a href="#" class="text-dark">Pricing</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Company</a></strong></p>
+                <p><a href="#" class="text-dark">About Us</a></p>
+                <p><a href="#" class="text-dark">Contact Us</a></p>
+                <p><a href="#" class="text-dark">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript Dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

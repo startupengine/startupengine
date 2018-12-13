@@ -2,11 +2,17 @@
 
 namespace App;
 
+use App\Traits\IsApiResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Traits\RelationshipsTrait;
 
 class AnalyticEvent extends Model
 {
+    use RelationshipsTrait;
+
+    use IsApiResource;
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -15,6 +21,12 @@ class AnalyticEvent extends Model
     protected $hidden = [
         'id', "segments", "decoded_path", 'cookies', "encodings", "base_path", "user_id", "client_ips", "languages", "script_name", "fingerprint", "headers", "input", "content", "attributes", "user_email", "user_name", "server", "instance", "json", "scheme_and_host", "query_string", "full_url", "deleted_at", "user_agent", "updated_at", "scheme", "request_uri", "session", "session_id", "client_ip", "client_locale", "event_data"
     ];
+
+    //protected $casts = ['created_at' => 'string'];
+
+    public function amount(){
+        return json_decode($this->event_data)->amount;
+    }
 
     public function createFromRequest(Request $request){
         $this->instance = json_encode($request->instance());
@@ -62,6 +74,19 @@ class AnalyticEvent extends Model
         }
         */
         $this->save();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User')->withDefault(function ($user) {
+            $user->id = 'User ID';
+        });
+    }
+
+    public function occurrences($days = 30)
+    {
+        $occurrences = \App\AnalyticEvent::where('created_at', '>=', \Carbon\Carbon::now()->subDays($days))->get();
+        return $occurrences;
     }
 
 }

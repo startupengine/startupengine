@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/app';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -41,4 +43,23 @@ class LoginController extends Controller
         \Auth::logout();
         return redirect('/');
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if(setting('site.homepage') != null){
+            $setting = setting('site.homepage');
+            $page = \App\Page::where('slug', $setting)->where('status', 'ACTIVE')->first();
+            if($page != null){
+                $route = '/'.$page->slug;
+            }
+        }
+        if(!isset($route) && \Auth::user()->hasPermissionTo('view backend') == true) {
+            $route = '/admin';
+        }
+        else {
+            $route = '/docs';
+        }
+        return redirect($route);
+    }
+
 }

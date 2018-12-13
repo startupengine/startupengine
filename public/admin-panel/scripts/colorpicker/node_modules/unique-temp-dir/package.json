@@ -1,0 +1,40 @@
+{
+  "name": "unique-temp-dir",
+  "version": "1.0.0",
+  "description": "Provides a uniquely named temp directory.",
+  "license": "MIT",
+  "repository": "jamestalmage/unique-temp-dir",
+  "author": {
+    "name": "James Talmage",
+    "email": "james@talmage.io",
+    "url": "github.com/jamestalmage"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "unique",
+    "temp",
+    "temporary",
+    "directory",
+    "dir",
+    "cross",
+    "platform",
+    "os"
+  ],
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "os-tmpdir": "^1.0.1",
+    "uid2": "0.0.3"
+  },
+  "devDependencies": {
+    "ava": "^0.8.0",
+    "xo": "^0.12.1"
+  }
+}

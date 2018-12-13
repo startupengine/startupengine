@@ -8,6 +8,54 @@ use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
+
+    public function getUsers(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getUsers($request));
+    }
+
+    public function getPages(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getPages($request));
+    }
+
+    public function getPosts(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getPosts($request));
+    }
+
+    public function newItem(Request $request)
+    {
+        $items = new \App\APIResponse();
+        return $items->newItem($request);
+    }
+
+    public function getProducts(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getProducts($request));
+    }
+
+    public function getProductPlans(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getProductPlans($request));
+    }
+
+    public function getProductPlanSchema(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getProductPlanSchema($request));
+    }
+
+    public function editProductPlans(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->editProductPlans($request));
+    }
+
+    public function getContentModels(Request $request) {
+        $response = new APIResponse();
+        return response()->json($response->getContentModels($request));
+    }
+
+
     public function getStripeProducts(Request $request) {
         $response = new APIResponse();
         return response()->json($response->getStripeProducts($request));
@@ -26,6 +74,24 @@ class APIController extends Controller
     public function createProduct(Request $request) {
         $response = new APIResponse();
         return response()->json($response->createProduct($request));
+    }
+
+    public function findProduct(Request $request, $id)
+    {
+        $items = new \App\APIResponse();
+        return $items->findProduct($request, $id);
+    }
+
+    public function editProduct(Request $request, $id)
+    {
+        $items = new \App\APIResponse();
+        return $items->editProduct($request, $id);
+    }
+
+    public function newProduct(Request $request)
+    {
+        $items = new \App\APIResponse();
+        return $items->newProduct($request);
     }
 
     public function createSubscription(Request $request) {
@@ -114,6 +180,12 @@ class APIController extends Controller
         return $items->getPage($slug);
     }
 
+    public function editPage(Request $request, $slug)
+    {
+        $items = new APIResponse();
+        return $items->editPage($request, $slug);
+    }
+
     public function getRandomPageVariation(Request $request, $slug)
     {
         $items = new APIResponse();
@@ -132,10 +204,27 @@ class APIController extends Controller
         return $items->getItem($request);
     }
 
+    public function findItem(Request $request, $id)
+    {
+        $items = new \App\APIResponse();
+        //dd($items->findItem($request, $id));
+        return $items->findItem($request, $id);
+    }
+
     public function getItems(Request $request)
     {
         $items = new \App\APIResponse();
         return $items->getItems($request);
+    }
+
+    public function editItem(Request $request, $id) {
+        $response = new APIResponse();
+        return response()->json($response->editItem($request, $id));
+    }
+
+    public function validateInput(Request $request, $id) {
+        $response = new APIResponse();
+        return response()->json($response->validateInput($request, $id));
     }
 
     public function search(Request $request)

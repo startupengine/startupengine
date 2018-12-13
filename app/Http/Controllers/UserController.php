@@ -11,12 +11,28 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->input('s') !== null) {
-            $users = \App\User::where('name', 'LIKE', '%' . $request->input('s') . '%')->orWhere('email', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
-        } else {
-            $users = \App\User::limit(100)->get();
-        }
-        return view('app.user.index')->with('users', $users);
+        return view('admin.users.index');
+    }
+
+    public function view(Request $request, $id)
+    {
+        $item = \App\User::find($id);
+        $options = [
+            'id' => $item->id,
+            'type' => 'user',
+            'index_uri' => '/admin/users',
+            'buttons' => [
+                "top_nav" => [
+                    "Preferences" =>[
+                        "class" => "btn-dark",
+                        "text" => "<i class='material-icons'>list_alt</i> View Preferences",
+                        "link" => "/admin/users/$item->id/preferences"
+                    ]
+                ]
+            ]
+        ];
+
+        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
     }
 
     public function newUser()

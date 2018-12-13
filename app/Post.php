@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\IsApiResource;
+use App\Traits\RelationshipsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use GrahamCampbell\Markdown\Facades\Markdown;
@@ -10,19 +12,27 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Appstract\Meta\Metable;
 use \Conner\Tagging\Taggable;
 use NexusPoint\Versioned\Versioned;
+use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
+use Carbon\Carbon;
 
 
-class Post extends Model implements AuditableContract
+class Post extends Model
 {
     use SoftDeletes;
 
-    use Auditable;
+    use EloquentJoin;
+
+    //use Auditable;
 
     use Metable;
 
     use Taggable;
 
     use Versioned;
+
+    use RelationshipsTrait;
+
+    use IsApiResource;
 
     /**
      * Field from the model to use as the versions name
@@ -36,6 +46,23 @@ class Post extends Model implements AuditableContract
      * @var array
      */
     protected $dates = ['deleted_at', 'published_at'];
+
+    protected $fillable = ['json', 'excerpt'];
+
+    public function searchFields(){
+        return['json','title', 'slug'];
+    }
+
+    /*
+    protected $casts = [
+        'json' => 'json',
+    ];
+    */
+
+    public function setJsonAttribute($json)
+    {
+        $this->attributes['json'] = json_encode($json);
+    }
 
     public function bodyHtml()
     {
@@ -54,15 +81,81 @@ class Post extends Model implements AuditableContract
 
     public function json()
     {
-        $json = $this->json;
+        if(isset($this->json)){
+            $json = $this->json;
+        }
+        else {
+            $json = null;
+        }
+        if(gettype($this->json) == 'string') {
+            $this->json = json_decode($this->json);
+        }
         return json_decode($json);
+    }
+
+    public function thumbnail(){
+        //$json = $this->content();
+        if($this->content() != null && $this->content()->sections != null){
+            foreach($this->schema()->sections as $section){
+                if($section->fields != null){
+                    foreach ($section->fields as $field => $value) {
+
+                        if(isset($value->isThumbnail) && $value->isThumbnail == true) {
+                            $slug = $section->slug;
+                            $string = "sections->".$slug."->fields->".$field;
+                            if($this->content()->sections->$slug->fields->$field) {
+                                return $this->content()->sections->$slug->fields->$field;
+                            }
+                            else { return null; }
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public function excerpt(){
+        if($this->content() != null && $this->schema()->fields != null){
+            foreach($this->schema()->fields as $field => $value){
+                if (isset($value->isExcerpt) && $value->isExcerpt == true) {
+                    if ($this->$field) {
+                        return $this->$field;
+                    } else {
+                        return null;
+                    }
+                }
+            }
+            foreach($this->schema()->sections as $section){
+                if($section->fields != null){
+                    foreach ($section->fields as $field => $value) {
+                        dd($section->fields);
+                        if(isset($value->isExcerpt) && $value->isExcerpt == true) {
+
+                            $slug = $section->slug;
+                            $string = "sections->".$slug."->fields->".$field;
+                            if($this->content()->sections->$slug->fields->$field) {
+                                return $this->content()->sections->$slug->fields->$field;
+                            }
+                            else { return null; }
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function content()
     {
-        $json = $this->json;
-        $array = json_decode($json, true)['versions'][1];
-        return json_decode(json_encode($array));
+        $json = $this->json();
+        if($json !== null) {
+            return $json;
+        }
+        else {
+            return null;
+        }
     }
 
     public function image() {
@@ -90,13 +183,20 @@ class Post extends Model implements AuditableContract
     }
 
     public function postType() {
-        $postType = $this->post_type;
-        $postType = PostType::where('slug', '=', $postType)->firstOrFail();
-        return $postType;
+        return $this->hasOne('App\PostType', 'slug', 'post_type');
+
     }
 
     public function schema() {
-        return json_decode($this->postType()->json);
+        $path = file_get_contents(storage_path().'/schemas/post.json');
+        $baseSchema = json_decode($path,  true);
+        $postTypeSchema = json_decode($this->postType()->first()->json, true);
+
+        $merged = array_merge($postTypeSchema, $baseSchema);
+
+        $merged = json_decode(json_encode($merged));
+        //dd($merged);
+        return $merged;
     }
 
     public function videoType($url) {
@@ -109,14 +209,11 @@ class Post extends Model implements AuditableContract
         }
     }
 
-    public function user(){
-        $user = \App\User::where('id', '=', $this->author_id)->first();
-        if($user !== null) {
-            return $user;
-        }
-        else {
-            return null;
-        }
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'author_id')->withDefault(function ($user) {
+            $user->id = 'User ID';
+        });
     }
 
     public function primaryTag(){
@@ -132,7 +229,22 @@ class Post extends Model implements AuditableContract
     }
 
     public function views(){
-        return \App\AnalyticEvent::where("event_data->model", 'post')->where("event_data->id", $this->id)->get();
+        $request = request();
+        if($request->input('startDate') != null){
+            $startDate = \Carbon\Carbon::parse($request->input('startDate'));
+        }
+        else {
+            $startDate = new Carbon();
+            $startDate = $startDate->subDays(30);
+        }
+        if($request->input('endDate') != null){
+            $endDate = \Carbon\Carbon::parse($request->input('endDate'));
+        }
+        else {
+            $endDate = new Carbon();
+        }
+        $views = $this->hasMany('App\AnalyticEvent', 'model_id')->where('event_type', '=', 'content viewed')->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);
+        return $views;
     }
 
 }

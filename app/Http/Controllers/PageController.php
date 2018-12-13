@@ -12,6 +12,23 @@ use App\Role;
 class PageController
 {
 
+    public function index(Request $request)
+    {
+        return view('admin.pages.index');
+    }
+
+    public function view(Request $request, $id)
+    {
+        $item = \App\Page::find($id);
+        $options = [
+            'id' => $item->id,
+            'type' => 'page',
+            'index_uri' => '/admin/pages'
+        ];
+
+        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+    }
+
     public function getHomepage()
     {
         $homepagesetting = Setting::where('key', '=', 'site.homepage')->first();
@@ -82,12 +99,6 @@ class PageController
     }
 
 
-    public function editPage(Request $request, $id)
-    {
-        $page = \App\Page::find($id);
-        //dd($page->tagNames());
-        return view('app.page.edit')->with('page', $page);
-    }
 
     public function savePage(Request $request)
     {
@@ -158,15 +169,7 @@ class PageController
         return redirect('/app/pages');
     }
 
-    public function index(Request $request)
-    {
-        if ($request->input('s') !== null) {
-            $pages = \App\Page::where('body', 'LIKE', '%' . $request->input('s') . '%')->orWhere('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('excerpt', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
-        } else {
-            $pages = Page::orderBy('created_at', 'desc')->limit(100)->get();
-        }
-        return view('app.page.index')->with('pages', $pages);
-    }
+
 
     public function deletePage(Request $request, $id) {
         if(\Auth::user()->hasPermissionTo('delete pages')) {

@@ -1,0 +1,556 @@
+FORMAT: 1A
+HOST: https://www.startupengine.io
+
+# API Overview
+
+Startup Engine uses a single API for all resources.
+
+Each resource has its own schema with unique permissions and data structure, but all resources share the same basic API methods: **browse, read, edit, add, and delete.**
+
+# Group System Logs
+
+The Log Resource API is a **read-only** API allowing users to list and view system logs
+
+### Browse [/api/resources/log{?limit,perPage,filter,sort,page[number]}]
+
+#### Browse [GET]
+
++ Parameters
+    + limit (optional) - limit the number of total results
+    + perPage (optional) - limit the number of results per page
+    + filter (optional) - only return results according to the filter logic of the [JSON API Spec](http://jsonapi.org)
+    + sort (optional) - sort the results by a specific attribute according to the logic of the [JSON API Spec](http://jsonapi.org)
+    + page[number] (optional) - show a specific page of the results according to the logic of the [JSON API Spec](http://jsonapi.org)
+
++ Response 200 (application/json)
+
+        {
+            "meta": {
+                "status": "success", - Status of response
+                "pages": 0,
+                "total": "1",
+                "from": 1,
+                "to": 30,
+                "per_page": 100,
+                "path": "http://127.0.0.1:8000/api/resources/log",
+                "current_page": 1
+            },
+            "links": {
+                "first_page_url": "http://127.0.0.1:8000/api/resources/log?filter=type%3Dexception&limit=1&page%5Bnumber%5D=1",
+                "next_page_url": null,
+                "prev_page_url": null,
+                "last_page_url": "http://127.0.0.1:8000/api/resources/log?filter=type%3Dexception&limit=1&page%5Bnumber%5D=1"
+            },
+            "errors": [
+
+            ],
+            "data": [
+            {
+                "uuid": "8c40a9d4-9a47-4cab-b237-8f1c62abd6d0",
+                "description": "InvalidArgumentException",
+                "occurrences": 0,
+                "sequence": 73684,
+                "type": "exception",
+                "should_display_on_index": false,
+                "created_at": "2018-11-13 07:19:10"
+            }
+            ]
+        }
+
+
+### Read [/api/resources/log/{id}]
+
+#### Read [GET]
++ Parameters
+    + id - A path variable that is required for a valid URL (string)
++ Response 200 (application/json)
+
+        {
+          "meta": {
+                "status": "success"
+          },
+          "links": [{
+                "self": "http://127.0.0.1:8000/api/resources/log/8",
+                "related": "http://127.0.0.1:8000/api/resources/log"
+            }],
+          "errors": [
+
+          ],
+          "data": {
+                "uuid": 8,
+                "description": "ErrorException",
+                "occurrences": 1,
+                "sequence": 64480,
+                "type": "exception",
+                "should_display_on_index": true,
+                "created_at": "2018-11-12 23:25:39"
+                }
+        }
+
+# Group Pages
+
+The Page Resource API gives users full BREAD (browse, read, add, edit, delete) capabilities
+
+### Browse [/api/resources/page{?limit,perPage,filter,sort,page[number]}]
+
+#### Browse [GET]
+
++ Parameters
+    + limit (optional) - limit the number of total results
+    + perPage (optional) - limit the number of results per page
+    + filter (optional) - only return results according to the filter logic of the [JSON API Spec](http://jsonapi.org)
+    + sort (optional) - sort the results by a specific attribute according to the logic of the [JSON API Spec](http://jsonapi.org)
+    + page[number] (optional) - show a specific page of the results according to the logic of the [JSON API Spec](http://jsonapi.org)
+
++ Response 200 (application/json)
+
+        {
+          "meta": {
+            "status": "success",
+            "pages": 0,
+            "total": 3,
+            "from": 1,
+            "to": 3,
+            "per_page": 100,
+            "path": "http://127.0.0.1:8000/api/resources/page",
+            "current_page": 1
+          },
+          "links": {
+            "first_page_url": "http://127.0.0.1:8000/api/resources/page?page%5Bnumber%5D=1",
+            "next_page_url": null,
+            "prev_page_url": null,
+            "last_page_url": "http://127.0.0.1:8000/api/resources/page?page%5Bnumber%5D=1"
+          },
+          "errors": [
+
+          ],
+          "data": [
+            {
+              "id": 2,
+              "links": {
+                "self": "http://127.0.0.1:8000/api/resources/page/2",
+                "related": "http://127.0.0.1:8000/api/resources/page"
+              },
+              "included": [
+
+              ],
+              "status": "INACTIVE",
+              "slug": "articles",
+              "tags": [
+
+              ],
+              "created_at": "2018-07-06 22:09:07",
+              "updated_at": "2018-07-06 22:09:07",
+              "title": "Articles",
+              "schema": {
+                "namespace": "Page",
+                "lang": {
+                  "en": {
+                    "singular": "page",
+                    "plural": "pages"
+                  }
+                },
+                "version": "0.1",
+                "title_field": "title",
+                "metadata": {
+                  "id": {
+                    "display name": "Page ID",
+                    "read_only": true
+                  }
+                },
+                "fields": {
+                  "title": {
+                    "display name": "Title",
+                    "description": "The title of this page.",
+                    "type": "text",
+                    "validations": {
+                      "required": true,
+                      "numeric": true
+                    }
+                  },
+                  "description": {
+                    "display name": "Description",
+                    "description": "Describe this page.",
+                    "type": "textarea"
+                  }
+                },
+                "sections": {
+                  "heading": {
+                    "title": "Heading",
+                    "fields": {
+                      "headline": {
+                        "type": "text",
+                        "description": "This appears at the top of the page.",
+                        "validations": {
+                          "required": true
+                        }
+                      },
+                      "button": {
+                        "type": "text",
+                        "description": "Text for the button at the top of the page.",
+                        "validations": {
+                          "required": true
+                        }
+                      },
+                      "button_link": {
+                        "display name": "Button Link",
+                        "type": "text",
+                        "description": "URL for the button at the top of the page.",
+                        "validations": {
+                          "required": true
+                        },
+                        "conditions": "(((((data || {}).content || {}).sections || {}).HEADING || {}).fields|| {}).button != null"
+                      },
+                      "background": {
+                        "type": "image",
+                        "validations": {
+                          "url": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "content": [
+
+              ]
+            },
+            {
+              "id": 1,
+              "links": {
+                "self": "http://127.0.0.1:8000/api/resources/page/1",
+                "related": "http://127.0.0.1:8000/api/resources/page"
+              },
+              "included": [
+
+              ],
+              "status": "INACTIVE",
+              "slug": "account",
+              "tags": [
+                {
+                  "id": 66,
+                  "slug": "12345",
+                  "name": "12345",
+                  "suggest": false,
+                  "count": 1,
+                  "tag_group_id": null
+                }
+              ],
+              "created_at": "2018-07-06 22:09:07",
+              "updated_at": "2018-09-24 07:27:59",
+              "title": "Account",
+              "schema": {
+                "namespace": "Page",
+                "lang": {
+                  "en": {
+                    "singular": "page",
+                    "plural": "pages"
+                  }
+                },
+                "version": "0.1",
+                "title_field": "title",
+                "metadata": {
+                  "id": {
+                    "display name": "Page ID",
+                    "read_only": true
+                  }
+                },
+                "fields": {
+                  "title": {
+                    "display name": "Title",
+                    "description": "The title of this page.",
+                    "type": "text",
+                    "validations": {
+                      "required": true,
+                      "numeric": true
+                    }
+                  },
+                  "description": {
+                    "display name": "Description",
+                    "description": "Describe this page.",
+                    "type": "textarea"
+                  }
+                },
+                "sections": {
+                  "heading": {
+                    "title": "Heading",
+                    "fields": {
+                      "headline": {
+                        "type": "text",
+                        "description": "This appears at the top of the page.",
+                        "validations": {
+                          "required": true
+                        }
+                      },
+                      "button": {
+                        "type": "text",
+                        "description": "Text for the button at the top of the page.",
+                        "validations": {
+                          "required": true
+                        }
+                      },
+                      "button_link": {
+                        "display name": "Button Link",
+                        "type": "text",
+                        "description": "URL for the button at the top of the page.",
+                        "validations": {
+                          "required": true
+                        },
+                        "conditions": "(((((data || {}).content || {}).sections || {}).HEADING || {}).fields|| {}).button != null"
+                      },
+                      "background": {
+                        "type": "image",
+                        "validations": {
+                          "url": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "content": [
+
+              ]
+            },
+            {
+              "id": 3,
+              "links": {
+                "self": "http://127.0.0.1:8000/api/resources/page/3",
+                "related": "http://127.0.0.1:8000/api/resources/page"
+              },
+              "included": [
+
+              ],
+              "status": "ACTIVE",
+              "slug": "12345",
+              "tags": [
+
+              ],
+              "created_at": "2018-07-06 22:09:07",
+              "updated_at": "2018-11-01 03:18:42",
+              "title": "test123",
+              "schema": {
+                "namespace": "Page",
+                "lang": {
+                  "en": {
+                    "singular": "page",
+                    "plural": "pages"
+                  }
+                },
+                "version": "0.1",
+                "title_field": "title",
+                "metadata": {
+                  "id": {
+                    "display name": "Page ID",
+                    "read_only": true
+                  }
+                },
+                "fields": {
+                  "title": {
+                    "display name": "Title",
+                    "description": "The title of this page.",
+                    "type": "text",
+                    "validations": {
+                      "required": true,
+                      "numeric": true
+                    }
+                  },
+                  "description": {
+                    "display name": "Description",
+                    "description": "Describe this page.",
+                    "type": "textarea"
+                  }
+                },
+                "sections": {
+                  "heading": {
+                    "title": "Heading",
+                    "fields": {
+                      "headline": {
+                        "type": "text",
+                        "description": "This appears at the top of the page.",
+                        "validations": {
+                          "required": true
+                        }
+                      },
+                      "button": {
+                        "type": "text",
+                        "description": "Text for the button at the top of the page.",
+                        "validations": {
+                          "required": true
+                        }
+                      },
+                      "button_link": {
+                        "display name": "Button Link",
+                        "type": "text",
+                        "description": "URL for the button at the top of the page.",
+                        "validations": {
+                          "required": true
+                        },
+                        "conditions": "(((((data || {}).content || {}).sections || {}).HEADING || {}).fields|| {}).button != null"
+                      },
+                      "background": {
+                        "type": "image",
+                        "validations": {
+                          "url": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "content": [
+
+              ]
+            }
+          ]
+        }
+
+### Read [/api/resources/page/{id}]
+
+#### Read [GET]
++ Parameters
+    + id - A path variable that is required for a valid URL (string)
++ Response 200 (application/json)
+
+        {
+              "meta": {
+                "status": "success"
+              },
+              "links": [
+                {
+                  "self": "http://127.0.0.1:8000/api/resources/page/1",
+                  "related": "http://127.0.0.1:8000/api/resources/page"
+                }
+              ],
+              "errors": [
+
+              ],
+              "data": {
+                "id": 1,
+                "included": [
+
+                ],
+                "status": "INACTIVE",
+                "slug": "account",
+                "tags": [
+                  {
+                    "id": 66,
+                    "slug": "12345",
+                    "name": "12345",
+                    "suggest": false,
+                    "count": 1,
+                    "tag_group_id": null
+                  }
+                ],
+                "created_at": "2018-07-06 22:09:07",
+                "updated_at": "2018-09-24 07:27:59",
+                "title": "Account",
+                "schema": {
+                  "namespace": "Page",
+                  "lang": {
+                    "en": {
+                      "singular": "page",
+                      "plural": "pages"
+                    }
+                  },
+                  "version": "0.1",
+                  "title_field": "title",
+                  "metadata": {
+                    "id": {
+                      "display name": "Page ID",
+                      "read_only": true
+                    }
+                  },
+                  "fields": {
+                    "title": {
+                      "display name": "Title",
+                      "description": "The title of this page.",
+                      "type": "text",
+                      "validations": {
+                        "required": true,
+                        "numeric": true
+                      }
+                    },
+                    "description": {
+                      "display name": "Description",
+                      "description": "Describe this page.",
+                      "type": "textarea"
+                    }
+                  },
+                  "sections": {
+                    "heading": {
+                      "title": "Heading",
+                      "fields": {
+                        "headline": {
+                          "type": "text",
+                          "description": "This appears at the top of the page.",
+                          "validations": {
+                            "required": true
+                          }
+                        },
+                        "button": {
+                          "type": "text",
+                          "description": "Text for the button at the top of the page.",
+                          "validations": {
+                            "required": true
+                          }
+                        },
+                        "button_link": {
+                          "display name": "Button Link",
+                          "type": "text",
+                          "description": "URL for the button at the top of the page.",
+                          "validations": {
+                            "required": true
+                          },
+                          "conditions": "(((((data || {}).content || {}).sections || {}).HEADING || {}).fields|| {}).button != null"
+                        },
+                        "background": {
+                          "type": "image",
+                          "validations": {
+                            "url": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "content": [
+
+                ]
+              }
+        }
+
+### Edit [/api/resources/page/{id}/edit{?validate,save}]
+
+#### Edit [POST]
++ Request
+
+        {
+            "data": {
+                "sections.about.fields.url" : "http://google.com"},
+            "save": true
+        }
+
++ Parameters
+    + id - A path variable that is required for a valid URL (string)
+    + validate - If set to true, signifies that input should be validated but not saved
+    + save - If set to true, signifies that input should be saved if valid
++ Response 200 (application/json)
+
+        {
+            "data": {
+            "fields": {
+              "sections.about.fields.url": {
+                "valid": false,
+                "errors": {
+                  "sections->about->fields->url": [
+                    "This is already in use."
+                  ]
+                },
+                "first_error": "This is already in use."
+              }
+            }
+            },
+            "status": "error",
+            "message": "Validation failed."
+        }

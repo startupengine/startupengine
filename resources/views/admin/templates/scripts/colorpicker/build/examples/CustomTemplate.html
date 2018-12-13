@@ -1,0 +1,91 @@
+<div class="example-group">
+
+  <div class="example-group-body">
+    <div class="example">
+  <div class="card card-default">
+      <div class="card-header example-title"><h2> Use a custom template </h2></div>
+    <div class="card-body">
+        <div class="example-description">
+                  <p>This example shows how to use a custom template to hide some elements and/or add new ones.</p>
+
+        </div>
+      <div class="example-demo">
+                <div id="cp1" data-color="#305AA2"></div>
+        <script>
+          $(function () {
+            $('#cp1').colorpicker({
+                  inline: true,
+                  container: true,
+                  extensions: [],
+                  template: `<div class="colorpicker">
+                <div class="colorpicker-saturation"><i class="colorpicker-guide"></i></div>
+                <div class="colorpicker-hue"><i class="colorpicker-guide"></i></div>
+                <div class="colorpicker-alpha">
+                    <div class="colorpicker-alpha-color"></div>
+                    <i class="colorpicker-guide"></i>
+                </div>
+                <div class="colorpicker-bar hsv-output"></div>
+              </div>`
+                })
+                .on('colorpickerChange colorpickerCreate', function (e) {
+                  var output = e.colorpicker.element
+                      .find('.hsv-output');
+                  var color = e.color.getCloneOpaque();
+
+                  output
+                      .html(e.color.toHslString())
+                      .css('background-color', color.toHexString());
+
+                  if (color.isDark()) {
+                    output.css('color', 'white');
+                  } else {
+                    output.css('color', 'black');
+                  }
+                });
+          });
+        </script>
+
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer--legend">Code</div>
+      <pre class="example-code prettyprint lang-html">&lt;div id=&quot;cp1&quot; data-color=&quot;#305AA2&quot;&gt;&lt;&#x2F;div&gt;
+&lt;script&gt;
+  $(function () {
+    $(&#39;#cp1&#39;).colorpicker({
+          inline: true,
+          container: true,
+          extensions: [],
+          template: `&lt;div class=&quot;colorpicker&quot;&gt;
+        &lt;div class=&quot;colorpicker-saturation&quot;&gt;&lt;i class=&quot;colorpicker-guide&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;div&gt;
+        &lt;div class=&quot;colorpicker-hue&quot;&gt;&lt;i class=&quot;colorpicker-guide&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;div&gt;
+        &lt;div class=&quot;colorpicker-alpha&quot;&gt;
+            &lt;div class=&quot;colorpicker-alpha-color&quot;&gt;&lt;&#x2F;div&gt;
+            &lt;i class=&quot;colorpicker-guide&quot;&gt;&lt;&#x2F;i&gt;
+        &lt;&#x2F;div&gt;
+        &lt;div class=&quot;colorpicker-bar hsv-output&quot;&gt;&lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;`
+        })
+        .on(&#39;colorpickerChange colorpickerCreate&#39;, function (e) {
+          var output = e.colorpicker.element
+              .find(&#39;.hsv-output&#39;);
+          var color = e.color.getCloneOpaque();
+
+          output
+              .html(e.color.toHslString())
+              .css(&#39;background-color&#39;, color.toHexString());
+
+          if (color.isDark()) {
+            output.css(&#39;color&#39;, &#39;white&#39;);
+          } else {
+            output.css(&#39;color&#39;, &#39;black&#39;);
+          }
+        });
+  });
+&lt;&#x2F;script&gt;</pre>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>

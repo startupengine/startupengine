@@ -1,0 +1,49 @@
+{
+  "namespace": "App\\Setting",
+  "lang": {
+    "en": {
+      "singular": "setting",
+      "plural": "settings"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "title_key": "id",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "Setting ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+    "key" : {
+      "display name": "Key",
+      "description": "The key for this setting.",
+      "type": "text",
+      "validations": {
+        "required": true,
+        "unique":"settings"
+      }
+    },
+    "value" : {
+      "display name": "Value",
+      "description": "The value of this setting.",
+      "type": "textarea",
+      "validations": {
+        "nullable": true
+      }
+    },
+    "json" : {
+      "display name": "JSON Schema",
+      "description": "The JSON schema of this preference.",
+      "type": "code",
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+  }
+}

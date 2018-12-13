@@ -1,0 +1,74 @@
+{
+  "namespace": "App\\Plan",
+  "version": "0.1",
+  "fields": {
+    "name" : {
+      "display name": "Name",
+      "description": "The name of this plan (i.e. Basic or Pro)",
+      "type": "text",
+      "validations": {
+        "required": true
+      }
+    },
+    "price" : {
+      "display name": "Price",
+      "description": "The cost of this plan (USD).",
+      "type": "number",
+      "validations": {
+        "required": true,
+        "numeric": true
+      }
+    },
+    "interval": {
+      "display name": "Billing Interval",
+      "description": "Charge the customer each...",
+      "type": "select",
+      "options": {
+        "day": "day",
+        "week": "week",
+        "month": "month",
+        "year": "year"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    "description" : {
+      "display name": "Description",
+      "description": "Describe this plan.",
+      "type": "textarea"
+    }
+  },
+  "sections": {
+    "about": {
+      "title": "Plan Details",
+      "fields": {
+        "type": {
+          "type": "select",
+          "options": {
+            "Physical Product": "Physical Product",
+            "Service": "Service",
+            "Software": "Software Subscription",
+            "Content": "Content Subscription"
+          },
+          "validations": {
+            "required": true
+          }
+        },
+        "description": {
+          "type": "textarea",
+          "description": "Describe this product. This appears in search engine listings.",
+          "validations": {
+            "required": true
+          }
+        },
+        "image": {
+          "type": "image",
+          "validations": {
+            "url": true
+          }
+        }
+      }
+    }
+  }
+}

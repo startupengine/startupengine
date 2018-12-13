@@ -157,7 +157,10 @@
                                        name="password">
                             </div>
                                 <?php if(Request::path() == "app/login") {  ?>
-                                <input type="hidden" name="redirect" value="/app"/>
+                                    <input type="hidden" name="redirect" value="/app"/>
+                                <?php } ?>
+                                <?php if(Request::path() == "admin/login") {  ?>
+                                <input type="hidden" name="redirect" value="/admin"/>
                                 <?php } ?>
                             <?php /*
                             <div class="form-group">

@@ -12,7 +12,7 @@ class SettingController extends Controller
 
     public function index(Request $request)
     {
-
+        /*
         if ($request->input('s') !== null) {
             $settings = \App\Setting::where('key', 'LIKE', '%' . $request->input('s') . '%')->orWhere('display_name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('value', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('display_name', 'asc')->get();
         } elseif ($request->input('group') !== null) {
@@ -23,8 +23,21 @@ class SettingController extends Controller
         }
         $postTypes = PostType::all();
         $settingsGroups = Setting::all()->groupBy('group');
-        return view('app.setting.index')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
+        return view('admin.settings.index')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
+        */
+        return view('admin.settings.index');
 
+    }
+
+    public function view(Request $request, $id)
+    {
+        $item = \App\Setting::find($id);
+        $options = [
+            'id' => $item->id,
+            'type' => 'setting',
+            'index_uri' => '/admin/settings/group/'.$item->group
+        ];
+        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
     }
 
     public function addSetting(Request $request)

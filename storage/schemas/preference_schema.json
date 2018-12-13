@@ -1,0 +1,40 @@
+{
+  "namespace": "App\\PreferenceSchema",
+  "lang": {
+    "en": {
+      "singular": "preference schema",
+      "plural": "preference schemas"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "title_key": "id",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "Preference ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+    "description" : {
+      "display name": "Description",
+      "description": "Describe this preference.",
+      "type": "textarea",
+      "validations": {
+        "required": true
+      }
+    },
+    "json" : {
+      "display name": "JSON Schema",
+      "description": "The JSON schema of this preference.",
+      "type": "code",
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+  }
+}

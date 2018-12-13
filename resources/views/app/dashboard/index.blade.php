@@ -90,11 +90,13 @@
                             <h3><i class="fa fa-credit-card" style="font-size:80%;color:#666;"></i><br>Subscribers</h3>
                             <?php  $customers = \App\Subscription::where('ends_at','=',null)->get()->groupBy('user_id'); ?>
                             <?php foreach($customers as $customer) {
-                                $values  = collect($customer->sum('price'));
+                                $values = collect($customer->sum('price'));
                             }
-                            $average = $values->avg()/100;
+                            if(isset($values)) {
+                                $average = $values->avg()/100;
+                            }
                             ?>
-                            <span class="badge">${{ $average }} / User </span><br>
+                            @if(isset($average))<span class="badge">${{ $average }} / User </span><br>@endif
                             <span class="badge">${{ \App\Subscription::where('ends_at','=',null)->get()->sum('price')/100 }} / Monthly</span>
                         </div>
                     </div>

@@ -1,0 +1,181 @@
+<div class="col-md-12" v-if="info.data == null">
+    <span class="badge badge-loading text-dark mr-2">Loading... <i class="fa fa-fw fa-spin text-dark fa-spinner"></i></span>
+</div>
+<div class="col" v-if="info != null & info.data != null" style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
+    <div class="card card-small mb-4" id="listView">
+        <div class="card-header border-bottom" align="center">
+            XXX_HEADER_XXX
+        </div>
+        <div class="card-body p-0 pb-0 text-center">
+            <table class="table mb-0" >
+                <thead class="bg-light" style="max-width:100%;">
+                <tr>
+                    XXX_TABLE_HEADER_XXX
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="dataRow" v-for="(item, index) in info.data ">
+                    XXX_TABLE_ROW_XXX
+                </tr>
+                <tr v-if="info.meta.total == 0 && status !== 'loading'">
+                    <td colspan="5" align="center" style="height:55px;">No results.</td>
+                </tr>
+                <tr class="loadingRow" v-if="status == 'loading'">
+                    <td colspan="5" align="center">
+                        <span style="display:none;">Loading...</span><i class="fa fa-fw fa-spin fa-spinner"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5" align="center" v-if="info.meta.pages > 0">
+                        <nav aria-label="Pagination" class="pull-left page-meta-container" style="display:inline-block;float:left; width:75px;">
+                            <ul class="pagination justify-content-center mt-3">
+                                <li class="page-item disabled page-meta" >
+                                    <a class="page-link" href="#">P<span class="hiddenOnMobile">age</span><span class="hiddenOnDesktop">g.</span> {{ info.meta.current_page }} <span class="hiddenOnMobile"> of {{ info.meta.pages}} </span></a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <nav aria-label="Pagination" style="display:inline-block;">
+                            <ul class="pagination justify-content-center mt-3" >
+                                <li class="page-item">
+                                    <a class="page-link" href="#" v-on:click="updateData(info.meta.current_page - 1)" v-bind:data-url="info.links.prev_page_url" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item hiddenOnMobile" v-on:click="updateData(1)" v-bind:class="{ active: info.meta.current_page == 1 }"><a class="page-link" href="#">1</a></li>
+                                <li v-if="info.meta.pages > 1" v-bind:class="{ active: info.meta.current_page == 2 }" class="page-item hiddenOnMobile" v-on:click="updateData(2)"><a class="page-link" href="#">2</a></li>
+                                <li v-if="info.meta.pages > 2" v-bind:class="{ active: info.meta.current_page == 3 }" class="page-item hiddenOnMobile" v-on:click="updateData(3)"><a class="page-link" href="#">3</a></li>
+                                <li v-if="info.meta.pages > 5 && info.meta.current_page <= (info.meta.pages - 3) && info.meta.current_page != 4" class="page-item disabled hiddenOnMobile"><a class="page-link" href="#">...</a></li>
+                                <li v-if="info.meta.current_page > 3 && info.meta.current_page <= (info.meta.pages - 3)" class="page-item active hiddenOnMobile"><a class="page-link" href="#">{{ info.meta.current_page }}</a></li>
+                                <li class="page-item active hiddenOnDesktop"><a class="page-link" href="#">{{ info.meta.current_page }}</a></li>
+                                <li data-test="4" v-if="info.meta.current_page >= 4 && info.meta.pages > 6" class="page-item disabled hiddenOnMobile"><a class="page-link" href="#">...</a></li>
+                                <li data-test="3" v-if="info.meta.pages >= 6 " v-bind:class="{ active: info.meta.current_page == (info.meta.pages - 2) }"class="page-item hiddenOnMobile" v-on:click="updateData(info.meta.pages - 2)"><a class="page-link" href="#">{{ info.meta.pages - 2}}</a></li>
+                                <li data-test="2" v-if="info.meta.pages >= 5 " v-bind:class="{ active: info.meta.current_page == (info.meta.pages - 1) }"class="page-item hiddenOnMobile" v-on:click="updateData(info.meta.pages - 1)"><a class="page-link" href="#">{{ info.meta.pages - 1}}</a></li>
+                                <li data-test="1" v-if="info.meta.pages >= 4 " v-bind:class="{ active: info.meta.current_page == (info.meta.pages) }" v-bind:class="{ disabled: (info.meta.current_page == info.meta.pages) }" class="page-item hiddenOnMobile" v-on:click="updateData(info.meta.pages)"><a class="page-link" href="#">{{ info.meta.pages }}</a></li>
+                                <li class="page-item" v-bind:class="{ disabled: (info.meta.current_page == info.meta.pages) }" >
+                                    <a class="page-link" href="#" v-on:click="updateData(info.meta.current_page + 1)" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <nav aria-label="Pagination" class="right page-meta-container" style="display:inline-block;float:right; width:75px;">
+                            <ul class="pagination justify-content-center mt-3">
+                                <li class="page-item disabled page-meta">
+                                    <a class="page-link hiddenOnDesktop" href="#">of {{ info.meta.pages }}</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="cardView" style="display:none;" v-if="info.displayFormat == 'cards'">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 dataRow" v-if="info.total == 0" style="float:left;display:block;">
+                <div class="card card-small card-post raised h-100" >
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class="text-ford-blue" href="#">No results.</a>
+                        </h5>
+                        <p class="card-text">Try changing your filters or search terms.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 loadingRow" v-if="status == 'loading'"  style="float:left;">
+                <div class="card card-small card-post raised h-100" >
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class="text-ford-blue" href="#">Loading...</a>
+                        </h5>
+                        <p class="card-text" align="center"><i class="fa fa-fw fa-spinner fa-spin"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div v-if="info.data != null" class="col-lg-3 col-md-6 col-sm-12 mb-4 dataRow" v-for="item in info.data" style="float:left;">
+                <div class="card card-small card-post raised h-100" v-if="item.content != null && item.content.sections != null">
+                    <div v-if="(item.content.sections.heading.fields.background != null && item.content.sections.heading.fields.background != '')" class="card-post__image"  v-bind:style="{ backgroundImage: 'url(' + item.content.sections.heading.fields.background + ')' }"
+                         style="background: #333; );">
+                        <span v-for="tag in item.tags.slice(0,3)" class="badge badge-dark badge-pill mt-2 mr-2" v-if="tag != null" style="float:right;">{{ tag.name }}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class="text-ford-blue" v-bind:href="'/admin/content/view/' + item.id">{{ item.title }}</a>
+                        </h5>
+                        <p class="card-text mb-2">{{ item.excerpt }}</p>
+                        <div v-if="item.content.sections.heading.fields.background == null" align="left">
+                            <span v-for="tag in item.tags.slice(0,3)" class="badge badge-dark badge-pill mt-2 mr-2" style="float:left;">{{ tag.name }}</span>
+                        </div>
+                    </div>
+                    <div class="card-footer border-top p-0 pt-3 pb-3" align="center">
+                        <div align="center">
+                            <div class="btn-group mb-2" role="group" aria-label="Table row actions">
+                                <a href="" class="btn btn-outline-primary btn-pill" v-bind:href="'/admin/content/view/' + item.post_type + '/' + item.id">
+                                    <i class="material-icons">search</i> View
+                                </a>
+                                <?php /*
+                                        <a href="" class="btn btn-white" v-bind:href="'/admin/content/edit/' + item.post_type + '/' + item.id">
+                                <i class="material-icons">bar_chart</i> Analytics
+                                </a> */ ?>
+                            </div>
+                        </div>
+                        <div class="d-inline-block flex-column justify-content-center ml-1 mr-1">
+                            <small class="card-text text-muted" style="text-transform:capitalize;">Last Updated {{ item.last_updated  }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 pb-4" align="center">
+            <nav aria-label="Pagination" class="pull-left page-meta-container" style="display:inline-block;float:left; width:75px;">
+                <ul class="pagination justify-content-center mt-3">
+                    <li class="page-item disabled page-meta">
+                        <a class="page-link" href="#">P<span class="hiddenOnMobile">age</span><span class="hiddenOnDesktop">g.</span> {{ info.meta.current_page }} <span class="hiddenOnMobile"> of {{ info.meta.pages}} </span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav aria-label="Pagination" style="display:inline-block;">
+                <ul class="pagination justify-content-center mt-3">
+                    <li class="page-item">
+                        <a class="page-link" href="#" v-on:click="updateData(info.meta.current_page - 1)" v-bind:data-url="info.links.prev_page_url" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item hiddenOnMobile" v-on:click="updateData(1)" v-bind:class="{ active: info.meta.current_page == 1 }"><a class="page-link" href="#">1</a></li>
+                    <li v-if="info.meta.pages > 1" v-bind:class="{ active: info.meta.current_page == 2 }" class="page-item hiddenOnMobile" v-on:click="updateData(2)"><a class="page-link" href="#">2</a></li>
+                    <li v-if="info.meta.pages > 2" v-bind:class="{ active: info.meta.current_page == 3 }" class="page-item hiddenOnMobile" v-on:click="updateData(3)"><a class="page-link" href="#">3</a></li>
+                    <li v-if="info.meta.pages > 5 && info.meta.current_page <= (info.meta.pages - 3) && info.meta.current_page != 4" class="page-item disabled hiddenOnMobile"><a class="page-link" href="#">...</a></li>
+                    <li v-if="info.meta.current_page > 3 && info.meta.current_page <= (info.meta.pages - 3)" class="page-item active hiddenOnMobile"><a class="page-link" href="#">{{ info.meta.current_page }}</a></li>
+                    <li class="page-item active hiddenOnDesktop"><a class="page-link" href="#">{{ info.meta.current_page }}</a></li>
+                    <li data-test="4" v-if="info.meta.current_page >= 4 && info.meta.pages > 6" class="page-item disabled hiddenOnMobile"><a class="page-link" href="#">...</a></li>
+                    <li data-test="3" v-if="info.meta.pages >= 6 " v-bind:class="{ active: info.meta.current_page == (info.meta.pages - 2) }"class="page-item hiddenOnMobile" v-on:click="updateData(info.meta.pages - 2)"><a class="page-link" href="#">{{ info.meta.pages - 2}}</a></li>
+                    <li data-test="2" v-if="info.meta.pages >= 5 " v-bind:class="{ active: info.meta.current_page == (info.meta.pages - 1) }"class="page-item hiddenOnMobile" v-on:click="updateData(info.meta.pages - 1)"><a class="page-link" href="#">{{ info.meta.pages - 1}}</a></li>
+                    <li data-test="1" v-if="info.meta.pages >= 4 " v-bind:class="{ active: info.meta.current_page == (info.meta.pages) }" v-bind:class="{ disabled: (info.meta.current_page == info.meta.pages) }" class="page-item hiddenOnMobile" v-on:click="updateData(info.meta.pages)"><a class="page-link" href="#">{{ info.meta.pages }}</a></li>
+                    <li class="page-item" v-bind:class="{ disabled: (info.meta.current_page == info.meta.pages) }" >
+                        <a class="page-link" href="#" v-on:click="updateData(info.meta.current_page + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav aria-label="Pagination" class="right page-meta-container" style="display:inline-block;float:right; width:75px;">
+                <ul class="pagination justify-content-center mt-3">
+                    <li class="page-item disabled page-meta">
+                        <a class="page-link hiddenOnDesktop" href="#">of {{ info.meta.pages }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

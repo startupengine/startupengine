@@ -1,0 +1,101 @@
+{
+  "namespace": "App\\User",
+  "lang": {
+    "en": {
+      "singular": "user",
+      "plural": "users"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "taggable": false,
+    "title_key": "email",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "User ID",
+        "column": "id"
+      }
+    }
+  },
+  "permissions": {
+    "browse": {
+      "roles": ["admin", "superadmin"]
+    },
+    "read": {
+      "roles": ["admin", "superadmin"]
+    },
+    "write": {
+      "roles": ["admin", "superadmin"]
+    },
+    "edit": {
+      "roles": ["admin", "superadmin"]
+    },
+    "delete": {
+      "roles": ["admin", "superadmin"]
+    },
+    "undelete": {
+      "roles": ["admin", "superadmin"]
+    }
+  },
+  "fields": {
+    "name" : {
+      "display name": "Name",
+      "description": "The name of this user.",
+      "type": "text",
+      "validations": {
+        "required": true
+      }
+    },
+    "email" : {
+      "display name": "E-mail",
+      "description": "Your e-mail address.",
+      "type": "text",
+      "validations": {
+        "email": true,
+        "required": true
+      }
+    },
+    "avatar" : {
+      "display name": "Profile Picture",
+      "description": "A picture of you.",
+      "type": "image",
+      "validations": {
+        "url": true
+      }
+    },
+    "bio" : {
+      "display name": "Bio",
+      "description": "A short bio.",
+      "type": "textarea",
+      "validations": {
+
+      }
+    },
+    "status": {
+      "type": "select",
+      "options": {
+        "Active": "ACTIVE",
+        "Inactive": "INACTIVE"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+    "about": {
+      "slug": "about",
+      "title": "About",
+      "fields": {
+        "website": {
+          "type": "text",
+          "description": "URL of your website.",
+          "validations": {
+            "url": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "namespace": "App\\Log",
+  "lang": {
+    "en": {
+      "singular": "log",
+      "plural": "logs"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "taggable": false,
+    "title_key": "uuid",
+    "primary_key": "id",
+    "readonly": {
+      "uuid":{
+        "label": "UUID",
+        "column": "uuid"
+      } ,
+      "type":{
+        "label": "Log Type",
+        "column": "type"
+      }
+    }
+  },
+  "fields": {
+  },
+  "sections": {
+  }
+}

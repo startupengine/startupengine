@@ -1,0 +1,262 @@
+{
+  "namespace": "App\\Product",
+  "lang": {
+    "en": {
+      "singular": "product",
+      "plural": "products"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "taggable": true,
+    "title_key": "name",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "Product ID",
+        "column": "id"
+      } ,
+      "stripe_id":{
+        "label": "Stripe ID",
+        "column": "stripe_id"
+      }
+    }
+  },
+  "permissions": {
+    "browse": {
+      "roles": ["admin", "superadmin", "product"]
+    },
+    "read": {
+      "roles": ["admin", "superadmin", "product"]
+    },
+    "write": {
+      "roles": ["admin", "superadmin", "product"]
+    },
+    "edit": {
+      "roles": ["admin", "superadmin", "product"]
+    },
+    "delete": {
+      "roles": ["admin", "superadmin", "product"]
+    },
+    "undelete": {
+      "roles": ["admin", "superadmin"]
+    }
+  },
+  "fields": {
+    "name" : {
+      "display name": "Name",
+      "description": "The name of this product.",
+      "type": "text",
+      "validations": {
+        "required": true
+      }
+    },
+    "slug" : {
+      "display name": "Slug",
+      "description": "The URL slug of this product.",
+      "type": "text",
+      "validations": {
+        "required": true
+      }
+    },
+    "status": {
+      "type": "select",
+      "options": {
+        "Active": "ACTIVE",
+        "Inactive": "INACTIVE"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+    "about": {
+      "slug": "about",
+      "title" : "Product Details",
+      "fields": {
+        "type": {
+          "type": "select",
+          "options": {
+            "Physical Product": "Physical Product",
+            "Service": "Service",
+            "Software": "Software Subscription",
+            "Content": "Content Subscription"
+          },
+          "validations": {
+            "required": true
+          }
+        },
+        "description": {
+          "type": "textarea",
+          "description": "Describe this product. This appears in search engine listings.",
+          "validations": {
+            "required": true
+          }
+        },
+        "image": {
+          "isThumbnail":true,
+          "type": "image",
+          "validations": {
+            "url": true
+          }
+        },
+        "price": {
+          "display name": "Base Price",
+          "type": "number",
+          "validations": {
+            "numeric": true
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).fulfillment != 'External'"
+        },
+        "billing_type": {
+          "display name": "Billing Type",
+          "type": "select",
+          "options": {
+            "One Time": "One Time",
+            "Recurring": "Recurring"
+          },
+          "validations": {},
+          "conditions": "['Service', 'Content Subscription', 'Software Subscription'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type)"
+        },
+        "billing_plans": {
+          "display name": "Billing Plans",
+          "type": "resource",
+          "options": {
+            "resource_name": "Pricing Plan",
+            "resource_get_keys": ["id", "name", "price", "interval", "description"],
+            "resource_display_keys": ["name", "price", "interval", "description"],
+            "resource_edit_keys": ["name", "description"],
+            "resource_id_key": "id",
+            "resource_name_key": "name",
+            "resource_get_url": "/api/products/plans",
+            "resource_schema_url": "/api/products/plans/schema",
+            "resource_read_url": "/api/products/plans/read",
+            "resource_edit_url": "/api/products/plans/edit",
+            "resource_add_url": "/api/products/plans/add",
+            "resource_delete_url": "/api/products/plans/delete",
+            "arguments":
+              [{
+                "from": "record.data.id",
+                "to": "product_id"
+              }]
+
+          },
+          "validations": {},
+          "conditions": "['Service', 'Content Subscription', 'Software Subscription'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type)"
+        },
+        "features": {
+          "type": "textarea",
+          "description": "A brief list of features. This appears on the pricing page.",
+          "validations": {
+            "required": true
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type == 'Software Subscription'"
+        },
+        "fulfillment": {
+          "display name": "Fulfillment",
+          "type": "select",
+          "description": "How will this be fulfilled?",
+          "options": {
+            "External": "External",
+            "Internal": "Internal"
+          },
+          "conditions": "['Service', 'Physical Product'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type)"
+        },
+        "samples": {
+          "type": "number",
+          "description": "How many free content items can the user view before requiring a paid subscription?",
+          "validations": {
+            "numeric": true
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type == 'Content Subscription'"
+        },
+        "repository": {
+          "type": "text",
+          "validations": {
+            "url": true
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type == 'Software Subscription'"
+
+        },
+        "url": {
+          "display name": "External Link",
+          "description": "Users will be redirected to this link to purchase this product.",
+          "type": "text",
+          "validations": {
+            "unique": "products,json->sections->about->fields->url",
+            "url": true
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).fulfillment == 'External' && ['Service', 'Physical Product'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type)"
+        },
+        "url_display": {
+          "display name": "External Link Format",
+          "type": "select",
+          "description": "How to display the external url",
+          "options": {
+            "New Window": "New Window",
+            "Embed": "Embed"
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).fulfillment == 'External' && (((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).url != null"
+        },
+        "url_display_rules": {
+          "display name": "Show external link before or after purchase?",
+          "type": "select",
+          "description": "When to display the external url",
+          "options": {
+            "Before": "Before",
+            "After": "After"
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).fulfillment == 'External' && (((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).url != null"
+        },
+        "commission": {
+          "display name": "Pay a commission to the service provider?",
+          "type": "percentage",
+          "description": "What percentage of the profit should be paid out to the person providing the service?",
+          "validations": {
+            "numeric": true,
+            "between": "0,100"
+          },
+          "conditions": "['Service'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type)"
+        },
+        "payout_delay": {
+          "display name": "Payout Delay (Days)",
+          "type": "number",
+          "description": "How many days after the service should we wait before paying out commissions?",
+          "validations": {
+            "numeric": true,
+            "between": "0,90"
+          },
+          "conditions": "['Service'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type) && ((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).commission != null ) && ((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).commission != 0) && (((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).url.indexOf('calendly.com') !== -1"
+        },
+        "trial": {
+          "type": "select",
+          "description": "How long is the free trial period?",
+          "options": {
+            "None": "None",
+            "7 Day": "7 Days",
+            "14 Days": "14 Days",
+            "30 Days": "30 Days"
+          },
+          "conditions": "['Software Subscription', 'Content Subscription'].includes((((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type)"
+        },
+        "require_payment_method": {
+          "type": "select",
+          "options": {
+            "Yes": "Yes",
+            "No": "No"
+          },
+          "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type == 'Software Subscription'"
+        },
+        "cost": {
+          "display name": "Internal Costs",
+          "description": "Costs associated with providing this product/service.",
+          "type": "number",
+          "validations": {
+            "numeric": true
+          }
+        }
+      }
+    }
+  }
+}

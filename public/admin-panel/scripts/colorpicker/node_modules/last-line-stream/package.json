@@ -1,0 +1,44 @@
+{
+  "name": "last-line-stream",
+  "version": "1.0.0",
+  "description": "A PassThrough stream that keeps track of last line written",
+  "license": "MIT",
+  "repository": "jamestalmage/last-line-stream",
+  "author": {
+    "name": "James Talmage",
+    "email": "james@talmage.io",
+    "url": "github.com/jamestalmage"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && nyc --reporter=lcov --reporter=text --cache ava"
+  },
+  "files": [
+    "index.js",
+    "tracker.js"
+  ],
+  "keywords": [
+    "stream",
+    "streams",
+    "line",
+    "lines",
+    "newline",
+    "spy",
+    "last",
+    "passthrough",
+    "pass-through",
+    "pass",
+    "through"
+  ],
+  "dependencies": {
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.9.1",
+    "coveralls": "^2.11.6",
+    "nyc": "^5.3.0",
+    "xo": "^0.12.1"
+  }
+}

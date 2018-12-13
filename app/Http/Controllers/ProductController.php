@@ -8,14 +8,19 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $subscriptions = updateSubscriptionPlans();
-        if ($request->input('s') !== null) {
-            $subscriptions = \App\Product::where('name', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('description', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
-        }
-        else {
-            $subscriptions = \App\Product::all();
-        }
-        return view('app.products.index')->with('subscriptions', $subscriptions);
+        return view('admin.products.index');
+    }
+
+    public function view(Request $request, $id)
+    {
+        $item = \App\Product::find($id);
+        $options = [
+            'id' => $item->id,
+            'type' => 'product',
+            'index_uri' => '/admin/products'
+        ];
+
+        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
     }
 
     public function saveProduct(Request $request) {

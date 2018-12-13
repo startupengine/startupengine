@@ -1,0 +1,67 @@
+{
+  "name": "babel-plugin-espower",
+  "description": "Babel plugin for power-assert",
+  "version": "2.4.0",
+  "author": {
+    "name": "Takuto Wada",
+    "email": "takuto.wada@gmail.com",
+    "url": "https://github.com/twada"
+  },
+  "bugs": "https://github.com/power-assert-js/babel-plugin-espower/issues",
+  "contributors": [
+    {
+      "name": "James Talmage",
+      "url": "https://github.com/jamestalmage"
+    }
+  ],
+  "dependencies": {
+    "babel-generator": "^6.1.0",
+    "babylon": "^6.1.0",
+    "call-matcher": "^1.0.0",
+    "core-js": "^2.0.0",
+    "espower-location-detector": "^1.0.0",
+    "espurify": "^1.6.0",
+    "estraverse": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.1.0",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "babel-preset-stage-2": "^6.1.2",
+    "mocha": "^3.0.0"
+  },
+  "directories": {
+    "lib": "./lib",
+    "test": "./test"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "index.js",
+    "create.js",
+    "with-experimental-syntax.js",
+    "lib",
+    "package.json"
+  ],
+  "homepage": "https://github.com/power-assert-js/babel-plugin-espower",
+  "keywords": [
+    "assert",
+    "assertion",
+    "babel",
+    "babel-plugin",
+    "power-assert",
+    "test",
+    "testing",
+    "transform"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/power-assert-js/babel-plugin-espower.git"
+  },
+  "scripts": {
+    "test": "mocha --timeout 0"
+  }
+}

@@ -1,0 +1,694 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Startup Engine: the all-in-one platform for launching your startup</title>
+    <meta name="description"
+          content="A demo landing page for agencies or product oriented businesses built using Shards, a free, modern and lightweight UI toolkit based on Bootstrap 4.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/shards.min.css">
+    <link rel="stylesheet" href="https://designrevision.com/demo/shards/extra/css/shards-extras.min.css">
+    <style>
+        .card-header {
+            background: none;
+            border:none;
+            text-align:center;
+            font-size:150%;
+            font-weight:200;
+            padding-top:30px;
+        }
+
+        .nav-item {
+            border-radius:4px;
+        }
+
+        .nav-item.active {
+            background: rgba(0,0,0,0.025) !important;
+        }
+
+        .blog .card {
+            border: none;
+            border-radius:5px !important;
+            height:100%;
+        }
+
+        .blog .card-body {
+            border-radius:5px;
+        }
+
+        .card-post__image {
+            border-radius:5px  !important;
+        }
+
+        h4.card-title {
+            margin-bottom:30px;
+        }
+
+        .blog .card .card-body .card-text {
+            color: #777 !important;
+            font-weight: 300 !important;
+            text-align:center;
+        }
+
+        .avatar {
+            min-height: 100px;
+            min-width: 100px;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat;
+            border-radius: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .hiddenOnDesktop {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hiddenOnMobile {
+                display: none;
+            }
+
+            .nav-link {
+                text-align: center;
+            }
+        }
+
+        .raised {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.125);
+        }
+
+        .card-post.raised {
+            box-shadow: 0px 10px 40px rgba(0, 0, 100, 0.125),0px 4px 10px rgba(0, 0, 100, 0.125);
+        }
+
+        .blog .card {
+            background-color: #fff !important;
+        }
+
+        .blog .card .card-body {
+            background: #fff;
+        }
+
+        .blog .card:hover .card-header {
+            opacity: 0.75;
+            -webkit-transition: opacity 0.4s;
+            -moz-transition: opacity 0.4s;
+            -ms-transition: opacity 0.4s;
+            -o-transition: opacity 0.4s;
+            transition: opacity 0.4s;
+        }
+
+        .blog .card:hover .btn .fa {
+            color: #ffc107 !important;
+        }
+
+        .blog .card:hover .btn {
+            background-color: #333 !important;
+            border-color: #333 !important;
+        }
+
+        .card .btn {
+            box-shadow:none;
+        }
+
+        .card:hover .btn {
+            box-shadow:0px 5px 15px rgba(0,0,100,0.15);
+        }
+    </style>
+    <style>
+        @media(min-width:768px) {
+            #search-form {
+                left: calc(50% - 250px);
+            }
+        }
+    </style>
+    <style>
+        .shards-landing-page--1 .welcome {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            background-size: cover
+        }
+
+        .shards-landing-page--1 .welcome:before {
+            position: absolute;
+            z-index: 0;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .8;
+            background: #007bff
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-landing-page--1 .welcome .inner-wrapper {
+                text-align: center
+            }
+        }
+
+        @media (max-width: 400px) {
+            .shards-landing-page--1 .welcome .welcome-heading {
+                font-size: 2.415rem
+            }
+        }
+
+        .shards-landing-page--1 .section-title {
+            position: relative
+        }
+
+        .shards-landing-page--1 .section-title:after {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: #007bff;
+            position: absolute;
+            left: 50%;
+            margin-left: -15px;
+            bottom: -20px
+        }
+
+        .shards-landing-page--1 .feature .icon {
+            border-radius: 50%;
+            min-width: 65px;
+            height: 65px;
+            line-height: 65px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(33, 37, 41, .1), 0 7px 14px rgba(33, 37, 41, .1);
+            font-size: 27px
+        }
+
+        .shards-landing-page--1 .section {
+            border-bottom: 1px solid #eaebed
+        }
+
+        .shards-landing-page--1 .section-invert {
+            background: #f9fafc
+        }
+
+        .shards-landing-page--1 .testimonials .avatar {
+            max-width: 80px;
+            overflow: hidden
+        }
+
+        .shards-app-promo-page--1 .welcome:before {
+            position: absolute;
+            z-index: 0;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .9;
+            background: #007bff;
+        }
+
+        @media (max-width: 991.98px) {
+            .shards-app-promo-page--1 .welcome {
+                height: auto
+            }
+
+            .shards-app-promo-page--1 .welcome .header-social-icons {
+                display: none
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-app-promo-page--1 .welcome {
+                height: auto
+            }
+
+            .shards-app-promo-page--1 .welcome .inner-wrapper {
+                padding-top: 4.5rem;
+                text-align: center
+            }
+        }
+
+        @media (max-width: 400px) {
+            .shards-app-promo-page--1 .welcome .welcome-heading {
+                font-size: 2.415rem
+            }
+        }
+
+        .shards-app-promo-page--1 .welcome .iphone-mockup {
+            max-width: 85%
+        }
+
+        .shards-app-promo-page--1 .section-title {
+            position: relative
+        }
+
+        .shards-app-promo-page--1 .section-title:after {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: #007bff;
+            position: absolute;
+            left: 50%;
+            margin-left: -15px;
+            bottom: -20px
+        }
+
+        .shards-app-promo-page--1 .section-title.underline--left:after {
+            left: 0;
+            margin-left: 0
+        }
+
+        .shards-app-promo-page--1 .app-screenshot {
+            background: url('https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c8b71c14f30ad8a2c4c0e2acb611702&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed !important;
+            background-size: cover !important;
+        }
+
+        .shards-app-promo-page--1 .app-screenshot:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #007bff;
+            opacity: .6
+        }
+
+        .shards-app-promo-page--1 .app-screenshot img {
+            max-width: 300px;
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 100%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            box-shadow: none !important;
+        }
+
+        @media(min-width:768px){
+            .shards-app-promo-page--1 .app-screenshot img {
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .shards-app-promo-page--1 .app-screenshot img {
+                display: table;
+                position: static;
+                -webkit-transform: translate(0);
+                transform: translate(0);
+                margin: 0 auto
+            }
+        }
+
+        .shards-app-promo-page--1 .feature .icon {
+            border-radius: 50%;
+            min-width: 65px;
+            height: 65px;
+            line-height: 65px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(33, 37, 41, .1), 0 7px 14px rgba(33, 37, 41, .1);
+            font-size: 27px
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-app-promo-page--1 .feature .icon {
+                margin-right: 1.5rem !important
+            }
+        }
+
+        .shards-app-promo-page--1 .blog .card-img-top {
+            height: 100%
+        }
+
+        .shards-app-promo-page--1 .section {
+            border-bottom: 1px solid #eaebed
+        }
+
+        .shards-app-promo-page--1 .section-invert {
+            background: #f9fafc
+        }
+
+        .shards-app-promo-page--1 .testimonials .avatar {
+            max-width: 80px;
+            overflow: hidden
+        }
+
+        @media (max-width: 767.98px) {
+            .shards-app-promo-page--1 .subscribe button, .shards-app-promo-page--1 .subscribe input {
+                width: 100%
+            }
+        }
+
+    </style>
+    <style>
+        .card-post .card-footer,.card-post .card-header{padding-left:1.5625rem;padding-right:1.5625rem}.card-post__image{position:relative;min-height:10.3125rem;border-top-left-radius:.625rem;border-top-right-radius:.625rem;background-size:cover;background-position:center;background-repeat:no-repeat}.card-post__author-avatar{width:2.8125rem;height:2.8125rem;box-shadow:0 0 0 .125rem #fff,0 .1875rem .4375rem rgba(90,97,105,.5);display:block;background-position:center;background-size:cover;border-radius:50%;text-indent:-9999px}.card-post__author-avatar--small{width:2.1875rem;height:2.1875rem}.card-post__author-name{font-weight:500}.card-post--aside{display:flex;flex-flow:row}.card-post--aside .card-post__image{border-top-right-radius:0;border-top-left-radius:.625rem;border-bottom-left-radius:.625rem;min-width:180px}.card-post--1 .card-post__author,.card-post--1 .card-post__category{position:absolute}.card-post--1 .card-post__author{transform:translateY(50%);margin-left:1.5625rem;position:absolute;bottom:0}.card-post--1 .card-post__category{top:.9375rem;right:.9375rem;position:absolute;text-transform:uppercase}.card-post--1 .card-body{padding-top:2.1875rem}.card-post--1.card-post--aside .card-body{padding:1.5625rem 1.5625rem}.card-post--1.card-post--aside .card-post__author{left:.9375rem;bottom:.9375rem;transform:none;margin:0}.card-post--1.card-post--aside .card-post__category{right:initial;top:.9375rem;left:.9375rem}.error{height:calc(100vh - 3.75rem);display:flex}.error__content{padding:0 .9375rem;display:flex;flex-flow:column;margin:auto;align-items:center;text-align:center}.error__content h2{color:#cacedb;font-weight:700;font-size:3.75rem;margin-bottom:1.5625rem}.error__content h3{font-weight:500;font-size:2.1875rem;margin-bottom:.625rem}.error__content p{color:#818ea3}
+    </style>
+    <style>
+        .input-lg {
+            height:50px;
+            max-width:500px;
+            display:inline;
+        }
+        .input-rounded-with-addon {
+            border-radius:25px 0px 0px 25px !important;
+        }
+
+        input[type="text"], textarea {
+            outline: none;
+            box-shadow:none !important;
+            border:1px solid #ccc !important;
+        }
+
+        .input-group input, .input-group .input-group-text {
+            transition:border 0.25s !important;
+        }
+
+        .input-group:hover input, .input-group:hover .input-group-text {
+            border:1px solid #777 !important;
+        }
+        .list-group-item{
+            vertical-align: baseline !important;
+        }
+
+        .list-group-item i {
+            width:25px;
+            height:25px;
+            opacity:1;
+            vertical-align:middle;
+            padding-top:4px;
+            margin-right:15px;
+            text-align:center;
+            color:#007bff;
+        }
+
+        li.media {
+            background:#fff;
+            margin:0px;
+            padding:15px;
+            border-radius:5px;
+            /*border:1px solid #ddd;*/
+        }
+        ul.list {
+            padding:0px;
+        }
+
+        li.media i.fa {
+            position:relative;
+            margin-top:-20px;
+            height:20px;
+            width:20px;
+            top:0px;
+            right:0px !important;
+            color: rgba(138, 141, 177, 0.43);
+        }
+
+        li.media:hover {
+            background:#f8f9fa;
+        }
+
+        li.media:hover i.fa {
+            color: rgba(107, 109, 137, 0.56);
+        }
+
+        li.media p {
+            width:calc(100% - 20px);
+            margin:0px;
+        }
+
+        .list-group {
+            border-radius:5px;
+        }
+
+        .media, .list-group {
+            cursor:pointer;
+            box-shadow: 0px 10px 40px rgba(0, 0, 100, 0.125),0px 4px 10px rgba(0, 0, 100, 0.125);
+        }
+
+        .card {
+            box-shadow: 0px 10px 40px rgba(0, 0, 100, 0.125),0px 4px 10px rgba(0, 0, 100, 0.125);
+        }
+
+        h5 {
+            color:#ddd !important;
+        }
+
+        h5::after {
+            background:#ddd !important;
+        }
+
+        .list-group-flush {
+            border-radius:5px !important;
+        }
+
+        .list-group-flush .list-group-item:first-of-type {
+            border-radius:5px 5px 0px 0px;
+        }
+
+        .list-group-flush .list-group-item:last-of-type {
+            border-radius:0px 0px 5px 5px;
+        }
+
+        #footer p, #footer a {
+            padding:0px !important;
+            margin:5px !important;
+            text-decoration:none !important;
+        }
+
+        #footer strong a {
+            color:#007bff !important;
+        }
+
+        #footer a {
+            opacity:0.7 !important;
+        }
+
+        #footer a:hover {
+            opacity:1 !important;
+            color:#007bff !important;
+        }
+
+        @media(max-width:768px) {
+            #footer .col-md-3 {
+                margin-bottom: 15px !important;
+            }
+        }
+    </style>
+
+</head>
+<body class="shards-app-promo-page--1 shards-landing-page--1" style="background:#f9fafc;">
+<!-- Welcome Section -->
+<div class="container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0" >
+        <a class="navbar-brand mr-1" href="#" style="margin-right:0px;font-size:100%;padding-top:10px;">
+            <img src="images/startup-engine-logo.png" class="mr-1"
+                 alt="Startup Engine: the all-in-one platform for launching your startup"
+                 style="max-height:40px;margin-right:0px;">
+            Startup Engine
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item hiddenOnDesktop">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Articles</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/startupengine"><i class="fa fa-twitter"></i> <span
+                            class="hiddenOnDesktop">Twitter</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/startupengine"><i class="fa fa-facebook"></i>
+                        <span class="hiddenOnDesktop">Facebook</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/startupengineio"><i class="fa fa-github"></i> <span
+                            class="hiddenOnDesktop">Github</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-dark btn-block ml-1 mr-2" href="signup.html"><span>Start Free Trial</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- / Navigation -->
+</div> <!-- .container -->
+<!-- / Welcome Section -->
+
+<!-- Our Blog Section -->
+<div class="blog section section-invert py-4" style="border:none;">
+    <H3 class="section-title text-center m-5">Help</H3>
+
+    <div class="container" align="center">
+        <div class="col-md-12" align="center">
+
+
+            <div class="input-group" id="search-form" style="">
+                <input type="text" class="form-control py-2 border-right-0 input-lg input-rounded-with-addon pl-4" placeholder="Search..." style="border-right:none !important;" />
+                <span class="input-group-append">
+                  <div class="input-group-text bg-transparent pl-2 pr-3" style="border-left:none !important;background:#fff !important;border-radius:0px 25px 25px 0px;"><i class="fa fa-fw fa-search"></i></div>
+            </span>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-8 mt-5">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="text-align:left;">
+                    <div class="d-inline-block"><i class="fa fa-fw fa-star" ></i> Getting Started</div>
+                    <span class="badge badge-primary badge-pill">14 Items</span>
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div class="d-inline-block"><i class="fa fa-fw fa-book"></i> Tutorials &amp; Guides</div>
+                    <span class="badge badge-primary badge-pill">5 Items</span>
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div class="d-inline-block"><i class="fa fa-fw fa-code"></i> Documentation</div>
+                    <span class="badge badge-primary badge-pill">22 Items</span>
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div class="d-inline-block"><i class="fa fa-fw fa-question-circle"></i> FAQs</div>
+                    <span class="badge badge-primary badge-pill">7 Items</span>
+                </li>
+            </ul>
+        </div>
+
+        <h5 class="section-title text-center text-muted m-5">Top Articles</h5>
+        <div class="col-md-8 mt-5" align="left">
+            <ul class="list">
+                <li class="media">
+                    <div class="media-body">
+                        <p>Cras sit amet nibh libero, in gravida nulla</p>
+                        <i class="fa fa-arrow-right pull-right"></i>
+                    </div>
+                </li>
+                <li class="media my-4">
+                    <div class="media-body">
+                        <p>Cras sit amet nibh libero, in gravida nulla</p>
+                        <i class="fa fa-arrow-right pull-right"></i>
+                    </div>
+                </li>
+                <li class="media">
+                    <div class="media-body">
+                        <p>Cras sit amet nibh libero, in gravida nulla</p>
+                        <i class="fa fa-arrow-right pull-right"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- / Our Blog Section -->
+
+<div class="contact section-invert pt-4 pb-0 mb-0">
+    <h5 class="section-title text-center text-muted mb-0">Contact Support</h3>
+    <div class="container py-4 pb-0 mb-0">
+        <div class="row justify-content-md-center px-4">
+            <div class="contact-form raised col-sm-12 col-md-12 col-lg-8 p-4 mb-5 mt-4 card" style="border-radius:8px;border:none;">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="contactFormFullName">Full Name</label>
+                                <input type="email" class="form-control" id="contactFormFullName" placeholder="Enter your full name">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="contactFormEmail">Email address</label>
+                                <input type="email" class="form-control" id="contactFormEmail" placeholder="Enter your email address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="exampleInputMessage1">Message</label>
+                                <textarea id="exampleInputMessage1" class="form-control mb-4" rows="3" placeholder="Enter your message..." name="message"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="btn btn-outline-primary btn-pill d-flex ml-auto mr-auto" type="submit" value="Send Your Message">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="footer" class="contact section-invert py-3 bg-white" style="border-top:1px solid #eee;box-shadow:0px 0px 60px rgba(0,0,100,0.05);">
+    <div class="container px-5 py-5 " align="center">
+        <div class="row" align="center">
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Features</a></strong></p>
+                <p><a href="#" class="text-dark">Landing Pages</a></p>
+                <p><a href="#" class="text-dark">Content Management</a></p>
+                <p><a href="#" class="text-dark">Integrated Analytics</a></p>
+                <p><a href="#" class="text-dark">Marketing Automation</a></p>
+                <p><a href="#" class="text-dark">Subscription Billing</a></p>
+                <p><a href="#" class="text-dark">3rd Party Plugins</a></p>
+                <p><a href="#" class="text-dark">Help & Documentation</a></p>
+                <p><a href="#" class="text-dark">Platform Architecture</a></p>
+                <p><a href="#" class="text-dark">Open-Source</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Solutions</a></strong></p>
+                <p><a href="#" class="text-dark">Content Platforms</a></p>
+                <p><a href="#" class="text-dark">Software Platforms</a></p>
+                <p><a href="#" class="text-dark">Service Platforms</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Resources</a></strong></p>
+                <p><a href="#" class="text-dark">Help Center</a></p>
+                <p><a href="#" class="text-dark">Documentation</a></p>
+                <p><a href="#" class="text-dark">Company Blog</a></p>
+                <p><a href="#" class="text-dark">Pricing</a></p>
+            </div>
+            <div class="col-md-3">
+                <p><strong><a href="#" class="text-dark">Company</a></strong></p>
+                <p><a href="#" class="text-dark">About Us</a></p>
+                <p><a href="#" class="text-dark">Contact Us</a></p>
+                <p><a href="#" class="text-dark">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript Dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

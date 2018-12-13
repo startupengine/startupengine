@@ -34,4 +34,9 @@ class PostType extends Model implements AuditableContract
         return json_decode($this->json);
     }
 
+    public function posts()
+    {
+        return $this->hasMany('App\Post', 'post_type', 'slug');
+    }
+
 }
