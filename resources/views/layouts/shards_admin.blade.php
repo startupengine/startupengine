@@ -274,7 +274,7 @@
                 <div class="main-content-container container-fluid px-4">
                     @if (array_key_exists('content', View::getSections()))
                     <div id="contentApp">
-                        <div class="page-header row no-gutters py-4 toggleVisibility" v-if="info != null"  v-bind:class="{visible: (status == null || status != 'loading'), invisible: status == null }">
+                        <div class="page-header row no-gutters py-4 toggleVisibility" v-if="info != null"  v-bind:class="{visible: (status != null), invisible: status == null }">
                             <div class="col-md-6 col-sm-6 text-center text-sm-left mb-3" id="pageTitle">
                                 <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
                             </div>

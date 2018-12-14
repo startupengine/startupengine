@@ -620,6 +620,14 @@ function renderResourceTableScriptsDynamically($options = null){
     if(!isset($options['LIMIT'])){
         $options['LIMIT'] = 5;
     }
+    if(!isset($options['PER_PAGE'])){
+        $options['PER_PAGE'] = 5;
+    }
+    if(!isset($options['FILTERS'])){
+        $options['FILTERS'] = '{}';
+    }
+
+
     $view = View::make('admin.components.resource_table_js', ['options' => $options]);
     $contents = (string) $view;
     return $contents;

@@ -185,7 +185,21 @@
         <?php $tableHeader = '<th scope="col" class="border-0" style="width:50px !important;text-align:left;">Image</th><th scope="col" class="border-0 hiddenOnMobile" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 " style="text-align:left;">Title</th><th scope="col" class="border-0">&nbsp;</th>'; ?>
         <?php $tableRow = '<td align="left" style="width:30px;"><span class="thumbnail" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class="hiddenOnMobile"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" align="left"><span class="badge text-dark mr-2 px-0">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/content/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
         <?php $cardHtml = '<div class="mt-2"><span class="badge badge-type text-dark text-uppercase">{{ item.schema.title }}</span><span class="badge badge-type text-dark ml-1 text-uppercase">{{ item.status }}</span></div>'; ?>
-        {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_BODY_HTML' => $cardHtml ]) !!}
+        <?php $cardFooter = '
+             <div align="center">
+                <div class="btn-group mb-2" role="group" aria-label="Table row actions">
+                    <a href="" class="btn btn-outline-primary btn-pill"
+                       v-bind:href="\'/admin/content/\' + item.id">
+            Edit<i class="fa fa-edit ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-2px;position:relative;"></i>
+            </a>
+            <a href="" target="_blank" class="btn btn-outline-primary btn-pill"
+                       v-bind:href="\'/content/\' + item.id + \'/\' + item.slug">
+            View<i class="fa fa-chevron-right ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-1px;position:relative;"></i>
+            </a>
+        </div>
+        </div>
+        '; ?>
+        {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_BODY_HTML' => $cardHtml, 'CARD_FOOTER' => $cardFooter]) !!}
         <!-- New Product Form Modal -->
         <div class="modal fade" id="modal-new-content-title" tabindex="-1" role="dialog" >
             <div class="modal-dialog" >

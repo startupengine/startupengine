@@ -136,23 +136,13 @@
     <div class="col-md-12">
     <div id="cardView" v-if="displayFormat == 'cards'">
         <div class="row row-eq-height">
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 " v-if="info.total == 0">
-                <div class="card card-small h-100">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4" v-if="info.meta.total == 0">
+                <div class="card card-small h-100" >
                     <div class="card-body">
                         <h5 class="card-title">
                             <a class="text-ford-blue" href="#">No results.</a>
                         </h5>
                         <p class="card-text">Try changing your filters or search terms.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 loadingRow" v-if="status == 'loading'" >
-                <div class="card card-small h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a class="text-ford-blue" href="#">Loading...</a>
-                        </h5>
-                        <p class="card-text" align="center"><i class="fa fa-fw fa-spinner fa-spin"></i></p>
                     </div>
                 </div>
             </div>
@@ -187,18 +177,18 @@
                         @endif
                     </div>
                     <div class="card-footer border-top p-0 pt-3 pb-3" align="center">
+                        @if(isset($options['CARD_FOOTER']))
+                            {!! $options['CARD_FOOTER'] !!}
+                        @else
                         <div align="center">
                             <div class="btn-group mb-2" role="group" aria-label="Table row actions">
                                 <a href="" class="btn btn-outline-primary btn-pill"
                                    v-bind:href="'<?php echo $options['PATH'] ?>/' + item.id">
-                                    <i class="material-icons">search</i> View
+                                     View<i class="fa fa-chevron-right ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-1px;position:relative;"></i>
                                 </a>
-                                <?php /*
-                                <a href="" class="btn btn-white" v-bind:href="'/admin/content/edit/' + item.post_type + '/' + item.id">
-                                    <i class="material-icons">bar_chart</i> Analytics
-                                </a> */ ?>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

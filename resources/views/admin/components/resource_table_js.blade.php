@@ -8,12 +8,12 @@
                 info: null,
                 status: 'init',
                 itemName: '',
-                filters: {'created_at': null},
+                filters: {!! $options['FILTERS'] !!},
                 filterString: @if(isset($options['FILTER_STRING'])) '{!! $options['FILTER_STRING'] !!}' @else '' @endif,
                 includes: {},
                 includesString: '',
-                perPage: {{ $options['LIMIT'] }},
-                limit: 100,
+                perPage: {{ $options['PER_PAGE'] }},
+                limit: {{ $options['LIMIT'] }},
                 displayFormat: 'list',
                 search: '',
                 searchString: '',
@@ -156,6 +156,7 @@
             }
         },
         mounted() {
+            this.updateFilters(this.filters);
             var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{{ $options['GLOBAL_FILTER'] }}' + this.sortString;
             console.log(url);
             var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}};

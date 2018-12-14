@@ -240,5 +240,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => 'http://127.0.0.1:8000/api/resources/log']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => 'http://127.0.0.1:8000/api/resources/log', 'FILTERS' => "{type: 'type=exception'}", "LIMIT" => 50, "PER_PAGE" => 5]) !!}
 @endsection
