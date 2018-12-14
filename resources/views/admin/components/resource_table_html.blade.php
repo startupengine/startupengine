@@ -67,7 +67,7 @@
                             <a class="page-link" href="#"
                                v-on:click="updateData(info.meta.current_page - 1)"
                                v-bind:data-url="info.links.prev_page_url" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
+                                <span aria-hidden="true" class="double-arrows">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
                         </li>
@@ -112,7 +112,7 @@
                             v-bind:class="{ disabled: (info.meta.current_page == info.meta.pages) }">
                             <a class="page-link" href="#"
                                v-on:click="updateData(info.meta.current_page + 1)" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
+                                <span aria-hidden="true" class="double-arrows">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>
                         </li>
@@ -199,7 +199,7 @@
                  style="display:inline-block;float:left; width:75px;">
                 <ul class="pagination justify-content-left mt-3">
                     <li class="page-item disabled page-meta">
-                        <a class="page-link" style="background:#ddd;" href="#">P<span class="hiddenOnMobile">age</span><span
+                        <a class="page-link" style="background:#dddddddd;" href="#">P<span class="hiddenOnMobile">age</span><span
                                     class="hiddenOnDesktop">g.</span> @{{ info.meta.current_page }} <span
                                     class="hiddenOnMobile"> of @{{ info.meta.pages}} </span></a>
                     </li>
@@ -210,8 +210,8 @@
                 <ul class="pagination justify-content-center mt-3">
                     <li class="page-item" v-bind:class="{ disabled: (currentPage == 1) }">
                         <a class="page-link" href="#" v-on:click="updateData(info.meta.current_page - 1)"
-                           v-bind:data-url="info.links.prev_page_url" aria-label="Previous" style="background: #ddd !important;">
-                            <span aria-hidden="true">&laquo;</span>
+                           v-bind:data-url="info.links.prev_page_url" aria-label="Previous" style="background: #dddddddd !important;">
+                            <span aria-hidden="true" class="double-arrows">&laquo;</span>
                             <span class="sr-only">Previous</span>
                         </a>
                     </li>
@@ -248,8 +248,8 @@
                             info.meta.pages }}</a></li>
                     <li class="page-item" v-bind:class="{ disabled: (info.meta.current_page == info.meta.pages) }">
                         <a class="page-link" href="#" v-on:click="updateData(info.meta.current_page + 1)"
-                           aria-label="Next" style="background: #ddd !important;">
-                            <span aria-hidden="true">&raquo;</span>
+                           aria-label="Next" style="background: #dddddddd !important;">
+                            <span aria-hidden="true" class="double-arrows">&raquo;</span>
                             <span class="sr-only">Next</span>
                         </a>
                     </li>
@@ -260,7 +260,7 @@
                  style="display:inline-block;float:right; width:75px;">
                 <ul class="pagination mt-3" style="float:right;">
                     <li class="page-item disabled page-meta">
-                        <a class="page-link hiddenOnDesktop"  style="background:#ddd;" href="#">of @{{ info.meta.pages }}</a>
+                        <a class="page-link hiddenOnDesktop"  style="background:#dddddddd;" href="#">of @{{ info.meta.pages }}</a>
                     </li>
                 </ul>
             </nav>

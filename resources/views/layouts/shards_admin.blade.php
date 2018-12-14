@@ -16,10 +16,16 @@
     <meta name="description"
           content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    <?php /*
+            <link href="/styles/fontawesome-v5.0.6.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    */ ?>
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="/styles/bootstrap.4.0.0.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0" href="/admin-panel/styles/shards-dashboards.1.0.0.min.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -275,14 +281,14 @@
                     @if (array_key_exists('content', View::getSections()))
                     <div id="contentApp">
                         <div class="page-header row no-gutters py-4 toggleVisibility" v-if="info != null"  v-bind:class="{visible: (status != null), invisible: status == null }">
-                            <div class="col-md-6 col-sm-6 text-center text-sm-left mb-3" id="pageTitle">
+                            <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3" id="pageTitle">
                                 <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
                             </div>
                             @yield('top-menu')
                         </div>
 
                         <div v-else  class="page-header row no-gutters py-4 toggleVisibility"  v-bind:class="{visible: (status == null || status != 'loading'), invisible: status == null }">
-                            <div class="col-md-6 col-sm-6 text-center text-sm-left mb-3" id="pageTitle">
+                            <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3" id="pageTitle">
                                 <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
                             </div>
                             @yield('top-menu')

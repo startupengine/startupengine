@@ -28,7 +28,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/register', ['uses' => '\App\Http\Controllers\Auth\LoginController@register'])->name('register');
 
     //Styles
-    Route::get('/styles.css', 'CssController@render')->name('css');
+    Route::get('/styles.css', 'CssController@render')->name('renderCss');
+    Route::get('/styles/{file}', 'CssController@view')->name('viewCss');
 
     //Javascript
     Route::get('/js/{file}', 'JsController@render')->name('js');

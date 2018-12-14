@@ -17,4 +17,9 @@
         }
     }
 
+    .page-link .double-arrows {
+        position: relative;
+        top: -2px;
+    }
+
 </style>
