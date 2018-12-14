@@ -1,8 +1,4 @@
 <style>
-
-    .page-item.disabled .page-link {
-        opacity:0.4;
-    }
     .page-item.disabled {
         cursor: not-allowed !important;
         background:#fff !important;

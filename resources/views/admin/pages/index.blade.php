@@ -250,5 +250,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => 'http://127.0.0.1:8000/api/resources/page', 'FILTERS' => "{status: 'status=ACTIVE'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => 'http://127.0.0.1:8000/api/resources/page']) !!}
 @endsection

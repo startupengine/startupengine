@@ -621,10 +621,7 @@ function renderResourceTableScriptsDynamically($options = null){
         $options['LIMIT'] = 5;
     }
     if(!isset($options['PER_PAGE'])){
-        $options['PER_PAGE'] = 5;
-    }
-    if(!isset($options['FILTERS'])){
-        $options['FILTERS'] = '{}';
+        $options['PER_PAGE'] = 10;
     }
 
 

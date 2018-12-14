@@ -8,7 +8,7 @@
                 info: null,
                 status: 'init',
                 itemName: '',
-                filters: {!! $options['FILTERS'] !!},
+                filters: @if(isset($options['FILTERS'])){!! $options['FILTERS'] !!} @else {} @endif,
                 filterString: @if(isset($options['FILTER_STRING'])) '{!! $options['FILTER_STRING'] !!}' @else '' @endif,
                 includes: {},
                 includesString: '',

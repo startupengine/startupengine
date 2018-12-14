@@ -168,7 +168,7 @@
 @section('content')
     <div class="row" v-if="info != null">
     <?php $header = '<div class="btn-group">
-                            <span class="btn btn-light border text-dark" style="opacity:0.5;" v-bind:class="{ active: filters.type == \'\'}" v-on:click="reset({\'filters\':true})">
+                            <span class="btn btn-light border text-dark hiddenOnMobile" style="opacity:0.5;" v-bind:class="{ active: filters.type == \'\'}" v-on:click="reset({\'filters\':true})">
                                  <span class="hiddenOnMobile">Showing</span>
                                  <span class=""><i class="material-icons mx-0 mb-1">visibility</i></span>
                             </span>
