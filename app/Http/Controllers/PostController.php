@@ -141,13 +141,15 @@ class PostController extends Controller
         else { abort(500); }
     }
 
-    public function getItem($slug) {
+    public function getItem($id, $slug = null) {
+
         if(\Auth::user() && \Auth::user()->hasRole('admin')) {
-            $item = Post::where('slug', '=',$slug)->where('post_type', '=', 'post')->first();
+            $item = Post::where('id', '=',$id)->first();
         }
         else {
-            $item = Post::where('slug', '=', $slug)->where('post_type', '=', 'post')->where('status', '=', 'PUBLISHED')->first();
+            $item = Post::where('id', '=',$id)->where('status', '=', 'PUBLISHED')->first();
         }
+
         if ($item == null) {
             abort(404);
         }
@@ -159,10 +161,11 @@ class PostController extends Controller
                 $event->user_email = \Auth::user()->email;
                 $event->user_name = \Auth::user()->name;
             }
-            $event->event_data = json_encode("{\"id\":$item->id, \"slug\":'$item->slug',\"title\":'$item->title', \"content_type\":'".$item->postType()->slug."'}");
-            $event->save();
+            //$event->event_data = json_encode("{\"id\":$item->id, \"slug\":'$item->slug',\"title\":'$item->title', \"content_type\":'".$item->postType()->slug."'}");
+            //$event->save();
             $postType = 'post';
-            return view('posts.view')->with('post', $item)->with('postType', $postType);
+            //dd($item);
+            return view('content.view')->with('post', $item)->with('postType', $postType);
         }
     }
 

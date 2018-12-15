@@ -23,7 +23,17 @@ class PageController
         $options = [
             'id' => $item->id,
             'type' => 'page',
-            'index_uri' => '/admin/pages'
+            'index_uri' => '/admin/pages',
+            'buttons' => [
+                'top_nav' => [
+                    'View' => [
+                        'link'=> '/'.$item->slug,
+                        'class'=> 'btn btn-dark',
+                        'text' => '<i class="material-icons mr-2">search</i>View',
+                        'target' => '_blank'
+                    ]
+                ]
+            ]
         ];
 
         return view('admin.components.resource_view')->with('item', $item)->with('options', $options);

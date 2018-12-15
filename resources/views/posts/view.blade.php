@@ -14,15 +14,15 @@
 <meta property="og:title" content="<?php echo $post->title; ?>"> <!-- EDIT -->
 <meta property="og:description" content="<?php echo $post->meta_description; ?>"> <!-- EDIT -->
 <meta property="og:updated_time" content="{{ \Carbon\Carbon::now()->toFormattedDateString() }}"> <!-- EDIT -->
-<meta property="og:image" content="<?php if($post->image() !== null) { echo $post->image(); } ?>"> <!-- EDIT -->
+<meta property="og:image" content="<?php if($post->thumbnail() !== null) { echo $post->thumbnail(); } ?>"> <!-- EDIT -->
 
 <!-- TWITTER -->
-<meta name="twitter:card" content="<?php if($post->image() !== null) { echo $post->image(); } ?>">
+<meta name="twitter:card" content="<?php if($post->thumbnail() !== null) { echo $post->thumbnail(); } ?>">
 <meta name="twitter:site" content="@webslides"> <!-- EDIT -->
 <meta name="twitter:creator" content="{{ setting('site.twitter_account') }}"> <!-- EDIT -->
 <meta name="twitter:title" content="<?php echo $post->title; ?>"> <!-- EDIT -->
 <meta name="twitter:description" content="<?php echo $post->meta_description; ?>"> <!-- EDIT -->
-<meta name="twitter:image" content="<?php if($post->image() !== null) { echo $post->image(); } ?>"> <!-- EDIT -->
+<meta name="twitter:image" content="<?php if($post->thumbnail() !== null) { echo $post->thumbnail(); } ?>"> <!-- EDIT -->
 @endsection
 
 @section('styles')

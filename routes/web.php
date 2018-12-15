@@ -38,7 +38,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/docs', 'ApiDocsController@index')->name('docs');
 
     //Content
-    Route::get('/content/{slug}', 'PostController@getItem')->name('contentById');
+    Route::get('/content/{id}/{slug}', 'PostController@getItem')->name('contentById');
+    Route::get('/content/{id}', 'PostController@getItem')->name('contentById');
     Route::get('/content/tag/{tag}', 'PostController@getItemsByTag')->name('contentByTag');
     Route::get('/content/{postType}/{tag}', 'PostController@getPostByPostTypeAndSlug')->name('contentByTagAndType');
 

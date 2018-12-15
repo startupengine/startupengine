@@ -49,8 +49,9 @@ class Post extends Model
 
     protected $fillable = ['json', 'excerpt'];
 
-    public function searchFields(){
-        return['json','title', 'slug'];
+    public function searchFields()
+    {
+        return ['json', 'title', 'slug'];
     }
 
     /*
@@ -69,127 +70,72 @@ class Post extends Model
         return Markdown::convertToHtml($this->content()->body->body);
     }
 
-    public function markdown($content)
+    public function content()
     {
-        return Markdown::convertToHtml($content);
-    }
-
-    public function category() {
-        $category = \App\Category::where('id', '=', $this->category_id)->first();
-        return $category;
+        $json = $this->json();
+        if ($json !== null) {
+            return $json;
+        } else {
+            return null;
+        }
     }
 
     public function json()
     {
-        if(isset($this->json)){
+        if (isset($this->json)) {
             $json = $this->json;
-        }
-        else {
+        } else {
             $json = null;
         }
-        if(gettype($this->json) == 'string') {
+        if (gettype($this->json) == 'string') {
             $this->json = json_decode($this->json);
         }
         return json_decode($json);
     }
 
-    public function thumbnail(){
-        //$json = $this->content();
-        if($this->content() != null && $this->content()->sections != null){
-            foreach($this->schema()->sections as $section){
-                if($section->fields != null){
-                    foreach ($section->fields as $field => $value) {
-
-                        if(isset($value->isThumbnail) && $value->isThumbnail == true) {
-                            $slug = $section->slug;
-                            $string = "sections->".$slug."->fields->".$field;
-                            if($this->content()->sections->$slug->fields->$field) {
-                                return $this->content()->sections->$slug->fields->$field;
-                            }
-                            else { return null; }
-
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    public function excerpt(){
-        if($this->content() != null && $this->schema()->fields != null){
-            foreach($this->schema()->fields as $field => $value){
-                if (isset($value->isExcerpt) && $value->isExcerpt == true) {
-                    if ($this->$field) {
-                        return $this->$field;
-                    } else {
-                        return null;
-                    }
-                }
-            }
-            foreach($this->schema()->sections as $section){
-                if($section->fields != null){
-                    foreach ($section->fields as $field => $value) {
-                        dd($section->fields);
-                        if(isset($value->isExcerpt) && $value->isExcerpt == true) {
-
-                            $slug = $section->slug;
-                            $string = "sections->".$slug."->fields->".$field;
-                            if($this->content()->sections->$slug->fields->$field) {
-                                return $this->content()->sections->$slug->fields->$field;
-                            }
-                            else { return null; }
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public function content()
+    public function markdown($content)
     {
-        $json = $this->json();
-        if($json !== null) {
-            return $json;
-        }
-        else {
-            return null;
-        }
+        return Markdown::convertToHtml($content);
     }
 
-    public function image() {
-        $image = $this->content()->body->image;
-        if($image !== null ) {
-            return $image;
-        }
-        else {
-            return null;
-        }
+    public function category()
+    {
+        $category = \App\Category::where('id', '=', $this->category_id)->first();
+        return $category;
     }
 
-    public function background() {
-        $background = $this->content()->body->background;
-        if($background !== null ) {
-            return $background;
+    public function thumbnail()
+    {
+        if ($this->content() != null) {
+            if ($this->content() != null && isset($this->content()->sections)) {
+                foreach ($this->schema()->sections as $section) {
+                    if ($section->fields != null) {
+                        foreach ($section->fields as $field => $value) {
+
+                            if (isset($value->isThumbnail) && $value->isThumbnail == true) {
+                                $slug = $section->slug;
+                                $string = "sections->" . $slug . "->fields->" . $field;
+
+                                if ($this->content()->sections->$slug->fields->$field) {
+                                    return $this->content()->sections->$slug->fields->$field;
+                                } else {
+                                    return null;
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+            }
         }
-        elseif($this->image() !== null) {
-            $background = $this->image();
-            return $background;
-        }
-        else {
-            return null;
-        }
+
     }
 
-    public function postType() {
-        return $this->hasOne('App\PostType', 'slug', 'post_type');
-
-    }
-
-    public function schema() {
-        $path = file_get_contents(storage_path().'/schemas/post.json');
-        $baseSchema = json_decode($path,  true);
+    public function schema()
+    {
+        $path = file_get_contents(storage_path() . '/schemas/post.json');
+        $baseSchema = json_decode($path, true);
         $postTypeSchema = json_decode($this->postType()->first()->json, true);
 
         $merged = array_merge($postTypeSchema, $baseSchema);
@@ -199,7 +145,124 @@ class Post extends Model
         return $merged;
     }
 
-    public function videoType($url) {
+    public function postType()
+    {
+        return $this->hasOne('App\PostType', 'slug', 'post_type');
+
+    }
+
+    public function thumbnailField($fullString = false)
+    {
+
+        if ($this->schema() != null && isset($this->schema()->sections)) {
+            foreach ($this->schema()->sections as $section) {
+                if ($section->fields != null) {
+                    foreach ($section->fields as $field => $value) {
+
+                        if (isset($value->isThumbnail) && $value->isThumbnail == true) {
+                            $slug = $section->slug;
+                            $string = "sections->" . $slug . "->fields->" . $field;
+                            if ($fullString == true) {
+                                return $string;
+                            } else {
+                                return $field;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public function sectionHasContent($sectionName, $fieldsToExclude = [], $returnFields = false)
+    {
+        if (isset($this->schema()->sections->$sectionName) && isset($this->content()->sections->$sectionName)) {
+            $section = $this->schema()->sections->$sectionName;
+            $fieldsWithContent = [];
+            foreach ($section->fields as $field => $value) {
+                $slug = $section->slug;
+
+                if (isset($this->content()->sections->$slug->fields->$field)) {
+                    if (in_array($field, $fieldsToExclude)) {
+                    } else {
+                        $fieldsWithContent[$field] = $this->content()->sections->$slug->fields->$field;
+                    }
+                }
+            }
+            if ($returnFields == true) {
+                return $fieldsWithContent;
+            } else {
+                if (count($fieldsWithContent) > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function excerpt()
+    {
+        if ($this->content() != null && isset($this->schema()->fields)) {
+            foreach ($this->schema()->fields as $field => $value) {
+                if (isset($value->isExcerpt) && $value->isExcerpt == true) {
+                    if ($this->$field) {
+                        return $this->$field;
+                    } else {
+                        return null;
+                    }
+                }
+            }
+            foreach ($this->schema()->sections as $section) {
+                if ($section->fields != null) {
+                    foreach ($section->fields as $field => $value) {
+                        dd($section->fields);
+                        if (isset($value->isExcerpt) && $value->isExcerpt == true) {
+
+                            $slug = $section->slug;
+                            $string = "sections->" . $slug . "->fields->" . $field;
+                            if ($this->content()->sections->$slug->fields->$field) {
+                                return $this->content()->sections->$slug->fields->$field;
+                            } else {
+                                return null;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function background()
+    {
+        $background = $this->content()->body->background;
+        if ($background !== null) {
+            return $background;
+        } elseif ($this->image() !== null) {
+            $background = $this->image();
+            return $background;
+        } else {
+            return null;
+        }
+    }
+
+    public function image()
+    {
+        $image = $this->content()->body->image;
+        if ($image !== null) {
+            return $image;
+        } else {
+            return null;
+        }
+    }
+
+    public function videoType($url)
+    {
         if (strpos($url, 'youtube') > 0) {
             return 'youtube';
         } elseif (strpos($url, 'vimeo') > 0) {
@@ -216,31 +279,30 @@ class Post extends Model
         });
     }
 
-    public function primaryTag(){
+    public function primaryTag()
+    {
         $tags = $this->tagNames();
-        if($tags !== null && count($tags) !== 0) {
+        if ($tags !== null && count($tags) !== 0) {
             $primaryTag = $tags[0];
-            $tag = \App\Post::where('post_type', '=', 'tag')->where('slug','=',strtolower($primaryTag))->first();
+            $tag = \App\Post::where('post_type', '=', 'tag')->where('slug', '=', strtolower($primaryTag))->first();
             return $tag;
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public function views(){
+    public function views()
+    {
         $request = request();
-        if($request->input('startDate') != null){
+        if ($request->input('startDate') != null) {
             $startDate = \Carbon\Carbon::parse($request->input('startDate'));
-        }
-        else {
+        } else {
             $startDate = new Carbon();
             $startDate = $startDate->subDays(30);
         }
-        if($request->input('endDate') != null){
+        if ($request->input('endDate') != null) {
             $endDate = \Carbon\Carbon::parse($request->input('endDate'));
-        }
-        else {
+        } else {
             $endDate = new Carbon();
         }
         $views = $this->hasMany('App\AnalyticEvent', 'model_id')->where('event_type', '=', 'content viewed')->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);

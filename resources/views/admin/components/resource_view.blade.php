@@ -291,233 +291,242 @@
 
 @endsection
 
-@section('page-title') {{ ucwords($item->schema()->lang->en->singular) }} <span style="opacity:0.5;"># {{ $item->id }}</span>@endsection
+@section('page-title') {{ ucwords($item->schema()->lang->en->singular) }} <span
+        style="opacity:0.5;"># {{ $item->id }}</span>@endsection
 
 @section('top-menu')
 
     @if( count(json_decode(json_encode($item->schema()->sections), true)) > 0 OR  count(json_decode(json_encode($item->schema()->fields), true)))
-    <div class="col-md-6 col-sm-6 pageNav justify-content-right">
-        <div class="btn-group my-1">
-            @if(isset($options['buttons']['top_nav']))
+        <div class="col-md-6 col-sm-6 pageNav justify-content-right">
+            <div class="btn-group my-1">
+                @if(isset($options['buttons']['top_nav']))
 
-                @foreach($options['buttons']['top_nav'] as $button)
-                    <a href="{{ $button['link'] }}" class="btn {{ $button['class'] }}">{!! $button['text'] !!}</a>
-                @endforeach
+                    @foreach($options['buttons']['top_nav'] as $button)
+                        <a href="{{ $button['link'] }}" @if(isset($button['target'])) target="{{ $button['target'] }}"
+                           @endif class="btn {{ $button['class'] }}">{!! $button['text'] !!}</a>
+                    @endforeach
 
-            @endif
-            <a href="#" class="btn btn-secondary" id="editContentButton" style="">
-                <i class="material-icons mr-2">edit</i> <span class="mr-1">Edit  <span class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span></span>
-            </a>
-            <div class="btn btn-danger px-3" data-toggle="modal"
-                 data-target="#modal-delete"><i class="material-icons mr-2">delete</i> Delete <span class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span>
+                @endif
+                <a href="#" class="btn btn-secondary" id="editContentButton" style="">
+                    <i class="material-icons mr-2">edit</i> <span class="mr-1">Edit  <span
+                                class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span></span>
+                </a>
+                <div class="btn btn-danger px-3" data-toggle="modal"
+                     data-target="#modal-delete"><i class="material-icons mr-2">delete</i> Delete <span
+                            class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     @endif
 
 @endsection
 
 @section('content')
-    <div id="contentForm" v-if="record != null && record.meta != null && record.meta.status == 'success'" style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
+    <div id="contentForm" v-if="record != null && record.meta != null && record.meta.status == 'success'"
+         style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
         <div class="row mb-2">
             <div class="col-lg-9 col-md-12">
 
-                @if(isset($options['custom_view']))
-                    @include($options['custom_view'])
-                @else
+            @if(isset($options['custom_view']))
+                @include($options['custom_view'])
+            @else
                 <!-- Add New Post Form -->
-                @if (Schema::hasColumn($item->getTable(), 'title'))
-                <div class="formSection" v-if="record.data != null">
-                    <div class="input-group mb-3 border-radius-10 border-0 raised" style="border:none !important;">
-                        <div class="input-group-prepend">
+                    @if (Schema::hasColumn($item->getTable(), 'title'))
+                        <div class="formSection" v-if="record.data != null">
+                            <div class="input-group mb-3 border-radius-10 border-0 raised"
+                                 style="border:none !important;">
+                                <div class="input-group-prepend">
                         <span class="input-group-text" style="border-color:transparent;width:60px;color:#fff;">
                             Title
                         </span>
+                                </div>
+                                <input type="text"
+                                       class="form-control form-control-lg bg-white text-truncate"
+                                       v-model="record.data.{{ $item->schema()->metadata->title_key }}"
+                                       placeholder="Title"
+                                       aria-label="Username" aria-describedby="basic-addon1" disabled
+                                       style="pointer-events:none;border:none !important;border-radius:0px 5px 5px 0px;">
+                                <div class="formEditButton btn btn-primary btn-pill"
+                                     style="position:absolute;right:15px;top:-15px;"
+                                     :data-fieldvalue="record.data.{{ $item->schema()->metadata->title_key }}"
+                                     data-toggle="modal"
+                                     data-target="#modal-edit-content"
+                                     v-on:click="updateForm({ 'sectionName': '{{ $item->schema()->metadata->title_key }}','fieldSlug': '{{ $item->schema()->metadata->title_key }}', 'fieldName': '{{ $item->schema()->metadata->title_key }}', 'fieldType': 'text', 'fieldInput': record['data']['{{ $item->schema()->metadata->title_key }}'], 'fieldDisplayName': 'Title', 'fieldDescription': 'Title for this item.' })">
+                                    Edit
+                                </div>
+                            </div>
                         </div>
-                        <input type="text"
-                               class="form-control form-control-lg bg-white text-truncate"
-                               v-model="record.data.{{ $item->schema()->metadata->title_key }}"
-                               placeholder="Title"
-                               aria-label="Username" aria-describedby="basic-addon1" disabled
-                               style="pointer-events:none;border:none !important;border-radius:0px 5px 5px 0px;">
-                        <div class="formEditButton btn btn-primary btn-pill"
-                             style="position:absolute;right:15px;top:-15px;"
-                             :data-fieldvalue="record.data.{{ $item->schema()->metadata->title_key }}"
-                             data-toggle="modal"
-                             data-target="#modal-edit-content"
-                             v-on:click="updateForm({ 'sectionName': '{{ $item->schema()->metadata->title_key }}','fieldSlug': '{{ $item->schema()->metadata->title_key }}', 'fieldName': '{{ $item->schema()->metadata->title_key }}', 'fieldType': 'text', 'fieldInput': record['data']['{{ $item->schema()->metadata->title_key }}'], 'fieldDisplayName': 'Title', 'fieldDescription': 'Title for this item.' })">
-                            Edit
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @if (Schema::hasColumn($item->getTable(), 'slug'))
-                <div class="formSection" v-if="record.data != null">
-                    <div class="input-group formSection  mb-3 border-radius-10 border-0 raised"
-                         style="border:none !important;">
-                        <div class="input-group-prepend">
+                    @endif
+                    @if (Schema::hasColumn($item->getTable(), 'slug'))
+                        <div class="formSection" v-if="record.data != null">
+                            <div class="input-group formSection  mb-3 border-radius-10 border-0 raised"
+                                 style="border:none !important;">
+                                <div class="input-group-prepend">
                         <span class="input-group-text" style="border-color:transparent;width:60px;color:#fff;">
                             Slug
                         </span>
-                        </div>
-                        <input type="text"
-                               class="form-control form-control-lg bg-white text-truncate"
-                               v-model="record.data.slug"
-                               placeholder="Your Post Slug"
-                               value="{{ $item->slug }}"
-                               aria-label="Username" aria-describedby="basic-addon1" disabled
-                               style="pointer-events:none;border:none !important;border-radius:0px 5px 5px 0px;">
-                        <div class="formEditButton btn btn-primary btn-pill"
-                             style="position:absolute;right:15px;top:-15px;"
-                             data-toggle="modal"
-                             data-target="#modal-edit-content"
-                             v-on:click="updateForm({'fieldName': 'slug', 'fieldType': 'text', 'fieldInput': record.data.slug, 'fieldDisplayName': 'Slug', 'fieldDescription': 'The text that appears in the URL for this item.'})">
-                            Edit
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-
-
-                <div v-if="record.data != null && record.data.schema != null && record.data.schema.fields != null">
-
-                    <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection" v-if="fieldName !== 'slug' && fieldName !== '{{ $item->schema()->metadata->title_key }}' && fieldName !== 'status'">
-                        <div class="card-body pb-3 px-3 pt-0">
-                            <div v-if="hasConditions(record['data'], value.conditions)"
-                                 class="input-group mt-3">
+                                </div>
+                                <input type="text"
+                                       class="form-control form-control-lg bg-white text-truncate"
+                                       v-model="record.data.slug"
+                                       placeholder="Your Post Slug"
+                                       value="{{ $item->slug }}"
+                                       aria-label="Username" aria-describedby="basic-addon1" disabled
+                                       style="pointer-events:none;border:none !important;border-radius:0px 5px 5px 0px;">
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="record['data'] != null && record['data'][fieldName] !== null"
-
+                                     style="position:absolute;right:15px;top:-15px;"
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"
-
-                                     v-on:click="updateForm({ 'fieldSlug': fieldName, 'fieldName': fieldName, 'fieldType': value.type, 'fieldInput': record['data'][fieldName], 'fieldDisplayName': fieldName, 'fieldDescription': value['description'], 'fieldSchema': value })"
-
-                                     style="position:absolute;right:-5px;top:10px;">Edit
+                                     v-on:click="updateForm({'fieldName': 'slug', 'fieldType': 'text', 'fieldInput': record.data.slug, 'fieldDisplayName': 'Slug', 'fieldDescription': 'The text that appears in the URL for this item.'})">
+                                    Edit
                                 </div>
+                            </div>
+                        </div>
+                    @endif
 
-                                <div class="formEditButton btn btn-primary btn-pill"
-                                     v-else
+                    <div v-if="record.data != null && record.data.schema != null && record.data.schema.fields != null">
 
-                                     data-toggle="modal"
-                                     data-target="#modal-edit-content"
+                        <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection"
+                             v-if="fieldName !== 'slug' && fieldName !== '{{ $item->schema()->metadata->title_key }}' && fieldName !== 'status'">
+                            <div class="card-body pb-3 px-3 pt-0">
+                                <div v-if="hasConditions(record['data'], value.conditions)"
+                                     class="input-group mt-3">
+                                    <div class="formEditButton btn btn-primary btn-pill"
+                                         v-if="record['data'] != null && record['data'][fieldName] !== null"
 
-                                     v-on:click="updateForm({ 'fieldSlug': fieldName, 'fieldName': fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': value['description'], 'fieldSchema': value })"
-                                     style="position:absolute;right:-5px;top:10px;">Edit
-                                </div>
+                                         data-toggle="modal"
+                                         data-target="#modal-edit-content"
 
-                                <label><span class="badge badge-outline-dark text-dark text-uppercase">@{{ fieldName }}</span></label>
+                                         v-on:click="updateForm({ 'fieldSlug': fieldName, 'fieldName': fieldName, 'fieldType': value.type, 'fieldInput': record['data'][fieldName], 'fieldDisplayName': fieldName, 'fieldDescription': value['description'], 'fieldSchema': value })"
 
-                                <div v-if="((record.data || {})[fieldName]) != null" class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
+                                         style="position:absolute;right:-5px;top:10px;">Edit
+                                    </div>
+
+                                    <div class="formEditButton btn btn-primary btn-pill"
+                                         v-else
+
+                                         data-toggle="modal"
+                                         data-target="#modal-edit-content"
+
+                                         v-on:click="updateForm({ 'fieldSlug': fieldName, 'fieldName': fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': value['description'], 'fieldSchema': value })"
+                                         style="position:absolute;right:-5px;top:10px;">Edit
+                                    </div>
+
+                                    <label><span class="badge badge-outline-dark text-dark text-uppercase">@{{ fieldName }}</span></label>
+
+                                    <div v-if="((record.data || {})[fieldName]) != null"
+                                         class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
                                     <span v-if="record.data.schema.fields[fieldName]['type'] == 'code'" class="p-0 m-0">
-                                            <pre v-highlightjs style="border-radius:4px;" class="m-0"><code class="json">@{{ record.data[fieldName] }}</code></pre>
+                                            <pre v-highlightjs style="border-radius:4px;" class="m-0"><code
+                                                        class="json">@{{ record.data[fieldName] }}</code></pre>
                                     </span>
-                                    <span v-else-if="record.data.schema.fields[fieldName]['type'] == 'image'"
-                                          v-bind:style="{ backgroundImage: 'url(' + record['data'][fieldName] + ')' }"
-                                          style="display:inline-block;width:100%;max-width:160px;height:100%;min-height:90px;background:#3333;border-radius:4px;background-size:cover;background-position:center;background-size:cover;">
+                                        <span v-else-if="record.data.schema.fields[fieldName]['type'] == 'image'"
+                                              v-bind:style="{ backgroundImage: 'url(' + record['data'][fieldName] + ')' }"
+                                              style="display:inline-block;width:100%;max-width:160px;height:100%;min-height:90px;background:#3333;border-radius:4px;background-size:cover;background-position:center;background-size:cover;">
                                     </span>
-                                    <span v-else>
+                                        <span v-else>
                                         @{{ record.data[fieldName] }}
                                     </span>
+                                    </div>
+                                    <p v-else
+                                       <?php /*-if="section['fields'][fieldName]['type'] != 'resource' && record['data']['content']['sections'][sectionName]['fields'][fieldName] == null" */ ?>
+                                       class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
+                                        <span style="opacity:0.5;">No data.</span>
+                                    </p>
                                 </div>
-                                <p v-else <?php /*-if="section['fields'][fieldName]['type'] != 'resource' && record['data']['content']['sections'][sectionName]['fields'][fieldName] == null" */ ?>
-                                class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
-                                    <span style="opacity:0.5;">No data.</span>
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
 
 
-                <div v-if="record.data != null && record.data.schema != null && record.data.schema.sections != null">
+                    <div v-if="record.data != null && record.data.schema != null && record.data.schema.sections != null">
 
-                    <div v-for="section,sectionName in record.data.schema.sections" class="card p-0 mb-3 formSection">
-                        <div class="card-header"><h6 v-if="section.title != null">@{{ section.title }}</h6><h6
-                                    v-else>@{{ sectionName }}</h6></div>
-                        <div class="card-body pb-3 px-3 pt-0">
-                            <div v-if="hasConditions(record['data'], value.conditions)"
-                                 v-for="value,fieldName in section.fields"
-                                 class="input-group">
+                        <div v-for="section,sectionName in record.data.schema.sections"
+                             class="card p-0 mb-3 formSection">
+                            <div class="card-header"><h6 v-if="section.title != null">@{{ section.title }}</h6><h6
+                                        v-else>@{{ sectionName }}</h6></div>
+                            <div class="card-body pb-3 px-3 pt-0">
+                                <div v-if="hasConditions(record['data'], value.conditions)"
+                                     v-for="value,fieldName in section.fields"
+                                     class="input-group">
 
-                                <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
+                                    <div class="formEditButton btn btn-primary btn-pill"
+                                         v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
-                                     data-toggle="modal"
-                                     data-target="#modal-edit-content"
+                                         data-toggle="modal"
+                                         data-target="#modal-edit-content"
 
-                                     v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': record['data']['content']['sections'][sectionName]['fields'][fieldName], 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': section['fields'][fieldName] })"
+                                         v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': record['data']['content']['sections'][sectionName]['fields'][fieldName], 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': section['fields'][fieldName] })"
 
-                                     style="position:absolute;right:-5px;top:10px;">Edit
-                                </div>
+                                         style="position:absolute;right:-5px;top:10px;">Edit
+                                    </div>
 
-                                <div class="formEditButton btn btn-primary btn-pill"
-                                     v-else
+                                    <div class="formEditButton btn btn-primary btn-pill"
+                                         v-else
 
-                                     data-toggle="modal"
-                                     data-target="#modal-edit-content"
+                                         data-toggle="modal"
+                                         data-target="#modal-edit-content"
 
-                                     v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': (section['fields'][fieldName]) })"
-                                     style="position:absolute;right:-5px;top:10px;">Edit
-                                </div>
+                                         v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': (section['fields'][fieldName]) })"
+                                         style="position:absolute;right:-5px;top:10px;">Edit
+                                    </div>
 
-                                <label v-if="value['display name'] != null"
-                                       style="text-transform:uppercase;opacity:0.6;" class="mb-2"><span
-                                            class="badge badge-outline-dark text-dark">@{{ value['display name'] }}</span></label>
-                                <label v-else style="text-transform:uppercase;opacity:0.6;" class="mb-2"><span
-                                            class="badge badge-outline-dark text-dark">@{{ fieldName }}</span></label>
+                                    <label v-if="value['display name'] != null"
+                                           style="text-transform:uppercase;opacity:0.6;" class="mb-2"><span
+                                                class="badge badge-outline-dark text-dark">@{{ value['display name'] }}</span></label>
+                                    <label v-else style="text-transform:uppercase;opacity:0.6;" class="mb-2"><span
+                                                class="badge badge-outline-dark text-dark">@{{ fieldName }}</span></label>
 
-                                 <p v-if="section['fields'][fieldName]['type'] == 'resource'"
-                                   class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
-                                    Click to view.
-                                </p>
+                                    <p v-if="section['fields'][fieldName]['type'] == 'resource'"
+                                       class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
+                                        Click to view.
+                                    </p>
 
-                                <p class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;"
-                                   v-if="(((((record.data || {}).content || {}).sections || {})[sectionName] || {}).fields|| {})[fieldName] != null">
+                                    <p class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;"
+                                       v-if="(((((record.data || {}).content || {}).sections || {})[sectionName] || {}).fields|| {})[fieldName] != null">
 
                                     <span v-if="section['fields'][fieldName]['type'] == 'image'"
                                           v-bind:style="{ backgroundImage: 'url(' + record['data']['content']['sections'][sectionName]['fields'][fieldName] + ')' }"
                                           style="display:inline-block;width:100%;max-width:160px;height:100%;min-height:90px;background:#3333;border-radius:4px;background-size:cover;background-position:center;background-size:cover;">
                                     </span>
-                                    <?php /*
+                                        <?php /*
                                     <span v-else-if="section['fields'][fieldName]['type'] == 'code'">
                                         <pre v-highlightjs style="border-radius:4px;" class="mt-2"><code class="json">@{{ record['data']['content']['sections'][sectionName]['fields'][fieldName] }}</code></pre>
                                     </span> */ ?>
 
-                                    <span v-else>
+                                        <span v-else>
                                         @{{ record['data']['content']['sections'][sectionName]['fields'][fieldName] }}
                                         <span v-if="value.type == 'percentage'"
                                               style="opacity:0.5;margin-left:3px;">%</span>
                                     </span>
-                                </p>
+                                    </p>
 
-                                <p v-else class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
-                                    <span style="opacity:0.5;">No data.</span>
-                                </p>
+                                    <p v-else class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
+                                        <span style="opacity:0.5;">No data.</span>
+                                    </p>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endif
             </div>
             <div class="col-lg-3 col-md-12">
                 <!-- Post Overview -->
                 <div class='card card-small mb-3 formSection' id="contentDetails">
                     @if (Schema::hasColumn($item->getTable(), 'status'))
-                    <div class="formEditButton btn btn-primary btn-pill"
-                         style="position:absolute;right:15px;top:-15px;"
+                        <div class="formEditButton btn btn-primary btn-pill"
+                             style="position:absolute;right:15px;top:-15px;"
 
-                         data-toggle="modal"
-                         data-target="#modal-edit-content"
+                             data-toggle="modal"
+                             data-target="#modal-edit-content"
 
-                         v-on:click="updateForm({'fieldDisplayName': 'Status','fieldName': 'status', 'fieldType': 'select', 'fieldInput': null, 'fieldDescription': 'Publish or unpublish this content.', 'fieldSchema' :{'options': {'ACTIVE': 'ACTIVE', 'INACTIVE': 'INACTIVE'}} })">
-                        Edit
-                    </div>
+                             v-on:click="updateForm({'fieldDisplayName': 'Status','fieldName': 'status', 'fieldType': 'select', 'fieldInput': null, 'fieldDescription': 'Publish or unpublish this content.', 'fieldSchema' :{'options': {'ACTIVE': 'ACTIVE', 'INACTIVE': 'INACTIVE'}} })">
+                            Edit
+                        </div>
                     @endif
                     <div class="card-header border-bottom">
                         <h6 class="m-0"><i class="fa fa-list"></i>&nbsp; Metadata</h6>
@@ -526,8 +535,8 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item pt-0 px-3 pb-0 mb-2">
                                 @if(isset($item->schema()->metadata))
-                                @if(isset($item->schema()->lang->en->singular))
-                                    <span class="d-block mb-2">
+                                    @if(isset($item->schema()->lang->en->singular))
+                                        <span class="d-block mb-2">
                                         <span class="badge badge-outline-dark text-dark">Type</span>
 
                                          <p class="fieldData card-text mb-2 mt-2 p-2"
@@ -537,11 +546,11 @@
                                              @endif
                                          </p>
                                     </span>
-                                @endif
-                                @foreach($item->schema()->metadata->readonly as $key => $value)
-                                <?php $column = $value->column; ?>
-                                <?php $label = $value->label; ?>
-                                <span class="d-block mb-2">
+                                    @endif
+                                    @foreach($item->schema()->metadata->readonly as $key => $value)
+                                        <?php $column = $value->column; ?>
+                                        <?php $label = $value->label; ?>
+                                        <span class="d-block mb-2">
                                     <span class="badge badge-outline-dark text-dark">{{ $label }}</span>
 
                                      <p class="fieldData card-text mb-2 mt-2 p-2"
@@ -549,7 +558,7 @@
                                         {{ $item->$column }}
                                     </p>
                                 </span>
-                                @endforeach
+                                    @endforeach
                                 @endif
                                 @if($item->published_at !== null)
                                     <span class="d-block mt-2 mb-3">
@@ -564,11 +573,12 @@
                                 @endif
                                 <span class="d-block mb-2 mt-2">
                                 @if (Schema::hasColumn($item->getTable(), 'status'))
-                                  <span class="badge badge-outline-dark text-dark">Status</span><br>
-                                    <p v-if="record.data.status == 'ACTIVE'" class="fieldData card-text mb-2 mt-2 p-2"
-                                       style="border-color:mediumseagreen !important;color:mediumseagreen !important;text-align:center;">@{{ record.data.status }}</p>
-                                    <p v-else class="fieldData card-text mb-2 mt-2 p-2"
-                                       style="color:#555;text-align:center;">@{{ record.data.status }}</p>
+                                        <span class="badge badge-outline-dark text-dark">Status</span><br>
+                                        <p v-if="record.data.status == 'ACTIVE'"
+                                           class="fieldData card-text mb-2 mt-2 p-2"
+                                           style="border-color:mediumseagreen !important;color:mediumseagreen !important;text-align:center;">@{{ record.data.status }}</p>
+                                        <p v-else class="fieldData card-text mb-2 mt-2 p-2"
+                                           style="color:#555;text-align:center;">@{{ record.data.status }}</p>
                                   </span>
                                 @endif
                             </li>
@@ -578,32 +588,32 @@
                 <!-- / Post Overview -->
                 <!-- Post Overview -->
                 @if(isset($item->schema()->metadata->taggable) && $item->schema()->metadata->taggable)
-                <div class='card card-small mb-3 formSection' id="tagsCard">
-                    <div class="formEditButton btn btn-primary btn-pill"
-                         style="position:absolute;right:15px;top:-15px;"
-                         v-on:click="updateForm({'fieldSlug': 'tags','fieldName': 'tags', 'fieldType': 'tags', 'fieldInput': null, 'fieldDisplayName': 'Tags', 'fieldDescription': 'Assign tags to this item.'})"
-                         data-toggle="modal"
-                         data-target="#modal-edit-content">Edit
-                    </div>
-                    <div class="card-header border-bottom" style="margin-bottom:15px !important;">
-                        <h6 class="m-0"><i class="fa fa-tag"></i> &nbsp;Tags</h6>
-                    </div>
-                    <div class='card-body p-0'>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-3 pb-3 pt-0">
-                                <div v-if="(record.data.tags != null && record.data.tags.length > 0)">
+                    <div class='card card-small mb-3 formSection' id="tagsCard">
+                        <div class="formEditButton btn btn-primary btn-pill"
+                             style="position:absolute;right:15px;top:-15px;"
+                             v-on:click="updateForm({'fieldSlug': 'tags','fieldName': 'tags', 'fieldType': 'tags', 'fieldInput': null, 'fieldDisplayName': 'Tags', 'fieldDescription': 'Assign tags to this item.'})"
+                             data-toggle="modal"
+                             data-target="#modal-edit-content">Edit
+                        </div>
+                        <div class="card-header border-bottom" style="margin-bottom:15px !important;">
+                            <h6 class="m-0"><i class="fa fa-tag"></i> &nbsp;Tags</h6>
+                        </div>
+                        <div class='card-body p-0'>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-3 pb-3 pt-0">
+                                    <div v-if="(record.data.tags != null && record.data.tags.length > 0)">
                                     <span class="badge badge-primary badge-pill badge-tag m-1"
                                           v-for="tag,tagName in record.data.tags" v-if="tag != null">
                                         @{{ tag.name }}
                                     </span>
-                                </div>
-                                <p class="card-text mb-1 p-1" v-else>
-                                    No tags.
-                                </p>
-                            </li>
-                        </ul>
+                                    </div>
+                                    <p class="card-text mb-1 p-1" v-else>
+                                        No tags.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
                 @endif
             </div>
         </div>
@@ -621,9 +631,12 @@
                     </div>
                     <div class="modal-body pt-4">
                         <p class="card-text">
-                            You are about to delete the following <?php echo $item->schema()->lang->en->singular; ?>: <strong class="text-danger">{{ record.data.<?php echo $item->schema()->metadata->title_key;?> }}</strong></p>
+                            You are about to delete the following <?php echo $item->schema()->lang->en->singular; ?>:
+                            <strong class="text-danger">{{ record.data.<?php echo $item->schema()->metadata->title_key;?> }}</strong>
+                        </p>
                         <p class="card-text">
-                            Once you delete this <?php echo $item->schema()->lang->en->singular; ?> it can only be un-deleted by an administrator.
+                            Once you delete this <?php echo $item->schema()->lang->en->singular; ?> it can only be
+                            un-deleted by an administrator.
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -658,9 +671,11 @@
                     <div class="modal-body pt-4">
                         <div class="form-horizontal" id="formFilters" role="form">
                             <label style="margin-bottom:1.5rem!important;margin-top:0px;"
-                                   v-if="fieldType != 'tags' && fieldDescription != null">@{{ fieldDescription }}</label>
+                                   v-if="fieldType != 'tags' && fieldDescription != null">@{{ fieldDescription
+                                }}</label>
                             <div v-if="fieldType == 'code'">
-                                <ace-editor style="border: 1px solid #eee;border-radius: 4px;" v-model="fieldInput" v-on:input="changed()"  min-lines="5"></ace-editor>
+                                <ace-editor style="border: 1px solid #eee;border-radius: 4px;" v-model="fieldInput"
+                                            v-on:input="changed()" min-lines="5"></ace-editor>
                             </div>
                             <div v-else-if="fieldType == 'richtext'">
                                 <quill-editor v-model="fieldInput"
@@ -671,7 +686,7 @@
                                               @ready="onEditorReady($event)" */ ?>
                                               v-on:error="changeStatus('error')"
                                               v-on:input="changed()"
-                                            style="height:100%;">
+                                              style="height:100%;">
                                 </quill-editor>
                             </div>
                             <div v-else-if="fieldType == 'image'">
@@ -692,10 +707,17 @@
                                 </p>
                             </div>
                             <div v-else-if="fieldName == 'status'">
-                                <select v-model="record.data.status" class="form-control" v-on:change="changed()">
+                                <select v-model="fieldInput" class="form-control" v-on:change="changed()">
                                     <option disabled>SELECT ONE</option>
+                                    <?php /*
                                     <option value="ACTIVE">Active</option>
                                     <option value="INACTIVE">Inactive</option>
+                                    */?>
+                                    @if(isset($item->schema()->fields->status->options))
+                                        @foreach($item->schema()->fields->status->options as $option => $value)
+                                            <option value="{{ $value }}">{{ $option }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div v-else-if="fieldType == 'text'">
@@ -742,13 +764,13 @@
                                     <div v-for="item in resource.data"
                                          class="list-group-item list-group-item-action d-inline-block">
                                         @{{ item.name }} <span style="float:right"><span
-                                                class="badge badge-primary badge-pill badge-price pull-left mr-1"
-                                                style="text-transform:capitalize;">@{{ item.price }}
+                                                    class="badge badge-primary badge-pill badge-price pull-left mr-1"
+                                                    style="text-transform:capitalize;">@{{ item.price }}
                                             / @{{ item.interval }}</span> <i v-on:click="deleteResourceItem(item)"
                                                                              class="fa fa-fw fa-minus deleteResource ml-2 pull-right"
                                                                              style="padding-top:5px;"></i> <i
-                                                v-on:click="viewItem(item)"
-                                                class="fa fa-fw fa-search viewResource ml-2 pull-right"></i>
+                                                    v-on:click="viewItem(item)"
+                                                    class="fa fa-fw fa-search viewResource ml-2 pull-right"></i>
                                             </span>
                                     </div>
                                     <div v-on:click="addResourceItem(fieldSchema)"
@@ -769,7 +791,8 @@
                                         <span class="badge badge-dark mb-2">@{{ key }}</span><br>
                                         <p class="card-text mb-2">@{{ field.description }}</p>
                                         <div v-if="info.data != null && info.data.fields != null && info.data.fields[key] != null && info.data.fields[key]['first_error'] != null"
-                                             class="text-danger mb-2">@{{ info.data.fields[key]['first_error'] }}</div>
+                                             class="text-danger mb-2">@{{ info.data.fields[key]['first_error'] }}
+                                        </div>
                                         <div v-if="field.type == 'select'">
                                             <select id="contentEditor" class="form-control"
                                                     style="text-transform:capitalize !important;"
@@ -819,7 +842,10 @@
                                     </option>
                                 </select>
                                 <div class="mt-3" style="opacity:0.5;">Previously
-                                    Selected: @{{ JSON.stringify(record['data']['content']['sections'][sectionName]['fields'][fieldSlug]) }}</div>
+                                    Selected: @{{
+                                    JSON.stringify(record['data']['content']['sections'][sectionName]['fields'][fieldSlug])
+                                    }}
+                                </div>
                             </div>
                             <div v-else-if="fieldType == 'number'">
                                 <div class="input-group mb-2" style="height:36px;">
@@ -898,25 +924,29 @@
                                 <span v-if="info.data != null && info.data.fields != null && info.data.fields[fieldName] != null && newItem != null">@{{ info['data']['fields'][fieldName]['first_error'] }}</span>
                                 <span v-else>Something went wrong.</span>
                             </div>
-                            <div v-else-if="info.status == 'success' && editorHasErrors == false" class="text-success mt-2"><i
+                            <div v-else-if="info.status == 'success' && editorHasErrors == false"
+                                 class="text-success mt-2"><i
                                         class="fa fa-fw fa-check-circle mr-1"></i>Input is valid
                             </div>
-                            <div v-else-if="fieldType == 'code' && editorHasErrors == 'pending'" class="text-warning mt-2"><i
-                                        class="fa fa-fw fa-spinner fa-spin mr-1"></i>
-                                Analyzing...</div>
-                            </div>
-                            <div v-if="editorHasErrors == true" class="text-danger mt-2"><i
-                                        class="fa fa-fw fa-exclamation-circle mr-1"></i>
-                                Invalid syntax.
+                            <div v-else-if="fieldType == 'code' && editorHasErrors == 'pending'"
+                                 class="text-warning mt-2"><i
+                                        class="fa fa-fw fa-spinner fa-spin fa-sync mr-1"></i>
+                                Analyzing...
                             </div>
                         </div>
+                        <div v-if="editorHasErrors == true" class="text-danger mt-2"><i
+                                    class="fa fa-fw fa-exclamation-circle mr-1"></i>
+                            Invalid syntax.
+                        </div>
+                    </div>
 
                     <div class="modal-footer" v-if="fieldType != 'tags' && fieldType != 'resource'" style="width:100%;">
                         <a v-on:click="refresh()" href="#" class="btn btn-danger btn-dimmed" data-dismiss="modal"
                            aria-hidden="true" style="float:left;">
                             Cancel
                         </a>
-                        <a v-if="info.status == 'success' && editorHasErrors == false" href="#" class="btn btn-success btn-save"
+                        <a v-if="info.status == 'success' && editorHasErrors == false" href="#"
+                           class="btn btn-success btn-save"
                            v-on:click="save()"
                            data-dismiss="modal" aria-hidden="true" style="float:right;">
                             Save
@@ -930,7 +960,8 @@
         </div>
     </div>
     <div v-else>
-        <span class="badge badge-loading text-dark mr-2">Loading... <i class="fa fa-fw fa-spin text-dark fa-spinner"></i></span>
+        <span class="badge badge-loading text-dark mr-2">Loading... <i
+                    class="fa fa-fw fa-spin text-dark fa-spinner fa-sync"></i></span>
     </div>
 
 @endsection
@@ -940,7 +971,7 @@
     <script src="{{ ENV('APP_URL') }}/js/components/ace-editor-vue-component.js"></script>
     <script>
         hljs.configure({   // optionally configure hljs
-            languages: ['json','javascript','html']
+            languages: ['json', 'javascript', 'html']
         });
     </script>
     {!! renderResourceEditorScripts($options)  !!}

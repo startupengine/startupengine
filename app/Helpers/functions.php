@@ -380,21 +380,26 @@ function addQueryConditions($request, $query, $model, $name){
                 }
             }
             else {
-                if (strpos($filter, '=') !== false) {
+                if (strpos($filter, '!=') !== false) {
+                    $elements = explode('!=', $filter);
+                    $operand = '!=';
+                }
+                elseif (strpos($filter, '=') !== false) {
                     $elements = explode('=', $filter);
                     $operand = '=';
                 }
-                if (strpos($filter, '<') !== false) {
+                elseif (strpos($filter, '<') !== false) {
                     $elements = explode('<', $filter);
                     $operand = '<';
                 }
-                if (strpos($filter, '>') !== false) {
+                elseif (strpos($filter, '>') !== false) {
                     $elements = explode('>', $filter);
                     $operand = '>';
                 }
+
                 //TODO: add exception if filtered columnn doesn't excess
                 //TODO: add RBAC rules for filtering
-                $elements = explode('=', $filter);
+                $elements = explode($operand, $filter);
                 if (Schema::hasColumn($model->getTable(), $elements[0])) {
                     $wheres[] = [$elements[0], $operand, $elements[1]];
                 }
@@ -624,6 +629,15 @@ function renderResourceTableScriptsDynamically($options = null){
         $options['PER_PAGE'] = 10;
     }
 
+    if(!isset($options['DISPLAY_FORMAT'])){
+        $options['DISPLAY_FORMAT'] = 'list';
+    }
+
+
+    if(!isset($options['SORT_BY'])){
+        $options['SORT_BY'] = 'created_at';
+    }
+
 
     $view = View::make('admin.components.resource_table_js', ['options' => $options]);
     $contents = (string) $view;
@@ -665,8 +679,32 @@ function renderResourceTableHtmlDynamically($options = null){
     if(!isset($options['CARD_BODY_FIELD'])){
         $options['CARD_BODY_FIELD'] = 'excerpt';
     }
-    if(!isset($options['WRAPPER_CLASS'])){
-        $options['WRAPPER_CLASS'] = 'col-md-12';
+
+    if(isset($options['WRAPPER_CLASS'])){
+        if($options['WRAPPER_CLASS'] != null) {
+            $options['WRAPPER_CLASS'] = 'col-md-12';
+        }
+        else {
+            $options['WRAPPER_CLASS'] = ' ';
+        }
+    }
+    if(!isset($options['HEADER'])){
+        $options['HEADER'] = '';
+    }
+    if(!isset($options['SHOW_TIMESTAMP'])){
+        $options['SHOW_TIMESTAMP'] = true;
+    }
+    if(!isset($options['SHOW_PAGINATION'])){
+        $options['SHOW_PAGINATION'] = true;
+    }
+    if(!isset($options['SHOW_TAGS'])){
+        $options['SHOW_TAGS'] = true;
+    }
+    if(!isset($options['TABLE_ROW'])){
+        $options['TABLE_ROW'] = '';
+    }
+    if(!isset($options['PATH'])){
+        $options['PATH'] = '';
     }
     $view = View::make('admin.components.resource_table_html', ['options' => $options]);
     $contents = (string) $view;
@@ -724,4 +762,32 @@ function primaryKey($model){
     $primaryKey = $schema->metadata->primary_key;
     $result = $model->$primaryKey;
     return $result;
+}
+
+
+// ************
+// Pages
+// ************
+
+function findAndFetch($fieldName, $pageField, $attribute = null){
+    $page = \App\Page::where($fieldName, $pageField)->first();
+    if($page != null && $page->status == 'ACTIVE'){
+        if($attribute != null) {
+            return $page->attribute;
+        }
+        else {
+            return true;
+        }
+    }
+    else { return false; }
+
+}
+
+function pageIsPublished($slug){
+    $page = \App\Page::where('slug', $slug)->where('status', 'ACTIVE')->first();
+    if($page != null) {
+        return true;
+    }
+    else { return false; }
+
 }
