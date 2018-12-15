@@ -24,22 +24,23 @@ class PostController extends Controller
         return view('app.post.index')->with('posts', $posts)->with('postTypes', $postTypes);
     }
 
-    public function getPost(Request $request, $slug) {
-        $post =  Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+    public function getPost(Request $request, $slug)
+    {
+        $post = Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
         $postType = 'post';
-        if(($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
+        if (($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
             return view('posts.view')->with('postType', $postType);
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function getPostByPostTypeAndSlug(Request $request, $postType, $slug) {
-        $post =  Post::where('post_type','=',$postType)->where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+    public function getPostByPostTypeAndSlug(Request $request, $postType, $slug)
+    {
+        $post = Post::where('post_type', '=', $postType)->where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
         $event = new AnalyticEvent();
         $event->event_type = 'content viewed';
-        if(\Auth::user()) {
+        if (\Auth::user()) {
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
@@ -47,36 +48,35 @@ class PostController extends Controller
         $array = ["id" => "$post->id", "model" => "post", "slug" => $post->slug];
         $event->event_data = json_encode($array);
         $event->save();
-        if(($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
+        if (($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
             return view('posts.view')->with('post', $post)->with('post', $post)->with('postType', $postType);
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function addPost(Request $request, $slug) {
+    public function addPost(Request $request, $slug)
+    {
         $categories = \App\Category::all();
         $post = null;
         $postType = \App\PostType::where('slug', '=', $slug)->where('enabled', '=', true)->firstOrFail();
         return view('app.post.add')->with('categories', $categories)->with('postType', $postType)->with('post', $post);
     }
 
-    public function savePost(Request $request) {
+    public function savePost(Request $request)
+    {
 
-        if(\Auth::user()->hasPermissionTo('edit posts')) {
-            if($request->input('id') !== null ){
+        if (\Auth::user()->hasPermissionTo('edit posts')) {
+            if ($request->input('id') !== null) {
                 $post = \App\Post::find($request->input('id'));
-            }
-            else {
+            } else {
                 $post = new \App\Post;
             }
-            if($request->input('published_at') == null) {
-                if($post->published_at == null) {
+            if ($request->input('published_at') == null) {
+                if ($post->published_at == null) {
                     $post->published_at = \Carbon\Carbon::now();
                 }
-            }
-            else {
+            } else {
                 $date = $request->input('published_at');
                 $published_at = \Carbon\Carbon::createFromFormat('m/d/Y', $date);
                 $post->published_at = $published_at->toDateTimeString();
@@ -88,20 +88,23 @@ class PostController extends Controller
             $post->author_id = \Auth::user()->id;
             $post->json = json_encode($request->input('json'));
             $post->post_type = $request->input('post_type');
-            if($request->input('status') == null) {
+            if ($request->input('status') == null) {
                 $post->status = 'DRAFT';
             }
             $tags = json_decode($request->input('tags'));
-            if($request->input('tags') !== null && $tags == true) {
+            if ($request->input('tags') !== null && $tags == true) {
                 $post->untag();
-                foreach($tags as $tag){
+                foreach ($tags as $tag) {
                     $post->tag($tag->name);
                 }
             }
 
             $event = new AnalyticEvent();
-            if($post->id !== null) { $event->event_type = 'content edited'; }
-            else { $event->event_type = 'content added'; }
+            if ($post->id !== null) {
+                $event->event_type = 'content edited';
+            } else {
+                $event->event_type = 'content added';
+            }
             $post->save();
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
@@ -110,14 +113,15 @@ class PostController extends Controller
             $event->save();
 
             return redirect('/app/content');
+        } else {
+            abort(500);
         }
-
-        else { abort(500); }
     }
 
-    public function viewPost(Request $request, $id) {
+    public function viewPost(Request $request, $id)
+    {
         $post = Post::find($id);
-        if($post == null) {
+        if ($post == null) {
             abort(404);
         }
         $categories = \App\Category::all();
@@ -125,39 +129,41 @@ class PostController extends Controller
         return view('app.post.view')->with('post', $post)->with('categories', $categories)->with('postType', $postType);
     }
 
-    public function editPost(Request $request, $id) {
+    public function editPost(Request $request, $id)
+    {
         $post = \App\Post::find($id);
         $categories = \App\Category::all();
         return view('app.post.edit')->with('post', $post)->with('categories', $categories)->with('postType', $post->postType());
     }
 
-    public function deletePost(Request $request, $id) {
-        if(\Auth::user()->hasPermissionTo('delete posts')) {
-            if($id !== null ){
+    public function deletePost(Request $request, $id)
+    {
+        if (\Auth::user()->hasPermissionTo('delete posts')) {
+            if ($id !== null) {
                 $post = \App\Post::find($id);
                 $post->delete();
             }
             return redirect('/app/content');
+        } else {
+            abort(500);
         }
-        else { abort(500); }
     }
 
-    public function getItem($id, $slug = null) {
+    public function getItem($id, $slug = null)
+    {
 
-        if(\Auth::user() && \Auth::user()->hasRole('admin')) {
-            $item = Post::where('id', '=',$id)->first();
-        }
-        else {
-            $item = Post::where('id', '=',$id)->where('status', '=', 'PUBLISHED')->first();
+        if (\Auth::user() && \Auth::user()->hasRole('admin')) {
+            $item = Post::where('id', '=', $id)->first();
+        } else {
+            $item = Post::where('id', '=', $id)->where('status', '=', 'PUBLISHED')->first();
         }
 
         if ($item == null) {
             abort(404);
-        }
-        else {
+        } else {
             $event = new AnalyticEvent();
             $event->event_type = 'content viewed';
-            if(\Auth::user()) {
+            if (\Auth::user()) {
                 $event->user_id = \Auth::user()->id;
                 $event->user_email = \Auth::user()->email;
                 $event->user_name = \Auth::user()->name;
@@ -166,13 +172,15 @@ class PostController extends Controller
             //$event->save();
             $postType = 'post';
             //dd($item);
-            return view('content.view')->with('post', $item)->with('postType', $postType);
+            if (!isset($message)) {
+                $message = null;
+            }
+            return view('content.view')->with('post', $item)->with('postType', $postType)->with('message', makeMessage($item));
         }
     }
 
-
-    public function getItemsByTag($tag) {
-        //$page = Page::where('slug', '=', 'articles')->where('status','=','ACTIVE')->firstOrFail();
+    public function getItemsByTag($tag)
+    {
         $tag = \App\Tag::where('slug', '=', $tag)->first();
         return view('content.tags.index')->with('tag', $tag);
     }

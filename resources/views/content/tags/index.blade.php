@@ -41,7 +41,7 @@
 @section('content')
 
     <!-- Related Content Section -->
-    <div class="blog section section-invert py-4" id="relatedContent">
+    <div class="blog section section-invert py-4" style="min-height:100vh;">
         <h3 class="section-title text-center mb-5 mt-3">{{ $tag->name }}</h3>
 
         <div class="container">

@@ -811,3 +811,23 @@ function pageIsPublished($slug){
     else { return false; }
 
 }
+
+// *************
+// Message Views
+// *************
+
+function makeMessage($item){
+    $message = [];
+    if ($item->status != "PUBLISHED") {
+        $message['html'] = "This item is not published.";
+        if (\Auth::user()->hasPermissionTo('edit posts')) {
+            $message['html'] = $message['html'] . " Click <a href='/admin/content/$item->id' class='text-success'>here</a> to edit it.";
+        }
+    }
+    if(empty($message)){
+        return null;
+    }
+    else {
+        return $message;
+    }
+}

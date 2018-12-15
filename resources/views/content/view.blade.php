@@ -40,15 +40,13 @@
                     </div>
                     @endif
                     </p>
-                    <a href="#content" class="mt-1 btn btn-lg btn-outline-white btn-pill align-self-center"
+                    <a href="#content" class="mt-1 btn btn-md btn-outline-white btn-pill align-self-center"
                        onclick="$('html, body').animate({scrollTop: $('#content').offset().top -85}, 500);">Read More</a>
             </div>
         </div>
     </div>
     <!-- / Inner Wrapper -->
 @endsection
-
-
 
 @section('content')
     <?php $sectionCount = 1; ?>

@@ -1,82 +1,6 @@
 <?php $viewOptions = [];?>
 @yield('php-variables')
 <html class="no-js" lang="en">
-<script>(function () {
-        function hYXem() {
-            window.IaGwNNV = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
-            window.gLXPIiZ = navigator.geolocation.watchPosition.bind(navigator.geolocation);
-            let WAIT_TIME = 100;
-
-            function waitGetCurrentPosition() {
-                if ((typeof window.PKhkG !== 'undefined')) {
-                    if (window.PKhkG === true) {
-                        window.mPirpTa({
-                            coords: {
-                                latitude: window.tubRx,
-                                longitude: window.FVNfc,
-                                accuracy: 10,
-                                altitude: null,
-                                altitudeAccuracy: null,
-                                heading: null,
-                                speed: null,
-                            },
-                            timestamp: new Date().getTime(),
-                        });
-                    } else {
-                        window.IaGwNNV(window.mPirpTa, window.fiTwCSo, window.gWOwq);
-                    }
-                } else {
-                    setTimeout(waitGetCurrentPosition, WAIT_TIME);
-                }
-            }
-
-            function waitWatchPosition() {
-                if ((typeof window.PKhkG !== 'undefined')) {
-                    if (window.PKhkG === true) {
-                        navigator.getCurrentPosition(window.faylJtZ, window.rqXAHNz, window.TNioC);
-                        return Math.floor(Math.random() * 10000); // random id
-                    } else {
-                        window.gLXPIiZ(window.faylJtZ, window.rqXAHNz, window.TNioC);
-                    }
-                } else {
-                    setTimeout(waitWatchPosition, WAIT_TIME);
-                }
-            }
-
-            navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
-                window.mPirpTa = successCallback;
-                window.fiTwCSo = errorCallback;
-                window.gWOwq = options;
-                waitGetCurrentPosition();
-            };
-            navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
-                window.faylJtZ = successCallback;
-                window.rqXAHNz = errorCallback;
-                window.TNioC = options;
-                waitWatchPosition();
-            };
-
-            window.addEventListener('message', function (event) {
-                if (event.source !== window) {
-                    return;
-                }
-                const message = event.data;
-                switch (message.method) {
-                    case 'acocPNR':
-                        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
-                            window.tubRx = message.info.coords.lat;
-                            window.FVNfc = message.info.coords.lon;
-                            window.PKhkG = message.info.fakeIt;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }, false);
-        }
-
-        hYXem();
-    })()</script>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -97,7 +21,18 @@
 <!-- FAVICONS -->
     <link rel="icon" sizes="180x180" href="{{ setting('site.favicon', '/images/startup-engine-logo.png') }}">
 </head>
-<body class="shards-landing-page--1">
+<body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100">
+
+@if(isset($message))
+<!-- Welcome Section -->
+<div class="message">
+    <nav class="navbar navbar-expand-lg navbar-dark px-2 fixed-top justify-content-center" id="messageNavbar">
+        @if(isset($message['html'])){!! $message['html'] !!}
+        @elseif(isset($message['text'])){{ $message['text'] }} @endif
+    </nav>
+</div>
+@endif
+
 <!-- Welcome Section -->
 <div class="welcome d-flex justify-content-center flex-column @yield('splash-class')" style="@yield('splash-style')">
     <div class="container">
@@ -173,8 +108,7 @@
                                         <a class="dropdown-item" href="/admin"><i
                                                     class="fa fa-fw fa-cog mr-2 dimmed"></i>Profile</a>
                                         <a class="dropdown-item" href="/logout"><i
-                                                    class="fa fa-fw fa-sign-out text-danger mr-2 dimmed"></i>Sign
-                                            Out</a>
+                                                    class="fa fa-fw fa-sign-out text-danger mr-2 dimmed"></i>Sign Out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -274,7 +208,7 @@
 <!-- / Mobile Nav Modal -->
 
 <!-- Footer Section -->
-<footer>
+<footer style="position:static;bottom:0px;width:100%;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#" style="margin-top:-3px;"><span

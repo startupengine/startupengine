@@ -8,9 +8,9 @@
             <div class="stats-small__data">
                 @if($oldStats[$key] != 0)
                     @if($oldStats[$key] > $stats[$key])
-                        <span class="stats-small__percentage stats-small__percentage--decrease" @if($stats[$key] == 0) style="margin-left:50px;" @endif>@if($stats[$key] != 0){{ $stats[$key]/$oldStats[$key] }}%@endif&nbsp;</span>
+                        <span class="stats-small__percentage stats-small__percentage--decrease" @if($stats[$key] == 0) style="margin-left:50px;" @endif>@if($stats[$key] != 0){{ round($stats[$key]/$oldStats[$key]) }}%@endif&nbsp;</span>
                     @elseif($oldStats[$key] < $stats[$key])
-                        <span class="stats-small__percentage stats-small__percentage--increase" @if($stats[$key] == 0) style="margin-left:50px;" @endif>{{ $stats[$key]/$oldStats[$key] }}%&nbsp;</span>
+                        <span class="stats-small__percentage stats-small__percentage--increase" @if($stats[$key] == 0) style="margin-left:50px;" @endif>{{ round($stats[$key]/$oldStats[$key]) }}%&nbsp;</span>
                     @else
                         <span class="invisible stats-small__percentage stats-small__percentage--decrease"></span>
                     @endif

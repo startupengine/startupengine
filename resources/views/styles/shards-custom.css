@@ -234,3 +234,22 @@ li .dimmed {
     min-height:auto !important;
     background:#fff !important;
 }
+
+.message, .message .navbar {
+    width:100%;
+    height:50px;
+    display:block;
+    text-align:center !important;
+    padding-left:15px;
+    padding-righ:15px;
+}
+
+.message .navbar-dark {
+    background:#000;
+    color:#fff;
+    border:none !important;
+}
+
+.hasMessage #topNavbar {
+    margin-top:50px !important;
+}
