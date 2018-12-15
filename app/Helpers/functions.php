@@ -366,6 +366,26 @@ function addQueryConditions($request, $query, $model, $name){
             $query->orderBy($sortBy, $sortDirection);
         }
     }
+
+    //Tags
+    $anyTags = $request->input('withAnyTag');
+    if($anyTags != null){
+        $anyTags = explode(',',$anyTags);
+        $query->withAnyTag($anyTags);
+    }
+
+    $allTags = $request->input('withAllTags');
+    if($allTags != null){
+        $allTags = explode(',',$allTags);
+        $query->withAllTags($allTags);
+    }
+
+    $withoutTags = $request->input('withoutTags');
+    if($allTags != null){
+        $withoutTags  = explode(',',$withoutTags );
+        $query->withAllTags($withoutTags );
+    }
+
     //Filter
     if($request->input('filter')) {
         $filters = $request->input('filter');

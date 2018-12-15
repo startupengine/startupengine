@@ -186,7 +186,7 @@
                                            v-bind:href="'<?php echo $options['PATH'] ?>/' + item.id">{{ item.<?php echo $options['CARD_HEADER_FIELD']; ?>}}</a>
                                     </h5>
                                     @if(isset($options['SHOW_TIMESTAMP']) && $options['SHOW_TIMESTAMP'] != false)
-                                        <p class="card-text dimmed my-2" style="text-transform:capitalize;">Last Updated
+                                        <p class="card-text dimmed my-2" style="text-transform:capitalize;"><i class="fa fa-calendar-o mr-2"></i>Updated
                                             @{{
                                             moment(item.updated_at, "YYYYMMDD").fromNow() }}
                                         </p>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Role;
@@ -171,7 +172,8 @@ class PostController extends Controller
 
 
     public function getItemsByTag($tag) {
-        $page = Page::where('slug', '=', 'articles')->where('status','=','ACTIVE')->firstOrFail();
-        return view('pages.view')->with('page', $page)->with('tag', $tag);
+        //$page = Page::where('slug', '=', 'articles')->where('status','=','ACTIVE')->firstOrFail();
+        $tag = \App\Tag::where('slug', '=', $tag)->first();
+        return view('content.tags.index')->with('tag', $tag);
     }
 }

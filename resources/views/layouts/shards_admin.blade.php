@@ -108,8 +108,8 @@
             <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
                 <div class="main-navbar border-bottom" id="brand-container">
                     <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom-0 p-0">
-                        <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
-                            <div class="d-table m-auto" onclick="window.location.href='/admin-panel/dashboard';">
+                        <a class="navbar-brand w-100 mr-0" href="/" style="line-height: 25px;">
+                            <div class="d-table m-auto" onclick="window.location.href='/';">
                                 <img id="main-logo" class="d-inline-block align-top mr-1"
                                      style="max-width: 30px;margin-top:-1px;margin-left:-10px;"
                                      src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}" alt="Startup Engine">

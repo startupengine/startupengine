@@ -117,5 +117,120 @@ li .dimmed {
 
 #topNavbar .nav-link:hover {
     opacity:1 !important;
-    background: rgba(0,0,0,0.1);
+}
+
+.tag-link:hover .badge-dark {
+    background:#333 !important;
+}
+
+.page-item.disabled {
+    cursor: not-allowed !important;
+    background:#fff !important;
+}
+
+.page-meta a {
+    color:#000 !important;
+}
+
+.page-meta {
+    border:none !important;
+}
+
+
+@media (min-width: 768px) {
+    .page-meta-container {
+        min-width:150px;
+    }
+}
+
+.page-link {
+    background:#fff !important;
+}
+
+@media(min-width:768px) {
+    .hiddenOnDesktop {
+        display:none !important;
+    }
+}
+
+@media(max-width:768px) {
+    .hiddenOnMobile {
+        display:none !important;
+    }
+}
+
+.raised {
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1);
+}
+
+.border-radius-5, .br-5 {
+    border-radius:5px !important;
+}
+
+.border-radius-10, .br-10 {
+    border-radius:10px !important;
+}
+
+.dimmed {
+    opacity:0.5;
+    transition:all 0.25s;
+}
+
+.dimmed:hover {
+    opacity:1;
+}
+
+.invisible {
+    opacity:0;
+    transition: all 0.5s;
+}
+
+.visible {
+    opacity:1 !important;
+    display:flex !important;
+    transition: all 0.5s;
+}
+
+.toggleVisibility {
+    display:none;
+    transition: all 0.5s !important;
+}
+
+#contentApp > .row .badge-loading {
+    margin-top:25px !important;
+}
+
+#topNavbar {
+    height:73px;
+    transition: all 0.2s ease-in-out  !important;
+    box-shadow:0px 0px 30px rgba(0,50,150,0);
+}
+
+#topNavbar.shadowed{
+    box-shadow:0px 0px 30px rgba(0,50,150,0.66);
+    transition: all 0.2s ease-in-out  !important;
+}
+
+#topNavbar.dark {
+    background: #3d8cff !important;
+}
+
+#topNavbar.filled {
+    background: #3d8cff !important;
+}
+
+#topNavbar .nav-item:hover .nav-link {
+    background:rgba(0,0,0,0.1) !important;
+}
+
+#accountDropdown .dropdown-toggle::after {
+    margin-top:7px !important;
+    margin-right:0px;
+    float:right !important;
+}
+
+.welcome.minimal {
+    height:73px !important;
+    min-height:auto !important;
+    background:#fff !important;
 }
