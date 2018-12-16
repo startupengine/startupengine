@@ -83,11 +83,11 @@
             display:none;
         }
 
-        .status-success .btn-success {
+        #stripeApp .status-success .btn-success {
             display:inline-block;
         }
 
-        .status-error .btn-danger {
+        #stripeApp .status-error .btn-danger {
             display:inline-block;
         }
 
