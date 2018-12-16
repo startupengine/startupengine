@@ -55,7 +55,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/subscription/submit/', 'SubscriptionController@submitSubscription');
 
     //App
-    Route::get('/app/account', 'AccountController@view')->name('account');
+    Route::get('/app/{accountView}', 'AccountController@view')->name('account');
 
 });
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    public function view(){
+    public function view($accountView){
         if(\Auth::user()) {
             $options = [
                 'id' => \Auth::user()->id,
@@ -15,7 +15,15 @@ class AccountController extends Controller
                 'buttons' => [],
                 'show_metadata' => false
             ];
-            return view('app.account.view')->with('options', $options);
+            if($accountView == 'account') {
+                return view('app.account.profile')->with('options', $options);
+            }
+            if($accountView == 'payment') {
+                return view('app.account.payment')->with('options', $options);
+            }
+            else {
+                abort(404);
+            }
         }
         else {
             abort(404);

@@ -9,10 +9,10 @@
   "version": "0.1",
   "metadata": {
     "taggable": false,
-    "title_key": "email",
+    "title_key": "id",
     "primary_key": "id",
     "readonly": {
-      "id":{
+      "id": {
         "label": "User ID",
         "column": "id"
       }
@@ -20,26 +20,44 @@
   },
   "permissions": {
     "browse": {
-      "roles": ["admin", "superadmin"]
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
     },
     "read": {
-      "roles": ["admin", "superadmin"]
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
     },
     "write": {
-      "roles": ["admin", "superadmin"]
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
     },
     "edit": {
-      "roles": ["admin", "superadmin"]
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
     },
     "delete": {
-      "roles": ["admin", "superadmin"]
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
     },
     "undelete": {
-      "roles": ["admin", "superadmin"]
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
     }
   },
   "fields": {
-    "name" : {
+    "name": {
       "display name": "Name",
       "description": "The name of this user.",
       "type": "text",
@@ -47,7 +65,7 @@
         "required": true
       }
     },
-    "email" : {
+    "email": {
       "display name": "E-mail",
       "description": "Your e-mail address.",
       "type": "text",
@@ -56,7 +74,7 @@
         "required": true
       }
     },
-    "avatar" : {
+    "avatar": {
       "display name": "Profile Picture",
       "description": "A picture of you.",
       "type": "image",
@@ -64,12 +82,11 @@
         "url": true
       }
     },
-    "bio" : {
+    "bio": {
       "display name": "Bio",
       "description": "A short bio.",
       "type": "textarea",
       "validations": {
-
       }
     },
     "status": {
@@ -88,11 +105,23 @@
       "slug": "about",
       "title": "About",
       "fields": {
+        "location": {
+          "type": "text",
+          "description": "Your location.",
+          "validations": {
+          }
+        },
         "website": {
           "type": "text",
           "description": "URL of your website.",
           "validations": {
             "url": true
+          }
+        },
+        "twitter": {
+          "type": "text",
+          "description": "Your twitter username.",
+          "validations": {
           }
         }
       }

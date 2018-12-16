@@ -11,8 +11,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/styles/bootstrap.4.0.0.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/shards.min.css">
     <link rel="stylesheet" href="/styles/shards-extras.min.css">
     <link rel="stylesheet" href="/styles/shards-custom.css">
@@ -105,16 +104,16 @@
                                         @if(\Auth::user()->avatar != null) <span class="d-inline-block"
                                                                                  style="height:25px;width:25px;border-radius:25px;background:url('{{ \Auth::user()->avatar }}');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:22px;margin-right:10px;position:absolute;float:left;">&nbsp;</span> @endif
                                         <span class="d-inline-block"
-                                              style="margin-left:25px;height:20px;width:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
+                                              style="margin-left:25px;height:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-menu dropdown-menu-right w-100" aria-labelledby="navbarDropdown">
                                         @if(\Auth::user()->hasPermissionTo('view backend'))<a class="dropdown-item"
                                                                                               href="/admin"><i
                                                     class="fa fa-fw fa-lock mr-2 dimmed"></i>Admin Panel</a>@endif
                                         <a class="dropdown-item" href="/app/account"><i
                                                     class="fa fa-fw fa-cog mr-2 dimmed"></i>My Account</a>
                                         <a class="dropdown-item" href="/logout"><i
-                                                    class="fa fa-fw fa-sign-out text-danger mr-2 dimmed"></i>Sign Out</a>
+                                                    class="fa fa-fw fa-sign-out-alt text-danger mr-2 dimmed"></i>Sign Out</a>
                                     </div>
                                 </li>
                             </ul>

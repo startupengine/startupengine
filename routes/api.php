@@ -30,6 +30,10 @@ Route::group(['middleware' => ['cors']], function () {
     // Delete
     Route::delete('/resources/{type}/{id}', 'ResourceController@delete')->name('DeleteApiResource');
 
+
+    // Stripe
+    Route::post('/stripe/payments/method', 'StripeController@storePaymentMethod')->name('StoreStripePaymentMethod');
+
     /*
     // Resource Relationships
     // Browse

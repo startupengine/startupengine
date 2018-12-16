@@ -160,7 +160,7 @@ li .dimmed {
 }
 
 .raised {
-    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1);
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.08), 0 0.9375rem 1.40625rem rgba(90,97,105,.08), 0 0.25rem 0.53125rem rgba(90,97,105,.082), 0 0.125rem 0.1875rem rgba(90,97,105,.08);
 }
 
 .border-radius-5, .br-5 {
@@ -257,6 +257,7 @@ li .dimmed {
 .card {
     min-height: 500px !important;
     max-height:80vh !important;
+    border-radius:5px !important;
 }
 
 .page-link {
@@ -265,11 +266,13 @@ li .dimmed {
 
 .page-item {
     box-shadow:none;
+    border:none !important;
 }
 
 .page-item.active .page-link {
     background: royalblue !important;
-    border-color: #000 !important;
+    border-color: royalblue !important;
+    box-shadow:none !important;
 }
 
 .text-shadow {
@@ -315,6 +318,7 @@ h1 {
 
 .list-group-item {
     transition:all 0.3s;
+    border-color:rgba(0, 90, 255, 0.125);
 }
 
 .list-group-item.active {
@@ -344,4 +348,288 @@ h1 {
 .card-header {
     font-face:'Open Sans' !important;
     font-weight: 600 !important;
+}
+
+td {
+    line-height: 28px;
+    vertical-align: middle;
+}
+
+nav li.page-item {
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+    border-right: 0px;
+}
+
+nav li.page-item:last-of-type {
+    border-right: 1px solid #ddd;
+}
+
+nav li.page-item.active a {
+    background: #555 !important;
+}
+
+nav li.page-item.active {
+    border-color: #555;
+}
+
+nav li.page-item:hover a {
+    color: #000 !important;
+}
+
+nav li.page-item.active:hover a {
+    color: #fff !important;
+}
+
+.page-item a {
+    color: #888;
+}
+
+table .badge-pill {
+    min-width: 80px;
+}
+
+label {
+    width: 100%;
+    display: block;
+}
+
+.formSection {
+    border-radius: 4px !important;
+}
+
+.formSection .input-group label {
+    transition: all 0.25s;
+}
+
+.formSection .input-group:hover label {
+    color: #444 !important;
+    opacity: 1 !important;
+}
+
+.formSection .input-group-text {
+    background: #5a6169 !important;
+    border-left: 3px #333 solid !important;
+    color: #fff !important;
+}
+
+.modal .input-group-text {
+    text-transform: capitalize;
+}
+
+.formSection:hover .input-group-text {
+    border-left: 3px #000 solid !important;
+    background: #000 !important;
+    transition: all 0.3s !important;
+}
+
+.formSection .card-header {
+    border-radius: 4px 4px 0px 0px !important;
+    transition: all 0.25s;
+    padding: 10px 10px;
+    border-color: #c8d3de !important;
+    text-transform: capitalize;
+    border-bottom: 1px solid #999;
+    margin-bottom: 20px !important;
+}
+
+.formSection .card-header h6 {
+    color: #333 !important;
+    font-weight: 600 !important;
+    font-size: .8125rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 300;
+    margin-bottom: 0px !important;
+    transition: all 0.25s;
+}
+
+.formSection .card-body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.formEditButton {
+    opacity: 0;
+}
+
+.formSection .input-group:hover .formEditButton, #tagsCard:hover .formEditButton, #contentDetails:hover .formEditButton {
+    opacity: 1;
+    transition: all 0.25s !important;
+}
+
+.formSection .input-group {
+    transition: all 0.25s !important;
+}
+
+.explicitButtons .formEditButton {
+    opacity: 1 !important;
+}
+
+.card-header {
+    border-radius: 5px 5px 0px 0px !important;
+}
+
+.card-text p {
+    margin: 0px;
+}
+
+.text-truncate div, .text-truncate p, .text-truncate h1, .text-truncate h2, .text-truncate h3, .text-truncate h4, .text-truncate h5, .text-truncate h6 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+textarea {
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+}
+
+.text-success i, .text-danger i {
+    opacity: 0.5;
+}
+
+.text-success {
+    color: #666 !important;
+}
+
+.text-success i {
+    color: #41c076 !important;
+}
+
+.btn-disabled {
+    opacity: 0.6;
+    background: #fff !important;
+    color: #333 !important;
+    border: 1px solid #333 !important;
+    cursor: not-allowed !important;
+}
+
+.btn-dimmed {
+    opacity: 0.75;
+}
+
+.btn-dimmed:hover {
+    opacity: 1;
+}
+
+.fieldData {
+    border-radius: 4px;
+    border: 1px solid #efefef;
+    transition: all 0.25s;
+    width: 100%;
+}
+
+.input-group:hover .fieldData {
+    border-color: royalblue;
+    background: #fafafa;
+}
+
+.formSection:hover .card-header {
+    border-bottom-color: #c8d3de;
+    background: #f8f8ff;
+}
+
+.formSection .input-group .badge {
+    background: #eaeaea !important;
+    border: 1px solid #ffffff !important;
+    color: #212529 !important;
+}
+
+#contentDetails .badge {
+    opacity: 0.5;
+    background: #eaeaea !important;
+    border: 1px solid #ffffff !important;
+    color: #212529 !important;
+    transition: all 0.25s;
+    margin-top: 5px;
+}
+
+#contentDetails:hover .badge {
+    opacity: 1;
+}
+
+.modal-fluid textarea {
+    height: calc(100vh - 250px) !important;
+}
+
+.badge-tag {
+    background: #444 !important;
+    border: 1px solid #444 !important;
+    color: #fff !important;
+    transition: all 0.25s;
+}
+
+.badge-tag span {
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    padding: 2px 4px 3px 4px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.badge-tag:hover span {
+    background: #fff;
+    color: #333;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2), 0px 5px 25px rgba(0, 0, 0, 0.3);
+}
+
+.badge-tag:hover {
+    color: #eee !important;
+    border: 1px solid #a5a5a5 !important;
+    background: #a5a5a5 !important;
+}
+
+#contentDetails .badge, #tagsCard .fieldData {
+    background: #eaeaea !important;
+    border: 1px solid #ffffff !important;
+    color: #212529 !important;
+    opacity: 0.5;
+}
+
+#contentDetails:hover .badge, #tagsCard:hover .fieldData {
+    opacity: 1;
+}
+
+.formSection input {
+    transition: all 0.25s;
+}
+
+.formSection:hover input {
+    background: #fafafa !important;
+}
+
+.badge-price {
+    min-width: 100px;
+}
+
+.deleteResource:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.viewResource {
+    padding-top: 5px;
+}
+
+.viewResource:hover {
+    cursor: pointer;
+    color: #000;
+}
+
+.modal-header .expand {
+    top: 16px;
+    right: 70px;
+    position: absolute;
+    opacity: 0.5;
+    padding: 10px;
+    cursor: pointer;
+    -webkit-text-stroke: 1px #888;
+}
+
+.modal-header .close{
+    top: 4px;
+    position: relative;
 }

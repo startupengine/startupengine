@@ -866,3 +866,27 @@ function makeMessage($item)
         return $message;
     }
 }
+
+
+// *************
+// Message Views
+// *************
+
+function stripeKey(){
+    if(ENV('APP_ENV') == 'local'){
+        return(ENV('STRIPE_TEST_KEY'));
+    }
+    else {
+        return(ENV('STRIPE_KEY'));
+    }
+}
+
+function renderStripeAppJs($options = [])
+{
+    if(!isset($options['USER_ID'])){
+        $options['USER_ID'] = \Auth::user()->id;
+    }
+    $view = View::make('components.stripe_app_js')->with('options', $options);
+    $contents = (string)$view;
+    return $contents;
+}
