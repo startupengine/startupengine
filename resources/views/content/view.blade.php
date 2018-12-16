@@ -18,7 +18,7 @@
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row">
-            <div class="col-md-12 mx-3 mb-3">
+            <div class="col-md-12 px-4 mb-3">
                 <h1 class="welcome-heading display-4 text-white text-center text-shadow">{{ $post->title }}</h1>
                 <p class="text-white pt-2 text-center text-shadow" style="font-size:130%;">{{ $post->excerpt() }}</p>
                 @if(count($post->tags) > 0)

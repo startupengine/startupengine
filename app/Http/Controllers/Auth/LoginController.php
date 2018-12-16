@@ -57,7 +57,7 @@ class LoginController extends Controller
             $route = '/admin';
         }
         else {
-            $route = '/docs';
+            $route = '/app/account';
         }
         return redirect($route);
     }

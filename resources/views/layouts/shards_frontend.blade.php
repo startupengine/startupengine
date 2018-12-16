@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/styles/shards.min.css">
     <link rel="stylesheet" href="/styles/shards-extras.min.css">
     <link rel="stylesheet" href="/styles/shards-custom.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 @yield('css')
 
@@ -110,8 +111,8 @@
                                         @if(\Auth::user()->hasPermissionTo('view backend'))<a class="dropdown-item"
                                                                                               href="/admin"><i
                                                     class="fa fa-fw fa-lock mr-2 dimmed"></i>Admin Panel</a>@endif
-                                        <a class="dropdown-item" href="/admin"><i
-                                                    class="fa fa-fw fa-cog mr-2 dimmed"></i>Profile</a>
+                                        <a class="dropdown-item" href="/app/account"><i
+                                                    class="fa fa-fw fa-cog mr-2 dimmed"></i>My Account</a>
                                         <a class="dropdown-item" href="/logout"><i
                                                     class="fa fa-fw fa-sign-out text-danger mr-2 dimmed"></i>Sign Out</a>
                                     </div>
@@ -194,6 +195,10 @@
                         </li>
                     @endif
                     @if(\Auth::user())
+                        <li class="nav-item w-100">
+                            <a class="nav-link text-dark" href="/app/account">My Account</a>
+                        </li>
+
                         <li class="nav-item w-100">
                             <a class="nav-link text-danger" href="/logout">Sign Out <br><span
                                         class="text-dark dimmed mt-1">Logged in as {{ \Auth::user()->name }}</span></a>

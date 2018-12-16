@@ -16,7 +16,7 @@
 @endsection
 
 @section('navbar-classes')
-    dark filled
+    filled
 @endsection
 
 @section('splash-class')

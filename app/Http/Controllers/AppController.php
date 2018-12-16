@@ -42,7 +42,7 @@ class AppController extends Controller
                     if($page != null){
                         $route = '/'.$page->slug;
                     }
-                    else { $route = '/docs';}
+                    else { $route = '/app/account';}
                 }
                 elseif(\Auth::user()->hasPermissionTo('view backend')) { $route = '/admin'; }
                 else { $route = '/'; }

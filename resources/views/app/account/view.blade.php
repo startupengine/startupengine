@@ -1,8 +1,49 @@
-@extends('layouts.shards_admin')
+@extends('layouts.shards_frontend')
 
-@section('title') Pages - <?php echo setting('site.title'); ?> @endsection
+@section('php-variables')
+    <?php $viewOptions['splash-height'] = '300px'; ?>
+@endsection
+
+@section('title')
+    Account
+@endsection
+
+@section('meta-description')
+    <?php echo setting('admin.description') ?>
+@endsection
 
 @section('css')
+    <style>
+        .avatar-large {
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+            display: inline-block;
+            background: url('{{ \Auth::user()->avatar() }}');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card.border {
+            border-color: #cfd8e2 !important;
+        }
+
+        .card-header{
+            background:#fff !important;
+        }
+
+        .card{
+            height:auto !important;
+            min-height:auto !important;
+        }
+
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
+
     <style>
         td {
             line-height: 28px;
@@ -276,57 +317,45 @@
             color: #000;
         }
 
+        #contentForm .col-lg-9 {
+            min-width: 100% !important;
+        }
+
     </style>
-    <link href="https://cdn.quilljs.com/1.3.4/quill.core.css" rel="stylesheet">
-    <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
-    <link href="https://cdn.quilljs.com/1.3.4/quill.bubble.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 @endsection
 
-@section('head')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
-
+@section('navbar-classes')
+    dark
 @endsection
 
-@section('page-title') {{ ucwords($item->schema()->lang->en->singular) }} <span
-        style="opacity:0.5;"># {{ $item->id }}</span>@endsection
-
-@section('top-menu')
-
-    @if( count(json_decode(json_encode($item->schema()->sections), true)) > 0 OR  count(json_decode(json_encode($item->schema()->fields), true)))
-        <div class="col-md-6 col-sm-6 pageNav justify-content-right">
-            <div class="btn-group my-1">
-                @if(isset($options['buttons']['top_nav']))
-
-                    @foreach($options['buttons']['top_nav'] as $button)
-                        <a href="{{ $button['link'] }}" @if(isset($button['target'])) target="{{ $button['target'] }}"
-                           @endif class="btn {{ $button['class'] }}">{!! $button['text'] !!}</a>
-                    @endforeach
-
-                @endif
-                <a href="#" class="btn btn-secondary" id="editContentButton" style="">
-                    <i class="material-icons mr-2">edit</i> <span class="mr-1">Edit  <span
-                                class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span></span>
-                </a>
-                <div class="btn btn-danger px-3" data-toggle="modal"
-                     data-target="#modal-delete"><i class="material-icons mr-2">delete</i> Delete <span
-                            class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span>
-                </div>
-            </div>
-
-        </div>
-    @endif
-
+@section('splash-class')
+    minimal
 @endsection
+
 
 @section('content')
-    {!! renderResourceEditorForm(null, \Auth::user()) !!}
+    <!-- Related Content Section -->
+    <div class="blog section section-invert pt-4 pb-0" style="min-height:100vh;">
+        <h3 class="section-title text-center mb-5 mt-3">My Account</h3>
 
+        <div class="container">
+            <div class="row pt-2">
+                <div class="pt-0 mb-3 col-md-3 pull-left">
+                    <ul class="list-group">
+                        <li class="list-group-item active"><i class="material-icons mr-2">person</i>Profile</li>
+                        <li class="list-group-item"><i class="material-icons mr-2">credit_card</i>Payment Details</li>
+                        <li class="list-group-item"><i class="material-icons mr-2">subscriptions</i>Subscriptions</li>
+                        <li class="list-group-item"><i class="material-icons mr-2">settings</i>Preferences</li>
+                    </ul>
+                </div>
+                <div class="pt-0 mb-3 col-md-9" id="contentApp">
+                    {!! renderResourceEditorForm($options, \Auth::user()) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Related Content Section -->
 @endsection
-
 
 @section('scripts')
     <script src="{{ ENV('APP_URL') }}/js/components/ace-editor-vue-component.js"></script>

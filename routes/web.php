@@ -54,6 +54,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/subscription/submit/', 'SubscriptionController@submitSubscription')->name('submitSubscription');
     Route::post('/subscription/submit/', 'SubscriptionController@submitSubscription');
 
+    //App
+    Route::get('/app/account', 'AccountController@view')->name('account');
+
 });
 
 // Admin Control Panel

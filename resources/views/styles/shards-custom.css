@@ -212,7 +212,7 @@ li .dimmed {
 }
 
 #topNavbar.dark {
-    background: #3d8cff !important;
+    background: #2d2d2d !important;
 }
 
 #topNavbar.filled {
@@ -303,4 +303,45 @@ h1 {
 .modal-backdrop.show {
     opacity: 0.6 !important;
     background-color:#000 !important;
+}
+
+.no-shadow{
+    box-shadow: none !important;
+}
+
+.section-invert {
+    background:linear-gradient(#e9f0ff, #fff) !important;
+}
+
+.list-group-item {
+    transition:all 0.3s;
+}
+
+.list-group-item.active {
+    background-color: #d9e8ff !important;
+    color: #000;
+    border-color: #bfd5fb !important;
+}
+
+.list-group-item:not(.active):hover {
+    background:#f2f8ff;
+}
+
+.list-group-item:hover i {
+    opacity:1;
+    color: #6464e1;
+}
+
+.list-group-item i {
+    opacity: 0.5;
+    transition:all 0.3s;
+}
+.list-group-item.active i {
+    color: #6464e1;
+    opacity:1;
+}
+
+.card-header {
+    font-face:'Open Sans' !important;
+    font-weight: 600 !important;
 }
