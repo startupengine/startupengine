@@ -21,6 +21,12 @@
                 sortField: '{{ $options['SORT_BY'] }}',
                 sortDirection: '-',
                 sortString: @if(isset($options['SORT_STRING'])) '{!! $options['SORT_STRING'] !!}' @else '' @endif,
+                withAnyTags: {!! $options['WITH_ANY_TAGS'] !!},
+                withAnyTagsString: '',
+                withAllTags: {!! $options['WITH_ALL_TAGS'] !!},
+                withAllTagsString: '',
+                withoutTags: {!! $options['WITHOUT_TAGS'] !!},
+                withoutTagsString: '',
                 startDate: '',
                 endDate: ''
             }
@@ -45,8 +51,30 @@
                 axios
                     .get(url)
                     .then(response => (item.deleted_at = null)
-            )
-                ;
+            );
+            },
+            updateTags(withAny, withAll, without){
+                if (withAny != null) {
+                    this.withAnyTags = withAny;
+                }
+                this.withAnyTagsString  = '&withAnyTag=';
+                for (var tag in this.withAnyTags) {
+                    this.withAnyTagsString = this.withAnyTagsString + this.withAnyTags[tag] + ',';
+                }
+                if (withAll != null) {
+                    this.withAllTags = withAll;
+                }
+                this.withAllTagsString  = '&withAllTags=';
+                for (var tag in this.withAllTags) {
+                    this.withAllTagsString = this.withAllTagsString + this.withAllTags[tag] + ',';
+                }
+                if (without != null) {
+                    this.withoutTags = without;
+                }
+                this.withoutTagsString  = '&withoutTags=';
+                for (var tag in this.withAllTags) {
+                    this.withoutTagsString = this.withoutTagsString + this.withoutTags[tag] + ',';
+                }
             },
             updateData(pageNumber) {
                 if (pageNumber != null) {
@@ -60,10 +88,10 @@
                 $('.dataRow').hide();
                 $('.loadingRow').show();
                 if (this.filters !== null) {
-                    var string = '{{ $options['url'] }}?{{ $options['GLOBAL_FILTER'] }}&page[number]=' + pageNumber + '&perpage=' + this.perPage + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString;
+                    var string = '{{ $options['url'] }}?{{ $options['GLOBAL_FILTER'] }}&page[number]=' + pageNumber + '&perpage=' + this.perPage + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
                 }
                 else {
-                    var string = '{{ $options['url'] }}?{{ $options['GLOBAL_FILTER'] }}&page[number]=' + pageNumber + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString;
+                    var string = '{{ $options['url'] }}?{{ $options['GLOBAL_FILTER'] }}&page[number]=' + pageNumber + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
                 }
                 if(this.startDate != ''){
                     string = string + '&startDate=' + this.startDate;
@@ -157,7 +185,8 @@
         },
         mounted() {
             this.updateFilters(this.filters);
-            var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{{ $options['GLOBAL_FILTER'] }}' + this.sortString;
+            this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
+            var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{{ $options['GLOBAL_FILTER'] }}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
             console.log(url);
             var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}};
             axios

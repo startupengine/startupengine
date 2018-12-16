@@ -653,11 +653,21 @@ function renderResourceTableScriptsDynamically($options = null){
         $options['DISPLAY_FORMAT'] = 'list';
     }
 
-
     if(!isset($options['SORT_BY'])){
         $options['SORT_BY'] = 'created_at';
     }
 
+    if(!isset($options['WITHOUT_TAGS'])){
+        $options['WITHOUT_TAGS'] = '{}';
+    }
+
+    if(!isset($options['WITH_ANY_TAGS'])){
+        $options['WITH_ANY_TAGS'] = '{}';
+    }
+
+    if(!isset($options['WITH_ALL_TAGS'])){
+        $options['WITH_ALL_TAGS'] = '{}';
+    }
 
     $view = View::make('admin.components.resource_table_js', ['options' => $options]);
     $contents = (string) $view;

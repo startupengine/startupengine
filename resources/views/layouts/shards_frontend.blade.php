@@ -97,9 +97,9 @@
                                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                        aria-expanded="false">
                                         @if(\Auth::user()->avatar != null) <span class="d-inline-block"
-                                                                                 style="height:25px;width:25px;border-radius:25px;background:url('{{ \Auth::user()->avatar }}');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:20px;margin-right:10px;position:absolute;float:left;">&nbsp;</span> @endif
+                                                                                 style="height:25px;width:25px;border-radius:25px;background:url('{{ \Auth::user()->avatar }}');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:22px;margin-right:10px;position:absolute;float:left;">&nbsp;</span> @endif
                                         <span class="d-inline-block"
-                                              style="margin-left:23px;height:20px;width:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
+                                              style="margin-left:25px;height:20px;width:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         @if(\Auth::user()->hasPermissionTo('view backend'))<a class="dropdown-item"
