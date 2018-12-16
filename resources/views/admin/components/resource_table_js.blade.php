@@ -140,8 +140,8 @@
                     }
                 }
                 for (var filter in this.filters) {
-                    if (filters.hasOwnProperty(filter)) {
-                        this.filterString = this.filterString + filters[filter] + ',';
+                    if (this.filters.hasOwnProperty(filter)) {
+                        this.filterString = this.filterString + this.filters[filter] + ',';
                     }
                 }
                 this.updateData();

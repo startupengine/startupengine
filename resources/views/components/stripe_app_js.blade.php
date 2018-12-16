@@ -14,6 +14,15 @@
                 },
                 updateInfo(info){
                     this.info = info;
+                    if(this.info.data.meta.status == 'success') {
+                        $("#lastFour").text(this.payload.token.card.last4);
+                        $("#card-element").hide();
+                        $("#stripeApp").addClass('status-success');
+                    }
+                    if(this.info.data.meta.status == 'error') {
+                        $("#stripeApp").addClass('status-error');
+                    }
+
                     this.status = 'loaded';
                 },
                 updatePayload(payload){

@@ -96,15 +96,15 @@
 
                         @if(\Auth::user())
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item dropdown" id="accountDropdown">
+                                <li class="nav-item dropdown ml-2" id="accountDropdown">
 
-                                    <a class="btn btn-pill btn-light text-dark ml-2 dropdown-toggle" href="#"
+                                    <a class="btn btn-pill btn-light text-dark  dropdown-toggle" href="#"
                                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                        aria-expanded="false">
                                         @if(\Auth::user()->avatar != null) <span class="d-inline-block"
-                                                                                 style="height:25px;width:25px;border-radius:25px;background:url('{{ \Auth::user()->avatar }}');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:22px;margin-right:10px;position:absolute;float:left;">&nbsp;</span> @endif
+                                                                                 style="height:25px;width:25px;border-radius:25px;background:url('{{ \Auth::user()->avatar }}');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:15px;margin-right:10px;position:absolute;float:left;">&nbsp;</span> @endif
                                         <span class="d-inline-block"
-                                              style="margin-left:25px;height:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
+                                              style="margin-left:30px;height:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right w-100" aria-labelledby="navbarDropdown">
                                         @if(\Auth::user()->hasPermissionTo('view backend'))<a class="dropdown-item"

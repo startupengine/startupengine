@@ -74,6 +74,23 @@
         #card-errors {
             margin-top: 10px !important;
         }
+
+        #stripeApp .btn-success{
+            display:none;
+        }
+
+        #stripeApp .btn-danger{
+            display:none;
+        }
+
+        .status-success .btn-success {
+            display:inline-block;
+        }
+
+        .status-error .btn-danger {
+            display:inline-block;
+        }
+
     </style>
 @endsection
 
@@ -101,8 +118,8 @@
                         <div class="card-header border-bottom">Payment Details</div>
                         <div class="card-body">
                             @if(\Auth::user()->card_last_four != null)
-                                <p class="card-text">Card on file ends in
-                                    <strong> {{ \Auth::user()->card_last_four }}</strong></p>
+                                <p class="card-text">Card on file ends in&nbsp;
+                                    <strong id="lastFour">{{ \Auth::user()->card_last_four }}</strong></p>
                             @endif
 
                             <form v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0"

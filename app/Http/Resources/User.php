@@ -22,6 +22,7 @@ class User extends JsonResource
         $fields['avatar'] = $this->avatar;
         $fields['status'] = $this->status;
         $fields['bio'] = $this->bio;
+        $fields['subscriptions'] = $this->subscriptions;
         if($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }

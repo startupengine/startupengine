@@ -83,6 +83,10 @@ class User extends AuthUser implements AuditableContract, UserResolver
         return \Auth::check() ? \Auth::user()->getAuthIdentifier() : null;
     }
 
+    public function subscriptions(){
+        return $this->hasMany('App\Subscription');
+    }
+
     public function stripeCustomer($source = null)
     {
         \Stripe\Stripe::setApiKey(stripeKey('secret'));

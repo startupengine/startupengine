@@ -410,7 +410,16 @@ function addQueryConditions($request, $query, $model, $name)
                 if (strpos($filter, '!=') !== false) {
                     $elements = explode('!=', $filter);
                     $operand = '!=';
-                } elseif (strpos($filter, '=') !== false) {
+                }
+                elseif (strpos($filter, '>=') !== false) {
+                    $elements = explode('>=', $filter);
+                    $operand = '>=';
+                }
+                elseif (strpos($filter, '<=') !== false) {
+                    $elements = explode('<=', $filter);
+                    $operand = '<=';
+                }
+                elseif (strpos($filter, '=') !== false) {
                     $elements = explode('=', $filter);
                     $operand = '=';
                 } elseif (strpos($filter, '<') !== false) {
