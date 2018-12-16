@@ -55,8 +55,8 @@
             box-shadow: 0 1px 3px 0 #e6ebf1;
             -webkit-transition: box-shadow 150ms ease;
             transition: box-shadow 150ms ease;
-            margin-right:5px;
-            margin-left:5px;
+            margin-right: 5px;
+            margin-left: 5px;
         }
 
         .StripeElement--focus {
@@ -72,7 +72,7 @@
         }
 
         #card-errors {
-            margin-top:10px !important;
+            margin-top: 10px !important;
         }
     </style>
 @endsection
@@ -101,10 +101,12 @@
                         <div class="card-header border-bottom">Payment Details</div>
                         <div class="card-body">
                             @if(\Auth::user()->card_last_four != null)
-                                <p class="card-text">Card on file ends in <strong> {{ \Auth::user()->card_last_four }}</strong></p>
+                                <p class="card-text">Card on file ends in
+                                    <strong> {{ \Auth::user()->card_last_four }}</strong></p>
                             @endif
 
-                            <form  v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0" style="width:100%; text-align:right;" >
+                            <form v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0"
+                                  style="width:100%; text-align:right;">
                                 <div class="form-row justify-content-center">
 
                                     <div id="card-element" style="width:100%;">
@@ -114,9 +116,18 @@
                                     <!-- Used to display form errors. -->
                                     <div id="card-errors" role="alert"></div>
                                 </div>
-                                <button class="btn btn-primary mt-2 pull-right" v-if="info.data == null">Update Payment Details</button>
-                                <div v-else-if="info.data.meta != null && info.data.meta.status != null && info.data.meta.status == 'success'" class="btn btn-success disabled mt-2 pull-right">
-                                    Success!
+                                <button class="btn btn-primary mt-2 pull-right" v-if="info.data == null">Update Payment
+                                    Details
+                                </button>
+                                <div v-else>
+                                    <div v-if="info.data.meta != null && info.data.meta.status != null && info.data.meta.status == 'success'"
+                                         class="btn btn-success disabled mt-2 text-dark pull-right">
+                                        <i class="fa fa-check-circle mr-2"></i>Success!
+                                    </div>
+                                    <button v-else-if="info.data.meta != null && info.data.meta.status != null && info.data.meta.status == 'errir'"
+                                            class="btn btn-danger mt-2 pull-right">
+                                        Try Again
+                                    </button>
                                 </div>
                             </form>
 
@@ -167,7 +178,7 @@
         card.mount('#card-element');
 
         // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function(event) {
+        card.addEventListener('change', function (event) {
             var displayError = document.getElementById('card-errors');
             if (event.error) {
                 displayError.textContent = event.error.message;
@@ -178,10 +189,10 @@
 
         // Handle form submission.
         var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
 
-            stripe.createToken(card).then(function(result) {
+            stripe.createToken(card).then(function (result) {
                 if (result.error) {
                     // Inform the user if there was an error.
                     var errorElement = document.getElementById('card-errors');
@@ -206,7 +217,7 @@
             console.log(token.id);
 
             // Submit the form
-            stripeApp.updatePayload({token:token, userId: userId});
+            stripeApp.updatePayload({token: token, userId: userId});
             //form.submit();
 
         }

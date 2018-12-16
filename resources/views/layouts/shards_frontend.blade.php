@@ -45,7 +45,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark px-0 fixed-top @yield('navbar-classes') " id="topNavbar">
             <div class="container px-2 px-md-0">
                 <a class="navbar-brand" href="/">
-                    <img src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}" style="max-height:30px;"
+                    <img src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}" style="min-width:30px;max-height:30px;display:inline-block;"
                          class="mr-2" alt="{{ setting('site.name') }}">
                     <span class="ml-1">{{ setting('site.name') }}</span>
                 </a>
