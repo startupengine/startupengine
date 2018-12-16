@@ -100,7 +100,11 @@
                     <div class="card">
                         <div class="card-header border-bottom">Payment Details</div>
                         <div class="card-body">
-                            <form  v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0" style="width:100%; text-align:right;">
+                            @if(\Auth::user()->card_last_four != null)
+                                <p class="card-text">Card on file ends in <strong> {{ \Auth::user()->card_last_four }}</strong></p>
+                            @endif
+
+                            <form  v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0" style="width:100%; text-align:right;" >
                                 <div class="form-row justify-content-center">
 
                                     <div id="card-element" style="width:100%;">
@@ -110,8 +114,12 @@
                                     <!-- Used to display form errors. -->
                                     <div id="card-errors" role="alert"></div>
                                 </div>
-                                <button class="btn btn-primary mt-2 pull-right">Update Payment Details</button>
+                                <button class="btn btn-primary mt-2 pull-right" v-if="info.data == null">Update Payment Details</button>
+                                <div v-else-if="info.data.meta != null && info.data.meta.status != null && info.data.meta.status == 'success'" class="btn btn-success disabled mt-2 pull-right">
+                                    Success!
+                                </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

@@ -83,18 +83,23 @@ class User extends AuthUser implements AuditableContract, UserResolver
         return \Auth::check() ? \Auth::user()->getAuthIdentifier() : null;
     }
 
-    public function stripeCustomer($token = null)
+    public function stripeCustomer($source = null)
     {
-        \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        if ($token == null) {
-            return \Stripe\Customer::retrieve($this->stripe_id);
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        if ($source == null) {
+            $customer = \Stripe\Customer::retrieve($this->stripe_id);
+            return $customer;
 
         } else {
 
             $customer = \Stripe\Customer::create(array(
                 "description" => "Customer for $this->email",
-                "source" => "$token" // obtained with Stripe.js
+                "source" => "$source", // obtained with Stripe.js
+                "email" => $this->email
             ));
+
+            $this->stripe_id = $customer->id;
+            $this->save();
 
             return $customer;
         }

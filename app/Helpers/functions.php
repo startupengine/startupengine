@@ -872,7 +872,10 @@ function makeMessage($item)
 // Message Views
 // *************
 
-function stripeKey(){
+function stripeKey($type = null){
+    if($type == 'secret'){
+        return(ENV('STRIPE_SECRET'));
+    }
     if(ENV('APP_ENV') == 'local'){
         return(ENV('STRIPE_TEST_KEY'));
     }
