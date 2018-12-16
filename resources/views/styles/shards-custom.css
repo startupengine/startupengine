@@ -245,11 +245,62 @@ li .dimmed {
 }
 
 .message .navbar-dark {
-    background:#000;
+    background:linear-gradient(#222, #111, #000);
     color:#fff;
     border:none !important;
 }
 
 .hasMessage #topNavbar {
     margin-top:50px !important;
+}
+
+.card {
+    min-height: 500px !important;
+    max-height:80vh !important;
+}
+
+.page-link {
+    background: #fff !important;
+}
+
+.page-item {
+    box-shadow:none;
+}
+
+.page-item.active .page-link {
+    background: royalblue !important;
+    border-color: #000 !important;
+}
+
+.text-shadow {
+    text-shadow: 1px 2px 5px rgba(0,50,100,0.3),  1px 2px 15px rgba(0,50,100,0.3);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans';
+}
+
+h1 {
+    font-weight:500 !important;
+}
+
+.invisible {
+    opacity:0;
+    transition: all 0.5s;
+}
+
+.visible {
+    opacity:1 !important;
+    display:flex !important;
+    transition: all 0.5s;
+}
+
+.toggleVisibility {
+    display:none;
+    transition: all 0.5s !important;
+}
+
+.modal-backdrop.show {
+    opacity: 0.6 !important;
+    background-color:#000 !important;
 }

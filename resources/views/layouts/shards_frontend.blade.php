@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/styles/shards.min.css">
     <link rel="stylesheet" href="/styles/shards-extras.min.css">
     <link rel="stylesheet" href="/styles/shards-custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 @yield('css')
 
 <!-- FAVICONS -->
@@ -26,10 +27,14 @@
 @if(isset($message))
 <!-- Welcome Section -->
 <div class="message">
-    <nav class="navbar navbar-expand-lg navbar-dark px-2 fixed-top justify-content-center" id="messageNavbar">
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top px-2 py-2" id="messageNavbar">
+        <div class="container px-0 justify-content-center">
         @if(isset($message['html'])){!! $message['html'] !!}
         @elseif(isset($message['text'])){{ $message['text'] }} @endif
+        </div>
     </nav>
+
 </div>
 @endif
 
@@ -136,7 +141,7 @@
 
 
 <!-- Mobile Nav Modal -->
-<div class="modal" tabindex="-1" role="dialog" id="navModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="navModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

@@ -182,6 +182,11 @@ class PostController extends Controller
     public function getItemsByTag($tag)
     {
         $tag = \App\Tag::where('slug', '=', $tag)->first();
-        return view('content.tags.index')->with('tag', $tag);
+        if($tag == null){
+            abort(404);
+        }
+        else {
+            return view('content.tags.index')->with('tag', $tag);
+        }
     }
 }

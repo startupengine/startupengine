@@ -1,6 +1,7 @@
 <?php
 
-function get_nested_property($property, $object) {
+function get_nested_property($property, $object)
+{
     return $object->{$property};
 }
 
@@ -9,26 +10,24 @@ function setting($key, $default = null)
 
     $originalKey = $key;
     if (strpos($key, '->') == true) {
-        $jsonKey = substr($key, strpos($key, "->")+2);
+        $jsonKey = substr($key, strpos($key, "->") + 2);
         $key = explode("->", $key);
         $string = $key[0];
-    }
-    else {
+    } else {
         $string = $key;
     }
 
     $setting = \App\Setting::where('key', '=', $string)->first();
 
 
-    if (strpos($originalKey , '->') !== false) {
+    if (strpos($originalKey, '->') !== false) {
 
         $value = $setting->content();
-        foreach (explode('->',$jsonKey) as $property) {
+        foreach (explode('->', $jsonKey) as $property) {
             $value = get_nested_property($property, $value);
         }
         return $value;
-    }
-    else {
+    } else {
         if ($setting !== null && $setting->value !== null) {
             $output = $setting->value;
         } elseif ($setting == null && $default == null) {
@@ -50,8 +49,7 @@ function findKey($array, $keySearch)
     if (array_key_exists($keySearch, $array)) return true;
 
     // key isn't in this array, go deeper
-    foreach($array as $key => $val)
-    {
+    foreach ($array as $key => $val) {
         // return true if it's found
         if (findKey($val, $keySearch)) return true;
     }
@@ -66,7 +64,7 @@ function get_array_value(array $array, array $indexes)
     }
 
     $index = array_shift($indexes);
-    if(!array_key_exists($index, $array)){
+    if (!array_key_exists($index, $array)) {
         return false;
     }
 
@@ -75,7 +73,7 @@ function get_array_value(array $array, array $indexes)
         return $value;
     }
 
-    if(!is_array($value)) {
+    if (!is_array($value)) {
         return false;
     }
 
@@ -89,28 +87,25 @@ function get_array_value(array $array, array $indexes)
     */
 }
 
-function convertSchemaToValidationArray($field, $validations){
+function convertSchemaToValidationArray($field, $validations)
+{
     $array = [];
-    foreach($validations as $validation => $value){
+    foreach ($validations as $validation => $value) {
         $field = str_replace('.', '->', $field);
 
         if ($validation == "required" && $value == "true") {
             $newvalue = "$validation";
-        }
-        elseif ($validation == "numeric" && $value == "true") {
+        } elseif ($validation == "numeric" && $value == "true") {
             $newvalue = "$validation";
-        }
-        elseif ($validation == "url" && $value == "true") {
+        } elseif ($validation == "url" && $value == "true") {
             $newvalue = "$validation";
-        }
-        else {
+        } else {
             $newvalue = "$validation:$value";
         }
 
-        if(isset($array[strtolower($field)])) {
-            $array[strtolower($field)] = $array[strtolower($field)] . "|". $newvalue;
-        }
-        else {
+        if (isset($array[strtolower($field)])) {
+            $array[strtolower($field)] = $array[strtolower($field)] . "|" . $newvalue;
+        } else {
             $array[strtolower($field)] = $newvalue;
         }
     }
@@ -118,12 +113,14 @@ function convertSchemaToValidationArray($field, $validations){
     return $array;
 }
 
-function convertDotsToArrows($text){
+function convertDotsToArrows($text)
+{
     $text = strtolower(str_replace('.', '->', $text));
     return $text;
 }
 
-function arrowsToArray($text, $value){
+function arrowsToArray($text, $value)
+{
     $strings = array($text);
     $nested_array = array();
 
@@ -131,29 +128,30 @@ function arrowsToArray($text, $value){
     $total = count($exploded);
 
     $count = 1;
-    foreach($strings as $item) {
+    foreach ($strings as $item) {
 
-            $temp = &$nested_array;
-            foreach ($exploded as $key) {
-                $temp = &$temp[$key];
-                $count = $count + 1;
-                if($count == $total){
-                    $temp = 'test';
-                    //dd($exploded[3]);
-                    //dd($key);
-                    //dd();
-                    $temp = [$exploded[$total-1] => $value];
-                    $output = $nested_array;
+        $temp = &$nested_array;
+        foreach ($exploded as $key) {
+            $temp = &$temp[$key];
+            $count = $count + 1;
+            if ($count == $total) {
+                $temp = 'test';
+                //dd($exploded[3]);
+                //dd($key);
+                //dd();
+                $temp = [$exploded[$total - 1] => $value];
+                $output = $nested_array;
 
-                }
             }
-            //$temp = array();
+        }
+        //$temp = array();
     }
 
     return $output;
 }
 
-function createSlug($str, $delimiter = '-'){
+function createSlug($str, $delimiter = '-')
+{
 
     $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
     return $slug;
@@ -161,11 +159,13 @@ function createSlug($str, $delimiter = '-'){
 }
 
 
-function jsonToPrettyString($string){
-    return ucwords(str_replace("_"," ",$string));
+function jsonToPrettyString($string)
+{
+    return ucwords(str_replace("_", " ", $string));
 }
 
-function callApi($url){
+function callApi($url)
+{
     $request = Request::create($url, 'GET');
     $response = Route::dispatch($request)->getContent();
     return json_decode($response);
@@ -173,55 +173,55 @@ function callApi($url){
 
 function button($path, $text, $type = null, $classes = null, $iconmarkup = null, $data = null, $element = null)
 {
-    if($type == 'new') {
-        $classes = $classes." btn btn-sm btn-round btn-secondary-outline ";
+    if ($type == 'new') {
+        $classes = $classes . " btn btn-sm btn-round btn-secondary-outline ";
         $iconmarkup = "&nbsp; <i class=\"fa fa-sm fa-plus-square-o\"></i>";
     }
-    if($type == 'edit') {
-        $classes = $classes." btn btn-sm btn-round btn-secondary-outline ";
+    if ($type == 'edit') {
+        $classes = $classes . " btn btn-sm btn-round btn-secondary-outline ";
         $iconmarkup = "&nbsp; <i class=\"fa fa-sm fa-edit\"></i>";
     }
-    if($type == 'save') {
+    if ($type == 'save') {
         $classes = $classes . " btn btn-sm btn-round btn-success ";
         $iconmarkup = "&nbsp; <i class=\"fa fa-sm fa-check-circle-o\"></i>";
     }
-        if($element == null) {
+    if ($element == null) {
         $element = 'a';
     }
 
-    if($path !== null) {
+    if ($path !== null) {
         $path = "href=\"$path\"";
     }
 
-    if($element == 'button') {
+    if ($element == 'button') {
         $elementMarkup = 'type="submit"';
-    }
-    else {
+    } else {
         $elementMarkup = null;
     }
 
-    $output = "<$element $elementMarkup $path class='$classes' $data>".ucwords($text)." $iconmarkup</$element>";
+    $output = "<$element $elementMarkup $path class='$classes' $data>" . ucwords($text) . " $iconmarkup</$element>";
     return $output;
 }
 
-function getStripeKeys(){
-    if(config('app.env') == 'local'){
+function getStripeKeys()
+{
+    if (config('app.env') == 'local') {
         $key = env('STRIPE_TEST_KEY');
         $secret = env('STRIPE_TEST_SECRET');
-    }
-    else {
+    } else {
         $key = env('STRIPE_KEY');
         $secret = env('STRIPE_SECRET');
     }
     return ["key" => $key, "secret" => $secret];
 }
 
-function updateSubscriptionProducts(){
+function updateSubscriptionProducts()
+{
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
     $products = \Stripe\Product::all();
-    foreach($products->data as $product){
+    foreach ($products->data as $product) {
         $item = \App\Product::where('stripe_id', '=', $product->id)->first();
-        if($item == null){
+        if ($item == null) {
             $item = new \App\Product();
         }
         $item->stripe_id = $product->id;
@@ -233,12 +233,13 @@ function updateSubscriptionProducts(){
     return $subscriptions;
 }
 
-function updateSubscriptionPlans(){
+function updateSubscriptionPlans()
+{
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
     $products = \Stripe\Product::all();
-    foreach($products->data as $product){
+    foreach ($products->data as $product) {
         $item = \App\Product::where('stripe_id', '=', $product->id)->withTrashed()->first();
-        if($item == null){
+        if ($item == null) {
             $item = new \App\Product();
         }
         $item->stripe_id = $product->id;
@@ -251,17 +252,17 @@ function updateSubscriptionPlans(){
 }
 
 
-function getStripePlans($id = null){
+function getStripePlans($id = null)
+{
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-    if($id !== null) {
+    if ($id !== null) {
         $plans = \Stripe\Plan::all(array("product" => $id));
-    }
-    else {
+    } else {
         $plans = \Stripe\Plan::all();
     }
-    foreach($plans->data as $plan){
+    foreach ($plans->data as $plan) {
         $item = \App\Plan::where('stripe_id', '=', $plan->id)->first();
-        if($item == null){
+        if ($item == null) {
             $item = new \App\Plan();
         }
         $item->stripe_id = $plan->id;
@@ -273,13 +274,15 @@ function getStripePlans($id = null){
     return $plans;
 }
 
-function newStripePlan($name, $productId){
+function newStripePlan($name, $productId)
+{
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-    $plan = \Stripe\Plan::create(array("product" => $productId,"name" => $name));
+    $plan = \Stripe\Plan::create(array("product" => $productId, "name" => $name));
     return $plan;
 }
 
-function createProductPlan($request){
+function createProductPlan($request)
+{
     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
     $plan = \Stripe\Plan::create(array(
         "interval" => $request->input('interval'),
@@ -295,23 +298,23 @@ function createProductPlan($request){
     return $record;
 }
 
-function valueExists($object, $array = null){
-    if(isset($object) !== null){
+function valueExists($object, $array = null)
+{
+    if (isset($object) !== null) {
         return $object;
-    }
-    else {
+    } else {
         return null;
     }
 }
 
-function mostPopularContent($postType, $limit = null){
-    if($limit == null) {
+function mostPopularContent($postType, $limit = null)
+{
+    if ($limit == null) {
         $posts = \App\Post::where('post_type', '=', $postType)->where('status', '=', 'PUBLISHED')->get();
-    }
-    else {
+    } else {
         $posts = \App\Post::where('post_type', '=', $postType)->where('status', '=', 'PUBLISHED')->limit($limit)->get();
     }
-    foreach ($posts as $post){
+    foreach ($posts as $post) {
         $post->views = count($post->views());
     }
     $posts = $posts->sortBy('views')->reverse();
@@ -322,24 +325,31 @@ function mostPopularContent($postType, $limit = null){
 // Resource API Logic
 // ******************
 
-function isResource($string){
+function isResource($string)
+{
     return in_array($string, ['event', 'content', 'log', 'package', 'page', 'permission', 'plan', 'preference', 'preferenceschema', 'product', 'role', 'setting', 'settingsgroup', 'subscription', 'tag', 'user']);
 }
 
-function isRelationship($model, $field){
-    if(isset($model->relationships()[$field])) {
+function isRelationship($model, $field)
+{
+    if (isset($model->relationships()[$field])) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
 
-function addQueryConditions($request, $query, $model, $name){
+function addQueryConditions($request, $query, $model, $name)
+{
     //Sort
-    if($request->input('sort')) {
+    if ($request->input('sort')) {
         $sortBy = $request->input('sort');
-        if($sortBy[0] == '-') { $sortDirection = "desc"; $sortBy = ltrim($sortBy,"-"); } else { $sortDirection = 'asc'; }
+        if ($sortBy[0] == '-') {
+            $sortDirection = "desc";
+            $sortBy = ltrim($sortBy, "-");
+        } else {
+            $sortDirection = 'asc';
+        }
 
         if (isRelationship($model, $sortBy)) {
             //dd(\App\Product::orderByJoin('purchases', $sortDirection, 'COUNT')->get());
@@ -349,70 +359,64 @@ function addQueryConditions($request, $query, $model, $name){
             //dd($products->has('purchases')->get());
             //dd($products->get());
             //dd($products->orderByJoin('purchases.id', 'asc', 'COUNT')->get());
-            if($request->input('sortMethod') != null) {
+            if ($request->input('sortMethod') != null) {
                 $sortMethod = 'COUNT';
-            }
-            else {
+            } else {
                 $sortMethod = $request->input('sortMethod');
             }
 
-            if($sortBy[0] == '-') {
+            if ($sortBy[0] == '-') {
                 $sortDirection == 'asc';
             }
-            $query->orderByJoin($sortBy.'.id', $sortDirection, $sortMethod);
+            $query->orderByJoin($sortBy . '.id', $sortDirection, $sortMethod);
 
-        }
-        else {
+        } else {
             $query->orderBy($sortBy, $sortDirection);
         }
     }
 
     //Tags
     $anyTags = $request->input('withAnyTag');
-    if($anyTags != null){
-        $anyTags = explode(',',$anyTags);
+    if ($anyTags != null) {
+        $anyTags = explode(',', $anyTags);
         $query->withAnyTag($anyTags);
     }
 
     $allTags = $request->input('withAllTags');
-    if($allTags != null){
-        $allTags = explode(',',$allTags);
+    if ($allTags != null) {
+        $allTags = explode(',', $allTags);
         $query->withAllTags($allTags);
     }
 
     $withoutTags = $request->input('withoutTags');
-    if($allTags != null){
-        $withoutTags  = explode(',',$withoutTags );
-        $query->withAllTags($withoutTags );
+    if ($allTags != null) {
+        $withoutTags = explode(',', $withoutTags);
+        $query->withAllTags($withoutTags);
     }
 
     //Filter
-    if($request->input('filter')) {
+    if ($request->input('filter')) {
         $filters = $request->input('filter');
         $filters = explode(',', $filters);
         $wheres = [];
-        foreach($filters as $filter) {
-            if(strpos($filter, '->') !== false) {
+        foreach ($filters as $filter) {
+            if (strpos($filter, '->') !== false) {
                 $elements = explode('=', $filter);
                 $operand = '=';
-                if(count($elements) > 1) {
+                if (count($elements) > 1) {
                     $wheres[] = [$elements[0], $operand, $elements[1]];
                 }
-            }
-            else {
+            } else {
                 if (strpos($filter, '!=') !== false) {
                     $elements = explode('!=', $filter);
                     $operand = '!=';
-                }
-                elseif (strpos($filter, '=') !== false) {
+                } elseif (strpos($filter, '=') !== false) {
                     $elements = explode('=', $filter);
                     $operand = '=';
-                }
-                elseif (strpos($filter, '<') !== false) {
+                } elseif (strpos($filter, '<') !== false) {
                     $elements = explode('<', $filter);
                     $operand = '<';
-                }
-                elseif (strpos($filter, '>') !== false) {
+                } elseif (strpos($filter, '>') !== false) {
                     $elements = explode('>', $filter);
                     $operand = '>';
                 }
@@ -429,18 +433,17 @@ function addQueryConditions($request, $query, $model, $name){
     }
 
     //Search
-    if($request->input('s')) {
+    if ($request->input('s')) {
         $search = $request->input('s');
         $count = 0;
         $options = ['model' => $model, 'search' => $search];
         $query->where(function ($query) use ($options) {
             $model = $options['model'];
             $search = $options['search'];
-            foreach($model->searchFields() as $searchField) {
-                if($count = 0) {
+            foreach ($model->searchFields() as $searchField) {
+                if ($count = 0) {
                     $query->where($searchField, 'ILIKE', '%' . $search . '%');
-                }
-                else {
+                } else {
                     $query->orWhere($searchField, 'ILIKE', '%' . $search . '%');
                 }
                 $count = $count + 1;
@@ -449,7 +452,7 @@ function addQueryConditions($request, $query, $model, $name){
     }
 
     //Limit
-    if($request->input('limit')) {
+    if ($request->input('limit')) {
         $limit = $request->input('limit');
         $query->limit($limit);
     }
@@ -460,7 +463,8 @@ function addQueryConditions($request, $query, $model, $name){
     return $query;
 }
 
-function modelToPath($type) {
+function modelToPath($type)
+{
     if ($type == 'post') {
         $type = 'content';
     }
@@ -470,7 +474,8 @@ function modelToPath($type) {
     return $type;
 }
 
-function pathToModel($type) {
+function pathToModel($type)
+{
     $type = strtolower($type);
     if ($type == 'content') {
         $type = 'post';
@@ -481,53 +486,53 @@ function pathToModel($type) {
     return $type;
 }
 
-function addIncludedRelationshipsToModel($request, $model){
-    if(request()->input('include') != null) {
+function addIncludedRelationshipsToModel($request, $model)
+{
+    if (request()->input('include') != null) {
         $includes = explode(',', request()->input('include'));
         //If model has relationships....
-        if(count($model->relationships()) > 0) {
+        if (count($model->relationships()) > 0) {
 
-            foreach($includes as $include) {
+            foreach ($includes as $include) {
                 //dd(in_array('user', $item->relationships()));
-                if($model->relationships()['user'] == true) {
+                if ($model->relationships()['user'] == true) {
                     $model->relationships = [];
                     $model->relationships[$include] = $model->$include();
                 }
             }
-        }
-        //If model has no relationships...
-        else{
+        } //If model has no relationships...
+        else {
             throw new Exception('Model has no relationships.');
         }
-    }
-    else {
+    } else {
 
     }
 }
 
-function addIncludedRelationshipsToApiResource($request, $model){
-    if(request()->input('include') != null) {
+function addIncludedRelationshipsToApiResource($request, $model)
+{
+    if (request()->input('include') != null) {
         $includes = explode(',', request()->input('include'));
         //If model has relationships....
-        if(count($model->relationships()) > 0) {
+        if (count($model->relationships()) > 0) {
             $relationships = [];
 
-            foreach($includes as $include) {
+            foreach ($includes as $include) {
 
                 //if specific fields have been requested via dot-notation, extract the included relationship and fields into separate variables
-                if(strpos($include, '.') == true){
+                if (strpos($include, '.') == true) {
                     $field = dotNotationToArray($include)[1];
                     $include = dotNotationToArray($include)[0];
                 }
-                if($model->relationships()[$include] !== false) {
-                    if(isset($field)) {
+                if ($model->relationships()[$include] !== false) {
+                    if (isset($field)) {
 
                         $collection = $model->$include()->get();
 
                         $subset = $collection->map(function ($item, $field) {
                             $includes = explode(',', request()->input('include'));
                             $fields = [];
-                            foreach($includes as $include) {
+                            foreach ($includes as $include) {
                                 $fields[] = substr($include, strpos($include, ".") + 1);
                             }
                             return collect($item->toArray())
@@ -536,72 +541,70 @@ function addIncludedRelationshipsToApiResource($request, $model){
                         });
 
                         $relationships[$include] = $subset;
-                    }
-                    else {
+                    } else {
 
                         $relationships[$include] = $model->$include()->get();
                     }
                 }
             }
-        }
-        //If model has no relationships...
-        else{
+        } //If model has no relationships...
+        else {
             throw new Exception('Model has no relationships.');
         }
-    }
-    else {
+    } else {
         $relationships = [];
     }
     return $relationships;
 }
 
-function addIncludedRelationshipsMetadataToApiResource($request, $model){
-    if(request()->input('include') != null) {
+function addIncludedRelationshipsMetadataToApiResource($request, $model)
+{
+    if (request()->input('include') != null) {
         $includes = explode(',', request()->input('include'));
         //If model has relationships....
-        if(count($model->relationships()) > 0) {
+        if (count($model->relationships()) > 0) {
             $relationships = [];
-            foreach($includes as $include) {
+            foreach ($includes as $include) {
                 //if specific fields have been requested via dot-notation, extract the included relationship and fields into separate variables
-                if(strpos($include, '.') == true){
+                if (strpos($include, '.') == true) {
                     $field = dotNotationToArray($include)[1];
                     $include = dotNotationToArray($include)[0];
                 }
 
                 //dd(in_array('user', $item->relationships()));
-                if($model->relationships()['user'] == true) {
+                if ($model->relationships()['user'] == true) {
                     $class = get_class($model->$include()->getRelated());
                     $newModel = new $class;
                     $relationships[$include] = $newModel->links(['related']);
                 }
             }
         }
-    }
-    else {
+    } else {
         $relationships = [];
     }
     return $relationships;
 }
 
-function dotNotationToArray($string){
+function dotNotationToArray($string)
+{
     $array = explode('.', $string);
     return $array;
 }
 
-function sparseFields($array, $model){
+function sparseFields($array, $model)
+{
 
     $requestedFields = request()->input('fields');
-    if($requestedFields != null && count($requestedFields) > 0){
+    if ($requestedFields != null && count($requestedFields) > 0) {
         $requestedFields = explode(',', $requestedFields[$model]);
-        $results= [];
-        foreach($array as $item => $value) {
-            if(in_array($item, $requestedFields)){
+        $results = [];
+        foreach ($array as $item => $value) {
+            if (in_array($item, $requestedFields)) {
                 $results[$item] = $value;
             }
         }
         return $results;
-    }
-    else {
+    } else {
         return $array;
     }
 
@@ -611,17 +614,17 @@ function sparseFields($array, $model){
 // Resource Editor Views
 // *********************
 
-function renderResourceTableScripts($options){
+function renderResourceTableScripts($options)
+{
 
-    $scripts = file_get_contents(resource_path().'/views/admin/components/resourcetable.js');
-    $scripts =htmlspecialchars_decode($scripts);
-    if($options['url'] != null) {
+    $scripts = file_get_contents(resource_path() . '/views/admin/components/resourcetable.js');
+    $scripts = htmlspecialchars_decode($scripts);
+    if ($options['url'] != null) {
         $scripts = str_replace("XXX_RESOURCE_URL_XXX", $options['url'], $scripts);
     }
-    if(isset($options['GLOBAL_FILTER'])) {
+    if (isset($options['GLOBAL_FILTER'])) {
         $scripts = str_replace("XXX_GLOBAL_FILTER_XXX", $options['GLOBAL_FILTER'], $scripts);
-    }
-    else {
+    } else {
         $scripts = str_replace("XXX_GLOBAL_FILTER_XXX", '', $scripts);
     }
     return $scripts;
@@ -629,146 +632,151 @@ function renderResourceTableScripts($options){
     //renderResourceTableScriptsDynamically($options);
 }
 
-function renderResourceTableScriptsDynamically($options = null){
-    if($options == null) {
+function renderResourceTableScriptsDynamically($options = null)
+{
+    if ($options == null) {
         $options = [];
     }
-    if(!isset($options['VUE_APP_NAME'])){
-        $options['VUE_APP_NAME'] = 'vueApp'.str_random(7);
+    if (!isset($options['VUE_APP_NAME'])) {
+        $options['VUE_APP_NAME'] = 'vueApp' . str_random(7);
     }
-    if(!isset($options['div_id'])){
+    if (!isset($options['div_id'])) {
         $options['div_id'] = 'contentApp';
     }
-    if(!isset($options['GLOBAL_FILTER'])){
+    if (!isset($options['GLOBAL_FILTER'])) {
         $options['GLOBAL_FILTER'] = '';
     }
-    if(!isset($options['LIMIT'])){
+    if (!isset($options['LIMIT'])) {
         $options['LIMIT'] = 5;
     }
-    if(!isset($options['PER_PAGE'])){
+    if (!isset($options['PER_PAGE'])) {
         $options['PER_PAGE'] = 10;
     }
 
-    if(!isset($options['DISPLAY_FORMAT'])){
+    if (!isset($options['DISPLAY_FORMAT'])) {
         $options['DISPLAY_FORMAT'] = 'list';
     }
 
-    if(!isset($options['SORT_BY'])){
+    if (!isset($options['SORT_BY'])) {
         $options['SORT_BY'] = 'created_at';
     }
 
-    if(!isset($options['WITHOUT_TAGS'])){
+    if (!isset($options['WITHOUT_TAGS'])) {
         $options['WITHOUT_TAGS'] = '{}';
     }
 
-    if(!isset($options['WITH_ANY_TAGS'])){
+    if (!isset($options['WITH_ANY_TAGS'])) {
         $options['WITH_ANY_TAGS'] = '{}';
     }
 
-    if(!isset($options['WITH_ALL_TAGS'])){
+    if (!isset($options['WITH_ALL_TAGS'])) {
         $options['WITH_ALL_TAGS'] = '{}';
     }
 
     $view = View::make('admin.components.resource_table_js', ['options' => $options]);
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
-function renderResourceTableHtml($options = null){
-    $scripts = file_get_contents(resource_path().'/views/admin/components/resourcetable.html');
+function renderResourceTableHtml($options = null)
+{
+    $scripts = file_get_contents(resource_path() . '/views/admin/components/resourcetable.html');
     $scripts = htmlspecialchars_decode($scripts);
-    if($options['HEADER'] != null) {
+    if ($options['HEADER'] != null) {
         $scripts = str_replace("XXX_HEADER_XXX", $options['HEADER'], $scripts);
-    }
-    else {
+    } else {
         $scripts = str_replace("XXX_HEADER_XXX", '', $scripts);
     }
-    if($options['TABLE_HEADER'] != null) {
+    if ($options['TABLE_HEADER'] != null) {
         $scripts = str_replace("XXX_TABLE_HEADER_XXX", $options['TABLE_HEADER'], $scripts);
     }
-    if($options['TABLE_ROW'] != null) {
+    if ($options['TABLE_ROW'] != null) {
         $scripts = str_replace("XXX_TABLE_ROW_XXX", $options['TABLE_ROW'], $scripts);
     }
 
-    if($options['PATH'] != null) {
+    if ($options['PATH'] != null) {
         $scripts = str_replace("XXX_PATH_XXX", $options['PATH'], $scripts);
     }
     return $scripts;
 }
 
-function renderResourceTableHtmlDynamically($options = null){
-    if($options == null) {
+function renderResourceTableHtmlDynamically($options = null)
+{
+    if ($options == null) {
         $options = [];
     }
-    if(!isset($options['div_id'])){
+    if (!isset($options['div_id'])) {
         $options['div_id'] = 'contentApp';
     }
-    if(!isset($options['CARD_HEADER_FIELD'])){
+    if (!isset($options['CARD_HEADER_FIELD'])) {
         $options['CARD_HEADER_FIELD'] = 'title';
     }
-    if(!isset($options['CARD_BODY_FIELD'])){
+    if (!isset($options['CARD_BODY_FIELD'])) {
         $options['CARD_BODY_FIELD'] = 'excerpt';
     }
 
-    if(isset($options['WRAPPER_CLASS'])){
-        if($options['WRAPPER_CLASS'] != null) {
-            $options['WRAPPER_CLASS'] = 'col-md-12';
-        }
-        else {
-            $options['WRAPPER_CLASS'] = ' ';
-        }
+    if (!isset($options['WRAPPER_CLASS'])) {
+        $options['WRAPPER_CLASS'] = 'col-md-12';
+    } else {
+        $options['WRAPPER_CLASS'] = ' ';
     }
-    if(!isset($options['HEADER'])){
+
+    if (!isset($options['HEADER'])) {
         $options['HEADER'] = '';
     }
-    if(!isset($options['SHOW_TIMESTAMP'])){
+    if (!isset($options['SHOW_TIMESTAMP'])) {
         $options['SHOW_TIMESTAMP'] = true;
     }
-    if(!isset($options['SHOW_PAGINATION'])){
+    if (!isset($options['SHOW_PAGINATION'])) {
         $options['SHOW_PAGINATION'] = true;
     }
-    if(!isset($options['SHOW_TAGS'])){
+    if (!isset($options['SHOW_TAGS'])) {
         $options['SHOW_TAGS'] = true;
     }
-    if(!isset($options['TABLE_ROW'])){
+    if (!isset($options['TABLE_ROW'])) {
         $options['TABLE_ROW'] = '';
     }
-    if(!isset($options['PATH'])){
+    if (!isset($options['PATH'])) {
         $options['PATH'] = '';
     }
     $view = View::make('admin.components.resource_table_html', ['options' => $options]);
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
-function renderResourceFilterModal($options = null){
+function renderResourceFilterModal($options = null)
+{
     $view = View::make('admin.components.resource_filter_modal', ['options' => $options]);
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
-function renderResourceEditorScripts($options = null){
+function renderResourceEditorScripts($options = null)
+{
     $view = View::make('admin.components.resource_editor_scripts', ['options' => $options]);
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
-function renderFilterButton(){
+function renderFilterButton()
+{
     $view = View::make('admin.components.clear_filters');
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
-function renderDisplayFormatButton(){
+function renderDisplayFormatButton()
+{
     $view = View::make('admin.components.display_format_button');
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
 // Dashboard Views
-function renderStatisticCard($stats, $oldStats, $statTitle, $key){
+function renderStatisticCard($stats, $oldStats, $statTitle, $key)
+{
     $view = View::make('admin.components.statistic_card', ['stats' => $stats, 'oldStats' => $oldStats, 'statTitle' => $statTitle, 'key' => $key]);
-    $contents = (string) $view;
+    $contents = (string)$view;
     return $contents;
 }
 
@@ -776,18 +784,22 @@ function renderStatisticCard($stats, $oldStats, $statTitle, $key){
 // JSON Schemas
 // ************
 
-function getNewSchema($type){
-    $type = "\\App\\".ucfirst($type);
+function getNewSchema($type)
+{
+    $type = "\\App\\" . ucfirst($type);
     $model = new $type;
     return $model->schema();
 }
 
-function primaryKeyName($model){
+function primaryKeyName($model)
+{
     $schema = $model->schema();
     $primaryKey = $schema->metadata->primary_key;
     return $primaryKey;
 }
-function primaryKey($model){
+
+function primaryKey($model)
+{
     $schema = $model->schema();
     $primaryKey = $schema->metadata->primary_key;
     $result = $model->$primaryKey;
@@ -799,26 +811,29 @@ function primaryKey($model){
 // Pages
 // ************
 
-function findAndFetch($fieldName, $pageField, $attribute = null){
+function findAndFetch($fieldName, $pageField, $attribute = null)
+{
     $page = \App\Page::where($fieldName, $pageField)->first();
-    if($page != null && $page->status == 'ACTIVE'){
-        if($attribute != null) {
+    if ($page != null && $page->status == 'ACTIVE') {
+        if ($attribute != null) {
             return $page->attribute;
-        }
-        else {
+        } else {
             return true;
         }
+    } else {
+        return false;
     }
-    else { return false; }
 
 }
 
-function pageIsPublished($slug){
+function pageIsPublished($slug)
+{
     $page = \App\Page::where('slug', $slug)->where('status', 'ACTIVE')->first();
-    if($page != null) {
+    if ($page != null) {
         return true;
+    } else {
+        return false;
     }
-    else { return false; }
 
 }
 
@@ -826,18 +841,21 @@ function pageIsPublished($slug){
 // Message Views
 // *************
 
-function makeMessage($item){
+function makeMessage($item)
+{
     $message = [];
     if ($item->status != "PUBLISHED") {
         $message['html'] = "This item is not published.";
         if (\Auth::user()->hasPermissionTo('edit posts')) {
-            $message['html'] = $message['html'] . " Click <a href='/admin/content/$item->id' class='text-success'>here</a> to edit it.";
+
+            $view = View::make('partials.messages.edit-content', ['item' => $item]);
+            $contents = (string)$view;
+            $message['html'] = $message['html'] . $contents;
         }
     }
-    if(empty($message)){
+    if (empty($message)) {
         return null;
-    }
-    else {
+    } else {
         return $message;
     }
 }

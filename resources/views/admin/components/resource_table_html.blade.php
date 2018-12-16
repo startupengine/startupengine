@@ -4,8 +4,8 @@
 </div>
 <div v-if="info != null & info.data != null" style="width:calc(100%);opacity:0;"
      v-bind:style="{ 'opacity': '1' }">
-    @if(isset($options['WRAPPER_CLASS']))
-        <div class="{{ $options['WRAPPER_CLASS'] }}" style="height:100%;">@endif
+
+        <div class="{{ $options['WRAPPER_CLASS'] }}">
             <div class="card card-small mb-4" id="listView" style="min-width:100%;height:100%;"
                  v-if="displayFormat == 'list'">
                 <div class="card-header" align="center">
@@ -186,7 +186,7 @@
                                            v-bind:href="'<?php echo $options['PATH'] ?>/' + item.id">{{ item.<?php echo $options['CARD_HEADER_FIELD']; ?>}}</a>
                                     </h5>
                                     @if(isset($options['SHOW_TIMESTAMP']) && $options['SHOW_TIMESTAMP'] != false)
-                                        <p class="card-text dimmed my-2" style="text-transform:capitalize;"><i class="fa fa-calendar-o mr-2"></i>Updated
+                                        <p class="card-text dimmed my-2" style="text-transform:capitalize;">Updated
                                             @{{
                                             moment(item.updated_at, "YYYYMMDD").fromNow() }}
                                         </p>

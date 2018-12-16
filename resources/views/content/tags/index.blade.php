@@ -13,20 +13,6 @@
 @endsection
 
 @section('css')
-    <style>
-        .card {
-            min-height: 500px !important;
-        }
-
-        .page-link {
-            background: #fff !important;
-        }
-
-        .page-item.active .page-link {
-            background: #000 !important;
-            border-color: #000 !important;
-        }
-    </style>
 @endsection
 
 @section('navbar-classes')
@@ -41,14 +27,13 @@
 @section('content')
 
     <!-- Related Content Section -->
-    <div class="blog section section-invert py-4" style="min-height:100vh;">
+    <div class="blog section section-invert pt-4 pb-0" style="min-height:100vh;">
         <h3 class="section-title text-center mb-5 mt-3">{{ $tag->name }}</h3>
 
         <div class="container">
-            <div class="py-4 mb-3 col-md-12">
-
-
-                <div class="row justify-content-center" id="contentApp" v-if="info != null">
+            <div class="pt-0 mb-0 col-md-12">
+                <div class="row justify-content-center" id="contentApp" v-if="info != null && info.meta.total != null">
+                    <div class="pb-3 mb-3 toggleVisibility" v-bind:class="{ visible: info.meta.total != null }">@{{ info.meta.total }} Item<span v-if="info.meta.total >1 ">s</span></div>
                     {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => true,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => true, 'CARD_ROW_CLASS'=> 'justify-content-center', 'PATH' => '/content']) !!}
                 </div>
 
