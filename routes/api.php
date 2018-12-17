@@ -15,10 +15,8 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['cors']], function () {
 
-    // Analytics
-    Route::get('/analytics/count', 'ResourceController@count')->name('CountAnalyticsEvents');
-
-    // Resources
+    //////////// API Resources ////////////
+    ////// Standard BREAD Operations
     // Browse
     Route::get('/resources/{type}', 'ResourceController@browse')->name('BrowseApiResource');
     // Read
@@ -30,24 +28,24 @@ Route::group(['middleware' => ['cors']], function () {
     // Delete
     Route::delete('/resources/{type}/{id}', 'ResourceController@delete')->name('DeleteApiResource');
 
-    // Transform
-    Route::post('/resources/{type}/{id}/transform/', 'ResourceController@transform')->name('TransformApiResource');
+    ////// Transformation Operations
+    // Browse Transformations
+    Route::get('/resources/{type}/{id}/transformation/{id}', 'ResourceTransformationController@index')->name('GetApiResourceTransformations');
+    // Read Transformation
+    Route::get('/resources/{type}/{id}/transformation/{id}', 'ResourceTransformation@view')->name('GetApiResourceTransformation');
+    // Add Transformation
+    Route::post('/resources/{type}/{id}/transformation/', 'ResourceController@add')->name('AddApiResourceTransformation');
 
+    // Analytics
+    Route::get('/analytics/count', 'ResourceController@count')->name('CountAnalyticsEvents');
 
-    /*
-    // Browse Relationship
-    Route::get('/resources/{type}/{id}/related/{relationship}', 'ResourceController@browseRelationship')->name('BrowseApiResourceRelation');
-    // Read Relationship
-    Route::get('/resources/{type}/{id}/related/{relationship}/{relationId}', 'ResourceController@editRelationship')->name('ReadApiResourceRelation');
-    // Add Relationship
-    Route::post('/resources/{type}/{id}/related/{relationship}', 'ResourceController@addRelationship')->name('AddApiResourceRelation');
-    // Edit Relationship
-    Route::post('/resources/{type}/{id}/related/{relationship}/{relationId}', 'ResourceController@editRelationship')->name('BrowseApiResourceRelation');
-    // Delete Relationship
-    Route::delete('/resources/{type}/{id}/related/{relationship}/{relationId}', 'ResourceController@deleteRelationship')->name('DeleteApiResourceRelation');
-    */
-
-    // Stripe
+    //////////// Third-Party APIs ////////////
+    ////// Stripe
+    // Browse Payment Methods
+    Route::get('/stripe/payments/methods', 'StripeController@browsePaymentMethods')->name('BrowseStripePaymentMethods');
+    // Read Payment Method
+    Route::get('/stripe/payments/method/{id}', 'StripeController@readPaymentMethod')->name('ReadStripePaymentMethod');
+    // Add Payment Methods
     Route::post('/stripe/payments/method', 'StripeController@storePaymentMethod')->name('StoreStripePaymentMethod');
 
 });
