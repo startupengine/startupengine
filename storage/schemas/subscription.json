@@ -1,0 +1,74 @@
+{
+  "namespace": "App\\Subscription",
+  "lang": {
+    "en": {
+      "singular": "subscription",
+      "plural": "subscription"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "taggable": false,
+    "title_key": "id",
+    "primary_key": "id",
+    "readonly": {
+      "id": {
+        "label": "Subscription ID",
+        "column": "id"
+      }
+    }
+  },
+  "permissions": {
+    "browse": {
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
+    },
+    "read": {
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
+    },
+    "write": {
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
+    },
+    "edit": {
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
+    },
+    "delete": {
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
+    },
+    "undelete": {
+      "roles": [
+        "admin",
+        "superadmin"
+      ]
+    }
+  },
+  "fields": {},
+  "sections": {
+    "about": {
+      "slug": "about",
+      "title": "About",
+      "fields": {
+        "notes": {
+          "type": "textarea",
+          "description": "Notes about this subscription.",
+          "validations": {
+          }
+        }
+      }
+    }
+  }
+}

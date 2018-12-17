@@ -60,7 +60,7 @@
                          style="bottom: 0px;width: 100% !important;display: table;">
                         <nav aria-label="Pagination" class="pull-left page-meta-container"
                              style="display:inline-block;float:left; width:75px;">
-                            <ul class="pagination justify-content-center mt-3">
+                            <ul class="pagination justify-content-left ml-3 mt-3">
                                 <li class="page-item disabled page-meta">
                                     <a class="page-link" href="#">P<span class="hiddenOnMobile">age</span><span
                                                 class="hiddenOnDesktop">g.</span> @{{ info.meta.current_page }}
@@ -127,10 +127,10 @@
                             </ul>
                         </nav>
 
-                        <nav aria-label="Pagination" class="right page-meta-container"
+                        <nav aria-label="Pagination" class="right justify-content-right page-meta-container"
                              style="display:inline-block;float:right; width:75px;">
-                            <ul class="pagination justify-content-center mt-3">
-                                <li class="page-item disabled page-meta">
+                            <ul class="pagination mr-3 mt-3 text-right">
+                                <li class="page-item disabled page-meta text-right">
                                     <a class="page-link hiddenOnDesktop" href="#">of @{{ info.meta.pages }}</a>
                                 </li>
                             </ul>

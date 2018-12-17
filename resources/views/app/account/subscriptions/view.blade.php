@@ -5,6 +5,15 @@
         $viewOptions['navbar-classes'] = ['dark'];
         $viewOptions['navbar-scroll-add-classes'] = ['dark'];
         $viewOptions['navbar-unscroll-remove-classes'] = [];
+
+        $item = \App\Subscription::find(app('request')->input('subscription_id'));
+
+        $options = [
+            'id' => $item->id,
+            'type' => 'subscription',
+            'index_uri' => '/app/account/subscriptions',
+            'show_metadata' => false
+        ];
     ?>
 @endsection
 
@@ -92,5 +101,6 @@
             languages: ['json', 'javascript', 'html']
         });
     </script>
+
     {!! renderResourceEditorScripts($options)  !!}
 @endsection

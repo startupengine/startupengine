@@ -30,23 +30,26 @@ Route::group(['middleware' => ['cors']], function () {
     // Delete
     Route::delete('/resources/{type}/{id}', 'ResourceController@delete')->name('DeleteApiResource');
 
+    // Transform
+    Route::post('/resources/{type}/{id}/transform/', 'ResourceController@transform')->name('TransformApiResource');
+
+
+    /*
+    // Browse Relationship
+    Route::get('/resources/{type}/{id}/related/{relationship}', 'ResourceController@browseRelationship')->name('BrowseApiResourceRelation');
+    // Read Relationship
+    Route::get('/resources/{type}/{id}/related/{relationship}/{relationId}', 'ResourceController@editRelationship')->name('ReadApiResourceRelation');
+    // Add Relationship
+    Route::post('/resources/{type}/{id}/related/{relationship}', 'ResourceController@addRelationship')->name('AddApiResourceRelation');
+    // Edit Relationship
+    Route::post('/resources/{type}/{id}/related/{relationship}/{relationId}', 'ResourceController@editRelationship')->name('BrowseApiResourceRelation');
+    // Delete Relationship
+    Route::delete('/resources/{type}/{id}/related/{relationship}/{relationId}', 'ResourceController@deleteRelationship')->name('DeleteApiResourceRelation');
+    */
 
     // Stripe
     Route::post('/stripe/payments/method', 'StripeController@storePaymentMethod')->name('StoreStripePaymentMethod');
 
-    /*
-    // Resource Relationships
-    // Browse
-    Route::get('/resources/{type}/{id}/relationship/{relationType}', 'ResourceRelationshipController@index')->name('BrowseApiResourceRelationships');
-    // Read
-    Route::get('/resources/{type}/{id}/relationship/{relationType}', 'ResourceRelationshipController@read')->name('ReadApiResourceRelationship');
-    // Add
-    Route::post('/resources/{type}/{id}/relationship/{relationType}', 'ResourceRelationshipController@add')->name('AddApiResourceRelationship');
-    // Edit
-    Route::post('/resources/{type}/{id}/relationship/{relationType}/{relationId}', 'ResourceRelationshipController@edit')->name('EditApiResourceRelationship');
-    // Delete
-    Route::delete('/resources/{type}/{id}/relationship/{relationType}/{relationId}', 'ResourceRelationshipController@delete')->name('DeleteApiResourceRelationship');
-    */
 });
 
 // Demo Data

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AccountController extends Controller
 {
@@ -23,6 +24,20 @@ class AccountController extends Controller
             }
             if($accountView == 'subscriptions') {
                 return view('app.account.subscriptions')->with('options', $options);
+            }
+            else {
+                abort(404);
+            }
+        }
+        else {
+            abort(404);
+        }
+    }
+
+    public function subView($accountView, $subView){
+        if(\Auth::user()) {
+            if(in_array($subView, ["view"]) && View::exists("app.account.$accountView.$subView")) {
+                return view("app.account.$accountView.$subView")->with('options', null);
             }
             else {
                 abort(404);

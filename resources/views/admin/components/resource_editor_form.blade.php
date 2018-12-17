@@ -98,7 +98,7 @@
                                     </span>
                                     <span v-else-if="record.data.schema.fields[fieldName]['type'] == 'image'"
                                           v-bind:style="{ backgroundImage: 'url(' + record['data'][fieldName] + ')' }"
-                                          style="display:inline-block;width:100%;max-width:160px;height:auto !important;min-height:90px;background:#3333;border-radius:4px;background-size:cover;background-position:center;background-size:cover;">
+                                          style="display:inline-block;width:100%;max-width:160px;height:auto !important;min-height:90px;background:#333;border-radius:4px;background-size:cover;background-position:center;background-size:cover;">
                                     </span>
                                     <span v-else>
                                         @{{ record.data[fieldName] }}
@@ -371,7 +371,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">@{{ fieldType }}</span>
                                 </div>
-                                <input v-on:input="changed()" class="form-control formFilter text-truncate"
+                                <input v-on:input="changed()" class="form-control formFilter text-truncate br-5-right"
                                        autocomplete="off" v-model="fieldInput" name="input"/><br>
                             </div>
                             <p v-if="(info.status != 'error' && fieldInput != '' && fieldInput != null)"

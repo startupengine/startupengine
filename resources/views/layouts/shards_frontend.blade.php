@@ -1,4 +1,7 @@
 <?php $viewOptions = [];?>
+<?php $viewOptions['navbar-classes'] = ['dark']; ?>
+<?php $viewOptions['navbar-scroll-add-classes'] = ['filled']; ?>
+<?php $viewOptions['navbar-unscroll-remove-classes'] = ['filled']; ?>
 @yield('php-variables')
 <html class="no-js" lang="en">
 <head>
@@ -261,7 +264,10 @@
     $(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 2) {
-                $('#topNavbar').addClass('filled');
+
+                @foreach($viewOptions['navbar-scroll-add-classes'] as $class)
+                    $('#topNavbar').addClass('{{ $class }}');
+                @endforeach
                 $('#topNavbar').addClass('shadowed');
             }
         });
@@ -269,7 +275,9 @@
     $(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() < 2) {
-                $('#topNavbar').removeClass('filled');
+                @foreach($viewOptions['navbar-unscroll-remove-classes'] as $class)
+                    $('#topNavbar').removeClass('{{ $class }}');
+                @endforeach
                 $('#topNavbar').removeClass('shadowed');
             }
         });

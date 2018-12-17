@@ -56,6 +56,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //App
     Route::get('/app/{accountView}', 'AccountController@view')->name('account');
+    Route::get('/app/{accountView}/{accountSubView}', 'AccountController@subView')->name('accountSubview');
 
 });
 
