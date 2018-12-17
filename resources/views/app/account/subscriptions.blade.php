@@ -65,7 +65,7 @@
 
 @section('content')
     <!-- Related Content Section -->
-    <div class="blog section section-invert pt-4 pb-0" style="min-height:100vh;">
+    <div class="blog section section-invert pt-4 pb-0" style="min-height:calc(100vh - 133px) !important;">
         <h3 class="section-title text-center mb-5 mt-3">My Account</h3>
 
         <div class="container">
@@ -76,21 +76,17 @@
                 <div class="pt-0 mb-3 col-md-9" id="contentApp">
                     <?php $nowString = \Carbon\Carbon::now()->toDateString(); ?>
                     <?php $header = '<div class="btn-group">
-                            <span class="btn btn-light border text-dark hiddenOnMobile" style="opacity:0.5;" v-bind:class="{ active: filters.type == \'\'}" v-on:click="reset({\'filters\':true})">
-                                 <span class="hiddenOnMobile">Showing</span>
-                                 <span class=""><i class="material-icons mx-0 mb-1">visibility</i></span>
-                            </span>
-                            <span class="btn btn-light border" v-bind:class="{ active: filters.status==\'trial_ends_at>='.$nowString.'\'}"  v-on:click="updateFilters({\'status\':\'trial_ends_at>='.$nowString.'\'})">
-                                <span>Trialing</span>
-                            </span>
                             <span class="btn btn-light border"  v-bind:class="{ active: filters.status==\'ends_at>='.$nowString.'\'}"  v-on:click="updateFilters({\'status\':\'ends_at>='.$nowString.'\'})">
                                 <span>Active</span>
+                            </span>
+                             <span class="btn btn-light border" v-bind:class="{ active: filters.status==\'trial_ends_at>='.$nowString.'\'}"  v-on:click="updateFilters({\'status\':\'trial_ends_at>='.$nowString.'\'})">
+                                <span>Trialing</span>
                             </span>
                             <span class="btn btn-light border"  v-bind:class="{ active: filters.status==\'ends_at<='.$nowString.'\'}"  v-on:click="updateFilters({\'status\':\'ends_at<='.$nowString.'\'})">
                                 <span>Expired</span>
                             </span>
                         </div>'; ?>
-                    <?php $tableRow = '<td align="left pl-3" class="text-capitalize">{{ item.name }}</td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-on:click="manageSubscription(item.id)"  class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
+                    <?php $tableRow = '<td align="left" class="text-capitalize"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-on:click="manageSubscription(item.id)"  class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
                     <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
                     <?php $cardFooter = '
              <div align="center">
@@ -115,5 +111,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
 @endsection
