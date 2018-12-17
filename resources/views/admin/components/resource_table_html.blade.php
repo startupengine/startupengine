@@ -59,7 +59,7 @@
                     <div align="center" v-if="info.meta.pages > 0" class="card-footer align-text-bottom"
                          style="bottom: 0px;width: 100% !important;display: table;">
                         <nav aria-label="Pagination" class="pull-left page-meta-container"
-                             style="display:inline-block;float:left; width:75px;">
+                             style="display:inline-block;float:left; width:75px;text-align:left;">
                             <ul class="pagination justify-content-left ml-3 mt-3">
                                 <li class="page-item disabled page-meta">
                                     <a class="page-link" href="#">P<span class="hiddenOnMobile">age</span><span
@@ -128,7 +128,7 @@
                         </nav>
 
                         <nav aria-label="Pagination" class="right justify-content-right page-meta-container"
-                             style="display:inline-block;float:right; width:75px;">
+                             style="display:inline-block;float:right; width:75px;text-align:right;">
                             <ul class="pagination mr-3 mt-3 text-right">
                                 <li class="page-item disabled page-meta text-right">
                                     <a class="page-link hiddenOnDesktop" href="#">of @{{ info.meta.pages }}</a>
