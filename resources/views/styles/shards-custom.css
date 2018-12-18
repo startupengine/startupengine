@@ -688,3 +688,11 @@ tr:hover .dimmed {
     position:relative;
     right:0px;
 }
+
+.place-indicator {
+    opacity:0 !important;
+}
+
+.active .place-indicator {
+    opacity:0.5 !important;
+}
