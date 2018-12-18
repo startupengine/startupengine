@@ -152,7 +152,7 @@
             transform(id, transformation, action, confirm){
                 this.transformationResult = null;
                 console.log(transformation);
-                if(transformation.hasOwnProperty('require_confirmation') && confirm !== true) {
+                if((transformation.hasOwnProperty('require_confirmation') && confirm !== true) || transformation.hasOwnProperty('options')) {
                     if (typeof confirmAction === "function") {
                         confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
                     }

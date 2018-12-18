@@ -11,7 +11,7 @@ class Subscription extends Model
     use IsApiResource;
 
     public function transformations(){
-        $allowed = ['cancel'];
+        $allowed = ['switchPlan', 'cancel'];
         $results = [];
         foreach($allowed  as $function){
             $results[$function] = $this->$function('schema');
@@ -31,7 +31,40 @@ class Subscription extends Model
                 'requirements' => [
                     'permissions_any' => [
                         'cancel own subscription',
-                        'cancel others permission']
+                        'cancel others subscription']
+                ]
+            ];
+            return $schema;
+        }
+        else{
+            //Do Something
+            //dump("Subscription #$this->id (Stripe ID: $this->stripe_id) Cancelled)");
+        }
+    }
+
+    public function switchPlan($input = null){
+        if($input == 'schema'){
+            $schema = [
+                'label' => 'Switch Plan',
+                'slug' => 'switchPlan',
+                'description' => 'Switch this subscription to another plan.',
+                'instruction' => 'Select a new plan.',
+                'options' => [
+                    'value-1' => [
+                        'label'=> 'Value 1',
+                        'selected' => true,
+                        'description'=> 'This is a good choice...'
+                    ],
+                    'value-2' => [
+                        'label'=> 'Value 2',
+                        'description'=> 'This is a good choice...'
+                    ]
+                ],
+                'success_message' => "Subscription $this->stripe_id successfully changed.",
+                'requirements' => [
+                    'permissions_any' => [
+                        'change own subscription',
+                        'change others subscription']
                 ]
             ];
             return $schema;
