@@ -27,6 +27,7 @@ class Subscription extends Model
                 'description' => 'Cancel this subscription.',
                 'require_confirmation' => true,
                 'confirmation_message' => 'Are you sure you want to cancel this subscription?',
+                'success_message' => "Subscription $this->stripe_id cancelled.",
                 'requirements' => [
                     'permissions_any' => [
                         'cancel own subscription',

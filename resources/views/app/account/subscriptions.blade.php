@@ -118,63 +118,10 @@
         </div>
     </div>
     <!-- / Related Content Section -->
-
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h5 class="modal-title" v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">Success</h5>
-                    <h5 class="modal-title" v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Error</h5>
-                    <h5 class="modal-title" v-else>Confirm Action</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">Action completed successfully.</p>
-                    <p v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Something went wrong.</p>
-                    <p v-else id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
-                </div>
-                <div class="modal-footer px-3" v-if="instance !== null">
-                    <button v-if="instance.transformationResult == null" type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                    <button v-if="instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'" type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check-circle text-white mr-2"></i>Okay</button>
-                    <button v-if="instance.transformationResult == null" type="button" class="btn btn-danger" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, options.action)">Confirm</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')
 
-    <script>
-        var confirmActionApp = new Vue({
-            el: '#confirmActionModal',
-            data() { return {
-                options: {},
-                instance: null,
-                response:null
-            }
-            },
-            methods: {
-                transform(id, transformation, action){
-                    this.response = this.instance.transform(id, transformation, action, true);
-                }
-            }
-        });
-        confirmAction = function(options){
-            var message = options.message;
-            $("#actionMessage").text(message);
-            if (typeof options.action === "undefined") {
-                options.action = null;
-            }
-            confirmActionApp.options = options;
-            confirmActionApp.instance = window[options.appName];
-            //$("#confirmActionButton").attr("onclick","subscriptionsApp.transform(" + options.id + ", " + options.transformation + ", " + options.action + ", true)");
-            $('#confirmActionModal').modal({show:true})
-        }
-    </script>
+
     {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
 @endsection
