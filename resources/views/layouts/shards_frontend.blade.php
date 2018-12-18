@@ -300,7 +300,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <p class="card-text" v-if="options.transformation.instruction != null">
+                    <p class="card-text" v-if="options.transformation.hasOwnProperty('instruction')">
                         @{{ options.transformation.instruction }}
                     </p>
                     <p class="card-text" v-else-if="options.transformation.hasOwnProperty('options')">Select an option.</p>
