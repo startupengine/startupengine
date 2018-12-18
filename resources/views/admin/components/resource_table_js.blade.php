@@ -30,7 +30,8 @@
                 withoutTags: {!! $options['WITHOUT_TAGS'] !!},
                 withoutTagsString: '',
                 startDate: '',
-                endDate: ''
+                endDate: '',
+                transformationResult: null
             }
         },
         methods: {
@@ -149,6 +150,7 @@
                 this.updateData();
             },
             transform(id, transformation, action, confirm){
+                this.transformationResult = null;
                 console.log(transformation);
                 if(transformation.hasOwnProperty('require_confirmation') && confirm !== true) {
                     if (typeof confirmAction === "function") {
@@ -165,10 +167,14 @@
                     url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString;
                     axios
                         .post(url)
-                        .then(response => (console.log(transformation))
+                        .then(response => (this.updateTransformationResult(response))
                 )
                     ;
                 }
+            },
+            updateTransformationResult(response){
+                this.transformationResult = response;
+                return response;
             },
             updatePerPage(perPage) {
                 this.perPage = perPage;
