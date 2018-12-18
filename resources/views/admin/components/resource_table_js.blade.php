@@ -1,4 +1,6 @@
 <script>
+
+
     var pageNumber = 1;
     var {{ $options['VUE_APP_NAME'] }} = new Vue({
         el: '#{{ $options['div_id'] }}',
@@ -146,17 +148,27 @@
                 }
                 this.updateData();
             },
-            transform(id, transformation, action){
-                if(action == null){
-                    var actionString = '&action=true';
+            transform(id, transformation, action, confirm){
+                console.log(transformation);
+                if(transformation.hasOwnProperty('require_confirmation') && confirm !== true) {
+                    if (typeof confirmAction === "function") {
+                        confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
+                    }
                 }
                 else {
-                    var actionString = '&action=' + action;
+                    if (action == null) {
+                        var actionString = '&action=true';
+                    }
+                    else {
+                        var actionString = '&action=' + action;
+                    }
+                    url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString;
+                    axios
+                        .post(url)
+                        .then(response => (console.log(transformation))
+                )
+                    ;
                 }
-                url = '{{ $options['url'] }}/' + id +'/transformation?transformation=' + transformation + actionString;
-                axios
-                    .post(url)
-                    .then(response => (console.log(transformation)));
             },
             updatePerPage(perPage) {
                 this.perPage = perPage;

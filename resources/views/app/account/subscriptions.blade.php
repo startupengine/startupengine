@@ -96,7 +96,7 @@
                             </span>
                         </div>
                     ';?>
-                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#" class="btn btn-white btn-sm btn-pill mr-2" v-for="transformation in item.transformations"  v-on:click="transform(item.id, transformation.slug)" :class="{[\'action-\'+transformation.slug]:true}" >{{ transformation.label }}</a><a href="#"  v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-sm btn-white btn-pill px-3" style="border-radius:30px;padding-left:10px;padding-right:10px;margin-right:5px;text-align:center;">Edit</a></td>'; ?>
+                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#" class="btn btn-white btn-sm btn-pill mr-2" v-for="transformation in item.transformations"  v-on:click="transform(item.id, transformation)" :class="{[\'action-\'+transformation.slug]:true}" >{{ transformation.label }}</a><a href="#"  v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-sm btn-white btn-pill px-3" style="border-radius:30px;padding-left:10px;padding-right:10px;margin-right:5px;text-align:center;">Edit</a></td>'; ?>
                     <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
                     <?php $cardFooter = '
              <div align="center">
@@ -118,8 +118,51 @@
         </div>
     </div>
     <!-- / Related Content Section -->
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Action</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="actionMessage"></p>
+                </div>
+                <div class="modal-footer px-3">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmActionButton" v-on:click="instance.transform(options.id, options.transformation, options.action, true)">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
+
+    <script>
+        var confirmActionApp = new Vue({
+            el: '#confirmActionModal',
+            data() { return {
+                options: {},
+                instance: null
+            }
+            }
+        });
+        confirmAction = function(options){
+            var message = options.message;
+            $("#actionMessage").text(message);
+            if (typeof options.action === "undefined") {
+                options.action = null;
+            }
+            confirmActionApp.options = options;
+            confirmActionApp.instance = window[options.appName];
+            //$("#confirmActionButton").attr("onclick","subscriptionsApp.transform(" + options.id + ", " + options.transformation + ", " + options.action + ", true)");
+            $('#confirmActionModal').modal({show:true})
+        }
+    </script>
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
 @endsection

@@ -25,6 +25,8 @@ class Subscription extends Model
                 'label' => 'Cancel',
                 'slug' => 'cancel',
                 'description' => 'Cancel this subscription.',
+                'require_confirmation' => true,
+                'confirmation_message' => 'Are you sure you want to cancel this subscription?',
                 'requirements' => [
                     'permissions_any' => [
                         'cancel own subscription',
