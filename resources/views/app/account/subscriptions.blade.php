@@ -41,6 +41,11 @@
             border-top: 1px solid #eee !important;
         }
 
+        .action-cancel {
+            border-color:#dc3545 !important;
+            color:#dc3545 !important;
+        }
+
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
@@ -91,7 +96,7 @@
                             </span>
                         </div>
                     ';?>
-                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#" class="btn btn-white btn-pill mr-2" v-for="transformation in item.transformations"  v-on:click="transform(transformation.slug)">{{ transformation.label }}</a><a href="#" class="btn btn-white" v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-white btn-icon btn-pill" style="border-radius:30px;padding-left:10px;padding-right:10px;margin-right:5px;text-align:center;"><i class="fa fa-fw fa-sm fa-angle-right" style="margin-left:2px;"></i></a></td>'; ?>
+                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#" class="btn btn-white btn-sm btn-pill mr-2" v-for="transformation in item.transformations"  v-on:click="transform(item.id, transformation.slug)" :class="{[\'action-\'+transformation.slug]:true}" >{{ transformation.label }}</a><a href="#"  v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-sm btn-white btn-pill px-3" style="border-radius:30px;padding-left:10px;padding-right:10px;margin-right:5px;text-align:center;">Edit</a></td>'; ?>
                     <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
                     <?php $cardFooter = '
              <div align="center">

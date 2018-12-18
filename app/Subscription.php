@@ -34,7 +34,8 @@ class Subscription extends Model
             return $schema;
         }
         else{
-            dump("Subscription #$this->id (Stripe ID: $this->stripe_id) Cancelled)");
+            //Do Something
+            //dump("Subscription #$this->id (Stripe ID: $this->stripe_id) Cancelled)");
         }
     }
 

@@ -32,7 +32,7 @@ Route::group(['middleware' => ['cors']], function () {
     // Browse Transformations
     //Route::get('/resources/{type}/{id}/transformation/{transformationId}', 'ResourceTransformationController@index')->name('GetApiResourceTransformations');
     // Read Transformation
-    Route::get('/resources/{type}/{id}/transformation/{transformationId}', 'ResourceTransformationController@view')->name('GetApiResourceTransformation');
+    //Route::get('/resources/{type}/{id}/transformation/{transformationId}', 'ResourceTransformationController@view')->name('GetApiResourceTransformation');
     // Add Transformation
     Route::post('/resources/{type}/{id}/transformation/', 'ResourceTransformationController@add')->name('AddApiResourceTransformation');
     Route::get('/resources/{type}/{id}/transformation/', 'ResourceTransformationController@add')->name('AddApiResourceTransformation');

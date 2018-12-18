@@ -146,11 +146,17 @@
                 }
                 this.updateData();
             },
-            transform(action){
-                url = '{{ $options['url'] }}/transformation?action=' + action;
+            transform(id, transformation, action){
+                if(action == null){
+                    var actionString = '&action=true';
+                }
+                else {
+                    var actionString = '&action=' + action;
+                }
+                url = '{{ $options['url'] }}/' + id +'/transformation?transformation=' + transformation + actionString;
                 axios
                     .post(url)
-                    .then(response => (console.log(action)));
+                    .then(response => (console.log(transformation)));
             },
             updatePerPage(perPage) {
                 this.perPage = perPage;
