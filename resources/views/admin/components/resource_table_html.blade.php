@@ -56,7 +56,7 @@
                     </div>
                 @else
 
-                    <div align="center" v-if="info.meta.pages > 0" class="card-footer align-text-bottom"
+                    <div align="center" v-if="info.meta.pages > 0 && status != 'loading'" class="card-footer align-text-bottom"
                          style="bottom: 0px;width: 100% !important;display: table;">
                         <nav aria-label="Pagination" class="pull-left page-meta-container"
                              style="display:inline-block;float:left; width:75px;text-align:left;">
@@ -224,9 +224,9 @@
                     </div>
 
                     @if(isset($options['SHOW_PAGINATION']) && $options['SHOW_PAGINATION'] != false)
-                        <div class="col-md-12 pb-4 px-0" align="center">
+                        <div class="col-md-12 pb-4 px-0" align="center" v-if="info.meta.pages > 0 && status != 'loading'">
                             <nav aria-label="Pagination" class="pull-left page-meta-container"
-                                 style="display:inline-block;float:left; width:75px;">
+                                 style="display:inline-block;float:left; width:75px;text-align:left;">
                                 <ul class="pagination justify-content-left mt-3">
                                     <li class="page-item disabled page-meta">
                                         <a class="page-link" style="background:#dddddddd;" href="#">P<span

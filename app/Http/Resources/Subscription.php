@@ -35,6 +35,7 @@ class Subscription extends JsonResource
         $fields['schema'] = $this->schema();
         $fields['content'] = $this->content();
         $fields = sparseFields($fields, 'user');
+        $fields['transformations'] = $this->transformations();
         return $fields;
     }
 }

@@ -10,6 +10,34 @@ class Subscription extends Model
 
     use IsApiResource;
 
+    public function transformations(){
+        $allowed = ['cancel'];
+        $results = [];
+        foreach($allowed  as $function){
+            $results[$function] = $this->$function('schema');
+        }
+        return $results;
+    }
+
+    public function cancel($input = null){
+        if($input == 'schema'){
+            $schema = [
+                'label' => 'Cancel',
+                'slug' => 'cancel',
+                'description' => 'Cancel this subscription.',
+                'requirements' => [
+                    'permissions_any' => [
+                        'cancel own subscription',
+                        'cancel others permission']
+                ]
+            ];
+            return $schema;
+        }
+        else{
+            dump("Subscription #$this->id (Stripe ID: $this->stripe_id) Cancelled)");
+        }
+    }
+
     public function json()
     {
         $json = json_decode($this->json);

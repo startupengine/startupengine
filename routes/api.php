@@ -30,11 +30,12 @@ Route::group(['middleware' => ['cors']], function () {
 
     ////// Transformation Operations
     // Browse Transformations
-    Route::get('/resources/{type}/{id}/transformation/{transformatioinId}', 'ResourceTransformationController@index')->name('GetApiResourceTransformations');
+    //Route::get('/resources/{type}/{id}/transformation/{transformationId}', 'ResourceTransformationController@index')->name('GetApiResourceTransformations');
     // Read Transformation
-    Route::get('/resources/{type}/{id}/transformation/{transformatioinId}', 'ResourceTransformation@view')->name('GetApiResourceTransformation');
+    Route::get('/resources/{type}/{id}/transformation/{transformationId}', 'ResourceTransformationController@view')->name('GetApiResourceTransformation');
     // Add Transformation
-    Route::post('/resources/{type}/{id}/transformation/', 'ResourceController@add')->name('AddApiResourceTransformation');
+    Route::post('/resources/{type}/{id}/transformation/', 'ResourceTransformationController@add')->name('AddApiResourceTransformation');
+    Route::get('/resources/{type}/{id}/transformation/', 'ResourceTransformationController@add')->name('AddApiResourceTransformation');
 
     // Analytics
     Route::get('/analytics/count', 'ResourceController@count')->name('CountAnalyticsEvents');

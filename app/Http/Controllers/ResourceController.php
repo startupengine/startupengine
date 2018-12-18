@@ -22,7 +22,6 @@ class ResourceController extends Controller
 
             $resource = addQueryConditions($request, $query, $model, $name);
 
-
             //GroupBy on Collection
             /*
             $test = $resource->get();
@@ -32,7 +31,6 @@ class ResourceController extends Controller
             });
             dd($test);
             */
-
 
             $count = (count($query->get()));
             $perPage = $request->input('perPage');

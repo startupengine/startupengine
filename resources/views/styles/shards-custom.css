@@ -8,11 +8,8 @@
 .card-post__image {
     border-radius:5px 5px 0px 0px;
     min-height:200px;
+    background-size:110% !important;
     background-position:center !important;
-}
-
-.card .card-post__image{
-    background-size:103% !important;
     opacity:0.85;
     transition: all 0.3s;
 }

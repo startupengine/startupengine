@@ -66,7 +66,7 @@
 @section('content')
     <!-- Related Content Section -->
     <div class="blog section section-invert pt-4 pb-0" style="min-height:calc(100vh - 133px) !important;">
-        <h3 class="section-title text-center mb-5 mt-3">My Account</h3>
+        <h4 class="section-title text-center mb-5 mt-3">My Account</h4>
 
         <div class="container">
             <div class="row pt-2">
@@ -91,7 +91,7 @@
                             </span>
                         </div>
                     ';?>
-                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-white btn-icon btn-pill" style="border-radius:30px;padding-left:10px;padding-right:10px;margin-right:5px;text-align:center;"><i class="fa fa-fw fa-sm fa-angle-right"></i></a></td>'; ?>
+                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.name }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#" class="btn btn-white btn-pill mr-2" v-for="transformation in item.transformations"  v-on:click="transform(transformation.slug)">{{ transformation.label }}</a><a href="#" class="btn btn-white" v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-white btn-icon btn-pill" style="border-radius:30px;padding-left:10px;padding-right:10px;margin-right:5px;text-align:center;"><i class="fa fa-fw fa-sm fa-angle-right" style="margin-left:2px;"></i></a></td>'; ?>
                     <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
                     <?php $cardFooter = '
              <div align="center">
