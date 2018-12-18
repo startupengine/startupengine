@@ -286,7 +286,7 @@
 
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal" v-if="options != null">
+<div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal" v-if="options != null && options.transformation != null">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -299,23 +299,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div  v-if="options.transformation != null && options.transformation.label != null">
-                <p class="card-text" v-if="options.transformation.instruction != null">
-                    @{{ options.transformation.instruction }}
-                </p>
-                <p class="card-text" v-else>Select an option.</p>
-                    <select class="form-control" v-model="selectedOption">
+                <div>
+                    <p class="card-text" v-if="options.transformation.instruction != null">
+                        @{{ options.transformation.instruction }}
+                    </p>
+                    <p class="card-text" v-else-if="options.transformation.hasOwnProperty('options')">Select an option.</p>
+                    <p class="card-text" v-else-if="options.transformation.hasOwnProperty('confirmation_message')" id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
+                    <select class="form-control" v-model="selectedOption" v-if="options.transformation.hasOwnProperty('options')">
                         <option disabled value="defaultChoice">Choose one...</option>
                         <option v-for="option,key in options.transformation.options" :value="key">@{{ option.label }}</option>
                     </select>
-                </div>
+                    </div>
                 <p class="card-text mt-4" v-if="selectedOption != 'defaultChoice' && options.transformation.options[selectedOption].description != null">@{{ options.transformation.options[selectedOption].description }}</p>
                 <p v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">
                     <span v-if="options.transformation.success_message != null">@{{ options.transformation.success_message }}</span>
                     <span v-else>Action completed successfully.</span>
                 </p>
                 <p v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Something went wrong.</p>
-                <p v-else id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
+
             </div>
             <div class="modal-footer px-3" v-if="instance !== null">
                 <div v-if="options.transformation.options == null">
@@ -358,15 +359,18 @@
             options.action = null;
         }
         confirmActionApp.options = options;
-        var transformationOptions = Object.keys(options.transformation.options).map(function(key) {
-            return [key, options.transformation.options[key]];
-        });
-        console.log('Options: ' + transformationOptions);
 
-        var currentlySelected = transformationOptions.find(function(element) {
-            return element.selected == true;
-        });
-        console.log('Currently Selected: '+ currentlySelected);
+        if(options.hasOwnProperty('options')) {
+            var transformationOptions = Object.keys(options.transformation.options).map(function (key) {
+                return [key, options.transformation.options[key]];
+            });
+            console.log('Options: ' + transformationOptions);
+            var currentlySelected = transformationOptions.find(function (element) {
+                return element.selected == true;
+            });
+            console.log('Currently Selected: '+ currentlySelected);
+        }
+
         if(currentlySelected != null){
             confirmActionApp.selectedOption = currentlySelected.slug;
         }
