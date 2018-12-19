@@ -11,7 +11,13 @@ class Subscription extends Model
     use IsApiResource;
 
     public function transformations(){
-        $allowed = ['switchPlan', 'cancel'];
+
+        $allowed = [];
+        if($this->details()->status != 'canceled'){
+            $allowed[] = 'switchPlan';
+            $allowed[] = 'cancel';
+        }
+
         $results = [];
         foreach($allowed  as $function){
             $results[$function] = $this->$function('schema');
@@ -37,8 +43,10 @@ class Subscription extends Model
             return $schema;
         }
         else{
-            //Do Something
-            //dump("Subscription #$this->id (Stripe ID: $this->stripe_id) Cancelled)");
+            \Stripe\Stripe::setApiKey(stripeKey('secret'));
+
+            $subscription = $this->details();
+            $subscription->cancel();
         }
     }
 

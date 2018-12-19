@@ -49,8 +49,8 @@
             <div class="container px-2 px-md-0">
                 <a class="navbar-brand" href="/">
                     <img src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}" style="min-width:30px;max-height:30px;display:inline-block;"
-                         class="mr-2" alt="{{ setting('site.name') }}">
-                    <span class="ml-1">{{ setting('site.name') }}</span>
+                         class="mr-1" alt="{{ setting('site.name') }}">
+                    <span>{{ setting('site.name') }}</span>
                 </a>
                 <button class="navbar-toggler" type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#navModal" aria-label="Toggle navigation">
@@ -224,7 +224,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#" style="margin-top:-3px;"><span
-                        class="dimmed mr-2">&copy;</span>{{ setting('site.name') }} <span
+                        class="dimmed mr-1">&copy;</span>{{ setting('site.name') }} <span
                         class="dimmed">{{ \Carbon\Carbon::now()->format('Y') }}</span></a>
             @if(findAndFetch('slug', 'pricing'))
                 <div class="justify-content-right" id="navbarNav">
