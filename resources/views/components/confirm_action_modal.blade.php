@@ -12,12 +12,12 @@
             </div>
             <div class="modal-body">
                 <div v-if="hasOptions()">
-                    <div class="card-text mb-3">@{{ options.transformation.description }}<br><div v-if="message == null">Select an option.</div><div v-else>@{{ message }}</div></div>
+                    <div class="card-text pb-4">@{{ options.transformation.description }}<br><div v-if="message == null">Select an option.</div><div v-else>@{{ message }}</div></div>
                     <select class="form-control" v-model="selectedOption" v-if="options.transformation.hasOwnProperty('options')">
                         <option disabled value="defaultChoice">Choose one...</option>
                         <option v-for="option,key in options.transformation.options" :value="key">@{{ option.label }}</option>
                     </select>
-                    <p class="card-text mt-4" v-if="selectedOption != 'defaultChoice' && options.transformation.options[selectedOption].description != null">@{{ options.transformation.options[selectedOption].description }}</p>
+                    <p class="card-text text-primary mt-4" style="opacity:0.75;" v-if="selectedOption != 'defaultChoice' && options.transformation.options[selectedOption].description != null">@{{ options.transformation.options[selectedOption].description }}</p>
                 </div>
                 <div v-else>
                     <p v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">

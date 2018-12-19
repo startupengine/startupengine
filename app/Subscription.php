@@ -44,23 +44,27 @@ class Subscription extends Model
 
     public function switchPlan($input = null){
         if($input == 'schema'){
+            $plans = $this->plans()->data;
+            $options = [];
+            if($plans != null){
+
+                foreach($plans as $plan){
+                    $item =[];
+                    $item['value'] = $plan->id;
+                    $item['label'] = $plan->nickname;
+                    $amount = "$".$plan->amount/100 ." ". strtoupper($plan->currency);
+                    $item['description'] = $amount. " / " . ucwords($plan->interval);
+                    $options[$plan->id] = $item;
+
+                }
+            }
             $schema = [
                 'label' => 'Switch Plan',
                 'slug' => 'switchPlan',
                 'description' => 'You may switch to another subscription plan.',
                 'instruction' => 'Select a new plan.',
                 'confirmation_message' => null,
-                'options' => [
-                    'value-1' => [
-                        'label'=> 'Value 1',
-                        'selected' => true,
-                        'description'=> 'This is a good choice...'
-                    ],
-                    'value-2' => [
-                        'label'=> 'Value 2',
-                        'description'=> 'This is a good choice...'
-                    ]
-                ],
+                'options' => $options,
                 'success_message' => "Subscription $this->stripe_id successfully changed.",
                 'requirements' => [
                     'permissions_any' => [
@@ -72,7 +76,18 @@ class Subscription extends Model
         }
         else{
             //Do Something
-            //dump("Subscription #$this->id (Stripe ID: $this->stripe_id) Cancelled)");
+            \Stripe\Stripe::setApiKey(stripeKey('secret'));
+
+            $subscription = $this->details();
+            \Stripe\Subscription::update($this->stripe_id, [
+                'cancel_at_period_end' => false,
+                'items' => [
+                    [
+                        'id' => $subscription->items->data[0]->id,
+                        'plan' => $input,
+                    ],
+                ],
+            ]);
         }
     }
 
@@ -86,6 +101,25 @@ class Subscription extends Model
     public function user(){
         $user = \App\User::where('id', '=', $this->user_id)->first();
         return $user;
+    }
+
+    public function details(){
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $object = \Stripe\Subscription::retrieve($this->stripe_id);
+        return $object;
+    }
+
+    public function product(){
+        $product_id = ($this->details()->plan->product);
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $product = \Stripe\Product::retrieve(["id" => $product_id ]);
+        return $product;
+    }
+    public function plans(){
+        $product_id = ($this->details()->plan->product);
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $plans= \Stripe\Plan::all(["product" => $product_id ]);
+        return $plans;
     }
 
     public function schema()

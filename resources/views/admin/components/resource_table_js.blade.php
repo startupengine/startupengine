@@ -149,10 +149,18 @@
                 }
                 this.updateData();
             },
-            transform(id, transformation, action, confirm){
+            transform(id, transformation, action, confirm) {
+                console.log('Recieved:');
+                console.log([id, transformation, action, confirm]);
                 this.transformationResult = null;
-                console.log(transformation);
-                if((transformation.hasOwnProperty('require_confirmation') && confirm !== true) || transformation.hasOwnProperty('options')) {
+                if (transformation.options != null && confirm != true) {
+                    console.log('test1');
+                    if (typeof confirmAction === "function") {
+                        confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
+                    }
+                }
+                else if(transformation.require_confirmation != null && confirm != true) {
+                    console.log('test2');
                     if (typeof confirmAction === "function") {
                         confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
                     }
@@ -165,6 +173,7 @@
                         var actionString = '&action=' + action;
                     }
                     url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString;
+                    console.log(url);
                     axios
                         .post(url)
                         .then(response => (this.updateTransformationResult(response))
@@ -174,6 +183,7 @@
             },
             updateTransformationResult(response){
                 this.transformationResult = response;
+                this.updateData();
                 return response;
             },
             updatePerPage(perPage) {
