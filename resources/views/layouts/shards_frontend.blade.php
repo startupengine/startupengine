@@ -323,7 +323,7 @@
                     <button v-if="instance.transformationResult == null" type="button" class="btn btn-danger" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, options.action)">Confirm</button>
                 </div>
                 <div v-else>
-                    <button v-if="instance.transformationResult == null" v-on:click="$('#confirmActionModal').modal('toggle');" type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button v-if="instance.transformationResult == null" type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                     <button v-if="instance.transformationResult == null && selectedOption != 'defaultChoice' " type="button" class="btn btn-primary" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, selectedOption, true)">Confirm</button>
                     <button v-if="instance.transformationResult == null && selectedOption == 'defaultChoice' " type="button" class="btn btn-primary disabled" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, selectedOption, true)">Confirm</button>
                 </div>
