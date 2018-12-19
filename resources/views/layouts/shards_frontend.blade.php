@@ -313,7 +313,7 @@
                         <span v-else>Action completed successfully.</span>
                     </p>
                     <p v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Something went wrong.</p>
-                    <p class="card-text" v-else-if="instance != null && instance.transformationResult == null && options.transformation.hasOwnProperty('confirmation_message') == true && options.transformation.confirmation_message != null" id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
+                    <p class="card-text" v-else-if="instance != null && instance.transformationResult == null && options.transformation.hasOwnProperty('confirmation_message')" id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
                 </div>
             </div>
             <div class="modal-footer px-3" v-if="instance !== null">
