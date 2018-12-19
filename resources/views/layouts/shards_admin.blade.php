@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ setting('site.name', 'Startup Engine') }} @if(setting('admin.name', 'Control Panel') != setting('site.name')) - {{ setting('admin.name') }}@endif</title>
+    <title>{{ setting('site.name', 'Startup Engine') }} @if(setting('admin.name', 'Control Panel') != setting('site.name'))
+            - {{ setting('admin.name') }}@endif</title>
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -27,7 +28,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-    <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0" href="/admin-panel/styles/shards-dashboards.1.0.0.min.css">
+    <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0"
+          href="/admin-panel/styles/shards-dashboards.1.0.0.min.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <?php /*
@@ -35,7 +37,7 @@
     <script async defer src="/js/app.js"></script>
     */ ?>
 
-    <!-- FAVICONS -->
+<!-- FAVICONS -->
 
     <link rel="icon" sizes="180x180" href="{{ setting('site.logo', '/images/startup-engine-logo.png') }}">
 
@@ -43,7 +45,7 @@
 
     @include('admin.styles.css')
 
-    <!-- STYLES -->
+<!-- STYLES -->
     @yield('css')
 
 </head>
@@ -70,6 +72,8 @@
                 <i class="material-icons">check</i>
             </li>
         </ul>
+    </div>
+    <?php /*
         <div class="actions mb-4">
             <a class="mb-2 btn btn-sm btn-primary w-100 d-table mx-auto extra-action"
                href="https://designrevision.com/downloads/shards-dashboard-lite/">
@@ -90,7 +94,8 @@
             </div>
             <div id="social-share" data-url="https://designrevision.com/downloads/shards-dashboard-lite/"
                  data-text="🔥 Check out Shards Dashboard Lite, a free and beautiful Bootstrap 4 admin dashboard template!"
-                 data-title="share"></div>
+                 data-title="share">
+            </div>
             <div class="loading-overlay">
                 <div class="spinner"></div>
             </div>
@@ -98,10 +103,11 @@
         <div class="close">
             <i class="material-icons">close</i>
         </div>
-    </div>
-    <div class="color-switcher-toggle animated pulse infinite" style="display:none;">
-        <i class="material-icons">settings</i>
-    </div>
+        </div>
+        <div class="color-switcher-toggle animated pulse infinite" style="display:none;">
+            <i class="material-icons">settings</i>
+        </div>
+        */ ?>
     <div class="container-fluid" id="main-container">
         <div class="row">
             <!-- Main Sidebar -->
@@ -112,7 +118,8 @@
                             <div class="d-table m-auto" onclick="window.location.href='/';">
                                 <img id="main-logo" class="d-inline-block align-top mr-1"
                                      style="max-width: 30px;margin-top:-1px;margin-left:-10px;"
-                                     src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}" alt="Startup Engine">
+                                     src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}"
+                                     alt="Startup Engine">
                                 <span class="d-none d-md-inline ml-1"
                                       style="vertical-align:middle;">{{ setting('admin.name', 'Control Panel') }}</span>
                             </div>
@@ -123,88 +130,102 @@
                     </nav>
                 </div>
                 <div id="navMenu">
-                <form autocomplete="off"  action="/admin-panel/search" method="POST" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
-                    <div class="input-group input-group-seamless ml-4">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-search"></i>
+                    <form autocomplete="off" action="/admin-panel/search" method="POST"
+                          class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
+                        <div class="input-group input-group-seamless ml-4">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </div>
                             </div>
-                        </div>
-                        <input v-model="search" class="navbar-search form-control" type="text" placeholder="Search for something..." name="s"
-                               aria-label="Search"></div>
+                            <input v-model="search" class="navbar-search form-control" type="text"
+                                   placeholder="Search for something..." name="s"
+                                   aria-label="Search"></div>
                         {{ csrf_field() }}
-                </form>
+                    </form>
 
 
-                <div class="nav-wrapper"  v-bind:class="{ hiddenOnMobile: search != '' && search != null }">
-                    <ul class="nav flex-column" id="sidebar">
-                        <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/" >
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Overview">view_quilt</i> <span>Overview</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/users*') ? 'active' : '' }}" >
-                            <a class="nav-link" href="/admin/users">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Users">people</i> <span>Users</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/pages*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/pages">
-                                <i class="material-icons"  data-toggle="tooltip" data-placement="left" title="Pages">library_books</i> <span>Pages</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/content*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/content">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Content">notes</i> <span>Content</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/settings*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/settings">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Settings">settings</i> <span>Settings</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/products">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Products">shopping_basket</i> <span>Products</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/analytics*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/analytics">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Analytics">bar_chart</i> <span>Analytics</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item {{ Request::is('admin/preferences*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/preferences/schemas">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Preferences">list_alt</i> <span>Preferences</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('admin/logs*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/admin/logs">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="System Logs">history</i> <span>System Logs</span>
-                            </a>
-                        </li>
-                        @if(\Auth::user()->hasRole('admin'))
-                            <li class="nav-item {{ Request::is('admin/realtime*') ? 'active' : '' }}">
-                                <a class="nav-link" href="/admin/realtime">
-                                    <i class="material-icons"  data-toggle="tooltip" data-placement="left" title="Real Time Data">track_changes</i> <span>Real Time Data</span>
+                    <div class="nav-wrapper" v-bind:class="{ hiddenOnMobile: search != '' && search != null }">
+                        <ul class="nav flex-column" id="sidebar">
+                            <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Overview">view_quilt</i> <span>Overview</span>
                                 </a>
                             </li>
-                        @endif
-                        <li class="nav-item" >
-                            <a class="nav-link" href="/docs" target="_blank">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="left" title="Documentation">book</i> <span>Documentation</span>
-                            </a>
-                        </li>
-                        @if(ENV('APP_ENV') == 'local')
-                            <li class="nav-item"  >
-                                <a class="nav-link" href="/dev/telescope" target="_blank">
-                                    <i class="material-icons"  data-toggle="tooltip" data-placement="left" title="Developer Tools">code</i> <span>Developer Tools</span>
+                            <li class="nav-item {{ Request::is('admin/users*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/users">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Users">people</i> <span>Users</span>
                                 </a>
                             </li>
-                        @endif
-                    </ul>
-                </div>
+                            <li class="nav-item {{ Request::is('admin/pages*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/pages">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Pages">library_books</i> <span>Pages</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/content*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/content">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Content">notes</i> <span>Content</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/settings*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/settings">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Settings">settings</i> <span>Settings</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/products">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Products">shopping_basket</i> <span>Products</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/analytics*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/analytics">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Analytics">bar_chart</i> <span>Analytics</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item {{ Request::is('admin/preferences*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/preferences/schemas">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Preferences">list_alt</i> <span>Preferences</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('admin/logs*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/logs">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="System Logs">history</i> <span>System Logs</span>
+                                </a>
+                            </li>
+                            @if(\Auth::user()->hasRole('admin'))
+                                <li class="nav-item {{ Request::is('admin/realtime*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="/admin/realtime">
+                                        <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                           title="Real Time Data">track_changes</i> <span>Real Time Data</span>
+                                    </a>
+                                </li>
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="/docs" target="_blank">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Documentation">book</i> <span>Documentation</span>
+                                </a>
+                            </li>
+                            @if(ENV('APP_ENV') == 'local')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/dev/telescope" target="_blank">
+                                        <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                           title="Developer Tools">code</i> <span>Developer Tools</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </aside>
             <!-- End Main Sidebar -->
@@ -212,7 +233,8 @@
                 <div class="main-navbar sticky-top bg-white border-bottom" id="top-nav">
                     <!-- Main Navbar -->
                     <nav class="navbar align-items-stretch navbar-light flex-md-nowrap border-bottom-0 p-0">
-                        <form autocomplete="off"  action="/admin-panel/search" method="POST" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+                        <form autocomplete="off" action="/admin-panel/search" method="POST"
+                              class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
                             <div class="input-group input-group-seamless">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -230,11 +252,15 @@
                                    aria-expanded="false">
                                     <div class="nav-link-icon__wrapper">
                                         <i class="material-icons">&#xE7F4;</i>
-                                        <span class="badge badge-pill badge-danger" v-if="info !== null" style="opacity:0;" v-bind:style="{ 'opacity': '1' }">@{{ info.count }}</span>
+                                        <span class="badge badge-pill badge-danger" v-if="info !== null"
+                                              style="opacity:0;"
+                                              v-bind:style="{ 'opacity': '1' }">@{{ info.count }}</span>
                                     </div>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink" v-if="info !== null">
-                                    <a class="dropdown-item" href="#" v-for="item in info.items" v-if="item.text != null">
+                                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink"
+                                     v-if="info !== null">
+                                    <a class="dropdown-item" href="#" v-for="item in info.items"
+                                       v-if="item.text != null">
                                         <div class="notification__icon-wrapper">
                                             <div class="notification__icon">
                                                 <i class="material-icons">&#xE6E1;</i>
@@ -253,13 +279,15 @@
                                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown"
                                    role="button" aria-haspopup="true" aria-expanded="false">
                                     <div id="menuAvatar"></div>
-                                    <span id="menuUserName" class="d-none d-md-inline-block text-capitalize">{{ \Auth::user()->name }}</span>
+                                    <span id="menuUserName"
+                                          class="d-none d-md-inline-block text-capitalize">{{ \Auth::user()->name }}</span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-small" >
+                                <div class="dropdown-menu dropdown-menu-small">
                                     <a class="dropdown-item" href="/admin/users/{{ \Auth::user()->id }}">
                                         <i class="material-icons">&#xE7FD;</i> Profile</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/admin/users/{{ \Auth::user()->id }}/preferences">
+                                    <a class="dropdown-item"
+                                       href="/admin/users/{{ \Auth::user()->id }}/preferences">
                                         <i class="material-icons">settings</i> Preferences</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" href="/logout">
@@ -279,23 +307,27 @@
                 </div>
                 <div class="main-content-container container-fluid px-4">
                     @if (array_key_exists('content', View::getSections()))
-                    <div id="contentApp">
-                        <div class="page-header row no-gutters py-4 toggleVisibility" v-if="info != null"  v-bind:class="{visible: (status != null), invisible: status == null }">
-                            <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3" id="pageTitle">
-                                <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
+                        <div id="contentApp">
+                            <div class="page-header row no-gutters py-4 toggleVisibility" v-if="info != null"
+                                 v-bind:class="{visible: (status != null), invisible: status == null }">
+                                <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3"
+                                     id="pageTitle">
+                                    <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
+                                </div>
+                                @yield('top-menu')
                             </div>
-                            @yield('top-menu')
-                        </div>
 
-                        <div v-else  class="page-header row no-gutters py-4 toggleVisibility"  v-bind:class="{visible: (status == null || status != 'loading'), invisible: status == null }">
-                            <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3" id="pageTitle">
-                                <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
+                            <div v-else class="page-header row no-gutters py-4 toggleVisibility"
+                                 v-bind:class="{visible: (status == null || status != 'loading'), invisible: status == null }">
+                                <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3"
+                                     id="pageTitle">
+                                    <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
+                                </div>
+                                @yield('top-menu')
                             </div>
-                            @yield('top-menu')
-                        </div>
                             @yield('content')
 
-                    </div>
+                        </div>
                     @else
                         <div>
                             <div class="page-header row no-gutters py-4 ">
@@ -311,6 +343,8 @@
             </main>
         </div>
     </div>
+
+    <?php /*
     <div class="promo-popup animated" style="display:none;">
         <a href="http://bit.ly/shards-dashboard-pro" class="pp-cta extra-action">
             <img src="https://dgc2qnsehk7ta.cloudfront.net/uploads/sd-blog-promo-2.jpg"> </a>
@@ -328,7 +362,9 @@
             <a class="pp-cta extra-action" href="http://bit.ly/shards-dashboard-pro">Download</a>
         </div>
     </div>
+    */?>
 
+    {!! renderConfirmActionModal() !!}
 
     <?php /*
         //<script src="https://cdn.jsdelivr.net/npm/moment@2.22"></script>
@@ -374,46 +410,52 @@
     <script>
         var sidebar = new Vue({
             el: '#app #navMenu',
-            data () {
+            data() {
                 return {
                     search: null
                 }
             },
-            mounted () {
+            mounted() {
             }
         })
 
         var menu = new Vue({
             el: '#app #accountMenu',
-            data () {
+            data() {
                 return {
                     info: null
                 }
             },
-            mounted () {
+            mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/user')
-                    .then(response => (this.info = response));
+                    .then(response = > (this.info = response)
+            )
+                ;
             }
         })
 
         var notificationsList = new Vue({
             el: '#app #notificationsList',
-            data () {
+            data() {
                 return {
                     info: null
                 }
             },
-            mounted () {
+            mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/notifications')
-                    .then(response => (this.info = response.data));
+                    .then(response = > (this.info = response.data)
+            )
+                ;
             }
         })
 
-     </script>
+    </script>
 
     @yield('scripts')
+
+    {!! renderConfirmActionScripts() !!}
 
 </div>
 </body>

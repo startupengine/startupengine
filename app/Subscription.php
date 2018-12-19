@@ -47,7 +47,7 @@ class Subscription extends Model
             $schema = [
                 'label' => 'Switch Plan',
                 'slug' => 'switchPlan',
-                'description' => 'Switch this subscription to another plan.',
+                'description' => 'You may switch to another subscription plan.',
                 'instruction' => 'Select a new plan.',
                 'confirmation_message' => null,
                 'options' => [

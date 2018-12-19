@@ -774,6 +774,21 @@ function renderResourceEditorScripts($options = null)
     return $contents;
 }
 
+function renderConfirmActionModal($options = null)
+{
+    $view = View::make('components.confirm_action_modal', ['options' => $options]);
+    $contents = (string)$view;
+    return $contents;
+}
+
+
+function renderConfirmActionScripts($options = null)
+{
+    $view = View::make('components.confirm_action_scripts', ['options' => $options]);
+    $contents = (string)$view;
+    return $contents;
+}
+
 function renderFilterButton()
 {
     $view = View::make('admin.components.clear_filters');
