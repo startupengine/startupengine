@@ -286,9 +286,9 @@
 
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal" v-if="options != null && options.transformation != null">
+<div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content"  v-if="options != null && options.transformation != null">
             <div class="modal-header">
                 <h5 class="modal-title" v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">Success</h5>
                 <h5 class="modal-title" v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Error</h5>
@@ -323,7 +323,7 @@
                     <button v-if="instance.transformationResult == null" type="button" class="btn btn-danger" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, options.action)">Confirm</button>
                 </div>
                 <div v-else>
-                    <button v-if="instance.transformationResult == null" type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button v-if="instance.transformationResult == null" v-on:click="$('#confirmActionModal').modal('toggle');" type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                     <button v-if="instance.transformationResult == null && selectedOption != 'defaultChoice' " type="button" class="btn btn-primary" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, selectedOption, true)">Confirm</button>
                     <button v-if="instance.transformationResult == null && selectedOption == 'defaultChoice' " type="button" class="btn btn-primary disabled" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, selectedOption, true)">Confirm</button>
                 </div>
@@ -365,6 +365,7 @@
             }
         }
     });
+
     confirmAction = function(options){
         this.options = {};
         var message = options.message;
@@ -382,7 +383,6 @@
             confirmActionApp.message = options.instruction;
         }
 
-
         if(options.hasOwnProperty('options')) {
             var transformationOptions = Object.keys(options.transformation.options).map(function (key) {
                 return [key, options.transformation.options[key]];
@@ -397,9 +397,13 @@
         if(currentlySelected != null){
             confirmActionApp.selectedOption = currentlySelected.slug;
         }
+
         confirmActionApp.instance = window[options.appName];
-        //$("#confirmActionButton").attr("onclick","subscriptionsApp.transform(" + options.id + ", " + options.transformation + ", " + options.action + ", true)");
-        $('#confirmActionModal').modal({show:true})
+        $('#confirmActionModal').modal('toggle');
+    }
+
+    closeConfirmActionModal = function(){
+        $('#confirmActionModal').modal('toggle');
     }
 </script>
 
