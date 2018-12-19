@@ -299,24 +299,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div>
-                    <p class="card-text" v-if="options.transformation.hasOwnProperty('instruction')">
-                        @{{ options.transformation.instruction }}
-                    </p>
-                    <p class="card-text" v-else-if="options.transformation.hasOwnProperty('options')">Select an option.</p>
-                    <p class="card-text" v-else-if="options.transformation.hasOwnProperty('confirmation_message')" id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
+                <div v-if="hasOptions()">
+                    <div class="card-text mb-3">@{{ options.transformation.description }}<br><div v-if="message == null">Select an option.</div><div v-else>@{{ message }}</div></div>
                     <select class="form-control" v-model="selectedOption" v-if="options.transformation.hasOwnProperty('options')">
                         <option disabled value="defaultChoice">Choose one...</option>
                         <option v-for="option,key in options.transformation.options" :value="key">@{{ option.label }}</option>
                     </select>
-                    </div>
-                <p class="card-text mt-4" v-if="selectedOption != 'defaultChoice' && options.transformation.options[selectedOption].description != null">@{{ options.transformation.options[selectedOption].description }}</p>
-                <p v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">
-                    <span v-if="options.transformation.success_message != null">@{{ options.transformation.success_message }}</span>
-                    <span v-else>Action completed successfully.</span>
-                </p>
-                <p v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Something went wrong.</p>
-
+                    <p class="card-text mt-4" v-if="selectedOption != 'defaultChoice' && options.transformation.options[selectedOption].description != null">@{{ options.transformation.options[selectedOption].description }}</p>
+                </div>
+                <div v-else>
+                    <p v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">
+                        <span v-if="options.transformation.success_message != null">@{{ options.transformation.success_message }}</span>
+                        <span v-else>Action completed successfully.</span>
+                    </p>
+                    <p v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Something went wrong.</p>
+                    <p class="card-text" v-else-if="instance != null && instance.transformationResult == null && options.transformation.hasOwnProperty('confirmation_message') == true && options.transformation.confirmation_message != null" id="actionMessage">@{{ options.transformation.confirmation_message }}</p>
+                </div>
             </div>
             <div class="modal-footer px-3" v-if="instance !== null">
                 <div v-if="options.transformation.options == null">
@@ -343,22 +341,47 @@
             options: {},
             instance: null,
             response:null,
-            selectedOption: 'defaultChoice'
+            selectedOption: 'defaultChoice',
+            message: ''
         }
         },
         methods: {
+            hasOptions(){
+                if(this.options.transformation.options != null) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+            hasMessage(){
+                return true;
+            },
+            getMessage(){
+                return this.message;
+            },
             transform(id, transformation, action){
                 this.response = this.instance.transform(id, transformation, action, true);
             }
         }
     });
     confirmAction = function(options){
+        this.options = {};
         var message = options.message;
         $("#actionMessage").text(message);
         if (typeof options.action === "undefined") {
             options.action = null;
         }
         confirmActionApp.options = options;
+
+        if(options.hasOwnProperty('confirmation_message')) {
+            confirmActionApp.message = options.confirmation_message;
+        }
+
+        if(options.hasOwnProperty('instruction')) {
+            confirmActionApp.message = options.instruction;
+        }
+
 
         if(options.hasOwnProperty('options')) {
             var transformationOptions = Object.keys(options.transformation.options).map(function (key) {

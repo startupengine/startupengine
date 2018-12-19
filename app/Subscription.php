@@ -49,6 +49,7 @@ class Subscription extends Model
                 'slug' => 'switchPlan',
                 'description' => 'Switch this subscription to another plan.',
                 'instruction' => 'Select a new plan.',
+                'confirmation_message' => null,
                 'options' => [
                     'value-1' => [
                         'label'=> 'Value 1',
