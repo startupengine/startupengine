@@ -368,7 +368,7 @@
     confirmAction = function(options){
         this.options = {};
         var message = options.message;
-        
+
         if (typeof options.action === "undefined") {
             options.action = null;
         }
