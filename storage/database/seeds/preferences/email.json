@@ -46,6 +46,13 @@
           "validations": {
             "boolean": true
           }
+        },
+        "notify-new-content": {
+          "type": "checkbox",
+          "description": "Send me new content by e-mail.",
+          "validations": {
+            "boolean": true
+          }
         }
       }
     }
