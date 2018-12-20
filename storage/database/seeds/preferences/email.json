@@ -1,0 +1,41 @@
+{
+  "namespace": "App\\Preference",
+  "name": "Email",
+  "slug": "user-email",
+  "key": "user.email",
+  "description": "E-mail preferences",
+  "lang": {
+    "en": {
+      "singular": "preference",
+      "plural": "preference"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "title_key": "id",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "Preference ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+  },
+  "sections": {
+    "about": {
+      "slug": "email",
+      "title": "E-mail Settings",
+      "fields": {
+        "email_address": {
+          "type": "text",
+          "description": "Your preferred e-mail address.",
+          "validations": {
+            "email": true
+          }
+        }
+      }
+    }
+  }
+}

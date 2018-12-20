@@ -46,17 +46,15 @@
             color:#dc3545 !important;
         }
 
+        #contentForm .col-lg-9 {
+            min-width: 100% !important;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
 
-    <style>
-        #contentForm .col-lg-9 {
-            min-width: 100% !important;
-        }
-    </style>
 @endsection
 
 @section('navbar-classes')
@@ -83,22 +81,8 @@
                     <?php $header = '
                         <h6 class="mb-0">Your Preferences</h6>'; ?>
                     <?php $tableHeader = '';?>
-                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.product.name }}</span><span class="badge badge-light text-dark hiddenOnMobile ml-2"><span class="dimmed">Plan:</span> {{ item.details.plan.nickname }}</span><span class="badge badge-light text-dark ml-2">{{ item.details.status }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#"  v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-sm btn-white btn-pill px-3 mr-2 d-none">Edit</a><a href="#" class="btn btn-white btn-sm btn-pill mr-2"   v-for="transformation in item.transformations"  v-on:click="transform(item.id, transformation)" :class="{[\'action-\'+transformation.slug]:true}" >{{ transformation.label }}</a></td>'; ?>
-                    <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
-                    <?php $cardFooter = '
-             <div align="center">
-                <div class="btn-group mb-2" role="group" aria-label="Table row actions">
-                    <a href="" class="btn btn-outline-primary btn-pill"
-                       v-bind:href="\'/admin/content/\' + item.id">
-            Edit<i class="fa fa-edit ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-2px;position:relative;"></i>
-            </a>
-            <a href="" target="_blank" class="btn btn-outline-primary btn-pill"
-                       v-bind:href="\'/content/\' + item.id + \'/\' + item.slug">
-            View<i class="fa fa-chevron-right ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-1px;position:relative;"></i>
-            </a>
-        </div>
-        </div>
-        '; ?>
+                    <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.description }}</span><span class="badge badge-light text-dark hiddenOnMobile ml-2"></td><td align="left" class="text-capitalize align-middle" style="width:50px;"><a :href="\'/app/settings/view?userpreference_id=\'+ item.id" class="btn btn-white btn-pill btn-sm">Edit</a></td>'; ?>
+
                     {!! renderResourceTableHtmlDynamically(['HEADER' => $header,  'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/setting', 'WRAPPER_CLASS' => '']) !!}
                 </div>
             </div>
@@ -110,5 +94,5 @@
 @section('scripts')
 
 
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'settingsApp', 'div_id' => "settingsApp", 'url' => '/api/resources/preference', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'settingsApp', 'div_id' => "settingsApp", 'url' => '/api/resources/userpreference', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
 @endsection

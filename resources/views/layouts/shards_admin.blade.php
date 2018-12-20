@@ -429,7 +429,7 @@
             mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/user')
-                    .then(response = > (this.info = response)
+                    .then(response => (this.info = response)
             )
                 ;
             }
@@ -445,7 +445,7 @@
             mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/notifications')
-                    .then(response = > (this.info = response.data)
+                    .then(response => (this.info = response.data)
             )
                 ;
             }

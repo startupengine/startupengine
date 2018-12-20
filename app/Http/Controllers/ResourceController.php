@@ -22,16 +22,6 @@ class ResourceController extends Controller
 
             $resource = addQueryConditions($request, $query, $model, $name);
 
-            //GroupBy on Collection
-            /*
-            $test = $resource->get();
-            $test = $test->groupBy(function($date) {
-                return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d'); // grouping by years
-                //return Carbon::parse($date->created_at)->format('m'); // grouping by months
-            });
-            dd($test);
-            */
-
             $count = (count($query->get()));
             $perPage = $request->input('perPage');
             $resource = $resource->jsonPaginate($perPage);
@@ -174,6 +164,9 @@ class ResourceController extends Controller
                 }
             }
 
+            //dd($item->overRideEdit());
+
+
             if ($jsonInput == null && ($request->input('delete') == null OR $request->input('undelete') == null)) {
                 $response["status"] = "pending";
                 $response["message"] = "No input.";
@@ -254,6 +247,7 @@ class ResourceController extends Controller
                 throw new \Exception("No input data");
             }
 
+
             if (count($errors) > 0) {
                 $response["status"] = "error";
                 $response["message"] = "Validation failed.";
@@ -271,9 +265,25 @@ class ResourceController extends Controller
                             $fieldString = $data[0];
                         }
 
-                        $item->forceFill([
-                            $fieldString => $data[1]
-                        ]);
+
+                        if($item->overRideEdit() == true){
+
+                            $item = $item->objectToEdit();
+                            if($item != null){
+                                $item->forceFill([
+                                    $fieldString => $data[1]
+                                ]);
+                                $item->save();
+                            }
+
+                        }
+
+                        else {
+
+                            $item->forceFill([
+                                $fieldString => $data[1]
+                            ]);
+                        }
 
 
                     }

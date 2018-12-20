@@ -332,7 +332,7 @@ h1 {
 }
 
 .list-group-item.active {
-    background-color: #d9e8ff !important;
+    background-color: #3a61ff !important;
     color: #000;
     border-color: #bfd5fb !important;
 }
@@ -343,7 +343,7 @@ h1 {
 
 .list-group-item:hover i {
     opacity:1;
-    color: #6464e1;
+    color: #3a61ff;
 }
 
 .list-group-item i {
@@ -351,7 +351,7 @@ h1 {
     transition:all 0.3s;
 }
 .list-group-item.active i {
-    color: #6464e1;
+    color: #3a61ff ;
     opacity:1;
 }
 
@@ -707,8 +707,4 @@ tr:hover .dimmed {
 
 .basic-addon i {
     color:#6464e1 !important;
-}
-
-.dataRow:last-of-type {
-    border-bottom:1px solid #ddd;
 }

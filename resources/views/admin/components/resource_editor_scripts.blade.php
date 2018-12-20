@@ -1,7 +1,4 @@
 <script>
-
-
-
     Vue.use(VueQuillEditor);
 
     Vue.component('Editor', {
@@ -106,7 +103,7 @@
                 addResourceItem(fieldSchema){
 
                     this.displayAddItemForm = true;
-                    url = fieldSchema['options']['resource_schema_url'];
+                    url = fieldSchema['options']['resource_schema_url'] @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     axios
                         .get(url)
                         .then(response => (this.newItemSchema = response.data)
@@ -136,7 +133,7 @@
                     }
                 },
                 deleteResourceItem(item){
-                    url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + item.id + '&delete=true&save=true';
+                    url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + item.id + '&delete=true&save=true' @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     console.log(url);
                     axios
                         .get(url)
@@ -213,13 +210,13 @@
                     }
 
                     if (this.resourceEditUrl != '' && this.resourceItem != null) {
-                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + this.resourceItem.id + '&' + this.fieldName.toLowerCase() + '=' + this.fieldInput;
+                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + this.resourceItem.id + '&' + this.fieldName.toLowerCase() + '=' + this.fieldInput @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     }
                     else if (this.resourceEditUrl != '' && this.resourceItem == null) {
-                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&newItem=' + JSON.stringify(this.newItem);
+                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&newItem=' + JSON.stringify(this.newItem) @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     }
                     else {
-                        url = '/api/resources/{{ $options['type'] }}/' + contentId;
+                        url = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     }
                     payload = {data: payload, validate: true};
                     console.log('Payload:');
@@ -248,7 +245,7 @@
                     this.fieldInput = fieldInput;
                     var payload = {};
                     payload['add'] = this.fieldInput;
-                    url = '/api/resources/{{ $options['type'] }}/' + contentId + '?validate&tags=' + encodeURIComponent(JSON.stringify(payload));
+                    url = '/api/resources/{{ $options['type'] }}/' + contentId + '?validate&tags=' + encodeURIComponent(JSON.stringify(payload)) @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     axios
                         .post(url)
                         .then(response => (this.info = response.data)
@@ -260,7 +257,7 @@
                             'Cache-Control': 'no-cache'
                         }
                     };
-                    var url2 = '/api/resources/{{ $options['type'] }}/' + contentId;
+                    var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
                     axios
                         .get(url2, config)
                         .then(response => (this.record = response.data)
@@ -271,7 +268,7 @@
                 removeTag(tagId){
                     var payload = {};
                     payload['untag'] = tagId;
-                    url = '/api/resources/{{ $options['type'] }}/' + contentId + '?validate&tags=' + encodeURIComponent(JSON.stringify(payload));
+                    url = '/api/resources/{{ $options['type'] }}/' + contentId + '?validate&tags=' + encodeURIComponent(JSON.stringify(payload)) @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                     axios
                         .post(url)
                         .then(response => (this.info = response.data)
@@ -283,7 +280,7 @@
                             'Cache-Control': 'no-cache'
                         }
                     };
-                    var url2 = '/api/resources/{{ $options['type'] }}/' + contentId;
+                    var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
                     axios
                         .get(url2, config)
                         .then(response => (this.record = response.data)
@@ -299,7 +296,7 @@
                     var status = '';
                     var payload = {};
                     if (this.newItemSchema != null) {
-                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&save=true&newItem=' + JSON.stringify(this.newItem);
+                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&save=true&newItem=' + JSON.stringify(this.newItem) @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                         console.log(url);
                         axios
                             .get(url)
@@ -316,10 +313,10 @@
                     else {
                         payload[this.fieldName] = this.fieldInput;
                         if (this.resourceEditUrl != '') {
-                            url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + this.resourceItem.id + '&' + this.fieldName.toLowerCase() + '=' + this.fieldInput + '&save=true';
+                            url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + this.resourceItem.id + '&' + this.fieldName.toLowerCase() + '=' + this.fieldInput + '&save=true' @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
                         }
                         else {
-                            url = '/api/resources/{{ $options['type'] }}/' + contentId;
+                            url = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif ;
                         }
                         payload = {'data':payload, 'save': true};
                         console.log('Payload:');
@@ -338,7 +335,7 @@
                                 'Cache-Control': 'no-cache'
                             }
                         };
-                        var url2 = '/api/resources/{{ $options['type'] }}/' + contentId;
+                        var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
                         axios
                             .get(url2, config)
                             .then(response => (this.record = response.data));
@@ -438,7 +435,7 @@
                 refresh(argument) {
                     if (argument === 'delete') {
                         console.log('Deleting {{ $options['type'] }} #' + contentId + '...');
-                        url1 = '/api/resources/{{ $options['type'] }}/' + contentId;
+                        url1 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
                         payload = {'data': {}, 'delete': true};
                         axios
                             .delete(url1, payload)
@@ -454,7 +451,7 @@
                             'Cache-Control': 'no-cache'
                         }
                     };
-                    var url2 = '/api/resources/{{ $options['type'] }}/' + contentId;
+                    var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
                     axios
                         .get(url2, config)
                         .then(response => (this.record = response.data)
@@ -506,7 +503,8 @@
                         'Cache-Control': 'no-cache'
                     }
                 };
-                var url2 = '/api/resources/{{ $options['type'] }}/' + contentId;
+                var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '/?{!! $options['URL_PARAMETERS'] !!}' @endif;
+                console.log(url2);
                 axios
                     .get(url2, config)
                     .then(response => (this.record = response.data)

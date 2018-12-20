@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 class AccountController extends Controller
 {
     public function view($accountView){
+
         if(\Auth::user()) {
             $options = [
                 'id' => \Auth::user()->id,
@@ -16,19 +17,20 @@ class AccountController extends Controller
                 'buttons' => [],
                 'show_metadata' => false
             ];
+
             if($accountView == 'account') {
                 return view('app.account.profile')->with('options', $options);
             }
-            if($accountView == 'settings') {
+            elseif($accountView == 'settings') {
                 return view('app.account.settings')->with('options', $options);
             }
-            if($accountView == 'payment') {
+            elseif($accountView == 'payment') {
                 return view('app.account.payment')->with('options', $options);
             }
-            if($accountView == 'subscriptions') {
+            elseif($accountView == 'subscriptions') {
                 return view('app.account.subscriptions')->with('options', $options);
             }
-            if($accountView == 'products') {
+            elseif($accountView == 'products') {
                 return view('app.account.products')->with('options', $options);
             }
             else {

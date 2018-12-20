@@ -1,5 +1,7 @@
-<div id="contentForm" v-if="record != null && record.meta != null && record.meta.status == 'success'"
+
+<div id="contentForm" v-if="info != null && record != null && record.meta != null && record.meta.status == 'success'"
      style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
+
     <div class="row mb-2">
         <div class="col-lg-9 col-md-12">
 
@@ -9,6 +11,7 @@
             <!-- Add New Post Form -->
                 @if (Schema::hasColumn($item->getTable(), 'title'))
                     <div class="formSection" v-if="record.data != null">
+
                         <div class="input-group mb-3 border-radius-10 border-0 raised"
                              style="border:none !important;">
                             <div class="input-group-prepend">
@@ -60,7 +63,7 @@
                     </div>
                 @endif
 
-                <div v-if="record.data != null && record.data.schema != null && record.data.schema.fields != null">
+                <div v-if="record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null  && record.data.schema.fields.length > 0">
 
                     <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection"
                          v-if="fieldName !== 'slug' && fieldName !== '{{ $item->schema()->metadata->title_key }}' && fieldName !== 'status'">
@@ -129,7 +132,7 @@
                                  class="input-group">
 
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
+                                     v-if="1 == 2 && record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && section.fields.length > 0 && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"

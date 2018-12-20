@@ -5,6 +5,9 @@ namespace App\Traits;
 trait IsApiResource
 {
 
+    public function overRideEdit(){
+        return false;
+    }
 
     public function links($array = [])
     {
