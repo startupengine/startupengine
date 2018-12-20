@@ -25,6 +25,9 @@ class AccountController extends Controller
             if($accountView == 'subscriptions') {
                 return view('app.account.subscriptions')->with('options', $options);
             }
+            if($accountView == 'products') {
+                return view('app.account.products')->with('options', $options);
+            }
             else {
                 abort(404);
             }

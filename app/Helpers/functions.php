@@ -898,16 +898,16 @@ function makeMessage($item)
 
 function stripeKey($type = null){
 
-    if(ENV('APP_ENV') == 'local'){
+    if(ENV('APP_ENV') != 'production'){
         if($type == 'secret'){
             return(ENV('STRIPE_TEST_SECRET'));
         }else {
-            return (ENV('STRIPE_SECRET'));
+            return (ENV('STRIPE_TEST_KEY'));
         }
     }
     else {
         if($type == 'secret'){
-            return(ENV('STRIPE_TEST_KEY'));
+            return(ENV('STRIPE_SECRET'));
         }else {
             return (ENV('STRIPE_KEY'));
         }

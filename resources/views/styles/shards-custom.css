@@ -693,3 +693,18 @@ tr:hover .dimmed {
 .active .place-indicator {
     opacity:0.5 !important;
 }
+
+
+.bg-very-light.border-top {
+    border-color:#ddd !important;
+}
+
+.basic-addon {
+    color:#8aa4bf!important;
+    background: #e7edff;
+    border:1px solid #becad6;
+}
+
+.basic-addon i {
+    color:#6464e1 !important;
+}
