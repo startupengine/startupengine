@@ -63,7 +63,7 @@
                     </div>
                 @endif
 
-                <div v-if="record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null  && record.data.schema.fields.length > 0">
+                <div v-if="record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null ">
 
                     <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection"
                          v-if="fieldName !== 'slug' && fieldName !== '{{ $item->schema()->metadata->title_key }}' && fieldName !== 'status'">
