@@ -154,7 +154,7 @@
                         <?php $nowString = \Carbon\Carbon::now()->toDateString(); ?>
                         <?php $header = '
                         <h6 class="mb-0"><i class="fa fa-fw fa-history mr-2 dimmed text-primary"></i>Payment History</h6>'; ?>
-                        <?php $tableRow = '<td align="left" class="text-capitalize align-middle pl-4"><span class="badge badge-light text-dark mx-2">{{ item.amount }} {{ item.currency }}</span><span class="badge badge-light text-dark hiddenOnMobile mr-2">{{ moment(item.updated_at, "YYYYMMDD").fromNow()  }}</span><span class="badge text-dark my-2">{{ item.description }}</span></td>'; ?>
+                        <?php $tableRow = '<td align="left" class="text-capitalize align-middle py-4 pl-4"><span class="badge badge-light text-dark mx-2 my-2">{{ item.amount }} {{ item.currency }}</span><span class="badge badge-light text-dark mr-2 my-2">{{ moment(item.updated_at, "YYYYMMDD").fromNow()  }}</span><span class="badge text-dark my-2" style="font-weight:200;">{{ item.description }}</span></td>'; ?>
                         {!! renderResourceTableHtmlDynamically(['HEADER' => $header,  'TABLE_ROW' => $tableRow, 'PATH' => '/admin/product', 'WRAPPER_CLASS' => '']) !!}
                     </div>
                 </div>

@@ -19,6 +19,9 @@ class AccountController extends Controller
             if($accountView == 'account') {
                 return view('app.account.profile')->with('options', $options);
             }
+            if($accountView == 'settings') {
+                return view('app.account.settings')->with('options', $options);
+            }
             if($accountView == 'payment') {
                 return view('app.account.payment')->with('options', $options);
             }

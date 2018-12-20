@@ -280,8 +280,8 @@ li .dimmed {
 }
 
 .page-item.active .page-link {
-    background: royalblue !important;
-    border-color: royalblue !important;
+    background: #3595ff !important;
+    border-color: #3595ff !important;
     box-shadow:none !important;
 }
 

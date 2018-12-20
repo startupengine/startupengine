@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ setting('site.name', 'Startup Engine') }} @if(setting('admin.name', 'Control Panel') != setting('site.name'))
-            - {{ setting('admin.name') }}@endif</title>
+            - {{ setting('admin.name', 'Control Panel') }}@endif</title>
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">

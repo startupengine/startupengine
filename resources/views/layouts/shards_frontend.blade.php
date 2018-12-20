@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@yield('title') - {{ setting('site.name') }}</title>
+    <title>@yield('title') - {{ setting('site.name', 'Startup Engine') }}</title>
     <meta name="description"
           content="@yield('meta-description')">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,8 +49,8 @@
             <div class="container px-2 px-md-0">
                 <a class="navbar-brand" href="/">
                     <img src="{{ setting('site.logo', '/images/startup-engine-logo.png') }}" style="min-width:30px;max-height:30px;display:inline-block;"
-                         class="mr-1" alt="{{ setting('site.name') }}">
-                    <span>{{ setting('site.name') }}</span>
+                         class="mr-1" alt="{{ setting('site.name', 'Startup Engine') }}">
+                    <span>{{ setting('site.name', 'Startup Engine') }}</span>
                 </a>
                 <button class="navbar-toggler" type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#navModal" aria-label="Toggle navigation">
