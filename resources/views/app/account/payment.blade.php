@@ -113,9 +113,9 @@
                 <div class="pt-0 mb-3 col-md-3 pull-left">
                     @include('app.account.partials.nav')
                 </div>
-                <div class="pt-0 mb-3 col-md-9" id="stripeApp">
-                    <div class="card">
-                        <div class="card-header border-bottom">Payment Details</div>
+                <div class="pt-0 mb-3 col-md-9">
+                    <div class="card mb-3"  id="stripeApp">
+                        <div class="card-header border-bottom text-center"><i class="material-icons text-primary dimmed  mr-2">credit_card</i>Payment Method</div>
                         <div class="card-body">
                             @if(\Auth::user()->card_last_four != null)
                                 <p class="card-text">Card on file ends in&nbsp;
@@ -150,7 +150,15 @@
 
                         </div>
                     </div>
+                    <div class="w-100" id="paymentsApp" v-if="info != null">
+                        <?php $nowString = \Carbon\Carbon::now()->toDateString(); ?>
+                        <?php $header = '
+                        <h6 class="mb-0"><i class="fa fa-fw fa-history mr-2 dimmed text-primary"></i>Payment History</h6>'; ?>
+                        <?php $tableRow = '<td align="left" class="text-capitalize align-middle pl-4"><span class="badge badge-light text-dark mx-2">{{ item.amount }} {{ item.currency }}</span><span class="badge badge-light text-dark hiddenOnMobile mr-2">{{ moment(item.updated_at, "YYYYMMDD").fromNow()  }}</span><span class="badge text-dark my-2">{{ item.description }}</span></td>'; ?>
+                        {!! renderResourceTableHtmlDynamically(['HEADER' => $header,  'TABLE_ROW' => $tableRow, 'PATH' => '/admin/product', 'WRAPPER_CLASS' => '']) !!}
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -239,4 +247,6 @@
 
         }
     </script>
+
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'paymentsApp', 'div_id' => 'paymentsApp', 'url' => '/api/resources/payment', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
 @endsection

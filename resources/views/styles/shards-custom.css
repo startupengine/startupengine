@@ -708,3 +708,7 @@ tr:hover .dimmed {
 .basic-addon i {
     color:#6464e1 !important;
 }
+
+.dataRow:last-of-type {
+    border-bottom:1px solid #ddd;
+}

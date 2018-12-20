@@ -198,6 +198,12 @@ class User extends AuthUser implements AuditableContract, UserResolver
         return ['name', 'email'];
     }
 
+    public function charges(){
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $results = \Stripe\Charge::all(["customer" => $this->stripe_id, "limit" => 100]);
+        return $results;
+    }
+
     public function topPages(){
         $id = $this->id;
         $events = AnalyticEvent::where('user_id', '=', $id)->where('event_type', '=', 'page viewed')->where('event_data->model', 'page')->get();

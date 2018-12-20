@@ -327,7 +327,7 @@ function mostPopularContent($postType, $limit = null)
 
 function isResource($string)
 {
-    return in_array($string, ['event', 'content', 'log', 'package', 'page', 'permission', 'plan', 'preference', 'preferenceschema', 'product', 'role', 'setting', 'settingsgroup', 'subscription', 'tag', 'user']);
+    return in_array($string, ['event', 'content', 'log', 'package', 'page', 'payment', 'permission', 'plan', 'preference', 'preferenceschema', 'product', 'role', 'setting', 'settingsgroup', 'subscription', 'tag', 'user']);
 }
 
 function isRelationship($model, $field)
