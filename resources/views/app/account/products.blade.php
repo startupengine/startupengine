@@ -70,7 +70,7 @@
 
 @section('content')
     <!-- Related Content Section -->
-    <div class="blog section section-invert pt-4 pb-0" style="min-height:calc(100vh - 133px) !important;">
+    <div class="blog section section-invert pt-4 pb-0 full-screen-section">
         <h4 class="section-title text-center mb-5 mt-3">My Account</h4>
 
         <div class="container">
@@ -86,7 +86,7 @@
                         <div class="text-center py-3  bg-very-light border-top">
                         <div class="input-group input-group-sm px-3">
                             <div class="input-group-prepend">
-                            <span class="input-group-text basic-addon"><i class="fa fa-fw fa-search"></i></span>
+                            <span class="input-group-text bg-white"><i class="fa fa-fw fa-search text-primary"></i></span>
                         </div>
                         <input class="form-control formFilter" id="s" name="s" autocomplete="off" placeholder="Search for products by name..." v-model="search" @change="updateSearch(search)" />
                         </div>

@@ -132,7 +132,7 @@
                                  class="input-group">
 
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="1 == 2 && record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && section.fields.length > 0 && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
+                                     v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"

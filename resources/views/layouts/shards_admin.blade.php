@@ -283,12 +283,9 @@
                                           class="d-none d-md-inline-block text-capitalize">{{ \Auth::user()->name }}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-small">
-                                    <a class="dropdown-item" href="/admin/users/{{ \Auth::user()->id }}">
-                                        <i class="material-icons">&#xE7FD;</i> Profile</a>
-                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item"
-                                       href="/admin/users/{{ \Auth::user()->id }}/preferences">
-                                        <i class="material-icons">settings</i> Preferences</a>
+                                       href="/app/account">
+                                        <i class="material-icons">settings</i> My Account</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" href="/logout">
                                         <i class="material-icons text-danger">&#xE879;</i> Logout </a>

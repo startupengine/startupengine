@@ -323,7 +323,7 @@ h1 {
 }
 
 .section-invert {
-    background:linear-gradient(#e9f0ff, #fff) !important;
+    background:linear-gradient(#e9f0ff 0px, #fff 1000px) !important;
 }
 
 .list-group-item {
@@ -707,4 +707,8 @@ tr:hover .dimmed {
 
 .basic-addon i {
     color:#6464e1 !important;
+}
+
+.full-screen-section{
+    min-height:calc(100vh - 133px) !important;
 }

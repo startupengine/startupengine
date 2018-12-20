@@ -78,7 +78,7 @@
 
 @section('content')
     <!-- Related Content Section -->
-    <div class="blog section section-invert pt-4 pb-0" style="min-height:calc(100vh - 133px) !important;">
+    <div class="blog section section-invert pt-4 pb-0 full-screen-section">
         <h3 class="section-title text-center mb-5 mt-3">My Account</h3>
 
         <div class="container">
