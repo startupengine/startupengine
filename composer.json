@@ -114,11 +114,13 @@
         "post-install-cmd": [
             "@php artisan migrate",
             "@php artisan command:SyncGit default",
+            "@php artisan command:SyncStripeProducts",
             "@install-drafter"
         ],
         "post-update-cmd": [
             "@php artisan migrate",
             "@install-drafter",
+            "@php artisan command:SyncStripeProducts",
             "@php artisan websockets:serve"
         ],
         "install-drafter": "Hmaus\\Drafter\\Installer::installDrafter"
