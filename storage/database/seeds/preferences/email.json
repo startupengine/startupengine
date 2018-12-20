@@ -21,11 +21,10 @@
       }
     }
   },
-  "fields": {
-  },
+
   "sections": {
-    "about": {
-      "slug": "email",
+    "email-addresses": {
+      "slug": "email-addresses",
       "title": "E-mail Settings",
       "fields": {
         "email_address": {
@@ -33,6 +32,19 @@
           "description": "Your preferred e-mail address.",
           "validations": {
             "email": true
+          }
+        }
+      }
+    },
+    "email-notifications": {
+      "slug": "email-notifications",
+      "title": "E-mail Notifications",
+      "fields": {
+        "notify-receipts": {
+          "type": "checkbox",
+          "description": "Send me invoices/receipts by e-mail.",
+          "validations": {
+            "boolean": true
           }
         }
       }

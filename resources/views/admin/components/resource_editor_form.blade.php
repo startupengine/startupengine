@@ -132,7 +132,7 @@
                                  class="input-group">
 
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
+                                     v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && 1 == 2  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"
@@ -356,6 +356,12 @@
                         <div v-if="fieldType == 'code'">
                             <ace-editor style="border: 1px solid #eee;border-radius: 4px;" v-model="fieldInput"
                                         v-on:input="changed()" min-lines="5"></ace-editor>
+                        </div>
+                        <div v-else-if="fieldType == 'checkbox'">
+                            <div class="custom-control custom-toggle my-2">
+                                <input type="checkbox" id="customToggle1" name="customToggle" class="custom-control-input"  v-model="fieldInput" v-on:input="changed()">
+                                <label class="custom-control-label" for="customToggle1"><span class="dimmed">No</span> / <span class="text-success">Yes</span></label>
+                            </div>
                         </div>
                         <div v-else-if="fieldType == 'richtext'">
                             <quill-editor v-model="fieldInput"

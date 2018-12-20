@@ -99,7 +99,11 @@ function convertSchemaToValidationArray($field, $validations)
             $newvalue = "$validation";
         } elseif ($validation == "url" && $value == "true") {
             $newvalue = "$validation";
-        } else {
+        }
+        elseif ($validation == "boolean" && $value == "true") {
+            $newvalue = "$validation";
+        }
+        else {
             $newvalue = "$validation:$value";
         }
 
