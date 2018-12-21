@@ -88,7 +88,7 @@ class Product extends Model
                 'instruction' => 'Select a plan.',
                 'confirmation_message' => null,
                 'options' => $options,
-                'success_message' => "Subscription $this->stripe_id successfully created.",
+                'success_message' => "Subscription successfully created.",
                 'requirements' => [
                     'permissions_any' => [
                         'change own subscription',

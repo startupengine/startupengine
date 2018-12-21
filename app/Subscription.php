@@ -10,23 +10,56 @@ class Subscription extends Model
 
     use IsApiResource;
 
-    public function transformations(){
+    public function transformations()
+    {
 
         $allowed = [];
-        if($this->details()->status != 'canceled'){
+        if ($this->details()->status != 'canceled') {
             $allowed[] = 'switchPlan';
             $allowed[] = 'cancel';
         }
 
         $results = [];
-        foreach($allowed  as $function){
+        foreach ($allowed as $function) {
             $results[$function] = $this->$function('schema');
         }
         return $results;
     }
 
-    public function cancel($input = null){
-        if($input == 'schema'){
+    public function details()
+    {
+
+        if ($this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
+            \Stripe\Stripe::setApiKey(stripeKey('secret'));
+            $object = \Stripe\Subscription::retrieve($this->stripe_id);
+            $details = $object;
+            $this->forceFill([
+                'json->remote_data' => $details
+            ]);
+            if ($object->status = 'canceled') {
+                $this->status = "INACTIVE";
+                $this->ends_at = \Carbon\Carbon::createFromTimestamp(1545355590)->toDateTimeString();
+                $this->save();
+            }
+            return $object;
+        } else {
+
+            return $this->content()->remote_data;
+        }
+    }
+
+    public function content()
+    {
+        $json = $this->json;
+        if (gettype($json) !== 'object') {
+            $json = json_decode($json, true);
+        }
+        return $json;
+    }
+
+    public function cancel($input = null)
+    {
+        if ($input == 'schema') {
             $schema = [
                 'label' => 'Cancel',
                 'slug' => 'cancel',
@@ -41,8 +74,7 @@ class Subscription extends Model
                 ]
             ];
             return $schema;
-        }
-        else{
+        } else {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
             $subscription = $this->details();
@@ -52,18 +84,19 @@ class Subscription extends Model
         }
     }
 
-    public function switchPlan($input = null){
-        if($input == 'schema'){
+    public function switchPlan($input = null)
+    {
+        if ($input == 'schema') {
             $plans = $this->plans()->data;
             $options = [];
-            if($plans != null){
+            if ($plans != null) {
 
-                foreach($plans as $plan){
-                    $item =[];
+                foreach ($plans as $plan) {
+                    $item = [];
                     $item['value'] = $plan->id;
                     $item['label'] = $plan->nickname;
-                    $amount = "$".$plan->amount/100 ." ". strtoupper($plan->currency);
-                    $item['description'] = $amount. " / " . ucwords($plan->interval);
+                    $amount = "$" . $plan->amount / 100 . " " . strtoupper($plan->currency);
+                    $item['description'] = $amount . " / " . ucwords($plan->interval);
                     $options[$plan->id] = $item;
 
                 }
@@ -83,8 +116,7 @@ class Subscription extends Model
                 ]
             ];
             return $schema;
-        }
-        else{
+        } else {
             //Do Something
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
@@ -101,55 +133,34 @@ class Subscription extends Model
         }
     }
 
-    public function json()
+    public function plans()
     {
-        $json = json_decode($this->json);
-        return $json;
-
+        $product_id = ($this->details()->plan->product);
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $plans = \Stripe\Plan::all(["product" => $product_id]);
+        return $plans;
     }
 
-    public function user(){
+
+
+    public function user()
+    {
         $user = \App\User::where('id', '=', $this->user_id)->first();
         return $user;
     }
 
-    public function details(){
-        \Stripe\Stripe::setApiKey(stripeKey('secret'));
-        $object = \Stripe\Subscription::retrieve($this->stripe_id);
-        if($object->status = 'canceled'){
-            $this->status = "INACTIVE";
-            $this->ends_at = \Carbon\Carbon::createFromTimestamp(1545355590)->toDateTimeString();
-            $this->save();
-        }
-        return $object;
-    }
-
-    public function product(){
+    public function product()
+    {
         $product_id = ($this->details()->plan->product);
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
-        $product = \Stripe\Product::retrieve(["id" => $product_id ]);
+        $product = \Stripe\Product::retrieve(["id" => $product_id]);
         return $product;
-    }
-    public function plans(){
-        $product_id = ($this->details()->plan->product);
-        \Stripe\Stripe::setApiKey(stripeKey('secret'));
-        $plans= \Stripe\Plan::all(["product" => $product_id ]);
-        return $plans;
     }
 
     public function schema()
     {
-        $path = file_get_contents(storage_path().'/schemas/subscription.json');
+        $path = file_get_contents(storage_path() . '/schemas/subscription.json');
         $schema = json_decode($path);
         return $schema;
-    }
-
-    public function content()
-    {
-        $json = $this->json;
-        if(gettype($json) !== 'object') {
-            $json = json_decode($json, true);
-        }
-        return $json;
     }
 }

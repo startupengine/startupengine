@@ -1,6 +1,6 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="confirmActionModal">
     <div class="modal-dialog" role="document">
-        <div class="modal-content"  v-if="options != null && options.transformation != null">
+        <div class="modal-content"  v-if="options != null && options.transformation != null && instance.transformationStatus == null">
             <div class="modal-header">
                 <h5 class="modal-title" v-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">Success</h5>
                 <h5 class="modal-title" v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">Error</h5>
@@ -39,6 +39,35 @@
                     <button v-if="instance.transformationResult == null && selectedOption != 'defaultChoice' " type="button" class="btn btn-primary" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, selectedOption, true)">Confirm</button>
                     <button v-if="instance.transformationResult == null && selectedOption == 'defaultChoice' " type="button" class="btn btn-primary disabled" id="confirmActionButton" v-on:click="transform(options.id, options.transformation, selectedOption, true)">Confirm</button>
                 </div>
+            </div>
+        </div>
+        <div class="modal-content" v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'success'">
+            <div class="modal-body">
+                <p class="text-center pt-4">
+                    <span v-if="options.transformation.success_message != null"><i class="mr-2 fa fa-fw fa-check-circle text-success"></i> @{{ options.transformation.success_message }}</span>
+                    <span v-else ><i class="mr-2 fa fa-fw fa-check-circle text-success"></i> Action completed successfully.</span>
+                </p>
+            </div>
+            <div class="modal-footer px-3">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+        <div class="modal-content" v-else-if="instance != null && instance.transformationResult != null && instance.transformationResult.data.meta.status == 'error'">
+            <div class="modal-body">
+                <p class="text-center pt-4">
+                    <span v-if="options.transformation.success_message != null"><i class="mr-2 fa fa-fw fa-times-circle text-danger"></i> @{{ options.transformation.success_message }}</span>
+                    <span v-else ><i class="mr-2 fa fa-fw fa-check-circle text-danger"></i> Something went wrong.</span>
+                </p>
+            </div>
+            <div class="modal-footer px-3">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+        <div class="modal-content" v-else >
+            <div class="modal-body">
+                <p class="text-center pt-4">
+                    Loading... <i class="ml-2 fa fa-fw fa-spinner fa-spin"></i>
+                </p>
             </div>
         </div>
     </div>

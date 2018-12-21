@@ -31,6 +31,7 @@
                 withoutTagsString: '',
                 startDate: '',
                 endDate: '',
+                transformationStatus: null,
                 transformationResult: null
             }
         },
@@ -172,6 +173,7 @@
                     else {
                         var actionString = '&action=' + action;
                     }
+                    this.transformationStatus = 'loading';
                     url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString;
                     console.log(url);
                     axios
@@ -183,6 +185,7 @@
             },
             updateTransformationResult(response){
                 this.transformationResult = response;
+                this.transformationStatus = 'loaded';
                 this.updateData();
                 return response;
             },
