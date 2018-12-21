@@ -72,7 +72,7 @@ class Subscription extends Model
                 'description' => 'Cancel this subscription.',
                 'require_confirmation' => true,
                 'confirmation_message' => 'Are you sure you want to cancel this subscription?',
-                'success_message' => "Subscription $this->stripe_id cancelled.",
+                'success_message' => "Subscription cancelled.",
                 'requirements' => [
                     'permissions_any' => [
                         'cancel own subscription',
@@ -85,7 +85,8 @@ class Subscription extends Model
 
             $subscription = $this->details();
             $subscription->cancel();
-            $subscription->ends_at = \Carbon\Carbon::now()->toDateTimeString();
+            $subscription->status = 'INACTIVE';
+            //$subscription->ends_at = \Carbon\Carbon::now()->toDateTimeString();
             $subscription->save();
         }
     }
@@ -114,7 +115,7 @@ class Subscription extends Model
                 'instruction' => 'Select a new plan.',
                 'confirmation_message' => null,
                 'options' => $options,
-                'success_message' => "Subscription $this->stripe_id successfully changed.",
+                'success_message' => "Subscription successfully changed.",
                 'requirements' => [
                     'permissions_any' => [
                         'change own subscription',
