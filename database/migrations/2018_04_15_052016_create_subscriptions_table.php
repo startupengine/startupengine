@@ -23,11 +23,12 @@ class CreateSubscriptionsTable extends Migration
             $table->text('user_email')->nullable();
             $table->string('stripe_id');
             $table->string('stripe_plan');
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->text('description')->nullable();
             $table->text('image')->nullable();
+            $table->text('status')->nullable();
             $table->json('json')->nullable();
         });
     }

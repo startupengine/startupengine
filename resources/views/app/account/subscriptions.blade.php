@@ -85,7 +85,7 @@
                     <?php $tableHeader = '
                         <div class="border-top text-center py-3 bg-very-light" style="border-color:#ddd !important;">
                         <div class="btn-group btn-group-sm">
-                            <span class="btn btn-white border"  v-bind:class="{ active: filters.status==\'ends_at>=' . $nowString . '\'}"  v-on:click="updateFilters({\'status\':\'ends_at>=' . $nowString . '\'})">
+                            <span class="btn btn-white border"  v-bind:class="{ active: filters.status==\'\'}"  v-on:click="updateFilters({\'status\':\'\'})">
                                 <span>Active</span>
                             </span>
                              <span class="btn btn-white border" v-bind:class="{ active: filters.status==\'trial_ends_at>=' . $nowString . '\'}"  v-on:click="updateFilters({\'status\':\'trial_ends_at>=' . $nowString . '\'})">
@@ -123,5 +123,5 @@
 @section('scripts')
 
 
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':''}"]) !!}
 @endsection

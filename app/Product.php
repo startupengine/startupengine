@@ -38,6 +38,82 @@ class Product extends Model
 
     }
 
+    public function transformations(){
+
+        $allowed = [];
+        if($this->status == 'ACTIVE'){
+            $allowed[] = 'subscribe';
+        }
+
+        $results = [];
+        foreach($allowed  as $function){
+            $results[$function] = $this->$function('schema');
+        }
+        return $results;
+    }
+
+    public function details(){
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $object = \Stripe\Product::retrieve($this->stripe_id);
+        return $object;
+    }
+
+    public function stripePlans(){
+        $product_id = ($this->stripe_id);
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        $plans= \Stripe\Plan::all(["product" => $product_id ]);
+        return $plans;
+    }
+
+    public function subscribe($input = null){
+        if($input == 'schema'){
+            $plans = $this->stripePlans()->data;
+            $options = [];
+            if($plans != null){
+
+                foreach($plans as $plan){
+                    $item =[];
+                    $item['value'] = $plan->id;
+                    $item['label'] = $plan->nickname;
+                    $amount = "$".$plan->amount/100 ." ". strtoupper($plan->currency);
+                    $item['description'] = $amount. " / " . ucwords($plan->interval);
+                    $options[$plan->id] = $item;
+
+                }
+            }
+            $schema = [
+                'label' => 'Subscribe',
+                'slug' => 'Subscribe',
+                'description' => 'You may subscribe to this product.',
+                'instruction' => 'Select a plan.',
+                'confirmation_message' => null,
+                'options' => $options,
+                'success_message' => "Subscription $this->stripe_id successfully created.",
+                'requirements' => [
+                    'permissions_any' => [
+                        'change own subscription',
+                        'change others subscription']
+                ]
+            ];
+            return $schema;
+        }
+        else{
+            //Do Something
+            \Stripe\Stripe::setApiKey(stripeKey('secret'));
+
+            $subscription = $this->details();
+            \Stripe\Subscription::create([
+                "customer" => "cus_EBKCkvnZ3YYNS1",
+                "items" => [
+                    [
+                        "plan" => "plan_EBM1ezhzsot0q6",
+                    ],
+                ]
+            ]);
+        }
+    }
+
+
     public function searchFields() {
         return ['slug', 'name', 'description', 'json->sections->about->fields->type', 'json->sections->about->fields->description'];
     }

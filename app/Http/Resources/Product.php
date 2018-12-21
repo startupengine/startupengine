@@ -39,6 +39,7 @@ class Product extends JsonResource
         }
         $fields['schema'] = $this->schema();
         $fields['content'] = $this->content();
+        $fields['transformations'] = $this->transformations();
         $fields = sparseFields($fields, 'product');
         return $fields;
     }

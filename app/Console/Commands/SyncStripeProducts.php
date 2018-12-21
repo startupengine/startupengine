@@ -18,7 +18,7 @@ class SyncStripeProducts extends Command
      *
      * @var string
      */
-    protected $description = 'Create database entreis for all products in the connected Stripe account.';
+    protected $description = 'Create database entries for all products in the connected Stripe account.';
 
     /**
      * Create a new command instance.

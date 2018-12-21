@@ -14,7 +14,7 @@
                 <div v-if="hasOptions()">
                     <div class="card-text pb-4">@{{ options.transformation.description }}<br><div v-if="message == null">Select an option.</div><div v-else>@{{ message }}</div></div>
                     <select class="form-control" v-model="selectedOption" v-if="options.transformation.hasOwnProperty('options')">
-                        <option disabled value="defaultChoice">Choose one...</option>
+                        <option disabled value="defaultChoice">Choose an option...</option>
                         <option v-for="option,key in options.transformation.options" :value="key">@{{ option.label }}</option>
                     </select>
                     <p class="card-text text-primary mt-4" style="opacity:0.75;" v-if="selectedOption != 'defaultChoice' && options.transformation.options[selectedOption].description != null">@{{ options.transformation.options[selectedOption].description }}</p>
