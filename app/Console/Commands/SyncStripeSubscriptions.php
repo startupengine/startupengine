@@ -56,7 +56,7 @@ class SyncStripeSubscriptions extends Command
                     $subscription->status = 'INACTIVE';
                 }
                 $user = \App\User::where('stripe_id', '=', $stripeSubscription->customer)->first();
-                dd($stripeSubscription);
+
                 if($user != null) {
                     $subscription->user_id = $user->id;
                 }
