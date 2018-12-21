@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use App\Traits\RelationshipsTrait;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 
 class Product extends Model
 {
@@ -108,7 +109,7 @@ class Product extends Model
                     \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
                     $subscription = $this->details();
-                    \Stripe\Subscription::create([
+                    $newStripeSubscription = \Stripe\Subscription::create([
                         "customer" => $user->stripe_id,
                         "items" => [
                             [
@@ -116,6 +117,8 @@ class Product extends Model
                             ],
                         ]
                     ]);
+                    Artisan::call("command:SyncStripeSubscriptions");
+
                 }
 
             }
