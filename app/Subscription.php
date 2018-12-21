@@ -47,6 +47,8 @@ class Subscription extends Model
 
             $subscription = $this->details();
             $subscription->cancel();
+            $subscription->ends_at = \Carbon\Carbon::now()->toDateTimeString();
+            $subscription->save();
         }
     }
 
@@ -114,6 +116,11 @@ class Subscription extends Model
     public function details(){
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
         $object = \Stripe\Subscription::retrieve($this->stripe_id);
+        if($object->status = 'canceled'){
+            $this->status = "INACTIVE";
+            $this->ends_at = \Carbon\Carbon::createFromTimestamp(1545355590)->toDateTimeString();
+            $this->save();
+        }
         return $object;
     }
 
