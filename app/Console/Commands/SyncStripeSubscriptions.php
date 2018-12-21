@@ -40,6 +40,8 @@ class SyncStripeSubscriptions extends Command
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
         $stripeSubscriptions = \Stripe\Subscription::all(['status' => 'all']);
+        echo $stripeSubscriptions->data[0];
+
         if($stripeSubscriptions != null){
             foreach($stripeSubscriptions->data as $stripeSubscription){
                 $subscription = \App\Subscription::where('stripe_id', $stripeSubscription->id)->first();
@@ -49,7 +51,7 @@ class SyncStripeSubscriptions extends Command
                 }
                 $subscription->stripe_plan = $stripeSubscription->plan->id;
 
-                if($stripeSubscription->plan->active == true){
+                if($stripeSubscription->status == 'active'){
                     $subscription->status = 'ACTIVE';
                 }
                 else {

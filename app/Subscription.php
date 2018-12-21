@@ -31,21 +31,23 @@ class Subscription extends Model
 
         if ($this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
-            $object = \Stripe\Subscription::retrieve($this->stripe_id);
-            $details = $object;
+            $details = \Stripe\Subscription::retrieve($this->stripe_id);
             $this->forceFill([
                 'json->remote_data' => $details
             ]);
-            //dump($object);
-            if ($object->plan->active != true) {
+            dump($details);
+            if ($details->status != 'active') {
                 $this->status = "INACTIVE";
-                $this->ends_at = \Carbon\Carbon::createFromTimestamp(1545355590)->toDateTimeString();
+                if($details->canceled_at != null) {
+                    $this->ends_at = \Carbon\Carbon::createFromTimestamp($details->canceled_at)->toDateTimeString();
+                }
             }
             else {
                 $this->status = 'ACTIVE';
+                $this->ends_at = null;
             }
             $this->save();
-            return $object;
+            return $details;
         } else {
 
             return $this->content()->remote_data;
