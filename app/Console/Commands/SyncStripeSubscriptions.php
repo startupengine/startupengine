@@ -48,6 +48,7 @@ class SyncStripeSubscriptions extends Command
                     $subscription ->stripe_id = $stripeSubscription->id;
                 }
                 $subscription->stripe_plan = $stripeSubscription->plan->id;
+
                 if($stripeSubscription->plan->active == true){
                     $subscription->status = 'ACTIVE';
                 }

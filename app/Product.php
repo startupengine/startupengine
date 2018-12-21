@@ -99,17 +99,26 @@ class Product extends Model
         }
         else{
             //Do Something
-            \Stripe\Stripe::setApiKey(stripeKey('secret'));
+            $userId = app('request')->input('user_id');
+            $planId = app('request')->input('action');
+            if($userId != null) {
+                $user = \App\User::find($userId);
+                //dump($user);
+                if($user != null) {
+                    \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
-            $subscription = $this->details();
-            \Stripe\Subscription::create([
-                "customer" => "cus_EBKCkvnZ3YYNS1",
-                "items" => [
-                    [
-                        "plan" => "plan_EBM1ezhzsot0q6",
-                    ],
-                ]
-            ]);
+                    $subscription = $this->details();
+                    \Stripe\Subscription::create([
+                        "customer" => $user->stripe_id,
+                        "items" => [
+                            [
+                                "plan" => $planId
+                            ],
+                        ]
+                    ]);
+                }
+
+            }
         }
     }
 

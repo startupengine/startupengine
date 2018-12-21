@@ -35,7 +35,9 @@
         .card {
             height: auto !important;
             min-height: auto !important;
+            display:inline-table;
         }
+
 
         .card-footer {
             border-top: 1px solid #eee !important;
@@ -103,6 +105,6 @@
 
 @section('scripts')
 
-
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/product', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}"]) !!}
+<?php $userId = \Auth::user()->id; ?>
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/product', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'ends_at>=".$nowString."'}", 'FORCE_URL_ARGUMENTS' => "user_id=$userId"]) !!}
 @endsection

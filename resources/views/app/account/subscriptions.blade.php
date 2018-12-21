@@ -24,17 +24,19 @@
             background-position: center;
         }
 
+        .card {
+            height: auto !important;
+            min-height: auto !important;
+            display:inline-table;
+        }
+
+
         .card.border {
             border-color: #cfd8e2 !important;
         }
 
         .card-header {
             background: #fff !important;
-        }
-
-        .card {
-            height: auto !important;
-            min-height: auto !important;
         }
 
         .card-footer {
@@ -97,22 +99,7 @@
                         </div>
                     ';?>
                     <?php $tableRow = '<td align="left" class="text-capitalize align-middle"><span class="pl-2">{{ item.product.name }}</span><span class="badge badge-light text-dark hiddenOnMobile ml-2"><span class="dimmed">Plan:</span> {{ item.details.plan.nickname }}</span><span class="badge badge-light text-dark ml-2">{{ item.details.status }}</span></td><td align="center"  style="width:auto;vertical-align:middle;text-align:right;"><a href="#"  v-bind:href="\'/app/subscriptions/view?subscription_id=\' + item.id" v-on:click="manageSubscription(item.id)"  class="btn btn-sm btn-white btn-pill px-3 mr-2 d-none">Edit</a><a href="#" class="btn btn-white btn-sm btn-pill mr-2"   v-for="transformation in item.transformations"  v-on:click="transform(item.id, transformation)" :class="{[\'action-\'+transformation.slug]:true}" >{{ transformation.label }}</a></td>'; ?>
-                    <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
-                    <?php $cardFooter = '
-             <div align="center">
-                <div class="btn-group mb-2" role="group" aria-label="Table row actions">
-                    <a href="" class="btn btn-outline-primary btn-pill"
-                       v-bind:href="\'/admin/content/\' + item.id">
-            Edit<i class="fa fa-edit ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-2px;position:relative;"></i>
-            </a>
-            <a href="" target="_blank" class="btn btn-outline-primary btn-pill"
-                       v-bind:href="\'/content/\' + item.id + \'/\' + item.slug">
-            View<i class="fa fa-chevron-right ml-2" style="-webkit-text-stroke: 0px #000;font-size:8px;top:-1px;position:relative;"></i>
-            </a>
-        </div>
-        </div>
-        '; ?>
-                    {!! renderResourceTableHtmlDynamically(['HEADER' => $header,  'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_BODY_HTML' => $cardHtml, 'CARD_FOOTER' => $cardFooter, 'WRAPPER_CLASS' => '']) !!}
+                    {!! renderResourceTableHtmlDynamically(['HEADER' => $header,  'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content', 'WRAPPER_CLASS' => '']) !!}
                 </div>
             </div>
         </div>
@@ -121,7 +108,5 @@
 @endsection
 
 @section('scripts')
-
-
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'status=ACTIVE'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'GLOBAL_FILTER' => '&user_id=1', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'status=ACTIVE'}"]) !!}
 @endsection

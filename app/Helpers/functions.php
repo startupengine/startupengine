@@ -647,7 +647,7 @@ function renderResourceTableScripts($options)
 
 function renderResourceTableScriptsDynamically($options = null)
 {
-    if ($options == null) {
+    if (!isset($options)) {
         $options = [];
     }
     if (!isset($options['VUE_APP_NAME'])) {

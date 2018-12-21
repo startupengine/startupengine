@@ -36,11 +36,15 @@ class Subscription extends Model
             $this->forceFill([
                 'json->remote_data' => $details
             ]);
-            if ($object->status = 'canceled') {
+            //dump($object);
+            if ($object->plan->active != true) {
                 $this->status = "INACTIVE";
                 $this->ends_at = \Carbon\Carbon::createFromTimestamp(1545355590)->toDateTimeString();
-                $this->save();
             }
+            else {
+                $this->status = 'ACTIVE';
+            }
+            $this->save();
             return $object;
         } else {
 

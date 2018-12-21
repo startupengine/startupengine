@@ -176,7 +176,7 @@
                         var actionString = '&action=' + action;
                     }
                     this.transformationStatus = 'loading';
-                    url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString;
+                    url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString @if( isset($options['FORCE_URL_ARGUMENTS']) ) + '&{{ $options['FORCE_URL_ARGUMENTS'] }}'@endif;
                     console.log(url);
                     axios
                         .post(url)
@@ -240,4 +240,5 @@
         );
         }
     });
+
 </script>
