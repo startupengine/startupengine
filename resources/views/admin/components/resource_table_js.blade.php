@@ -156,12 +156,14 @@
                 this.transformationResult = null;
                 if (transformation.options != null && confirm != true) {
                     console.log('test1');
+                    this.transformationStatus = null;
                     if (typeof confirmAction === "function") {
                         confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
                     }
                 }
                 else if(transformation.require_confirmation != null && confirm != true) {
                     console.log('test2');
+                    this.transformationStatus = null;
                     if (typeof confirmAction === "function") {
                         confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
                     }

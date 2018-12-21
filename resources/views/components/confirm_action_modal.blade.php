@@ -60,7 +60,7 @@
                 </p>
             </div>
             <div class="modal-footer px-3">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="instance.transformationStatus = null">Okay</button>
             </div>
         </div>
         <div class="modal-content" v-else >
