@@ -108,5 +108,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'GLOBAL_FILTER' => '&user_id=1', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'status=ACTIVE'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME' => 'subscriptionsApp', 'url' => '/api/resources/subscription', 'GLOBAL_FILTER' => '&user_id=1', 'FILTERS' => "{'user_id':'user_id=".\Auth::user()->id."',    'status':'status=ACTIVE'}", "LIMIT" => 100]) !!}
 @endsection
