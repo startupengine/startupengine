@@ -10,6 +10,9 @@
         }
         },
         methods: {
+            dismissActionModal(){
+                $('#confirmActionModal').modal('hide');
+            },
             hasOptions(){
                 if(this.options.transformation.options != null) {
                     return true;

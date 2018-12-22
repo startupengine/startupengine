@@ -303,6 +303,9 @@
         methods: {
             infoNotification(input){
                 this.$snotify.info(input);
+            },
+            errorNotification(input){
+                this.$snotify.error(input);
             }
         },
         mounted() {

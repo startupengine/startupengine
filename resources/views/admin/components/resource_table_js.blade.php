@@ -32,7 +32,8 @@
                 startDate: '',
                 endDate: '',
                 transformationStatus: null,
-                transformationResult: null
+                transformationResult: null,
+                transformationError: null
             }
         },
         methods: {
@@ -180,12 +181,30 @@
                     console.log(url);
                     axios
                         .post(url)
-                        .then(response => (this.updateTransformationResult(response))
-                )
-                    ;
+                        .catch(function (error) {
+                            this.updateTransformationError(error);
+                            if (error.response) {
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                                console.log(error.response.headers);
+                            }
+                        })
+                        .then(response => (this.updateTransformationResult(response)));
+
                 }
             },
+            updateTransformationError(error){
+                console.log('Error:');
+                console.log(error);
+                if(notificationsApp != null){
+                    notificationsApp.errorNotification(error.response.data.detail);
+                }
+                this.transformationError = error;
+            },
             updateTransformationResult(response){
+                if(confirmActionApp != null){
+                    confirmActionApp.dismissActionModal();
+                }
                 this.transformationResult = response;
                 this.transformationStatus = 'loaded';
                 this.updateData();
