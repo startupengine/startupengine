@@ -85,9 +85,9 @@ class Subscription extends Model
 
             $subscription = $this->details();
             $subscription->cancel();
-            $subscription->status = 'INACTIVE';
-            //$subscription->ends_at = \Carbon\Carbon::now()->toDateTimeString();
-            $subscription->save();
+            $this->status = 'INACTIVE';
+            $this->ends_at = \Carbon\Carbon::now()->toDateTimeString();
+            $this->save();
         }
     }
 
