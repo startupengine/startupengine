@@ -183,7 +183,7 @@
                     axios
                         .post(url)
                         .catch(function (error) {
-                            this.updateTransformationError(error);
+                            {{ $options['VUE_APP_NAME'] }}.updateTransformationError(error);
                             if (error.response) {
                                 console.log(error.response.data);
                                 console.log(error.response.status);
@@ -198,7 +198,10 @@
                 console.log('Error:');
                 console.log(error);
                 if(notificationsApp != null){
-                    notificationsApp.errorNotification(error.response.data.detail);
+                    notificationsApp.errorNotification('Something went wrong.');
+                }
+                if(confirmActionApp != null){
+                    confirmActionApp.dismissActionModal();
                 }
                 this.transformationError = error;
             },

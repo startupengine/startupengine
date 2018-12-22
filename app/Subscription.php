@@ -29,7 +29,7 @@ class Subscription extends Model
         return $results;
     }
 
-    public function details($refresh = null)
+    public function details($refresh = null, $object = null)
     {
 
         if ($refresh == true OR $this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
@@ -56,8 +56,12 @@ class Subscription extends Model
             }
             $this->save();
             //dd($this->json);
-
-            return $this->content()->remote_data;
+            if($object != null){
+             return $details;
+            }
+            else {
+                return $this->content()->remote_data;
+            }
         } else {
 
             return $this->content()->remote_data;
@@ -99,7 +103,7 @@ class Subscription extends Model
         } else {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
-            $subscription = $this->details();
+            $subscription = $this->details(true, true);
             $subscription->cancel();
             $this->status = 'INACTIVE';
             $this->ends_at = \Carbon\Carbon::now()->toDateTimeString();
