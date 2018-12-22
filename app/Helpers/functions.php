@@ -1093,23 +1093,28 @@ function jsonErrorMessage($input = null){
         if(isset($input['detail'])){
             $response['detail'] = $input['detail'];
         }
+        if(isset($input['message'])){
+            $response['message'] = $input['message'];
+        }
     }
     else {
         $response['status'] = 500;
         $response['code'] = null;
         $response['title'] = null;
+        $response['detail'] = null;
+        $response['message'] = null;
     }
     if(!isset($response['status'])){
         $response['status'] = 500;
     }
-    if(!isset($response['detail'])){
+    if($response['message'] == null){
         if($input != null && gettype($input) == 'string'){
             $message = $input;
         }
         else {
             $message = 'Something went wrong.';
         }
-        $response['detail'] = $message;
+        $response['message'] = $message;
     }
     return ['errors' => $response];
 }

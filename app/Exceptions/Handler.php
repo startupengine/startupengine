@@ -51,11 +51,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
         $currentUrl = $request->url();
         $baseApiUrl = \App::make('url')->to('/api/resources');
         $isJson = strpos($currentUrl, $baseApiUrl) !== false;
 
-        if ($request->wantsJson() OR $request->expectsJson() OR $isJson) {
+        $stackTrace = $request->input('stackTrace');
+
+        if ($request->wantsJson() OR $request->expectsJson() OR $isJson && $stackTrace != true) {
             return $this->jsonResponse($exception);
             //return $this->jsonResponse($exception);
         }

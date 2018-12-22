@@ -10,6 +10,8 @@ class Subscription extends Model
 
     use IsApiResource;
 
+    protected $casts = ['json' => 'array'];
+
     public function transformations()
     {
 
@@ -27,10 +29,10 @@ class Subscription extends Model
         return $results;
     }
 
-    public function details()
+    public function details($refresh = null)
     {
 
-        if ($this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
+        if ($refresh == true OR $this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
             $details = \Stripe\Subscription::retrieve($this->stripe_id);
             $product = \Stripe\Product::retrieve($details->plan->product);
@@ -53,7 +55,9 @@ class Subscription extends Model
                 $this->ends_at = null;
             }
             $this->save();
-            return $details;
+            //dd($this->json);
+
+            return $this->content()->remote_data;
         } else {
 
             return $this->content()->remote_data;
@@ -63,8 +67,14 @@ class Subscription extends Model
     public function content()
     {
         $json = $this->json;
-        if (gettype($json) !== 'object') {
+
+        if (gettype($json) == 'string') {
             $json = json_decode($json, true);
+        }
+        if (gettype($json) == 'object' OR gettype($json) == 'array') {
+
+            $json = json_decode(json_encode($json));
+
         }
         return $json;
     }
@@ -134,11 +144,12 @@ class Subscription extends Model
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
             $subscription = $this->details();
+            //dd($subscription->subscription);
             \Stripe\Subscription::update($this->stripe_id, [
                 'cancel_at_period_end' => false,
                 'items' => [
                     [
-                        'id' => $subscription->items->data[0]->id,
+                        'id' => $subscription->subscription->items->data[0]->id,
                         'plan' => $input,
                     ],
                 ],
@@ -148,7 +159,7 @@ class Subscription extends Model
 
     public function plans()
     {
-        $product_id = ($this->details()->subscription->plan->product);
+        $product_id = ($this->details(true)->subscription->plan->product);
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
         $plans = \Stripe\Plan::all(["product" => $product_id]);
         return $plans;

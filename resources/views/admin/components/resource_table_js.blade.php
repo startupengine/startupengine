@@ -93,10 +93,10 @@
                 $('.dataRow').hide();
                 $('.loadingRow').show();
                 if (this.filters !== null) {
-                    var string = '{{ $options['url'] }}?{{ $options['GLOBAL_FILTER'] }}&page[number]=' + pageNumber + '&perpage=' + this.perPage + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
+                    var string = '{{ $options['url'] }}?{!! $options['GLOBAL_FILTER'] !!}&page[number]=' + pageNumber + '&perpage=' + this.perPage + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
                 }
                 else {
-                    var string = '{{ $options['url'] }}?{{ $options['GLOBAL_FILTER'] }}&page[number]=' + pageNumber + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
+                    var string = '{{ $options['url'] }}?{!! $options['GLOBAL_FILTER'] !!}&page[number]=' + pageNumber + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
                 }
                 if(this.startDate != ''){
                     string = string + '&startDate=' + this.startDate;
@@ -155,6 +155,7 @@
                 console.log('Recieved:');
                 console.log([id, transformation, action, confirm]);
                 this.transformationResult = null;
+                this.transformationError = null;
                 if (transformation.options != null && confirm != true) {
                     console.log('test1');
                     this.transformationStatus = null;
@@ -208,7 +209,12 @@
                         confirmActionApp.dismissActionModal();
                     }
                     if(notificationsApp != null){
-                        notificationsApp.errorNotification(this.transformationResult.data.errors.detail);
+                        if(this.transformationResult.data.errors.message != null) {
+                            notificationsApp.errorNotification(this.transformationResult.data.errors.message);
+                        }
+                        else {
+                            notificationsApp.errorNotification('Something went wrong.');
+                        }
                     }
                 }
                 this.transformationStatus = 'loaded';
@@ -255,7 +261,7 @@
         mounted() {
             this.updateFilters(this.filters);
             this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
-            var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{{ $options['GLOBAL_FILTER'] }}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
+            var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
             console.log(url);
             var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}};
             axios
