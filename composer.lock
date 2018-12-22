@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c69ebc73698a5ea94d57d75325440734",
+    "content-hash": "14ad45f8b9c1a9d1bd90814b813e03ac",
     "packages": [
         {
             "name": "appstract/laravel-meta",
@@ -5974,6 +5974,57 @@
                 "phra"
             ],
             "time": "2015-10-13T18:44:15+00:00"
+        },
+        {
+            "name": "sfelix-martins/json-exception-handler",
+            "version": "v1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sfelix-martins/json-exception-handler.git",
+                "reference": "42078a9bfe00d99b56feac1543ba65431d85f04f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sfelix-martins/json-exception-handler/zipball/42078a9bfe00d99b56feac1543ba65431d85f04f",
+                "reference": "42078a9bfe00d99b56feac1543ba65431d85f04f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SMartins\\JsonHandler\\JsonHandlerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SMartins\\JsonHandler\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Martins",
+                    "email": "sfelix_martins@hotmail.com"
+                }
+            ],
+            "description": "Adds more power to Laravel Exceptions Handler to treat json responses",
+            "keywords": [
+                "api",
+                "exceptions",
+                "handler",
+                "json",
+                "jsonapi",
+                "laravel"
+            ],
+            "time": "2018-01-22T12:52:57+00:00"
         },
         {
             "name": "shipping-docker/vessel",

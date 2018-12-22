@@ -4,9 +4,12 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use SMartins\JsonHandler\JsonHandler;
 
 class Handler extends ExceptionHandler
 {
+    use JsonHandler;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -48,6 +51,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $currentUrl = $request->url();
+        $baseApiUrl = \App::make('url')->to('/api/resources');
+        $isJson = strpos($currentUrl, $baseApiUrl) !== false;
+
+        if ($request->wantsJson() OR $request->expectsJson() OR $isJson) {
+            return $this->jsonResponse($exception);
+        }
+
         return parent::render($request, $exception);
     }
 }
