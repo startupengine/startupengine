@@ -35,7 +35,7 @@ class Subscription extends Model
             $this->forceFill([
                 'json->remote_data' => $details
             ]);
-            dump($details);
+            //dump($details);
             if ($details->status != 'active') {
                 $this->status = "INACTIVE";
                 if($details->canceled_at != null) {

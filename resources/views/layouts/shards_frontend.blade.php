@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/styles/shards.min.css">
     <link rel="stylesheet" href="/styles/shards-extras.min.css">
     <link rel="stylesheet" href="/styles/shards-custom.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-snotify@3.2.1/styles/material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 @yield('css')
@@ -242,6 +243,8 @@
 </footer>
 <!-- / Footer Section -->
 
+{!! renderConfirmActionModal() !!}
+
 <!-- JavaScript Dependencies -->
 
 <script src="/js/moment-2.22.js"></script>
@@ -255,6 +258,8 @@
 
 <script src="/js/jquery.sharre.min.js"></script>
 <script src="/js/vue.js"></script>
+<script src="https://unpkg.com/vue-snotify@3.2.1/vue-snotify.js"></script>
+
 <script src="/js/axios-min.js"></script>
 <script src="/js/polyfill-min.js"></script>
 <script src="/js/bootstrap-vue.js"></script>
@@ -287,11 +292,23 @@
     });
 </script>
 
-
-
-{!! renderConfirmActionModal() !!}
-
 @yield('scripts')
+<div id="notificationsApp">
+    <vue-snotify></vue-snotify>
+</div>
+<script>
+    var notificationsApp = new Vue({
+        el: '#notificationsApp',
+        data: {},
+        methods: {
+            infoNotification(input){
+                this.$snotify.info(input);
+            }
+        },
+        mounted() {
+        }
+    })
+</script>
 
 {!! renderConfirmActionScripts() !!}
 

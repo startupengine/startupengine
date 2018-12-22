@@ -25,9 +25,11 @@ class SyncStripeSubscriptions extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($verbose = null)
     {
         parent::__construct();
+
+        $this->verbose = $verbose;
     }
 
     /**
@@ -37,12 +39,17 @@ class SyncStripeSubscriptions extends Command
      */
     public function handle()
     {
+
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
         $stripeSubscriptions = \Stripe\Subscription::all(['status' => 'all']);
-        echo $stripeSubscriptions->data[0];
+
+        if($this->verbose == true) {
+            echo $stripeSubscriptions->data[0];
+        }
 
         if($stripeSubscriptions != null){
+
             foreach($stripeSubscriptions->data as $stripeSubscription){
                 $subscription = \App\Subscription::where('stripe_id', $stripeSubscription->id)->first();
                 if($subscription  == null) {
@@ -67,6 +74,9 @@ class SyncStripeSubscriptions extends Command
                 $subscription->save();
             }
         }
-      echo "\nSynced subscriptions from Stripe account.\n\n";
+        if($this->verbose == true) {
+            echo "\nSynced subscriptions from Stripe account.\n\n";
+        }
+        return null;
     }
 }

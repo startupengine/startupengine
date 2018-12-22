@@ -117,11 +117,12 @@ class Product extends Model
                             ],
                         ]
                     ]);
-                    Artisan::call("command:SyncStripeSubscriptions");
+                    Artisan::queue("command:SyncStripeSubscriptions");
 
                 }
 
             }
+            return $this;
         }
     }
 
