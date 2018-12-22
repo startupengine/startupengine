@@ -24,8 +24,8 @@ class Subscription extends JsonResource
         $fields['stripe_id'] = $this->stripe_id;
         $fields['stripe_plan'] = $this->stripe_plan;
         $fields['details'] = $this->details();
-        $fields['product'] = $this->product();
-        $fields['plans'] = $this->plans();
+        //$fields['product'] = $this->product();
+        //$fields['plans'] = $this->plans();
         if($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }

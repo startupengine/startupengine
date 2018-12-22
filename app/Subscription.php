@@ -14,7 +14,8 @@ class Subscription extends Model
     {
 
         $allowed = [];
-        if ($this->details()->status != 'canceled') {
+
+        if ($this->status == 'ACTIVE') {
             $allowed[] = 'switchPlan';
             $allowed[] = 'cancel';
         }
@@ -32,8 +33,13 @@ class Subscription extends Model
         if ($this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
             $details = \Stripe\Subscription::retrieve($this->stripe_id);
+            $product = \Stripe\Product::retrieve($details->plan->product);
             $this->forceFill([
-                'json->remote_data' => $details
+                'json->remote_data' => [
+                    "subscription" => $details,
+                    "product" => $product
+
+                ]
             ]);
             //dump($details);
             if ($details->status != 'active') {
@@ -142,7 +148,7 @@ class Subscription extends Model
 
     public function plans()
     {
-        $product_id = ($this->details()->plan->product);
+        $product_id = ($this->details()->subscription->plan->product);
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
         $plans = \Stripe\Plan::all(["product" => $product_id]);
         return $plans;
