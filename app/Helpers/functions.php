@@ -1074,3 +1074,42 @@ function formatcurrency($floatcurr, $curr = "USD"){
     }
 }
 
+// ***************
+// Error Reporting
+// ***************
+
+function jsonErrorMessage($input = null){
+    $response = [];
+    if($input != null && gettype($input) == 'array'){
+        if(isset($input['status'])){
+            $response['status'] = $input['status'];
+        }
+        if(isset($input['code'])){
+            $response['code'] = $input['code'];
+        }
+        if(isset($input['title'])){
+            $response['title'] = $input['title'];
+        }
+        if(isset($input['detail'])){
+            $response['detail'] = $input['detail'];
+        }
+    }
+    else {
+        $response['status'] = 500;
+        $response['code'] = null;
+        $response['title'] = null;
+    }
+    if(!isset($response['status'])){
+        $response['status'] = 500;
+    }
+    if(!isset($response['detail'])){
+        if($input != null && gettype($input) == 'string'){
+            $message = $input;
+        }
+        else {
+            $message = 'Something went wrong.';
+        }
+        $response['detail'] = $message;
+    }
+    return ['errors' => $response];
+}

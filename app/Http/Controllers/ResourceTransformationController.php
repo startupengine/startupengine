@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class ResourceTransformationController extends Controller
 {
-
     public function add(Request $request, $type, $id)
     {
 
@@ -55,7 +54,7 @@ class ResourceTransformationController extends Controller
             } else abort(404);
         }
         catch(\Exception $e){
-
+            return jsonErrorMessage();
         }
     }
 }

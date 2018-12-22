@@ -202,10 +202,15 @@
                 this.transformationError = error;
             },
             updateTransformationResult(response){
-                if(confirmActionApp != null){
-                    confirmActionApp.dismissActionModal();
-                }
                 this.transformationResult = response;
+                if(this.transformationResult.data.hasOwnProperty('errors') && this.transformationResult.data.errors.hasOwnProperty('status')){
+                    if(confirmActionApp != null){
+                        confirmActionApp.dismissActionModal();
+                    }
+                    if(notificationsApp != null){
+                        notificationsApp.errorNotification(this.transformationResult.data.errors.detail);
+                    }
+                }
                 this.transformationStatus = 'loaded';
                 this.updateData();
                 return response;
