@@ -83,7 +83,7 @@ class Product extends Model
                 }
             }
             $schema = [
-                'label' => 'Subscribe',
+                'label' => 'Add Subscription',
                 'slug' => 'Subscribe',
                 'description' => 'You may subscribe to this product.',
                 'instruction' => 'Select a plan.',

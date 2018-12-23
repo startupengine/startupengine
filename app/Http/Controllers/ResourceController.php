@@ -310,7 +310,7 @@ class ResourceController extends Controller
 
             }
             $response["meta"]["input"] = $request->input();
-            return response($response, 200)->json();
+            return response($response, 200);
         } else {
             abort(404);
         }
