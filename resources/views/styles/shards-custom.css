@@ -125,8 +125,25 @@ li .dimmed {
     background:#fff !important;
 }
 
-.card .page-item .page-link {
+.card .pagination .page-item .page-link {
+    background:#eeeeeeee !important;
+    border-right:#ddd 1px solid !important;
+    min-width:35px;
+}
+
+.pagination .page-item:last-of-type .page-link {
+    border-right:none !important;
+}
+
+.card .pagination .page-item:first-of-type .page-link, .card .pagination .page-item:last-of-type .page-link  {
     background:#eee  !important;
+
+}
+
+.card .page-item.active .page-link , .page-item.active .page-link {
+    background: #3595ff !important;
+    border-color: #3595ff !important;
+    box-shadow:none !important;
 }
 
 
@@ -279,11 +296,7 @@ li .dimmed {
     border:none !important;
 }
 
-.page-item.active .page-link {
-    background: #3595ff !important;
-    border-color: #3595ff !important;
-    box-shadow:none !important;
-}
+
 
 .text-shadow {
     text-shadow: 1px 2px 5px rgba(0,50,100,0.3),  1px 2px 15px rgba(0,50,100,0.3);
