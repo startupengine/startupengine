@@ -2,10 +2,10 @@
     <span class="badge badge-loading text-dark mr-2">Loading... <i
                 class="fa fa-fw fa-spinner fa-sync-alt fa-spin text-dark"></i></span>
 </div>
-<div v-if="info != null & info.data != null" style="width:calc(100%);opacity:0;"
+<div v-if="info != null & info.data != null" style="width:calc(100%);opacity:0;height:100%;"
      v-bind:style="{ 'opacity': '1' }">
 
-        <div class="{{ $options['WRAPPER_CLASS'] }}">
+        <div class="{{ $options['WRAPPER_CLASS'] }}" style="height:100%;">
             <div class="card card-small mb-4" id="listView" style="min-width:100%;height:100%;"
                  v-if="displayFormat == 'list'">
                 <div class="card-header" align="center">
@@ -22,19 +22,19 @@
                         @endif
                         <tbody>
 
-                        <tr class="dataRow" v-for="(item, index) in info.data"
+                        <tr class="dataRow" v-for="(item, index) in info.data" v-if="info != null && info.data != null && info.data.length > 0"
                             @if( isset($options['TABLE_ROW_CONDITIONS'] )) v-if="{!! $options['TABLE_ROW_CONDITIONS']  !!}" @endif>
                             {!! $options['TABLE_ROW']  !!}
                         </tr>
                         @if( !isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ))
                             <tr v-if="info.meta != null && info.meta.total != null && info.meta.total == 0 && status !== 'loading'">
-                                <td colspan="5" class="dimmed" align="center" style="height:55px;">No results.</td>
+                                <td colspan="5" class="dimmed" align="center" style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else No results. @endif</td>
                             </tr>
                         @endif
                         @if( isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ))
-                            <td v-if="info.data.every(function(item){return ( {!! $options['TABLE_ROW_NO_RESULTS_CONDITIONS'] !!} )}) && status != 'loading'"
+                            <td v-if="info != null && info.data != null && info.data.meta != null && info.data.meta.total != null && info.data.meta.total > 0 && info.data.every(function(item){return ( {!! $options['TABLE_ROW_NO_RESULTS_CONDITIONS'] !!} )}) && status != 'loading'"
                                 colspan="5" class="dimmed" align="center"
-                                style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {{ $options['TABLE_ROW_NO_RESULTS_MESSAGE'] }} @else
+                                style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else
                                     No results. Try different settings.@endif</td>
                         @endif
                         <tr class="loadingRow" v-if="status == 'loading'">
@@ -42,6 +42,10 @@
                                 <span style="display:none;">Loading...</span><i
                                         class="fa fa-fw fa-sync fa-spin fa-spinner"></i>
                             </td>
+                        </tr>
+                        <tr class="dataRow" v-else>
+                            @if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else
+                                No results. Try different settings.@endif
                         </tr>
 
 
