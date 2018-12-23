@@ -43,11 +43,12 @@
                                         class="fa fa-fw fa-sync fa-spin fa-spinner"></i>
                             </td>
                         </tr>
+                        @if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE']))
                         <tr class="dataRow" v-else>
-                            @if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else
-                                No results. Try different settings.@endif
-                        </tr>
+                            {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!}
 
+                        </tr>
+                        @endif
 
                         </tbody>
                     </table>
