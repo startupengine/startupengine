@@ -48,6 +48,10 @@
                             {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!}
 
                         </tr>
+                        @else
+                        <tr class="dataRow" v-else>
+                            <div align="center" class="pt-4"><img src="/images/illustrations/undraw_empty_xct9.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message">No results.</p></div>
+                        </tr>
                         @endif
 
                         </tbody>

@@ -212,7 +212,8 @@
             <?php $tableRow = '<td align="left" style="width:30px;"><span class="thumbnail" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class="hiddenOnMobile d-sm-none d-md-none"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" class="pl-0 ml-0" align="left"><span class="badge text-primary pull-left dimmed mr-2" >{{ item.views }} View<span v-if="item.views > 1">s</span></span><span class="badge text-dark mr-2 px-0">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/content/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
             <?php $tableFooter = ' '; ?>
             <?php $tableRowNoResultsConditions = 'item.views == 0'; ?>
-            {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content/',  'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => 'No results. Try changing the dates.', 'WRAPPER_CLASS' => '']) !!}
+            <?php $noResults = '<div align="center" class="pt-4"><img src="/images/illustrations/undraw_empty_xct9.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message">Nothing to see here. Try changing the dates.</p></div>'; ?>
+            {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content/',  'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => $noResults, 'WRAPPER_CLASS' => '']) !!}
 
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 mb-4" id="pagesApp" v-if="info !== null">
@@ -222,7 +223,7 @@
             <?php $tableFooter = ' '; ?>
             <?php $tableRowConditions = "item.views > 0"; ?>
             <?php $tableRowNoResultsConditions = 'item.views == 0'; ?>
-            {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/pages/', 'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => 'No results. Try changing the dates.', 'WRAPPER_CLASS' => '']) !!}
+            {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/pages/', 'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => $noResults, 'WRAPPER_CLASS' => '']) !!}
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 mb-4" id="productsApp" v-if="info !== null">
             <?php $header = '<h6 class="mb-0">Top Products</h6>'; ?>
@@ -231,7 +232,8 @@
             <?php $tableFooter = ' '; ?>
             <?php $tableRowConditions = "item.purchases > 0"; ?>
             <?php $tableRowNoResultsConditions = 'item.purchases == 0'; ?>
-            {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/products/', 'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => 'No results. Try changing the dates.', 'WRAPPER_CLASS' => '']) !!}
+
+            {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/products/', 'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => $noResults, 'WRAPPER_CLASS' => '']) !!}
         </div>
     </div>
 @endsection
