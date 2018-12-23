@@ -393,10 +393,11 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.sharre.min.js"></script>
     <script src="/js/vue.js"></script>
+    <script src="https://unpkg.com/vue-snotify@3.2.1/vue-snotify.js"></script>
     <script src="/js/axios-min.js"></script>
     <script src="/js/polyfill-min.js"></script>
     <script src="/js/bootstrap-vue.js"></script>
-
+    {!! renderNotificationsApp() !!}
     <script src="/admin-panel/scripts/shards-dashboards.1.0.0.min.js"></script>
     <?php /* <script src="/admin-panel/scripts/extras.1.0.0.min.js"></script> */ ?>
     <script>

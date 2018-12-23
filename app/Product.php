@@ -54,9 +54,14 @@ class Product extends Model
     }
 
     public function details(){
-        \Stripe\Stripe::setApiKey(stripeKey('secret'));
-        $object = \Stripe\Product::retrieve($this->stripe_id);
-        return $object;
+        try {
+            \Stripe\Stripe::setApiKey(stripeKey('secret'));
+            $object = \Stripe\Product::retrieve($this->stripe_id);
+        }
+        catch (\Exception $e) {
+        }
+        if (!isset($object)) { $object = null; }
+            return $object;
     }
 
     public function stripePlans(){
@@ -156,13 +161,17 @@ class Product extends Model
 
     public function content()
     {
-
         $json = $this->json;
-        if(gettype($json) == 'string') {
-            $json = json_decode($json);
+
+        if (gettype($json) == 'string') {
+            $json = json_decode($json, true);
+        }
+        if (gettype($json) == 'object' OR gettype($json) == 'array') {
+
+            $json = json_decode(json_encode($json));
+
         }
         return $json;
-
     }
 
     public function schema()

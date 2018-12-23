@@ -1118,3 +1118,10 @@ function jsonErrorMessage($input = null){
     }
     return ['errors' => $response];
 }
+
+function renderNotificationsApp()
+{
+    $view = View::make('components.notifications_app');
+    $contents = (string)$view;
+    return $contents;
+}

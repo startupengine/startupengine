@@ -27,7 +27,7 @@
                             {!! $options['TABLE_ROW']  !!}
                         </tr>
                         @if( !isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ))
-                            <tr v-if="info.meta.total == 0 && status !== 'loading'">
+                            <tr v-if="info.meta != null && info.meta.total != null && info.meta.total == 0 && status !== 'loading'">
                                 <td colspan="5" class="dimmed" align="center" style="height:55px;">No results.</td>
                             </tr>
                         @endif

@@ -40,6 +40,9 @@
             onSubmit() {
 
             },
+            updateInfo(response){
+              this.info = response;
+            },
             reset(options) {
                 if (options.hasOwnProperty('filters')) {
                     this.filters = {};
@@ -205,6 +208,14 @@
                 }
                 this.transformationError = error;
             },
+            sendErrorNotification(error){
+                console.log('Error:');
+                console.log(error);
+                if(typeof notificationsApp != 'undefined'){
+                    notificationsApp.errorNotification('Something went wrong.');
+                }
+                this.transformationError = error;
+            },
             updateTransformationResult(response){
                 this.transformationResult = response;
                 if(this.transformationResult.data.hasOwnProperty('errors') && this.transformationResult.data.errors.hasOwnProperty('status')){
@@ -269,7 +280,7 @@
             var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}};
             axios
                 .get(url, config)
-                .then(response => (this.info = response.data)
+                .then(response => ({{ $options['VUE_APP_NAME'] }}.updateInfo(response))
         );
         }
     });
