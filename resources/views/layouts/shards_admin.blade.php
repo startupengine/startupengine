@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0"
           href="/admin-panel/styles/shards-dashboards.1.0.0.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-snotify@3.2.1/styles/material.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <?php /*

@@ -7,10 +7,16 @@
         data: {},
         methods: {
             infoNotification(input){
-                this.$snotify.info(input);
+                this.$snotify.info(input,  {
+                    timeout: 10000,
+                    pauseOnHover: true
+                });
             },
             errorNotification(input){
-                this.$snotify.error(input);
+                this.$snotify.error(input,  {
+                    timeout: 10000,
+                    pauseOnHover: true
+                });
             }
         },
         mounted() {
