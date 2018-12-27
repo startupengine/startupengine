@@ -1,3 +1,0 @@
-[mysqld]
-general-log = On
-general-log-file = /var/log/mysql/mysql.log
