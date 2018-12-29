@@ -911,7 +911,9 @@ CMD bash -c "composer install"
 
 CMD sudo php artisan cache:clear
 
-CMD (sleep 2 && python -m webbrowser http://startupengine.test)
+CMD npm i opn
+
+CMD (sleep 2 && opn(http://startupengine.test))
 
 ###########################################################################
 # End StartupEngine
