@@ -6,7 +6,7 @@
         @if(\Auth::user()->avatar != null)
         background:url('{{ \Auth::user()->avatar() }}');
         @else
-        background:#ddd;
+        background:url('/images/avatar.png');
         @endif
         display:inline-block;
         margin:5px 5px 5px 5px;
