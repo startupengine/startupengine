@@ -106,16 +106,17 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate"
+            "@php artisan key:generate",
+            "@php artisan migrate:fresh --seed"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
-            "@php artisan migrate",
             "@php artisan command:SyncGit default",
             "@php artisan command:SyncStripeProducts",
+            "@php artisan passport:install",
             "@install-drafter"
         ],
         "post-update-cmd": [
