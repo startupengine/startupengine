@@ -224,5 +224,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => 'http://127.0.0.1:8000/api/resources/preference', 'GLOBAL_FILTER' => 'filter=user_id='.$user->id]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/preference', 'GLOBAL_FILTER' => 'filter=user_id='.$user->id]) !!}
 @endsection

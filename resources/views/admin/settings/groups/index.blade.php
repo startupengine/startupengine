@@ -220,5 +220,5 @@
 @endsection
 
 @section('scripts')
-        {!! renderResourceTableScriptsDynamically(['url' => 'http://127.0.0.1:8000/api/resources/setting', 'GLOBAL_FILTER' => 'filter=group='.$groupFilter.'&perPage=100']) !!}
+        {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/setting', 'GLOBAL_FILTER' => 'filter=group='.$groupFilter.'&perPage=100']) !!}
 @endsection
