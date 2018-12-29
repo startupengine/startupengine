@@ -3,7 +3,11 @@
         height:30px;
         width:30px;
         border-radius:15px;
+        @if(\Auth::user()->avatar != null)
         background:url('{{ \Auth::user()->avatar() }}');
+        @else
+        background:#ddd;
+        @endif
         display:inline-block;
         margin:5px 5px 5px 5px;
         background-size:cover;

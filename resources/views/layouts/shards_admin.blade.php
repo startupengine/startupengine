@@ -40,7 +40,7 @@
 
 <!-- FAVICONS -->
 
-    <link rel="icon" sizes="180x180" href="{{ setting('site.logo', '/images/startup-engine-logo.png') }}">
+    <link rel="icon" sizes="180x180" href="{{ setting('site.logo', URL::to('/').'/images/startup-engine-logo.png') }}">
 
     @yield('head')
 

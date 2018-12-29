@@ -162,7 +162,7 @@
 @endsection
 
 @section('content')
-    <div class="row" v-if="info != null">
+    <div class="row" v-if="info != null && info.data != null">
     <?php $header = '<div class="btn-group">
                             <span class="btn btn-light border text-dark" style="opacity:0.5;" v-bind:class="{ active: filters.type == \'\'}" v-on:click="reset({\'filters\':true})">
                                  <span class="hiddenOnMobile">Showing</span>
@@ -176,7 +176,7 @@
                             </span>
                         </div>'; ?>
         <?php $tableHeader = '<th scope="col" class="border-0" style="width:30px !important;text-align:left;">&nbsp;</th><th scope="col" class="border-0 hiddenOnMobile" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 h hiddenOnMobile" style="max-width:100px;text-align:left;">Name</th><th scope="col" class="border-0 h" style="text-align:left;">E-mail</th><th scope="col" class="border-0" style="width:50px;text-align:center;">&nbsp;</th>'; ?>
-        <?php $tableRow = '<td align="left" style="width:30px;"><div class="avatar" v-bind:style="{ backgroundImage: \'url(\' + item.avatar + \')\' }"></div></td><td align="left" style="width:100px;" class="hiddenOnMobile"><span class="badge badge-type text-dark mr-2" style="width:100%;">{{ item.status }}</span></td><td align="left" class="hiddenOnMobile" style="width:100px;"><span class="badge text-dark hiddenOnMobile px-0" v-if="item.name != null">{{ item.name }}</span></td><td align="left"><span class="badge text-dark mr-2 px-0 ">{{ item.email }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/users/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
+        <?php $tableRow = '<td align="left" style="width:30px;"><div class="avatar" v-if="item.avatar != null" v-bind:style="{ backgroundImage: \'url(\' + item.avatar + \')\' }"></div><div class="avatar" v-else></div></td><td align="left" style="width:100px;" class="hiddenOnMobile"><span class="badge badge-type text-dark mr-2" style="width:100%;">{{ item.status }}</span></td><td align="left" class="hiddenOnMobile" style="width:100px;"><span class="badge text-dark hiddenOnMobile px-0" v-if="item.name != null">{{ item.name }}</span></td><td align="left"><span class="badge text-dark mr-2 px-0 ">{{ item.email }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/users/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
         {!! renderResourceTableHtml(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/products/']) !!}
         <!-- New Product Form Modal -->
         <div class="modal fade" id="modal-new-content-title" tabindex="-1" role="dialog" >

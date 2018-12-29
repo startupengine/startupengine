@@ -1,8 +1,8 @@
-<div class="col-md-12" v-if="info.data == null">
+<div class="col-md-12" v-if="info != null && info.data == null">
     <span class="badge badge-loading text-dark mr-2">Loading... <i
                 class="fa fa-fw fa-spinner fa-sync-alt fa-spin text-dark"></i></span>
 </div>
-<div v-if="info != null & info.data != null" style="width:calc(100%);opacity:0;height:100%;"
+<div v-else style="width:calc(100%);opacity:0;height:100%;"
      v-bind:style="{ 'opacity': '1' }">
 
         <div class="{{ $options['WRAPPER_CLASS'] }}" style="height:100%;">
@@ -32,7 +32,7 @@
                             </tr>
                         @endif
                         @if( isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ))
-                            <td v-if="info != null && info.data != null && info.data.meta != null && info.data.meta.total != null && info.data.meta.total > 0 && info.data.every(function(item){return ( {!! $options['TABLE_ROW_NO_RESULTS_CONDITIONS'] !!} )}) && status != 'loading'"
+                            <td v-if="info != null && info.data != null && info.meta != null && info.meta.total != null && info.meta.total > 0 && info.data.every(function(item){return ( {!! $options['TABLE_ROW_NO_RESULTS_CONDITIONS'] !!} )}) && status != 'loading'"
                                 colspan="5" class="dimmed" align="center"
                                 style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else
                                     No results. Try different settings.@endif</td>
@@ -150,7 +150,7 @@
             <div class="col-md-12"> @endif
                 <div id="cardView" v-if="displayFormat == 'cards'">
                     <div class="row row-eq-height @if(isset($options['CARD_ROW_CLASS'])) {{ $options['CARD_ROW_CLASS'] }} @endif">
-                        <div class="col-lg-4 col-md-4 col-sm-12 mb-4" v-if="info.meta.total == 0">
+                        <div class="col-lg-4 col-md-4 col-sm-12 mb-4" v-if="info.meta != null && info.meta.total != null && info.meta.total == 0">
                             <div class="card card-small h-100">
                                 <div class="card-body">
                                     <h5 class="card-title">
