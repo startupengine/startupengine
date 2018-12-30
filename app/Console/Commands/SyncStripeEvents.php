@@ -40,7 +40,7 @@ class SyncStripeEvents extends Command
     public function handle()
     {
 
-        SyncFromStripe::dispatch()->delay(now()->addMinutes(10));
+        SyncFromStripe::dispatch();
 
         echo "\nSynced events from Stripe account.\n\n";
     }
