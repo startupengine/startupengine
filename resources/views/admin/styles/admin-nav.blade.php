@@ -15,6 +15,12 @@
         pointer-events:none !important;
     }
 
+    @media(min-width:768px) {
+        .nav-wrapper {
+            padding-top: 16px;
+        }
+    }
+
     #menuUserName {
         display:inline-block;
         margin-top:10px;

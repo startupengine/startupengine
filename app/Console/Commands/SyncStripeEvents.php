@@ -2,23 +2,25 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SyncFromStripe;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
-class LaunchContainer extends Command
+class SyncStripeEvents extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'launch:Container';
+    protected $signature = 'command:SyncStripeEvents';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Launch Docker container & open browser';
+    protected $description = 'Create database entries for all events in the connected Stripe account.';
 
     /**
      * Create a new command instance.
@@ -37,7 +39,9 @@ class LaunchContainer extends Command
      */
     public function handle()
     {
-        exec('cd laradock; docker-compose build workspace php-worker laravel-horizon php-fpm; docker-compose up -d nginx postgres php-worker laravel-horizon redis beanstalkd workspace; sleep 10; open http://startupengine.test');
-        exec('cd laradock; docker-compose exec php-fpm php artisan command:SyncStripeProducts');
+
+        SyncFromStripe::dispatch()->delay(now()->addMinutes(10));
+
+        echo "\nSynced events from Stripe account.\n\n";
     }
 }

@@ -32,6 +32,7 @@
     "require": {
         "php": ">=7.0.0",
         "ext-gd": "*",
+        "ext-pcntl": "*",
         "appstract/laravel-meta": "^0.2.0",
         "barryvdh/laravel-ide-helper": "^2.4",
         "beyondcode/laravel-websockets": "^1.0",
@@ -68,7 +69,7 @@
         "barryvdh/laravel-httpcache": "*",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "laravel/telescope": "^1.0",
+        "laravel/telescope": "*",
         "mockery/mockery": "0.9.*",
         "orangehill/iseed": "^2.5",
         "phpunit/phpunit": "~7.0",
@@ -117,6 +118,8 @@
             "@php artisan command:SyncGit default",
             "@php artisan command:SyncStripeProducts",
             "@php artisan passport:install",
+            "@php artisan queue:failed-table",
+            "@php artisan migrate",
             "@install-drafter"
         ],
         "post-update-cmd": [
@@ -130,7 +133,11 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "platform": {
+            "ext-pcntl": "7.2",
+            "ext-posix": "7.2"
+        }
     },
     "dependencies": {
         "minimatch": ">=3.0.2",

@@ -907,15 +907,17 @@ RUN php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 # StartupEngine
 ###########################################################################
 
-CMD bash -c "composer install"
+#CMD bash -c "composer install"
 
-CMD sudo php artisan cache:clear
+#CMD php artisan cache:clear
 
-CMD sudo php artisan command:SyncStripeProducts
+#CMD composer install
 
-CMD npm i opn
+#CMD php artisan command:SyncStripeProducts
 
-CMD (sleep 2 && opn(http://startupengine.test))
+#RUN npm i opn
+
+#CMD (sleep 2 && opn http://startupengine.test)
 
 ###########################################################################
 # End StartupEngine

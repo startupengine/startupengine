@@ -15,7 +15,7 @@ class AppController extends Controller
         $stats['clicks'] = count(\App\AnalyticEvent::where('event_type','=', 'click')->whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());
         $stats['users'] = count(\App\User::whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());
         //$stats['subscriptions'] = count(\App\Subscription::whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());
-        $stats['transactions'] = count(\App\AnalyticEvent::where('event_type','=', 'product purchased')->whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());
+        $stats['transactions'] = count(\App\Payment::whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());
 
 
         $oldStats = [];
@@ -24,7 +24,7 @@ class AppController extends Controller
         $oldStats['clicks'] = count(\App\AnalyticEvent::where('event_type','=', 'click')->whereBetween('created_at',  [ \Carbon\Carbon::now()->subDays(60)->toDateTimeString(), \Carbon\Carbon::now()->subDays(30)->toDateTimeString()] )->get());
         $oldStats['users'] = count(\App\User::whereBetween('created_at',  [ \Carbon\Carbon::now()->subDays(60)->toDateTimeString(), \Carbon\Carbon::now()->subDays(30)->toDateTimeString()] )->get());
         //$oldStats['subscriptions'] = count(\App\Subscription::whereBetween('created_at',  [ \Carbon\Carbon::now()->subDays(60)->toDateTimeString(), \Carbon\Carbon::now()->subDays(30)->toDateTimeString()] )->get());
-        $oldStats['transactions'] = count(\App\AnalyticEvent::where('event_type','=', 'product purchased')->whereBetween('created_at',  [ \Carbon\Carbon::now()->subDays(60)->toDateTimeString(), \Carbon\Carbon::now()->subDays(30)->toDateTimeString()] )->get());
+        $oldStats['transactions'] = count(\App\Payment::whereBetween('created_at',  [ \Carbon\Carbon::now()->subDays(60)->toDateTimeString(), \Carbon\Carbon::now()->subDays(30)->toDateTimeString()] )->get());
 
         //dd([$oldStats, $stats]);
         return view('admin.dashboard.index')->with('stats', $stats)->with('oldStats', $oldStats);

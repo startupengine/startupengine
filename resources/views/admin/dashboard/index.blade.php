@@ -171,6 +171,12 @@
 
 @section('page-title') Overview <span class="ml-1 dimmed">Last 30 Days</span>@endsection
 
+@section('top-menu')
+    <div class="col-md-6 col-sm-6 pull-right pageNav" align="right">
+        <a href="/admin/analytics" class="btn btn-white btn-pill">Explore Analytics<i class="fa fa-arrow-right text-primary ml-2"></i></a>
+    </div>
+@endsection
+
 @section('alt_content')
     <!-- Small Stats Blocks -->
     <div class="row bg-black" id="analyticCounts">

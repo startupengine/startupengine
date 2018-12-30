@@ -40,6 +40,7 @@ class RebuildContainerDatabase extends Command
     {
         exec('cd laradock; docker-compose exec php-fpm php artisan migrate:fresh --seed');
         exec('cd laradock; docker-compose exec php-fpm php artisan command:SyncStripeProducts');
+        exec('cd laradock; docker-compose exec php-fpm php artisan command:SyncStripeUsers');
         echo ("\nRebuilt database.\n\n");
     }
 }
