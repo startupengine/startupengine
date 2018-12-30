@@ -49,7 +49,7 @@
                             <input type="text"
                                    class="form-control form-control-lg bg-white text-truncate"
                                    v-model="record.data.slug"
-                                   placeholder="Your Post Slug"
+                                   placeholder="url-slug"
                                    value="{{ $item->slug }}"
                                    aria-label="Username" aria-describedby="basic-addon1" disabled
                                    style="pointer-events:none;border:none !important;border-radius:0px 5px 5px 0px;">

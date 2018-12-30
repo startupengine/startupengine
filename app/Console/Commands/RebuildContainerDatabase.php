@@ -3,15 +3,16 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan as Artisan;
 
-class LaunchContainer extends Command
+class RebuildContainerDatabase extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'launch:Container';
+    protected $signature = 'rebuild:ContainerDatabase';
 
     /**
      * The console command description.
@@ -37,7 +38,8 @@ class LaunchContainer extends Command
      */
     public function handle()
     {
-        exec('cd laradock; docker-compose build workspace php-fpm; docker-compose up -d nginx postgres workspace; sleep 10; open http://startupengine.test');
+        exec('cd laradock; docker-compose exec php-fpm php artisan migrate:fresh --seed');
         exec('cd laradock; docker-compose exec php-fpm php artisan command:SyncStripeProducts');
+        echo ("\nRebuilt database.\n\n");
     }
 }

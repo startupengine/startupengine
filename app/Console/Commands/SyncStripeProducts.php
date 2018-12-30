@@ -37,9 +37,11 @@ class SyncStripeProducts extends Command
      */
     public function handle()
     {
+
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
         $stripeProducts = \Stripe\Product::all();
+
         if($stripeProducts != null){
             foreach($stripeProducts->data as $stripeProduct){
                 $product = \App\Product::where('stripe_id', $stripeProduct->id)->first();
