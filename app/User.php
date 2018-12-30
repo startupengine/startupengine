@@ -12,6 +12,7 @@ use OwenIt\Auditing\Contracts\UserResolver;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
+use Laravolt\Avatar\Facade as Avatar;
 
 class User extends AuthUser implements AuditableContract, UserResolver
 {
@@ -114,7 +115,8 @@ class User extends AuthUser implements AuditableContract, UserResolver
             return $this->avatar;
         }
         else {
-            return url('/')."/images/avatar.png";
+            return Avatar::create($this->name)->toBase64();
+            //return url('/')."/images/avatar.png";
         }
 
     }

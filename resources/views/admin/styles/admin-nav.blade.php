@@ -3,7 +3,7 @@
         height:30px;
         width:30px;
         border-radius:15px;
-        @if(\Auth::user()->avatar != null)
+        @if(\Auth::user()->avatar() != null)
         background:url('{{ \Auth::user()->avatar() }}');
         @else
         background:url('/images/avatar.png');

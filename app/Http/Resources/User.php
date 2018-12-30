@@ -19,7 +19,7 @@ class User extends JsonResource
         $fields['id'] = $this->id;
         $fields['name'] = $this->name;
         $fields['email'] = $this->email;
-        $fields['avatar'] = $this->avatar;
+        $fields['avatar'] = $this->avatar();
         $fields['status'] = $this->status;
         $fields['bio'] = $this->bio;
         $fields['charges'] = $this->charges();
