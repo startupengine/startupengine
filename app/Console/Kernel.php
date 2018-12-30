@@ -29,6 +29,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('telescope:prune')->daily();
+        $schedule->command('command:SyncStripeProducts')->daily();
+        $schedule->command('command:SyncStripeUsers')->daily();
+        $schedule->command('command:SyncStripeEvents')->daily();
     }
 
     /**
