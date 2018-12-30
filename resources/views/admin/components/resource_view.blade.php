@@ -323,10 +323,8 @@
 @endsection
 
 @section('content')
-    {!! renderResourceEditorForm(null, \Auth::user()) !!}
-
+    {!! renderResourceEditorForm($options, $item) !!}
 @endsection
-
 
 @section('scripts')
     <script src="{{ ENV('APP_URL') }}/js/components/ace-editor-vue-component.js"></script>

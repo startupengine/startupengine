@@ -12,6 +12,9 @@ class LogController extends Controller
 
     public function view(Request $request, $id)
     {
+
+
+
         $item = \App\Log::find($id);
         $options = [
             'id' => $item->id,
@@ -19,6 +22,8 @@ class LogController extends Controller
             'index_uri' => '/admin/logs',
             'custom_view' => 'admin.logs.view'
         ];
+
+        ///dd($options);
 
         return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
     }

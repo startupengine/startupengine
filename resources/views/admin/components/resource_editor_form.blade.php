@@ -5,6 +5,7 @@
     <div class="row mb-2">
         <div class="col-lg-9 col-md-12">
 
+
         @if(isset($options['custom_view']))
             @include($options['custom_view'])
         @else
@@ -192,7 +193,7 @@
                 </div>
             @endif
         </div>
-        @if( !isset($options['show_metadata']) OR $options['show_metadata'] == true)
+        @if(!isset($options['show_metadata']) OR $options['show_metadata'] == true)
         <div class="col-lg-3 col-md-12">
             <!-- Post Overview -->
             <div class='card card-small mb-3 formSection' id="contentDetails">
@@ -239,7 +240,7 @@
                                 </span>
                                 @endforeach
                             @endif
-                            @if($item->published_at !== null)
+                            @if(isset($item->published_at))
                                 <span class="d-block mt-2 mb-3">
                                     <span class="badge badge-outline-dark text-dark">Created</span>
                                     <br>
@@ -295,7 +296,7 @@
                 </div>
             @endif
         </div>
-            @endif
+        @endif
     </div>
 
     <!-- Delete Modal -->

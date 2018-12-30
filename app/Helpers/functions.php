@@ -767,6 +767,7 @@ function renderResourceFilterModal($options = null)
 function renderResourceEditorForm($options = null, $item)
 {
     $view = View::make('admin.components.resource_editor_form', ['options' => $options, 'item' => $item]);
+    //dd($view);
     $contents = (string)$view;
     return $contents;
 }
