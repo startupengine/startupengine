@@ -911,6 +911,8 @@ CMD bash -c "composer install"
 
 CMD sudo php artisan cache:clear
 
+CMD sudo php artisan command:SyncStripeProducts
+
 CMD npm i opn
 
 CMD (sleep 2 && opn(http://startupengine.test))

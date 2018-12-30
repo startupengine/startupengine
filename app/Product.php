@@ -209,4 +209,29 @@ class Product extends Model
         return $purchases;
     }
 
+    public function syncFromStripe(){
+        $compressed = $this->details()->metadata['se_json'];
+        if($compressed){
+            $this->json = $compressed;
+            $this->save();
+        }
+        //$uncompressed = gzdecode($compressed);
+        //dd($uncompressed);
+    }
+
+    public function postSave($execute = false){
+        //$compressed = gzencode($item->json, 9);
+        //dd(gzdecode($compressed));
+        //dd(strlen($item->json) - strlen(gzcompress($item->json, 9)));
+        if($execute == true){
+            $stripeProduct = $this->details();
+            $stripeProduct->metadata['se_json'] = $this->json;
+            $stripeProduct->save();
+            return true;
+        }
+        else {
+            return true;
+        }
+    }
+
 }

@@ -285,6 +285,10 @@ class ResourceController extends Controller
                             ]);
                         }
 
+                        if($item->postSave() == true){
+                            $item->postSave(true);
+                        }
+
 
                     }
                     if (isset($jsonInput['slug'])) {

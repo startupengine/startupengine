@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class LaunchContainer extends Command
+class ContainerCLI extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'launch:Container';
+    protected $signature = 'cli:Container';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Launch Docker container & open browser';
+    protected $description = 'Launch CLI for Docker container';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,11 @@ class LaunchContainer extends Command
      */
     public function handle()
     {
-        exec('cd laradock; docker-compose build workspace php-fpm; docker-compose up -d nginx postgres workspace; sleep 10; open http://startupengine.test');
+        echo ("\n");
+        echo('To access the container CLI, run:');
+        echo ("\n cd laradock");
+        echo ("\n docker-compose exec php-fpm bash");
+        echo ("\n");
+        echo ("\n");
     }
 }

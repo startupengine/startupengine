@@ -54,6 +54,9 @@ class SyncStripeProducts extends Command
                 else {
                     $product->status = 'INACTIVE';
                 }
+                if($stripeProduct->metadata['se_json'] != null){
+                    $product->syncFromStripe();
+                }
                 $product->save();
             }
         }
