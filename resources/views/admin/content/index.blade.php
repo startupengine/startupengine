@@ -255,20 +255,16 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="modal-new-content">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New Item</h5>
-
-                </div>
                 <div class="modal-body">
-                    <?php $postTypes = \App\PostType::where('enabled', true)->get(); ?>
+                    <?php $postTypes = \App\PostType::where('enabled', true)->orderBy('title', 'asc')->get(); ?>
                     @if(count($postTypes) > 0)
                     <p class="text-center">
                         What kind of item would you like to create?
                     </p>
                     <ul class="list-group">
                     @foreach($postTypes as $postType)
-                       <li class="list-group-item  list-group-item-action ">
-                           {{ ucwords($postType->schema()->lang->en->singular) }}
+                       <li class="list-group-item list-group-item-action text-ford-blue">
+                           <span class="text-ford-blue">{{ ucwords($postType->schema()->lang->en->singular) }}</span>
                        </li>
                     @endforeach
                     </ul>
@@ -277,7 +273,7 @@
                     @endif
                 </div>
                 <div class="modal-footer px-3">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

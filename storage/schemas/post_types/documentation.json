@@ -2,8 +2,8 @@
   "namespace": "App\\Post",
   "lang": {
     "en": {
-      "singular": "article",
-      "plural": "articles"
+      "singular": "documentation",
+      "plural": "documentation"
     }
   },
   "version": "0.1",

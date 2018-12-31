@@ -77,6 +77,7 @@
 @include('admin.styles.tables')
 @include('admin.styles.cards')
 @include('admin.styles.forms')
+@include('admin.styles.lists')
 @include('admin.styles.modals')
 @include('admin.styles.pagination')
 @include('admin.styles.typography')
