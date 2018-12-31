@@ -136,11 +136,17 @@ class Post extends Model
     {
         $path = file_get_contents(storage_path() . '/schemas/post.json');
         $baseSchema = json_decode($path, true);
-        $postTypeSchema = json_decode($this->postType()->first()->json, true);
 
-        $merged = array_merge($postTypeSchema, $baseSchema);
+        if($this->postType() != null OR $this->json == null) {
+            $postTypeSchema = json_decode($this->postType()->first()->json, true);
 
-        $merged = json_decode(json_encode($merged));
+            $merged = array_merge($postTypeSchema, $baseSchema);
+
+            $merged = json_decode(json_encode($merged));
+        }
+        else {
+            $merged = $baseSchema;
+        }
         //dd($merged);
         return $merged;
     }

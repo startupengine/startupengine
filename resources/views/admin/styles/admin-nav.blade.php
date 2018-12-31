@@ -105,4 +105,17 @@
         }
     }
 
+    .main-sidebar {
+        transition: all 0.3s !important;
+    }
+    .modal-open .main-sidebar {
+        opacity: 0.5 !important;
+    }
+
+    .modal-open .navbar-brand {
+        background-color: #fff !important;
+        border-bottom: none !important;
+        z-index: 0 !important;
+    }
+
 </style>

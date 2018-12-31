@@ -162,6 +162,10 @@
     <div class="col-md-6 col-sm-6 pull-right pageNav" align="right">
         {!! renderDisplayFormatButton() !!}
         {!! renderFilterButton() !!}
+        <div class="btn-group mb-1">
+        <a href="#" class="btn btn-primary actionButton ml-1" data-toggle="modal" v-if="info != null"
+           data-target="#modal-new-content" style="width:auto !important;padding-top:10px;float:right;"><i class="fa fa-plus"></i> &nbsp;New Item</a>
+        </div>
     </div>
 @endsection
 
@@ -246,6 +250,37 @@
             ]
         ?>
         {!! renderResourceFilterModal($options) !!}
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-new-content">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Item</h5>
+
+                </div>
+                <div class="modal-body">
+                    <?php $postTypes = \App\PostType::where('enabled', true)->get(); ?>
+                    @if(count($postTypes) > 0)
+                    <p class="text-center">
+                        What kind of item would you like to create?
+                    </p>
+                    <ul class="list-group">
+                    @foreach($postTypes as $postType)
+                       <li class="list-group-item  list-group-item-action ">
+                           {{ ucwords($postType->schema()->lang->en->singular) }}
+                       </li>
+                    @endforeach
+                    </ul>
+                    @else
+                        No content types have been created. Please create one first.
+                    @endif
+                </div>
+                <div class="modal-footer px-3">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
