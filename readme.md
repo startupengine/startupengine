@@ -14,7 +14,7 @@ A beautiful & open-source platform for launching startups.<br>
 - [License](#license)
 
 
-<img src="storage/docs/screenshots/admin.png" alt="Startup Engine Admin Panel" style="border:1px solid #eee;border-radius:5px;"><br>
+<img src="storage/docs/screenshots/admin.jpg" alt="Startup Engine Admin Panel" style="border:1px solid #eee;border-radius:5px;"><br>
 
 # Demo
 
