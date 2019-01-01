@@ -6,7 +6,6 @@ A beautiful & open-source platform for launching startups.<br>
 
 **Table of Contents** 
 
-- [Screenshots](#screenshots)
 - [Demo](#demo)
 - [Features](#features)   
 - [Deploying](#deploying)
