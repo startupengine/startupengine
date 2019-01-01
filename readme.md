@@ -4,29 +4,14 @@ A beautiful & open-source platform for launching startups.<br>
 <img src="storage/docs/images/logo.png" width="100">    
 </div>
 
-**Table of Contents** 
-
-- [Demo](#demo)
-- [Features](#features)   
-- [Deploying](#deploying)
-- [Support](#support)
-- [Security](#security)
-- [License](#license)
-
-
 <img src="storage/docs/screenshots/admin.jpg" alt="Startup Engine Admin Panel" style="border:1px solid #eee;border-radius:5px;"><br>
 
-# Demo
+# Key Features 
 
-See it in action at https://www.startupengine.io
-
-# Features 
-
-* [x] Publish content, sell subscriptions & process payments.
+* [x] Publish & sell software/content subscriptions.
 * [x] Completely plug-and-play. Coding is optional.
 * [x] Supports any workflow, architecture, or framework.
-* [x] Content API allows you integrate with external sites/apps.
-* [x] Landing pages optimization powered by integrated analytics. No setup required.
+* [x] JSON API allows you integrate with external sites/apps.
 * [x] Completely open-source.
 * [x] 1-Click Install.
 
@@ -64,6 +49,8 @@ Change these after logging in.
 
 ## Install Locally
 
+### Standard Installation
+
 See Laravel's [official installation guide](https://laravel.com/docs/5.6/installation) to get started with running Laravel apps locally.
  
 Once you're familiar with Laravel, run
@@ -82,8 +69,6 @@ Be sure you're running a [PostgreSQL](https://www.postgresql.org/) database, the
 
 `php artisan passport:install`
 
-`php artisan command:SyncGit reset`
-
 And finally, to view your installation in a browser, run
 
 `php artisan serve`
@@ -93,6 +78,18 @@ Your app will be viewable at http://127.0.0.1:8000
 You may log in by going to http://127.0.0.1:8000/login
 
 The default user email is **admin@example.com** and the default password is **password**.
+
+### Containerized Installation
+
+Startup Engine ships with a complete Docker-powered development environment. To develop via Docker, run the following command inside the `/laradock` directory:
+
+`docker-compose up -d nginx postgres php-worker laravel-horizon redis beanstalkd workspace`
+
+Alternatively, you may use a PHP artisan command from the root directory to achieve the same effect:
+
+`php artisan launch:Container` 
+
+The app will be available locally at **http://startupengine.test**.
 
 # Support
 
