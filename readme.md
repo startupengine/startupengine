@@ -65,7 +65,7 @@ Then copy the newly generated key and run:
  
 `heroku config:set APP_KEY=APPKEYGOESHERE` 
 
-The default user email is **admin@example.com** and the default password is **password**.
+The default user email is `admin@example.com` and the default password is `password`.
 
 Change these after logging in.
 
