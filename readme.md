@@ -2,7 +2,7 @@
 
 A beautiful & open-source platform for launching startups.
 
-<div>
+<div align="center" style="width:100%;">
      <img src="storage/docs/images/logo.png" width="100">    
 </div>
 
@@ -17,7 +17,7 @@ A beautiful & open-source platform for launching startups.
 - [License](#license)
 
 
-<img src="storage/docs/screenshots/admin.png" alt="Startup Engine Admin Panel"><br>
+<img src="storage/docs/screenshots/admin.png" alt="Startup Engine Admin Panel" style="border:1px solid #eee;border-radius:5px;"><br>
 
 # Demo
 
