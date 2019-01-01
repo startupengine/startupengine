@@ -15,38 +15,6 @@ A beautiful & open-source platform for launching startups.<br>
 * [x] Completely open-source.
 * [x] 1-Click Install.
 
-# Deploying
-
-## Deploy to Heroku
-
-Click the button below to deploy a new instance of Startup Engine to Heroku instantly.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
-
-Please reference Heroku's [official guide](https://devcenter.heroku.com/articles/getting-started-with-laravel) for getting started with Laravel apps on Heroku.
-
-Once you've installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), run the following commands on your instance:
-
-First, generate an `APP_KEY` by running: 
-
-`php artisan key:generate`. 
-
-Then copy the newly generated key and run:
- 
-`heroku config:set APP_KEY=YOURKEYGOESHERE` 
-
-`php artisan migrate:refresh --seed --force`
-
-`php artisan passport:install`
-
-`php artisan command:SyncGit reset`
-
-You may log in by going to https://www.herokuapp.com/YOURAPPNAME/login
-
-The default user email is **admin@example.com** and the default password is **password**.
-
-Change these after logging in.
-
 ## Install Locally
 
 ### Standard Installation
@@ -90,6 +58,37 @@ Alternatively, you may use a PHP artisan command from the root directory to achi
 `php artisan launch:Container` 
 
 The app will be available locally at **http://startupengine.test**.
+
+# Deploying
+
+Click the button below to deploy a new instance of Startup Engine to Heroku instantly.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
+
+Please reference Heroku's [official guide](https://devcenter.heroku.com/articles/getting-started-with-laravel) for getting started with Laravel apps on Heroku.
+
+Once you've installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), run the following commands on your instance:
+
+First, generate an `APP_KEY` by running: 
+
+`php artisan key:generate`. 
+
+Then copy the newly generated key and run:
+ 
+`heroku config:set APP_KEY=YOURKEYGOESHERE` 
+
+`php artisan migrate:refresh --seed --force`
+
+`php artisan passport:install`
+
+`php artisan command:SyncGit reset`
+
+You may log in by going to https://www.herokuapp.com/YOURAPPNAME/login
+
+The default user email is **admin@example.com** and the default password is **password**.
+
+Change these after logging in.
+
 
 # Support
 
