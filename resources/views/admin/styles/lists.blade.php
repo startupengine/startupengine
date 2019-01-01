@@ -3,7 +3,7 @@
         transition:all 0.3s !important;
     }
     .list-group-item.list-group-item-action {
-        background: #ecfaff !important;
+        background: #f8fdff !important;
         padding: 20px !important;
         font-size: 115% !important;
         font-weight: 500 !important;
