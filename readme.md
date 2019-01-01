@@ -21,23 +21,11 @@ A beautiful & open-source platform for launching startups.<br>
 
 See Laravel's [official installation guide](https://laravel.com/docs/5.6/installation) to get started with running Laravel apps locally.
  
-Once you're familiar with Laravel, run
+Once you're familiar with Laravel, set up a a [PostgreSQL](https://www.postgresql.org/) database and run:
 
-`composer install`
+`composer install`  
 
-`npm install`
-
-`php artisan key:generate`. 
-
-Then copy the newly generated key and edit the value into your `.env` file. If you don't have an .env file, see `.env.example` for the required fields. 
-
-Be sure you're running a [PostgreSQL](https://www.postgresql.org/) database, then run
-
-`php artisan migrate:refresh --seed --force`
-
-`php artisan passport:install`
-
-And finally, to view your installation in a browser, run
+To view your installation in a browser, run:
 
 `php artisan serve`
 
@@ -49,7 +37,7 @@ The default user email is **admin@example.com** and the default password is **pa
 
 Startup Engine ships with a complete Docker-powered development environment. To develop via Docker, run the following command inside the `/laradock` directory:
 
-`docker-compose up -d nginx postgres php-worker laravel-horizon redis beanstalkd workspace`
+`docker-compose up -d nginx postgres php-worker laravel-horizon redis workspace`
 
 Alternatively, you may use a PHP artisan command from the root directory to achieve the same effect:
 
@@ -67,21 +55,13 @@ Please reference Heroku's [official guide](https://devcenter.heroku.com/articles
 
 Once you've installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), run the following commands on your instance:
 
-First, generate an `APP_KEY` by running: 
+First, generate an `APP_KEY` by locally running: 
 
 `php artisan key:generate`. 
 
 Then copy the newly generated key and run:
  
-`heroku config:set APP_KEY=YOURKEYGOESHERE` 
-
-`php artisan migrate:refresh --seed --force`
-
-`php artisan passport:install`
-
-`php artisan command:SyncGit reset`
-
-You may log in by going to https://www.herokuapp.com/YOURAPPNAME/login
+`heroku config:set APP_KEY=APPKEYGOESHERE` 
 
 The default user email is **admin@example.com** and the default password is **password**.
 
