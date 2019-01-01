@@ -41,9 +41,7 @@ And finally, to view your installation in a browser, run
 
 `php artisan serve`
 
-Your app will be viewable at http://127.0.0.1:8000
-
-You may log in by going to http://127.0.0.1:8000/login
+Your app will be viewable at **http://127.0.0.1:8000**
 
 The default user email is **admin@example.com** and the default password is **password**.
 
