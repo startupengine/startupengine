@@ -43,7 +43,9 @@ Alternatively, you may use a PHP artisan command from the root directory to achi
 
 `php artisan launch:Container` 
 
-The app will be available locally at **http://startupengine.test**.
+The app will be available locally at **http://startupengine.test**. 
+
+You may need to [edit your hosts file](https://www.imore.com/how-edit-your-macs-hosts-file-and-why-you-would-want) before the url will work.
 
 # Deploying
 
