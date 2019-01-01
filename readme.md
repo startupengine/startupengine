@@ -1,9 +1,7 @@
-# Startup Engine
-
-A beautiful & open-source platform for launching startups.
-
 <div align="center" style="width:100%;">
-     <img src="storage/docs/images/logo.png" width="100">    
+<h1>Startup Engine</h1>
+A beautiful & open-source platform for launching startups.<br>
+<img src="storage/docs/images/logo.png" width="100">    
 </div>
 
 **Table of Contents** 
