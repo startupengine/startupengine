@@ -144,17 +144,5 @@
         "lodash": ">=4.17.5"
     },
     "repositories": {
-        "0": {
-            "type": "composer",
-            "url": "https://larapack.io"
-        },
-        "1": {
-            "type": "path",
-            "url": "./laravel-comments"
-        },
-        "hooks": {
-            "type": "composer",
-            "url": "https://larapack.io"
-        }
     }
 }

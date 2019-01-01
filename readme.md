@@ -3,7 +3,7 @@
 A beautiful & open-source platform for launching startups.
 
 <div>
-     <img src="https://images.contentful.com/x5o3atz1wqhm/2PWSbcsefYImQyMuqcIuGi/5efaa2c98a4819ef729885a7c3aa381c/App_Icon_2x.png" width="100">    
+     <img src="storage/docs/images/logo.png" width="100">    
 </div>
 
 **Table of Contents** 
@@ -16,34 +16,8 @@ A beautiful & open-source platform for launching startups.
 - [Security](#security)
 - [License](#license)
 
-# Screenshots
 
-### Landing Page
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/home.png" width="400" /><br>
-
-### Blog
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/blog.png" width="400" /><br>
-
-### Analytics Explorer
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/analytics.jpg" width="400" /><br>
-
-### Content Editor
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/editor.png?refresh" width="400" /><br>
-
-### Content Type Editor
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/content-type.png" width="400" /><br>
-
-### User Management
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/users.png" width="400" /><br>
-
-### Role Management
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/roles.png" width="400" /><br>
-
-### Permission Management
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/permissions.png" width="400" /><br>
-
-### API Management
-<img src="https://s3.us-east-2.amazonaws.com/startupengine/screenshots/api-manager.png?refresh" width="400" /><br>
+<img src="storage/docs/screenshots/admin.png" alt="Startup Engine Admin Panel"><br>
 
 # Demo
 
