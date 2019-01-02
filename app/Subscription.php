@@ -2,12 +2,14 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\IsApiResource;
+use Altek\Accountant\Contracts\Recordable;
 
-class Subscription extends Model implements Altek\Accountant\Contracts\Recordable
+class Subscription extends Model implements Recordable
 {
-    use Altek\Accountant\Contracts\Recordable;
+    use \Altek\Accountant\Recordable;
 
     use IsApiResource;
 

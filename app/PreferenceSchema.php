@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PreferenceSchema extends Model implements Altek\Accountant\Contracts\Recordable
 {
     use Altek\Accountant\Contracts\Recordable;
-    
+
     use IsApiResource;
 
     public function content() {

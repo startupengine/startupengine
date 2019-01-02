@@ -9,6 +9,11 @@ trait IsApiResource
         return false;
     }
 
+
+    public function postSave(){
+        return false;
+    }
+
     public function links($array = [])
     {
 
