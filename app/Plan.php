@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Plan extends Model implements Altek\Accountant\Contracts\Recordable
+class Plan extends Model implements \Altek\Accountant\Contracts\Recordable
 {
-    use Altek\Accountant\Contracts\Recordable;
+    use \Altek\Accountant\Recordable
 
     use SoftDeletes;
 

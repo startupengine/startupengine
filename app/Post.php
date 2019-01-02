@@ -16,9 +16,9 @@ use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Carbon\Carbon;
 
 
-class Post extends Model implements Altek\Accountant\Contracts\Recordable
+class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 {
-    use Altek\Accountant\Contracts\Recordable;
+    use \Altek\Accountant\Recordable;
 
     use SoftDeletes;
 

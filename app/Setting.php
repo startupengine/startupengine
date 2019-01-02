@@ -5,9 +5,11 @@ namespace App;
 use App\Traits\IsApiResource;
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class Setting extends Model implements \Altek\Accountant\Contracts\Recordable
 {
     use IsApiResource;
+
+    use \Altek\Accountant\Recordable;
 
     protected $fillable = ['value'];
     protected $casts = ['json' => 'json'];

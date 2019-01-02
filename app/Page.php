@@ -17,8 +17,9 @@ use App\Traits\hasJsonSchema;
 use App\Traits\validateInputAgainstJsonSchema;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 
-class Page extends Model
+class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 {
+    use \Altek\Accountant\Recordable;
 
     use EloquentJoin;
 
