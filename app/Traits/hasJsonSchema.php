@@ -15,7 +15,7 @@ trait hasJsonSchema
             $path = file_get_contents(storage_path() . '/schemas/page.json');
             $baseSchema = json_decode($path, true);
 
-            if($this->schema != null OR $this->json == null) {
+            if($this->schema != null) {
                 $postTypeSchema = json_decode($this->schema, true);
 
                 $merged = array_merge($postTypeSchema, $baseSchema);
