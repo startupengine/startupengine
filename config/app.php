@@ -174,6 +174,7 @@ return [
         Caffeinated\Modules\ModulesServiceProvider::class,
         Appstract\Meta\MetaServiceProvider::class,
         \Conner\Tagging\Providers\TaggingServiceProvider::class,
+        Altek\Accountant\AccountantServiceProvider::class,
 
         /*
          * Application Service Providers...

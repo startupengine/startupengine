@@ -13,9 +13,13 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 use Laravolt\Avatar\Facade as Avatar;
+use Altek\Accountant\Contracts\Identifiable as Identifiable;
+use Altek\Accountant\Contracts\Recordable;
 
-class User extends AuthUser implements AuditableContract, UserResolver
+class User extends AuthUser implements AuditableContract, UserResolver, Identifiable, Recordable
 {
+
+    use \Altek\Accountant\Recordable;
 
     use Billable;
 
@@ -74,6 +78,14 @@ class User extends AuthUser implements AuditableContract, UserResolver
         'deleted',
         'restored',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        return $this->getKey();
+    }
 
 
     /**

@@ -273,7 +273,7 @@
                     @endif
                 </div>
                 <div class="modal-footer px-3">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-secondary mr-1" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

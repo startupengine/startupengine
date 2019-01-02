@@ -8,8 +8,10 @@ use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use NexusPoint\Versioned\Versioned;
 
-class PostType extends Model implements AuditableContract
+class PostType extends Model implements AuditableContract, Altek\Accountant\Contracts\Recordable
 {
+    use Altek\Accountant\Contracts\Recordable;
+
     use SoftDeletes;
 
     use Auditable;

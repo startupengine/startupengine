@@ -33,6 +33,7 @@
         "php": ">=7.0.0",
         "ext-gd": "*",
         "ext-pcntl": "*",
+        "altek/accountant": "^1.1",
         "appstract/laravel-meta": "^0.2.0",
         "barryvdh/laravel-ide-helper": "^2.4",
         "beyondcode/laravel-websockets": "^1.0",
@@ -127,9 +128,7 @@
         ],
         "post-update-cmd": [
             "@php artisan migrate",
-            "@install-drafter",
-            "@php artisan command:SyncStripeProducts",
-            "@php artisan websockets:serve"
+            "@install-drafter"
         ],
         "install-drafter": "Hmaus\\Drafter\\Installer::installDrafter"
     },

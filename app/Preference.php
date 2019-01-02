@@ -5,8 +5,9 @@ namespace App;
 use App\Traits\IsApiResource;
 use Illuminate\Database\Eloquent\Model;
 
-class Preference extends Model
+class Preference extends Model implements Altek\Accountant\Contracts\Recordable
 {
+    use Altek\Accountant\Contracts\Recordable;
 
     use IsApiResource;
 

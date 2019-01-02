@@ -10,9 +10,12 @@ use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use App\Traits\RelationshipsTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
+use \Altek\Accountant\Recordable as Recordable;
 
-class Product extends Model
+class Product extends Model implements \Altek\Accountant\Contracts\Recordable
 {
+
+    use \Altek\Accountant\Recordable;
 
     use RelationshipsTrait;
 
