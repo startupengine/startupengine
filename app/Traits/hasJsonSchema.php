@@ -11,16 +11,22 @@ trait hasJsonSchema
 
     public function schema() {
         if($this->getModel() == 'App\Page') {
-            if ($this->schema !== null) {
-                $schema = json_decode($this->schema);
-                if (gettype($schema) == "string") {
-                    $schema = json_decode($schema);
-                }
+
+            $path = file_get_contents(storage_path() . '/schemas/page.json');
+            $baseSchema = json_decode($path, true);
+
+            if($this->schema != null OR $this->json == null) {
+                $postTypeSchema = json_decode($this->schema, true);
+
+                $merged = array_merge($postTypeSchema, $baseSchema);
+
+                $merged = json_decode(json_encode($merged));
             }
-            if(!isset($schema)) {
-                $path = file_get_contents(storage_path().'/schemas/page.json');
-                $schema = json_decode($path);
+            else {
+                $merged = $baseSchema;
             }
+
+            $schema = $merged;
 
             return $schema;
         }
