@@ -398,8 +398,12 @@
     <script src="/js/axios-min.js"></script>
     <script src="/js/polyfill-min.js"></script>
     <script src="/js/bootstrap-vue.js"></script>
+
+    {!! renderPassportApp() !!}
     {!! renderNotificationsApp() !!}
+
     <script src="/admin-panel/scripts/shards-dashboards.1.0.0.min.js"></script>
+
     <?php /* <script src="/admin-panel/scripts/extras.1.0.0.min.js"></script> */ ?>
     <script>
         $(function () {
@@ -455,6 +459,8 @@
     @yield('scripts')
 
     {!! renderConfirmActionScripts() !!}
+
+
 
 </div>
 </body>

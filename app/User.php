@@ -6,6 +6,7 @@ use App\Traits\IsApiResource;
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\Passport;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
@@ -246,6 +247,20 @@ class User extends AuthUser implements AuditableContract, UserResolver, Identifi
             $json = json_decode($json, true);
         }
         return $json;
+    }
+
+    public function webAppToken(){
+
+        $token = \App\OAuthToken::where('user_id', $this->id)->where('client_id', 1)->first();
+        if($token == null){
+            \Auth::user()->createToken('Web App')->accessToken;
+            $token =  \App\OAuthToken::where('user_id', $this->id)->where('client_id', 1)->first();
+        }
+
+        //return $token->id;
+        $crypt_key = new \League\OAuth2\Server\CryptKey(storage_path('oauth-private.key'));
+
+        return  $token->convertToJWT($crypt_key);
     }
 
 }

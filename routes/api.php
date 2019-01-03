@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['cors']], function () {
+Route::group(['middleware' => ['cors', 'auth:api']], function () {
 
     //////////// API Resources ////////////
     ////// Standard BREAD Operations

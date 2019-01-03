@@ -9,6 +9,7 @@ class AppController extends Controller
 
     public function index()
     {
+        //dd(\Auth::user()->webAppToken()->id);
         $stats = [];
         $stats['pageViews'] = count(\App\AnalyticEvent::where('event_type','=', 'page viewed')->whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());
         $stats['contentViews'] = count(\App\AnalyticEvent::where('event_type','=', 'content viewed')->whereDate('created_at', '>', \Carbon\Carbon::now()->subDays(30))->get());

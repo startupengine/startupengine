@@ -30,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::enableImplicitGrant();
 
+        Passport::personalAccessClient(1);
 
     }
 }

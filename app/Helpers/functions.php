@@ -929,6 +929,27 @@ function renderStripeAppJs($options = [])
     return $contents;
 }
 
+// ********
+// Passport
+// ********
+
+function renderPassportApp(){
+    $view = View::make('components.passport_app');
+    $contents = (string)$view;
+    return $contents;
+}
+
+function passportAuthorizationHeader(){
+    if(\Auth::user()) {
+        return "Bearer ".\Auth::user()->webAppToken();
+    }
+    else {
+        return "Bearer ";
+    }
+}
+
+
+
 // **********
 // Currencies
 // **********

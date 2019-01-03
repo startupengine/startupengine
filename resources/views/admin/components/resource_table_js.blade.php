@@ -108,7 +108,7 @@
                     string = string + '&endDate=' + this.endDate;
                 }
                 console.log('GET ' + string);
-                var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}};
+                var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache', 'Authorization': '{{ passportAuthorizationHeader() }}' }};
                 axios
                     .get(string, config)
                     .then((response) => {
@@ -277,7 +277,7 @@
             this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
             var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
             console.log(url);
-            var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}};
+            var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache', 'Authorization': "{{ passportAuthorizationHeader() }}"}};
             axios
                 .get(url, config)
                 .then(response => ({{ $options['VUE_APP_NAME'] }}.updateInfo(response))
