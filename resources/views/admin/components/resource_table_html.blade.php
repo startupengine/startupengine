@@ -28,7 +28,7 @@
                         </tr>
                         @if( !isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ))
                             <tr v-if="info.meta != null && info.meta.total != null && info.meta.total == 0 && status !== 'loading'">
-                                <td colspan="5" class="dimmed" align="center" style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else No results. @endif</td>
+                                <td colspan="5" class="dimmed" align="center" style="height:55px;">No results.</td>
                             </tr>
                         @endif
                         @if( isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ) && !isset($options['TABLE_ROW_NO_RESULTS_MESSAGE']))
@@ -44,7 +44,7 @@
                             </td>
                         </tr>
                         @if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE']))
-                        <tr class="dataRow" v-else>
+                        <tr class="dataRow" v-if="info.data.every(function(item){return ( {!! $options['TABLE_ROW_NO_RESULTS_CONDITIONS'] !!} )}) == false">
                             {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!}
 
                         </tr>
