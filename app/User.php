@@ -253,14 +253,15 @@ class User extends AuthUser implements AuditableContract, UserResolver, Identifi
 
         $token = \App\OAuthToken::where('user_id', $this->id)->where('client_id', 1)->first();
         if($token == null){
-            \Auth::user()->createToken('Web App')->accessToken;
+            $newToken = $this->createToken('Web App')->accessToken;
+
             $token =  \App\OAuthToken::where('user_id', $this->id)->where('client_id', 1)->first();
+            $token->token = $newToken;
+
         }
-
-        //return $token->id;
-        $crypt_key = new \League\OAuth2\Server\CryptKey(storage_path('oauth-private.key'));
-
-        return  $token->convertToJWT($crypt_key);
+        $token->expires_at = \Carbon\Carbon::now()->addDays(3)->toDateTimeString();
+        $token->save();
+        return $token->token;
     }
 
 }

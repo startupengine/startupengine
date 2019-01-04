@@ -31,11 +31,11 @@
                                 <td colspan="5" class="dimmed" align="center" style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else No results. @endif</td>
                             </tr>
                         @endif
-                        @if( isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ))
+                        @if( isset($options['TABLE_ROW_NO_RESULTS_CONDITIONS'] ) && !isset($options['TABLE_ROW_NO_RESULTS_MESSAGE']))
                             <td v-if="info != null && info.data != null && info.meta != null && info.meta.total != null && info.meta.total > 0 && info.data.every(function(item){return ( {!! $options['TABLE_ROW_NO_RESULTS_CONDITIONS'] !!} )}) && status != 'loading'"
                                 colspan="5" class="dimmed" align="center"
-                                style="height:55px;">@if(isset($options['TABLE_ROW_NO_RESULTS_MESSAGE'])) {!! $options['TABLE_ROW_NO_RESULTS_MESSAGE'] !!} @else
-                                    No results. Try different settings.@endif</td>
+                                style="height:55px;">
+                                    No results. Try different settings.</td>
                         @endif
                         <tr class="loadingRow" v-if="status == 'loading'">
                             <td colspan="5" align="center">
