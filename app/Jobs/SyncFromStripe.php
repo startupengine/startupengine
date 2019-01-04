@@ -12,15 +12,21 @@ class SyncFromStripe implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $type;
+    public $starting_after;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($type = 'charge')
+    public function __construct($type = 'charge', $starting_after = null)
     {
         //
         $this->type = $type;
+        $this->starting_after = $starting_after;
+        dump($this->type);
+        dump($this->starting_after);
     }
 
     /**
@@ -32,7 +38,12 @@ class SyncFromStripe implements ShouldQueue
     {
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
-        $stripeEvents = \Stripe\Charge::all();
+        if($this->starting_after == null) {
+            $stripeEvents = \Stripe\Charge::all();
+        }
+        else {
+            $stripeEvents = \Stripe\Charge::all(['starting_after' => $this->starting_after]);
+        }
 
         if($stripeEvents!= null){
             foreach($stripeEvents->data as $stripeEvent){
@@ -47,6 +58,12 @@ class SyncFromStripe implements ShouldQueue
                 $payment->json = json_encode(["remote_data"=>$stripeEvent]);
                 $payment->save();
             }
+
+
+            if($stripeEvents->has_more && $stripeEvent != null){
+                SyncFromStripe::dispatch($this->type, $stripeEvent->id);
+            }
+
         }
     }
 }
