@@ -37,7 +37,7 @@ class LaunchContainer extends Command
      */
     public function handle()
     {
-        exec('cd laradock; docker-compose build workspace php-worker laravel-horizon php-fpm; docker-compose up -d nginx postgres php-worker laravel-horizon redis beanstalkd workspace; sleep 10; open http://startupengine.test');
+        exec('cd laradock; docker-compose build apache2 workspace php-worker laravel-horizon php-fpm; docker-compose up -d apache2 postgres php-worker laravel-horizon redis  workspace;');
         exec('cd laradock; docker-compose exec php-fpm php artisan command:SyncStripeProducts');
     }
 }

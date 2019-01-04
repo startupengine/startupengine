@@ -6,6 +6,10 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title') - {{ setting('site.name', 'Startup Engine') }}</title>
     <meta name="description"
@@ -263,6 +267,7 @@
 <script src="/js/axios-min.js"></script>
 <script src="/js/polyfill-min.js"></script>
 <script src="/js/bootstrap-vue.js"></script>
+{!! renderPassportApp() !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
@@ -293,7 +298,6 @@
 </script>
 
 @yield('scripts')
-
 {!! renderNotificationsApp() !!}
 
 {!! renderConfirmActionScripts() !!}
