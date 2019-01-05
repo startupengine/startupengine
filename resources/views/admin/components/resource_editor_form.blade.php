@@ -121,7 +121,7 @@
 
 
 
-                <div v-if="record.data != null && record.data.schema != null && record.data.schema.sections != null">
+                <div v-if="record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
 
                     <div v-for="section,sectionName in record.data.schema.sections"
                          class="card p-0 mb-3 formSection">
@@ -133,7 +133,7 @@
                                  class="input-group">
 
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="record['data']['content'] != null && record['data']['content']['sections'] !== null && record['data']['content']['sections'][sectionName] !== null && 1 == 2  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
+                                     v-if="record['data']['content'] != null && record['data']['content'].hasOwnProperty('sections') && record['data']['content']['sections'][sectionName] !== null  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"

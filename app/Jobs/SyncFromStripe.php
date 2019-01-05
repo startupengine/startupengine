@@ -49,35 +49,43 @@ class SyncFromStripe implements ShouldQueue
             $stripeModel  = "\\Stripe\\Product";
             $localModel = "\\App\\Product";
         }
+        if($this->type == 'plan'){
+            $stripeModel  = "\\Stripe\\Plan";
+            $localModel = "\\App\\Plan";
+        }
 
         if($this->starting_after == null) {
-            $stripeEvents = $stripeModel::all();
+            $stripeObjects = $stripeModel::all();
         }
         else {
-            $stripeEvents = $stripeModel::all(['starting_after' => $this->starting_after]);
+            $stripeObjects = $stripeModel::all(['starting_after' => $this->starting_after]);
         }
 
-        if($stripeEvents!= null && $stripeEvents->data != null){
-            foreach($stripeEvents->data as $stripeEvent){
+        if($stripeObjects!= null && $stripeObjects->data != null){
+            foreach($stripeObjects->data as $stripeObject){
                 if($this->type == 'customer') {
-                    $object = $localModel::where('email', $stripeEvent->email)->first();
+                    $object = $localModel::where('email', $stripeObject->email)->first();
                 }
                 else {
-                    $object = $localModel::where('stripe_id', $stripeEvent->id)->first();
+                    $object = $localModel::where('stripe_id', $stripeObject->id)->first();
                 }
                 if($object == null) {
                     $object = new $localModel;
                 }
-                $object->stripe_id = $stripeEvent->id;
+                $object->stripe_id = $stripeObject->id;
                 if($this->type == 'charge') {
-                    $object->amount = $stripeEvent->amount;
-                    $object->currency = $stripeEvent->currency;
-                    $object->description = $stripeEvent->description;
+                    $object->amount = $stripeObject->amount;
+                    $object->currency = $stripeObject->currency;
+                    $object->description = $stripeObject->description;
+                }
+                if($this->type == 'product') {
+                    $object->description = $stripeObject->description;
+                    $object->name = $stripeObject->name;
                 }
                 if($this->type == 'customer') {
-                    $object->email = $stripeEvent->email;
-                    if($stripeEvent->name != null) {
-                        $object->name = $stripeEvent->name;
+                    $object->email = $stripeObject->email;
+                    if($stripeObject->name != null) {
+                        $object->name = $stripeObject->name;
                     }
                     else {
                         $object->name = 'User';
@@ -86,12 +94,19 @@ class SyncFromStripe implements ShouldQueue
                         $object->resetPassword();
                     }
                 }
-                $object->json = json_encode(["remote_data"=>$stripeEvent]);
+                if($stripeObject->metadata['se_json'] != null){
+                    $object->forceFill([
+                        'json' => $stripeObject->metadata['se_json']
+                    ]);
+                }
+                $object->forceFill([
+                    'json->remote_data' => json_decode(json_encode($stripeObject))
+                ]);
                 $object->save();
             }
 
-            if($stripeEvents->has_more && $stripeEvent != null){
-                SyncFromStripe::dispatch($this->type, $stripeEvent->id);
+            if($stripeObjects->has_more && $stripeObject != null){
+                SyncFromStripe::dispatch($this->type, $stripeObject->id);
             }
 
         }
