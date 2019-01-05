@@ -53,7 +53,10 @@ class SyncFromStripe implements ShouldQueue
             $stripeModel  = "\\Stripe\\Plan";
             $localModel = "\\App\\Plan";
         }
-
+        if($this->type == 'subscription'){
+            $stripeModel = "\\Stripe\\Subscription";
+            $localModel = "\\App\\Subscription";
+        }
         if($this->starting_after == null) {
             $stripeObjects = $stripeModel::all();
         }
@@ -81,6 +84,37 @@ class SyncFromStripe implements ShouldQueue
                 if($this->type == 'product') {
                     $object->description = $stripeObject->description;
                     $object->name = $stripeObject->name;
+                }
+                if($this->type == 'subscription') {
+                    $user = \App\User::where('stripe_id', $stripeObject->customer)->first();
+                    if($user != null){
+                        $object->user_id = $user->id;
+                    }
+                    $user = null;
+                    if($stripeObject->plan != null){
+                        $object->stripe_plan = $stripeObject->plan->id;
+                    }
+                    if($stripeObject->status == 'active'){
+                        $object->status = 'ACTIVE';
+                    }
+                    else {
+                        $object->status = 'INACTIVE';
+                    }
+                }
+                if($this->type == 'plan') {
+                    $object->name = $stripeObject->name;
+                    $object->description = $stripeObject->description;
+                    $object->price = $stripeObject->amount;
+                    $object->interval = $stripeObject->interval;
+                    $product = \App\Product::where('stripe_id', $stripeObject->product)->first();
+                    $object->product_id = $product->id;
+                    $product = null;
+                    if($stripeObject->active == true){
+                        $object->status = 'ACTIVE';
+                    }
+                    else {
+                        $object->status = 'INACTIVE';
+                    }
                 }
                 if($this->type == 'customer') {
                     $object->email = $stripeObject->email;
