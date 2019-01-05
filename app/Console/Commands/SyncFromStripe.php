@@ -2,25 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\SyncFromStripe;
+use App\Jobs\SyncFromStripe as SyncFromStripeJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
-class SyncStripeEvents extends Command
+class SyncFromStripe extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:SyncStripeEvents';
+    protected $signature = 'command:SyncFromStripe {type?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create database entries for all events in the connected Stripe account.';
+    protected $description = 'Create database entries for objects in the connected Stripe account.';
 
     /**
      * Create a new command instance.
@@ -39,9 +39,14 @@ class SyncStripeEvents extends Command
      */
     public function handle()
     {
+        $type = $this->argument('type');
+        if($type == null){
+            $type = 'charge';
+        }
+        echo "\nSyncing $type objects from Stripe.\n";
 
-        SyncFromStripe::dispatch();
+        SyncFromStripeJob::dispatch($type);
 
-        echo "\nSynced events from Stripe account.\n\n";
+        echo "\nSynced $type objects.\n\n";
     }
 }

@@ -22,11 +22,10 @@ class SyncFromStripe implements ShouldQueue
      */
     public function __construct($type = 'charge', $starting_after = null)
     {
-        //
         $this->type = $type;
         $this->starting_after = $starting_after;
-        dump($this->type);
-        dump($this->starting_after);
+        //dump($this->type);
+        ///dump($this->starting_after);
     }
 
     /**
@@ -38,27 +37,58 @@ class SyncFromStripe implements ShouldQueue
     {
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
+        if($this->type == 'charge'){
+            $stripeModel = "\\Stripe\\Charge";
+            $localModel = "\\App\\Payment";
+        }
+        if($this->type == 'customer'){
+            $stripeModel  = "\\Stripe\\Customer";
+            $localModel = "\\App\\User";
+        }
+        if($this->type == 'product'){
+            $stripeModel  = "\\Stripe\\Product";
+            $localModel = "\\App\\Product";
+        }
+
         if($this->starting_after == null) {
-            $stripeEvents = \Stripe\Charge::all();
+            $stripeEvents = $stripeModel::all();
         }
         else {
-            $stripeEvents = \Stripe\Charge::all(['starting_after' => $this->starting_after]);
+            $stripeEvents = $stripeModel::all(['starting_after' => $this->starting_after]);
         }
 
-        if($stripeEvents!= null){
+        if($stripeEvents!= null && $stripeEvents->data != null){
             foreach($stripeEvents->data as $stripeEvent){
-                $payment = \App\Payment::where('stripe_id', $stripeEvent->id)->first();
-                if($payment == null) {
-                    $payment = new \App\Payment;
+                if($this->type == 'customer') {
+                    $object = $localModel::where('email', $stripeEvent->email)->first();
                 }
-                $payment->stripe_id = $stripeEvent->id;
-                $payment->amount = $stripeEvent->amount;
-                $payment->currency = $stripeEvent->currency;
-                $payment->description = $stripeEvent->description;
-                $payment->json = json_encode(["remote_data"=>$stripeEvent]);
-                $payment->save();
+                else {
+                    $object = $localModel::where('stripe_id', $stripeEvent->id)->first();
+                }
+                if($object == null) {
+                    $object = new $localModel;
+                }
+                $object->stripe_id = $stripeEvent->id;
+                if($this->type == 'charge') {
+                    $object->amount = $stripeEvent->amount;
+                    $object->currency = $stripeEvent->currency;
+                    $object->description = $stripeEvent->description;
+                }
+                if($this->type == 'customer') {
+                    $object->email = $stripeEvent->email;
+                    if($stripeEvent->name != null) {
+                        $object->name = $stripeEvent->name;
+                    }
+                    else {
+                        $object->name = 'User';
+                    }
+                    if($object->password == null){
+                        $object->resetPassword();
+                    }
+                }
+                $object->json = json_encode(["remote_data"=>$stripeEvent]);
+                $object->save();
             }
-
 
             if($stripeEvents->has_more && $stripeEvent != null){
                 SyncFromStripe::dispatch($this->type, $stripeEvent->id);

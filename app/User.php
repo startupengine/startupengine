@@ -16,6 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravolt\Avatar\Facade as Avatar;
 use Altek\Accountant\Contracts\Identifiable as Identifiable;
 use Altek\Accountant\Contracts\Recordable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends AuthUser implements AuditableContract, UserResolver, Identifiable, Recordable
 {
@@ -262,6 +263,11 @@ class User extends AuthUser implements AuditableContract, UserResolver, Identifi
         $token->expires_at = \Carbon\Carbon::now()->addDays(3)->toDateTimeString();
         $token->save();
         return $token->token;
+    }
+
+    public function resetPassword(){
+        $this->password = Hash::make(str_random(11));
+        $this->save();
     }
 
 }
