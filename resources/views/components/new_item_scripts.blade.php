@@ -79,6 +79,7 @@
             newItemSchema: null,
             newItemInput: {},
             status: 'loading',
+            formSubmitted: null,
             editorStatus: null,
             quillOptions: {
                 modules: {
@@ -106,31 +107,38 @@
 
                 return status;
             },
-            changed(){
-                var payload = {};
+            changed(input){
+                if(input == true){
+                    this.formSubmitted = true;
+                }
+                if(this.formSubmitted != null) {
+                    var payload = {};
 
-                payload = this.newItemInput;
-                console.log(payload);
-                this.payload = payload;
-                url = '/api/resources/' + this.type;
-                payload = {data: payload, validate: true};
-                console.log('Payload:');
-                console.log(payload);
-                axiosConfig = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Cache-Control': 'no-cache',
-                        "Access-Control-Allow-Origin": "*"
-                    }
-                };
-                axios({
-                    method: 'post',
-                    url: url,
-                    headers: axiosConfig,
-                    data:payload
-                }).then(response => (this.validationResults = response.data));
-                console.log('Server recieved:');
-                console.log(this.info);
+                    payload = this.newItemInput;
+                    console.log(payload);
+                    this.payload = payload;
+                    url = '/api/resources/' + this.type;
+                    payload = {data: payload, validate: true};
+                    console.log('Payload:');
+                    console.log(payload);
+                    axiosConfig = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cache-Control': 'no-cache',
+                            "Access-Control-Allow-Origin": "*"
+                        }
+                    };
+                    axios({
+                        method: 'post',
+                        url: url,
+                        headers: axiosConfig,
+                        data: payload
+                    }).then(response => (this.validationResults = response.data)
+                )
+                    ;
+                    console.log('Server recieved:');
+                    console.log(this.info);
+                }
             },
             save(){
                 var title = '';

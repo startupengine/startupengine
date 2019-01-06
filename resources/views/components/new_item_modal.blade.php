@@ -43,7 +43,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-outline-primary disabled" v-if="validationResults != {} && validationResults.hasOwnProperty('errors')">Save changes</button>
-                <button type="button" class="btn btn-primary" v-on:click="changed()" v-else>Save changes</button>
+                <button type="button" class="btn btn-primary" v-on:click="changed(true)" v-else>Save changes</button>
             </div>
         </div>
     </div>
