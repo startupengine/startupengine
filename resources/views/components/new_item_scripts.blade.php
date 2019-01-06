@@ -174,18 +174,25 @@
             updateType(input){
                 this.type = input;
             },
+            updateNewItem(input){
+                this.info = input;
+                for (var field in input.data.schema.fields) {
+                    this.newItemInput[field] = '';
+                }
+            },
             newItem(options){
                 this.type = options.type;
                 var config = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Cache-Control': 'no-cache'
-                    }
+                    },
+                    data: {}
                 };
                 var url = '/api/resources/' + this.type;
                 axios
                     .post(url, config)
-                    .then(response => (this.info = response.data));
+                    .then(response => (this.updateNewItem(response.data)));
             }
         },
         mounted () {

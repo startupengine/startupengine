@@ -14,6 +14,9 @@
                         @{{ index }}
                     </span>
                     <input class="form-control mt-2" v-model="newItemInput[index]" v-on:input="changed()">
+                    <p class="text-danger my-2" v-if="validationResults.hasOwnProperty('meta') && validationResults.meta.hasOwnProperty('fields')  && validationResults.meta.fields.hasOwnProperty(index)">
+                        @{{ validationResults.meta.fields[index]['first_error'] }}
+                    </p>
                 </div>
                 <div v-for="item, index in info.data.schema.sections" class="pt-2 mt-2">
                     <hr class="mb-4">
@@ -36,7 +39,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-outline-primary disabled" v-if="validationResults != {} && validationResults.hasOwnProperty('errors')">Save changes</button>
+                <button type="button" class="btn btn-primary" v-on:click="changed()" v-else>Save changes</button>
             </div>
         </div>
     </div>

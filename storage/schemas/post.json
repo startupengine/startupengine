@@ -25,7 +25,7 @@
       "type": "text",
       "validations": {
         "required": true,
-        "max": 3
+        "max": 100
       }
     },
     "slug" : {

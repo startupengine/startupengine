@@ -126,7 +126,7 @@ class ResourceController extends Controller
 
             $newArray = [];
             $errors = [];
-
+            $item = $model;
 
             //if JSON has input data...
             if (isset($jsonInput)) {
@@ -173,10 +173,10 @@ class ResourceController extends Controller
                             $newArray[] = [$field, $value];
                         }
 
-                        $response['data']['fields'][$field]['valid'] = $validator->passes();
-                        $response['data']['fields'][$field]['errors'] = $validator->errors($field);
-                        $response['data']['fields'][$field]['first_error'] = $validator->errors($field)->first();
-                        foreach ($response['data']['fields'] as $field => $result) {
+                        $response['meta']['fields'][$field]['valid'] = $validator->passes();
+                        $response['meta']['fields'][$field]['errors'] = $validator->errors($field);
+                        $response['meta']['fields'][$field]['first_error'] = $validator->errors($field)->first();
+                        foreach ($response['meta']['fields'] as $field => $result) {
                             if ($result['valid'] == false) {
                                 $errors[$field] = "Error";
                             }
@@ -197,6 +197,7 @@ class ResourceController extends Controller
             }
 
             if (count($errors) > 0) {
+                $response['errors'] = $validator->errors();
                 $response["status"] = "error";
                 $response["message"] = "Validation failed.";
             } else {
@@ -206,7 +207,7 @@ class ResourceController extends Controller
 
 
                 if ($request->input('save') == true) {
-                    $item = $model;
+
 
 
                     foreach ($newArray as $field => $data) {
@@ -253,6 +254,7 @@ class ResourceController extends Controller
                     }
 
                     $item->save();
+                    $item->schema = $item->schema();
 
                     $response["message"] = "Input saved.";
                 }
@@ -260,22 +262,10 @@ class ResourceController extends Controller
                 $response["status"] = "success";
 
             }
-
+            $response['data'] = $item;
             $response["meta"]["input"] = $request->input();
             return response($response, 200);
 
-            $response = [
-                'meta' => [
-                    'status' => 'success',
-                ],
-                'links' => [
-                    null
-                ],
-                'errors' => [],
-                'data' => $model
-            ];
-
-            return response()->json($response);
         } else abort(404);
     }
 
