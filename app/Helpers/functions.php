@@ -757,6 +757,13 @@ function renderResourceTableHtmlDynamically($options = null)
     return $contents;
 }
 
+function renderFormInputs($options = null)
+{
+    $view = View::make('components.inputs', ['options' => $options]);
+    $contents = (string)$view;
+    return $contents;
+}
+
 function renderNewItemModal($options = null)
 {
     $view = View::make('components.new_item_modal', ['options' => $options]);

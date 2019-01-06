@@ -24,7 +24,8 @@
       "description": "The title of this content.",
       "type": "text",
       "validations": {
-        "required": true
+        "required": true,
+        "max": 3
       }
     },
     "slug" : {

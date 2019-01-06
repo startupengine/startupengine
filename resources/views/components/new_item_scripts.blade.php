@@ -74,6 +74,7 @@
             fieldDisplayName: null,
             resourceItem: null,
             resourceEditUrl: '',
+            validationResults: {},
             displayAddItemForm: null,
             newItemSchema: null,
             newItemInput: {},
@@ -108,24 +109,10 @@
             changed(){
                 var payload = {};
 
-                payload[this.fieldName] = this.fieldInput;
+                payload = this.newItemInput;
                 console.log(payload);
-
                 this.payload = payload;
-                this.selected = this.fieldInput;
-                if(this.fieldType == 'code') {
-                    this.editorHasErrors = 'pending';
-                }
-
-                if (this.resourceEditUrl != '' && this.resourceItem != null) {
-                    url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + this.resourceItem.id + '&' + this.fieldName.toLowerCase() + '=' + this.fieldInput @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
-                }
-                else if (this.resourceEditUrl != '' && this.resourceItem == null) {
-                    url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&newItem=' + JSON.stringify(this.newItem) @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
-                }
-                else {
-                    url = '/api/resources/{{ $options['type'] }}/';
-                }
+                url = '/api/resources/' + this.type;
                 payload = {data: payload, validate: true};
                 console.log('Payload:');
                 console.log(payload);
@@ -141,7 +128,7 @@
                     url: url,
                     headers: axiosConfig,
                     data:payload
-                }).then(response => (this.info = response.data));
+                }).then(response => (this.validationResults = response.data));
                 console.log('Server recieved:');
                 console.log(this.info);
             },

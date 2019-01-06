@@ -7,4 +7,12 @@
     .badge.badge-light {
         background:#efefef !important;
     }
+
+    .badge.badge-section {
+        width: 100%;
+        display: inline-block;
+        max-width: 100% !important;
+        float: left;
+        text-align: center !important;
+    }
 </style>
