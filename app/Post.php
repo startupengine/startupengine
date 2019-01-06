@@ -134,13 +134,22 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     }
 
+    public function setType($type = 'article'){
+        $this->post_type = $type;
+    }
+
     public function schema()
     {
         $path = file_get_contents(storage_path() . '/schemas/post.json');
         $baseSchema = json_decode($path, true);
 
-        if($this->postType() != null OR $this->json == null) {
-            $postTypeSchema = json_decode($this->postType()->first()->json, true);
+        if($this->postType() != null) {
+            if($this->postType()->first() != null && isset($this->postType()->first()->json)) {
+                $postTypeSchema = json_decode($this->postType()->first()->json, true);
+            }
+            else {
+                $postTypeSchema = [];
+            }
 
             $merged = array_merge($postTypeSchema, $baseSchema);
 
@@ -155,6 +164,9 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function postType()
     {
+        if($this->post_type == null){
+            $this->setType();
+        }
         return $this->hasOne('App\PostType', 'slug', 'post_type');
 
     }

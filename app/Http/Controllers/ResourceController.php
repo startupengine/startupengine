@@ -111,6 +111,30 @@ class ResourceController extends Controller
         } else abort(404);
     }
 
+    public function add(Request $request, $type)
+    {
+        if (isResource($type)) {
+            $type = pathToModel($type);
+            $name = "\\App\\$type";
+            $model = new $name;
+            $model->json = [];
+            $model->schema = $model->schema();
+
+            $response = [
+                'meta' => [
+                    'status' => 'success',
+                ],
+                'links' => [
+                    null
+                ],
+                'errors' => [],
+                'data' => $model
+            ];
+
+            return response()->json($response);
+        } else abort(404);
+    }
+
     public function delete(Request $request, $type, $id)
     {
         if (isResource($type)) {

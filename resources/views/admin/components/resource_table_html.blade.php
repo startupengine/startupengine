@@ -61,7 +61,7 @@
                     </div>
                 @else
 
-                    <div align="center" v-if="info.meta.pages > 0 && status != 'loading'" class="card-footer align-text-bottom"
+                    <div align="center" v-if="info != null && info.meta != null && info.meta.pages != null && info.meta.pages > 0 && status != 'loading'" class="card-footer align-text-bottom"
                          style="bottom: 0px;width: 100% !important;display: table;">
                         <nav aria-label="Pagination" class="pull-left page-meta-container"
                              style="display:inline-block;float:left; width:75px;text-align:left;">
@@ -141,6 +141,7 @@
                             </ul>
                         </nav>
                     </div>
+
 
                 @endif
             </div>

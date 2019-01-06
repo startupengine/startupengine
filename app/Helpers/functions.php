@@ -757,6 +757,20 @@ function renderResourceTableHtmlDynamically($options = null)
     return $contents;
 }
 
+function renderNewItemModal($options = null)
+{
+    $view = View::make('components.new_item_modal', ['options' => $options]);
+    $contents = (string)$view;
+    return $contents;
+}
+
+function renderNewItemScripts($options = null)
+{
+    $view = View::make('components.new_item_scripts', ['options' => $options]);
+    $contents = (string)$view;
+    return $contents;
+}
+
 function renderResourceFilterModal($options = null)
 {
     $view = View::make('admin.components.resource_filter_modal', ['options' => $options]);

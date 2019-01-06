@@ -32,8 +32,15 @@ class PostType extends Model implements AuditableContract, \Altek\Accountant\Con
 
     protected $dates = ['deleted_at', 'published_at'];
 
-    public function json() {
-        return json_decode($this->json);
+    public function json()
+    {
+        if (isset($this->json)) {
+            $json = json_decode($this->json);
+        } else {
+            $json = null;
+        }
+        return $json;
+
     }
 
     public function posts()

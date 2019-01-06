@@ -39,6 +39,8 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     use validateInputAgainstJsonSchema;
 
+    protected $fillable = ['title'];
+
     /**
      * Field from the model to use as the versions name
      * @var string
@@ -80,7 +82,8 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         'restored',
     ];
 
-    public function searchFields(){
+    public function searchFields()
+    {
         return ['title', 'slug', 'json'];
     }
 
@@ -102,37 +105,31 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function json()
     {
-        $json = json_decode($this->json);
-        return $json;
-
-    }
-
-    public function content()
-    {
-        $json = $this->json;
-        if($json != null && gettype($json) != 'object'){
-            $array = json_decode($json, true);
+        if (isset($this->json)) {
+            $json = json_decode($this->json);
+        } else {
+            $json = null;
         }
-        else { $array = []; }
-
-
         return $json;
+
     }
 
-    public function thumbnail(){
+    public function thumbnail()
+    {
         //$json = $this->content();
-        if($this->content() != null && $this->content()->sections != null){
-            foreach($this->schema()->sections as $section){
-                if($section->fields != null){
+        if ($this->content() != null && $this->content()->sections != null) {
+            foreach ($this->schema()->sections as $section) {
+                if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
 
-                        if(isset($value->isThumbnail) && $value->isThumbnail == true) {
+                        if (isset($value->isThumbnail) && $value->isThumbnail == true) {
                             $slug = $section->slug;
-                            $string = "sections->".$slug."->fields->".$field;
-                            if(isset($this->content()->sections->$slug->fields->$field)) {
-                                    return $this->content()->sections->$slug->fields->$field;
+                            $string = "sections->" . $slug . "->fields->" . $field;
+                            if (isset($this->content()->sections->$slug->fields->$field)) {
+                                return $this->content()->sections->$slug->fields->$field;
+                            } else {
+                                return null;
                             }
-                            else { return null; }
 
                         }
                     }
@@ -140,6 +137,19 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             }
         }
 
+    }
+
+    public function content()
+    {
+        $json = $this->json;
+        if ($json != null && gettype($json) != 'object') {
+            $array = json_decode($json, true);
+        } else {
+            $array = [];
+        }
+
+
+        return $json;
     }
 
     public function markdown($content)
@@ -169,27 +179,26 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         return $versions;
     }
 
-    public function views(){
+    public function views()
+    {
         $request = request();
-        if($request->input('startDate') != null){
+        if ($request->input('startDate') != null) {
             $startDate = \Carbon\Carbon::parse($request->input('startDate'));
-        }
-        else {
+        } else {
             $startDate = new Carbon();
             $startDate = $startDate->subDays(30);
         }
-        if($request->input('endDate') != null){
+        if ($request->input('endDate') != null) {
             $endDate = \Carbon\Carbon::parse($request->input('endDate'));
-        }
-        else {
+        } else {
             $endDate = new Carbon();
         }
-            /*
-          $startDate = \Carbon\Carbon::now()->subDays(30)->toDateTimeString();
-          $endDate = \Carbon\Carbon::now()->subDays(0)->toDateTimeString();
-          $views = $item->views()->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate)->get();
-          dd($views);
-          */
+        /*
+      $startDate = \Carbon\Carbon::now()->subDays(30)->toDateTimeString();
+      $endDate = \Carbon\Carbon::now()->subDays(0)->toDateTimeString();
+      $views = $item->views()->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate)->get();
+      dd($views);
+      */
         //dd($endDate);
         $views = $this->hasMany('App\AnalyticEvent', 'model_id')->where('event_type', '=', 'page viewed')->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);
         return $views;

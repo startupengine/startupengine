@@ -263,7 +263,7 @@
                     </p>
                     <ul class="list-group">
                     @foreach($postTypes as $postType)
-                       <li class="list-group-item list-group-item-action text-ford-blue">
+                       <li class="list-group-item list-group-item-action text-ford-blue" onclick="newItemApp.newItem({'type':'content', 'subtype': '{{ $postType->schema()->lang->en->singular }}'});$('#modal-new-content').modal('hide');$('#newItemModal').modal('show');" >
                            <span class="text-ford-blue">{{ ucwords($postType->schema()->lang->en->singular) }}</span>
                        </li>
                     @endforeach

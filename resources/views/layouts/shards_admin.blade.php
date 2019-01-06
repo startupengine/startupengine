@@ -460,7 +460,9 @@
 
     {!! renderConfirmActionScripts() !!}
 
+    {!! renderNewItemModal() !!}
 
+    {!! renderNewItemScripts() !!}
 
 </div>
 </body>
