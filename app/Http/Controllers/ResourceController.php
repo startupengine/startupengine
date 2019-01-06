@@ -175,7 +175,9 @@ class ResourceController extends Controller
                         $input = [strtolower($field) => $value];
                         $validator = \Validator::make($input, $validationParameters);
 
-
+                        if (strpos($field, '.') !== false) {
+                            $field = 'json.'.$field;
+                        }
                         if (strpos($field, '->') !== false) {
                             $newArray[] = ['json->' . convertDotsToArrows($field), $value];
                         } else {
