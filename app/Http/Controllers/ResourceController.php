@@ -177,7 +177,6 @@ class ResourceController extends Controller
 
 
                         if (strpos($field, '->') !== false) {
-                            dd('test');
                             $newArray[] = ['json->' . convertDotsToArrows($field), $value];
                         } else {
                             $newArray[] = [$field, $value];
