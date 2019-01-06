@@ -33,7 +33,10 @@
                             <span class="badge badge-light text-dark mb-2 text-capitalize" v-else>
                             @{{ fieldIndex }}
                         </span>
-                        <input class="form-control mt-2" v-model="newItemInput['json.sections.'+ index + '.fields.' + fieldIndex]">
+                        <input class="form-control mt-2" v-model="newItemInput['json.sections.'+ index + '.fields.' + fieldIndex]" v-on:input="changed()">
+                        <p class="text-danger my-2" v-if="validationResults.hasOwnProperty('meta') && validationResults.meta.hasOwnProperty('fields')  && validationResults.meta.fields.hasOwnProperty('sections.' + index + '.fields.' + fieldIndex)">
+                            @{{ validationResults.meta.fields['sections.' + index + '.fields.' + fieldIndex]['first_error'] }}
+                        </p>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,8 @@
 <style>
+
+    .modal {
+        overflow: scroll;
+    }
     .modal .control-label {
         color:#888;
         font-weight:bold;

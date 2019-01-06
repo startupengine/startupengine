@@ -117,7 +117,7 @@ class ResourceController extends Controller
             $type = pathToModel($type);
             $name = "\\App\\$type";
             $model = new $name;
-            $model->json = [];
+            //$model->json = [];
             $model->schema = $model->schema();
 
             $jsonInput = $request->input('data');
@@ -135,10 +135,16 @@ class ResourceController extends Controller
                 foreach ($jsonInput as $field => $value) {
 
                     $schema = json_decode(json_encode($schema), true);
-                    if (strpos($field, '.') !== false) {
 
+                    if (strpos($field, '.') !== false) {
+                        $field = explode('json.', $field);
+                        $field = $field[1];
+                        //dd($field);
                         $arrayIndexes = explode(".", $field);
+
+
                         $schemaFieldDefinition = (get_array_value($schema, $arrayIndexes));
+
                     } else {
                         if (isset($schema['fields'][$field])) {
                             $schemaFieldDefinition = $schema['fields'][$field];
@@ -152,12 +158,15 @@ class ResourceController extends Controller
                     }
 
 
+
+
                     if ($schemaFieldDefinition == false) {
                         $schemaFieldDefinition = [];
                     }
 
                     $hasvalidations = array_key_exists("validations", $schemaFieldDefinition);
-                    //dd($hasvalidations);
+
+
 
                     if ($hasvalidations) {
                         $validations = $schemaFieldDefinition["validations"];
@@ -168,6 +177,7 @@ class ResourceController extends Controller
 
 
                         if (strpos($field, '->') !== false) {
+                            dd('test');
                             $newArray[] = ['json->' . convertDotsToArrows($field), $value];
                         } else {
                             $newArray[] = [$field, $value];
@@ -191,6 +201,7 @@ class ResourceController extends Controller
                     }
 
                 }
+
 
             } else {
                 throw new \Exception("No input data");
