@@ -201,6 +201,17 @@
                 axios
                     .post(url, config)
                     .then(response => (this.updateNewItem(response.data)));
+            },
+            sectionHasValidations(section){
+                console.log(section.fields);
+                var result = Object.values(section.fields).some(
+                    function(field) {
+                        console.log(field);
+                        return (field.hasOwnProperty('validations') && field.validations.hasOwnProperty('required') && field.validations.required);
+                    }
+                );
+                console.log(result);
+                return result;
             }
         },
         mounted () {
