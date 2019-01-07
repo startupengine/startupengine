@@ -51,6 +51,7 @@
         "Unpublished": "UNPUBLISHED"
       },
       "validations": {
+        "required": true
       }
     }
   }

@@ -81,6 +81,7 @@
             status: 'loading',
             formSubmitted: null,
             editorStatus: null,
+            savedItem: {},
             quillOptions: {
                 modules: {
                 }
@@ -108,6 +109,7 @@
                 return status;
             },
             changed(input){
+                this.appStatus = 'editing';
                 if(input == true){
                     this.formSubmitted = true;
                 }
@@ -140,41 +142,37 @@
                     console.log(this.info);
                 }
             },
+            updateSavedItem(data){
+                this.savedItem = data;
+                this.status = 'success';
+            },
             save(){
-                var title = '';
-                var slug = '';
-                var status = '';
+                this.status = 'loading';
+                console.log('Saving...');
                 var payload = {};
 
-                    payload[this.fieldName] = this.fieldInput;
-                    if (this.resourceEditUrl != '') {
-                        url = this.resourceEditUrl + '?product_id=' + this.record.data.id + '&plan_id=' + this.resourceItem.id + '&' + this.fieldName.toLowerCase() + '=' + this.fieldInput + '&save=true' @if(isset($options['URL_PARAMETERS'])) + '&{!! $options['URL_PARAMETERS'] !!}' @endif ;
+                payload = this.newItemInput;
+                console.log(payload);
+                this.payload = payload;
+                url = '/api/resources/' + this.type;
+                payload = {data: payload, save: true};
+                console.log('Payload:');
+                console.log(payload);
+                axiosConfig = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-cache',
+                        "Access-Control-Allow-Origin": "*"
                     }
-                    else {
-                        url = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif ;
-                    }
-                    payload = {'data':payload, 'save': true};
-                    console.log('Payload:');
-                    console.log(payload);
-                    axios
-                        .post(url, payload)
-                        .then(response => (this.info = response.data)
-                );
-
-                    if (this.info.status == 'success') {
-                        $('#modal-new-item').modal('toggle');
-                    }
-                    var config = {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Cache-Control': 'no-cache'
-                        }
-                    };
-                    var url2 = '/api/resources/' + this.type;
-                    axios
-                        .get(url2, config)
-                        .then(response => (this.record = response.data));
-
+                };
+                axios({
+                    method: 'post',
+                    url: url,
+                    headers: axiosConfig,
+                    data: payload
+                }).then(response => (this.updateSavedItem(response.data)));
+                console.log('Server recieved:');
+                console.log(this.savedItem);
             },
             updateStatus(status){
                 this.editorStatus = status;
