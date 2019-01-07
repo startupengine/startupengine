@@ -11,6 +11,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a class="btn btn-outline-primary" v-bind:href="'/admin/content/' + savedItem.data.id">Continue Editing</a>
                 </div>
             </div>
             <div v-if="status == 'loading'">

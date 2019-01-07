@@ -172,17 +172,17 @@
 @section('content')
     <div class="row" v-if="info != null">
     <?php $header = '<div class="btn-group">
-                            <span class="btn btn-light border text-dark hiddenOnMobile" style="opacity:0.5;" v-bind:class="{ active: filters.type == \'\'}" v-on:click="reset({\'filters\':true})">
-                                 <span class="hiddenOnMobile">Showing</span>
-                                 <span class=""><i class="material-icons mx-0 mb-1">visibility</i></span>
+
+                            <span class="btn btn-light btn-sm border px-2" v-bind:class="{ active: filters.status==\'status=DRAFT\'}"  v-on:click="updateFilters({\'status\':\'status=DRAFT\'})">
+                                <span>Drafts</span>
                             </span>
-                            <span class="btn btn-light border" v-bind:class="{ active: filters.status==\'status=PENDING\'}"  v-on:click="updateFilters({\'status\':\'status=PENDING\'})">
+                            <span class="btn btn-light btn-sm border px-2" v-bind:class="{ active: filters.status==\'status=PENDING\'}"  v-on:click="updateFilters({\'status\':\'status=PENDING\'})">
                                 <span>Pending</span>
                             </span>
-                            <span class="btn btn-light border" v-bind:class="{ active: filters.status==\'status=PUBLISHED\'}"   v-on:click="updateFilters({\'status\':\'status=PUBLISHED\'})">
+                            <span class="btn btn-light btn-sm border px-2" v-bind:class="{ active: filters.status==\'status=PUBLISHED\'}"   v-on:click="updateFilters({\'status\':\'status=PUBLISHED\'})">
                                 <span>Published</span>
                             </span>
-                            <span class="btn btn-light border"  v-bind:class="{ active: filters.status==\'status=UNPUBLISHED\'}" v-on:click="updateFilters({\'status\':\'status=UNPUBLISHED\'})">
+                            <span class="btn btn-light btn-sm border px-2"  v-bind:class="{ active: filters.status==\'status=UNPUBLISHED\'}" v-on:click="updateFilters({\'status\':\'status=UNPUBLISHED\'})">
                                 <span>Unpublished</span>
                             </span>
                         </div>'; ?>
