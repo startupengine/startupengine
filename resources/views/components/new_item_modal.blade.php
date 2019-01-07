@@ -9,6 +9,9 @@
                         <i class="fa fa-fw fa-check-circle text-success mr-2"></i>Your item was saved.
                     </p>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
             <div v-if="status == 'loading'">
                 <div class="modal-body" align="center">

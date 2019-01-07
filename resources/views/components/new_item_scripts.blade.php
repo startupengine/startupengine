@@ -74,6 +74,7 @@
             fieldDisplayName: null,
             resourceItem: null,
             resourceEditUrl: '',
+            callback: null,
             validationResults: {},
             displayAddItemForm: null,
             newItemSchema: null,
@@ -145,6 +146,7 @@
             updateSavedItem(data){
                 this.savedItem = data;
                 this.status = 'success';
+                this.callback();
             },
             save(){
                 this.status = 'loading';
@@ -187,6 +189,9 @@
                 }
             },
             newItem(options){
+                console.log('Options:');
+                console.log(options);
+                this.callback = options.callback;
                 this.type = options.type;
                 var config = {
                     headers: {
