@@ -189,6 +189,9 @@
                 }
             },
             newItem(options){
+                this.savedItem = {};
+                this.validationResults = {};
+                this.status = 'loaded';
                 console.log('Options:');
                 console.log(options);
                 this.callback = options.callback;
