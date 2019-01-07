@@ -128,8 +128,19 @@ class ResourceController extends Controller
             $errors = [];
             $item = $model;
 
+            $requiredFields = [];
+            foreach($schema->fields as $key => $schemaField){
+                if(isset($schemaField->validations->required)){
+                    $requiredFields[$key] = $model->$key;
+                }
+            }
+            //dd($requiredFields);
+            $jsonInput = array_merge($requiredFields, $jsonInput);
+            //dd($jsonInput);
+
             //if JSON has input data...
             if (isset($jsonInput)) {
+
 
                 //foreach field
                 foreach ($jsonInput as $field => $value) {
@@ -156,6 +167,8 @@ class ResourceController extends Controller
                             return $response;
                         }
                     }
+
+
 
 
 
