@@ -105,7 +105,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function json()
     {
-        if (isset($this->json)) {
+        if ($this->json != null) {
             $json = json_decode($this->json);
         } else {
             $json = null;
