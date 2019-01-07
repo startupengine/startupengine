@@ -659,11 +659,16 @@ function renderResourceTableScriptsDynamically($options = null)
     if (!isset($options['GLOBAL_FILTER'])) {
         $options['GLOBAL_FILTER'] = '';
     }
+
     if (!isset($options['LIMIT'])) {
         $options['LIMIT'] = 5;
     }
     if (!isset($options['PER_PAGE'])) {
         $options['PER_PAGE'] = 10;
+    }
+
+    if($options['PER_PAGE'] > $options['LIMIT']){
+        $options['PER_PAGE'] = $options['LIMIT'];
     }
 
     if (!isset($options['DISPLAY_FORMAT'])) {
