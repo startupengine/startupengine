@@ -90,6 +90,14 @@
         },
 
         methods: {
+            redirectPath(){
+                if(this.type == 'product'){
+                    return '/admin/products/';
+                }
+                if(this.type == 'post'){
+                    return '/admin/content/';
+                }
+            },
             onEditorReady(){},
             onEditorFocus(){},
             ready(){},

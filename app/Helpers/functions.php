@@ -1173,3 +1173,8 @@ function renderNotificationsApp()
     $contents = (string)$view;
     return $contents;
 }
+
+function hasAttribute($attr)
+{
+    return array_key_exists($attr, $this->attributes);
+}

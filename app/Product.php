@@ -37,7 +37,12 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function json()
     {
-        $json = json_decode($this->json);
+        if($this->json != null) {
+            $json = json_decode($this->json);
+        }
+        else {
+            $json = null;
+        }
         return $json;
 
     }
@@ -57,11 +62,22 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
     }
 
     public function details(){
-        try {
-            \Stripe\Stripe::setApiKey(stripeKey('secret'));
-            $object = \Stripe\Product::retrieve($this->stripe_id);
+        \Stripe\Stripe::setApiKey(stripeKey('secret'));
+        if($this->stripe_id == null) {
+
+            if($this->name == null) {
+                $this->name = 'Product '.rand(11);
+                $this->save();
+            }
+            $object = \Stripe\Product::create(['type' => 'service', 'name' => $this->name]);
+            $this->stripe_id = $object->id;
+            $this->save();
         }
-        catch (\Exception $e) {
+        else {
+            try {
+                $object = \Stripe\Product::retrieve($this->stripe_id);
+            } catch (\Exception $e) {
+            }
         }
         if (!isset($object)) { $object = null; }
             return $object;
@@ -149,7 +165,7 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
                             $slug = $section->slug;
                             $string = "sections->".$slug."->fields->".$field;
                             //dd($this->content()->sections->$slug->fields->$field);
-                            if($this->content() != null && $this->content()->sections != null && $this->content()->sections->$slug != null && $this->content()->sections->$slug->fields != null && isset($this->content()->sections->$slug->fields->$field)) {
+                            if($this->content() != null && $this->content()->sections != null && $this->content()->sections->$slug != null && isset($this->content()->sections->$slug->fields) && isset($this->content()->sections->$slug->fields->$field)) {
                                 return $this->content()->sections->$slug->fields->$field;
                             }
                             else { return null; }

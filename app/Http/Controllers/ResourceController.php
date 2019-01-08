@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AnalyticEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ResourceController extends Controller
 {
@@ -244,6 +245,7 @@ class ResourceController extends Controller
 
                 if ($request->input('save') == true) {
 
+                    $item->json = null;
 
 
                     foreach ($newArray as $field => $data) {
@@ -262,6 +264,7 @@ class ResourceController extends Controller
                                 $item->forceFill([
                                     $fieldString => $data[1]
                                 ]);
+
                                 $item->save();
                             }
 
@@ -275,15 +278,19 @@ class ResourceController extends Controller
                         }
 
                         if($item->postSave() == true){
-                            $item->postSave(true);
+                            //$item->postSave(true);
                         }
-
-
-
 
                     }
                     unset($item->schema);
-                    $item->author_id = \Auth::user()->id;
+
+                    if(Schema::hasColumn($item->getTable(), 'author_id')){
+                        $item->author_id = \Auth::user()->id;
+                    }
+                    if(Schema::hasColumn($item->getTable(), 'user_id')) {
+                        $item->user_id = \Auth::user()->id;
+                    }
+
 
                     if($item->slug == null){
                         $item->slug = createSlug($item->title);
@@ -298,6 +305,7 @@ class ResourceController extends Controller
                 $response["status"] = "success";
 
             }
+
             $response['data'] = $item;
             $response["meta"]["input"] = $request->input();
             return response($response, 200);
