@@ -56,7 +56,7 @@
       "description": "The URL slug of this product.",
       "type": "text",
       "validations": {
-        "required": true
+
       }
     },
     "status": {

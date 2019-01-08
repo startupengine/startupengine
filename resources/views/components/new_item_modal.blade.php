@@ -28,7 +28,7 @@
 
 
                 <div class="modal-body">
-                    <div v-for="item, index in info.data.schema.fields" class="pt-0 mb-2" v-if="item.validations.required">
+                    <div v-for="item, index in info.data.schema.fields" class="pt-0 mb-2" v-if="item != null && item.validations != null && item.validations.required">
                         <span class="badge badge-light text-dark mb-2" v-if="item['display name'] != null">
                             @{{ item['display name'] }}
                         </span>
@@ -51,7 +51,7 @@
                         <span class="card-text badge-section text-dark my-2 mb-4 text-capitalize" v-else>
                             @{{ index }}
                         </span>
-                        <div v-for="field, fieldIndex in item.fields" class="pt-2 mt-2" v-if="field.validations.required">
+                        <div v-for="field, fieldIndex in item.fields" class="pt-2 mt-2" v-if="field.validations != null && field.validations.required == true">
                             <span class="badge badge-light text-dark mb-2" v-if="field['display name'] != null">
                                 @{{ field['display name'] }}
                             </span>

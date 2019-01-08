@@ -134,9 +134,20 @@ class ResourceController extends Controller
                     $requiredFields[$key] = $model->$key;
                 }
             }
-            //dd($requiredFields);
             $jsonInput = array_merge($requiredFields, $jsonInput);
-            //dd($jsonInput);
+            if(isset($schema->sections)){
+                $requiredJsonFields = [];
+                foreach($schema->sections as $key => $sectionContents){
+
+                    foreach($sectionContents->fields as $virtualField => $fieldContents) {
+                        if (isset($fieldContents->validations->required)) {
+                            $requiredJsonFields['json.sections.'.$key.'.'.$virtualField] = null;
+                        }
+                    }
+                }
+
+                $jsonInput = array_merge($jsonInput,$requiredJsonFields);
+            }
 
             //if JSON has input data...
             if (isset($jsonInput)) {

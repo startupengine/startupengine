@@ -160,6 +160,7 @@
 @section('top-menu')
     <div class="col-md-6 col-sm-6 pull-right pageNav" align="right">
         {!! renderFilterButton() !!}
+        <div class="btn btn-primary mb-1" style="padding-top:10px;" onclick="newItemApp.newItem({'callback': productsApp.updateData, 'type':'product'});$('#newItemModal').modal('show');"><i class="fa fa-fw fa-plus mr-2"></i>New Item</div>
     </div>
 @endsection
 
@@ -234,5 +235,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/product']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/product', 'VUE_APP_NAME' => 'productsApp']) !!}
 @endsection

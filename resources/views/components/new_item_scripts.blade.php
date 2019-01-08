@@ -118,7 +118,7 @@
                     var payload = {};
 
                     payload = this.newItemInput;
-                    console.log(payload);
+                    //console.log(payload);
                     this.payload = payload;
                     url = '/api/resources/' + this.type;
                     payload = {data: payload, validate: true};
@@ -139,8 +139,8 @@
                     }).then(response => (this.validationResults = response.data)
                 )
                     ;
-                    console.log('Server recieved:');
-                    console.log(this.info);
+                    //console.log('Server recieved:');
+                    //console.log(this.info);
                 }
             },
             updateSavedItem(data){
@@ -150,16 +150,16 @@
             },
             save(){
                 this.status = 'loading';
-                console.log('Saving...');
+                //console.log('Saving...');
                 var payload = {};
 
                 payload = this.newItemInput;
-                console.log(payload);
+                //console.log(payload);
                 this.payload = payload;
                 url = '/api/resources/' + this.type;
                 payload = {data: payload, save: true};
-                console.log('Payload:');
-                console.log(payload);
+                //console.log('Payload:');
+                //console.log(payload);
                 axiosConfig = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -173,8 +173,8 @@
                     headers: axiosConfig,
                     data: payload
                 }).then(response => (this.updateSavedItem(response.data)));
-                console.log('Server recieved:');
-                console.log(this.savedItem);
+                //console.log('Server recieved:');
+                //console.log(this.savedItem);
             },
             updateStatus(status){
                 this.editorStatus = status;
@@ -185,15 +185,39 @@
             updateNewItem(input){
                 this.info = input;
                 for (var field in input.data.schema.fields) {
-                    this.newItemInput[field] = '';
+                    this.newItemInput[field] = null;
                 }
+
+                var obj = input.data.schema.sections;
+
+                console.log('Sections Array:');
+
+                var sectionsArray = Object.keys(obj).map(function(key) {
+                    return [key, obj[key]];
+                });
+
+                function myFunction(item, index) {
+                    if(typeof item != 'undefined') {
+                        newItemApp.setRequiredFields(item);
+                    }
+                }
+
+                sectionsArray.forEach((myFunction));
+
+
+
+
+                //console.log(virtualField);
+                        //this.newItemInput['json.sections.' + section + '.fields' ] = null;
+
+
             },
             newItem(options){
                 this.savedItem = {};
                 this.validationResults = {};
                 this.status = 'loaded';
-                console.log('Options:');
-                console.log(options);
+                //console.log('Options:');
+                //console.log(options);
                 this.callback = options.callback;
                 this.type = options.type;
                 var config = {
@@ -208,21 +232,52 @@
                     .post(url, config)
                     .then(response => (this.updateNewItem(response.data)));
             },
+            setRequiredFields(section){
+                console.log('HERE');
+                console.log(section);
+                var label = section[0];
+                var section = section[1];
+
+
+                if(section.hasOwnProperty('fields')) {
+                    var sectionsFieldsArray = Object.keys(section.fields).map(function(key) {
+                        return [key, section[key]];
+                    });
+                }
+
+                sectionsFieldsArray.forEach((setFields));
+                    function setFields(field){
+                        //console.log('-- section:');
+                        //console.log(section);
+                        //console.log('-- field:');
+                        ///console.log(field);
+                        //console.log('Field Schema');
+                        //console.log(section['fields']);
+                        var fieldSchema = section['fields'][field[0]];
+                        //console.log(fieldSchema);
+
+                        if(fieldSchema.hasOwnProperty('validations') && fieldSchema.validations.hasOwnProperty('required') && fieldSchema.validations.required == true){
+                            newItemApp.newItemInput['json.sections.' + label + '.fields.' + field[0]] = null;
+                        }
+
+                    }
+
+                //console.log(result);
+            },
             sectionHasValidations(section){
-                console.log(section.fields);
+                //console.log(section.fields);
                 var result = Object.values(section.fields).some(
                     function(field) {
-                        console.log(field);
+                        //console.log(field);
                         return (field.hasOwnProperty('validations') && field.validations.hasOwnProperty('required') && field.validations.required);
                     }
                 );
-                console.log(result);
+                //console.log(result);
                 return result;
             }
         },
         mounted () {
             this.status = 'loaded';
-            console.log('1234');
         }
 
     });
