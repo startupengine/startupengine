@@ -94,7 +94,7 @@
                 if(this.type == 'product'){
                     return '/admin/products/';
                 }
-                if(this.type == 'post'){
+                if(this.type == 'content'){
                     return '/admin/content/';
                 }
             },
