@@ -91,7 +91,7 @@
           "type": "textarea",
           "description": "Describe this product. This appears in search engine listings.",
           "validations": {
-            "required": true
+
           }
         },
         "image": {
@@ -105,7 +105,8 @@
           "display name": "Base Price",
           "type": "number",
           "validations": {
-            "numeric": true
+            "numeric": true,
+            "required": true
           },
           "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).fulfillment != 'External'"
         },
@@ -149,7 +150,7 @@
           "type": "textarea",
           "description": "A brief list of features. This appears on the pricing page.",
           "validations": {
-            "required": true
+
           },
           "conditions": "(((((data || {}).content || {}).sections || {}).about || {}).fields|| {}).type == 'Software Subscription'"
         },

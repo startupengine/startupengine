@@ -762,12 +762,6 @@ function renderResourceTableHtmlDynamically($options = null)
     return $contents;
 }
 
-function renderFormInputs($options = null)
-{
-    $view = View::make('components.inputs', ['options' => $options]);
-    $contents = (string)$view;
-    return $contents;
-}
 
 function renderNewItemModal($options = null)
 {
@@ -1170,6 +1164,47 @@ function jsonErrorMessage($input = null){
 function renderNotificationsApp()
 {
     $view = View::make('components.notifications_app');
+    $contents = (string)$view;
+    return $contents;
+}
+
+function renderFormInputs($options = null)
+{
+    if(!isset($options)) {
+        $options = [];
+    }
+    if(!isset($options['fieldName'])) {
+        $options['fieldName'] = 'item';
+    }
+    if(!isset($options['storageObject'])) {
+        $options['storageObject'] = 'newItemInput';
+    }
+    if(isset($options['jsonFields']) && $options['jsonFields'] == true) {
+        if(!isset($options['storageObjectFieldKey'])) {
+            $options['storageObjectFieldKey'] = "'json.sections.'+ index + '.fields.' + fieldIndex";
+        }
+        if(!isset($options['v-model'])) {
+            $options['v-model'] = "newItemInput['json.sections.'+ index + '.fields.' + fieldIndex]";
+        }
+        if(!isset($options['fieldName'])) {
+            $options['fieldName'] = 'field';
+        }
+    }
+    else {
+        if(!isset($options['storageObjectFieldKey'])) {
+            $options['storageObjectFieldKey'] = 'index';
+        }
+        if(!isset($options['v-model'])) {
+            $options['v-model'] = 'newItemInput[index]';
+        }
+    }
+    if(!isset($options['fieldType'])) {
+        $options['fieldType'] = 'item.type';
+    }
+    if(!isset($options['fieldDescription'])) {
+        $options['fieldDescription'] = 'item.description';
+    }
+    $view = View::make('components.inputs', ['options' => $options]);
     $contents = (string)$view;
     return $contents;
 }

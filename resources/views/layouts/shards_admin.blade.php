@@ -49,6 +49,24 @@
 <!-- STYLES -->
     @yield('css')
 
+    <script src="/js/moment-2.22.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-ui-1.12.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="/js/popper.js"></script>
+    <script src="/admin-panel/scripts/shards.min.js"></script>
+    <script src="/js/chart-min.js"></script>
+    <script src="/js/vue-chartjs-min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.sharre.min.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="https://unpkg.com/vue-snotify@3.2.1/vue-snotify.js"></script>
+    <script src="/js/axios-min.js"></script>
+    <script src="/js/polyfill-min.js"></script>
+    <script src="/js/bootstrap-vue.js"></script>
+
 </head>
 <div id="app">
     <div class="color-switcher animated" style="display:none;">
@@ -381,23 +399,7 @@
         //<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
         //<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     */?>
-    <script src="/js/moment-2.22.js"></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/jquery-ui-1.12.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="/js/popper.js"></script>
-    <script src="/admin-panel/scripts/shards.min.js"></script>
-    <script src="/js/chart-min.js"></script>
-    <script src="/js/vue-chartjs-min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.sharre.min.js"></script>
-    <script src="/js/vue.js"></script>
-    <script src="https://unpkg.com/vue-snotify@3.2.1/vue-snotify.js"></script>
-    <script src="/js/axios-min.js"></script>
-    <script src="/js/polyfill-min.js"></script>
-    <script src="/js/bootstrap-vue.js"></script>
+
 
     {!! renderPassportApp() !!}
     {!! renderNotificationsApp() !!}
@@ -459,10 +461,10 @@
     @yield('scripts')
 
     {!! renderConfirmActionScripts() !!}
-
     {!! renderNewItemModal() !!}
-
     {!! renderNewItemScripts() !!}
+
+
 
 </div>
 </body>
