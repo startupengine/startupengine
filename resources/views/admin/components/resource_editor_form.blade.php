@@ -235,7 +235,7 @@
 
                                      <p class="fieldData card-text mb-2 mt-2 p-2"
                                         style="background:#fafafa;color:#555;text-align:center;text-transform:capitalize;">
-                                        {{ $item->$column }}
+                                         {{ $item->$column }}&nbsp;
                                     </p>
                                 </span>
                                 @endforeach
