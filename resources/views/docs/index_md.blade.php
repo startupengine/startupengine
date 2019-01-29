@@ -175,7 +175,7 @@
         @endif
         </div>
 
-        <div class="col-md-12 text-right w-100 pr-0 pb-3">
+        <div class="col-md-12 text-right w-100 pr-0 pb-4">
             Built with <span class="ml-2">&nbsp;💖&nbsp;<span class="fa fa-fw fa-sm fa-plus dimmed mx-2"></span>&nbsp;⚡</span>
         </div>
 
