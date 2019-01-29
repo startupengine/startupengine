@@ -166,7 +166,9 @@
                                     <div class="card card-small" style="width:100%;">
                                         <div class="card-header">
                                             <strong class="card-title" id="{{ $action->elementId }}">
-                                                <?php /* <span class="name text-primary mr-2">{{ $action->name }}</span> */ ?>
+                                                <?php
+/* <span class="name text-primary mr-2">{{ $action->name }}</span> */
+?>
                                                 <span class="badge badge-dark method {{ $action->methodLower }}">{{ $action->method }}</span>
                                                 <code class="uri">{!! urldecode($action->uriTemplate) !!}</code>
                                             </strong>

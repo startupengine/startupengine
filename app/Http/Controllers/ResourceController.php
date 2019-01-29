@@ -471,7 +471,7 @@ class ResourceController extends Controller
                         }
 
                         if($item->postSave() == true){
-                            //$item->postSave(true);
+                            $item->postSave(true);
                         }
 
                     }

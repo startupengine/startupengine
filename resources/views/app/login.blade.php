@@ -5,7 +5,9 @@
 @endsection
 
 @section('meta')
-    <meta name="description" content="<?php echo setting('admin.description') ?>">
+    <meta name="description" content="<?php echo setting(
+        'admin.description'
+    ); ?>">
 @endsection
 
 @section('styles')
@@ -156,10 +158,11 @@
                                 <input type="password" placeholder="Password..." class="form-control" required
                                        name="password">
                             </div>
-                                <?php if(Request::path() == "app/login") {  ?>
+                                <?php if (Request::path() == "app/login") { ?>
                                 <input type="hidden" name="redirect" value="/app"/>
                                 <?php } ?>
-                            <?php /*
+                            <?php
+/*
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <div class="form-check" style="margin-top:15px;">
@@ -172,7 +175,8 @@
                                     </div>
                                 </div>
                             </div>
-                            */?>
+                            */
+?>
                         </div>
                     </div>
                     <div class="footer text-center">

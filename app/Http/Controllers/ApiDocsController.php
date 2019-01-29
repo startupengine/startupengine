@@ -2,22 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Http\Request;
 
 class ApiDocsController extends Controller
 {
     /**
-     * Show the API Blueprint documentation.
-     *
-     * @param BlueprintDocs $blueprintDocs
+     * Show the default documentation file.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(\M165437\BlueprintDocs\BlueprintDocs $blueprintDocs)
+    public function index()
     {
-        $api = $blueprintDocs
-            ->parse(config('blueprintdocs.blueprint_file'))
-            ->getApi();
-        return view('docs.index', compact('api'));
+        $input = file_get_contents(config('docs.docs_index'));
+
+        $file = config('docs.docs_index_file');
+
+        $folder = config('docs.docs_root_folder');
+
+        $output = Markdown::convertToHtml($input);
+
+        return view('docs.index_md', compact('output', 'folder', 'file'));
+    }
+
+    /**
+     * Show the requested documentation file.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view($file)
+    {
+        $input = file_get_contents(docsPath() . $file);
+
+        $output = Markdown::convertToHtml($input);
+
+        return view('docs.index_md', compact('output'));
+    }
+
+    /**
+     * Show the requested nested documentation file.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewNested($folder, $file)
+    {
+        $input = file_get_contents(docsPath() . $folder . '/' . $file);
+
+        $output = Markdown::convertToHtml($input);
+
+        return view('docs.index_md', compact('output', 'folder', 'file'));
     }
 }

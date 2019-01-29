@@ -6,24 +6,24 @@ A beautiful & open-source platform for launching startups.<br>
 
 <img src="storage/docs/screenshots/admin.jpg" alt="Startup Engine Admin Panel" style="border:1px solid #eee;border-radius:5px;"><br>
 
-# Key Features 
+# Key Features
 
-* [x] Publish & sell software/content subscriptions.
-* [x] Completely plug-and-play. Coding is optional.
-* [x] Supports any workflow, architecture, or framework.
-* [x] JSON API allows you integrate with external sites/apps.
-* [x] Completely open-source.
-* [x] 1-Click Install.
+- [x] Publish & sell software/content subscriptions.
+- [x] Completely plug-and-play. Coding is optional.
+- [x] Supports any workflow, architecture, or framework.
+- [x] JSON API allows you integrate with external sites/apps.
+- [x] Completely open-source.
+- [x] 1-Click Install.
 
 ## Install Locally
 
 ### Standard Installation
 
 See Laravel's [official installation guide](https://laravel.com/docs/5.6/installation) to get started with running Laravel apps locally.
- 
+
 Once you're familiar with Laravel, set up a a [PostgreSQL](https://www.postgresql.org/) database and run:
 
-`composer install`  
+`composer install`
 
 To view your installation in a browser, run:
 
@@ -41,9 +41,9 @@ Startup Engine ships with a complete Docker-powered development environment. To 
 
 Alternatively, you may use a PHP artisan command from the root directory to achieve the same effect:
 
-`php artisan launch:Container` 
+`php artisan launch:Container`
 
-The app will be available locally at [http://startupengine.test](http://startupengine.test). 
+The app will be available locally at [http://startupengine.test](http://startupengine.test).
 
 You may need to [edit your hosts file](https://www.imore.com/how-edit-your-macs-hosts-file-and-why-you-would-want) before the url will work.
 
@@ -57,27 +57,26 @@ Please reference Heroku's [official guide](https://devcenter.heroku.com/articles
 
 Once you've installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), run the following commands on your instance:
 
-First, generate an `APP_KEY` by locally running: 
+First, generate an `APP_KEY` by locally running:
 
-`php artisan key:generate`. 
+`php artisan key:generate`.
 
 Then copy the newly generated key and run:
- 
-`heroku config:set APP_KEY=APPKEYGOESHERE` 
+
+`heroku config:set APP_KEY=APPKEYGOESHERE`
 
 The default user email is `admin@example.com` and the default password is `password`.
 
 Change these after logging in.
 
-
 # Support
 
-Found a bug? [Submit an issue here on Github.](https://github.com/luckyrabbitllc/startupengine/issues)
+Found a bug? [Submit an issue.](https://github.com/startupengine/startupengine/issues)
 
-# Security 
+# Security
 
 If you discover a security vulnerability within Startup Engine, please send an e-mail to startupengine.io@domainsbyproxy.com
- 
+
 All security vulnerabilities will be promptly addressed.
 
 # License

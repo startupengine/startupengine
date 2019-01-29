@@ -42,7 +42,7 @@ header li.menuButton a {
   height: 50px;
   width: 50px;
   -webkit-box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
-          box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 50px rgba(0, 0, 0, 0.3);
   margin-top: -5px;
 }
 
@@ -53,7 +53,7 @@ header .hiddenOnDesktop {
 
 header nav.hiddenOnMobile {
   -webkit-box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.1);
 }
 
 .button {
@@ -94,9 +94,7 @@ i.close.icon {
   right: -0.5rem !important;
 }
 
-
-  header ul {
-    -webkit-flex-flow: inherit !important;
-    flex-flow: inherit !important;
-  }
-
+header ul {
+  -webkit-flex-flow: inherit !important;
+  flex-flow: inherit !important;
+}

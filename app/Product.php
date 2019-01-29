@@ -66,7 +66,7 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
         if($this->stripe_id == null) {
 
             if($this->name == null) {
-                $this->name = 'Product '.rand(11);
+                $this->name = 'Product '.$this->id;
                 $this->save();
             }
             $object = \Stripe\Product::create(['type' => 'service', 'name' => $this->name]);

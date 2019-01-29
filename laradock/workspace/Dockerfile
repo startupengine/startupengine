@@ -919,6 +919,16 @@ RUN php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 
 #CMD (sleep 2 && opn http://startupengine.test)
 
+RUN mkdir  /var/www/
+RUN mkdir  /var/www/vendor/
+RUN mkdir  /var/www/vendor/bin
+RUN mkdir  /var/www/vendor/bin/drafter
+RUN mkdir /var/www/vendor/apiaryio/
+RUN mkdir /var/www/vendor/apiaryio/drafter
+RUN mkdir /var/www/vendor/apiaryio/drafter/bin
+RUN mkdir /var/www/vendor/apiaryio/drafter/bin/drafter
+RUN ln -sfn /var/www/vendor/apiaryio/drafter/bin/drafter /var/www/vendor/bin/drafter
+
 ###########################################################################
 # End StartupEngine
 ###########################################################################
