@@ -639,10 +639,10 @@
 
                         <nav class="nav">
                             <div class="nav-item dropdown  m-2 mr-4" style="padding-top:1px; border-radius:25px; padding-left:10px;padding-right:10px; border:1px solid #007bff;">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="popover" and data-content="...">
                                     <span class="mr-2">{{ ucwords($folder) }}</span></a>
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     @foreach(docsFolders() as $folder)
                                         <a class="dropdown-item" href="/docs/{{ $folder }}">{{ ucwords($folder) }}</a>
                                     @endforeach
@@ -726,7 +726,7 @@
             mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/menu')
-                    .then(response = > (this.info = response)
+                    .then(response => (this.info = response)
             )
                 ;
                 //.then(console.log(this));
@@ -743,7 +743,7 @@
             mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/user')
-                    .then(response = > (this.info = response)
+                    .then(response => (this.info = response)
             )
                 ;
             }
@@ -759,7 +759,7 @@
             mounted() {
                 axios
                     .get('http://127.0.0.1:8000/api/demo/notifications')
-                    .then(response = > (this.info = response.data)
+                    .then(response => (this.info = response.data)
             )
                 ;
             }
