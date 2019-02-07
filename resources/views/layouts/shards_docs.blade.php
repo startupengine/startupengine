@@ -25,10 +25,12 @@
           href="/admin-panel/styles/shards-dashboards.1.0.0.min.css">
 
     <link rel="stylesheet" href="/admin-panel/styles/extras.1.0.0.min.css">
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script async defer src="/js/app.js"></script>
+<?php
+/* <script async defer src="https://buttons.github.io/buttons.js"></script> */
+?>
 
-    <!-- FAVICONS -->
+
+<!-- FAVICONS -->
     <?php if (setting('site.favicon') !== null) { ?>
     <link rel="icon" sizes="180x180" href="{{ setting('site.favicon') }}">
     <?php } ?>
@@ -432,7 +434,7 @@
 
         .documentation-card h1, .documentation-card h2, .documentation-card h3, .documentation-card h4, .documentation-card h5, .documentation-card h6 {
             color: #2568ff;
-            font-weight:500;
+            font-weight: 500;
         }
 
         .documentation-card h1 {
@@ -484,31 +486,39 @@
             font-size: 150% !important;
             color: #3d5170;
             background: none !important;
-            padding:0px !important;
+            padding: 0px !important;
             margin-top: 10px;
-            margin-bottom:25px;
-            padding-bottom:15px !important;
+            margin-bottom: 25px;
+            padding-bottom: 15px !important;
             border-bottom: 1px solid #eee;
         }
 
         .main-sidebar .nav .nav-item .nav-link.active,
-        .main-sidebar .nav .nav-item.active{
+        .main-sidebar .nav .nav-item.active {
             background: linear-gradient(89deg, rgba(232, 236, 255, 0.53), #002bc700 120px) !important;
         }
 
         hr {
-            margin-bottom:30px;
+            margin-bottom: 30px;
         }
 
         body .page-title h1:first-child {
-            margin-bottom:0px !important;
+            margin-bottom: 0px !important;
         }
 
         .page-title > p {
-            font-weight:300 !important;
+            font-weight: 300 !important;
         }
 
+        @media(max-width:991px) {
+            .truncate {
+                max-width: 150px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 
+        }
     </style>
 
     <!-- STYLES -->
@@ -592,19 +602,25 @@
                 </div>
 
 
-                <div class="nav-wrapper">
+                <div class="nav-wrapper d-sm-none d-lg-inline-flex">
                     <ul class="nav flex-column" id="sidebar">
 
                         @foreach(docFiles($folder) as $markdownFile)
                             @if($markdownFile != 'description.md')
-                            <li class="nav-item">
-                                <a class="nav-link @if($file == $markdownFile) active @endif " href="/docs/{{ $folder }}/{{ $markdownFile }}">
-                                    <span>{{ docsTitle($folder, $markdownFile) }}</span>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @if($file == $markdownFile) active @endif "
+                                       href="/docs/{{ $folder }}/<?php if (
+                                           isset($subfolder) &&
+                                           $subfolder != null
+                                       ) {
+                                           echo $subfolder . "/";
+                                       } ?>{{ $markdownFile }}">
+                                        <span>{{ docsTitle($folder, $markdownFile) }}</span>
+                                    </a>
+                                </li>
                             @endif
                         @endforeach
-                            
+
                     </ul>
                     <div class="col-md-12 py-2 d-sm-none d-block" align="left">
                         <a class="btn btn-neutral btn-pill mr-2 pl-1" href="{{ URL::to('/') }}">
@@ -626,8 +642,9 @@
                                         <img id="main-logo" class="d-inline-block align-top mr-1"
                                              style="max-width: 30px;margin-top:-1px;margin-left:10px;"
                                              src="/images/startup-engine-logo.png" alt="Startup Engine">
-                                        <span class="hiddenOnDesktop ml-1"
-                                              style="vertical-align:middle;">Startup Engine <span class="ml-2" style="opacity:0.5;">Docs</span></span>
+                                        <span class=" d-none  ml-1"
+                                              style="vertical-align:middle;">Startup Engine <span
+                                                    class="ml-2 hiddenOnMobile" style="opacity:0.5;">Docs</span></span>
                                     </div>
                                 </a>
                             </nav>
@@ -638,14 +655,26 @@
                         </div>
 
                         <nav class="nav">
-                            <div class="nav-item dropdown  m-2 mr-4" style="padding-top:1px; border-radius:25px; padding-left:10px;padding-right:10px; border:1px solid #007bff;">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="popover" and data-content="...">
-                                    <span class="mr-2">{{ ucwords($folder) }}</span></a>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    @foreach(docsFolders() as $folder)
-                                        <a class="dropdown-item" href="/docs/{{ $folder }}">{{ ucwords($folder) }}</a>
-                                    @endforeach
+                            <div class="nav-item dropdown m-2 mr-3 mr-lg-4"
+                                 style="padding-top:5px; border-radius:5px;  padding-left:10px;padding-right:0px;">
+                                <div class="btn-group ">
+                                    <a class="btn btn-outline-primary pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
+                                       data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                                            '@foreach(docsFolders() as $docFolder)
+                                                    <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $docFolder }}">{{ ucwords($docFolder) }}</a>
+                                            @endforeach'
+                                       data-html="true">
+                                        <span class="mr-1">{{ ucwords($folder) }}</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+
+                                    @if(count(docsFolders($folder)) > 0)
+                                        <a class="btn btn-outline-primary pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false" tyle="border-left:none;"
+                                       data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                                       '@foreach(docsFolders($folder) as $docFolder)
+                                               <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $folder }}/{{$docFolder}}">{{ ucwords($docFolder) }}</a>
+                                            @endforeach'
+                                       data-html="true">
+                                        <span class="mr-1">@if(isset($subfolder)) {{ ucwords($subfolder) }}  @elseif(count(docsFolders($folder)) > 0) {{ ucwords(docsFolders($folder)[0]) }} @endif</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                                    @endif
                                 </div>
                             </div>
                             <a href="#"
@@ -715,60 +744,14 @@
     <?php
 /* <script src="/admin-panel/scripts/extras.1.0.0.min.js"></script> */
 ?>
-    <script>
-        var sidebar = new Vue({
-            el: '#app #sidebar',
-            data() {
-                return {
-                    info: null
-                }
-            },
-            mounted() {
-                axios
-                    .get('http://127.0.0.1:8000/api/demo/menu')
-                    .then(response => (this.info = response)
-            )
-                ;
-                //.then(console.log(this));
-            }
-        })
 
-        var menu = new Vue({
-            el: '#app #accountMenu',
-            data() {
-                return {
-                    info: null
-                }
-            },
-            mounted() {
-                axios
-                    .get('http://127.0.0.1:8000/api/demo/user')
-                    .then(response => (this.info = response)
-            )
-                ;
-            }
-        })
-
-        var notificationsList = new Vue({
-            el: '#app #notificationsList',
-            data() {
-                return {
-                    info: null
-                }
-            },
-            mounted() {
-                axios
-                    .get('http://127.0.0.1:8000/api/demo/notifications')
-                    .then(response => (this.info = response.data)
-            )
-                ;
-            }
-        })
-
-    </script>
 
     @yield('scripts')
-
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
 </div>
 </body>
 </html>

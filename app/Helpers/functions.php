@@ -1381,17 +1381,38 @@ function docsTitle($folder, $file)
     return strip_tags($title);
 }
 
-function docsFolders()
+function docsFolders($root = null)
 {
-    $array = scandir(base_path('storage/docs/content/'));
+    $basepath = base_path('storage/docs/content/' . $root . '/');
+    $array = scandir($basepath);
     $results = [];
     foreach ($array as $path) {
-        if (strpos($path, '.') !== false) {
-        } else {
+        if (
+            $path !== '.' &&
+            $path !== '..' &&
+            strtolower($path) !== '.ds_store' &&
+            is_dir($basepath . $path)
+        ) {
             $results[] = $path;
         }
     }
     return $results;
+}
+
+function firstDoc($folder = null, $subfolder = null)
+{
+    $path = base_path('storage/docs/content/' . $folder);
+    if ($subfolder != null) {
+        $path = $path . "/" . $subfolder;
+    }
+    $array = scandir($path);
+    $results = [];
+    foreach ($array as $path) {
+        if (strpos($path, '.md') !== false && $path != 'description.md') {
+            $results[] = $path;
+        }
+    }
+    return $results[0];
 }
 
 function nextDoc($folder = null, $current = null)
@@ -1405,7 +1426,7 @@ function nextDoc($folder = null, $current = null)
     }
     $position = array_search($current, $results);
     $total = count($results);
-    if ($total > $position) {
+    if ($total > $position + 1) {
         $hasNext = true;
     } else {
         $hasNext = false;

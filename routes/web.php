@@ -43,10 +43,14 @@ Route::group(['middleware' => ['web']], function () {
 
     //Documentation
     Route::get('/docs', 'ApiDocsController@index')->name('browseDocs');
-    Route::get('/docs/{file}', 'ApiDocsController@index')->name('viewDocs');
+    Route::get('/docs/{file}', 'ApiDocsController@view')->name('viewDocs');
     Route::get('/docs/{folder}/{file}', 'ApiDocsController@viewNested')->name(
         'viewNestedDocs'
     );
+    Route::get(
+        '/docs/{folder}/{subfolder}/{file}',
+        'ApiDocsController@viewSubNested'
+    )->name('viewSubNestedDocs');
 
     //Content
     Route::get('/content/tags/{tag}', 'PostController@getItemsByTag')->name(

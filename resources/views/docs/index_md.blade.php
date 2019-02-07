@@ -157,7 +157,12 @@
 
                 <div class="btn btn-white btn-lg btn-neutral d-lg-inline-flex d-block mb-2">
                     Previous: &nbsp;
-                    <a href="/docs/{{ $folder }}/{!! $nextDoc['prev_file'] !!}">{!! $nextDoc['prev_preview'] !!}</a>
+                    <a href="/docs/{{ $folder }}/<?php if (
+                        isset($subfolder) &&
+                        $subfolder != null
+                    ) {
+                        echo $subfolder . "/";
+                    } ?>{!! $nextDoc['prev_file'] !!}">{!! $nextDoc['prev_preview'] !!}</a>
                 </div>
 
 
@@ -168,7 +173,12 @@
 
                     <div class="btn btn-white btn-lg btn-neutral  d-lg-inline-flex d-block float-lg-right" >
                         Next: &nbsp;
-                        <a href="/docs/{{ $folder }}/{!! $nextDoc['next_file'] !!}">{!! $nextDoc['next_preview'] !!}</a>
+                        <a href="/docs/{{ $folder }}/<?php if (
+                            isset($subfolder) &&
+                            $subfolder != null
+                        ) {
+                            echo $subfolder . "/";
+                        } ?>{!! $nextDoc['next_file'] !!}">{!! $nextDoc['next_preview'] !!}</a>
                     </div>
 
 
