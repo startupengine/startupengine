@@ -642,14 +642,15 @@
                                         <img id="main-logo" class="d-inline-block align-top mr-1"
                                              style="max-width: 30px;margin-top:-1px;margin-left:10px;"
                                              src="/images/startup-engine-logo.png" alt="Startup Engine">
-                                        <span class=" d-none  ml-1"
-                                              style="vertical-align:middle;">Startup Engine <span
-                                                    class="ml-2 hiddenOnMobile" style="opacity:0.5;">Docs</span></span>
+                                        <span class=" d-inline-block ml-1"
+                                              style="vertical-align:middle;"><span class="d-none">Startup Engine </span><span
+                                                    class="ml-2 " style="opacity:0.5;">Docs</span></span>
                                     </div>
                                 </a>
                             </nav>
                         </div>
                         <div class="p-2 hiddenOnMobile">
+
                             <div class="nav-link" style="margin-left:-15px;opacity:0.5;margin-top:2px;">Docs</div>
 
                         </div>
