@@ -659,22 +659,26 @@
                             <div class="nav-item dropdown m-2 mr-3 mr-lg-4"
                                  style="padding-top:5px; border-radius:5px;  padding-left:10px;padding-right:0px;">
                                 <div class="btn-group ">
-                                    <a class="btn btn-outline-primary pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
-                                       data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
-                                            '@foreach(docsFolders() as $docFolder)
-                                                    <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $docFolder }}">{{ ucwords($docFolder) }}</a>
-                                            @endforeach'
-                                       data-html="true">
-                                        <span class="mr-1">{{ ucwords($folder) }}</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                                    @if(count(docsFolders()) > 1)
+                                        <a class="btn btn-outline-primary pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
+                                           data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                                                '@foreach(docsFolders() as $docFolder)
+                                                        <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $docFolder }}">{{ ucwords($docFolder) }}</a>
+                                                @endforeach'
+                                           data-html="true">
+                                            <span class="mr-1">{{ ucwords($folder) }}</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
 
-                                    @if(count(docsFolders($folder)) > 0)
-                                        <a class="btn btn-outline-primary pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false" tyle="border-left:none;"
-                                       data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
-                                       '@foreach(docsFolders($folder) as $docFolder)
-                                               <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $folder }}/{{$docFolder}}">{{ ucwords($docFolder) }}</a>
-                                            @endforeach'
-                                       data-html="true">
-                                        <span class="mr-1">@if(isset($subfolder)) {{ ucwords($subfolder) }}  @elseif(count(docsFolders($folder)) > 0) {{ ucwords(docsFolders($folder)[0]) }} @endif</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                                        @if(count(docsFolders($folder)) > 0)
+                                            <a class="btn btn-outline-primary pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false" tyle="border-left:none;"
+                                           data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                                           '@foreach(docsFolders($folder) as $docFolder)
+                                                   <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $folder }}/{{$docFolder}}">{{ ucwords($docFolder) }}</a>
+                                                @endforeach'
+                                           data-html="true">
+                                            <span class="mr-1">@if(isset($subfolder)) {{ ucwords($subfolder) }}  @elseif(count(docsFolders($folder)) > 0) {{ ucwords(docsFolders($folder)[0]) }} @endif</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                                        @endif
+                                        @else
+                                            <a class="btn btn-light btn-white btn-pill pl-3 pr-4 truncate" href="/" aria-haspopup="true" aria-expanded="false" tyle=""><i class="ml-0 mr-2 fa fa-fw fa-arrow-left" style="opacity:1 !important;"></i>Back To Home</a>
                                     @endif
                                 </div>
                             </div>
