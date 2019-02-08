@@ -16,11 +16,13 @@ return [
 
     'condense_navigation' => false,
 
-    'docs_index' => base_path('storage/docs/content/latest/0-readme.md'),
+    'docs_index' => base_path(
+        'storage/docs/content/getting started/0-readme.md'
+    ),
 
     'docs_index_file' => '0-readme.md',
 
-    'docs_root_folder' => 'latest',
+    'docs_root_folder' => 'getting started',
 
     'drafter' => base_path('drafter')
 ];
