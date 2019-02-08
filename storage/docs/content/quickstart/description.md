@@ -1,1 +1,1 @@
-# This is the technical documentation for [Startup Engine](https://www.startupengine.io), an all-in-one platform for 🚀 and 🌱 an automated startup.
+# This is the quick-start guide for [Startup Engine](https://www.startupengine.io), an all-in-one platform that helps you 🚀 and 🌱 an automated startup.
