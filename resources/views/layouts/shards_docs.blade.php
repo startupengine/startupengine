@@ -622,7 +622,7 @@
                         @endforeach
 
                     </ul>
-                    <div class="col-md-12 py-2 d-sm-none d-block" align="left">
+                    <div class="col-md-12 py-2 d-sm-none d-block text-center" align="left">
                         <a class="btn btn-neutral btn-pill mr-2 pl-1" href="{{ URL::to('/') }}">
                             <span class="fa fa-fw fa-arrow-left mr-1 ml-0"></span>Back To Home
                         </a>
@@ -678,7 +678,7 @@
                                             <span class="mr-1">@if(isset($subfolder)) {{ ucwords($subfolder) }}  @elseif(count(docsFolders($folder)) > 0) {{ ucwords(docsFolders($folder)[0]) }} @endif</span><span class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
                                         @endif
                                         @else
-                                            <a class="btn btn-light btn-white btn-pill pl-3 pr-4 truncate" href="/" aria-haspopup="true" aria-expanded="false" tyle=""><i class="ml-0 mr-2 fa fa-fw fa-arrow-left" style="opacity:1 !important;"></i>Back To Home</a>
+                                            <a class="btn btn-light btn-white btn-pill pl-3 pr-4 truncate d-block" href="/" aria-haspopup="true" aria-expanded="false"><i class="ml-0 mr-2 fa fa-fw fa-arrow-left" style="opacity:1 !important;"></i>Back To Home</a>
                                     @endif
                                 </div>
                             </div>
