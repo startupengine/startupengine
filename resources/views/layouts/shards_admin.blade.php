@@ -17,11 +17,13 @@
     <meta name="description"
           content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php /*
+    <?php
+/*
             <link href="/styles/fontawesome-v5.0.6.css" rel="stylesheet">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    */ ?>
+    */
+?>
 
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="/styles/bootstrap.4.0.0.min.css" rel="stylesheet">
@@ -33,10 +35,12 @@
     <link rel="stylesheet" href="https://unpkg.com/vue-snotify@3.2.1/styles/material.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-    <?php /*
+    <?php
+/*
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script async defer src="/js/app.js"></script>
-    */ ?>
+    */
+?>
 
 <!-- FAVICONS -->
 
@@ -92,7 +96,8 @@
             </li>
         </ul>
     </div>
-    <?php /*
+    <?php
+/*
         <div class="actions mb-4">
             <a class="mb-2 btn btn-sm btn-primary w-100 d-table mx-auto extra-action"
                href="https://designrevision.com/downloads/shards-dashboard-lite/">
@@ -126,7 +131,8 @@
         <div class="color-switcher-toggle animated pulse infinite" style="display:none;">
             <i class="material-icons">settings</i>
         </div>
-        */ ?>
+        */
+?>
     <div class="container-fluid" id="main-container">
         <div class="row">
             <!-- Main Sidebar -->
@@ -321,10 +327,10 @@
                         </nav>
                     </nav>
                 </div>
-                <div class="main-content-container container-fluid px-4">
+                <div class="main-content-container container-fluid px-4 mt-4" >
                     @if (array_key_exists('content', View::getSections()))
                         <div id="contentApp">
-                            <div class="page-header row no-gutters py-4 toggleVisibility" v-if="info != null"
+                            <div class="page-header row no-gutters pb-4 toggleVisibility" v-if="info != null"
                                  v-bind:class="{visible: (status != null), invisible: status == null }">
                                 <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3"
                                      id="pageTitle">
@@ -333,7 +339,7 @@
                                 @yield('top-menu')
                             </div>
 
-                            <div v-else class="page-header row no-gutters py-4 toggleVisibility"
+                            <div v-else class="page-header row no-gutters pb-4 toggleVisibility"
                                  v-bind:class="{visible: (status == null || status != 'loading'), invisible: status == null }">
                                 <div class="col-md-6 col-sm-12 text-center text-sm-center text-md-left mb-3"
                                      id="pageTitle">
@@ -346,7 +352,7 @@
                         </div>
                     @else
                         <div>
-                            <div class="page-header row no-gutters py-4 ">
+                            <div class="page-header row no-gutters pb-4 ">
                                 <div class="col-md-6 col-sm-6 text-center text-sm-left mb-3" id="pageTitle">
                                     <h3 class="page-title mt-1 mb-1">@yield('page-title')</h3>
                                 </div>
@@ -360,7 +366,8 @@
         </div>
     </div>
 
-    <?php /*
+    <?php
+/*
     <div class="promo-popup animated" style="display:none;">
         <a href="http://bit.ly/shards-dashboard-pro" class="pp-cta extra-action">
             <img src="https://dgc2qnsehk7ta.cloudfront.net/uploads/sd-blog-promo-2.jpg"> </a>
@@ -378,11 +385,13 @@
             <a class="pp-cta extra-action" href="http://bit.ly/shards-dashboard-pro">Download</a>
         </div>
     </div>
-    */?>
+    */
+?>
 
     {!! renderConfirmActionModal() !!}
 
-    <?php /*
+    <?php
+/*
         //<script src="https://cdn.jsdelivr.net/npm/moment@2.22"></script>
         //<script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -398,7 +407,8 @@
         //<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
         //<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
         //<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
-    */?>
+    */
+?>
 
 
     {!! renderPassportApp() !!}
@@ -406,7 +416,9 @@
 
     <script src="/admin-panel/scripts/shards-dashboards.1.0.0.min.js"></script>
 
-    <?php /* <script src="/admin-panel/scripts/extras.1.0.0.min.js"></script> */ ?>
+    <?php
+/* <script src="/admin-panel/scripts/extras.1.0.0.min.js"></script> */
+?>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()

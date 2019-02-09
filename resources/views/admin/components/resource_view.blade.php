@@ -297,6 +297,7 @@
 @section('top-menu')
 
     @if( count(json_decode(json_encode($item->schema()->sections), true)) > 0 OR  count(json_decode(json_encode($item->schema()->fields), true)))
+
         <div class="col-md-6 col-sm-6 pageNav justify-content-right">
             <div class="btn-group my-1">
                 @if(isset($options['buttons']['top_nav']))
