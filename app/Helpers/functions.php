@@ -1412,7 +1412,7 @@ function hasDocs()
     } else {
         $result = false;
     }
-    return $results;
+    return $result;
 }
 
 function docsFolders($root = null)

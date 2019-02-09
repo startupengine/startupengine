@@ -103,11 +103,11 @@
                                     <a class="nav-link" href="#">Help</a>
                                 </li>
                             @endif
-                                @if(hasDocs())
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/docs" target="_blank">Documentation</a>
-                                    </li>
-                                @endif
+                            @if(hasDocs())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/docs" target="_blank">Documentation</a>
+                                </li>
+                            @endif
                         </ul>
 
                         @if(\Auth::user())
