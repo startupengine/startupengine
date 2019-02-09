@@ -108,11 +108,11 @@
         }
 
         .truncate {
-            width: 300px;
-            white-space: nowrap;
-            display: inline-flex;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            width: 150px;
+            white-space: nowrap !important;
+            display: inline-block;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
             text-align: left;
         }
 
@@ -200,32 +200,45 @@
         <div class="col-sm-12 col-md-12 col-lg-4 mb-4" id="contentApp" v-if="info !== null">
             <!-- End Small Stats Blocks -->
             <?php $header = '<h6 class="mb-0">Top Content</h6>'; ?>
-            <?php $tableHeader = ''; //'<th scope="col" class="border-0" style="width:50px !important;text-align:left;">Image</th><th scope="col" class="border-0 hiddenOnMobile d-sm-none d-md-none" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 " style="text-align:left;">Title</th><th scope="col" class="border-0">&nbsp;</th>'; ?>
+            <?php $tableHeader = '';
+//'<th scope="col" class="border-0" style="width:50px !important;text-align:left;">Image</th><th scope="col" class="border-0 hiddenOnMobile d-sm-none d-md-none" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 " style="text-align:left;">Title</th><th scope="col" class="border-0">&nbsp;</th>';
+?>
             <?php $tableRowConditions = "item.views > 0"; ?>
-            <?php $tableRow = '<td align="left" style="width:30px;"><span class="thumbnail" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class="hiddenOnMobile d-sm-none d-md-none"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" class="pl-0 ml-0" align="left"><span class="badge text-primary pull-left dimmed mr-2" >{{ item.views }} View<span v-if="item.views > 1">s</span></span><span class="badge text-dark mr-2 px-0">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/content/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
+            <?php $tableRow =
+                '<td align="left" class="hiddenOnMobile d-sm-none d-md-none d-lg-block" style="width:auto;"><span class="thumbnail" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class="hiddenOnMobile d-sm-none d-md-none"><span class="badge badge-type text-dark" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" class="pl-0 ml-0" align="left"><span class="badge text-primary dimmed mr-2" >{{ item.views }} View<span v-if="item.views > 1 || item.views == 0">s</span></span><span class="badge text-dark mr-2 px-0"><span class="truncate" style="white-space:pre;">{{ item.title }}</span></span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/content/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
             <?php $tableFooter = ' '; ?>
             <?php $tableRowNoResultsConditions = 'item.views == 0'; ?>
-            <?php $noResults = '<div align="center" class="pt-4"  v-if="info.data.every(function(item){return (item.views > 0 )})" ><img src="/images/illustrations/undraw_typewriter_i8xd.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message pt-3">Nothing here. Try adding some content.<br><a href="/admin/content" class="btn btn-primary btn-pill mt-3">Content</a></p></div>'; ?>
+            <?php $noResults =
+                '<div align="center" class="pt-4 "  v-if="info.data.every(function(item){return (item.views > 0 )})" ><img src="/images/illustrations/undraw_typewriter_i8xd.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message pt-3">Nothing here. Try adding some content.<br><a href="/admin/content" class="btn btn-primary btn-pill mt-3">Content</a></p></div>'; ?>
             {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content/',  'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => $noResults, 'WRAPPER_CLASS' => 'h-100']) !!}
 
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 mb-4" id="pagesApp" v-if="info !== null">
             <?php $header = '<h6 class="mb-0">Top Pages</h6>'; ?>
-            <?php $tableHeader =  ''; //'<th scope="col" class="border-0" style="width:50px !important;text-align:left;">Image</th><th scope="col" class="border-0 hiddenOnMobile d-sm-none d-md-none" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 " style="text-align:left;">Title</th><th scope="col" class="border-0 ">&nbsp;</th>'; ?>
-            <?php $tableRow = '<td align="left" style="width:30px;"><span class="thumbnail pull-right" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class=" hiddenOnMobile d-sm-none d-md-none"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" class="pl-0 ml-0" align="left"><span class="badge text-primary pull-left dimmed mr-2" >{{ item.views }} View<span v-if="item.views > 1">s</span></span><span class="badge text-dark mr-2 px-0">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/pages/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
+            <?php $tableHeader = '';
+//'<th scope="col" class="border-0" style="width:50px !important;text-align:left;">Image</th><th scope="col" class="border-0 hiddenOnMobile d-sm-none d-md-none" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 " style="text-align:left;">Title</th><th scope="col" class="border-0 ">&nbsp;</th>';
+?>
+            <?php $tableRow =
+                '<td align="left" style="width:30px;"><span class="thumbnail pull-right" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class=" hiddenOnMobile d-sm-none d-md-none"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" class="pl-0 ml-0" align="left"><span class="badge text-primary pull-left dimmed mr-2" >{{ item.views }} View<span v-if="item.views > 1">s</span></span><span class="badge text-dark mr-2 px-0">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/pages/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
             <?php $tableFooter = ' '; ?>
             <?php $tableRowConditions = "item.views > 1"; ?>
             <?php $tableRowNoResultsConditions = 'item.views > 1'; ?>
-            <?php $noResults = '<div align="center" class="pt-4" v-if="info.data.every(function(item){return (item.views > 1 )})" ><img src="/images/illustrations/undraw_content_vbqo.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message pt-3">Nothing here. Try adding some pages.<br><a href="/admin/pages" class="btn btn-primary btn-pill mt-3">Pages</a></p></div>'; ?>
+            <?php $noResults =
+                '<div align="center" class="pt-4" v-if="info.data.every(function(item){return (item.views > 1 )})" ><img src="/images/illustrations/undraw_content_vbqo.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message pt-3">Nothing here. Try adding some pages.<br><a href="/admin/pages" class="btn btn-primary btn-pill mt-3">Pages</a></p></div>'; ?>
             {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/pages/', 'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => $noResults, 'WRAPPER_CLASS' => 'h-100']) !!}
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 mb-4" id="productsApp" v-if="info !== null">
             <?php $header = '<h6 class="mb-0">Top Products</h6>'; ?>
-            <?php $tableHeader = ''; //'<th scope="col" class="border-0 d-sm-none d-md-none hiddenOnMobile" style="min-width:50px;text-align:left;">Image</th><th scope="col" class="border-0 d-md-none d-sm-none" style="width:100px !important;text-align:left;">Type</th><th scope="col" class="border-0 h" style="text-align:left;">Name</th><th scope="col" class="border-0" style="width:25px;text-align:center;">&nbsp;</th>'; ?>
-            <?php $tableRow = '<td align="left" class="hiddenOnMobile  d-sm-none" style="width:50px;"><span class="thumbnail  mr-2" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span></td><td align="left" style="width:100px;" class="d-md-none"><span class="badge badge-type text-dark mr-2" style="width:100%;" v-if="(((((item || {}).content || {}).sections || {}).about || {}).fields|| {}).type != null">{{ item.content.sections.about.fields.type }}</span><span class="badge badge-type text-dark mr-2" style="width:100%;" v-else><span class="dimmed">N/A</span></span></td><td align="left"><span class="badge text-primary dimmed mr-2">{{ item.purchases }} Purchase<span v-if="item.purchases > 1">s</span></span><span class="badge text-dark mr-2 px-0">{{ item.name }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/products/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
+            <?php $tableHeader = '';
+//'<th scope="col" class="border-0 d-sm-none d-md-none hiddenOnMobile" style="min-width:50px;text-align:left;">Image</th><th scope="col" class="border-0 d-md-none d-sm-none" style="width:100px !important;text-align:left;">Type</th><th scope="col" class="border-0 h" style="text-align:left;">Name</th><th scope="col" class="border-0" style="width:25px;text-align:center;">&nbsp;</th>';
+?>
+            <?php $tableRow =
+                '<td align="left" class="hiddenOnMobile  d-sm-none" style="width:50px;"><span class="thumbnail  mr-2" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span></td><td align="left" style="width:100px;" class="d-md-none"><span class="badge badge-type text-dark mr-2" style="width:100%;" v-if="(((((item || {}).content || {}).sections || {}).about || {}).fields|| {}).type != null">{{ item.content.sections.about.fields.type }}</span><span class="badge badge-type text-dark mr-2" style="width:100%;" v-else><span class="dimmed">N/A</span></span></td><td align="left"><span class="badge text-primary dimmed mr-2">{{ item.purchases }} Purchase<span v-if="item.purchases > 1">s</span></span><span class="badge text-dark mr-2 px-0">{{ item.name }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/products/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
             <?php $tableFooter = ' '; ?>
-            <?php $tableRowConditions = "item != null && item.purchases != null && item.purchases > 0"; ?>
-            <?php $noResults = '<div align="center" class="pt-4"  v-if="info.data.every(function(item){return (item.purchases > 0 )})" ><img src="/images/illustrations/undraw_revenue_3osh.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message pt-3">Nothing here. Try adding some products.<br><a href="/admin/products" class="btn btn-primary btn-pill mt-3">Products</a></p></div>'; ?>
+            <?php $tableRowConditions =
+                "item != null && item.purchases != null && item.purchases > 0"; ?>
+            <?php $noResults =
+                '<div align="center" class="pt-4"  v-if="info.data.every(function(item){return (item.purchases > 0 )})" ><img src="/images/illustrations/undraw_revenue_3osh.svg" style="max-width:180px;" class="mb-3 pb-3"><p class="card-text mt-4 empty-message pt-3">Nothing here. Try adding some products.<br><a href="/admin/products" class="btn btn-primary btn-pill mt-3">Products</a></p></div>'; ?>
             <?php $tableRowNoResultsConditions = 'item.purchases == 0'; ?>
             {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/products/', 'TABLE_FOOTER' => $tableFooter, 'TABLE_ROW_CONDITIONS' => $tableRowConditions, 'TABLE_ROW_NO_RESULTS_CONDITIONS' => $tableRowNoResultsConditions, 'TABLE_ROW_NO_RESULTS_MESSAGE' => $noResults, 'WRAPPER_CLASS' => 'h-100']) !!}
         </div>
