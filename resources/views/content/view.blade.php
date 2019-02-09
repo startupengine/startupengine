@@ -5,12 +5,21 @@
 @endsection
 
 @section('meta-description')
-    <?php echo setting('admin.description') ?>
+    <?php echo setting('admin.description'); ?>
 @endsection
 
 
 @section('splash-style')
     background-image:url('{{ $post->thumbnail() }}');
+@endsection
+
+@section('css')
+    <style>
+        #contentApp {
+            display: inline-table !important;
+            width: 100% !important;
+        }
+    </style>
 @endsection
 
 
@@ -122,7 +131,7 @@
     <div class="blog section section-invert pt-2 pb-3" id="relatedContent">
         <h3 class="section-title text-center mt-5 ">Recommended For You</h3>
 
-        <div class="container">
+        <div class="container text-center">
             <div class="pt-5 mb-0">
 
 

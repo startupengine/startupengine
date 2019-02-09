@@ -167,7 +167,7 @@
                              v-for="item in info.data"
                         >
                             <div class="@if(isset($options['CARD_CLASS'])) {{ $options['CARD_CLASS'] }} @else card card-small h-100 @endif"
-                                 v-if="item.content != null" style="min-height:420px;">
+                                 style="min-height:420px;">
                                 <div v-if="item.thumbnail != null"
                                      class="card-post__image"
                                      v-bind:style="{ backgroundImage: 'url(' + item.thumbnail + ')' }"
@@ -189,7 +189,11 @@
                                 <div class="card-body">
                                     <h5 class="card-title mb-2">
                                         <a class="text-ford-blue text-capitalize"
-                                           v-bind:href="'<?php echo $options['PATH'] ?>/' + item.id">{{ item.<?php echo $options['CARD_HEADER_FIELD']; ?>}}</a>
+                                           v-bind:href="'<?php echo $options[
+                                               'PATH'
+                                           ]; ?>/' + item.id">{{ item.<?php echo $options[
+    'CARD_HEADER_FIELD'
+]; ?>}}</a>
                                     </h5>
                                     @if(isset($options['SHOW_TIMESTAMP']) && $options['SHOW_TIMESTAMP'] != false)
                                         <p class="card-text dimmed my-2" style="text-transform:capitalize;">Updated
@@ -197,7 +201,9 @@
                                             moment(item.updated_at, "YYYYMMDD").fromNow() }}
                                         </p>
                                     @endif
-                                    <p class="card-text mt-2 mb-3">{{ item.<?php echo $options['CARD_BODY_FIELD']; ?> }}</p>
+                                    <p class="card-text mt-2 mb-3">{{ item.<?php echo $options[
+                                        'CARD_BODY_FIELD'
+                                    ]; ?> }}</p>
                                     <p v-if="item.thumbnail == null" align="left" class="card-text d-block w-100">
                                     <span v-for="tag in item.tags.slice(0,3)" class="badge badge-dark badge-pill mt-2 mr-2"
                                   >@{{ tag.name }}</span>
@@ -216,7 +222,9 @@
                                         <div align="center">
                                             <div class="btn-group mb-2" role="group" aria-label="Table row actions">
                                                 <a href="" class="btn btn-outline-primary btn-pill"
-                                                   v-bind:href="'<?php echo $options['PATH'] ?>/' + item.id">
+                                                   v-bind:href="'<?php echo $options[
+                                                       'PATH'
+                                                   ]; ?>/' + item.id">
                                                     View<i class="fa fa-chevron-right ml-2"
                                                            style="-webkit-text-stroke: 0px #000;font-size:8px;top:-1px;position:relative;"></i>
                                                 </a>

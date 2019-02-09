@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-    <?php echo setting('site.name') ?>
+    <?php echo setting('site.name'); ?>
 @endsection
 
 @section('meta')
-    <meta name="description" content="<?php echo setting('admin.description') ?>">
+    <meta name="description" content="<?php echo setting(
+        'admin.description'
+    ); ?>">
 @endsection
 
 @section('styles')
@@ -22,7 +24,7 @@
                             @if($postTypes->isEmpty())
                                 <a href="#" class="dropdown-item">No content types</a>
                             @endif
-                            <?php foreach($postTypes as $postType) { ?>
+                            <?php foreach ($postTypes as $postType) { ?>
                             <a href="/app/new/{{$postType->slug}}"
                                class="dropdown-item"> <i class="now-ui-icons ui-1_simple-add"></i> &nbsp;
                                 New {{$postType->title}}</a>
@@ -53,7 +55,9 @@
                                         class="badge badge-date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->updated_at))->diffForHumans() }}</span>
                             </td>
                             <td scope="col" class="hiddenOnMobile status_column"><span
-                                        class="badge badge-status<?php if ($post->status !== "PUBLISHED") {
+                                        class="badge badge-status<?php if (
+                                            $post->status !== "PUBLISHED"
+                                        ) {
                                             echo "-disabled";
                                         } ?>">{{ $post->status }}</span></td>
                             <td>

@@ -39,7 +39,7 @@
 
     .visible {
         opacity:1 !important;
-        display:flex !important;
+        display:flex;
         transition: all 0.5s;
     }
 
