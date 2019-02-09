@@ -1381,6 +1381,40 @@ function docsTitle($folder, $file)
     return strip_tags($title);
 }
 
+function hasDocs()
+{
+    $basepath = base_path('storage/docs/content/');
+    $array = scandir($basepath);
+    $results = [];
+    foreach ($array as $path) {
+        if (
+            $path !== '.' &&
+            $path !== '..' &&
+            strtolower($path) !== '.ds_store' &&
+            is_dir($basepath . $path)
+        ) {
+            $results[] = $path;
+        }
+    }
+    $folderCount = count($results);
+
+    $path = $basepath;
+    $array = scandir($path);
+    $results = [];
+    foreach ($array as $path) {
+        if (strpos($path, '.md') !== false && $path != 'description.md') {
+            $results[] = $path;
+        }
+    }
+    $rootdocs = count($results);
+    if ($rootdocs > 0 or $folderCount > 0) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $results;
+}
+
 function docsFolders($root = null)
 {
     $basepath = base_path('storage/docs/content/' . $root . '/');

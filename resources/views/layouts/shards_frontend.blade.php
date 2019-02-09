@@ -1,4 +1,4 @@
-<?php $viewOptions = [];?>
+<?php $viewOptions = []; ?>
 <?php $viewOptions['navbar-classes'] = ['dark']; ?>
 <?php $viewOptions['navbar-scroll-add-classes'] = ['filled']; ?>
 <?php $viewOptions['navbar-unscroll-remove-classes'] = ['filled']; ?>
@@ -67,6 +67,9 @@
                         {!! setting('site.top-nav') !!}
                     @else
                         <ul class="navbar-nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
                             @if(pageIsPublished('products'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="#" data-toggle="popover" data-placement="bottom"
@@ -100,6 +103,11 @@
                                     <a class="nav-link" href="#">Help</a>
                                 </li>
                             @endif
+                                @if(hasDocs())
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/docs" target="_blank">Documentation</a>
+                                    </li>
+                                @endif
                         </ul>
 
                         @if(\Auth::user())
@@ -123,7 +131,8 @@
                                                     class="fa fa-fw fa-lock mr-2 dimmed"></i>Admin Panel</a>@endif
                                         <a class="dropdown-item" href="/app/account"><i
                                                     class="fa fa-fw fa-cog mr-2 dimmed"></i>My Account</a>
-                                        <a class="dropdown-item" href="/logout"><i
+                                        
+                                            <a class="dropdown-item" href="/logout"><i
                                                     class="fa fa-fw fa-sign-out-alt text-danger mr-2 dimmed"></i>Sign Out</a>
                                     </div>
                                 </li>
@@ -197,6 +206,11 @@
                     @if(pageIsPublished('help'))
                         <li class="nav-item w-100">
                             <a href="#" class="nav-link">Help</a>
+                        </li>
+                    @endif
+                    @if(hasDocs())
+                        <li class="nav-item">
+                            <a class="nav-link" href="/docs" target="_blank">Documentation</a>
                         </li>
                     @endif
                     @if(\Auth::user() && \Auth::user()->hasPermissionTo('view backend'))
