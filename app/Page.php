@@ -11,11 +11,12 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Appstract\Meta\Metable;
-use \Conner\Tagging\Taggable;
+use Conner\Tagging\Taggable;
 use NexusPoint\Versioned\Versioned;
 use App\Traits\hasJsonSchema;
 use App\Traits\validateInputAgainstJsonSchema;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 {
@@ -67,7 +68,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         'user_id',
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
 
     /**
@@ -75,12 +76,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
      *
      * @var array
      */
-    protected $auditableEvents = [
-        'created',
-        'updated',
-        'deleted',
-        'restored',
-    ];
+    protected $auditableEvents = ['created', 'updated', 'deleted', 'restored'];
 
     public function searchFields()
     {
@@ -89,9 +85,17 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function raw($path)
     {
-        $url = "https://raw.githubusercontent.com/" . env('GITHUB_USERNAME') . "/" . env('GITHUB_REPOSITORY') . "/" . env("GITHUB_REPOSITORY_BRANCH") . "/pages/" . $path;
+        $url =
+            "https://raw.githubusercontent.com/" .
+            env('GITHUB_USERNAME') .
+            "/" .
+            env('GITHUB_REPOSITORY') .
+            "/" .
+            env("GITHUB_REPOSITORY_BRANCH") .
+            "/pages/" .
+            $path;
         $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($curl);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($httpCode == 404) {
@@ -111,32 +115,38 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             $json = null;
         }
         return $json;
-
     }
 
     public function thumbnail()
     {
         //$json = $this->content();
-        if ($this->content() != null && $this->content()->sections != null) {
+        if ($this->content() != null && isset($this->content()->sections)) {
             foreach ($this->schema()->sections as $section) {
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
-
-                        if (isset($value->isThumbnail) && $value->isThumbnail == true) {
+                        if (
+                            isset($value->isThumbnail) &&
+                            $value->isThumbnail == true
+                        ) {
                             $slug = $section->slug;
-                            $string = "sections->" . $slug . "->fields->" . $field;
-                            if (isset($this->content()->sections->$slug->fields->$field)) {
-                                return $this->content()->sections->$slug->fields->$field;
+                            $string =
+                                "sections->" . $slug . "->fields->" . $field;
+                            if (
+                                isset(
+                                    $this->content()->sections->$slug->fields
+                                        ->$field
+                                )
+                            ) {
+                                return $this->content()->sections->$slug->fields
+                                    ->$field;
                             } else {
                                 return null;
                             }
-
                         }
                     }
                 }
             }
         }
-
     }
 
     public function content()
@@ -148,7 +158,6 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             $array = [];
         }
 
-
         return $json;
     }
 
@@ -159,18 +168,16 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function schemaToString()
     {
-        {
-            if ($this->schema() !== null) {
-                return json_encode($this->schema());
-            } else {
-                return null;
-            }
+        if ($this->schema() !== null) {
+            return json_encode($this->schema());
+        } else {
+            return null;
         }
     }
 
     public function versions()
     {
-        $json = json_decode($this->json, TRUE);
+        $json = json_decode($this->json, true);
         $versions = count($json['versions']);
         if ($versions == null) {
             $versions = 0;
@@ -200,9 +207,10 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
       dd($views);
       */
         //dd($endDate);
-        $views = $this->hasMany('App\AnalyticEvent', 'model_id')->where('event_type', '=', 'page viewed')->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);
+        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
+            ->where('event_type', '=', 'page viewed')
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate);
         return $views;
     }
-
-
 }

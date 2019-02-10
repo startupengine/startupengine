@@ -1538,3 +1538,22 @@ function prevDoc($folder = null, $current = null)
 
     return $results;
 }
+
+// *************
+// Landing Pages
+// *************
+
+function hasLandingPage($folder = 'home')
+{
+    $path = resource_path('views/pages/defaults/');
+    $path = $path . $folder . '/' . $folder . '.blade.php';
+    $exists = file_exists($path);
+    return $exists;
+}
+
+function defaultPage($folder = 'home')
+{
+    $path = 'pages.defaults.';
+    $path = $path . $folder . '.' . $folder;
+    return $path;
+}

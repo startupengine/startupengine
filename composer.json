@@ -73,6 +73,7 @@
     "shipping-docker/vessel": "^3.0",
     "spatie/laravel-json-api-paginate": "^1.4",
     "spatie/laravel-permission": "^2.7",
+    "symfony/property-access": "^4.2",
     "wikimedia/composer-merge-plugin": "^1.4"
   },
   "require-dev": {

@@ -18,9 +18,9 @@
     @yield('styles')
 
     <!-- FAVICONS -->
-    <?php if( setting('site.favicon') !== null) { ?>
+    <?php if (setting('site.favicon') !== null) { ?>
     <link rel="icon" sizes="180x180" href="{{ setting('site.favicon') }}">
-    <?php }  ?>
+    <?php } ?>
 
     <!-- Meta -->
     @yield('meta')
@@ -35,7 +35,9 @@
 
 @if((isset($page->content()->settings) && isset($page->content()->settings->use_global_menu) && $page->content()->settings->use_global_menu == "false"))
 @else
-    @include('theme.templates.global.menu')
+    @if(View::exists('theme.templates.global.menu'))
+        @include('theme.templates.global.menu')
+    @endif
 @endif
 
 

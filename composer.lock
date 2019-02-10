@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
     "This file is @generated automatically"
   ],
-  "content-hash": "d7021267d86835ad75acd923d3e3f51d",
+  "content-hash": "671740973e1778380b7f6da6eb86dc55",
   "packages": [
     {
       "name": "altek/accountant",
@@ -6510,6 +6510,60 @@
       "time": "2019-01-06T16:19:23+00:00"
     },
     {
+      "name": "symfony/inflector",
+      "version": "v4.2.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/inflector.git",
+        "reference": "275e54941a4f17a471c68d2a00e2513fc1fd4a78"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/inflector/zipball/275e54941a4f17a471c68d2a00e2513fc1fd4a78",
+        "reference": "275e54941a4f17a471c68d2a00e2513fc1fd4a78",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.1.3",
+        "symfony/polyfill-ctype": "~1.8"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "4.2-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Symfony\\Component\\Inflector\\": ""
+        },
+        "exclude-from-classmap": ["/Tests/"]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Bernhard Schussek",
+          "email": "bschussek@gmail.com"
+        },
+        {
+          "name": "Symfony Community",
+          "homepage": "https://symfony.com/contributors"
+        }
+      ],
+      "description": "Symfony Inflector Component",
+      "homepage": "https://symfony.com",
+      "keywords": [
+        "inflection",
+        "pluralize",
+        "singularize",
+        "string",
+        "symfony",
+        "words"
+      ],
+      "time": "2019-01-16T20:31:39+00:00"
+    },
+    {
       "name": "symfony/polyfill-ctype",
       "version": "v1.10.0",
       "source": {
@@ -6697,6 +6751,69 @@
       "description": "Symfony Process Component",
       "homepage": "https://symfony.com",
       "time": "2019-01-03T14:48:52+00:00"
+    },
+    {
+      "name": "symfony/property-access",
+      "version": "v4.2.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/property-access.git",
+        "reference": "4768734a803c4471b7a733bd13698d91dd0cf193"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/property-access/zipball/4768734a803c4471b7a733bd13698d91dd0cf193",
+        "reference": "4768734a803c4471b7a733bd13698d91dd0cf193",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.1.3",
+        "symfony/inflector": "~3.4|~4.0"
+      },
+      "require-dev": {
+        "symfony/cache": "~3.4|~4.0"
+      },
+      "suggest": {
+        "psr/cache-implementation": "To cache access methods."
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "4.2-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Symfony\\Component\\PropertyAccess\\": ""
+        },
+        "exclude-from-classmap": ["/Tests/"]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Fabien Potencier",
+          "email": "fabien@symfony.com"
+        },
+        {
+          "name": "Symfony Community",
+          "homepage": "https://symfony.com/contributors"
+        }
+      ],
+      "description": "Symfony PropertyAccess Component",
+      "homepage": "https://symfony.com",
+      "keywords": [
+        "access",
+        "array",
+        "extraction",
+        "index",
+        "injection",
+        "object",
+        "property",
+        "property path",
+        "reflection"
+      ],
+      "time": "2019-01-16T20:31:39+00:00"
     },
     {
       "name": "symfony/psr-http-message-bridge",
