@@ -233,6 +233,13 @@
         .documentation-card.border, #sidebar {
             border:1px solid rgba(0,100,150,0.2) !important;
         }
+
+        #description h1, #description h2, #description h3, #description h4, #description h5, #description h6 {
+            margin:15px;
+        }
+        #description {
+            text-align: center !important;
+        }
     </style>
 @endsection
 
@@ -249,7 +256,7 @@
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row">
-            <div class="col-md-12 px-4 mb-3 text-white">
+            <div class="col-md-12 px-4 text-white" id="description">
                 @if(file_exists(docsPath().'/'.$folder.'/description.md')) {!! GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(file_get_contents(docsPath().'/'.$folder.'/description.md')) !!} @endif
             </div>
         </div>
