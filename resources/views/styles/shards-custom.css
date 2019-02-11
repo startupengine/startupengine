@@ -110,7 +110,13 @@ li .dimmed {
   opacity: 0.8 !important;
   color: #fff !important;
   transition: all 0.3s;
-  border-radius: 3px;
+  border-radius: 25px;
+  padding-left:15px;
+  padding-right:15px;
+}
+
+#topNavbar .nav-item {
+  margin-right:5px;
 }
 
 #topNavbar .nav-link:hover {
@@ -758,7 +764,7 @@ tr:hover .dimmed {
 }
 
 .nav-item {
-  border-radius: 4px;
+  border-radius: 25px;
 }
 
 
