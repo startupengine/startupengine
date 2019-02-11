@@ -345,7 +345,7 @@
                             @if($nextDoc['has_prev'])
 
 
-                                <div class="btn btn-default btn-lg d-lg-inline-flex d-block mb-2">
+                                <div class="btn btn-white btn-lg d-lg-inline-flex d-block mb-2">
                                     Previous: &nbsp;
                                     <a href="/docs/{{ $folder }}/<?php if (
                                         isset($subfolder) &&
@@ -361,7 +361,7 @@
                             @if($nextDoc['has_next'])
 
 
-                                <div class="btn btn-default btn-lg d-lg-inline-flex d-block float-lg-right">
+                                <div class="btn btn-white btn-lg d-lg-inline-flex d-block float-lg-right">
                                     Next: &nbsp;
                                     <a href="/docs/{{ $folder }}/<?php if (
                                         isset($subfolder) &&
