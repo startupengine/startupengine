@@ -105,7 +105,7 @@
                             @endif
                             @if(hasDocs())
                                 <li class="nav-item {{ Request::is('docs*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="/docs" target="_blank">Documentation</a>
+                                    <a class="nav-link" href="/docs">Documentation</a>
                                 </li>
                             @endif
                         </ul>
@@ -209,7 +209,7 @@
                     @endif
                     @if(hasDocs())
                         <li class="nav-item">
-                            <a class="nav-link" href="/docs" target="_blank">Documentation</a>
+                            <a class="nav-link" href="/docs">Documentation</a>
                         </li>
                     @endif
                     @if(\Auth::user() && \Auth::user()->hasPermissionTo('view backend'))
