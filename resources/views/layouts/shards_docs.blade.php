@@ -73,17 +73,7 @@
             padding: .9375rem 2rem .9375rem 1.25rem !important;
         }
 
-        #menuAvatar {
-            height: 30px;
-            width: 30px;
-            border-radius: 15px;
-            background: url('{{ \Auth::user()->avatar() }}');
-            display: inline-block;
-            margin: 5px 5px 5px 5px;
-            background-size: cover;
-            background-position: center;
-            pointer-events: none !important;
-        }
+
 
         #menuUserName {
             display: inline-block;

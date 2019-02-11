@@ -89,7 +89,9 @@ class PageController
 
         if ($page == null && hasLandingPage() == true) {
             $page = new \App\Page();
-            $page->json = '{"test": {"test2":1234}}';
+            $page->json =
+                '{"sections":{"heading":{"fields":{"headline":"Run an automated startup from your laptop."}}}}';
+
             return view(defaultPage())->with('page', $page);
         }
 

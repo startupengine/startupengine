@@ -67,7 +67,7 @@
                         {!! setting('site.top-nav') !!}
                     @else
                         <ul class="navbar-nav">
-                            <li class="nav-item ">
+                            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
                             @if(pageIsPublished('products'))
@@ -99,12 +99,12 @@
                                 </li>
                             @endif
                             @if(pageIsPublished('help'))
-                                <li class="nav-item">
+                                <li class="nav-item {{ Request::is('help*') ? 'active' : '' }}">
                                     <a class="nav-link" href="#">Help</a>
                                 </li>
                             @endif
                             @if(hasDocs())
-                                <li class="nav-item">
+                                <li class="nav-item {{ Request::is('docs*') ? 'active' : '' }}">
                                     <a class="nav-link" href="/docs" target="_blank">Documentation</a>
                                 </li>
                             @endif
@@ -140,8 +140,7 @@
                         @else
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="btn btn-pill btn-light text-dark ml-2" href="/login">Sign In <i
-                                                class="fa fa-fw fa-sign-in"></i></a>
+                                    <a class="btn btn-pill btn-outline-white ml-2" href="/login">Sign In</a>
                                 </li>
                             </ul>
                         @endif
@@ -242,7 +241,7 @@
 <!-- / Mobile Nav Modal -->
 
 <!-- Footer Section -->
-<footer style="position:static;bottom:0px;width:100%;">
+<footer style="position:static;bottom:0px;width:100%;" class="hiddenOnDesktop">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#" style="margin-top:-3px;"><span

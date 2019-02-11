@@ -752,3 +752,11 @@ tr:hover .dimmed {
 .shards-landing-page--1 .welcome:before {
   background: #001165 !important;
 }
+
+.nav-item.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item {
+  border-radius: 4px;
+}

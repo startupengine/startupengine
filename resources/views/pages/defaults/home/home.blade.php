@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-md-12 px-4 mb-3">
                 <h1 class="welcome-heading display-4 text-white text-center text-shadow">@if($page->title != null) {{ $page->title }} @else {{ setting('site.name', 'Startup Engine') }} @endif</h1>
-                <p class="text-white pt-2 text-center text-shadow" style="font-size:130%;">@if($page->getJsonContent('[sections][heading][fields][headline]') != null) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else @endif</p>
+                <p class="text-white pt-2 text-center text-shadow" style="font-size:130%;">@if($page->getJsonContent('[sections][heading][fields][headline]') != null) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else {{ setting('site.description') }} @endif</p>
                 <p align="center">
                     <a href="#content" class="mt-1 btn btn-md btn-white btn-pill align-self-center"
                        onclick="$('html, body').animate({scrollTop: $('#content').offset().top @if(isset($message)) -205 @else -155 @endif }, 500);">Read More</a>
