@@ -263,9 +263,8 @@
 
         @if(count(docsFolders()) > 1)
             <div class="section p-4" align="center" style="background: #dae4f9;border: 1px solid rgba(0,0,0,0.05);">
-
+                <div class="btn btn-neutral hiddenOnMobile" style="background:rgba(0,0,0,0.075);">Navigation</div>
                 <div class="btn-group ">
-                    <div class="btn btn-neutral hiddenOnMobile" style="background:rgba(0,0,0,0.075);">Navigation</div>
                     <a class="btn btn-white pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
                        data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
                        '@foreach(docsFolders() as $docFolder)
