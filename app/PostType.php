@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use NexusPoint\Versioned\Versioned;
+use App\Traits\IsApiResource;
 
-class PostType extends Model implements AuditableContract, \Altek\Accountant\Contracts\Recordable
+class PostType extends Model implements
+    AuditableContract,
+    \Altek\Accountant\Contracts\Recordable
 {
     use \Altek\Accountant\Recordable;
 
@@ -17,6 +20,8 @@ class PostType extends Model implements AuditableContract, \Altek\Accountant\Con
     use Auditable;
 
     use Versioned;
+
+    use IsApiResource;
 
     /**
      * Field from the model to use as the versions name
@@ -40,7 +45,6 @@ class PostType extends Model implements AuditableContract, \Altek\Accountant\Con
             $json = null;
         }
         return $json;
-
     }
 
     public function posts()
@@ -53,5 +57,4 @@ class PostType extends Model implements AuditableContract, \Altek\Accountant\Con
         $postTypeSchema = json_decode($this->json);
         return $postTypeSchema;
     }
-
 }

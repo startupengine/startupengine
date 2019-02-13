@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/styles/shards-custom.css">
     <link rel="stylesheet" href="https://unpkg.com/vue-snotify@3.2.1/styles/material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 @yield('css')
 
 <!-- FAVICONS -->
@@ -83,6 +83,7 @@
                                     <a class="nav-link" href="#">Services</a>
                                 </li>
                             @endif
+
                             @if(pageIsPublished('pricing'))
                                 <li class="nav-item d-none">
                                     <a class="nav-link" href="#">Pricing</a>
@@ -93,9 +94,9 @@
                                     <a class="nav-link" href="#">Resources</a>
                                 </li>
                             @endif
-                            @if(pageIsPublished('blog'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Blog</a>
+                            @if(pageIsPublished('content') OR view()->exists('pages.defaults.content.index'))
+                                <li class="nav-item {{ Request::is('content*') ? 'active' : '' }}">
+                                    <a href="/content" class="nav-link">Content</a>
                                 </li>
                             @endif
                             @if(pageIsPublished('help'))
@@ -105,7 +106,12 @@
                             @endif
                             @if(hasDocs())
                                 <li class="nav-item {{ Request::is('docs*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="/docs">Documentation</a>
+                                    <a class="nav-link" href="#"  data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
+                                    '<div align="center">
+                                    @foreach(docsFolders() as $docFolder)
+                                        <a class="dropdown-item py-1 px-3 m-0" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>
+                                    @endforeach <div class="dropdown-divider"></div> <a class="dropdown-item py-1 px-3 m-0" href="/docs">View All</a> </div>'
+                                       data-html="true" >Documentation</a>
                                 </li>
                             @endif
                         </ul>
@@ -197,9 +203,9 @@
                             <a href="#" class="nav-link">Resources</a>
                         </li>
                     @endif
-                    @if(pageIsPublished('blog'))
+                    @if(pageIsPublished('content') OR view()->exists('pages.defaults.content.index'))
                         <li class="nav-item w-100">
-                            <a href="#" class="nav-link">Blog</a>
+                            <a href="/content" class="nav-link">Content</a>
                         </li>
                     @endif
                     @if(pageIsPublished('help'))

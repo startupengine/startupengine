@@ -1,6 +1,6 @@
 @extends('layouts.shards_frontend')
 
-@section('title') Documentation @endsection
+@section('title') Content @endsection
 
 @section('css')
     <style>
@@ -120,11 +120,6 @@
         .documentation-card {
             max-height: none !important;
             box-shadow: none !important;
-            border-radius:5px !important;
-        }
-
-        .btn-lg {
-            border-radius:5px !important;
         }
 
         pre {
@@ -134,14 +129,8 @@
             padding: 5px 20px;
         }
 
-        .page-title  h1, .page-title  h2, .page-title  h3 {
-            font-size: 250% !important;
-            font-weight:100 !important;
-            color:#fff !important;
-            z-index:999 !important;
-            text-align:center;
-            display:block !important;
-            width:100% !important;
+        .page-title > h1 {
+            font-size: 25px !important;
         }
 
         .text-white p, .text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6 {
@@ -152,6 +141,8 @@
             height: auto !important;
             max-height: auto !important;
             min-height: 500px;
+            background:none;
+            /*background-image:url('https://images.unsplash.com/photo-1508796079212-a4b83cbf734d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');*/
         }
 
         .shards-landing-page--1 .welcome h1 {
@@ -247,15 +238,11 @@
 
         #description h1, #description h2, #description h3, #description h4, #description h5, #description h6 {
             margin: 15px;
-            font-weight:300 !important;
+            font-weight:300;
         }
 
         #description {
             text-align: center !important;
-        }
-
-        #description a {
-            font-weight:600 !important;
         }
 
         .affix {
@@ -276,22 +263,33 @@
             color: #fff;
         }
     </style>
+    <style>
+        #contentApp {
+            display: contents !important;
+            width: 100% !important;
+        }
+    </style>
 @endsection
 
 @section('head')
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
 @endsection
 
-@section('page-title') Documentation @endsection
+@section('page-title') Content @endsection
 
 @section('top-menu')
 @endsection
 
 @section('header')
     <!-- Inner Wrapper -->
-    <div class="inner-wrapper mt-auto mb-auto container page-title">
+    <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row">
-           <h3>Documentation</h3>
+            <div class="col-md-12 px-4 text-white text-center py-5" id="description">
+                <h2 class="page-title mb-4">Content</h2>
+                <div class="input-group d-inline-flex px-4" style="max-width:800px;">
+                    <input class="form-control form-control-lg form-control-translucent" v-model="contentApp.search" :input="changed" placeholder="Search..." style="border-radius:30px;padding-left:20px !important;"/>
+                </div>
+            </div>
         </div>
     </div>
     <!-- / Inner Wrapper -->
@@ -300,35 +298,37 @@
 
 @section('content')
     <main id="content">
+            @if(count(\App\PostType::all()) > 0)
+            <nav class="navbar navbar-expand-sm navbar-light" data-toggle="affix" align="center"
+                 style="background: #dae4f9;border: 1px solid rgba(0,0,0,0.05);">
+                <div class="container" align="center">
+                    <div class="btn-group btn-group-sm mx-auto">
+                        <div class="btn btn-black disabled">Showing</div>
+                        <a class="btn btn-white pl-4 truncate" href="#" aria-haspopup="true"
+                           aria-expanded="false" tyle="border-left:none;"
+                           data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                           '<div align="center">@foreach(\App\PostType::all() as $postType)
+                                   <div class="dropdown-item py-1 px-3 m-0" onclick="contentApp.updateFilters({&apos;post_type&apos;:&apos;post_type={{ $postType->slug }}&apos;})">{{ ucwords($postType->getPluralName()) }}</div>
+                            @endforeach <div class="dropdown-divider"></div> <div class="dropdown-item py-1 px-3 m-0" onclick="contentApp.reset({&apos;filters&apos;:true, &apos;search&apos;:true})">All Content</div></div>'
+                           data-html="true">
+                            <span class="mr-1">All Content</span><span
+                                    class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                    </div>
+                </div>
+            </nav>
+            @endif
 
-        <div class="blog section section-invert p-4  firstSection" style="min-height:500px;">
+
+        <div class="blog section section-invert p-4  " style="min-height:30vh;">
             <div class="container">
-                <div class="row px-3" id="docsApp">
+                <div class="row px-0 pt-3">
 
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="list-group raised list-group-flush" style="width:100%;margin-top:-75px;border-radius:6px;">
 
-                                @foreach(docsFolders() as $docFolder)
-                                    <a href="/docs/{{ $docFolder }}" class="list-group-item list-group-item-action" href="/docs/{{ $docFolder }}">
-
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="my-2">{{ str_replace('_', ' ', ucwords($docFolder)) }}</h5>
-                                            <small class="badge badge-light badge-pill px-3 my-2"><?php echo count(docFiles($docFolder)) .' '.str_plural('Item'); ?></small>
-                                        </div>
-                                        <p class="m-0 pb-2">{!! strip_tags(GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(str_replace('#', '', file_get_contents(docsPath().'/'.$docFolder.'/description.md')))) !!} </p>
-                                    </a>
-                                @endforeach
+                            <div class="row justify-content-center" id="contentApp" >
+                                {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => "w-100", 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content', 'WRAPPER_STYLE' => '', 'CONTAINER_STYLE'=> 'width:calc(100%);opacity:0;']) !!}
                             </div>
 
-                        </div>
-                    </div>
 
-
-                    <div class="col-md-12 pr-0 py-4 w-100 text-center text-reagent-gray dimmed" style="cursor:default;">
-                        Built with <span class="ml-2">💖<span
-                                    class="fa fa-fw fa-sm fa-plus text-reagent-gray mx-2"></span>&nbsp;⚡</span>
-                    </div>
 
                 </div>
             </div>
@@ -372,4 +372,6 @@
 
         });
     </script>
+
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards']) !!}
 @endsection

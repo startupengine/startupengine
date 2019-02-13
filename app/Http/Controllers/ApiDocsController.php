@@ -14,14 +14,9 @@ class ApiDocsController extends Controller
      */
     public function index()
     {
-        $input = file_get_contents(config('docs.docs_index'));
-
+        $output = '';
         $file = config('docs.docs_index_file');
-
         $folder = config('docs.docs_root_folder');
-
-        $output = Markdown::convertToHtml($input);
-
         return view('docs.index', compact('output', 'folder', 'file'));
     }
 
@@ -44,7 +39,7 @@ class ApiDocsController extends Controller
 
         $folder = $file;
         $file = config('docs.docs_index_file');
-        return view('docs.index', compact('output', 'folder', 'file'));
+        return view('docs.view', compact('output', 'folder', 'file'));
     }
 
     /**
@@ -74,7 +69,7 @@ class ApiDocsController extends Controller
         }
 
         return view(
-            'docs.index',
+            'docs.view',
             compact('output', 'folder', 'subfolder', 'file')
         );
     }
@@ -93,7 +88,7 @@ class ApiDocsController extends Controller
         $output = Markdown::convertToHtml($input);
 
         return view(
-            'docs.index',
+            'docs.view',
             compact('output', 'folder', 'subfolder', 'file')
         );
     }

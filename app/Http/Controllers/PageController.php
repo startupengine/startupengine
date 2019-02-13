@@ -108,6 +108,14 @@ class PageController
             ->where('status', '=', 'ACTIVE')
             ->first();
         if ($page == null) {
+            if (view()->exists('pages.defaults.' . $slug . '.index')) {
+                $page = new \App\Page();
+                $page->json = "{}";
+                return view('pages.defaults.' . $slug . '.index')->with(
+                    'page',
+                    $page
+                );
+            }
             abort(404);
         }
         $page->content = $page->content();

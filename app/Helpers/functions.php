@@ -1354,10 +1354,14 @@ function docFiles($folder)
     $array = scandir(base_path('storage/docs/content/' . $folder));
     $results = [];
     foreach ($array as $result) {
-        if (strpos($result, '.md') !== false) {
+        if (
+            strpos($result, 'description.md') !== true &&
+            strpos($result, '.md') !== false
+        ) {
             $results[] = $result;
         }
     }
+
     return $results;
 }
 
@@ -1556,4 +1560,14 @@ function defaultPage($folder = 'home')
     $path = 'pages.defaults.';
     $path = $path . $folder . '.' . $folder;
     return $path;
+}
+
+// *************
+// Introspection
+// *************
+
+function sellsSaas()
+{
+    $saas = \App\Product::where('status', '=', 'ACTIVE')->get();
+    return $saas;
 }

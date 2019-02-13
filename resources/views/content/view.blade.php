@@ -19,6 +19,11 @@
             display: inline-table !important;
             width: 100% !important;
         }
+
+        h2.welcome-heading {
+            font-size:220% !important;
+            font-weight: 200;
+        }
     </style>
 @endsection
 
@@ -28,8 +33,8 @@
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row">
             <div class="col-md-12 px-4 mb-3">
-                <h1 class="welcome-heading display-4 text-white text-center text-shadow">{{ $post->title }}</h1>
-                <p class="text-white pt-2 text-center text-shadow" style="font-size:130%;">{{ $post->excerpt() }}</p>
+                <h2 class="welcome-heading display-4 text-white text-center ">{{ $post->title }}</h2>
+                <h5 class="text-white pt-2 text-center  mb-4" style="font-size:130%;font-weight:200;">{{ $post->excerpt() }}</h5>
                 @if(count($post->tags) > 0)
                     <p align="center" class="text-center">
                     <div class="pb-1 pt-0 mt-0 text-center">
@@ -53,7 +58,7 @@
                     </p>
                 @endif
                 <p align="center">
-                    <a href="#content" class="mt-1 btn btn-md btn-outline-white btn-pill align-self-center"
+                    <a href="#content" class="mt-1 btn btn-md btn-outline-white btn-translucent btn-pill align-self-center"
                        onclick="$('html, body').animate({scrollTop: $('#content').offset().top @if(isset($message)) -205 @else -155 @endif }, 500);">Read More</a>
                 </p>
             </div>

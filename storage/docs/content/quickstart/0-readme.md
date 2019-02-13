@@ -1,6 +1,6 @@
 # Introduction
 
-A beautiful & open-source platform for launching startups.<br>
+Startup Engine is a beautiful & open-source platform for launching startups.<br>
 
 ## Key Features
 
