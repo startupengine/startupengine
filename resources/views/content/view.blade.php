@@ -10,7 +10,7 @@
 
 
 @section('splash-style')
-    background-image:url('{{ $post->thumbnail() }}');
+     @if($post->thumbnail() != null) background-image:url('{{ $post->thumbnail() }}'); @endif
 @endsection
 
 @section('css')
@@ -70,8 +70,9 @@
 @section('content')
     <?php $sectionCount = 1; ?>
     <main id="content">
-        @if(isset($post->schema()->sections))
-            @foreach($post->schema()->sections as $section)
+
+    @if($post->postType()->first()->schema() != null)
+        @foreach($post->postType()->first()->schema()->sections as $section)
 
                 @if($post->sectionHasContent($section->slug, [$post->thumbnailField()]))
                     <div class="blog section section-invert py-2  @if($sectionCount == 1) firstSection @endif">
@@ -141,7 +142,7 @@
 
 
                 <div class="row justify-content-center" id="contentApp" v-if="info != null">
-                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-5 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content']) !!}
+                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-5 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content']) !!}
                 </div>
 
 

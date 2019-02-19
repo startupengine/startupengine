@@ -27,22 +27,25 @@ class Post extends JsonResource
         $fields['views'] = count($this->views);
         $fields['thumbnail'] = $this->thumbnail();
         $fields['excerpt'] = $this->excerpt();
-        if($this->created_at != null) {
+        //dd($this->postType()->schema());
+        if ($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
-        if($this->updated_at != null) {
+        if ($this->updated_at != null) {
             $fields['updated_at'] = $this->updated_at->toDateTimeString();
         }
-        if($this->deleted_at != null) {
+        if ($this->deleted_at != null) {
             $fields['deleted_at'] = $this->deleted_at->toDateTimeString();
         }
-        if($this->title != null) {
+        if ($this->title != null) {
             $fields['title'] = $this->title;
         }
-        if($this->name != null) {
+        if ($this->name != null) {
             $fields['name'] = $this->name;
         }
-        $fields['schema'] = $this->schema();
+        $fields['schema'] = $this->postType()
+            ->first()
+            ->schema();
         $fields['content'] = $this->content();
         $fields = sparseFields($fields, 'content');
         return $fields;

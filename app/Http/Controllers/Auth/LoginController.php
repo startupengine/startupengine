@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-
 class LoginController extends Controller
 {
     /*
@@ -39,27 +38,40 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function logout() {
+    public function logout()
+    {
         \Auth::logout();
         return redirect('/');
     }
 
+    public function register()
+    {
+        if (\Auth::user()) {
+            return redirect('/');
+        } else {
+            return view('app.register');
+        }
+    }
+
     protected function authenticated(Request $request, $user)
     {
-        if(setting('site.homepage') != null){
+        if (setting('site.homepage') != null) {
             $setting = setting('site.homepage');
-            $page = \App\Page::where('slug', $setting)->where('status', 'ACTIVE')->first();
-            if($page != null){
-                $route = '/'.$page->slug;
+            $page = \App\Page::where('slug', $setting)
+                ->where('status', 'ACTIVE')
+                ->first();
+            if ($page != null) {
+                $route = '/' . $page->slug;
             }
         }
-        if(!isset($route) && \Auth::user()->hasPermissionTo('view backend') == true) {
+        if (
+            !isset($route) &&
+            \Auth::user()->hasPermissionTo('view backend') == true
+        ) {
             $route = '/admin';
-        }
-        else {
+        } else {
             $route = '/app/account';
         }
         return redirect($route);
     }
-
 }

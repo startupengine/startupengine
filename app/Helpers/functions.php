@@ -856,6 +856,13 @@ function renderNewItemScripts($options = null)
     return $contents;
 }
 
+function renderNewUserScripts($options = null)
+{
+    $view = View::make('components.new_user_scripts', ['options' => $options]);
+    $contents = (string) $view;
+    return $contents;
+}
+
 function renderResourceFilterModal($options = null)
 {
     $view = View::make('admin.components.resource_filter_modal', [

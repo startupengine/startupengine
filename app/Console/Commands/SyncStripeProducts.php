@@ -37,31 +37,33 @@ class SyncStripeProducts extends Command
      */
     public function handle()
     {
-
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
         $stripeProducts = \Stripe\Product::all();
 
-        if($stripeProducts != null){
-            foreach($stripeProducts->data as $stripeProduct){
-                $product = \App\Product::where('stripe_id', $stripeProduct->id)->first();
-                if($product == null) {
-                    $product = new \App\Product;
+        if ($stripeProducts != null) {
+            foreach ($stripeProducts->data as $stripeProduct) {
+                $product = \App\Product::where(
+                    'stripe_id',
+                    $stripeProduct->id
+                )->first();
+                if ($product == null) {
+                    $product = new \App\Product();
                     $product->stripe_id = $stripeProduct->id;
                 }
                 $product->name = $stripeProduct->name;
-                if($stripeProduct->active == true){
+                if ($stripeProduct->active == true) {
                     $product->status = 'ACTIVE';
-                }
-                else {
+                } else {
                     $product->status = 'INACTIVE';
                 }
-                if($stripeProduct->metadata['se_json'] != null){
+
+                if ($stripeProduct->metadata['se_json'] != null) {
                     $product->syncFromStripe();
                 }
                 $product->save();
             }
         }
-      echo "\nSynced products from Stripe account.\n\n";
+        echo "\nSynced products from Stripe account.\n\n";
     }
 }

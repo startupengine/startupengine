@@ -28,14 +28,13 @@
 @yield('css')
 
 <!-- FAVICONS -->
-    <link rel="icon" sizes="180x180" href="{{ setting('site.favicon', '/images/startup-engine-logo.png') }}">
+    <link rel="icon" sizes="180x180" href="{{ setting('site.favicon', '/images/startup-engine-icon.png') }}">
 </head>
 <body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100">
-
+<div id="mainApp">
 @if(isset($message))
 <!-- Welcome Section -->
 <div class="message">
-
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top px-2 py-2" id="messageNavbar">
         <div class="container px-0 justify-content-center">
         @if(isset($message['html'])){!! $message['html'] !!}
@@ -70,25 +69,12 @@
                             <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
-                            @if(pageIsPublished('products'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="popover" data-placement="bottom"
-                                       data-trigger="hover focus" data-delay='{ "show": 100, "hide": 1500 }'
-                                       data-html="true"
-                                       data-content="And here's some amazing content. It's very engaging. Right? <a href='#'>Test</a>">Products</a>
-                                </li>
-                            @endif
                             @if(pageIsPublished('services'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Services</a>
                                 </li>
                             @endif
 
-                            @if(pageIsPublished('pricing'))
-                                <li class="nav-item d-none">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                </li>
-                            @endif
                             @if(pageIsPublished('resources'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Resources</a>
@@ -99,6 +85,12 @@
                                     <a href="/content" class="nav-link">Content</a>
                                 </li>
                             @endif
+                            @if(pageIsPublished('pricing') OR \App\Product::where('status', '=', 'ACTIVE') != null)
+                                <li class="nav-item {{ Request::is('pricing*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="/pricing"
+                                    >Pricing</a>
+                                </li>
+                            @endif
                             @if(pageIsPublished('help'))
                                 <li class="nav-item {{ Request::is('help*') ? 'active' : '' }}">
                                     <a class="nav-link" href="#">Help</a>
@@ -106,22 +98,31 @@
                             @endif
                             @if(hasDocs())
                                 <li class="nav-item {{ Request::is('docs*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="#"  data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
-                                    '<div align="center">
+                                    <a class="nav-link" href="/docs" id="docsNavLink" data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
+                                    '<div align="center" class="popover-menu">
                                     @foreach(docsFolders() as $docFolder)
                                         <a class="dropdown-item py-1 px-3 m-0" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>
                                     @endforeach <div class="dropdown-divider"></div> <a class="dropdown-item py-1 px-3 m-0" href="/docs">View All</a> </div>'
-                                       data-html="true" >Documentation</a>
+                                       data-html="true" >Docs</a>
                                 </li>
                             @endif
                         </ul>
 
                         @if(\Auth::user())
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item dropdown ml-2" id="accountDropdown">
+                                <li class="nav-item dropdown mx-2" id="accountDropdown">
 
-                                    <a class="btn btn-pill btn-light text-dark  dropdown-toggle" href="#"
-                                       id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    <a class="btn btn-pill btn-light text-dark " href="/app/account"
+                                       id="navbarDropdown" role="button"  aria-haspopup="true"
+                                       data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
+                                       '<div align="left" class="popover-menu">
+                                    @if(\Auth::user()->hasPermissionTo('view backend'))
+                                               <a class="dropdown-item py-1 px-3 m-0" href="/admin"><i
+                                                    class="fa fa-fw fa-lock mr-2 "></i>Admin Panel</a><div class="dropdown-divider"></div>
+                                    @endif <a class="dropdown-item py-1 px-3 m-0" href="/app/account"><i
+                                                    class="fa fa-fw fa-cog mr-2 "></i>My Account</a> <a class="dropdown-item py-1 px-3 m-0" href="/logout"><i
+                                                    class="fa fa-fw fa-sign-out-alt text-danger mr-2 "></i>Sign Out</a> </div>'
+                                       data-html="true"
                                        aria-expanded="false">
                                         @if(\Auth::user()->avatar() != null) <span class="d-inline-block"
                                                                                  style="height:25px;width:25px;border-radius:25px;background:url('{{ \Auth::user()->avatar() }}');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:15px;margin-right:10px;position:absolute;float:left;">&nbsp;</span>
@@ -129,24 +130,19 @@
                                                                                  style="height:25px;width:25px;border-radius:25px;background:url('/images/avatar.png');background-color:#eee;background-size:cover;background-position:center;top:10.5px;left:15px;margin-right:10px;position:absolute;float:left;">&nbsp;</span>
                                         @endif
                                         <span class="d-inline-block"
-                                              style="margin-left:30px;height:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }}</span>
+                                              style="margin-left:30px;height:20px;border-radius:20px;top:2px;margin-right:2px;position:relative;min-width:50px;">{{ \Auth::user()->name }} <i class="fa fa-fw fa-caret-down"></i></span>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right w-100" aria-labelledby="navbarDropdown">
-                                        @if(\Auth::user()->hasPermissionTo('view backend'))<a class="dropdown-item"
-                                                                                              href="/admin"><i
-                                                    class="fa fa-fw fa-lock mr-2 dimmed"></i>Admin Panel</a>@endif
-                                        <a class="dropdown-item" href="/app/account"><i
-                                                    class="fa fa-fw fa-cog mr-2 dimmed"></i>My Account</a>
-                                        
-                                            <a class="dropdown-item" href="/logout"><i
-                                                    class="fa fa-fw fa-sign-out-alt text-danger mr-2 dimmed"></i>Sign Out</a>
-                                    </div>
                                 </li>
                             </ul>
                         @else
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="btn btn-pill btn-outline-white ml-2" href="/login">Sign In</a>
+                                    <div class="btn-group ml-1">
+                                    <a class="btn btn-outline-white" href="/login">Sign In</a>
+                                    </div>
+                                    <div class="btn-group ml-1">
+                                    <a class="btn btn-white raised" href="/register">Sign Up</a>
+                                    </div>
                                 </li>
                             </ul>
                         @endif
@@ -188,24 +184,14 @@
                             <a href="#" class="nav-link">Services</a>
                         </li>
                     @endif
-                    @if(pageIsPublished('products'))
-                        <li class="nav-item w-100">
-                            <a href="#" class="nav-link">Products</a>
-                        </li>
-                    @endif
-                    @if(pageIsPublished('pricing'))
-                        <li class="nav-item w-100 d-none">
-                            <a href="#" class="nav-link">Pricing</a>
-                        </li>
-                    @endif
-                    @if(pageIsPublished('resources'))
-                        <li class="nav-item w-100">
-                            <a href="#" class="nav-link">Resources</a>
-                        </li>
-                    @endif
                     @if(pageIsPublished('content') OR view()->exists('pages.defaults.content.index'))
                         <li class="nav-item w-100">
                             <a href="/content" class="nav-link">Content</a>
+                        </li>
+                    @endif
+                    @if(pageIsPublished('pricing') OR count(\App\Product::where('status', '=', 'ACTIVE')->get()) > 0)
+                        <li class="nav-item w-100 ">
+                            <a href="/pricing" class="nav-link">Pricing</a>
                         </li>
                     @endif
                     @if(pageIsPublished('help'))
@@ -234,7 +220,10 @@
                         </li>
                     @else
                         <li class="nav-item w-100">
-                            <a class="nav-link text-dark" href="/login">Sign In <i class="fa fa-fw fa-sign-in"></i></a>
+                            <a class="nav-link text-dark" href="/login">Sign In</a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a class="nav-link text-dark" href="/register">Sign Up</a>
                         </li>
                     @endif
 
@@ -265,8 +254,11 @@
     </nav>
 </footer>
 <!-- / Footer Section -->
+</div>
 
 {!! renderConfirmActionModal() !!}
+
+
 
 <!-- JavaScript Dependencies -->
 
@@ -314,6 +306,13 @@
             }
         });
     });
+    $('#docsNavLink').hover(function(){
+        this.href = "#";
+    });
+    $('#navbarDropdown').hover(function(){
+        this.href = "#";
+    });
+
 </script>
 
 @yield('scripts')

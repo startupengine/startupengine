@@ -13,20 +13,31 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['cors', 'auth:api']], function () {
+Route::post('register', 'Api\UsersController@create');
 
+Route::group(['middleware' => ['cors', 'auth:api']], function () {
     //////////// API Resources ////////////
     ////// Standard BREAD Operations
     // Browse
-    Route::get('/resources/{type}', 'ResourceController@browse')->name('BrowseApiResource');
+    Route::get('/resources/{type}', 'ResourceController@browse')->name(
+        'BrowseApiResource'
+    );
     // Read
-    Route::get('/resources/{type}/{id}', 'ResourceController@read')->name('ReadApiResource');
+    Route::get('/resources/{type}/{id}', 'ResourceController@read')->name(
+        'ReadApiResource'
+    );
     // Add
-    Route::post('/resources/{type}', 'ResourceController@add')->name('AddApiResource');
+    Route::post('/resources/{type}', 'ResourceController@add')->name(
+        'AddApiResource'
+    );
     // Edit
-    Route::post('/resources/{type}/{id}', 'ResourceController@edit')->name('EditApiResource');
+    Route::post('/resources/{type}/{id}', 'ResourceController@edit')->name(
+        'EditApiResource'
+    );
     // Delete
-    Route::delete('/resources/{type}/{id}', 'ResourceController@delete')->name('DeleteApiResource');
+    Route::delete('/resources/{type}/{id}', 'ResourceController@delete')->name(
+        'DeleteApiResource'
+    );
 
     ////// Transformation Operations
     // Browse Transformations
@@ -34,21 +45,37 @@ Route::group(['middleware' => ['cors', 'auth:api']], function () {
     // Read Transformation
     //Route::get('/resources/{type}/{id}/transformation/{transformationId}', 'ResourceTransformationController@view')->name('GetApiResourceTransformation');
     // Add Transformation
-    Route::post('/resources/{type}/{id}/transformation/', 'ResourceTransformationController@add')->name('AddApiResourceTransformation');
-    Route::get('/resources/{type}/{id}/transformation/', 'ResourceTransformationController@add')->name('AddApiResourceTransformation');
+    Route::post(
+        '/resources/{type}/{id}/transformation/',
+        'ResourceTransformationController@add'
+    )->name('AddApiResourceTransformation');
+    Route::get(
+        '/resources/{type}/{id}/transformation/',
+        'ResourceTransformationController@add'
+    )->name('AddApiResourceTransformation');
 
     // Analytics
-    Route::get('/analytics/count', 'ResourceController@count')->name('CountAnalyticsEvents');
+    Route::get('/analytics/count', 'ResourceController@count')->name(
+        'CountAnalyticsEvents'
+    );
 
     //////////// Third-Party APIs ////////////
     ////// Stripe
     // Browse Payment Methods
-    Route::get('/stripe/payments/methods', 'StripeController@browsePaymentMethods')->name('BrowseStripePaymentMethods');
+    Route::get(
+        '/stripe/payments/methods',
+        'StripeController@browsePaymentMethods'
+    )->name('BrowseStripePaymentMethods');
     // Read Payment Method
-    Route::get('/stripe/payments/method/{id}', 'StripeController@readPaymentMethod')->name('ReadStripePaymentMethod');
+    Route::get(
+        '/stripe/payments/method/{id}',
+        'StripeController@readPaymentMethod'
+    )->name('ReadStripePaymentMethod');
     // Add Payment Methods
-    Route::post('/stripe/payments/method', 'StripeController@storePaymentMethod')->name('StoreStripePaymentMethod');
-
+    Route::post(
+        '/stripe/payments/method',
+        'StripeController@storePaymentMethod'
+    )->name('StoreStripePaymentMethod');
 });
 
 // Demo Data
@@ -63,7 +90,6 @@ Route::get('/demo/dashboard/analytics', 'DemoController@dashboardAnalytics');
 Route::get('/demo/dashboard/social', 'DemoController@dashboardSocialFeed');
 Route::get('/demo/dashboard/content', 'DemoController@dashboardRecentContent');
 Route::get('/demo/notifications', 'DemoController@notifications');
-
 
 /* OLD API ROUTES
 // Users

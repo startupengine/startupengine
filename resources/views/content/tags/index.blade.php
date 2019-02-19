@@ -1,6 +1,11 @@
 @extends('layouts.shards_frontend')
 
 @section('php-variables')
+    <?php
+    $viewOptions['navbar-classes'] = ['dark'];
+    $viewOptions['navbar-scroll-add-classes'] = ['dark'];
+    $viewOptions['navbar-unscroll-remove-classes'] = [];
+    ?>
     <?php $viewOptions['splash-height'] = '300px'; ?>
 @endsection
 

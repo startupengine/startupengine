@@ -293,7 +293,6 @@
     <!-- / Inner Wrapper -->
 @endsection
 
-
 @section('content')
     <main id="content">
 
@@ -303,7 +302,7 @@
                 <div class="container" align="center">
                     <div class="btn-group btn-group-sm mx-auto">
                         <div class="btn btn-black disabled">Menu</div>
-                        <a class="btn btn-white pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
+                        <a class="btn btn-white border-whitec pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
                            data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
                            '@foreach(docsFolders() as $docFolder)
                                    <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>

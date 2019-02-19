@@ -11,7 +11,7 @@
   background-size: 110% !important;
   background-position: center !important;
   opacity: 0.85;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .card:hover .dimmed {
@@ -23,13 +23,13 @@ li:hover .dimmed {
 }
 
 li .dimmed {
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .card:hover .card-post__image {
   opacity: 1;
   background-size: 115% !important;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .card-footer {
@@ -84,7 +84,7 @@ li .dimmed {
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,50,150, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
   opacity: 0.8;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .navbar-toggler {
@@ -92,7 +92,8 @@ li .dimmed {
   background: #efefef !important;
   box-shadow: 0px 4px 15px rgba(0, 0, 100, 0.3) !important;
   border-radius: 3px !important;
-  transition: all 0.3s;
+  transition: all 0.2s;
+  margin-right:10px;
   /*border-radius:25px !important;*/
 }
 
@@ -109,7 +110,8 @@ li .dimmed {
   font-weight: 300 !important;
   opacity: 0.8 !important;
   color: #fff !important;
-  transition: all 0.3s;
+  text-shadow:0px 2px 3px rgba(0,0,0,0.2);
+  transition: all 0.2s;
   border-radius: 25px;
   padding-left:15px;
   padding-right:15px;
@@ -358,7 +360,7 @@ h1 {
 }
 
 .list-group-item {
-  transition: all 0.3s;
+  transition: all 0.2s;
   border-color: rgba(0, 90, 255, 0.125);
 }
 
@@ -379,7 +381,7 @@ h1 {
 
 .list-group-item i {
   opacity: 0.5;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 .list-group-item.active i {
   color: #3a61ff;
@@ -769,10 +771,13 @@ tr:hover .dimmed {
 
 
 .shards-landing-page--1 .welcome:before {
-  background: linear-gradient(30deg, #ff8f4c 10%, #ff4f52 100%) !important;
+  /*background: linear-gradient(30deg, #ff8f4c 10%, #ff4f52 100%) !important;*/
   /*background: linear-gradient(180deg, #333 0%, #222 59%, #111 130%) !important;*/
   /*background:linear-gradient(0deg, #4371eb 0%, #537bea 59%, #588bff 130%) !important;*/
-  opacity:1;
+  /*background:linear-gradient(30deg, #efa5c0 10%, #6badff 100%) !important;*/
+  /*background:linear-gradient(-30deg, #3950f7 10%, #ba97ff 100%) !important;*/
+  background:linear-gradient(180deg, #4ba3ff 10%, #7277ff 100%) !important;
+  opacity:.9;
 }
 
 .shards-landing-page--1 .welcome #description a {
@@ -790,7 +795,7 @@ tr:hover .dimmed {
 }
 
 input.form-control-translucent{
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,50,0.2);
   box-shadow:0px 0px 30px rgba(0,0,0,0.05) inset;
   border-color:rgba(0,0,0,0);
   transition:all 0.5s;
@@ -799,6 +804,11 @@ input.form-control-translucent{
 
 input.form-control-translucent:focus{
   color: #333333;
+  border-color: transparent !important;
+}
+
+input.form-control-translucent:hover{
+  border-color: transparent;
 }
 
 
@@ -828,4 +838,29 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   .card {
     min-height:auto !important;
   }
+}
+
+.popover-menu .dropdown-item{
+  border-radius:4px;
+}
+
+.btn-cta {
+  background-image: linear-gradient(#ffc57d, #ff5caf);
+  background-size:cover !important;
+  border: 0px solid #fff !important;
+  color: #fff;
+  z-index: 888;
+  border-radius:25px !important;
+  font-weight: 600;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+  transform:scale(1.01) !important;
+}
+.btn-cta:hover {
+  transform:scale(1.1) !important;
+  border: none !important;
+  color: #fff;
 }

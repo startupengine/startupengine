@@ -1,119 +1,102 @@
-@extends('layouts.app')
+@extends('layouts.shards_frontend')
+
+@section('php-variables')
+    <?php
+    $viewOptions['navbar-classes'] = ['dark'];
+    $viewOptions['navbar-scroll-add-classes'] = ['dark'];
+    $viewOptions['navbar-unscroll-remove-classes'] = [];
+    ?>
+@endsection
 
 @section('title')
-    Login
+    Account
 @endsection
 
-@section('meta')
-    <meta name="description" content="<?php echo setting(
-        'admin.description'
-    ); ?>">
+@section('meta-description')
+    <?php echo setting('admin.description') ?>
 @endsection
 
-@section('styles')
+@section('css')
     <style>
-        .card-header {
-            width: 100% !important;
-            min-width: 100% !important;
-            position: relative !important;
-            left: 0px !important;
-            top: 0px !important;
+        .avatar-large {
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+            display: inline-block;
+            background-size: cover;
+            background-position: center;
         }
 
-        .card {
-            background: #fff !important;
+        .card.border {
+            border-color: #cfd8e2 !important;
         }
 
-        #gradient {
-            display: none;
+        .card-header{
+            background:#fff !important;
         }
 
-        .card-signup {
-            /*background: orangered !important;*/
-            background: linear-gradient(45deg, #9360ff, #4286ff) !important;
+        .card{
+            height:auto !important;
+            min-height:auto !important;
         }
 
-        .card-signup .card-body i, .card-signup h4 {
-            color: #fff !important;
-        }
 
-        #signin {
-            color: #444 !important;
-        }
-
-        .bg-gradient-light {
-            background: linear-gradient(45deg, #ff6060, #ff426e) !important;
-        }
-
-        .checkbox label::before, .checkbox label::after {
-            background: #fff;
-        }
-
-        .input-group-addon {
-            padding-right: 20px !important;
-            background: rgba(0, 0, 0, 0.3) !important;
-        }
-
-        input {
-            -webkit-text-fill-color: #333 !important;
-            -webkit-box-shadow: 0 0 0 30px white inset !important;
-        }
-
-        .help-block {
-            color:#fff !important;
-            text-align: center;
-            margin-bottom:15px;
-            max-width:75%;
-            margin-top:-25px;
-        }
-
-        .shadowed {
-            -webkit-filter: drop-shadow(0px 6px 3px rgba(15,15,150,0.15)) !important;
-            filter: url(#drop-shadow);
-            -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=6, Color='#444')";
-            filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=6, Color='#444')";
-        }
-        @media(max-width: 991px) {
-            .row{
-                margin-top:25px !important;
-                margin-left:10px;
-                margin-right:10px;
-            }
-        }
-
-        .btn-icon:hover, #signin:hover {
-            transform: scale(1.1); /* Equal to scaleX(0.7) scaleY(0.7) */
-        }
-
-        .input-group input {
-            border-radius:0px 4px 4px 0px;
-        }
-        .input-group-addon {
-            border-radius:4px 0px 0px 4px;
-        }
-
-        .bg-gradient {
-            background:linear-gradient(-45deg, #f1f8ff 0%, #95a7ff30 100%) !important;
-        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
 
+    <style>
+        #contentForm .col-lg-9 {
+            min-width: 100% !important;
+        }
+        .input-group {
+            margin-bottom:15px;
+        }
+        .input-group-addon {
+            min-width:50px;
+            background:#eee;
+            border-radius:5px 0px 0px 5px;
+            color:#a3aac5;
+            padding:13px;
+        }
+
+        .btn-login {
+            border: 1px solid #d6e8ff !important;
+            background: #d6e8ff !important;
+        }
+
+    </style>
 @endsection
 
+@section('navbar-classes')
+    @foreach($viewOptions['navbar-classes'] as $class)
+        {{ $class }}
+    @endforeach
+@endsection
+
+@section('splash-class')
+    minimal
+@endsection
 
 @section('content')
-    <body class="index-page sidebar-collapse bg-gradient" style="height:100vh;">
-    <div class="container">
-        <div class="row" style="margin-top:5%;">
-            <div class="card card-signup bg-gradient-blue">
+<div class=" section section-invert" style="border:none !important;min-height:100%;">
+    <div class="container" align="center">
+        <div class="row pt-5">
+            <div class="card mx-auto mb-4 p-4">
                 <form class="form-horizontal " method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
-                    <div class="header text-center">
+                    <div class="card-header border-bottom text-center">
                         @if(setting('site.logo') !== null)
                             <div>
                                 <img src="{{ setting('site.logo') }}" style="max-height:70px;margin-bottom:15px;" class="shadowed"/>
                             </div>
                         @endif
-                        <h4 class="title title-up">Sign In</h4>
+                        <h4 class="title title-up mb-1">Sign In</h4>
+                        <h6 class="mb-4">to continue</h6>
+                    </div>
+                    <div class="card-body pt-0">
                         <div class="social-line">
                             @if(setting('auth.enable-twitter-login') == 'true')
                             <a href="#login" class="btn btn-neutral btn-twitter btn-icon btn-lg  btn-round">
@@ -144,16 +127,16 @@
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </div>
                             @endif
-                            <div class="input-group form-group-no-border">
+                            <div class="input-group ">
                                 <span class="input-group-addon">
-                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                    <i class="fa fa-fw fa-envelope"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="Email..." name="email"
                                        value="{{ old('email') }}" required autofocus>
                             </div>
-                            <div class="input-group form-group-no-border">
+                            <div class="input-group ">
                                 <span class="input-group-addon">
-                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                    <i class="fa fa-fw fa-lock"></i>
                                 </span>
                                 <input type="password" placeholder="Password..." class="form-control" required
                                        name="password">
@@ -180,23 +163,26 @@
                         </div>
                     </div>
                     <div class="footer text-center">
-                        <button class="btn btn-neutral btn-round btn-lg" id="signin">Sign In</button>
+                        <button class="btn btn-white btn-login btn-pill btn-lg mb-3" id="signin">Sign In</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <div align="center" style="margin-top:15px;">
-        <a href="/" class="btn btn-link">
+        <a href="/register" class="btn btn-outline-primary">
+            Create An Account
+        </a>
+        <a href="/" class="btn btn-outline-secondary hiddenOnDesktop">
             @if(setting('site.name') !== null)
             Back to {{setting('site.name')}}
             @else
-            Back to {{ config('app.url') }}
+            Back to <i class="fa fa-fw fa-home"></i>
             @endif
         </a>
         @if(setting('auth.tos-link') !== null)
         <a href="{{setting('auth.tos-link')}}" target="_blank" class="btn btn-link">Terms of Service</a>
         @endif
     </div>
-    </body>
+</div>
 @endsection

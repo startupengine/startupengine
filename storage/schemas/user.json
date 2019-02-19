@@ -71,7 +71,8 @@
       "type": "text",
       "validations": {
         "email": true,
-        "required": true
+        "required": true,
+        "unique": "users"
       }
     },
     "avatar": {
@@ -79,7 +80,7 @@
       "description": "A picture of you.",
       "type": "image",
       "validations": {
-        "url": true
+
       }
     },
     "bio": {
@@ -95,6 +96,12 @@
         "Active": "ACTIVE",
         "Inactive": "INACTIVE"
       },
+      "validations": {
+
+      }
+    },
+    "password": {
+      "type": "text",
       "validations": {
         "required": true
       }

@@ -9,7 +9,7 @@
 @endsection
 
 @section('splash-style')
-background-image:url('https://images.unsplash.com/photo-1510416096143-b3f355567e3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');
+background-image:url('https://images.unsplash.com/photo-1505051508008-923feaf90180?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'); background-size:cover;
 @endsection
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.shards_frontend')
+@extends('layouts.app')
 
 @section('content')
     <body class="index-page sidebar-collapse bg-gradient-orange">

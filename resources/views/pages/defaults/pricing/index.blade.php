@@ -1,6 +1,6 @@
 @extends('layouts.shards_frontend')
 
-@section('title') Content @endsection
+@section('title') Pricing @endsection
 
 @section('css')
     <style>
@@ -141,7 +141,7 @@
             height: auto !important;
             max-height: auto !important;
             min-height: 500px;
-            background:none;
+            background: none;
             /*background-image:url('https://images.unsplash.com/photo-1508796079212-a4b83cbf734d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');*/
         }
 
@@ -238,7 +238,7 @@
 
         #description h1, #description h2, #description h3, #description h4, #description h5, #description h6 {
             margin: 15px;
-            font-weight:300;
+            font-weight: 300;
         }
 
         #description {
@@ -262,11 +262,27 @@
         .affix.navbar .navbar-brand {
             color: #fff;
         }
+
+        .card-header {
+            background:#edfff6;
+            color:#8ac1b2 !important;
+        }
     </style>
     <style>
         #contentApp {
             display: contents !important;
             width: 100% !important;
+        }
+        .card-subtitle, .card-title {
+            color: #333 !important;
+        }
+        .text-dull-blue h5, .text-dull-blue h6  {
+            color:#557698 !important;
+            text-align:center;
+        }
+
+        .card-subtitle {
+            opacity:0.7;
         }
     </style>
 @endsection
@@ -281,14 +297,28 @@
 @endsection
 
 @section('header')
+    <?php $softwareProducts = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Software Subscription')->get(); ?>
+    <?php $contentProducts = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Content Subscription')->get(); ?>
+    <?php $results = []; if(count($contentProducts) > 0 ){ $results[] = 'Content Subscription'; } if(count($softwareProducts) > 0 ){ $results[] = 'Software Subscription'; } ?>
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
             <div class="col-md-12 px-4 text-white text-center py-5" id="description">
-                <h2 class="page-title mb-4">Content</h2>
-                <div class="input-group d-inline-flex px-4" style="max-width:800px;" id="">
-                    <input id="search" autocomplete="off" class="form-control form-control-lg form-control-translucent"  placeholder="Search..." style="border-radius:30px;padding-left:20px !important;"/>
-                </div>
+                <h2 class="page-title my-5">Pricing</h2>
+                @if(count($results) > 1)
+                    <div class="btn-group btn-group-sm mx-auto">
+                        <div class="btn btn-black disabled">Showing</div>
+                        <a class="btn btn-white border-white text-dark pl-4 truncate" href="#" aria-haspopup="true"
+                           aria-expanded="false" tyle="border-left:none;"
+                           data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                           '<div align="center">@foreach($results as $type)
+                                   <div class="dropdown-item py-1 px-3 m-0" onclick="changeContentType({&apos;label&apos;:&apos;{{ ucwords($type) }}&apos;,&apos;post_type&apos;:&apos;post_type={{ $type }}&apos;})">{{ ucwords($type) }}</div>
+                                @endforeach</div>'
+                           data-html="true">
+                            <span class="mr-1" id="selectedContentType">Software Subscriptions</span><span
+                                    class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -297,42 +327,80 @@
 
 
 @section('content')
+
+    <?php $softwares = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Software Subscription')->get(); ?>
     <main id="content">
-            @if(count(\App\PostType::all()) > 0)
-            <nav class="navbar navbar-expand-sm navbar-light" data-toggle="affix" align="center"
-                 style="background: #dae4f9;border: 1px solid rgba(0,0,0,0.05);">
-                <div class="container" align="center">
-                    <div class="btn-group btn-group-sm mx-auto">
-                        <div class="btn btn-black disabled">Showing</div>
-                        <a class="btn btn-white border-white pl-4 truncate" href="#" aria-haspopup="true"
-                           aria-expanded="false" tyle="border-left:none;"
-                           data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
-                           '<div align="center">@foreach(\App\PostType::all() as $postType)
-                                   <div class="dropdown-item py-1 px-3 m-0" onclick="changeContentType({&apos;label&apos;:&apos;{{ ucwords($postType->getPluralName()) }}&apos;,&apos;post_type&apos;:&apos;post_type={{ $postType->slug }}&apos;})">{{ ucwords($postType->getPluralName()) }}</div>
-                            @endforeach <div class="dropdown-divider"></div> <div class="dropdown-item py-1 px-3 m-0" onclick="resetContentType()">All Content</div></div>'
-                           data-html="true">
-                            <span class="mr-1" id="selectedContentType">All Content</span><span
-                                    class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
-                    </div>
-                </div>
-            </nav>
-            @endif
-
-
-        <div class="blog section section-invert p-4  " style="min-height:30vh;border:none !important;">
-            <div class="container">
-                <div class="row px-0 pt-3">
-
-
-                            <div class="row justify-content-center" id="contentApp" >
-                                {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => "w-100", 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content', 'WRAPPER_STYLE' => '', 'CONTAINER_STYLE'=> 'width:calc(100%);opacity:0;']) !!}
+        @foreach($softwares as $product)
+            <?php $plans = $product->stripePlans()->data; ?>
+            @if(count($plans) <= 1)
+                <div class="blog section section-invert p-4  " style="min-height:30vh;">
+                    <div class="container">
+                        <div class="row px-0 pt-3 pb-5" >
+                            <div class="row justify-content-center text-center" id="contentApp">
+                                <div class="col-md-6 mx-auto">
+                                    <div class="card  h-auto" style="@if(count($softwares) == 1)margin-top:-72px; @else margin-top:30px; @endif min-height:auto !important;">
+                                        <div class="card-header">{{ $product->name }}</div>
+                                        <div class="card-body h-auto text-center">
+                                            <p class="card-text">@if($product->getJsonContent('[sections][about][fields][description]') != null){{ $product->getJsonContent('[sections][about][fields][description]') }} @endif</p>
+                                            <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>99</h5>
+                                            <h6 class="card-subtitle mb-4 text-muted">per month</h6>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item border-none">Feature 1</li>
+                                                <li class="list-group-item">Feature 2</li>
+                                                <li class="list-group-item">Feature 3</li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-footer text-center pt-0 pb-5">
+                                            <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
-
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            @else
+                    <div class="blog section section-invert p-4 pt-5 border-none" style="min-height:calc(100% - 300px);">
+                        <div class="container">
+                            @if(count($softwares) > 1)
+                                <div class="row mb-4 pt-4 pb-0">
+                                    <div class="col-md-12 text-dull-blue mb-0">
+                                        <div class=" h-auto pt-3 px-4 pb-3 " style="min-height:auto !important;border-radius:5px !important;xwxw">
+                                        <h5>{{ $product->name }}</h5>
+                                        @if($product->getJsonContent('[sections][about][fields][description]') != null) <h6 class="dimmed">{{ $product->getJsonContent('[sections][about][fields][description]') }}</h6> @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="row" @if(count($softwares) == 1)  style="margin-top:-110px;" @endif>
+                                <div class="row justify-content-center text-center" id="contentApp" >
+                                    @foreach($plans as $plan)
+                                        <?php $dbEntry = \App\Plan::where('stripe_id', '=', $plan->id)->first(); ?>
+                                        <div class="@if(count($plans) > 2) col-md-4 @else col-md-6 @endif mb-5 mx-auto">
+                                            <div class="card h-auto " style="min-height:auto !important;">
+                                                <div class="card-header">{{ $plan->nickname }}</div>
+                                                <div class="card-body h-auto text-center">
+                                                    @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][description]') != null) <p class="card-text">{{ $dbEntry->getJsonContent('[sections][about][fields][description]')  }}</p>@endif
+                                                    <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>99</h5>
+                                                    <h6 class="card-subtitle mb-4 text-muted">per month</h6>
+                                                    @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][features]') != null)<div>{!!  $dbEntry->getJsonContent('[sections][about][fields][features]') !!}</div>@endif
+                                                </div>
+                                                <div class="card-footer text-center pt-0 pb-5">
+                                                    <a href="/subscribe/{{ $product->stripe_id }}/{{ $plan->id }}" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            @endif
+        @endforeach
     </main>
 @endsection
 
@@ -373,19 +441,21 @@
         });
     </script>
     <script>
-        $( "#search" ).change(function() {
+        $("#search").change(function () {
             var search = $("#search").val();
             contentApp.updateSearch(search);
         });
-        function changeContentType(input){
+
+        function changeContentType(input) {
             var newobj = {'post_type': input.post_type};
             contentApp.updateFilters(newobj);
             $("#selectedContentType").text(input.label);
         }
-        function resetContentType(){
-            contentApp.reset({'filters':true, 'search':true});
+
+        function resetContentType() {
+            contentApp.reset({'filters': true, 'search': true});
             $("#selectedContentType").text("All Content");
         }
     </script>
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards']) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/product', 'DISPLAY_FORMAT' => 'cards']) !!}
 @endsection

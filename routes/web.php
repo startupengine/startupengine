@@ -14,6 +14,8 @@
 // Use Custom Modules
 use Caffeinated\Modules\Facades\Module;
 
+Route::post('/api/new-register', 'Api\UsersController@create');
+
 Route::group(
     ['middleware' => ['web', 'permission:view backend', 'backend']],
     function () {
@@ -24,7 +26,7 @@ Route::group(
 // User Facing Front-End
 Route::group(['middleware' => ['web']], function () {
     //Authentication
-    Auth::routes();
+    Auth::routes(['verify' => true]);
     Route::get('/login', 'AppController@login')->name('login');
     Route::get(
         '/logout',
@@ -74,6 +76,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/{slug}', 'PageController@getPage')->name('page');
 
     //Subscriptions
+    Route::get(
+        '/subscribe/{product_id}/{plan_id}',
+        'SubscriptionController@addSubscription'
+    )->name('newSubscription');
     Route::get(
         '/subscribe/{id}',
         'SubscriptionController@confirmSubscription'

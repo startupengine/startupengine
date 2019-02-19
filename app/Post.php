@@ -10,11 +10,10 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Appstract\Meta\Metable;
-use \Conner\Tagging\Taggable;
+use Conner\Tagging\Taggable;
 use NexusPoint\Versioned\Versioned;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Carbon\Carbon;
-
 
 class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 {
@@ -102,7 +101,11 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function category()
     {
-        $category = \App\Category::where('id', '=', $this->category_id)->first();
+        $category = \App\Category::where(
+            'id',
+            '=',
+            $this->category_id
+        )->first();
         return $category;
     }
 
@@ -113,28 +116,38 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
                 foreach ($this->schema()->sections as $section) {
                     if ($section->fields != null) {
                         foreach ($section->fields as $field => $value) {
-
-                            if (isset($value->isThumbnail) && $value->isThumbnail == true) {
+                            if (
+                                isset($value->isThumbnail) &&
+                                $value->isThumbnail == true
+                            ) {
                                 $slug = $section->slug;
-                                $string = "sections->" . $slug . "->fields->" . $field;
 
-                                if ($this->content()->sections->$slug->fields->$field) {
-                                    return $this->content()->sections->$slug->fields->$field;
+                                $contentstring =
+                                    '[sections][' .
+                                    $slug .
+                                    '][fields][' .
+                                    $field .
+                                    ']';
+                                if (
+                                    $this->getJsonContent($contentstring) !=
+                                    null
+                                ) {
+                                    return $this->getJsonContent(
+                                        $contentstring
+                                    );
                                 } else {
                                     return null;
                                 }
-
-
                             }
                         }
                     }
                 }
             }
         }
-
     }
 
-    public function setType($type = 'article'){
+    public function setType($type = 'article')
+    {
         $this->post_type = $type;
     }
 
@@ -143,62 +156,78 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         $path = file_get_contents(storage_path() . '/schemas/post.json');
         $baseSchema = json_decode($path, true);
 
-        if($this->postType() != null) {
-            if($this->postType()->first() != null && isset($this->postType()->first()->json)) {
-                $postTypeSchema = json_decode($this->postType()->first()->json, true);
-            }
-            else {
+        if ($this->postType() != null) {
+            if (
+                $this->postType()->first() != null &&
+                isset($this->postType()->first()->json)
+            ) {
+                $postTypeSchema = json_decode(
+                    $this->postType()->first()->json,
+                    true
+                );
+            } else {
                 $postTypeSchema = [];
             }
 
             $merged = array_merge($postTypeSchema, $baseSchema);
 
             $merged = json_decode(json_encode($merged));
-        }
-        else {
+        } else {
             $merged = $baseSchema;
         }
-        //dd($merged);
+
         return $merged;
     }
 
     public function postType()
     {
-        if($this->post_type == null){
+        if ($this->post_type == null) {
             $this->setType();
         }
         return $this->hasOne('App\PostType', 'slug', 'post_type');
-
     }
 
     public function thumbnailField($fullString = false)
     {
-
         if ($this->schema() != null && isset($this->schema()->sections)) {
             foreach ($this->schema()->sections as $section) {
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
-
-                        if (isset($value->isThumbnail) && $value->isThumbnail == true) {
+                        if (
+                            isset($value->isThumbnail) &&
+                            $value->isThumbnail == true
+                        ) {
                             $slug = $section->slug;
-                            $string = "sections->" . $slug . "->fields->" . $field;
+                            $string =
+                                "sections->" . $slug . "->fields->" . $field;
                             if ($fullString == true) {
                                 return $string;
                             } else {
                                 return $field;
                             }
-
                         }
                     }
                 }
             }
         }
-
     }
 
-    public function sectionHasContent($sectionName, $fieldsToExclude = [], $returnFields = false)
-    {
-        if (isset($this->schema()->sections->$sectionName) && isset($this->content()->sections->$sectionName)) {
+    public function sectionHasContent(
+        $sectionName,
+        $fieldsToExclude = [],
+        $returnFields = false
+    ) {
+        $result = $this->getJsonContent('[sections][' . $sectionName . ']');
+        if ($result == null) {
+            return false;
+        } else {
+            return true;
+        }
+        /*
+        if (
+            isset($this->schema()->sections->$sectionName) &&
+            isset($this->content()->sections->$sectionName)
+        ) {
             $section = $this->schema()->sections->$sectionName;
             $fieldsWithContent = [];
             foreach ($section->fields as $field => $value) {
@@ -207,7 +236,9 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
                 if (isset($this->content()->sections->$slug->fields->$field)) {
                     if (in_array($field, $fieldsToExclude)) {
                     } else {
-                        $fieldsWithContent[$field] = $this->content()->sections->$slug->fields->$field;
+                        $fieldsWithContent[
+                            $field
+                        ] = $this->content()->sections->$slug->fields->$field;
                     }
                 }
             }
@@ -223,6 +254,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         } else {
             return false;
         }
+        */
     }
 
     public function excerpt()
@@ -241,16 +273,22 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
                         dd($section->fields);
-                        if (isset($value->isExcerpt) && $value->isExcerpt == true) {
-
+                        if (
+                            isset($value->isExcerpt) &&
+                            $value->isExcerpt == true
+                        ) {
                             $slug = $section->slug;
-                            $string = "sections->" . $slug . "->fields->" . $field;
-                            if ($this->content()->sections->$slug->fields->$field) {
-                                return $this->content()->sections->$slug->fields->$field;
+                            $string =
+                                "sections->" . $slug . "->fields->" . $field;
+                            if (
+                                $this->content()->sections->$slug->fields
+                                    ->$field
+                            ) {
+                                return $this->content()->sections->$slug->fields
+                                    ->$field;
                             } else {
                                 return null;
                             }
-
                         }
                     }
                 }
@@ -294,9 +332,11 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'author_id')->withDefault(function ($user) {
-            $user->id = 'User ID';
-        });
+        return $this->hasOne('App\User', 'id', 'author_id')->withDefault(
+            function ($user) {
+                $user->id = 'User ID';
+            }
+        );
     }
 
     public function primaryTag()
@@ -304,7 +344,9 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         $tags = $this->tagNames();
         if ($tags !== null && count($tags) !== 0) {
             $primaryTag = $tags[0];
-            $tag = \App\Post::where('post_type', '=', 'tag')->where('slug', '=', strtolower($primaryTag))->first();
+            $tag = \App\Post::where('post_type', '=', 'tag')
+                ->where('slug', '=', strtolower($primaryTag))
+                ->first();
             return $tag;
         } else {
             return null;
@@ -325,8 +367,10 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         } else {
             $endDate = new Carbon();
         }
-        $views = $this->hasMany('App\AnalyticEvent', 'model_id')->where('event_type', '=', 'content viewed')->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);
+        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
+            ->where('event_type', '=', 'content viewed')
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate);
         return $views;
     }
-
 }

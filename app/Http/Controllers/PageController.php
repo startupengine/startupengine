@@ -104,6 +104,13 @@ class PageController
 
     public function getPage($slug)
     {
+        /*$products = \App\Product::where('status', 'ACTIVE')
+            ->where(
+                'json->sections->about->fields->type',
+                'Software Subscription'
+            )
+            ->get();*/
+        //dd($products);
         $page = \App\Page::where('slug', '=', $slug)
             ->where('status', '=', 'ACTIVE')
             ->first();
