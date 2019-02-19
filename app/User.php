@@ -313,4 +313,9 @@ class User extends AuthUser implements
         $this->password = Hash::make(str_random(11));
         $this->save();
     }
+
+    public function setPasswordAttribute($pass)
+    {
+        $this->attributes['password'] = Hash::make($pass);
+    }
 }

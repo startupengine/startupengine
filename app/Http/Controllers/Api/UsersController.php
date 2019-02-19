@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -163,32 +164,12 @@ class UsersController extends Controller
                 if ($request->input('save') == true) {
                     $item->json = null;
 
-                    foreach ($newArray as $field => $data) {
-                        if (strpos($data[0], 'json.') !== false) {
-                            $fieldString = convertDotsToArrows($data[0]);
-                        } else {
-                            $fieldString = $data[0];
-                        }
+                    $item->name = $request->input('data')['name'];
+                    $item->email = $request->input('data')['email'];
+                    $item->password = Hash::make(
+                        $request->input('data')['password']
+                    );
 
-                        if ($item->overRideEdit() == true) {
-                            $item = $item->objectToEdit();
-                            if ($item != null) {
-                                $item->forceFill([
-                                    $fieldString => $data[1]
-                                ]);
-
-                                $item->save();
-                            }
-                        } else {
-                            $item->forceFill([
-                                $fieldString => $data[1]
-                            ]);
-                        }
-
-                        if ($item->postSave() == true) {
-                            $item->postSave(true);
-                        }
-                    }
                     unset($item->schema);
 
                     $item->save();
