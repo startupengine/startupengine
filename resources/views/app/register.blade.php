@@ -71,6 +71,10 @@
         .input-group-addon i.text-danger {
             opacity:0.66 !important;
         }
+
+        .input-group-addon-danger {
+            background:#ffdfe2;
+        }
     </style>
 @endsection
 
@@ -140,7 +144,7 @@
                                     </div>
                                 @endif
                                 <div class="input-group ">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon" v-bind:class="{ 'input-group-addon-danger': (info != null && info.status == 'error' && info.meta.fields.name.valid == false) }">
                                     <i class="fa fa-fw fa-user text-danger" v-if="info != null && info.status == 'error' && info.meta.fields.name.valid == false" ></i>
                                     <i class="fa fa-fw fa-user" v-else></i>
                                 </span>
@@ -150,7 +154,7 @@
                                 </div>
                                 <p v-if="info != null && info.status == 'error' && info.meta.fields.name.hasOwnProperty('first_error')" class="text-danger text-left mt-0 mb-3">@{{ info.meta.fields.name.first_error }}</p>
                                 <div class="input-group ">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon"  v-bind:class="{ 'input-group-addon-danger': (info != null && info.status == 'error' && info.meta.fields.email.valid == false) }">
                                     <i class="fa fa-fw fa-envelope text-danger" v-if="info != null && info.status == 'error' && info.meta.fields.email.valid == false" ></i>
                                     <i class="fa fa-fw fa-envelope" v-else></i>
                                 </span>
@@ -160,7 +164,7 @@
                                 </div>
                                 <p v-if="info != null && info.status == 'error' && info.meta.fields.email.hasOwnProperty('first_error')" class="text-danger text-left mt-0 mb-3">@{{ info.meta.fields.email.first_error}}</p>
                                 <div class="input-group ">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon"  v-bind:class="{ 'input-group-addon-danger': (info != null && info.status == 'error' && info.meta.fields.password.valid == false) }">
                                     <i class="fa fa-fw fa-lock text-danger" v-if="info != null && info.status == 'error' && info.meta.fields.password.valid == false" ></i>
                                     <i class="fa fa-fw fa-lock" v-else></i>
                                 </span>

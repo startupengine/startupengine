@@ -27,6 +27,8 @@ Route::group(
 Route::group(['middleware' => ['web']], function () {
     //Authentication
     Auth::routes(['verify' => true]);
+    Route::get('/verify', 'Auth\VerificationController@verify')->name('verify');
+
     Route::get('/login', 'AppController@login')->name('login');
     Route::get(
         '/logout',
@@ -73,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
     //Pages
     Route::get('/', 'PageController@getHomepage')->name('homepage');
     Route::get('/home', 'PageController@getHomepage')->name('home');
-    Route::get('/{slug}', 'PageController@getPage')->name('page');
+    Route::get('/{slug}', 'PageController@getPage')->name('view page');
 
     //Subscriptions
     Route::get(
@@ -188,7 +190,6 @@ Route::group(
         );
     }
 );
-
 //Custom Module Routes
 foreach (Module::enabled() as $module) {
     $file = '/app/Modules/' . $module['name'] . '/Http/Routes/web.php';
@@ -196,3 +197,5 @@ foreach (Module::enabled() as $module) {
         include $file;
     }
 }
+
+Route::get('/home', 'HomeController@index')->name('home');
