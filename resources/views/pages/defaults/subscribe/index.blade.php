@@ -495,10 +495,10 @@
                                         <div v-if="status == 'loading'" >
                                             <i class="fa fa-fw fa-spinner fa-spin animate mr-2"></i>Loading...
                                         </div>
-                                        <div class="bg-white p-4 br-5 p-4 margin-top-72-large raised toggleVisibility d-block" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"   v-else-if="status == 'loaded' && info.hasOwnProperty('meta') == true && info.meta.status == 'success'">
+                                        <div class="bg-white p-4 br-5 p-4 margin-top-72-large raised toggleVisibility invisible" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"   v-else-if="status == 'loaded' && info.hasOwnProperty('meta') == true && info.meta.status == 'success'">
                                             <i class="fa fa-fw fa-check-circle text-success mr-2"></i>Success! You have subscribed to {{ $product->name }}. You may manage your subscriptions in <a href="/app/subscriptions">My Subscriptions</a>.
                                         </div>
-                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility d-block" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"  v-else class="text-danger">
+                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility invisible" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"  v-else class="text-danger">
                                             <i class="fa fa-fw fa-exclamation-circle text-success mr-2"></i> Something went wrong. Reload the page and try again.
                                         </div>
                                     </div>

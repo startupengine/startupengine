@@ -249,6 +249,8 @@ li .dimmed {
   background: rgba(10,10,250,0.1);
 }
 
+
+
 #topNavbar.shadowed {
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.66);
   transition: all 0.2s ease-in-out !important;
@@ -331,21 +333,9 @@ h1 {
   font-weight: 500 !important;
 }
 
-.invisible {
-  opacity: 0;
-  transition: all 0.5s;
-}
 
-.visible {
-  opacity: 1 !important;
-  display: flex;
-  transition: all 0.5s;
-}
 
-.toggleVisibility {
-  display: none;
-  transition: all 0.5s !important;
-}
+
 
 .modal-backdrop.show {
   opacity: 0.6 !important;
