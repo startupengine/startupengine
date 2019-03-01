@@ -499,7 +499,7 @@
                                             <i class="fa fa-fw fa-check-circle text-success mr-2"></i>Success! You have subscribed to {{ $product->name }}. You may manage your subscriptions in <a href="/app/subscriptions">My Subscriptions</a>.
                                         </div>
                                         <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.errors != null, 'd-block': info.errors != null}"  v-else-if="info.errors != null" >
-                                            <i class="fa fa-fw fa-exclamation-circle text-danger mr-2"></i> @{{ info.errors.message }}
+                                            <i class="fa fa-fw fa-exclamation-circle text-danger mr-2"></i> Something went wrong. Reload the page and try again.
                                         </div>
                                         <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.hasOwnProperty('meta') == true, 'd-block': info.hasOwnProperty('meta') == true}"  v-else >
                                             <i class="fa fa-fw fa-exclamation-circle text-danger mr-2"></i> Something went wrong. Reload the page and try again.
