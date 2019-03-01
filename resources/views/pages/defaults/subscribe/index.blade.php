@@ -264,8 +264,8 @@
         }
 
         .card-header {
-            background:#edfff6;
-            color:#8ac1b2 !important;
+            background: #edfff6;
+            color: #8ac1b2 !important;
         }
     </style>
     <style>
@@ -273,16 +273,126 @@
             display: contents !important;
             width: 100% !important;
         }
+
         .card-subtitle, .card-title {
             color: #333 !important;
         }
-        .text-dull-blue h5, .text-dull-blue h6  {
-            color:#557698 !important;
-            text-align:center;
+
+        .text-dull-blue h5, .text-dull-blue h6 {
+            color: #557698 !important;
+            text-align: center;
         }
 
         .card-subtitle {
-            opacity:0.7;
+            opacity: 0.7;
+        }
+    </style>
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <style>
+        /**
+       * The CSS shown here will not be introduced in the Quickstart guide, but shows
+       * how you can use CSS to style your Element's container.
+       */
+        .StripeElement {
+            background-color: white;
+            height: 40px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+
+        #card-errors {
+            margin-top: 10px !important;
+        }
+
+        #subscribeForm .btn-success {
+            display: none;
+        }
+
+        #subscribeForm .btn-danger {
+            display: none;
+        }
+
+        #subscribeForm.status-success .btn-success {
+            display: inline-block;
+        }
+
+        #subscribeForm.status-error .btn-danger {
+            display: inline-block;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .input-group-addon {
+            min-width: 50px;
+            background: #eee;
+            border-radius: 5px 0px 0px 5px;
+            color: #a3aac5 !important;
+            padding: 13px;
+        }
+
+        .input-group-addon i {
+            color: #a3aac5 !important;
+        }
+
+        .btn-login {
+            color: #fff;
+            border: 1px solid #858a94 !important;
+            padding: 9px 25px 10px 25px;
+            background: linear-gradient(#858a94, #2d2d33) !important;
+            margin: 0px 10px !important;
+        }
+
+        .input-group-addon i.text-danger {
+            opacity: 0.66 !important;
+        }
+
+        .input-group-addon-danger {
+            background: #ffdfe2;
+        }
+
+        @media (min-width: 768px) {
+            #formCard {
+                margin-top: -87px !important;
+            }
+
+            .margin-top-72-large {
+                margin-top:-72px;
+            }
+        }
+
+        .bg-white {
+            display:inline-block !important;
+        }
+
+        .shards-landing-page--1 .welcome:before {
+            background: linear-gradient(30deg, #ff568f 0%, #ff4760 35%, #ffe09b 100%) !important;
+        }
+
+        #topNavbar {
+            background: rgba(250, 50, 50, 0.15) !important;
         }
     </style>
 @endsection
@@ -293,32 +403,13 @@
 
 @section('page-title') Content @endsection
 
-@section('top-menu')
-@endsection
-
 @section('header')
-    <?php $softwareProducts = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Software Subscription')->get(); ?>
-    <?php $contentProducts = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Content Subscription')->get(); ?>
-    <?php $results = []; if(count($contentProducts) > 0 ){ $results[] = 'Content Subscription'; } if(count($softwareProducts) > 0 ){ $results[] = 'Software Subscription'; } ?>
+
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
             <div class="col-md-12 px-4 text-white text-center py-5" id="description">
-                <h2 class="page-title my-5">Subscribe</h2>
-                @if(count($results) > 1)
-                    <div class="btn-group btn-group-sm mx-auto">
-                        <div class="btn btn-black disabled">Showing</div>
-                        <a class="btn btn-white border-white text-dark pl-4 truncate" href="#" aria-haspopup="true"
-                           aria-expanded="false" tyle="border-left:none;"
-                           data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
-                           '<div align="center">@foreach($results as $type)
-                                   <div class="dropdown-item py-1 px-3 m-0" onclick="changeContentType({&apos;label&apos;:&apos;{{ ucwords($type) }}&apos;,&apos;post_type&apos;:&apos;post_type={{ $type }}&apos;})">{{ ucwords($type) }}</div>
-                                @endforeach</div>'
-                           data-html="true">
-                            <span class="mr-1" id="selectedContentType">Software Subscriptions</span><span
-                                    class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
-                    </div>
-                @endif
+                <h2 class="page-title mb-4">Subscribe</h2>
             </div>
         </div>
     </div>
@@ -328,134 +419,253 @@
 
 @section('content')
 
-    <?php $softwares = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Software Subscription')->get(); ?>
+
     <main id="content">
-        @foreach($softwares as $product)
-            <?php $plans = $product->stripePlans()->data; ?>
-            @if(count($plans) <= 1)
-                <div class="blog section section-invert p-4  " style="min-height:30vh;">
-                    <div class="container">
-                        <div class="row px-0 pt-3 pb-5" >
-                            <div class="row justify-content-center text-center" id="contentApp">
-                                <div class="col-md-6 mx-auto">
-                                    <div class="card  h-auto" style="@if(count($softwares) == 1)margin-top:-72px; @else margin-top:30px; @endif min-height:auto !important;">
-                                        <div class="card-header">{{ $product->name }}</div>
-                                        <div class="card-body h-auto text-center">
-                                            <p class="card-text">@if($product->getJsonContent('[sections][about][fields][description]') != null){{ $product->getJsonContent('[sections][about][fields][description]') }} @endif</p>
-                                            <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>99</h5>
-                                            <h6 class="card-subtitle mb-4 text-muted">per month</h6>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item border-none">Feature 1</li>
-                                                <li class="list-group-item">Feature 2</li>
-                                                <li class="list-group-item">Feature 3</li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-footer text-center pt-0 pb-5">
-                                            <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
-                                        </div>
-                                    </div>
+
+        <div class="blog section section-invert pt-4 pb-0 full-screen-section"
+             style="border:none; min-height:calc(100vh - 300px) !important;">
+
+            <div class="container">
+                <div class="col-md-12 justify-content-center">
+                    <div class="row">
+                        <div class="col-md-4  text-center">
+                            <div class="mt-0"
+                                 style="min-height:auto !important;border-radius:10px;    margin-top: -62px !important;">
+                                <div class="card-body pt-0">
+                                    <h5 class="text-light">{{ $product->name }}</h5>
+                                    <p class="pt-3 mb-2"><strong><span
+                                                    class="text-primary">${{ $plan->price/100 }}</span>
+                                            / {{ $plan->interval }}</strong></p>
+                                    <p class="pb-0 pt-2 mb-2"> {{ $product->description }}</p>
+                                    @if($plan->description != null) <p class="pt-2"> {{ $plan->description }}</p> @endif
                                 </div>
                             </div>
-
-
                         </div>
-                    </div>
-                </div>
-            @else
-                    <div class="blog section section-invert p-4 pt-5 border-none" style="min-height:calc(100% - 300px);">
-                        <div class="container">
-                            @if(count($softwares) > 1)
-                                <div class="row mb-4 pt-4 pb-0">
-                                    <div class="col-md-12 text-dull-blue mb-0">
-                                        <div class=" h-auto pt-3 px-4 pb-3 " style="min-height:auto !important;border-radius:5px !important;xwxw">
-                                        <h5>{{ $product->name }}</h5>
-                                        @if($product->getJsonContent('[sections][about][fields][description]') != null) <h6 class="dimmed">{{ $product->getJsonContent('[sections][about][fields][description]') }}</h6> @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-
-                            <div class="row" @if(count($softwares) == 1)  style="margin-top:-110px;" @endif>
-                                <div class="row justify-content-center text-center" id="contentApp" >
-                                    @foreach($plans as $plan)
-                                        <?php $dbEntry = \App\Plan::where('stripe_id', '=', $plan->id)->first(); ?>
-                                        <div class="@if(count($plans) > 2) col-md-4 @else col-md-6 @endif mb-5 mx-auto">
-                                            <div class="card h-auto " style="min-height:auto !important;">
-                                                <div class="card-header">{{ $plan->nickname }}</div>
-                                                <div class="card-body h-auto text-center">
-                                                    @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][description]') != null) <p class="card-text">{{ $dbEntry->getJsonContent('[sections][about][fields][description]')  }}</p>@endif
-                                                    <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>99</h5>
-                                                    <h6 class="card-subtitle mb-4 text-muted">per month</h6>
-                                                    @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][features]') != null)<div>{!!  $dbEntry->getJsonContent('[sections][about][fields][features]') !!}</div>@endif
+                        <div class="col-md-8">
+                            <div >
+                                <div class="card mx-auto mb-3 mt-0 px-3 bg-very-light-blue-alt w-100" id="formCard"
+                                     style="
+                                    min-height: auto !important;
+                                    box-shadow: 0px 15px 45px rgba(0,0,70,0.1) !important;
+                                    border: 1px solid #dfecf7 !important;
+                                    background: #f6f8ff !important;"
+                                     >
+                                    <div class="card-body" style="min-height:auto !important;">
+                                        <form v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0"
+                                              style="max-width:100%; text-align:right;">
+                                            <div class="form-row justify-content-left  pt-3">
+                                                <div class="badge badge-primary text-dark-blue bg-light-blue badge-pill px-3 mb-3 ml-1">
+                                                    Payment Method
                                                 </div>
-                                                <div class="card-footer text-center pt-0 pb-5">
-                                                    <a href="/subscribe/{{ $product->stripe_id }}/{{ $plan->id }}" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
+                                                <div id="card-element" style="width:100%;">
+                                                    <!-- A Stripe Element will be inserted here. -->
+                                                </div>
+
+                                                <!-- Used to display form errors. -->
+                                                <div id="card-errors" role="alert"></div>
+                                            </div>
+                                            <div class="form-row justify-content-left py-3">
+                                                <div class="badge badge-primary text-dark-blue bg-light-blue badge-pill px-3 mb-1 ml-1">
+                                                    E-mail Address
+                                                </div>
+                                                <div class="input-group">
+                                                <span class="input-group-addon ml-1"><i
+                                                            class="fa fa-fw fa-envelope text-dark"></i></span>
+                                                    <input v-on:input="changed()" type="text"
+                                                           class="form-control mr-1" placeholder="E-mail..."
+                                                           name="email"
+                                                           @if(\Auth::user()) value="{{ \Auth::user()->email }}" @endif
+                                                           value="{{ old('name') }}" required autofocus
+                                                           @if(\Auth::user()) disabled @endif>
                                                 </div>
                                             </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="w-100 d-block pr-md-0 pb-2" align="center" id="subscribeApp">
+                                    <div  v-if="status == 'loaded' && info.hasOwnProperty('meta') == false">
+                                        <div class="btn btn-lg btn-pill btn-default btn-outline-success mt-3 mr-4 mb-4 toggleVisibility" style="float:right;" v-bind:class="{ visible: status == 'loaded'}"  >
+                                            Continue<i
+                                                    class="fas fa-xs fa-chevron-right ml-2"></i>
                                         </div>
-                                    @endforeach
+                                    </div>
+                                    <div v-else >
+                                        <div v-if="status == 'loading'" >
+                                            <i class="fa fa-fw fa-spinner fa-spin animate mr-2"></i>Loading...
+                                        </div>
+                                        <div class="bg-white p-4 br-5 p-4 margin-top-72-large raised toggleVisibility d-block" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"   v-else-if="status == 'loaded' && info.hasOwnProperty('meta') == true && info.meta.status == 'success'">
+                                            <i class="fa fa-fw fa-check-circle text-success mr-2"></i>Success! You have subscribed to {{ $product->name }}. You may manage your subscriptions in <a href="/app/subscriptions">My Subscriptions</a>.
+                                        </div>
+                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility d-block" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"  v-else class="text-danger">
+                                            <i class="fa fa-fw fa-exclamation-circle text-success mr-2"></i> Something went wrong. Reload the page and try again.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-            @endif
-        @endforeach
+
+                </div>
+
+            </div>
+        </div>
+
     </main>
 @endsection
 
 @section('scripts')
+
+
     <script>
-        $(document).ready(function () {
+        // Create a Stripe client.
+        var stripe = Stripe('{{ stripeKey() }}');
 
-            var toggleAffix = function (affixElement, scrollElement, wrapper) {
+        // Create an instance of Elements.
+        var elements = stripe.elements();
 
-                var height = affixElement.outerHeight(),
-                    top = wrapper.offset().top;
-
-                if (scrollElement.scrollTop() >= top) {
-                    wrapper.height(height);
-                    affixElement.addClass("affix");
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                lineHeight: '18px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
                 }
-                else {
-                    affixElement.removeClass("affix");
-                    wrapper.height('auto');
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    console.log(result);
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                    console.log(result);
                 }
-
-            };
-
-
-            $('[data-toggle="affix"]').each(function () {
-                var ele = $(this),
-                    wrapper = $('<div></div>');
-
-                ele.before(wrapper);
-                $(window).on('scroll resize', function () {
-                    toggleAffix(ele, $(this), wrapper);
-                });
-
-                // init
-                toggleAffix(ele, $(window), wrapper);
             });
-
         });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            console.log(token.id);
+
+            // Submit the form
+                    @if(\Auth::user())
+            var userId = '{{ \Auth::user()->stripe_id }}';
+            @endif
+            stripeApp.updatePayload({token: token, userId: userId});
+            //form.submit();
+
+        }
     </script>
+
     <script>
-        $("#search").change(function () {
-            var search = $("#search").val();
-            contentApp.updateSearch(search);
+        var stripeApp = new Vue({
+            el: '#subscribeApp',
+            data: {
+                info: {},
+                payload: {},
+                hasErrors: false,
+                status: 'loading'
+            },
+            methods: {
+                onSubmit(input) {
+                    console.log('test');
+                    console.log(input);
+                },
+                updateInfo(info) {
+                    this.info = info;
+                    if (this.info.meta.status == 'success') {
+                        $("#lastFour").text(this.payload.token.card.last4);
+                        $("#card-element").hide();
+                        $("#subscribeForm").addClass('status-success');
+                    }
+                    if (this.info.meta.status == 'error') {
+                        $("#subscribeForm").addClass('status-error');
+                    }
+
+                    this.status = 'loaded';
+                },
+                updatePayload(payload) {
+                    this.payload = payload;
+                    //console.log(this.payload);
+                    this.addSubscription();
+                    $("#formCard").hide();
+                },
+                addSubscription() {
+                    this.status = 'loading';
+                    var config = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cache-Control': 'no-cache'
+                        }
+                    };
+                    var url = '/api/resources/product/{{ $product->id }}/transformation?action={{ $plan->stripe_id }}&transformation=Subscribe&user_id={{ \Auth::user()->id }}';
+                    payload = {data: this.payload};
+                    axiosConfig = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cache-Control': 'no-cache',
+                            "Access-Control-Allow-Origin": "*"
+                        }
+                    };
+                    axios({
+                        method: 'post',
+                        url: url,
+                        headers: axiosConfig,
+                        data: payload
+                    }).then(response => (this.updateInfo(response.data))
+                )
+                    ;
+                }
+            },
+            mounted() {
+                this.status = 'loaded';
+            }
         });
-
-        function changeContentType(input) {
-            var newobj = {'post_type': input.post_type};
-            contentApp.updateFilters(newobj);
-            $("#selectedContentType").text(input.label);
-        }
-
-        function resetContentType() {
-            contentApp.reset({'filters': true, 'search': true});
-            $("#selectedContentType").text("All Content");
-        }
     </script>
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/product', 'DISPLAY_FORMAT' => 'cards']) !!}
+
 @endsection

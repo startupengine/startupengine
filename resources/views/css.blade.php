@@ -16,3 +16,4 @@ $secondaryColor = setting('site.$secondaryColor');
 h1::after, h2::after, h3::after {
     background: {{ $brandColor }};
 }
+

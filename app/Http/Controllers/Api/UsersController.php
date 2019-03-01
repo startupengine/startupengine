@@ -173,6 +173,7 @@ class UsersController extends Controller
                     unset($item->schema);
 
                     $item->save();
+                    $item->sendEmailVerificationNotification();
                     $item->schema = $item->schema();
 
                     $response["message"] = "Input saved.";

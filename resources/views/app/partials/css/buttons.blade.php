@@ -14,6 +14,11 @@
         background: royalblue !important;
     }
 
+    .btn-purple {
+        background:lavender !important;
+        color:rebeccapurple !important;
+    }
+
     .btn-raised {
         box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.15) !important;
     }

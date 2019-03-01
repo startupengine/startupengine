@@ -19,8 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\TrustProxies::class,
-
+        \App\Http\Middleware\TrustProxies::class
     ];
 
     /**
@@ -41,16 +40,9 @@ class Kernel extends HttpKernel
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class
         ],
 
+        'backend' => [\App\Http\Middleware\Backend::class],
 
-        'backend' => [
-            \App\Http\Middleware\Backend::class
-        ],
-
-
-        'api' => [
-            'throttle:200,1',
-            'bindings',
-        ],
+        'api' => ['throttle:200,1', 'bindings']
     ];
 
     /**
@@ -62,13 +54,16 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.basic' =>
+            \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
-        'role'       => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' =>
+            \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class
     ];
 }

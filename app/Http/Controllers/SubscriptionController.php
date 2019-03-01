@@ -36,11 +36,17 @@ class SubscriptionController extends Controller
     public function addSubscription($product, $plan)
     {
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $product = \App\Product::where('stripe_id', $plan)->get();
-        $plan = \App\Plan::where('stripe_id', $plan)->get();
-        return view('pages.defaults.subscribe.index')
-            ->with('product', $product)
-            ->with('plan', $plan);
+
+        $product = \App\Product::where('stripe_id', '=', $product)->first();
+        $plan = \App\Plan::where('stripe_id', '=', $plan)->first();
+
+        if ($product != null && $plan != null) {
+            return view('pages.defaults.subscribe.index')
+                ->with('product', $product)
+                ->with('plan', $plan);
+        } else {
+            abort(404);
+        }
     }
 
     public function saveSubscription(Request $request)

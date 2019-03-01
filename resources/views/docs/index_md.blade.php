@@ -127,6 +127,10 @@
         .page-title > h1 {
             font-size:25px !important;
         }
+
+        .shards-landing-page--1 .welcome:before {
+            background: linear-gradient(235deg, #43eaad 0%, #4fa6ff 77%) !important;
+        }
     </style>
 @endsection
 

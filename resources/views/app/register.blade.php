@@ -202,7 +202,7 @@
                     </form>
                 </div>
                 <div v-else class="p-4 w-100" align="center">
-                    Loading...
+                    <span class="text-dark" style="font-weight:400;"><i class="fa fa-fw far fa-spin fa-sync-alt animate mr-2"></i>Loading...</span>
                 </div>
             </div>
         </div>

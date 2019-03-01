@@ -236,7 +236,7 @@
 <!-- / Mobile Nav Modal -->
 
 <!-- Footer Section -->
-<footer style="position:static;bottom:0px;width:100%;" class="hiddenOnDesktop">
+<footer style="position:static;bottom:0px;width:100%;" class="hiddenOnDesktop d-none">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#" style="margin-top:-3px;"><span

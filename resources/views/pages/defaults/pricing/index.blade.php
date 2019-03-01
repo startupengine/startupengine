@@ -263,10 +263,7 @@
             color: #fff;
         }
 
-        .card-header {
-            background:#edfff6;
-            color:#8ac1b2 !important;
-        }
+
     </style>
     <style>
         #contentApp {
@@ -283,6 +280,12 @@
 
         .card-subtitle {
             opacity:0.7;
+        }
+        .shards-landing-page--1 .welcome:before {
+            background: linear-gradient(30deg, #ff568f 0%, #ff4760 35%, #ffe09b 100%) !important;
+        }
+        #topNavbar {
+            background: rgba(250, 50, 50, 0.15) !important;
         }
     </style>
 @endsection
@@ -304,7 +307,7 @@
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
             <div class="col-md-12 px-4 text-white text-center py-5" id="description">
-                <h2 class="page-title my-5">Pricing</h2>
+                <h2 class="page-title mb-4">Pricing</h2>
                 @if(count($results) > 1)
                     <div class="btn-group btn-group-sm mx-auto">
                         <div class="btn btn-black disabled">Showing</div>
@@ -339,16 +342,12 @@
                             <div class="row justify-content-center text-center" id="contentApp">
                                 <div class="col-md-6 mx-auto">
                                     <div class="card  h-auto" style="@if(count($softwares) == 1)margin-top:-72px; @else margin-top:30px; @endif min-height:auto !important;">
-                                        <div class="card-header">{{ $product->name }}</div>
+                                        <div class="card-header text-dark-blue bg-light-blue">{{ $product->name }}</div>
                                         <div class="card-body h-auto text-center">
                                             <p class="card-text">@if($product->getJsonContent('[sections][about][fields][description]') != null){{ $product->getJsonContent('[sections][about][fields][description]') }} @endif</p>
-                                            <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>99</h5>
+                                            <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $product->price/100 }}</h5>
                                             <h6 class="card-subtitle mb-4 text-muted">per month</h6>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item border-none">Feature 1</li>
-                                                <li class="list-group-item">Feature 2</li>
-                                                <li class="list-group-item">Feature 3</li>
-                                            </ul>
+                                            <div class="p-3">{{ $product->description }}</div>
                                         </div>
                                         <div class="card-footer text-center pt-0 pb-5">
                                             <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
@@ -368,8 +367,9 @@
                                 <div class="row mb-4 pt-4 pb-0">
                                     <div class="col-md-12 text-dull-blue mb-0">
                                         <div class=" h-auto pt-3 px-4 pb-3 " style="min-height:auto !important;border-radius:5px !important;xwxw">
-                                        <h5>{{ $product->name }}</h5>
-                                        @if($product->getJsonContent('[sections][about][fields][description]') != null) <h6 class="dimmed">{{ $product->getJsonContent('[sections][about][fields][description]') }}</h6> @endif
+                                            <h5>{{ $product->name }}</h5>
+                                            @if($product->getJsonContent('[sections][about][fields][description]') != null) <h6 class="dimmed">{{ $product->getJsonContent('[sections][about][fields][description]') }}</h6> @endif
+                                            @if($product->description != null) <div class="p-3">{{ $product->description }} </div>@endif
                                         </div>
                                     </div>
                                 </div>
@@ -381,12 +381,13 @@
                                         <?php $dbEntry = \App\Plan::where('stripe_id', '=', $plan->id)->first(); ?>
                                         <div class="@if(count($plans) > 2) col-md-4 @else col-md-6 @endif mb-5 mx-auto">
                                             <div class="card h-auto " style="min-height:auto !important;">
-                                                <div class="card-header">{{ $plan->nickname }}</div>
+                                                <div class="card-header text-dark-blue bg-light-blue">{{ $plan->nickname }}</div>
                                                 <div class="card-body h-auto text-center">
                                                     @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][description]') != null) <p class="card-text">{{ $dbEntry->getJsonContent('[sections][about][fields][description]')  }}</p>@endif
-                                                    <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>99</h5>
-                                                    <h6 class="card-subtitle mb-4 text-muted">per month</h6>
+                                                    <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $plan->amount/100 }}</h5>
+                                                    <h6 class="card-subtitle mb-4 text-muted">per {{ $plan->interval }}</h6>
                                                     @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][features]') != null)<div>{!!  $dbEntry->getJsonContent('[sections][about][fields][features]') !!}</div>@endif
+                                                    @if($dbEntry->description != null) <div class="p-3">{{ $dbEntry->description }} </div>@endif
                                                 </div>
                                                 <div class="card-footer text-center pt-0 pb-5">
                                                     <a href="/subscribe/{{ $product->stripe_id }}/{{ $plan->id }}" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>

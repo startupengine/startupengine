@@ -27,7 +27,10 @@ Route::group(
 Route::group(['middleware' => ['web']], function () {
     //Authentication
     Auth::routes(['verify' => true]);
-    Route::get('/verify', 'Auth\VerificationController@verify')->name('verify');
+    Route::get(
+        '/email/verify/{id}',
+        'Auth\VerificationController@verify'
+    )->name('verify');
 
     Route::get('/login', 'AppController@login')->name('login');
     Route::get(

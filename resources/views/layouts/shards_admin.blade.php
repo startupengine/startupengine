@@ -227,7 +227,7 @@
                                        title="System Logs">history</i> <span>System Logs</span>
                                 </a>
                             </li>
-                            @if(\Auth::user()->hasRole('admin'))
+                            @if(\Auth::user()->hasRole('admin') && 1 == 2)
                                 <li class="nav-item {{ Request::is('admin/realtime*') ? 'active' : '' }}">
                                     <a class="nav-link" href="/admin/realtime">
                                         <i class="material-icons" data-toggle="tooltip" data-placement="left"

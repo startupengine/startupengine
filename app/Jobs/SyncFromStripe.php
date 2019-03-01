@@ -108,8 +108,12 @@ class SyncFromStripe implements ShouldQueue
                     }
                 }
                 if ($this->type == 'plan') {
-                    $object->name = $stripeObject->name;
-                    $object->description = $stripeObject->description;
+                    $object->name = $stripeObject->nickname;
+                    $object->description =
+                        $stripeObject->nickname .
+                        " plan ($" .
+                        $stripeObject->amount / 100 .
+                        " per month)";
                     $object->price = $stripeObject->amount;
                     $object->interval = $stripeObject->interval;
                     $product = \App\Product::where(

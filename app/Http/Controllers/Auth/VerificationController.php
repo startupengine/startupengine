@@ -32,13 +32,24 @@ class VerificationController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->middleware('signed')->only('verify');
         $this->middleware('throttle:60,1')->only('verify', 'resend');
     }
 
-    public function verify()
+    public function verify($id = null)
     {
-        return view('auth.verify');
+        $request = request();
+        if ($request->hasValidSignature()) {
+            $user = \App\User::find($id);
+            $user->email_verified_at = \Carbon\Carbon::now()->toDateTimeString();
+            $user->save();
+            return view('app.verified');
+        } else {
+            return view('auth.verify');
+        }
     }
 }

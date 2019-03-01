@@ -32,6 +32,9 @@
             display: inline-table !important;
             width: 100% !important;
         }
+        #topNavbar {
+            background: transparent !important;
+        }
     </style>
 @endsection
 

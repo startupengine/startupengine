@@ -318,4 +318,8 @@ class User extends AuthUser implements
     {
         $this->attributes['password'] = Hash::make($pass);
     }
+
+    public function addSubscription(Request $request)
+    {
+    }
 }

@@ -229,12 +229,12 @@ li .dimmed {
 
 .visible {
   opacity: 1 !important;
-  display: flex;
+  display: unset !important;
   transition: all 0.5s;
 }
 
 .toggleVisibility {
-  display: none;
+  display:none;
   transition: all 0.5s !important;
 }
 
@@ -246,6 +246,7 @@ li .dimmed {
   height: 73px;
   transition: all 0.2s ease-in-out !important;
   box-shadow: 0px 0px 30px rgba(0, 50, 150, 0);
+  background: rgba(10,10,250,0.1);
 }
 
 #topNavbar.shadowed {
@@ -776,7 +777,7 @@ tr:hover .dimmed {
   /*background:linear-gradient(0deg, #4371eb 0%, #537bea 59%, #588bff 130%) !important;*/
   /*background:linear-gradient(30deg, #efa5c0 10%, #6badff 100%) !important;*/
   /*background:linear-gradient(-30deg, #3950f7 10%, #ba97ff 100%) !important;*/
-  background:linear-gradient(180deg, #4ba3ff 10%, #7277ff 100%) !important;
+  background:linear-gradient(235deg, #62d3ff 10%, #7277ff 100%) !important;
   opacity:.9;
 }
 
@@ -844,8 +845,8 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   border-radius:4px;
 }
 
-.btn-cta {
-  background-image: linear-gradient(#ffc57d, #ff5caf);
+.btn-cta, .btn-cta:active, .btn-cta:focus, .btn-cta:hover {
+  background-image: linear-gradient(#ffc57d, #ff5caf) !important;
   background-size:cover !important;
   border: 0px solid #fff !important;
   color: #fff;
@@ -863,4 +864,40 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   transform:scale(1.1) !important;
   border: none !important;
   color: #fff;
+}
+
+
+.btn-purple {
+  background:lavender !important;
+  color:rebeccapurple !important;
+}
+
+.btn-light-blue-outline {
+  background: rgba(213, 218, 255, 0.17) !important;
+  color: #3b4b99 !important;
+  border:1px solid rgba(0,80,95,0.15);
+}
+
+.bg-light-green {
+  background: #d9ecff !important;
+}
+
+.text-dark-green {
+  color: #8ac1b2 !important;
+}
+
+.bg-light-blue {
+  background-color: #d1e8ff !important;
+}
+
+.text-dark-blue {
+  color: #00178aba !important;
+}
+
+.text-dark-pink {
+  color: #d23661ba !important;
+}
+
+.bg-light-pink {
+  background-color: #ffd1d5 !important;
 }
