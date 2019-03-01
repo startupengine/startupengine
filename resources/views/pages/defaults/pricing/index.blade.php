@@ -342,7 +342,7 @@
                             <div class="row justify-content-center text-center" id="contentApp">
                                 <div class="col-md-6 mx-auto">
                                     <div class="card  h-auto" style="@if(count($softwares) == 1)margin-top:-72px; @else margin-top:30px; @endif min-height:auto !important;">
-                                        <div class="card-header text-dark-blue bg-light-blue">{{ $product->name }}</div>
+                                        <div class="card-header text-dark-green bg-light-green">{{ $product->name }}</div>
                                         <div class="card-body h-auto text-center">
                                             <p class="card-text">@if($product->getJsonContent('[sections][about][fields][description]') != null){{ $product->getJsonContent('[sections][about][fields][description]') }} @endif</p>
                                             <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $product->price/100 }}</h5>
@@ -381,7 +381,7 @@
                                         <?php $dbEntry = \App\Plan::where('stripe_id', '=', $plan->id)->first(); ?>
                                         <div class="@if(count($plans) > 2) col-md-4 @else col-md-6 @endif mb-5 mx-auto">
                                             <div class="card h-auto " style="min-height:auto !important;">
-                                                <div class="card-header text-dark-blue bg-light-blue">{{ $plan->nickname }}</div>
+                                                <div class="card-header text-dark-green bg-light-green">{{ $plan->nickname }}</div>
                                                 <div class="card-body h-auto text-center">
                                                     @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][description]') != null) <p class="card-text">{{ $dbEntry->getJsonContent('[sections][about][fields][description]')  }}</p>@endif
                                                     <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $plan->amount/100 }}</h5>
