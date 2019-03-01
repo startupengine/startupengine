@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function () {
         'Auth\VerificationController@verify'
     )->name('verify');
 
-    Route::get('/login', 'AppController@login')->name('login');
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::get(
         '/logout',
         '\App\Http\Controllers\Auth\LoginController@logout'
@@ -84,7 +84,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get(
         '/subscribe/{product_id}/{plan_id}',
         'SubscriptionController@addSubscription'
-    )->name('newSubscription');
+    )
+        ->name('newSubscription')
+        ->middleware('auth');
     Route::get(
         '/subscribe/{id}',
         'SubscriptionController@confirmSubscription'

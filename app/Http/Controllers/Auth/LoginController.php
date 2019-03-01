@@ -44,12 +44,48 @@ class LoginController extends Controller
         return redirect('/');
     }
 
+    public function redirectLink()
+    {
+        if (url()->previous() != null) {
+            return url()->previous();
+        } else {
+            return '/login';
+        }
+    }
+
     public function register()
     {
         if (\Auth::user()) {
             return redirect('/');
         } else {
             return view('app.register');
+        }
+    }
+
+    public function showLoginForm(Request $request)
+    {
+        session(['link' => url()->previous()]);
+        if (\Auth::user()) {
+            if (\Auth::user() && $request->input('redirect') !== null) {
+                return redirect($request->input('redirect'));
+            } else {
+                if (setting('site.homepage') != null) {
+                    $route = setting('site.homepage');
+                    $page = \App\Page::where('slug', $route)->first();
+                    if ($page != null) {
+                        $route = '/' . $page->slug;
+                    } else {
+                        $route = '/app/account';
+                    }
+                } elseif (\Auth::user()->hasPermissionTo('view backend')) {
+                    $route = '/admin';
+                } else {
+                    $route = '/';
+                }
+                return redirect($route);
+            }
+        } else {
+            return view('app.login');
         }
     }
 
@@ -72,6 +108,11 @@ class LoginController extends Controller
         } else {
             $route = '/app/account';
         }
-        return redirect($route);
+
+        if (session('link') != null) {
+            return redirect(session('link'));
+        } else {
+            return redirect($route);
+        }
     }
 }

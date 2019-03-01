@@ -824,6 +824,10 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 .welcome {
   min-height:300px !important;
+  background-image: url(/images/abstract.png);
+  background-attachment: scroll !important;
+  background-size: cover !important;
+  background-position: center center !important;
 }
 
 @media(max-width:768px){
