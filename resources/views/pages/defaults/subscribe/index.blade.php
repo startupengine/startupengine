@@ -486,19 +486,22 @@
 
                                 <div class="w-100 d-block pr-md-0 pb-2" align="center" id="subscribeApp">
                                     <div  v-if="status == 'loaded' && info.hasOwnProperty('meta') == false">
-                                        <button class="btn btn-lg btn-pill btn-default btn-outline-success mt-3 mr-4 mb-4 toggleVisibility" style="float:right;" v-bind:class="{ visible: status == 'loaded'}"  v-on:click="submit" >
+                                        <button class="btn btn-lg btn-pill btn-default btn-outline-success mt-3 mr-4 mb-4 toggleVisibility" style="float:right;" v-bind:class="{ visible: status == 'loaded'}"  v-on:click="submit">
                                             Continue<i
                                                     class="fas fa-xs fa-chevron-right ml-2"></i>
                                         </button>
                                     </div>
                                     <div v-else >
-                                        <div v-if="status == 'loading'" >
+                                        <div v-if="status == 'loading' && info.errors == null" >
                                             <i class="fa fa-fw fa-spinner fa-spin animate mr-2"></i>Loading...
                                         </div>
                                         <div class="bg-white p-4 br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.hasOwnProperty('meta') == true,  'd-block': info.hasOwnProperty('meta') == true}"   v-else-if="status == 'loaded' && info.hasOwnProperty('meta') == true && info.meta.status == 'success'">
                                             <i class="fa fa-fw fa-check-circle text-success mr-2"></i>Success! You have subscribed to {{ $product->name }}. You may manage your subscriptions in <a href="/app/subscriptions">My Subscriptions</a>.
                                         </div>
-                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.hasOwnProperty('meta') == true, 'd-block': info.hasOwnProperty('meta') == true}"  v-else class="text-danger">
+                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.errors != null, 'd-block': info.errors != null}"  v-else-if="info.errors != null" >
+                                            <i class="fa fa-fw fa-exclamation-circle text-danger mr-2"></i> Something went wrong. Reload the page and try again.
+                                        </div>
+                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.hasOwnProperty('meta') == true, 'd-block': info.hasOwnProperty('meta') == true}"  v-else >
                                             <i class="fa fa-fw fa-exclamation-circle text-danger mr-2"></i> Something went wrong. Reload the page and try again.
                                         </div>
                                     </div>
