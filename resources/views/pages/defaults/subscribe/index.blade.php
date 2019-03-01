@@ -442,7 +442,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div >
+
                                 <div class="card mx-auto mb-3 mt-0 px-3 bg-very-light-blue-alt w-100" id="formCard"
                                      style="
                                     min-height: auto !important;
@@ -452,7 +452,7 @@
                                      >
                                     <div class="card-body" style="min-height:auto !important;">
                                         <form v-on:submit.prevent="onSubmit" id="payment-form" class="mb-0"
-                                              style="max-width:100%; text-align:right;">
+                                              style="max-width:100%;">
                                             <div class="form-row justify-content-left  pt-3">
                                                 <div class="badge badge-primary text-dark-blue bg-light-blue badge-pill px-3 mb-3 ml-1">
                                                     Payment Method
@@ -486,24 +486,24 @@
 
                                 <div class="w-100 d-block pr-md-0 pb-2" align="center" id="subscribeApp">
                                     <div  v-if="status == 'loaded' && info.hasOwnProperty('meta') == false">
-                                        <div class="btn btn-lg btn-pill btn-default btn-outline-success mt-3 mr-4 mb-4 toggleVisibility" style="float:right;" v-bind:class="{ visible: status == 'loaded'}"  >
+                                        <button class="btn btn-lg btn-pill btn-default btn-outline-success mt-3 mr-4 mb-4 toggleVisibility" style="float:right;" v-bind:class="{ visible: status == 'loaded'}"  v-on:click="submit" >
                                             Continue<i
                                                     class="fas fa-xs fa-chevron-right ml-2"></i>
-                                        </div>
+                                        </button>
                                     </div>
                                     <div v-else >
                                         <div v-if="status == 'loading'" >
                                             <i class="fa fa-fw fa-spinner fa-spin animate mr-2"></i>Loading...
                                         </div>
-                                        <div class="bg-white p-4 br-5 p-4 margin-top-72-large raised toggleVisibility invisible" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"   v-else-if="status == 'loaded' && info.hasOwnProperty('meta') == true && info.meta.status == 'success'">
+                                        <div class="bg-white p-4 br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.hasOwnProperty('meta') == true,  'd-block': info.hasOwnProperty('meta') == true}"   v-else-if="status == 'loaded' && info.hasOwnProperty('meta') == true && info.meta.status == 'success'">
                                             <i class="fa fa-fw fa-check-circle text-success mr-2"></i>Success! You have subscribed to {{ $product->name }}. You may manage your subscriptions in <a href="/app/subscriptions">My Subscriptions</a>.
                                         </div>
-                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility invisible" v-bind:class="{ visible: info.hasOwnProperty('meta') == true}"  v-else class="text-danger">
-                                            <i class="fa fa-fw fa-exclamation-circle text-success mr-2"></i> Something went wrong. Reload the page and try again.
+                                        <div class="bg-white br-5 p-4 margin-top-72-large raised toggleVisibility " v-bind:class="{ visible: info.hasOwnProperty('meta') == true, 'd-block': info.hasOwnProperty('meta') == true}"  v-else class="text-danger">
+                                            <i class="fa fa-fw fa-exclamation-circle text-danger mr-2"></i> Something went wrong. Reload the page and try again.
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
                         </div>
                     </div>
@@ -561,23 +561,25 @@
             }
         });
 
-        // Handle form submission.
-        var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
 
+        function getToken(){
             stripe.createToken(card).then(function (result) {
                 if (result.error) {
                     // Inform the user if there was an error.
                     var errorElement = document.getElementById('card-errors');
-                    console.log(result);
                     errorElement.textContent = result.error.message;
                 } else {
                     // Send the token to your server.
                     stripeTokenHandler(result.token);
-                    console.log(result);
                 }
             });
+        }
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            getToken();
         });
 
         // Submit the form with the token ID.
@@ -612,6 +614,9 @@
                 status: 'loading'
             },
             methods: {
+                submit(){
+                    getToken();
+                },
                 onSubmit(input) {
                     console.log('test');
                     console.log(input);

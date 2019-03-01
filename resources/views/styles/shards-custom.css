@@ -235,6 +235,7 @@ li .dimmed {
 
 .toggleVisibility {
   display:none;
+  opacity:0;
   transition: all 0.5s !important;
 }
 
