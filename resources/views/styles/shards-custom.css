@@ -302,7 +302,7 @@ li .dimmed {
 }
 
 .card {
-  min-height: 500px !important;
+  min-height: 350px !important;
   max-height: 80vh !important;
   border-radius: 10px !important;
 }
@@ -895,4 +895,25 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 .bg-light-pink {
   background-color: #ffd1d5 !important;
+}
+
+
+@media (min-width: 768px) {
+  #contentApp .col-md-4:nth-last-child(1), #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n) {
+    width:50% !important;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  #contentApp .col-md-4:nth-of-type(4n):last-of-type, #contentApp .col-md-4:nth-of-type(6n) {
+    width:100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  #contentApp .col-md-4:nth-of-type(4n):last-of-type .card, #contentApp .col-md-4:nth-of-type(6n) .card {
+    min-height:300px !important;
+  }
+  #contentApp .col-md-4:nth-of-type(4n):last-of-type  .card .card-title , #contentApp .col-md-4:nth-of-type(6n)  .card .card-title {
+    text-align: center !important;
+  }*/
 }
