@@ -899,7 +899,7 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 
 @media (min-width: 768px) {
-  #contentApp .col-md-4:nth-last-child(1), #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n) {
+  #contentApp .col-md-4:nth-last-child(1):not(:nth-child(3n)), #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n) {
     width:50% !important;
     flex: 0 0 50% !important;
     max-width: 50% !important;
