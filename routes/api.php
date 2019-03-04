@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'Api\UsersController@create');
 
-Route::group(['middleware' => ['cors', 'auth']], function () {
+Route::group(['middleware' => ['cors', 'auth', 'api.rbac']], function () {
     //////////// API Resources ////////////
     ////// Standard BREAD Operations
     // Browse

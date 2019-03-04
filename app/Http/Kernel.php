@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
 
         'backend' => [\App\Http\Middleware\Backend::class],
 
-        'api' => ['throttle:200,1', 'bindings']
+        'api' => ['throttle:200,1', 'bindings', 'api.rbac']
     ];
 
     /**
@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
         /*'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
          'auth.optional' => \App\Http\Middleware\OptionalAuthentication::class,*/
         'auth' => \App\Http\Middleware\OptionalAuthentication::class,
+        'api.rbac' => \App\Http\Middleware\ApiRbac::class,
         'auth.default' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' =>
             \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
