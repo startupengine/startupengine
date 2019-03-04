@@ -229,7 +229,7 @@ li .dimmed {
 
 .visible {
   opacity: 1 !important;
-  display: unset !important;
+  display: block !important;
   transition: all 0.5s;
 }
 

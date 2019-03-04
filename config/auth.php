@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -15,7 +14,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'users'
     ],
 
     /*
@@ -38,13 +37,13 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users'
         ],
 
         'api' => [
             'driver' => 'passport',
-            'provider' => 'users',
-        ],
+            'provider' => 'users'
+        ]
     ],
 
     /*
@@ -67,8 +66,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
-        ],
+            'model' => App\User::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -95,8 +94,7 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60,
-        ],
-    ],
-
+            'expire' => 60
+        ]
+    ]
 ];

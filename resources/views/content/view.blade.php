@@ -142,7 +142,7 @@
 
 
                 <div class="row justify-content-center" id="contentApp" v-if="info != null">
-                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-5 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content']) !!}
+                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content']) !!}
                 </div>
 
 
@@ -185,5 +185,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', "FILTERS" => "{exclude: 'id!=$post->id'}", "SORT_BY" => 'views']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', "FILTERS" => "{exclude: 'id!=$post->id'}", "SORT_BY" => 'views', "LIMIT" => 3]) !!}
 @endsection

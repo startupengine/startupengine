@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'Api\UsersController@create');
 
-Route::group(['middleware' => ['cors', 'auth:api']], function () {
+Route::group(['middleware' => ['cors', 'auth']], function () {
     //////////// API Resources ////////////
     ////// Standard BREAD Operations
     // Browse
@@ -65,31 +65,61 @@ Route::group(['middleware' => ['cors', 'auth:api']], function () {
     Route::get(
         '/stripe/payments/methods',
         'StripeController@browsePaymentMethods'
-    )->name('BrowseStripePaymentMethods');
+    )
+        ->name('BrowseStripePaymentMethods')
+        ->middleware('auth.default');
     // Read Payment Method
     Route::get(
         '/stripe/payments/method/{id}',
         'StripeController@readPaymentMethod'
-    )->name('ReadStripePaymentMethod');
+    )
+        ->name('ReadStripePaymentMethod')
+        ->middleware('auth.default');
     // Add Payment Methods
     Route::post(
         '/stripe/payments/method',
         'StripeController@storePaymentMethod'
-    )->name('StoreStripePaymentMethod');
-});
+    )
+        ->name('StoreStripePaymentMethod')
+        ->middleware('auth.default');
 
-// Demo Data
-Route::get('/demo/menu', 'DemoController@menu');
-Route::get('/demo/user', 'DemoController@user');
-Route::get('/demo/user/{id}/activities', 'DemoController@userActivities');
-Route::get('/demo/users', 'DemoController@users');
-Route::get('/demo/pages', 'DemoController@pages');
-Route::get('/demo/content//content/models', 'DemoController@contentModels');
-Route::get('/demo/products', 'DemoController@products');
-Route::get('/demo/dashboard/analytics', 'DemoController@dashboardAnalytics');
-Route::get('/demo/dashboard/social', 'DemoController@dashboardSocialFeed');
-Route::get('/demo/dashboard/content', 'DemoController@dashboardRecentContent');
-Route::get('/demo/notifications', 'DemoController@notifications');
+    // Demo Data
+    Route::get('/demo/menu', 'DemoController@menu')->middleware('auth.default');
+    Route::get('/demo/user', 'DemoController@user')->middleware('auth.default');
+    Route::get(
+        '/demo/user/{id}/activities',
+        'DemoController@userActivities'
+    )->middleware('auth.default');
+    Route::get('/demo/users', 'DemoController@users')->middleware(
+        'auth.default'
+    );
+    Route::get('/demo/pages', 'DemoController@pages')->middleware(
+        'auth.default'
+    );
+    Route::get(
+        '/demo/content//content/models',
+        'DemoController@contentModels'
+    )->middleware('auth.default');
+    Route::get('/demo/products', 'DemoController@products')->middleware(
+        'auth.default'
+    );
+    Route::get(
+        '/demo/dashboard/analytics',
+        'DemoController@dashboardAnalytics'
+    );
+    Route::get(
+        '/demo/dashboard/social',
+        'DemoController@dashboardSocialFeed'
+    )->middleware('auth.default');
+    Route::get(
+        '/demo/dashboard/content',
+        'DemoController@dashboardRecentContent'
+    );
+    Route::get(
+        '/demo/notifications',
+        'DemoController@notifications'
+    )->middleware('auth.default');
+});
 
 /* OLD API ROUTES
 // Users
