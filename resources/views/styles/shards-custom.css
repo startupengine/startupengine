@@ -899,21 +899,30 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 
 @media (min-width: 768px) {
-  #contentApp .col-md-4:nth-last-child(1):not(:nth-child(3n)):not(:nth-child(2n)), #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n) {
-    width:50% !important;
-    flex: 0 0 50% !important;
-    max-width: 50% !important;
-  }
-  #contentApp .col-md-4:nth-of-type(4n):last-of-type, #contentApp .col-md-4:nth-of-type(6n) {
+  #contentApp .col-md-4:last-of-type, #contentApp .col-md-4:nth-of-type(4):last-of-type, #contentApp .col-md-4:nth-of-type(7):last-of-type {
     width:100% !important;
     flex: 0 0 100% !important;
     max-width: 100% !important;
   }
-
-  #contentApp .col-md-4:nth-of-type(4n):last-of-type .card, #contentApp .col-md-4:nth-of-type(6n) .card {
-    min-height:300px !important;
+  #contentApp .col-md-4:nth-child(1), #contentApp .col-md-4:nth-child(2), #contentApp .col-md-4:nth-child(3), {
+    width:33% !important;
+    flex: 0 0 33% !important;
+    max-width: 33% !important;
   }
-  #contentApp .col-md-4:nth-of-type(4n):last-of-type  .card .card-title , #contentApp .col-md-4:nth-of-type(6n)  .card .card-title {
-    text-align: center !important;
-  }*/
+  #contentApp .col-md-4:nth-last-child(1), #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n), #contentApp .col-md-4:nth-of-type(7n):nth-last-of-type(2), #contentApp .col-md-4:nth-of-type(8n):last-of-type {
+    width:50% !important;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  #contentApp .col-md-4:nth-of-type(7n):last-of-type, #contentApp .col-md-4:nth-of-type(6n) {
+    width:100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  #contentApp .col-md-4:nth-child(7n), #contentApp .col-md-4:nth-child(8n), #contentApp .col-md-4:nth-child(9n) {
+    width:33% !important;
+    flex: 0 0 33% !important;
+    max-width: 33% !important;
+  }
+
 }
