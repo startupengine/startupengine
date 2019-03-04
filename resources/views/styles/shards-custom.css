@@ -909,7 +909,7 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
     flex: 0 0 33% !important;
     max-width: 33% !important;
   }
-  #contentApp .col-md-4:nth-last-child(1), #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n), #contentApp .col-md-4:nth-of-type(11n), #contentApp .col-md-4:nth-of-type(7n):nth-last-of-type(2),#contentApp .col-md-4:nth-of-type(13n),#contentApp .col-md-4:nth-of-type(14n), #contentApp .col-md-4:nth-of-type(8n):last-of-type {
+   #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n), #contentApp .col-md-4:nth-of-type(11n), #contentApp .col-md-4:nth-of-type(7n):nth-last-of-type(2),#contentApp .col-md-4:nth-of-type(13n),#contentApp .col-md-4:nth-of-type(14n), #contentApp .col-md-4:nth-of-type(8n):last-of-type {
     width:50% !important;
     flex: 0 0 50% !important;
     max-width: 50% !important;

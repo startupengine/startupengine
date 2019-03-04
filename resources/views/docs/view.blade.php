@@ -462,7 +462,7 @@
                 var height = affixElement.outerHeight(),
                     top = wrapper.offset().top;
 
-                if (scrollElement.scrollTop() >= top) {
+                if (scrollElement.scrollTop() >= top -70) {
                     wrapper.height(height);
                     affixElement.addClass("affix");
                 }

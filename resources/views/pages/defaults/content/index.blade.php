@@ -345,7 +345,7 @@
                 var height = affixElement.outerHeight(),
                     top = wrapper.offset().top;
 
-                if (scrollElement.scrollTop() >= top) {
+                if (scrollElement.scrollTop() >= top - 70) {
                     wrapper.height(height);
                     affixElement.addClass("affix");
                 }
@@ -387,5 +387,5 @@
             $("#selectedContentType").text("All Content");
         }
     </script>
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', 'LIMIT' => 10]) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', 'PER_PAGE' => 10, 'LIMIT' => 100]) !!}
 @endsection
