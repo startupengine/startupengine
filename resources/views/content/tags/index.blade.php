@@ -56,5 +56,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', "SORT_BY" => 'views', 'WITH_ANY_TAGS' => "{'$tag->slug':'$tag->slug'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', "SORT_BY" => 'views', 'WITH_ANY_TAGS' => "{'$tag->slug':'$tag->slug'}", "LIMIT" => 10]) !!}
 @endsection

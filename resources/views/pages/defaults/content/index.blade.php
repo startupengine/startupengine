@@ -387,5 +387,5 @@
             $("#selectedContentType").text("All Content");
         }
     </script>
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', 'LIMIT' => 30]) !!}
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'contentApp','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', 'LIMIT' => 10]) !!}
 @endsection
