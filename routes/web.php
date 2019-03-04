@@ -86,7 +86,7 @@ Route::group(['middleware' => ['web']], function () {
         'SubscriptionController@addSubscription'
     )
         ->name('newSubscription')
-        ->middleware('auth');
+        ->middleware('auth.default');
     Route::get(
         '/subscribe/{id}',
         'SubscriptionController@confirmSubscription'
