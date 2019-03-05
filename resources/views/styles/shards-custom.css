@@ -304,7 +304,7 @@ li .dimmed {
 .card {
   min-height: 350px !important;
   max-height: 80vh !important;
-  border-radius: 10px !important;
+  border-radius: 7px !important;
 }
 
 .page-link {
@@ -901,7 +901,7 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 @media (min-width: 768px) {
   #contentApp .col-md-4:last-of-type, #contentApp .col-md-4:nth-of-type(4):last-of-type, #contentApp .col-md-4:nth-of-type(7):last-of-type, #contentApp .col-md-4:nth-of-type(10):last-of-type, #contentApp .col-md-4:nth-of-type(13):last-of-type {
     width:100% !important;
-    flex: 0 0 100% !important;
+    flex: 0 0 calc(100% - 16px) !important;
     max-width: 100% !important;
   }
   #contentApp .col-md-4:nth-child(1), #contentApp .col-md-4:nth-child(2), #contentApp .col-md-4:nth-child(3) {
@@ -911,13 +911,13 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   }
    #contentApp .col-md-4:nth-of-type(4n), #contentApp .col-md-4:nth-of-type(5n), #contentApp .col-md-4:nth-of-type(11n), #contentApp .col-md-4:nth-of-type(7n):nth-last-of-type(2),#contentApp .col-md-4:nth-of-type(13n),#contentApp .col-md-4:nth-of-type(14n), #contentApp .col-md-4:nth-of-type(8n):last-of-type {
     width:50% !important;
-    flex: 0 0 50% !important;
+    flex: 0 0 calc(50% - 8px) !important;
     max-width: 50% !important;
   }
 
   #contentApp .col-md-4:nth-of-type(7n):last-of-type, #contentApp .col-md-4:nth-of-type(6n) {
     width:100% !important;
-    flex: 0 0 100% !important;
+    flex: 0 0 calc(100% - 16px) !important;
     max-width: 100% !important;
   }
   #contentApp .col-md-4:nth-of-type(7n), #contentApp .col-md-4:nth-of-type(8n), #contentApp .col-md-4:nth-of-type(9n) {
@@ -925,4 +925,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
     flex: 0 0 33% !important;
     max-width: 33% !important;
   }
+}
+
+.card {
+  box-shadow: 0px 50px 150px rgba(0,0,190,0.2),
+  0px 10px 25px rgba(0,0,50,0.1) !important;
 }

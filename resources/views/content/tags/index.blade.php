@@ -41,7 +41,7 @@
     <div class="blog section section-invert pt-4 pb-0" style="min-height:100vh;">
         <h3 class="section-title text-center mb-5 mt-3">{{ $tag->name }}</h3>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="pt-0 mb-0 col-md-12">
                 <div class="justify-content-center" id="contentApp" v-if="info != null && info.meta.total != null">
                     <div class="pb-3 mb-3 toggleVisibility text-center " v-bind:class="{ visible: info.meta.total != null,  'd-block': info.meta.total != null }">@{{ info.meta.total }} Item<span v-if="info.meta.total >1 ">s</span></div>

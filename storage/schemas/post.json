@@ -56,5 +56,13 @@
     }
   },
   "sections": {
+  },
+  "permissions": {
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_pages"]
+    },
+    "read": {}
   }
 }

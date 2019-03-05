@@ -97,6 +97,8 @@
             margin-bottom: 20px;
         }
 
+
+
         .hljs-attribute {
             color: mediumseagreen;
             font-weight: bold;
@@ -307,8 +309,11 @@
                         <a class="btn btn-white border-white pl-4 truncate" href="#" aria-haspopup="true"
                            aria-expanded="false" tyle="border-left:none;"
                            data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
-                           '<div align="center">@foreach(\App\PostType::all() as $postType)
+                           '<div align="center">
+                            @foreach(\App\PostType::withCount('posts')->get() as $postType)
+                                @if($postType->posts_count > 0)
                                    <div class="dropdown-item py-1 px-3 m-0" onclick="changeContentType({&apos;label&apos;:&apos;{{ ucwords($postType->getPluralName()) }}&apos;,&apos;post_type&apos;:&apos;post_type={{ $postType->slug }}&apos;})">{{ ucwords($postType->getPluralName()) }}</div>
+                               @endif
                             @endforeach <div class="dropdown-divider"></div> <div class="dropdown-item py-1 px-3 m-0" onclick="resetContentType()">All Content</div></div>'
                            data-html="true">
                             <span class="mr-1" id="selectedContentType">All Content</span><span
@@ -320,12 +325,12 @@
 
 
         <div class="blog section section-invert p-4  " style="min-height:30vh;border:none !important;">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row px-0 pt-3">
 
 
                             <div class="row justify-content-center" id="contentApp" >
-                                {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => "w-100", 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content', 'WRAPPER_STYLE' => '', 'CONTAINER_STYLE'=> 'width:calc(100%);opacity:0;']) !!}
+                                {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card mb-4 mx-2', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => "w-100", 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content', 'WRAPPER_STYLE' => 'margin-top:20px;', 'CONTAINER_STYLE'=> 'width:calc(100%);opacity:0;']) !!}
                             </div>
 
 

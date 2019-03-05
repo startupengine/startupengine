@@ -9,43 +9,35 @@ use Illuminate\Contracts\Auth\Factory as Auth;
 
 class OptionalAuthentication extends Authenticate
 {
+    public function handle($request, Closure $next, ...$guards)
+    {
+        $this->authenticate($guards);
+
+        return $next($request);
+    }
+
     /**
      * Determine if the user is logged in to any of the given guards.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  array  $guards
      * @return void
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    protected function authenticate($request, array $guards = [])
+    protected function authenticate($request, array $guards = ['api'])
     {
         if (empty($guards)) {
-            $guards = [null];
+            return $this->auth->authenticate();
         }
 
-        if (request()->is('api/resources/*')) {
-            foreach ($guards as $guard) {
-                if ($this->auth->guard($guard)->check()) {
-                    return $this->auth->shouldUse($guard);
-                }
+        foreach ($guards as $guard) {
+            if ($this->auth->guard($guard)->check()) {
+                return $this->auth->shouldUse($guard);
+            } else {
+                return null;
             }
-        } else {
-            throw new AuthenticationException(
-                'Unauthenticated.',
-                $guards,
-                $this->redirectTo($request)
-            );
-        }
-    }
-
-    public function handle($request, Closure $next, ...$guards)
-    {
-        try {
-            $this->authenticate($guards);
-        } catch (AuthenticationException $e) {
         }
 
-        return $next($request);
+        throw new AuthenticationException('Unauthenticated.', $guards);
     }
 }

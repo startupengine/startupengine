@@ -8,7 +8,7 @@
 
     <div class="{{ $options['WRAPPER_CLASS'] }}"
          style="@if(isset($options['WRAPPER_STYLE'])) {{ $options['WRAPPER_STYLE'] }} @else height:100%; @endif">
-        <div class="card card-small mb-4" id="listView" style="min-width:100%;height:100%;"
+        <div class="card card-small mb-5" id="listView" style="min-width:100%;height:100%;"
              v-if="displayFormat == 'list'">
             <div class="card-header" align="center">
                 {!! $options['HEADER']  !!}
@@ -158,7 +158,7 @@
             <div class="@if(isset($options['WRAPPER_CLASS'])) {{ $options['WRAPPER_CLASS'] }} @else col-md-12 @endif">
                 <div id="cardView" v-if="displayFormat == 'cards'">
                     <div class="row row-eq-height @if(isset($options['CARD_ROW_CLASS'])) {{ $options['CARD_ROW_CLASS'] }} @endif">
-                        <div class="col-lg-4 col-md-4 col-sm-12 mb-4"
+                        <div class="col-lg-4 col-md-4 col-sm-12 mb-5"
                              v-if="info.meta != null && info.meta.total != null && info.meta.total == 0">
                             <div class="card card-small h-100">
                                 <div class="card-body">
@@ -182,9 +182,9 @@
                                      style="background: #333;">
 
 
-                                    @if(isset($options['SHOW_TAGS']) && $options['SHOW_TAGS'] != false)
-                                        <span style="float:right;">
-                                            <span v-for="tag in item.tags.slice(0,3)"
+                                    @if(isset($options['SHOW_TAGS']) && $options['SHOW_TAGS'] == true)
+                                        <span style="float:right;"  v-if="item.tags != null && item.tags.length > 0">
+                                            <span  v-for="tag in item.tags.slice(0,3)"
                                                   class="badge badge-dark badge-pill mt-2 mr-2"
                                                   v-if="tag != null">
                                                 @{{ tag.name }}
@@ -211,7 +211,7 @@
                                         'CARD_BODY_FIELD'
                                     ]; ?> }}</p>
                                     <p v-if="item.thumbnail == null" align="left" class="card-text d-block w-100">
-                                    <span v-for="tag in item.tags.slice(0,3)"
+                                    <span v-if="item.hasOwnProperty('tags') && item.tags.length > 0"  v-for="tag in item.tags.slice(0,3)"
                                           class="badge badge-dark badge-pill mt-2 mr-2"
                                     >@{{ tag.name }}</span>
 
@@ -258,7 +258,7 @@
                                 </ul>
                             </nav>
 
-                            <nav aria-label="Pagination" style="display:inline-block;">
+                            <nav aria-label="Pagination" style="display:inline-block;" >
                                 <ul class="pagination justify-content-center mt-3">
                                     <li class="page-item" v-bind:class="{ disabled: (currentPage == 1) }">
                                         <a class="page-link" href="#"
