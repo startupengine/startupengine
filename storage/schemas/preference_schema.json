@@ -36,5 +36,32 @@
     }
   },
   "sections": {
+  },
+  "permissions": {
+    "browse": {
+      "requires_auth": true,
+      "requires_permission":
+      ["browse_preference_schemas"]
+    },
+    "read": {
+      "requires_auth": true,
+      "requires_permission":
+      ["read_preference_schemas"]
+    },
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_preference_schemas"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_preference_schemas"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_preference_schemas"]
+    }
   }
 }

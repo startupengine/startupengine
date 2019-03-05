@@ -70,5 +70,22 @@
         }
       }
     }
+  },
+  "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_subscriptions"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_subscriptions"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_subscriptions"]
+    }
   }
 }

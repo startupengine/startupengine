@@ -20,5 +20,32 @@
   "fields": {
   },
   "sections": {
+  },
+  "permissions": {
+    "browse": {
+      "requires_auth": true,
+      "requires_permission":
+      ["browse_preferences"]
+    },
+    "read": {
+      "requires_auth": true,
+      "requires_permission":
+      ["read_preferences"]
+    },
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_preferences"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_preferences"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_preferences"]
+    }
   }
 }

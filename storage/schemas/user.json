@@ -18,44 +18,6 @@
       }
     }
   },
-  "permissions": {
-    "browse": {
-      "roles": [
-        "admin",
-        "superadmin"
-      ]
-    },
-    "read": {
-      "roles": [
-        "admin",
-        "superadmin"
-      ]
-    },
-    "write": {
-      "roles": [
-        "admin",
-        "superadmin"
-      ]
-    },
-    "edit": {
-      "roles": [
-        "admin",
-        "superadmin"
-      ]
-    },
-    "delete": {
-      "roles": [
-        "admin",
-        "superadmin"
-      ]
-    },
-    "undelete": {
-      "roles": [
-        "admin",
-        "superadmin"
-      ]
-    }
-  },
   "fields": {
     "name": {
       "display name": "Name",
@@ -132,6 +94,23 @@
           }
         }
       }
+    }
+  },
+  "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_users"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_users"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_users"]
     }
   }
 }

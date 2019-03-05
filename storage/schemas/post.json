@@ -58,11 +58,20 @@
   "sections": {
   },
   "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_posts"]
+    },
     "edit": {
       "requires_auth": true,
       "requires_permission":
-      ["edit_pages"]
+      ["edit_posts"]
     },
-    "read": {}
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_posts"]
+    }
   }
 }

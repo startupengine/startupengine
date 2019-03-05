@@ -45,5 +45,32 @@
     }
   },
   "sections": {
+    "permissions": {
+      "browse": {
+        "requires_auth": true,
+        "requires_permission":
+        ["browse_settings"]
+      },
+      "read": {
+        "requires_auth": true,
+        "requires_permission":
+        ["read_settings"]
+      },
+      "add": {
+        "requires_auth": true,
+        "requires_permission":
+        ["add_settings"]
+      },
+      "edit": {
+        "requires_auth": true,
+        "requires_permission":
+        ["edit_settings"]
+      },
+      "delete": {
+        "requires_auth": true,
+        "requires_permission":
+        ["delete_settings"]
+      }
+    }
   }
 }

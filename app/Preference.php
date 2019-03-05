@@ -21,18 +21,22 @@ class Preference extends Model implements \Altek\Accountant\Contracts\Recordable
         return $this->belongsTo('App\User')->first();
     }
 
-
-    public function schema() {
-
-        $path = file_get_contents(storage_path().'/schemas/preference.json');
-        $baseSchema = json_decode($path,  true);
-        $customSchema = json_decode($this->preferenceSchema()->json, true);
+    public function schema()
+    {
+        $path = file_get_contents(storage_path() . '/schemas/preference.json');
+        $baseSchema = json_decode($path, true);
+        if ($this->preferenceSchema() != null) {
+            $customSchema = json_decode($this->preferenceSchema()->json, true);
+        } else {
+            $customSchema = [];
+        }
         $merged = array_merge($baseSchema, $customSchema);
         $merged = json_decode(json_encode($merged));
         return $merged;
     }
 
-    public function content() {
+    public function content()
+    {
         $json = $this->json;
         return $json;
     }

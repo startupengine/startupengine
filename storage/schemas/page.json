@@ -93,5 +93,22 @@
         }
       }
     }
+  },
+  "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_pages"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_pages"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_pages"]
+    }
   }
 }

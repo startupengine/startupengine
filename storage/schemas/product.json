@@ -259,5 +259,22 @@
         }
       }
     }
+  },
+  "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_products"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_products"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_products"]
+    }
   }
 }
