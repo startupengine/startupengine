@@ -4,9 +4,12 @@ namespace App;
 
 use App\Scopes\SettingsGroupScope;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\IsApiResource;
 
 class SettingsGroup extends Model
 {
+    use IsApiResource;
+
     protected $table = 'settings';
 
     /**
@@ -21,9 +24,14 @@ class SettingsGroup extends Model
         static::addGlobalScope(new SettingsGroupScope());
     }
 
-    public function items(){
+    public function items()
+    {
         $items = count(\App\Setting::where('group', '=', $this->group)->get());
         return $items;
     }
 
+    public function schema()
+    {
+        return 123;
+    }
 }

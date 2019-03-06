@@ -30,10 +30,11 @@ class ApiRbac
             }
 
             $type = request()->route('type');
-            $type = "\App\\" . ucwords(pathToModel($type));
+            $type = "\\App\\" . ucwords(pathToModel($type));
             $model = new $type();
 
             if (
+                method_exists($model, 'schema') &&
                 $model->schema() != null &&
                 isset($model->schema()->permissions) &&
                 isset($model->schema()->permissions->$action)
