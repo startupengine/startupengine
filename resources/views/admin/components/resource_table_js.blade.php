@@ -96,9 +96,16 @@
                 $('.dataRow').hide();
                 $('.loadingRow').show();
 
+                if(this.search != null){
+                    this.searchString = '&s=' + this.search;
+                }
+                else {
+                    this.searchString = '';
+                }
+
 
                 this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
-                var string = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString + '&page[number]=' + pageNumber;
+                var string = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString + '&page[number]=' + pageNumber + this.searchString;
 
 
 

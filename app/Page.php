@@ -213,4 +213,24 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             ->where('created_at', '<=', $endDate);
         return $views;
     }
+
+    public function schema()
+    {
+        $path = file_get_contents(storage_path() . '/schemas/page.json');
+        $baseSchema = json_decode($path, true);
+
+        if ($this->id != null && $this->schema != null) {
+            $postTypeSchema = json_decode($this->schema, true);
+
+            $merged = array_merge($postTypeSchema, $baseSchema);
+
+            $merged = json_decode(json_encode($merged));
+        } else {
+            $merged = $baseSchema;
+        }
+
+        $schema = $merged;
+
+        return $schema;
+    }
 }

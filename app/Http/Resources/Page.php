@@ -14,7 +14,6 @@ class Page extends JsonResource
      */
     public function toArray($request)
     {
-
         //$startDate = \Carbon\Carbon::now()->subDays(30)->toDateTimeString();
         //dd($startDate);
         //dd($this);
@@ -24,7 +23,7 @@ class Page extends JsonResource
         //dd($startDate);
         $fields = [];
         $fields['id'] = $this->id;
-        if(\Request::route()->getName() != 'ReadApiResource'){
+        if (\Request::route()->getName() != 'ReadApiResource') {
             $fields['links'] = $this->links();
         }
 
@@ -37,19 +36,19 @@ class Page extends JsonResource
         $fields['status'] = $this->status;
         $fields['slug'] = $this->slug;
         $fields['tags'] = $this->tags;
-        if($this->created_at != null) {
+        if ($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
-        if($this->updated_at != null) {
+        if ($this->updated_at != null) {
             $fields['updated_at'] = $this->updated_at->toDateTimeString();
         }
-        if($this->deleted_at != null) {
+        if ($this->deleted_at != null) {
             $fields['deleted_at'] = $this->deleted_at->toDateTimeString();
         }
-        if($this->title != null) {
+        if ($this->title != null) {
             $fields['title'] = $this->title;
         }
-        if($this->name != null) {
+        if ($this->name != null) {
             $fields['name'] = $this->name;
         }
         $fields['meta_description'] = $this->meta_description;
@@ -58,7 +57,6 @@ class Page extends JsonResource
         $fields = sparseFields($fields, 'page');
         return $fields;
     }
-
 
     /**
      * Get additional data that should be returned with the resource array.
