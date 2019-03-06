@@ -95,12 +95,13 @@
                 this.status = 'loading';
                 $('.dataRow').hide();
                 $('.loadingRow').show();
-                if (this.filters !== null) {
-                    var string = '{{ $options['url'] }}?{!! $options['GLOBAL_FILTER'] !!}&page[number]=' + pageNumber + '&perpage=' + this.perPage + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
-                }
-                else {
-                    var string = '{{ $options['url'] }}?{!! $options['GLOBAL_FILTER'] !!}&page[number]=' + pageNumber + '&perPage=' + this.perPage + '&limit=' + this.limit + '&includes=' + this.includeString + '&sort=' + this.sortString + this.searchString  + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
-                }
+
+
+                this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
+                var string = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString + '&page[number]=' + pageNumber;
+
+
+
                 if(this.startDate != ''){
                     string = string + '&startDate=' + this.startDate;
                 }

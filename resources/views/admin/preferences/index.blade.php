@@ -223,5 +223,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/preference']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/preference', 'LIMIT' => 1000]) !!}
 @endsection

@@ -97,6 +97,16 @@
     }
   },
   "permissions": {
+    "browse": {
+      "requires_auth": true,
+      "requires_permission":
+      ["browse_users"]
+    },
+    "read": {
+      "requires_auth": true,
+      "requires_permission":
+      ["read_users"]
+    },
     "add": {
       "requires_auth": true,
       "requires_permission":

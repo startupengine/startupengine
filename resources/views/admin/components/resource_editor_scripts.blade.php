@@ -323,23 +323,29 @@
                         console.log(payload);
                         axios
                             .post(url, payload)
-                            .then(response => (this.info = response.data)
+                            .then(response => (this.saveValidationResultAndReload(response.data))
                     );
 
                         if (this.info.status == 'success') {
-                            $('#modal-edit-content').modal('toggle');
+                            $('#modal-edit-content').modal('hide');
                         }
-                        var config = {
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Cache-Control': 'no-cache'
-                            }
-                        };
-                        var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
-                        axios
-                            .get(url2, config)
-                            .then(response => (this.record = response.data));
                     }
+                },
+                saveValidationResultAndReload(input){
+                    this.info = input
+                    this.reload();
+                },
+                reload(){
+                    var config = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cache-Control': 'no-cache'
+                        }
+                    };
+                    var url = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '?{!! $options['URL_PARAMETERS'] !!}' @endif;
+                    axios
+                        .get(url, config)
+                        .then(response => (this.record = response.data));
                 },
                 updateSectionName(sectionName) {
                     if (typeof(sectionName) == 'undefined') {

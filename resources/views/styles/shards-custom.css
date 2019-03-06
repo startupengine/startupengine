@@ -693,7 +693,7 @@ tr:hover .dimmed {
 }
 
 .btn.btn-white {
-  border: 1px solid #e1e5eb;
+  border: 1px solid #fff !important;
   color: #3d5170;
 }
 
