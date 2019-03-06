@@ -119,7 +119,7 @@
 
         .documentation-card {
             max-height: none !important;
-            box-shadow: none !important;
+
             border-radius:5px !important;
         }
 
@@ -331,12 +331,12 @@
             </nav>
         @endif
 
-        <div class="blog section section-invert p-4  firstSection">
+        <div class="blog section section-invert p-4  firstSection" style="background:#fff !important;">
             <div class="container">
                 <div class="row px-3" id="docsApp">
                     <div class="col-md-3 hiddenOnMobile">
                         <div class="row">
-                            <div class="card documentation-card w-100 mr-3 h-auto " style="min-height:auto !important;">
+                            <div class="card documentation-card w-100 mr-3 h-auto " style="z-index:999;min-height:auto !important;">
 
                                 <div class="nav-wrapper d-sm-none d-lg-inline-flex">
                                     <ul class="nav flex-column w-100 border  " id="sidebar">
@@ -369,7 +369,7 @@
                     </div>
                     <div class="col col-md-9">
                         <div class="row">
-                            <div class="card documentation-card border  " style="width:100%;">
+                            <div class="card documentation-card " style="width:100%;box-shadow: none !important;">
                                 <div class="card-body pt-2 px-4 pb-4">
                                     {!! $output !!}
                                 </div>
