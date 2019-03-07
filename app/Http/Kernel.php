@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         // 'auth.optional' => \App\Http\Middleware\OptionalAuthentication::class,*/
         'auth' => \App\Http\Middleware\OptionalAuthentication::class,
         'apirbac' => \App\Http\Middleware\ApiRbac::class,
+        'webrbac' => \App\Http\Middleware\WebRbac::class,
         'auth.default' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' =>
             \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

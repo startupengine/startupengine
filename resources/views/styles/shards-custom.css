@@ -349,6 +349,7 @@ h1 {
 
 .section-invert {
   background: linear-gradient(#e9f0ff 0px, #fff 250px) !important;
+  border:none !important;
 }
 
 .list-group-item {
@@ -693,8 +694,12 @@ tr:hover .dimmed {
 }
 
 .btn.btn-white {
-  border: 1px solid #fff !important;
+  border: 1px solid #ddd !important;
   color: #3d5170;
+}
+
+#topNavbar .btn.btn-white {
+  border: 1px solid #fff!important;
 }
 
 .bg-very-light-blue,

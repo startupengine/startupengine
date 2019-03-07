@@ -66,14 +66,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/content/tags', 'PostController@getItemsByTag')->name(
         'contentTagIndex'
     );
-    Route::get('/content/{id}/{slug}', 'PostController@getItem')->name(
-        'contentById'
-    );
-    Route::get('/content/{id}', 'PostController@getItem')->name('contentById');
-    Route::get(
-        '/content/{postType}/{tag}',
-        'PostController@getPostByPostTypeAndSlug'
-    )->name('contentByTagAndType');
+    Route::group(['middleware' => ['webrbac']], function () {
+        Route::get('/content/{id}/{slug}', 'PostController@getItem')->name(
+            'contentById'
+        );
+        Route::get('/content/{id}', 'PostController@getItem')->name(
+            'contentById'
+        );
+        Route::get(
+            '/content/{postType}/{tag}',
+            'PostController@getPostByPostTypeAndSlug'
+        )->name('contentByTagAndType');
+    });
 
     //Pages
     Route::get('/', 'PageController@getHomepage')->name('homepage');

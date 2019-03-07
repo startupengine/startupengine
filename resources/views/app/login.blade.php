@@ -62,10 +62,7 @@
             padding:13px;
         }
 
-        .btn-login {
-            border: 1px solid #d6e8ff !important;
-            background: #d6e8ff !important;
-        }
+
 
     </style>
 @endsection
@@ -163,7 +160,7 @@
                         </div>
                     </div>
                     <div class="footer text-center">
-                        <button class="btn btn-white btn-login btn-pill btn-lg mb-3" id="signin">Sign In</button>
+                        <button class="btn btn-success btn-pill btn-lg mb-3" id="signin">Sign In</button>
                     </div>
                 </form>
             </div>
