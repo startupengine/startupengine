@@ -368,7 +368,7 @@
                 <div class="row px-3" id="docsApp">
                     <div class="col-md-4 d-sm-none d-lg-block">
                         <div class="row">
-                            <div  class="card documentation-card w-100 mr-3 h-auto raised-1-down" style="z-index:999;min-height:auto !important;">
+                            <div  class="card documentation-card w-100 mr-3 h-auto flat" style="z-index:999;min-height:auto !important;">
 
                                 <div class="nav-wrapper d-none d-sm-none d-lg-inline-flex">
                                     <ul class="nav flex-column w-100 " id="sidebar">
