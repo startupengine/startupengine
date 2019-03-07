@@ -15,11 +15,21 @@ class WebRbac
      */
     public function handle($request, Closure $next)
     {
-        if (request()->is('content/*')) {
+        if (request()->is('/content/*')) {
             $id = request()->route('id');
-
             $model = \App\Post::find($id);
+        }
+        if (request()->route()->action['as'] == 'view page') {
+            $id = request()->route('slug');
+            $model = \App\Page::where('slug', '=', $id)->first();
+        }
 
+        if ($model == null && request()->route()->action['as'] == 'view page') {
+            if (defaultPageExists($id)) {
+            } else {
+                abort(404);
+            }
+        } else {
             if (
                 method_exists($model, 'schema') &&
                 $model->schema() != null &&

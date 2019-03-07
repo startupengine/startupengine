@@ -9,7 +9,6 @@
 @endsection
 
 @section('splash-style')
-background-image:url('https://images.unsplash.com/photo-1505051508008-923feaf90180?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'); background-size:cover;
 @endsection
 
 
@@ -18,8 +17,8 @@ background-image:url('https://images.unsplash.com/photo-1505051508008-923feaf901
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row justify-content-center">
             <div class="col-md-12 mx-3 mb-3 ">
-                <h1 class=" display-4 text-white text-center">Error 404</h1>
-                <p class="text-white pt-2 text-center" style="font-size:130%;">Page not found.
+                <h1 class=" display-4 text-white text-center"><i class="fa fa-fw fa-lg fa-ban mb-3 text-dark" style="opacity:0.35;"></i></h1>
+                <p class="text-white pt-2 text-center" style="font-size:130%;">Page not found.</p>
             </div>
         </div>
     </div>

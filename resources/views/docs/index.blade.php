@@ -300,7 +300,10 @@
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container page-title">
         <div class="row">
-           <h3>Documentation</h3>
+            <h5 align="center" class="w-100" style="z-index:99999;color:rgba(255,255,255,0.4);">
+                {{ setting('site.name', null) }}
+            </h5>
+            <h3>Help Desk</h3>
         </div>
     </div>
     <!-- / Inner Wrapper -->

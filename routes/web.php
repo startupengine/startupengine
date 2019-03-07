@@ -79,37 +79,31 @@ Route::group(['middleware' => ['web']], function () {
         )->name('contentByTagAndType');
     });
 
-    //Pages
-    Route::get('/', 'PageController@getHomepage')->name('homepage');
-    Route::get('/home', 'PageController@getHomepage')->name('home');
-    Route::get('/{slug}', 'PageController@getPage')->name('view page');
+    Route::group(['middleware' => ['webrbac']], function () {
+        //Pages
+        Route::get('/', 'PageController@getHomepage')->name('homepage');
+        Route::get('/home', 'PageController@getHomepage')->name('home');
+        Route::get('/{slug}', 'PageController@getPage')->name('view page');
+    });
 
-    //Subscriptions
+    //Subscribe
     Route::get(
         '/subscribe/{product_id}/{plan_id}',
         'SubscriptionController@addSubscription'
     )
         ->name('newSubscription')
         ->middleware('auth.default');
-    Route::get(
-        '/subscribe/{id}',
-        'SubscriptionController@confirmSubscription'
-    )->name('confirmSubscription');
-    Route::get(
-        '/subscription/submit/',
-        'SubscriptionController@submitSubscription'
-    )->name('submitSubscription');
-    Route::post(
-        '/subscription/submit/',
-        'SubscriptionController@submitSubscription'
-    );
 
     //App
-    Route::get('/app/{accountView}', 'AccountController@view')->name('account');
+    Route::get('/app/{accountView}', 'AccountController@view')
+        ->name('account')
+        ->middleware('auth.default');
     Route::get(
         '/app/{accountView}/{accountSubView}',
         'AccountController@subView'
-    )->name('accountSubview');
+    )
+        ->name('accountSubview')
+        ->middleware('auth.default');
 });
 
 // Admin Control Panel

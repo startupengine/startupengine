@@ -1578,3 +1578,12 @@ function sellsSaas()
     $saas = \App\Product::where('status', '=', 'ACTIVE')->get();
     return $saas;
 }
+
+function defaultPageExists($slug)
+{
+    if (view()->exists('pages.defaults.' . $slug . '.index')) {
+        return true;
+    } else {
+        return false;
+    }
+}

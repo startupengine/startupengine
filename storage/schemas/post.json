@@ -58,7 +58,7 @@
   "sections": {
   },
   "permissions": {
-    
+
     "add": {
       "requires_auth": true,
       "requires_permission":

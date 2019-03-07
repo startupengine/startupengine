@@ -103,7 +103,7 @@
                                     @foreach(docsFolders() as $docFolder)
                                         <a class="dropdown-item py-1 px-3 m-0" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>
                                     @endforeach <div class="dropdown-divider"></div> <a class="dropdown-item py-1 px-3 m-0" href="/docs">View All</a> </div>'
-                                       data-html="true" >Docs</a>
+                                       data-html="true" >Help</a>
                                 </li>
                             @endif
                         </ul>
@@ -201,7 +201,7 @@
                     @endif
                     @if(hasDocs())
                         <li class="nav-item">
-                            <a class="nav-link" href="/docs">Documentation</a>
+                            <a class="nav-link" href="/docs">Help</a>
                         </li>
                     @endif
                     @if(\Auth::user() && \Auth::user()->hasPermissionTo('view backend'))
