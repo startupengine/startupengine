@@ -157,6 +157,15 @@
             font-size: 110% !important;
         }
 
+        ul.nav li:nth-child(odd) {
+            border-radius:0px !important;
+            background: rgba(200, 220, 240, 0.25) !important;
+        }
+        ul.nav li:nth-child(even) {
+            border-radius:0px !important;
+            background: rgba(200, 220, 240, 0.15) !important;
+        }
+
         .documentation-card h1, .documentation-card h2, .documentation-card h3, .documentation-card h4, .documentation-card h5, .documentation-card h6 {
             color: #2568ff;
             font-weight: 500;
@@ -165,6 +174,7 @@
         .documentation-card h1 {
             font-size: 150% !important;
             padding: 0px 15px !important;
+            border-radius:0px !important;
         }
 
         .documentation-card h2 {
@@ -216,7 +226,7 @@
             margin-bottom: 25px;
             padding-bottom: 15px !important;
             border-bottom: 1px solid #eee;
-            border-radius: 6px !important;
+            border-radius: 0px !important;
         }
 
         .nav .nav-link.active {
@@ -236,7 +246,15 @@
         }
 
         .documentation-card.border, #sidebar {
-            border: 1px solid rgba(0, 100, 150, 0.2) !important;
+            border: 0px solid rgba(0, 100, 150, 0.2) !important;
+        }
+
+        #sidebar li:first-of-type{
+            border-radius:5px 5px 0px 0px !important;
+        }
+
+        #sidebar li:last-of-type{
+            border-radius:0px 0px 5px 5px !important;
         }
 
         #description h1, #description h2, #description h3, #description h4, #description h5, #description h6 {
@@ -273,6 +291,16 @@
         .shards-landing-page--1 .welcome:before {
             background: linear-gradient(35deg, #6100b9 0%, #9451ff 77%) !important;
         }
+
+        @media(min-width:768px){
+            #docContentCard {
+                margin-top: -71px !important;
+            }
+            #sideBar{
+                background:#fff;
+                margin-top: -60px !important;
+            }
+        }
     </style>
 @endsection
 
@@ -301,7 +329,7 @@
     <main id="content">
 
         @if(count(docsFolders()) > 1)
-            <nav class="navbar navbar-expand-sm navbar-light" data-toggle="affix" align="center"
+            <nav class="navbar navbar-expand-sm navbar-light hiddenOnDesktop" data-toggle="affix" align="center"
                  style="background: #dae4f9;border: 1px solid rgba(0,0,0,0.05);">
                 <div class="container" align="center">
                     <div class="btn-group btn-group-sm mx-auto">
@@ -334,23 +362,48 @@
         <div class="blog section section-invert p-4  firstSection" style="background:#fff !important;">
             <div class="container">
                 <div class="row px-3" id="docsApp">
-                    <div class="col-md-3 hiddenOnMobile">
+                    <div class="col-md-4 d-sm-none d-lg-block">
                         <div class="row">
-                            <div class="card documentation-card w-100 mr-3 h-auto " style="z-index:999;min-height:auto !important;">
+                            <div  class="card documentation-card w-100 mr-3 h-auto " style="z-index:999;min-height:auto !important;box-shadow:none !important;border:none !important;">
 
-                                <div class="nav-wrapper d-sm-none d-lg-inline-flex">
-                                    <ul class="nav flex-column w-100 border  " id="sidebar">
+                                <div class="nav-wrapper d-none d-sm-none d-lg-inline-flex">
+                                    <ul class="nav flex-column w-100 " id="sidebar">
+                                        <li class="hiddenOnMobile nav-item w-100 text-center py-3 px-1 border-bottom" style="border-color:rgba(0,0,200,0.1) !important;">
+                                            <div class="btn-group btn-group-sm mx-auto">
+                                                <div class="btn btn-black disabled">Menu</div>
+                                                <a class="btn btn-white border-whitec pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
+                                                   data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                                                   '@foreach(docsFolders() as $docFolder)
+                                                           <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>
+                                                @endforeach'
+                                                   data-html="true">
+                                                    <span class="mr-1">{{ str_replace('_', ' ', ucwords($folder)) }}</span><span
+                                                            class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+
+                                                @if(count(docsFolders($folder)) > 0)
+                                                    <a class="btn btn-white pl-4 truncate" href="#" aria-haspopup="true"
+                                                       aria-expanded="false" tyle="border-left:none;"
+                                                       data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
+                                                       '@foreach(docsFolders($folder) as $docFolder)
+                                                               <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $folder }}/{{$docFolder}}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>
+                                                @endforeach'
+                                                       data-html="true">
+                                                        <span class="mr-1">@if(isset($subfolder)) {{ ucwords($subfolder) }}  @elseif(count(docsFolders($folder)) > 0) {{ ucwords(docsFolders($folder)[0]) }} @endif</span><span
+                                                                class="ml-1 fa fa-fw fa-caret-down d-inline-block"></span></a>
+                                                @endif
+                                            </div>
+                                        </li>
                                         @foreach(docFiles($folder) as $markdownFile)
                                             @if($markdownFile != 'description.md')
                                                 <li class="nav-item">
-                                                    <a class="nav-link @if($file == $markdownFile) active @endif "
+                                                    <a class="nav-link"
                                                        href="/docs/{{ $folder }}/<?php if (
                                                            isset($subfolder) &&
                                                            $subfolder != null
                                                        ) {
                                                            echo $subfolder . "/";
                                                        } ?>{{ $markdownFile }}">
-                                                        <span>{{ docsTitle($folder, $markdownFile) }}</span>
+                                                        <span>@if($file == $markdownFile) <i class="fa fa-fw fa-sm fa-chevron-right dimmed text-primary mr-2"></i> @endif {{ docsTitle($folder, $markdownFile) }}</span>
                                                     </a>
                                                 </li>
                                             @endif
@@ -367,21 +420,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col col-md-9">
+                    <div class="col col-sm-12 col-md-12 col-lg-8 mb-3">
                         <div class="row">
-                            <div class="card documentation-card " style="width:100%;box-shadow: none !important;">
+                            <div id="docContentCard" class="card documentation-card raised-md-1 flat-sm" style="width:100%;">
                                 <div class="card-body pt-2 px-4 pb-4">
                                     {!! $output !!}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 pb-3 px-0 hiddenOnMobile" align="left">
+                            <div class="col-md-12 mb-2 px-0 d-none d-lg-block" align="left">
                                 <?php $nextDoc = prevDoc($folder, $file); ?>
                                 @if($nextDoc['has_prev'])
 
 
-                                    <div class="btn btn-white btn-lg d-lg-inline-flex d-block mb-2">
+                                    <div class="btn btn-white btn-lg mb-2">
                                         Previous: &nbsp;
                                         <a href="/docs/{{ $folder }}/<?php if (
                                             isset($subfolder) &&
@@ -397,7 +450,7 @@
                                 @if($nextDoc['has_next'])
 
 
-                                    <div class="btn btn-white btn-lg d-lg-inline-flex d-block float-lg-right">
+                                    <div class="btn btn-white btn-lg  float-lg-right">
                                         Next: &nbsp;
                                         <a href="/docs/{{ $folder }}/<?php if (
                                             isset($subfolder) &&
@@ -412,11 +465,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 hiddenOnDesktop">
+                    <div class="col-md-12 d-block d-lg-none">
                         <div class="row">
-                            <div class="card documentation-card w-100  h-auto" style="min-height:auto !important;">
+                            <div class="card documentation-card w-100 raised-2-down h-auto" style="min-height:auto !important;">
 
-                                <div class="nav-wrapper d-sm-none d-lg-inline-flex">
+                                <div class="nav-wrapper">
                                     <ul class="nav flex-column border   w-100" id="sidebar">
                                         @foreach(docFiles($folder) as $markdownFile)
                                             @if($markdownFile != 'description.md')
@@ -428,7 +481,7 @@
                                                        ) {
                                                            echo $subfolder . "/";
                                                        } ?>{{ $markdownFile }}">
-                                                        <span>{{ docsTitle($folder, $markdownFile) }}</span>
+                                                        <span>@if($file == $markdownFile) <i class="fa fa-fw fa-sm fa-chevron-right dimmed text-primary mr-2"></i> @endif  {{ docsTitle($folder, $markdownFile) }}</span>
                                                     </a>
                                                 </li>
                                             @endif
