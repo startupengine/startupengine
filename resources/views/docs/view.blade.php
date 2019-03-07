@@ -465,7 +465,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 d-block d-lg-none">
+                    <div class="col-md-12 d-block d-lg-none mt-0 mt-sm-5 mt-xs-5 ">
                         <div class="row">
                             <div class="card documentation-card w-100 raised-2-down h-auto" style="min-height:auto !important;">
 
