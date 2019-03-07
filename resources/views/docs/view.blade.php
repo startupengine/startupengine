@@ -275,7 +275,7 @@
             top: 72;
             right: 0;
             left: 0;
-            z-index: 1030;
+            z-index: 999999 !important;
         }
 
         /* fixed to top styles */
@@ -291,9 +291,10 @@
         .shards-landing-page--1 .welcome:before {
             background: linear-gradient(35deg, #6100b9 0%, #9451ff 77%) !important;
         }
-        @media(max-width:768px) {
+
+        @media(max-width:991px) {
             #docContentCard {
-                margin-top: -20px;
+                margin-top: -22px !important;
             }
         }
         @media(min-width:991px){
@@ -366,7 +367,7 @@
         <div class="blog section section-invert p-4  firstSection" style="background:#fff !important;">
             <div class="container">
                 <div class="row px-3" id="docsApp">
-                    <div class="col-md-4 d-sm-none d-lg-block">
+                    <div class="col-md-4 d-none d-lg-block">
                         <div class="row">
                             <div  class="card documentation-card w-100 mr-3 h-auto flat" style="z-index:999;min-height:auto !important;">
 
