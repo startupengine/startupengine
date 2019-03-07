@@ -15,7 +15,7 @@ class WebRbac
      */
     public function handle($request, Closure $next)
     {
-        if (request()->is('/content/*')) {
+        if (request()->route()->action['as'] == 'contentById') {
             $id = request()->route('id');
             $model = \App\Post::find($id);
         }
@@ -25,8 +25,7 @@ class WebRbac
         }
 
         if (!isset($model) && !isset($id)) {
-            if (request()->is('/')) {
-            } else {
+            if (request()->route()->action['as'] != 'homepage') {
                 abort(404);
             }
         } elseif (
