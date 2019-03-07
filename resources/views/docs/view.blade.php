@@ -246,7 +246,7 @@
         }
 
         .documentation-card.border, #sidebar {
-            border: 0px solid rgba(0, 100, 150, 0.2) !important;
+            border: 1px solid rgba(0, 50, 250, 0.15) !important;
         }
 
         #sidebar li:first-of-type{
@@ -291,8 +291,12 @@
         .shards-landing-page--1 .welcome:before {
             background: linear-gradient(35deg, #6100b9 0%, #9451ff 77%) !important;
         }
-
-        @media(min-width:768px){
+        @media(max-width:768px) {
+            #docContentCard {
+                margin-top: -20px;
+            }
+        }
+        @media(min-width:991px){
             #docContentCard {
                 margin-top: -71px !important;
             }
@@ -329,7 +333,7 @@
     <main id="content">
 
         @if(count(docsFolders()) > 1)
-            <nav class="navbar navbar-expand-sm navbar-light hiddenOnDesktop" data-toggle="affix" align="center"
+            <nav class="navbar navbar-expand-sm navbar-light d-block d-lg-none" data-toggle="affix" align="center"
                  style="background: #dae4f9;border: 1px solid rgba(0,0,0,0.05);">
                 <div class="container" align="center">
                     <div class="btn-group btn-group-sm mx-auto">
@@ -364,7 +368,7 @@
                 <div class="row px-3" id="docsApp">
                     <div class="col-md-4 d-sm-none d-lg-block">
                         <div class="row">
-                            <div  class="card documentation-card w-100 mr-3 h-auto " style="z-index:999;min-height:auto !important;box-shadow:none !important;border:none !important;">
+                            <div  class="card documentation-card w-100 mr-3 h-auto raised-1-down" style="z-index:999;min-height:auto !important;">
 
                                 <div class="nav-wrapper d-none d-sm-none d-lg-inline-flex">
                                     <ul class="nav flex-column w-100 " id="sidebar">
@@ -422,7 +426,7 @@
                     </div>
                     <div class="col col-sm-12 col-md-12 col-lg-8 mb-3">
                         <div class="row">
-                            <div id="docContentCard" class="card documentation-card raised-md-1 flat-sm" style="width:100%;">
+                            <div id="docContentCard" class="card documentation-card  flat  raised-lg-1 " style="width:100%;">
                                 <div class="card-body pt-2 px-4 pb-4">
                                     {!! $output !!}
                                 </div>
@@ -467,14 +471,14 @@
                     </div>
                     <div class="col-md-12 d-block d-lg-none mt-0 mt-sm-5 mt-xs-5 ">
                         <div class="row">
-                            <div class="card documentation-card w-100 raised-2-down h-auto" style="min-height:auto !important;">
+                            <div class="card documentation-card w-100 flat h-auto" style="min-height:auto !important;">
 
                                 <div class="nav-wrapper">
                                     <ul class="nav flex-column border   w-100" id="sidebar">
                                         @foreach(docFiles($folder) as $markdownFile)
                                             @if($markdownFile != 'description.md')
                                                 <li class="nav-item">
-                                                    <a class="nav-link @if($file == $markdownFile) active @endif "
+                                                    <a class="nav-link  "
                                                        href="/docs/{{ $folder }}/<?php if (
                                                            isset($subfolder) &&
                                                            $subfolder != null
