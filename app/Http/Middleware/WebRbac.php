@@ -24,11 +24,17 @@ class WebRbac
             $model = \App\Page::where('slug', '=', $id)->first();
         }
 
-        if ($model == null && request()->route()->action['as'] == 'view page') {
-            if (defaultPageExists($id)) {
+        if (!isset($model) && !isset($id)) {
+            if (request()->is('/')) {
             } else {
                 abort(404);
             }
+        } elseif (
+            isset($model) &&
+            (request()->route()->action['as'] == 'view page' or
+                request()->route()->action['as'] == 'homepage') &&
+            defaultPageExists($id)
+        ) {
         } else {
             if (
                 method_exists($model, 'schema') &&
