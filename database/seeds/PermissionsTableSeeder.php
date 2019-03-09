@@ -332,7 +332,9 @@ class PermissionsTableSeeder extends Seeder
             'name' => 'delete permissions'
         ]);
 
-        //Assign permissions to roles
+        ////////////////////////////////
+        //Assign permissions to roles//
+        //////////////////////////////
 
         //Users
         $role = Role::where('name', '=', 'user')->first();

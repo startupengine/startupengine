@@ -61,18 +61,25 @@ class ApiRbac
                 ) {
                     foreach ($rules['requires_permission'] as $permission) {
                         try {
+                            $permission = str_replace(
+                                '_',
+                                ' ',
+                                $rules['requires_permission']
+                            );
+
                             if (
                                 \Auth::user()->hasPermissionTo(
-                                    $rules['requires_permission'] !== true
+                                    $permission == false
                                 )
                             ) {
                                 abort(403);
                             }
                         } catch (\Exception $exception) {
-                            abort(403);
+                            // Do nothing - previously: abort(403)
                         }
                     }
                 }
+
                 if (
                     isset($rules['requires_permission']) &&
                     \Auth::user() == null

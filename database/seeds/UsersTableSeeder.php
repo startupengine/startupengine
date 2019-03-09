@@ -1,8 +1,8 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,15 +13,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (User::count() == 0) {
+        $pass = 'password';
 
+        if (User::count() == 0) {
             //Admin user
             $user = User::create([
                 'name' => 'Admin',
                 'email' => 'admin@example.com',
                 'status' => 'ACTIVE',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('admin');
             $user->assignRole('staff');
@@ -36,8 +37,8 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Kevin Flynn',
                 'email' => 'user@example.com',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('user');
             $user->assignRole('staff');
@@ -46,8 +47,8 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Aaron Sorkin',
                 'email' => 'writer@example.com',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('writer');
             $user->assignRole('staff');
@@ -56,8 +57,8 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Ira Glass',
                 'email' => 'editor@example.com',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('editor');
             $user->assignRole('staff');
@@ -66,8 +67,8 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Linus Torvalds',
                 'email' => 'developer@example.com',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('developer');
             $user->assignRole('staff');
@@ -76,8 +77,8 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Steve Jobs',
                 'email' => 'executive@example.com',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('executive');
             $user->assignRole('staff');
@@ -86,8 +87,8 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name' => 'Nate Silver',
                 'email' => 'analyst@example.com',
-                'password' => bcrypt('password'),
-                'remember_token' => str_random(60),
+                'password' => 'password',
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('analyst');
             $user->assignRole('staff');
