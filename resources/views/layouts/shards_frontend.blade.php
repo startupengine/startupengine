@@ -1,8 +1,10 @@
-<?php $viewOptions = []; ?>
-<?php $viewOptions['navbar-classes'] = ['dark']; ?>
-<?php $viewOptions['navbar-scroll-add-classes'] = ['filled']; ?>
-<?php $viewOptions['navbar-unscroll-remove-classes'] = ['filled']; ?>
+
+<?php  $viewOptions['navbar-classes'] = ['navbar-light', 'navbar-blend-light-blue'];
+        $viewOptions['navbar-scroll-add-classes'] = ['navbar-dark', 'dark'];
+        $viewOptions['navbar-unscroll-remove-classes'] = ['navbar-dark', 'dark'];  ?>
+
 @yield('php-variables')
+
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
@@ -112,7 +114,7 @@
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item dropdown mx-2" id="accountDropdown">
 
-                                    <a class="btn btn-pill btn-light text-dark " href="/app/account"
+                                    <a class="btn btn-pill btn-white text-dark " href="/app/account"
                                        id="navbarDropdown" role="button"  aria-haspopup="true"
                                        data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
                                        '<div align="left" class="popover-menu">
@@ -288,7 +290,9 @@
     $(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 2) {
-
+                @foreach($viewOptions['navbar-classes'] as $class)
+                    $('#topNavbar').removeClass('{{ $class }}');
+                @endforeach
                 @foreach($viewOptions['navbar-scroll-add-classes'] as $class)
                     $('#topNavbar').addClass('{{ $class }}');
                 @endforeach
@@ -303,6 +307,9 @@
                     $('#topNavbar').removeClass('{{ $class }}');
                 @endforeach
                 $('#topNavbar').removeClass('shadowed');
+                @foreach($viewOptions['navbar-classes'] as $class)
+                $('#topNavbar').addClass('{{ $class }}');
+                @endforeach
             }
         });
     });

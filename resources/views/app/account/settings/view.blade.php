@@ -2,19 +2,14 @@
 
 @section('php-variables')
     <?php
-        $viewOptions['navbar-classes'] = ['dark'];
-        $viewOptions['navbar-scroll-add-classes'] = ['dark'];
-        $viewOptions['navbar-unscroll-remove-classes'] = [];
-
-        $item = \App\Subscription::find(app('request')->input('subscription_id'));
-
-        $options = [
-            'id' => app('request')->input('userpreference_id'),
-            'type' => 'userpreference',
-            'index_uri' => '/app/account/settings',
-            'show_metadata' => false,
-            'URL_PARAMETERS' => '&user_id='.\Auth::user()->id
-        ];
+    $item = \App\Subscription::find(app('request')->input('subscription_id'));
+    $options = [
+        'id' => app('request')->input('userpreference_id'),
+        'type' => 'userpreference',
+        'index_uri' => '/app/account/settings',
+        'show_metadata' => false,
+        'URL_PARAMETERS' => '&user_id=' . \Auth::user()->id
+    ];
     ?>
 @endsection
 
@@ -42,13 +37,13 @@
             border-color: #cfd8e2 !important;
         }
 
-        .card-header{
-            background:#fff !important;
+        .card-header {
+            background: #fff !important;
         }
 
-        .card{
-            height:auto !important;
-            min-height:auto !important;
+        .card {
+            height: auto !important;
+            min-height: auto !important;
         }
 
 
@@ -66,9 +61,7 @@
 @endsection
 
 @section('navbar-classes')
-    @foreach($viewOptions['navbar-classes'] as $class)
-        {{ $class }}
-    @endforeach
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')
@@ -79,7 +72,7 @@
 @section('content')
     <!-- Related Content Section -->
     <div class="blog section section-invert pt-4 pb-0 full-screen-section">
-        <h3 class="section-title text-center mb-5 mt-3">My Account</h3>
+        <h4 class="section-title text-center mb-5 mt-3">My Account</h4>
 
         <div class="container">
             <div class="row pt-2">

@@ -93,7 +93,7 @@ li .dimmed {
 }
 
 .navbar-toggler {
-  border-color: rgb(255, 255, 255) !important;
+  border-color: transparent !important;
   background: #efefef !important;
   box-shadow: 0px 4px 15px rgba(0, 0, 100, 0.3) !important;
   border-radius: 3px !important;
@@ -258,7 +258,7 @@ li .dimmed {
 
 
 #topNavbar.shadowed {
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.66);
+  box-shadow: 0px 0px 30px rgba(0, 0, 110, 0.3);
   transition: all 0.2s ease-in-out !important;
 }
 
@@ -988,4 +988,16 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   .flat-sm {
     box-shadow:none !important;
   }
+}
+
+
+#topNavbar.navbar-blend-light-blue {
+  background-color:#e9f0ff!important;
+  color:#333 !important;
+}
+
+#topNavbar.navbar-blend-light-blue li.nav-item a.nav-link, #topNavbar.navbar-blend-light-blue a {
+  color:#333 !important;
+  text-decoration:none !important;
+  text-shadow:none !important;
 }

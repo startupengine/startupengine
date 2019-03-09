@@ -166,7 +166,7 @@
 @section('content')
     <div class="row" v-if="info != null">
     <?php $header = 'A list of settings grouped by type.'; ?>
-        <?php $tableHeader = '<th scope="col" class="border-0 h hiddenOnMobile" style="min-width:100px;text-align:left;">Group</th><th scope="col" class="border-0" style="text-align:left;">Description</th><th scope="col" class="border-0 h" style="width:25px;text-align:center;">&nbsp;</th>'; ?>
+        <?php $tableHeader = '<th scope="col" class="border-0 h hiddenOnMobile" style="width:100px;text-align:left;">Group</th><th scope="col" class="border-0" style="text-align:left;">Description</th><th scope="col" class="border-0 h" style="width:25px;text-align:center;">&nbsp;</th>'; ?>
         <?php $tableRow = '<td align="left" class="hiddenOnMobile" style="width:100px;"><span class="badge badge-type text-dark mr-2" style="width:100%;" v-if="item.group != null">{{ item.group }}</span></td><td align="left"><span class="badge text-dark mr-1 px-0">{{ item.value }}</span> <span class="badge text-dark mr-2 px-0 dimmed hiddenOnMobile">({{ item.items }} Items)</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/settings/group/\' + item.group" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
         {!! renderResourceTableHtml(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/products/']) !!}
         <!-- New Product Form Modal -->

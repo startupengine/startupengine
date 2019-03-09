@@ -137,7 +137,7 @@
         .page-title  h1, .page-title  h2, .page-title  h3 {
             font-size: 250% !important;
             font-weight:100 !important;
-            color:#fff !important;
+            color:#333 !important;
             z-index:999 !important;
             text-align:center;
             display:block !important;
@@ -282,7 +282,7 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background: linear-gradient(35deg, #6100b9 0%, #9451ff 77%) !important;
+            background: #e9f0ff !important;
         }
     </style>
 @endsection
@@ -292,6 +292,14 @@
 @endsection
 
 @section('page-title') Documentation @endsection
+
+@section('navbar-classes')
+    navbar-light navbar-blend-light-blue
+@endsection
+
+@section('splash-class')
+
+@endsection
 
 @section('top-menu')
 @endsection
@@ -303,7 +311,7 @@
             <h5 align="center" class="w-100" style="z-index:99999;color:rgba(255,255,255,0.4);">
                 {{ setting('site.name', null) }}
             </h5>
-            <h3>Help Desk</h3>
+            <h3 class="text-dark">Help Desk</h3>
         </div>
     </div>
     <!-- / Inner Wrapper -->

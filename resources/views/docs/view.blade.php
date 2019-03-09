@@ -268,6 +268,7 @@
 
         #description a {
             font-weight:600 !important;
+            color:#555 !important;
         }
 
         .affix {
@@ -289,7 +290,7 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background: linear-gradient(35deg, #6100b9 0%, #9451ff 77%) !important;
+            background: #e9f0ff !important;
         }
 
         @media(max-width:991px) {
@@ -323,6 +324,10 @@
 
 @section('page-title') @if(file_exists(docsPath().'/'.$folder.'/description.md')) {!! GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(file_get_contents(docsPath().'/'.$folder.'/description.md')) !!} @endif @endsection
 
+@section('navbar-classes')
+    navbar-light navbar-blend-light-blue
+@endsection
+
 @section('top-menu')
 @endsection
 
@@ -330,7 +335,7 @@
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row">
-            <div class="col-md-12 px-4 text-white py-5" id="description" >
+            <div class="col-md-12 px-4 text-dark py-5" id="description" >
                 @if(file_exists(docsPath().'/'.$folder.'/description.md')) {!! GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(file_get_contents(docsPath().'/'.$folder.'/description.md')) !!} @endif
             </div>
         </div>

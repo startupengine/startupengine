@@ -1,7 +1,11 @@
 @extends('layouts.shards_frontend')
 
 @section('php-variables')
-    <?php $viewOptions['splash-height'] = '300px'; ?>
+    <?php
+    $viewOptions['navbar-classes'] = ['navbar-light', 'navbar-blend-light-blue'];
+    $viewOptions['navbar-scroll-add-classes'] = ['navbar-dark', 'dark'];
+    $viewOptions['navbar-unscroll-remove-classes'] = ['navbar-dark', 'dark'];
+    ?>
 @endsection
 
 @section('title')
@@ -62,7 +66,7 @@
 @endsection
 
 @section('navbar-classes')
-    dark
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')

@@ -2,9 +2,9 @@
 
 @section('php-variables')
     <?php
-        $viewOptions['navbar-classes'] = ['dark'];
-        $viewOptions['navbar-scroll-add-classes'] = ['dark'];
-        $viewOptions['navbar-unscroll-remove-classes'] = [];
+        $viewOptions['navbar-classes'] = ['navbar-light', 'navbar-blend-light-blue'];
+        $viewOptions['navbar-scroll-add-classes'] = ['navbar-dark', 'dark'];
+        $viewOptions['navbar-unscroll-remove-classes'] = ['navbar-dark', 'dark'];
     ?>
 @endsection
 

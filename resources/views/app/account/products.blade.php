@@ -1,9 +1,5 @@
 @extends('layouts.shards_frontend')
 
-@section('php-variables')
-    <?php $viewOptions['splash-height'] = '300px'; ?>
-@endsection
-
 @section('title')
     Account
 @endsection
@@ -62,7 +58,7 @@
 @endsection
 
 @section('navbar-classes')
-    dark
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')

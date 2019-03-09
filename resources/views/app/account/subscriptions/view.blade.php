@@ -65,9 +65,7 @@
 @endsection
 
 @section('navbar-classes')
-    @foreach($viewOptions['navbar-classes'] as $class)
-        {{ $class }}
-    @endforeach
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')
@@ -78,7 +76,7 @@
 @section('content')
     <!-- Related Content Section -->
     <div class="blog section section-invert pt-4 pb-0" style="min-height:calc(100vh - 133px) !important;">
-        <h3 class="section-title text-center mb-5 mt-3">My Account</h3>
+        <h4 class="section-title text-center mb-5 mt-3">My Account</h4>
 
         <div class="container">
             <div class="row pt-2">
