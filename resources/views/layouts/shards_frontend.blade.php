@@ -1,5 +1,5 @@
 
-<?php  $viewOptions['navbar-classes'] = ['navbar-light', 'navbar-blend-light-blue'];
+<?php  $viewOptions['navbar-classes'] = [];
         $viewOptions['navbar-scroll-add-classes'] = ['navbar-dark', 'dark'];
         $viewOptions['navbar-unscroll-remove-classes'] = ['navbar-dark', 'dark'];  ?>
 

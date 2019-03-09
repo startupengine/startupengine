@@ -5,6 +5,10 @@
   }
 }
 
+.navbar-brand {
+  color:#fff;
+}
+
 code {
     background: #fff3f5;
     border-radius: 4px;
@@ -252,7 +256,7 @@ li .dimmed {
   height: 73px;
   transition: all 0.2s ease-in-out !important;
   box-shadow: 0px 0px 30px rgba(0, 50, 150, 0);
-  background: rgba(10,10,250,0.1);
+  background: none !important;
 }
 
 
