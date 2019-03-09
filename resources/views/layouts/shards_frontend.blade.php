@@ -114,7 +114,7 @@
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item dropdown mx-2" id="accountDropdown">
 
-                                    <a class="btn btn-pill btn-white text-dark " href="/app/account"
+                                    <a class="btn btn-pill btn-white text-dark raised" href="/app/account"
                                        id="navbarDropdown" role="button"  aria-haspopup="true"
                                        data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
                                        '<div align="left" class="popover-menu">
