@@ -980,6 +980,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   .raised-lg-1 {
     box-shadow:0px -10px 20px -5px rgba(0,0,150,0.1) !important;
   }
+  .raised-lg-2 {
+    box-shadow:0px -0px 30px 0px rgba(0,0,150,0.15) !important;
+  }
 }
 
 
@@ -1004,4 +1007,11 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 #topNavbar.navbar-light .btn-outline-white{
   border-color:#333 !important;
+}
+
+
+#topNavbar.navbar-light .btn-outline-white:hover{
+  border-color:#fff !important;
+  background-color:#fff !important;
+  color:#333  !important;
 }

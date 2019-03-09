@@ -440,7 +440,7 @@
                     </div>
                     <div class="col col-sm-12 col-md-12 col-lg-8 mb-3">
                         <div class="row">
-                            <div id="docContentCard" class="card documentation-card  flat  raised-lg-1 " style="width:100%;">
+                            <div id="docContentCard" class="card documentation-card  flat  raised-lg-2 " style="width:100%;">
                                 <div class="card-body pt-2 px-4 pb-4">
                                     {!! $output !!}
                                 </div>
