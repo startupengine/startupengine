@@ -306,6 +306,14 @@
                 margin-top: -60px !important;
             }
         }
+
+        #sidebar li.nav-item:hover > a.nav-link:not(.active) {
+            background:#fff;
+            transition: all 0.4s !important;
+        }
+        #sidebar li.nav-item:hover > a.active {
+            background: #d1e8ff !important;
+        }
     </style>
 @endsection
 
@@ -401,14 +409,14 @@
                                         @foreach(docFiles($folder) as $markdownFile)
                                             @if($markdownFile != 'description.md')
                                                 <li class="nav-item">
-                                                    <a class="nav-link"
+                                                    <a class="nav-link @if($file == $markdownFile) active @endif"
                                                        href="/docs/{{ $folder }}/<?php if (
                                                            isset($subfolder) &&
                                                            $subfolder != null
                                                        ) {
                                                            echo $subfolder . "/";
                                                        } ?>{{ $markdownFile }}">
-                                                        <span>{{ docsTitle($folder, $markdownFile) }} @if($file == $markdownFile) <span class="badge  badge-pill badge-primary float-right m-2">Currently Viewing</span> @endif</span>
+                                                        <span>@if($file == $markdownFile) <i class="fa fa-fw fa-sm fa-caret-right mr-1 dimmed text-success"></i> @endif {{ docsTitle($folder, $markdownFile) }} @if($file == $markdownFile) <span class="badge  badge-pill badge-primary bg-light-blue text-dark-blue float-right m-2">Currently Viewing</span> @endif</span>
                                                     </a>
                                                 </li>
                                             @endif
@@ -479,14 +487,14 @@
                                         @foreach(docFiles($folder) as $markdownFile)
                                             @if($markdownFile != 'description.md')
                                                 <li class="nav-item">
-                                                    <a class="nav-link  "
+                                                    <a class="nav-link @if($file == $markdownFile) active @endif"
                                                        href="/docs/{{ $folder }}/<?php if (
                                                            isset($subfolder) &&
                                                            $subfolder != null
                                                        ) {
                                                            echo $subfolder . "/";
                                                        } ?>{{ $markdownFile }}">
-                                                        <span>{{ docsTitle($folder, $markdownFile) }} @if($file == $markdownFile) <span class="badge  badge-pill badge-primary float-right m-2">Currently Viewing</span> @endif</span>
+                                                        <span>@if($file == $markdownFile) <i class="fa fa-fw fa-sm fa-caret-right mr-1 dimmed text-success"></i> @endif {{ docsTitle($folder, $markdownFile) }} @if($file == $markdownFile) <span class="badge  badge-pill badge-primary bg-light-blue text-dark-blue float-right m-2">Currently Viewing</span> @endif</span>
                                                     </a>
                                                 </li>
                                             @endif
