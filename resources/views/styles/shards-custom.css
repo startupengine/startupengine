@@ -978,7 +978,7 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 @media(min-width:991px) {
   .raised-lg-1 {
-    box-shadow: 0px -15px 30px -5px rgba(0, 0, 150, 0.15) !important;
+    box-shadow:0px -10px 20px -5px rgba(0,0,150,0.1) !important;
   }
 }
 
@@ -1000,4 +1000,8 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   color:#333 !important;
   text-decoration:none !important;
   text-shadow:none !important;
+}
+
+#topNavbar.navbar-light .btn-outline-white{
+  border-color:#333 !important;
 }

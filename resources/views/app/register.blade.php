@@ -1,11 +1,6 @@
 @extends('layouts.shards_frontend')
 
 @section('php-variables')
-    <?php
-    $viewOptions['navbar-classes'] = ['dark'];
-    $viewOptions['navbar-scroll-add-classes'] = ['dark'];
-    $viewOptions['navbar-unscroll-remove-classes'] = [];
-    ?>
 @endsection
 
 @section('title')
@@ -79,9 +74,7 @@
 @endsection
 
 @section('navbar-classes')
-    @foreach($viewOptions['navbar-classes'] as $class)
-        {{ $class }}
-    @endforeach
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')

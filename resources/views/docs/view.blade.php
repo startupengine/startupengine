@@ -157,11 +157,11 @@
             font-size: 110% !important;
         }
 
-        ul.nav li:nth-child(odd) {
+        #sidebar.nav li:nth-child(odd) {
             border-radius:0px !important;
             background: rgba(200, 220, 240, 0.25) !important;
         }
-        ul.nav li:nth-child(even) {
+        #sidebar.nav li:nth-child(even) {
             border-radius:0px !important;
             background: rgba(200, 220, 240, 0.15) !important;
         }
@@ -268,7 +268,7 @@
 
         #description a {
             font-weight:600 !important;
-            color:#555 !important;
+            color:#2568ff !important;
         }
 
         .affix {

@@ -1,11 +1,7 @@
 @extends('layouts.shards_frontend')
 
 @section('php-variables')
-    <?php
-    $viewOptions['navbar-classes'] = ['dark'];
-    $viewOptions['navbar-scroll-add-classes'] = ['dark'];
-    $viewOptions['navbar-unscroll-remove-classes'] = [];
-    ?>
+
 @endsection
 
 @section('title')
@@ -68,9 +64,7 @@
 @endsection
 
 @section('navbar-classes')
-    @foreach($viewOptions['navbar-classes'] as $class)
-        {{ $class }}
-    @endforeach
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')
@@ -168,7 +162,8 @@
     </div>
     <div align="center" style="margin-top:15px;">
         <a href="/register" class="btn btn-outline-primary">
-            Create An Account
+            Need to create
+            an account?
         </a>
         <a href="/" class="btn btn-outline-secondary hiddenOnDesktop">
             @if(setting('site.name') !== null)

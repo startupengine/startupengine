@@ -327,7 +327,7 @@
 
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="list-group raised list-group-flush" style="width:100%;margin-top:-75px;border-radius:6px;">
+                            <div class="list-group raised-2-down list-group-flush" style="width:100%;margin-top:-75px;border-radius:6px;">
 
                                 @foreach(docsFolders() as $docFolder)
                                     <a href="/docs/{{ $docFolder }}" class="list-group-item list-group-item-action" href="/docs/{{ $docFolder }}">

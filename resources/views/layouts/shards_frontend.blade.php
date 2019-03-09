@@ -139,12 +139,16 @@
                         @else
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <div class="btn-group ml-1">
-                                    <a class="btn btn-outline-white" href="/login">Sign In</a>
-                                    </div>
-                                    <div class="btn-group ml-1">
-                                    <a class="btn btn-white raised" href="/register">Sign Up</a>
-                                    </div>
+                                    @if (!\Request::is('login'))
+                                        <div class="btn-group ml-1">
+                                            <a class="btn btn-outline-white" href="/login">Sign In</a>
+                                        </div>
+                                    @endif
+                                    @if (!\Request::is('register'))
+                                        <div class="btn-group ml-1">
+                                            <a class="btn btn-white raised" href="/register">Sign Up</a>
+                                        </div>
+                                    @endif
                                 </li>
                             </ul>
                         @endif
