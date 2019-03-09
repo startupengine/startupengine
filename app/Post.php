@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\GlobalPostsScope;
 use App\Traits\IsApiResource;
 use App\Traits\RelationshipsTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -49,6 +50,18 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
     protected $dates = ['deleted_at', 'published_at'];
 
     protected $fillable = ['json', 'excerpt'];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new GlobalPostsScope());
+    }
 
     public function searchFields()
     {

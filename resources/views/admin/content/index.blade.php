@@ -102,20 +102,6 @@
             border-color:#ddd;
         }
 
-        .truncate {
-            width: 300px;
-            white-space: nowrap;
-            display:inline-flex;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align:left;
-        }
-        @media(max-width:768px){
-            .truncate {
-                width: 150px;
-            }
-        }
-
         .badge-occurrence {
             min-width:100px;
         }
@@ -187,7 +173,7 @@
                             </span>
                         </div>'; ?>
         <?php $tableHeader = '<th scope="col" class="border-0" style="width:50px !important;text-align:left;">Image</th><th scope="col" class="border-0 hiddenOnMobile" style="width:100px !important;text-align:left;">Status</th><th scope="col" class="border-0 " style="text-align:left;">Title</th><th scope="col" class="border-0">&nbsp;</th>'; ?>
-        <?php $tableRow = '<td align="left" style="width:30px;"><span class="thumbnail" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class="hiddenOnMobile"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" align="left"><span class="badge text-dark mr-2 px-0">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/content/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
+        <?php $tableRow = '<td align="left" style="width:30px;"><span class="thumbnail" v-if="item.thumbnail != null" v-bind:style="{ backgroundImage: \'url(\' + item.thumbnail + \')\' }"> </span><span class="thumbnail" v-else></span></td><td align="left" style="width:100px;" class="hiddenOnMobile"><span class="badge badge-type text-dark mr-2" style="width:100%;" >{{ item.status }}</span></td><td style="width:auto;" align="left"><span class="badge text-dark mr-2 px-0 truncate-100 text-left">{{ item.title }}</span></td><td align="center"  style="width:50px;vertical-align:middle;"><a href="#" class="btn btn-white" v-bind:href="\'/admin/content/\' + item.id" class="btn btn-white" style="border-radius:15px;margin-right:5px;width:30px;height:30px;padding:7px 5px 6px 7px;"><i class="fa fa-fw fa-angle-right"></i></a></td>'; ?>
         <?php $cardHtml = '<div class="mt-2" align="left"><span class="badge badge-type text-dark text-uppercase"><span class="dimmed mr-1">Type:</span>{{ item.schema.title }}</span><br><span class="badge badge-type text-dark mt-1 text-uppercase"><span class="dimmed mr-1">Status:</span>{{ item.status }}</span></div>'; ?>
         <?php $cardFooter = '
              <div align="center">

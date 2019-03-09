@@ -408,7 +408,7 @@
                                                        ) {
                                                            echo $subfolder . "/";
                                                        } ?>{{ $markdownFile }}">
-                                                        <span>@if($file == $markdownFile) <i class="fa fa-fw fa-sm fa-chevron-right dimmed text-primary mr-2"></i> @endif {{ docsTitle($folder, $markdownFile) }}</span>
+                                                        <span>{{ docsTitle($folder, $markdownFile) }} @if($file == $markdownFile) <span class="badge  badge-pill badge-primary float-right m-2">Currently Viewing</span> @endif</span>
                                                     </a>
                                                 </li>
                                             @endif
@@ -486,7 +486,7 @@
                                                        ) {
                                                            echo $subfolder . "/";
                                                        } ?>{{ $markdownFile }}">
-                                                        <span>@if($file == $markdownFile) <i class="fa fa-fw fa-sm fa-chevron-right dimmed text-primary mr-2"></i> @endif  {{ docsTitle($folder, $markdownFile) }}</span>
+                                                        <span>{{ docsTitle($folder, $markdownFile) }} @if($file == $markdownFile) <span class="badge  badge-pill badge-primary float-right m-2">Currently Viewing</span> @endif</span>
                                                     </a>
                                                 </li>
                                             @endif

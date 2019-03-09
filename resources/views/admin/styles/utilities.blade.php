@@ -51,4 +51,21 @@
     #contentApp > .row .badge-loading {
         margin-top:25px !important;
     }
+
+    .truncate , .truncate-100{
+        width: 150px !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        text-align: left;
+        float:left;
+        color:#000 !important;
+    }
+
+    @media(min-width:768px){
+        .truncate-100 {
+            width:calc(100% - 0px) !important;
+        }
+    }
 </style>

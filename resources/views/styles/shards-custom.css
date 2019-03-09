@@ -531,6 +531,17 @@ label {
   white-space: nowrap;
 }
 
+.truncate {
+  width: calc(66% - 0px) !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: left;
+  float:left;
+  color:#000 !important;
+}
+
 textarea {
   word-break: break-all !important;
   overflow-wrap: break-word !important;
