@@ -13,96 +13,324 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        //Create core app permissions
 
-        //Create basic app permissions
-        Permission::create(['guard_name' => 'web', 'name' => 'view backend']);
-        Permission::create(['guard_name' => 'web', 'name' => 'view own profile']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit own profile']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'view backend'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'view analytics']);
+        //Users
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'view own profile'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit own profile'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'browse own pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read own pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit own pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add own pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete own pages']);
+        //Analytics
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'view analytics'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'undelete pages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'publish pages']);
+        //Pages
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse own pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read own pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit own pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add own pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete own pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'undelete pages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'publish pages'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'browse own posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read own posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit own posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add own posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete own posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'undelete posts']);
-        Permission::create(['guard_name' => 'web', 'name' => 'publish posts']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse own posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read own posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit own posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add own posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete own posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'undelete posts'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'publish posts'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'manage api settings']);
-        Permission::create(['guard_name' => 'web', 'name' => 'browse api tokens']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read api tokens']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit api tokens']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add api tokens']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete api tokens']);
-        Permission::create(['guard_name' => 'web', 'name' => 'browse api clients']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read api clients']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit api clients']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add api clients']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete api clients']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'manage api settings'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse api tokens'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read api tokens'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit api tokens'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add api tokens'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete api tokens'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse api clients'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read api clients'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit api clients'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add api clients'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete api clients'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'read text fields']);
-        Permission::create(['guard_name' => 'web', 'name' => 'write text fields']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read richtext fields']);
-        Permission::create(['guard_name' => 'web', 'name' => 'write richtext fields']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read code fields']);
-        Permission::create(['guard_name' => 'web', 'name' => 'write code fields']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read text fields'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'write text fields'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read richtext fields'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'write richtext fields'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read code fields'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'write code fields'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse packages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read packages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit packages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add packages']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete packages']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse packages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read packages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit packages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add packages'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete packages'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse settings']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read settings']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit settings']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add settings']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete settings']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse settings'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read settings'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit settings'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add settings'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete settings'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse users']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read users']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit users']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add users']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete users']);
+        //Users
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse users'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read users'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit users'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add users'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete users'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse roles']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read roles']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit roles']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add roles']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete roles']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse roles'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read roles'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit roles'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add roles'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete roles'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse content types']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read content types']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit content types']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add content types']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete content types']);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse content types'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read content types'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit content types'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add content types'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete content types'
+        ]);
 
-        Permission::create(['guard_name' => 'web', 'name' => 'browse permissions']);
-        Permission::create(['guard_name' => 'web', 'name' => 'read permissions']);
-        Permission::create(['guard_name' => 'web', 'name' => 'edit permissions']);
-        Permission::create(['guard_name' => 'web', 'name' => 'add permissions']);
-        Permission::create(['guard_name' => 'web', 'name' => 'delete permissions']);
-
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse permissions'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read permissions'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit permissions'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add permissions'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete permissions'
+        ]);
 
         //Assign permissions to roles
 
@@ -130,6 +358,7 @@ class PermissionsTableSeeder extends Seeder
         //Admin
         $role = Role::where('name', '=', 'admin')->first();
         $role->givePermissionTo('view backend');
+        $role->givePermissionTo('browse users');
         $role->givePermissionTo('browse pages');
         $role->givePermissionTo('read pages');
         $role->givePermissionTo('edit pages');
@@ -256,6 +485,5 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo('browse posts');
         $role->givePermissionTo('read posts');
         $role->givePermissionTo('edit posts');
-
     }
 }
