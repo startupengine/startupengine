@@ -951,7 +951,13 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   #contentApp .col-md-4:first-of-type:last-of-type {
     width:100% !important;
     flex: 0 0 100% !important;
-    max-width: 1140px !important;
+    max-width: 1200px !important;
+  }
+
+  #contentApp .col-md-4:nth-last-of-type(2):first-of-type, #contentApp .col-md-4:nth-of-type(2):last-of-type {
+    width:50% !important;
+    flex: 0 0 calc(50% - 8px) !important;
+    max-width: 50% !important;
   }
 }
 

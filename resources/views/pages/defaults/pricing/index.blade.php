@@ -134,7 +134,7 @@
         }
 
         .text-white p, .text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6 {
-            color: #fff !important;
+            color: #333 !important;
         }
 
         .shards-landing-page--1 .welcome {
@@ -282,11 +282,9 @@
             opacity:0.7;
         }
         .shards-landing-page--1 .welcome:before {
-            background: linear-gradient(30deg, #ff568f 0%, #ff4760 35%, #ffe09b 100%) !important;
+            background: #e9f0ff!important;
         }
-        #topNavbar {
-            background: rgba(250, 50, 50, 0.15) !important;
-        }
+      
     </style>
 @endsection
 
@@ -296,7 +294,8 @@
 
 @section('page-title') Content @endsection
 
-@section('top-menu')
+@section('navbar-classes')
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('header')
@@ -307,7 +306,7 @@
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
             <div class="col-md-12 px-4 text-white text-center py-5" id="description">
-                <h2 class="page-title mb-4">Pricing</h2>
+                <h2 class="page-title mb-4 text-dark">Pricing</h2>
                 @if(count($results) > 1)
                     <div class="btn-group btn-group-sm mx-auto">
                         <div class="btn btn-black disabled">Showing</div>

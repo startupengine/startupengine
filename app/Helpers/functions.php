@@ -1591,9 +1591,19 @@ function defaultPageExists($slug)
 function hasSubscriptionProductsForSale()
 {
     $products = \App\Product::where('status', 'ACTIVE')
-        ->where('json->sections->about->type', 'Content Subscription')
-        ->orWhere('json->sections->about->type', 'Software Subscription')
+        ->where(
+            'json->sections->about->fields->type',
+            '=',
+            'Software Subscription'
+        )
+        ->Orwhere(
+            'json->sections->about->fields->type',
+            '=',
+            'Content Subscription'
+        )
+        ->where('status', '=', 'ACTIVE')
         ->get();
+
     if (count($products) < 1) {
         return false;
     } else {

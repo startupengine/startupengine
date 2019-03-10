@@ -156,7 +156,7 @@
 
 
                 <div class="row justify-content-center"  >
-                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content']) !!}
+                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-0  justify-content-center', 'PATH' => '/content']) !!}
                 </div>
 
 
