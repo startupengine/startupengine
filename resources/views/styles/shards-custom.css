@@ -947,6 +947,12 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
     flex: 0 0 33% !important;
     max-width: 33% !important;
   }
+
+  #contentApp .col-md-4:first-of-type:last-of-type {
+    width:100% !important;
+    flex: 0 0 100% !important;
+    max-width: 1140px !important;
+  }
 }
 
 .card {

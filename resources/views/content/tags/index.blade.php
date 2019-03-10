@@ -27,7 +27,7 @@
 @endsection
 
 @section('navbar-classes')
-    filled
+    navbar-light navbar-blend-light-blue
 @endsection
 
 @section('splash-class')

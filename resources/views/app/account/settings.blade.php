@@ -53,6 +53,12 @@
         #contentForm .col-lg-9 {
             min-width: 100% !important;
         }
+
+        .shards-landing-page--1 .welcome:before {
+            background-color:#e9f0ff!important;
+            opacity:1 !important;
+            color:#333 !important;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>

@@ -10,7 +10,8 @@
 
 
 @section('splash-style')
-     @if($post->thumbnail() != null) background-image:url('{{ $post->thumbnail() }}'); @endif
+     @if($post->thumbnail() != null) background-image:url('{{ $post->thumbnail() }}'); @else
+     background:#e9f0ff!important; @endif
 @endsection
 
 @section('css')
@@ -24,9 +25,22 @@
             font-size:220% !important;
             font-weight: 200;
         }
+
+
+        .shards-landing-page--1 .welcome:before {
+            background:#e9f0ff!important;
+            color:#333 !important;
+        }
+
+        .shards-landing-page--1 .welcome h1,.shards-landing-page--1 .welcome h2 {
+            color:#333 !important;
+        }
     </style>
 @endsection
 
+@section('navbar-classes')
+    navbar-light navbar-blend-light-blue
+@endsection
 
 @section('header')
     <!-- Inner Wrapper -->
@@ -41,7 +55,7 @@
                         <?php $tagCount = 1; ?>
                         @if(count($post->tags) > 0)
                                 <a class="tag-link" href="#"  data-toggle="modal"
-                                   data-target="#tagsModal" aria-label="Toggle related topics"><span class="px-3 py-2 badge badge-light text-dark badge-pill mb-1">Topics</span></a>
+                                   data-target="#tagsModal" aria-label="Toggle related topics"><span class="px-3 py-2 badge bg-light-blue text-dark-blue badge-pill mb-1">Topics</span></a>
                         @endif
                         @foreach($post->tags as $tag)
                             @if($tagCount <= 3)
@@ -58,7 +72,7 @@
                     </p>
                 @endif
                 <p align="center">
-                    <a href="#content" class="mt-1 btn btn-md btn-outline-white btn-translucent btn-pill align-self-center"
+                    <a href="#content" class="mt-1 btn btn-md btn-outline-white btn-translucent btn-pill align-self-center raised"
                        onclick="$('html, body').animate({scrollTop: $('#content').offset().top @if(isset($message)) -205 @else -155 @endif }, 500);">Read More</a>
                 </p>
             </div>
@@ -134,7 +148,7 @@
     </main>
 
     <!-- Related Content Section -->
-    <div class="blog section section-invert pt-2 pb-3" id="contentApp" v-if="info != null && info.meta != null && info.meta.total != null && info.meta.total > 0">
+    <div class="blog section border-top pt-2 pb-3" id="contentApp" v-if="info != null && info.meta != null && info.meta.total != null && info.meta.total > 0" style="border-color:rgba(0,0,150,0.1) !important;">
         <h3 class="section-title text-center mt-5 ">Recommended For You</h3>
 
         <div class="container text-center">
