@@ -382,7 +382,7 @@
             </nav>
         @endif
 
-        <div class="blog section section-invert p-4  firstSection" style="background:#fff !important;">
+        <div class="blog section section-invert p-4  firstSection" style="">
             <div class="container">
                 <div class="row px-3" id="docsApp">
                     <div class="col-md-4 d-none d-lg-block">
