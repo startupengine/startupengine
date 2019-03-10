@@ -134,14 +134,14 @@
     </main>
 
     <!-- Related Content Section -->
-    <div class="blog section section-invert pt-2 pb-3" id="relatedContent">
+    <div class="blog section section-invert pt-2 pb-3" id="contentApp" v-if="info != null && info.meta != null && info.meta.total != null && info.meta.total > 0">
         <h3 class="section-title text-center mt-5 ">Recommended For You</h3>
 
         <div class="container text-center">
             <div class="pt-5 mb-0">
 
 
-                <div class="row justify-content-center" id="contentApp" v-if="info != null">
+                <div class="row justify-content-center"  >
                     {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content']) !!}
                 </div>
 

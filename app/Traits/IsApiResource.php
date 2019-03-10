@@ -54,14 +54,13 @@ trait IsApiResource
     public function getJsonContent($field)
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()->getPropertyAccessor();
-
+        $value = null;
         if ($this->json != null) {
             $json = json_decode($this->json, true);
-            $value = $propertyAccessor->getValue($json, $field);
-        } else {
-            $value = null;
+            if ($json != null) {
+                $value = $propertyAccessor->getValue($json, $field);
+            }
         }
-
         return $value;
     }
 

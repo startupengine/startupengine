@@ -984,13 +984,27 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   .raised-lg-2 {
     box-shadow:0px -0px 30px 0px rgba(0,0,150,0.15) !important;
   }
+  .bg-none-lg {
+    background:none !important;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 991px) {
+  .flat-md {
+    box-shadow:none !important;
+  }
+  .bg-none-md {
+    background:none !important;
+  }
 }
 
 
-
-@media(max-width:768px){
+  @media(max-width:768px){
   .flat-sm {
     box-shadow:none !important;
+  }
+  .bg-none-sm {
+    background:none !important;
   }
 }
 
