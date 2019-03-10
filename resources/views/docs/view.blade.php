@@ -230,7 +230,7 @@
         }
 
         .nav .nav-link.active {
-            background: #dae4f97d !important;
+            background: #e4eefe !important;
         }
 
         .nav {
@@ -313,7 +313,7 @@
             transition: all 0.4s !important;
         }
         #sidebar li.nav-item:hover > a.active {
-            background: #d1e8ff !important;
+            background: #dae4f97d !important;
         }
 
         .shards-landing-page--1 .welcome::before {
@@ -391,7 +391,7 @@
 
                                 <div class="nav-wrapper d-none d-sm-none d-lg-inline-flex">
                                     <ul class="nav flex-column w-100 " id="sidebar">
-                                        <li class="hiddenOnMobile nav-item w-100 text-center py-3 px-1 border-bottom" style="border-color:rgba(0,0,200,0.1) !important;">
+                                        <li class="hiddenOnMobile nav-item w-100 text-center py-3 px-1 border-bottom" style="border-color:rgba(0,0,200,0.1) !important;background:#ebf1fe !important;">
                                             <div class="btn-group btn-group-sm mx-auto">
                                                 <div class="btn btn-black disabled">Menu</div>
                                                 <a class="btn btn-white border-whitec pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
