@@ -282,7 +282,8 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background: #e9f0ff !important;
+            background:#ebf1fe !important;
+            opacity: 1 !important;
         }
     </style>
 @endsection

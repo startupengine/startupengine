@@ -97,6 +97,10 @@
             margin-bottom: 20px;
         }
 
+        .card {
+            min-height:150px !important;
+        }
+
 
 
         .hljs-attribute {
@@ -147,8 +151,14 @@
             /*background-image:url('https://images.unsplash.com/photo-1508796079212-a4b83cbf734d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');*/
         }
 
+        .shards-landing-page--1 .welcome::before {
+            background:#ebf1fe !important;
+            opacity: 1 !important;
+        }
+
         .shards-landing-page--1 .welcome h1 {
             margin: 80px 0px;
+            color:#333 !important;
         }
 
         .documentation-card li {
@@ -279,6 +289,11 @@
 
 @section('page-title') Content @endsection
 
+@section('navbar-classes')
+    navbar-light navbar-blend-light-blue
+@endsection
+
+
 @section('top-menu')
 @endsection
 
@@ -286,7 +301,7 @@
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
-            <div class="col-md-12 px-4 text-white text-center py-5" id="description">
+            <div class="col-md-12 px-4 text-dark text-center py-5" id="description">
                 <h2 class="page-title mb-4">Content</h2>
                 <div class="input-group d-inline-flex px-4" style="max-width:800px;" id="">
                     <input id="search" autocomplete="off" class="form-control form-control-lg form-control-translucent"  placeholder="Search..." style="border-radius:30px;padding-left:20px !important;"/>
@@ -300,7 +315,7 @@
 
 @section('content')
     <main id="content">
-            @if(count(\App\PostType::all()) > 0)
+            @if(count(\App\PostType::all()) > 0 && count(\App\Post::all()) > 0 )
             <nav class="navbar navbar-expand-sm navbar-light" data-toggle="affix" align="center"
                  style="background: #dae4f9;border: 1px solid rgba(0,0,0,0.05);">
                 <div class="container" align="center">
@@ -329,7 +344,7 @@
                 <div class="row px-0 pt-3">
 
 
-                            <div class="row justify-content-center" id="contentApp" >
+                            <div class="row justify-content-center" id="contentApp" align="center">
                                 {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card mb-4 mx-2', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => "w-100", 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-4 justify-content-center', 'PATH' => '/content', 'WRAPPER_STYLE' => 'margin-top:20px;', 'CONTAINER_STYLE'=> 'width:calc(100%);opacity:0;']) !!}
                             </div>
 

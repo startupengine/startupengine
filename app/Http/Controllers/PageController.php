@@ -117,6 +117,11 @@ class PageController
         if ($page == null) {
             if (view()->exists('pages.defaults.' . $slug . '.index')) {
                 $page = new \App\Page();
+                if ($slug == 'pricing') {
+                    if (hasSubscriptionProductsForSale() == false) {
+                        abort(404);
+                    }
+                }
                 $page->json = "{}";
                 return view('pages.defaults.' . $slug . '.index')->with(
                     'page',

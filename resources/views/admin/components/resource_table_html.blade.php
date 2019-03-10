@@ -160,7 +160,7 @@
                     <div class="row row-eq-height @if(isset($options['CARD_ROW_CLASS'])) {{ $options['CARD_ROW_CLASS'] }} @endif">
                         <div class="col-lg-4 col-md-4 col-sm-12 mb-5"
                              v-if="info.meta != null && info.meta.total != null && info.meta.total == 0">
-                            <div class="card card-small h-100">
+                            <div class="card ">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <a class="text-ford-blue" href="#">No results.</a>

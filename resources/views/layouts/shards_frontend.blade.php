@@ -87,7 +87,7 @@
                                     <a href="/content" class="nav-link">Content</a>
                                 </li>
                             @endif
-                            @if(pageIsPublished('pricing') OR \App\Product::where('status', '=', 'ACTIVE') != null)
+                            @if(pageIsPublished('pricing') OR hasSubscriptionProductsForSale())
                                 <li class="nav-item {{ Request::is('pricing*') ? 'active' : '' }}">
                                     <a class="nav-link" href="/pricing"
                                     >Pricing</a>
@@ -195,7 +195,7 @@
                             <a href="/content" class="nav-link">Content</a>
                         </li>
                     @endif
-                    @if(pageIsPublished('pricing') OR count(\App\Product::where('status', '=', 'ACTIVE')->get()) > 0)
+                    @if(pageIsPublished('pricing') OR hasSubscriptionProductsForSale())
                         <li class="nav-item w-100 ">
                             <a href="/pricing" class="nav-link">Pricing</a>
                         </li>

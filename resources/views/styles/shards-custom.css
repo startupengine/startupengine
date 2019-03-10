@@ -950,7 +950,7 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .card {
-  box-shadow: 0px 50px 150px rgba(0,0,190,0.2),
+  box-shadow: 0px 50px 150px rgba(0,0,190,0.15),
   0px 10px 25px rgba(0,0,50,0.1) !important;
 }
 

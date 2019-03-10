@@ -315,6 +315,11 @@
         #sidebar li.nav-item:hover > a.active {
             background: #d1e8ff !important;
         }
+
+        .shards-landing-page--1 .welcome::before {
+            background:#ebf1fe !important;
+            opacity: 1 !important;
+        }
     </style>
 @endsection
 
