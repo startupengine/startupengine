@@ -148,7 +148,7 @@
     </main>
 
     <!-- Related Content Section -->
-    <div class="blog section border-top pt-2 pb-3" id="contentApp" v-if="info != null && info.meta != null && info.meta.total != null && info.meta.total > 0" style="border-color:rgba(0,0,150,0.1) !important;">
+    <div class="blog section section-invert border-top pt-2 pb-3 " id="contentApp" v-if="info != null && info.meta != null && info.meta.total != null && info.meta.total > 0" style="border-color:rgba(0,0,150,0.1) !important;">
         <h3 class="section-title text-center mt-5 ">Recommended For You</h3>
 
         <div class="container text-center">

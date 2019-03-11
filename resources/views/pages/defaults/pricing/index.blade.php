@@ -308,7 +308,7 @@
             <div class="col-md-12 px-4 text-white text-center py-5" id="description">
                 <h2 class="page-title mb-4 text-dark">Pricing</h2>
                 @if(count($results) > 1)
-                    <div class="btn-group btn-group-sm mx-auto">
+                    <div class="btn-group btn-group-sm mx-auto mt-3">
                         <div class="btn btn-black disabled">Showing</div>
                         <a class="btn btn-white border-white text-dark pl-4 truncate" href="#" aria-haspopup="true"
                            aria-expanded="false" tyle="border-left:none;"
@@ -331,11 +331,11 @@
 @section('content')
 
     <?php $softwares = \App\Product::where('status', 'ACTIVE')->whereJsonContains('json->sections->about->fields->type', 'Software Subscription')->get(); ?>
-    <main id="content">
+    <main id="content"  style="min-height:calc(100% - 300px);">
         @foreach($softwares as $product)
             <?php $plans = $product->stripePlans()->data; ?>
             @if(count($plans) <= 1)
-                <div class="blog section section-invert p-4  " style="min-height:30vh;">
+                <div class="blog section section-invert p-4"  style="min-height:calc(100% - 300px);">
                     <div class="container">
                         <div class="row px-0 pt-3 pb-5" >
                             <div class="row justify-content-center text-center" id="contentApp">
@@ -354,12 +354,10 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-            @else
+            @elseif(count($plans) > 1)
                     <div class="blog section section-invert p-4 pt-5 border-none" style="min-height:calc(100% - 300px);">
                         <div class="container">
                             @if(count($softwares) > 1)

@@ -135,6 +135,8 @@
             float:left;
             margin-top:3px;
         }
+
+
     </style>
 @endsection
 
@@ -189,7 +191,9 @@
         </div>
         </div>
         '; ?>
+
         {!! renderResourceTableHtmlDynamically(['HEADER' => $header, 'TABLE_HEADER' => $tableHeader, 'TABLE_ROW' => $tableRow, 'PATH' => '/admin/content', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_BODY_HTML' => $cardHtml, 'CARD_FOOTER' => $cardFooter]) !!}
+
         <!-- New Product Form Modal -->
         <div class="modal fade" id="modal-new-content-title" tabindex="-1" role="dialog" >
             <div class="modal-dialog" >

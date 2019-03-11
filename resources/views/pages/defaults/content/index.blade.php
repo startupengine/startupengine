@@ -339,7 +339,7 @@
             @endif
 
 
-        <div class="blog section section-invert p-4  " style="min-height:30vh;border:none !important;">
+        <div class="blog section section-invert p-4  " style="min-height:calc(100% - 300px);border:none !important;">
             <div class="container">
                 <div class="row px-0 pt-3">
 

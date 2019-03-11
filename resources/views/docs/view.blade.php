@@ -382,7 +382,7 @@
             </nav>
         @endif
 
-        <div class="blog section section-invert p-4  firstSection bg-none-sm bg-none-md" style="">
+        <div class="blog section section-invert p-4  firstSection bg-white-sm bg-white-md" style="min-height:calc(100% - 300px);">
             <div class="container">
                 <div class="row px-3" id="docsApp">
                     <div class="col-md-4 d-none d-lg-block">

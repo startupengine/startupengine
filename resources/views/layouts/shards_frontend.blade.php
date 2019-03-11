@@ -27,12 +27,49 @@
     <link rel="stylesheet" href="https://unpkg.com/vue-snotify@3.2.1/styles/material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            min-height: 100vh !important;
+            position:relative;
+        }
+        body {
+            background:#ebf1fe !important;
+        }
+        #wrap {
+            min-height: 100%;
+        }
+
+        #main {
+            overflow:auto;
+            padding-bottom:150px; /* this needs to be bigger than footer height*/
+        }
+        main#content {
+            background:#ebf1fe !important;
+        }
+
+        #footer .navbar-dark {
+            background:#252938 !important;
+        }
+
+        @media(max-width:991px) {
+            #footer .justify-content-between .justify-content-left, #footer .justify-content-between .justify-content-right {
+                width: 100% !important;
+                text-align: center !important;
+            }
+        }
+        #footer {
+            position: static;
+            bottom: 0;
+        }
+    </style>
 @yield('css')
 
 <!-- FAVICONS -->
     <link rel="icon" sizes="180x180" href="{{ setting('site.favicon', '/images/startup-engine-icon.png') }}">
 </head>
-<body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100">
+<body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100 d-flex flex-column">
+<div id="wrap">
 <div id="mainApp">
 @if(isset($message))
 <!-- Welcome Section -->
@@ -141,7 +178,7 @@
                                 <li class="nav-item">
                                     @if (!\Request::is('login'))
                                         <div class="btn-group ml-1">
-                                            <a class="btn btn-outline-white" href="/login">Sign In</a>
+                                            <a class="btn btn-outline-white  raised" href="/login">Sign In</a>
                                         </div>
                                     @endif
                                     @if (!\Request::is('register'))
@@ -242,14 +279,25 @@
 <!-- / Mobile Nav Modal -->
 
 <!-- Footer Section -->
-<footer style="position:static;bottom:0px;width:100%;" class="hiddenOnDesktop d-none">
+<footer  class="w-100" id="footer">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#" style="margin-top:-3px;"><span
-                        class="dimmed mr-1">&copy;</span>{{ setting('site.name') }} <span
+        <div class="container justify-content-between">
+            <div class="justify-content-left">
+            <a class="navbar-brand" href="/" style="float:left;"><span
+                        class="dimmed mr-1">&copy;</span>{{ setting('site.name', 'Startup Engine') }} <span
                         class="dimmed">{{ \Carbon\Carbon::now()->format('Y') }}</span></a>
-            @if(findAndFetch('slug', 'pricing'))
-                <div class="justify-content-right" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                @if(setting('site.tos') != null)
+                    <ul class="navbar-nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Terms of Service</a>
+                        </li>
+                    </ul>
+                @endif
+            </div>
+            </div>
+            @if(hasSubscriptionProductsForSale())
+                <div class="justify-content-right text-right" id="navbarNav">
                     <div class="text-white">Get started today.
                         <a class="btn btn-primary btn-pill ml-2" href="/pricing">Sign Up <i
                                     class="fa fa-angle-right ml-2"></i></a>
@@ -330,6 +378,6 @@
 {!! renderNotificationsApp() !!}
 
 {!! renderConfirmActionScripts() !!}
-
+</div>
 </body>
 </html>

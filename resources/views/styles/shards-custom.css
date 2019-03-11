@@ -862,6 +862,10 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   border-radius:4px;
 }
 
+.btn-no-border {
+  border-color:transparent !important;
+}
+
 .btn-cta, .btn-cta:active, .btn-cta:focus, .btn-cta:hover {
   background-image: linear-gradient(#ffc57d, #ff5caf) !important;
   background-size:cover !important;
@@ -905,6 +909,14 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 .bg-light-blue {
   background-color: #d1e8ff !important;
+}
+
+.text-light-blue {
+  color:#d1e8ff !important;
+}
+
+.bg-dark-blue {
+  background: #00178aba !important;
 }
 
 .text-dark-blue {
@@ -988,6 +1000,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   }
 }
 
+.bg-none {
+  background:none !important;
+}
 
 @media(min-width:991px) {
   .raised-lg-1 {
@@ -999,6 +1014,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   .bg-none-lg {
     background:none !important;
   }
+  .bg-white-lg {
+    background:#fff !important;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 991px) {
@@ -1007,6 +1025,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   }
   .bg-none-md {
     background:none !important;
+  }
+  .bg-white-md {
+    background:#fff !important;
   }
 }
 
@@ -1017,6 +1038,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   }
   .bg-none-sm {
     background:none !important;
+  }
+  .bg-white-sm {
+    background:#fff !important;
   }
 }
 
@@ -1033,7 +1057,12 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 #topNavbar.navbar-light .btn-outline-white{
-  border-color:#333 !important;
+  border-color: rgba(93, 104, 171, 0.5) !important;
+  color: rgb(93, 104, 171) !important;
+}
+
+#topNavbar .btn-white:hover {
+  background:#fff !important;
 }
 
 
@@ -1041,4 +1070,9 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   border-color:#fff !important;
   background-color:#fff !important;
   color:#333  !important;
+}
+
+.underlined {
+  border-bottom: 2px rgba(69, 118, 255, 0.95) solid;
+  padding-bottom: 10px;
 }

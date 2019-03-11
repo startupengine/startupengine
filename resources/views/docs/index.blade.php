@@ -322,7 +322,7 @@
 @section('content')
     <main id="content">
 
-        <div class="blog section section-invert p-4  firstSection" style="min-height:500px;">
+        <div class="blog section section-invert p-4  firstSection" style="min-height:calc(100% - 300px);">
             <div class="container">
                 <div class="row px-3" id="docsApp">
 
@@ -346,7 +346,7 @@
                     </div>
 
 
-                    <div class="col-md-12 pr-0 py-4 w-100 text-center text-reagent-gray dimmed" style="cursor:default;">
+                    <div class="col-md-12 pr-0 py-4 w-100 text-center text-reagent-gray" style="cursor:default;">
                         Built with <span class="ml-2">💖<span
                                     class="fa fa-fw fa-sm fa-plus text-reagent-gray mx-2"></span>&nbsp;⚡</span>
                     </div>

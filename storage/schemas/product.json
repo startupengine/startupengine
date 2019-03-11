@@ -9,7 +9,7 @@
   "version": "0.1",
   "metadata": {
     "taggable": true,
-    "title_key": "name",
+    "title_key": "id",
     "primary_key": "id",
     "readonly": {
       "id":{
