@@ -57,10 +57,42 @@
                 width: 100% !important;
                 text-align: center !important;
             }
+            #footer .list-group-header {
+                padding-bottom:20px !important;
+                padding-top:20px !important;
+            }
         }
         #footer {
             position: static;
             bottom: 0;
+        }
+
+        #footer .bg-dark {
+            background: #252938 !important;
+        }
+
+        #footer .bg-dark .border-top {
+            border-color: rgba(255,255,255,0.15) !important;
+        }
+
+        #footer .bg-dark .dimmed  {
+            color:rgba(215,215,255,0.5) !important;
+            opacity:1 !important;
+        }
+
+        #footer .bg-dark .fa {
+            opacity:.5 !important;
+            color:rgba(215,215,255,0.5) !important;
+        }
+
+        #footer .bg-dark .list-group-item {
+            background: #252938 !important;
+            color:rgba(215,215,255,0.5) !important;
+            border:none !important;
+        }
+
+        #footer .bg-dark .list-group-item a {
+            color:#fff !important;
         }
     </style>
 @yield('css')
@@ -281,9 +313,9 @@
 <!-- Footer Section -->
 <footer  class="w-100" id="footer">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container justify-content-between">
+        <div class="container justify-content-between py-2">
             <div class="justify-content-left">
-            <a class="navbar-brand" href="/" style="float:left;"><span
+            <a class="navbar-brand" href="/" ><span
                         class="dimmed mr-1">&copy;</span>{{ setting('site.name', 'Startup Engine') }} <span
                         class="dimmed">{{ \Carbon\Carbon::now()->format('Y') }}</span></a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -306,6 +338,47 @@
             @endif
         </div>
     </nav>
+    <div class="section bg-dark py-0">
+    <div class="container">
+        <div class="row border-top mx-1 py-4">
+            <div class="col-md-3 p-0 mb-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-newspaper mr-2 text-primary"></i>Content</li>
+                    @foreach(\App\PostType::all() as $postType)
+                        <li class="list-group-item text-capitalize text-white"><a href="/content/type/{{ $postType->getPluralName() }}">{{ $postType->getPluralName() }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            @if(hasSubscriptionProductsForSale())
+                <div class="col-md-3 p-0 mb-3">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-shopping-cart mr-2 text-primary"></i>Products</li>
+                        @foreach(getSubscriptionProducts() as $product)
+                            <li class="list-group-item text-capitalize text-white"><a href="/products/{{ $product->id}}">{{ str_replace('_', ' ', ucwords($product->name)) }}</a></li>
+                        @endforeach
+                        <li class="list-group-item text-capitalize text-white"><a href="/pricing">Pricing</a></li>
+                    </ul>
+                </div>
+            @endif
+            <div class="col-md-3 p-0 mb-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-book mr-2 text-primary"></i>Documentation</li>
+                    @foreach(docsFolders() as $docFolder)
+                        <li class="list-group-item text-capitalize text-white"><a href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-md-3 p-0 mb-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-user mr-2 text-primary"></i>Account</li>
+                    <li class="list-group-item text-capitalize text-white"><a href="/app/account">My Profile</a></li>
+                    <li class="list-group-item text-capitalize text-white"><a href="/app/settings">My Settings</a></li>
+                    <li class="list-group-item text-capitalize text-white"><a href="/app/subscriptions">My Subscriptions</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
 </footer>
 <!-- / Footer Section -->
 </div>

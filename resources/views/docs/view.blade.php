@@ -230,7 +230,7 @@
         }
 
         .nav .nav-link.active {
-            background: #e4eefe !important;
+            /*background: #e4eefe !important;*/
         }
 
         .nav {
@@ -308,12 +308,12 @@
             }
         }
 
-        #sidebar li.nav-item:hover > a.nav-link:not(.active) {
+        /*#sidebar li.nav-item:hover > a.nav-link:not(.active) {
             background:#fff;
             transition: all 0.4s !important;
-        }
+        }*/
         #sidebar li.nav-item:hover > a.active {
-            background: #dae4f97d !important;
+            /*background: #dae4f97d !important;*/
         }
 
         .shards-landing-page--1 .welcome::before {
@@ -390,11 +390,11 @@
                             <div  class="card documentation-card w-100 mr-3 h-auto flat" style="z-index:999;min-height:auto !important;">
 
                                 <div class="nav-wrapper d-none d-sm-none d-lg-inline-flex">
-                                    <ul class="nav flex-column w-100 " id="sidebar">
-                                        <li class="hiddenOnMobile nav-item w-100 text-center py-3 px-1 border-bottom" style="border-color:rgba(0,0,200,0.1) !important;background:#ebf1fe !important;">
+                                    <ul class="nav flex-column w-100 " id="sidebar" style="border-color:rgba(0,50,255,0.25) !important;">
+                                        <li class="hiddenOnMobile nav-item w-100 text-center py-3 px-1" style="border-color:rgba(0,0,100,0.5) !important;background:#e4eefe !important;border-radius:4px 4px 0px 0px !important;">
                                             <div class="btn-group btn-group-sm mx-auto">
                                                 <div class="btn btn-black disabled">Menu</div>
-                                                <a class="btn btn-white border-whitec pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
+                                                <a class="btn btn-white border-white pl-4 truncate" href="#" aria-haspopup="true" aria-expanded="false"
                                                    data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=
                                                    '@foreach(docsFolders() as $docFolder)
                                                            <a class="dropdown-item py-1 px-3 m-0 @if($folder == $docFolder) text-primary @endif" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>

@@ -1610,3 +1610,22 @@ function hasSubscriptionProductsForSale()
         return true;
     }
 }
+
+function getSubscriptionProducts()
+{
+    $products = \App\Product::where('status', 'ACTIVE')
+        ->where(
+            'json->sections->about->fields->type',
+            '=',
+            'Software Subscription'
+        )
+        ->Orwhere(
+            'json->sections->about->fields->type',
+            '=',
+            'Content Subscription'
+        )
+        ->where('status', '=', 'ACTIVE')
+        ->get();
+
+    return $products;
+}

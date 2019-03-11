@@ -306,7 +306,7 @@
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
             <div class="col-md-12 px-4 text-white text-center py-5" id="description">
-                <h2 class="page-title mb-4 text-dark">Pricing</h2>
+                <h2 class="page-title @if(count($results) > 1) mb-4 @endif text-dark">Pricing</h2>
                 @if(count($results) > 1)
                     <div class="btn-group btn-group-sm mx-auto mt-3">
                         <div class="btn btn-black disabled">Showing</div>

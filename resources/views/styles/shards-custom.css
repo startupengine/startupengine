@@ -1044,6 +1044,10 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   }
 }
 
+.border-white, .btn-white.border-white  {
+  border:1px solid #fff !important;
+}
+
 
 #topNavbar.navbar-blend-light-blue {
   background-color:#e9f0ff!important;
