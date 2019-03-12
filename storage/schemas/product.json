@@ -94,6 +94,13 @@
 
           }
         },
+        "richtext_description": {
+          "type": "richtext",
+          "description": "Describe this product. This appears on the product page.",
+          "validations": {
+            "required": true
+          }
+        },
         "image": {
           "isThumbnail":true,
           "type": "image",

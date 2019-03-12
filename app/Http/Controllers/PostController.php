@@ -17,18 +17,40 @@ class PostController extends Controller
     {
         $postTypes = PostType::all();
         if ($request->input('s') !== null) {
-            $posts = \App\Post::where('title', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('post_type', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
+            $posts = \App\Post::where(
+                'title',
+                'ILIKE',
+                '%' . $request->input('s') . '%'
+            )
+                ->orWhere('slug', 'ILIKE', '%' . $request->input('s') . '%')
+                ->orWhere(
+                    'post_type',
+                    'ILIKE',
+                    '%' . $request->input('s') . '%'
+                )
+                ->limit(100)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         } else {
-            $posts = \App\Post::limit(100)->orderBy('updated_at', 'desc')->get();
+            $posts = \App\Post::limit(100)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         }
-        return view('app.post.index')->with('posts', $posts)->with('postTypes', $postTypes);
+        return view('app.post.index')
+            ->with('posts', $posts)
+            ->with('postTypes', $postTypes);
     }
 
     public function getPost(Request $request, $slug)
     {
-        $post = Post::where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+        $post = Post::where('slug', '=', $slug)
+            ->where('status', '=', 'PUBLISHED')
+            ->firstOrFail();
         $postType = 'post';
-        if (($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
+        if (
+            $post->status !== null && $post->published_at->isPast() or
+            \Auth::user()
+        ) {
             return view('posts.view')->with('postType', $postType);
         } else {
             abort(404);
@@ -37,7 +59,10 @@ class PostController extends Controller
 
     public function getPostByPostTypeAndSlug(Request $request, $postType, $slug)
     {
-        $post = Post::where('post_type', '=', $postType)->where('slug', '=', $slug)->where('status', '=', 'PUBLISHED')->firstOrFail();
+        $post = Post::where('post_type', '=', $postType)
+            ->where('slug', '=', $slug)
+            ->where('status', '=', 'PUBLISHED')
+            ->firstOrFail();
         $event = new AnalyticEvent();
         $event->event_type = 'content viewed';
         if (\Auth::user()) {
@@ -45,11 +70,21 @@ class PostController extends Controller
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
         }
-        $array = ["id" => "$post->id", "model" => "post", "slug" => $post->slug];
+        $array = [
+            "id" => "$post->id",
+            "model" => "post",
+            "slug" => $post->slug
+        ];
         $event->event_data = json_encode($array);
         $event->save();
-        if (($post->status !== null && $post->published_at->isPast()) OR \Auth::user()) {
-            return view('posts.view')->with('post', $post)->with('post', $post)->with('postType', $postType);
+        if (
+            $post->status !== null && $post->published_at->isPast() or
+            \Auth::user()
+        ) {
+            return view('posts.view')
+                ->with('post', $post)
+                ->with('post', $post)
+                ->with('postType', $postType);
         } else {
             abort(404);
         }
@@ -59,18 +94,22 @@ class PostController extends Controller
     {
         $categories = \App\Category::all();
         $post = null;
-        $postType = \App\PostType::where('slug', '=', $slug)->where('enabled', '=', true)->firstOrFail();
-        return view('app.post.add')->with('categories', $categories)->with('postType', $postType)->with('post', $post);
+        $postType = \App\PostType::where('slug', '=', $slug)
+            ->where('enabled', '=', true)
+            ->firstOrFail();
+        return view('app.post.add')
+            ->with('categories', $categories)
+            ->with('postType', $postType)
+            ->with('post', $post);
     }
 
     public function savePost(Request $request)
     {
-
         if (\Auth::user()->hasPermissionTo('edit posts')) {
             if ($request->input('id') !== null) {
                 $post = \App\Post::find($request->input('id'));
             } else {
-                $post = new \App\Post;
+                $post = new \App\Post();
             }
             if ($request->input('published_at') == null) {
                 if ($post->published_at == null) {
@@ -78,7 +117,10 @@ class PostController extends Controller
                 }
             } else {
                 $date = $request->input('published_at');
-                $published_at = \Carbon\Carbon::createFromFormat('m/d/Y', $date);
+                $published_at = \Carbon\Carbon::createFromFormat(
+                    'm/d/Y',
+                    $date
+                );
                 $post->published_at = $published_at->toDateTimeString();
             }
             $post->title = $request->input('title');
@@ -109,7 +151,7 @@ class PostController extends Controller
             $event->user_id = \Auth::user()->id;
             $event->user_email = \Auth::user()->email;
             $event->user_name = \Auth::user()->name;
-            $event->event_data = json_encode("{\"id\":$post->id}");
+            $event->event_data = json_encode("{\"id\":{$post->id}}");
             $event->save();
 
             return redirect('/app/content');
@@ -126,14 +168,20 @@ class PostController extends Controller
         }
         $categories = \App\Category::all();
         $postType = $post->postType();
-        return view('app.post.view')->with('post', $post)->with('categories', $categories)->with('postType', $postType);
+        return view('app.post.view')
+            ->with('post', $post)
+            ->with('categories', $categories)
+            ->with('postType', $postType);
     }
 
     public function editPost(Request $request, $id)
     {
         $post = \App\Post::find($id);
         $categories = \App\Category::all();
-        return view('app.post.edit')->with('post', $post)->with('categories', $categories)->with('postType', $post->postType());
+        return view('app.post.edit')
+            ->with('post', $post)
+            ->with('categories', $categories)
+            ->with('postType', $post->postType());
     }
 
     public function deletePost(Request $request, $id)
@@ -151,11 +199,12 @@ class PostController extends Controller
 
     public function getItem($id, $slug = null)
     {
-
         if (\Auth::user() && \Auth::user()->hasRole('admin')) {
             $item = Post::where('id', '=', $id)->first();
         } else {
-            $item = Post::where('id', '=', $id)->where('status', '=', 'PUBLISHED')->first();
+            $item = Post::where('id', '=', $id)
+                ->where('status', '=', 'PUBLISHED')
+                ->first();
         }
 
         if ($item == null) {
@@ -175,18 +224,30 @@ class PostController extends Controller
             if (!isset($message)) {
                 $message = null;
             }
-            return view('content.view')->with('post', $item)->with('postType', $postType)->with('message', makeMessage($item));
+            return view('content.view')
+                ->with('post', $item)
+                ->with('postType', $postType)
+                ->with('message', makeMessage($item));
         }
     }
 
     public function getItemsByTag($tag)
     {
         $tag = \App\Tag::where('slug', '=', $tag)->first();
-        if($tag == null){
+        if ($tag == null) {
             abort(404);
-        }
-        else {
+        } else {
             return view('content.tags.index')->with('tag', $tag);
+        }
+    }
+
+    public function getItemsByType($type)
+    {
+        $type = \App\PostType::where('slug', '=', $type)->firstOrFail();
+        if ($type == null) {
+            abort(404);
+        } else {
+            return view('content.type.index')->with('type', $type);
         }
     }
 }

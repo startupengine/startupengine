@@ -115,6 +115,15 @@ class PageController
             ->where('status', '=', 'ACTIVE')
             ->first();
         if ($page == null) {
+            if ($slug == 'features') {
+                if (
+                    hasSubscriptionProductsForSale() &&
+                    count(getSubscriptionProducts()) == 1
+                ) {
+                    $product = getSubscriptionProducts()[0];
+                    return redirect('/products/' . $product->stripe_id);
+                }
+            }
             if (view()->exists('pages.defaults.' . $slug . '.index')) {
                 $page = new \App\Page();
                 if ($slug == 'pricing') {

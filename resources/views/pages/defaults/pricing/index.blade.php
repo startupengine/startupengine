@@ -339,7 +339,7 @@
                     <div class="container">
                         <div class="row px-0 pt-3 pb-5" >
                             <div class="row justify-content-center text-center" id="contentApp">
-                                <div class="col-md-6 mx-auto">
+                                <div class="col-md-5 mx-auto">
                                     <div class="card  h-auto" style="@if(count($softwares) == 1)margin-top:-72px; @else margin-top:30px; @endif min-height:auto !important;">
                                         <div class="card-header text-dark-green bg-light-green">{{ $product->name }}</div>
                                         <div class="card-body h-auto text-center">
@@ -349,7 +349,8 @@
                                             <div class="p-3">{{ $product->description }}</div>
                                         </div>
                                         <div class="card-footer text-center pt-0 pb-5">
-                                            <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
+                                            <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started</a>
+                                            <a href="/products/{{ $product->stripe_id }}" class="btn btn-outline-primary btn-pill raised mt-0 ml-2">More Info</a>
                                         </div>
                                     </div>
                                 </div>
@@ -387,7 +388,8 @@
                                                     @if($dbEntry->description != null) <div class="p-3">{{ $dbEntry->description }} </div>@endif
                                                 </div>
                                                 <div class="card-footer text-center pt-0 pb-5">
-                                                    <a href="/subscribe/{{ $product->stripe_id }}/{{ $plan->id }}" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started <i class="fa fa-fw fa-arrow-right"></i></a>
+                                                    <a href="/subscribe/{{ $product->stripe_id }}/{{ $plan->id }}" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started</a>
+                                                    <a href="/products/{{ $product->stripe_id }}" class="btn btn-outline-primary btn-pill raised mt-0 ml-2">More Info</a>
                                                 </div>
                                             </div>
                                         </div>

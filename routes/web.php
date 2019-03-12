@@ -60,6 +60,9 @@ Route::group(['middleware' => ['web']], function () {
     )->name('viewSubNestedDocs');
 
     //Content
+    Route::get('/content/type/{type}', 'PostController@getItemsByType')->name(
+        'contentByType'
+    );
     Route::get('/content/tags/{tag}', 'PostController@getItemsByTag')->name(
         'contentByTag'
     );
@@ -85,6 +88,16 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/home', 'PageController@getHomepage')->name('home');
         Route::get('/{slug}', 'PageController@getPage')->name('view page');
     });
+
+    //Product Pages
+    Route::get('/products/{id}', 'ProductController@viewProductPage')->name(
+        'viewProductPage'
+    );
+
+    //Feature Pages
+    Route::get('/features/{id}', 'FeatureController@viewFeaturePage')->name(
+        'viewFeaturePage'
+    );
 
     //Subscribe
     Route::get(
@@ -149,6 +162,14 @@ Route::group(
         );
         Route::get('/admin/products/{id}', 'ProductController@view')->name(
             'adminProductView'
+        );
+
+        // Features
+        Route::get('/admin/features', 'FeatureController@index')->name(
+            'adminFeatureIndex'
+        );
+        Route::get('/admin/features/{id}', 'FeatureController@view')->name(
+            'adminFeatureView'
         );
 
         // Analytics

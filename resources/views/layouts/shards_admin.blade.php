@@ -208,6 +208,12 @@
                                        title="Products">shopping_basket</i> <span>Products</span>
                                 </a>
                             </li>
+                            <li class="nav-item {{ Request::is('admin/features*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/features">
+                                    <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                       title="Products">star</i> <span>Features</span>
+                                </a>
+                            </li>
                             <li class="nav-item {{ Request::is('admin/analytics*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/analytics">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"

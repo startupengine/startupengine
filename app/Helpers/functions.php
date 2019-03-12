@@ -373,6 +373,7 @@ function isResource($string)
     return in_array($string, [
         'event',
         'content',
+        'feature',
         'log',
         'package',
         'page',

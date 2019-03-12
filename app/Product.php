@@ -44,6 +44,11 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
         return $json;
     }
 
+    public function features()
+    {
+        return $this->belongsToMany(\App\Feature::class);
+    }
+
     public function transformations()
     {
         $allowed = [];

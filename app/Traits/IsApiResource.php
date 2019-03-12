@@ -78,4 +78,111 @@ trait IsApiResource
 
         return $term;
     }
+
+    public function thumbnail()
+    {
+        if ($this->content() != null) {
+            if ($this->content() != null && isset($this->content()->sections)) {
+                foreach ($this->schema()->sections as $section) {
+                    if ($section->fields != null) {
+                        foreach ($section->fields as $field => $value) {
+                            if (
+                                isset($value->isThumbnail) &&
+                                $value->isThumbnail == true
+                            ) {
+                                $slug = $section->slug;
+
+                                $contentstring =
+                                    '[sections][' .
+                                    $slug .
+                                    '][fields][' .
+                                    $field .
+                                    ']';
+                                if (
+                                    $this->getJsonContent($contentstring) !=
+                                    null
+                                ) {
+                                    return $this->getJsonContent(
+                                        $contentstring
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function thumbnailField($fullString = false)
+    {
+        if ($this->schema() != null && isset($this->schema()->sections)) {
+            foreach ($this->schema()->sections as $section) {
+                if ($section->fields != null) {
+                    foreach ($section->fields as $field => $value) {
+                        if (
+                            isset($value->isThumbnail) &&
+                            $value->isThumbnail == true
+                        ) {
+                            $slug = $section->slug;
+                            $string =
+                                "sections->" . $slug . "->fields->" . $field;
+                            if ($fullString == true) {
+                                return $string;
+                            } else {
+                                return $field;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function sectionHasContent(
+        $sectionName,
+        $fieldsToExclude = [],
+        $returnFields = false
+    ) {
+        $result = $this->getJsonContent('[sections][' . $sectionName . ']');
+        if ($result == null) {
+            return false;
+        } else {
+            return true;
+        }
+        /*
+        if (
+            isset($this->schema()->sections->$sectionName) &&
+            isset($this->content()->sections->$sectionName)
+        ) {
+            $section = $this->schema()->sections->$sectionName;
+            $fieldsWithContent = [];
+            foreach ($section->fields as $field => $value) {
+                $slug = $section->slug;
+
+                if (isset($this->content()->sections->$slug->fields->$field)) {
+                    if (in_array($field, $fieldsToExclude)) {
+                    } else {
+                        $fieldsWithContent[
+                            $field
+                        ] = $this->content()->sections->$slug->fields->$field;
+                    }
+                }
+            }
+            if ($returnFields == true) {
+                return $fieldsWithContent;
+            } else {
+                if (count($fieldsWithContent) > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        */
+    }
 }

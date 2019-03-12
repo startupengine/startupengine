@@ -1060,6 +1060,10 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   text-shadow:none !important;
 }
 
+#topNavbar.navbar-dark .navbar-brand:hover {
+  color:#fff !important;
+}
+
 #topNavbar.navbar-light .btn-outline-white{
   border-color: rgba(93, 104, 171, 0.5) !important;
   color: rgb(93, 104, 171) !important;

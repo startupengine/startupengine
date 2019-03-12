@@ -146,9 +146,11 @@
                                 </li>
                             @endif
 
-                            @if(pageIsPublished('resources'))
+                            @if(pageIsPublished('features') OR hasSubscriptionProductsForSale())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Resources</a>
+                                    @if(count(getSubscriptionProducts()) == 1)
+                                        <a class="nav-link" href="/features">Features</a>
+                                    @endif
                                 </li>
                             @endif
                             @if(pageIsPublished('content') OR view()->exists('pages.defaults.content.index'))
@@ -345,17 +347,24 @@
                 <ul class="list-group">
                     <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-newspaper mr-2 text-primary"></i>Content</li>
                     @foreach(\App\PostType::all() as $postType)
-                        <li class="list-group-item text-capitalize text-white"><a href="/content/type/{{ $postType->getPluralName() }}">{{ $postType->getPluralName() }}</a></li>
+                        <li class="list-group-item text-capitalize text-white"><a href="/content/type/{{ $postType->slug }}">{{ $postType->getPluralName() }}</a></li>
                     @endforeach
                 </ul>
             </div>
             @if(hasSubscriptionProductsForSale())
                 <div class="col-md-3 p-0 mb-3">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-shopping-cart mr-2 text-primary"></i>Products</li>
+                        <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-shopping-cart mr-2 text-primary"></i>Product<?php if(count(getSubscriptionProducts()) > 1) { echo "s"; } ?></li>
                         @foreach(getSubscriptionProducts() as $product)
-                            <li class="list-group-item text-capitalize text-white"><a href="/products/{{ $product->id}}">{{ str_replace('_', ' ', ucwords($product->name)) }}</a></li>
+                            <li class="list-group-item text-capitalize text-white"><a href="/products/{{ $product->stripe_id}}">{{ str_replace('_', ' ', ucwords($product->name)) }}</a></li>
                         @endforeach
+                        @if(pageIsPublished('features') OR hasSubscriptionProductsForSale())
+
+                                @if(count(getSubscriptionProducts()) == 1)
+                                <li class="list-group-item text-capitalize text-white"><a href="/features">Features</a></li>
+                                @endif
+
+                        @endif
                         <li class="list-group-item text-capitalize text-white"><a href="/pricing">Pricing</a></li>
                     </ul>
                 </div>

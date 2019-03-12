@@ -1,0 +1,133 @@
+{
+  "namespace": "Feature",
+  "lang": {
+    "en": {
+      "singular": "feature",
+      "plural": "features"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "title_key": "id",
+    "primary_key": "id",
+    "id": {
+      "display name": "Feature ID",
+      "read_only": true
+    },
+    "taggable": true,
+    "readonly" : {
+      "id":{
+        "label": "Page ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+    "name" : {
+      "display name": "Name",
+      "description": "The name of this feature.",
+      "type": "text",
+      "validations": {
+      }
+    },
+    "slug" : {
+      "display name": "Slug",
+      "description": "The URL slug of this content.",
+      "type": "text",
+      "validations": {
+      }
+    },
+    "status": {
+      "type": "select",
+      "options": {
+        "Draft": "DRAFT",
+        "Published": "PUBLISHED",
+        "Unpublished": "UNPUBLISHED",
+        "PENDING": "PENDING"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+    "heading": {
+      "slug": "heading",
+      "title": "Heading",
+      "fields": {
+        "description": {
+          "type": "textarea",
+          "description": "This appears at the top of the page.",
+          "validations": {
+            "required": true
+          }
+        },
+        "button": {
+          "type": "text",
+          "description": "Text for the 'read more' button.",
+          "validations": {
+            "required": true
+          }
+        },
+        "thumbnail": {
+          "type": "image",
+          "isThumbnail": true,
+          "validations": {
+            "url": true
+          }
+        }
+      }
+    },
+    "heading": {
+      "slug": "heading",
+      "title": "Heading",
+      "fields": {
+        "description": {
+          "type": "textarea",
+          "description": "This appears at the top of the page.",
+          "validations": {
+            "required": true
+          }
+        },
+        "button": {
+          "type": "text",
+          "description": "Text for the 'read more' button.",
+          "validations": {
+            "required": true
+          }
+        },
+        "thumbnail": {
+          "type": "image",
+          "isThumbnail": true,
+          "validations": {
+            "url": true
+          }
+        },
+        "body": {
+          "type": "richtext",
+          "isThumbnail": true,
+          "validations": {
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_features"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_features"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_features"]
+    }
+  }
+}
