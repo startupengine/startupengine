@@ -72,10 +72,10 @@
                     <div class="card raised-1" style="margin-top:-60px; min-height:50px !important;">
                         <div class="card-body text-center bg-very-light-blue text-dark br-5 p-5" style="font-size:150%;">
                             <div class="row">
-                                <div class="col-md-4 mb-5 text-left">
+                                <div class="col-md-4 text-left">
                                     <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" style="max-width:100%;max-height:250px;"/>
                                 </div>
-                                <div class="col-md-8 text-left">
+                                <div class="col-md-8 pt-5 pt-lg-0 pt-md-0 text-left">
                                     {!! $feature->getJsonContent('[sections][heading][fields][description]') !!}
                                 </div>
                             </div>
