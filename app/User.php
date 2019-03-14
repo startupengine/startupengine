@@ -105,11 +105,11 @@ class User extends AuthUser implements
             $customer = \Stripe\Customer::retrieve($this->stripe_id);
             return $customer;
         } else {
-            $customer = \Stripe\Customer::create(array(
+            $customer = \Stripe\Customer::create([
                 "description" => "Customer for $this->email",
                 "source" => "$source", // obtained with Stripe.js
                 "email" => $this->email
-            ));
+            ]);
 
             $this->stripe_id = $customer->id;
             $this->save();

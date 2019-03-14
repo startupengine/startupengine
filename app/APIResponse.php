@@ -91,7 +91,7 @@ class APIResponse extends Model
     public function getStripeProducts($request)
     {
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $products = \Stripe\Product::all(array("limit" => 100));
+        $products = \Stripe\Product::all(["limit" => 100]);
         foreach ($products->data as $product) {
             $item = \App\Product::where('stripe_id', '=', $product->id)->first();
             if ($item == null) {
@@ -109,10 +109,10 @@ class APIResponse extends Model
     public function createProduct($request)
     {
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $product = \Stripe\Product::create(array(
+        $product = \Stripe\Product::create([
             "name" => $request->input('name'),
             "type" => "service"
-        ));
+        ]);
         return response()
             ->json($product);
     }
@@ -163,7 +163,7 @@ class APIResponse extends Model
     {
         $user = User::find($id);
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $invoices = \Stripe\Invoice::all(array("customer" => $user->stripe_id, "limit" => 10));
+        $invoices = \Stripe\Invoice::all(["customer" => $user->stripe_id, "limit" => 10]);
         return response()
             ->json($invoices);
     }
@@ -733,15 +733,15 @@ class APIResponse extends Model
                     $plan = new \App\Plan;
                     $plan->save();
                     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-                    $stripePlan = \Stripe\Plan::create(array(
+                    $stripePlan = \Stripe\Plan::create([
                         "amount" => $request->input('price'),
                         "interval" => $request->input('interval'),
-                        "product" => array(
+                        "product" => [
                             "name" => $request->input('name')
-                        ),
+                        ],
                         "currency" => "usd",
                         "id" => $plan->id
-                    ));
+                    ]);
 
                     $plan->stripe_id = $stripePlan->id;
                     $plan->remote_data = json_encode($stripePlan);
@@ -995,12 +995,12 @@ class APIResponse extends Model
 
         if (isset($type) && isset($name)) {
             \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-            $product = \Stripe\Product::create(array(
+            $product = \Stripe\Product::create([
                 "name" => $name,
                 "type" => $type,
                 "description" => null,
                 "attributes" => []
-            ));
+            ]);
             $record = new \App\Product();
             $record->stripe_id = $product->id;
             if ($type == 'good') {
