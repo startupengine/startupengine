@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use App\Traits\IsApiResource;
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
@@ -310,7 +311,7 @@ class User extends AuthUser implements
 
     public function resetPassword()
     {
-        $this->password = Hash::make(str_random(11));
+        $this->password = Hash::make(Str::random(11));
         $this->save();
     }
 

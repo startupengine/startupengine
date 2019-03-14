@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -25,7 +26,7 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames) {
-            $permissionsForeignKeyName = str_singular($tableNames['permissions']).'_id';
+            $permissionsForeignKeyName = Str::singular($tableNames['permissions']).'_id';
             $table->integer($permissionsForeignKeyName)->unsigned();
             $table->morphs('model');
 
@@ -38,7 +39,7 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames) {
-            $rolesForeignKeyName = str_singular($tableNames['roles']).'_id';
+            $rolesForeignKeyName = Str::singular($tableNames['roles']).'_id';
             $table->integer($rolesForeignKeyName)->unsigned();
             $table->morphs('model');
 
@@ -51,8 +52,8 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
-            $permissionsForeignKeyName = str_singular($tableNames['permissions']).'_id';
-            $rolesForeignKeyName = str_singular($tableNames['roles']).'_id';
+            $permissionsForeignKeyName = Str::singular($tableNames['permissions']).'_id';
+            $rolesForeignKeyName = Str::singular($tableNames['roles']).'_id';
 
             $table->integer($permissionsForeignKeyName)->unsigned();
             $table->integer($rolesForeignKeyName)->unsigned();

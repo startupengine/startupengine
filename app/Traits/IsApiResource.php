@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Str;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 trait IsApiResource
@@ -71,9 +72,9 @@ trait IsApiResource
         if (isset($schema->lang->en->plural)) {
             $term = $schema->lang->en->plural;
         } elseif (isset($schema->lang->en->singular)) {
-            $term = str_plural($schema->lang->en->singular);
+            $term = Str::plural($schema->lang->en->singular);
         } elseif (isset($this->title)) {
-            $term = str_plural($this->title);
+            $term = Str::plural($this->title);
         }
 
         return $term;

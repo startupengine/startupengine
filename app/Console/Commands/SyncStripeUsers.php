@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
@@ -58,7 +59,7 @@ class SyncStripeUsers extends Command
                 }
 
                 if ($user->password == null) {
-                    $user->password = Hash::make(str_random(11));
+                    $user->password = Hash::make(Str::random(11));
                 }
 
                 if ($stripeCustomer->metadata['se_json'] != null) {

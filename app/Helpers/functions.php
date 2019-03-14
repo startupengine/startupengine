@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use PHLAK\SemVer;
 
 function get_nested_property($property, $object)
@@ -714,7 +715,7 @@ function renderResourceTableScriptsDynamically($options = null)
         $options = [];
     }
     if (!isset($options['VUE_APP_NAME'])) {
-        $options['VUE_APP_NAME'] = 'vueApp' . str_random(7);
+        $options['VUE_APP_NAME'] = 'vueApp' . Str::random(7);
     }
     if (!isset($options['div_id'])) {
         $options['div_id'] = 'contentApp';
