@@ -124,16 +124,18 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             foreach ($this->schema()->sections as $section) {
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
-                        if (isset($value->isThumbnail) &&
+                        if (
+                            isset($value->isThumbnail) &&
                             $value->isThumbnail == true
                         ) {
                             $slug = $section->slug;
                             $string =
                                 "sections->" . $slug . "->fields->" . $field;
-                            if (isset(
-                                $this->content()->sections->$slug->fields
+                            if (
+                                isset(
+                                    $this->content()->sections->$slug->fields
                                         ->$field
-                            )
+                                )
                             ) {
                                 return $this->content()->sections->$slug->fields
                                     ->$field;
@@ -205,7 +207,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
       dd($views);
       */
         //dd($endDate);
-        $views = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
+        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
             ->where('event_type', '=', 'page viewed')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

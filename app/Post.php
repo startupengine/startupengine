@@ -47,9 +47,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
      *
      * @var array
      */
-    protected $dates = [
-        'published_at'
-    ];
+    protected $dates = ['deleted_at', 'published_at'];
 
     protected $fillable = ['json', 'excerpt'];
 
@@ -135,7 +133,8 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         $baseSchema = json_decode($path, true);
 
         if ($this->postType() != null) {
-            if ($this->postType()->first() != null &&
+            if (
+                $this->postType()->first() != null &&
                 isset($this->postType()->first()->json)
             ) {
                 $postTypeSchema = json_decode(
@@ -161,7 +160,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         if ($this->post_type == null) {
             $this->setType();
         }
-        return $this->hasOne(\App\PostType::class, 'slug', 'post_type');
+        return $this->hasOne('App\PostType', 'slug', 'post_type');
     }
 
     public function excerpt()
@@ -180,13 +179,15 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
                         dd($section->fields);
-                        if (isset($value->isExcerpt) &&
+                        if (
+                            isset($value->isExcerpt) &&
                             $value->isExcerpt == true
                         ) {
                             $slug = $section->slug;
                             $string =
                                 "sections->" . $slug . "->fields->" . $field;
-                            if ($this->content()->sections->$slug->fields
+                            if (
+                                $this->content()->sections->$slug->fields
                                     ->$field
                             ) {
                                 return $this->content()->sections->$slug->fields
@@ -237,7 +238,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function user()
     {
-        return $this->hasOne(\App\User::class, 'id', 'author_id')->withDefault(
+        return $this->hasOne('App\User', 'id', 'author_id')->withDefault(
             function ($user) {
                 $user->id = 'User ID';
             }
@@ -272,7 +273,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         } else {
             $endDate = new Carbon();
         }
-        $views = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
+        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
             ->where('event_type', '=', 'content viewed')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

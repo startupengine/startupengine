@@ -47,7 +47,8 @@ class PostController extends Controller
             ->where('status', '=', 'PUBLISHED')
             ->firstOrFail();
         $postType = 'post';
-        if ($post->status !== null && $post->published_at->isPast() or
+        if (
+            $post->status !== null && $post->published_at->isPast() or
             \Auth::user()
         ) {
             return view('posts.view')->with('postType', $postType);
@@ -76,7 +77,8 @@ class PostController extends Controller
         ];
         $event->event_data = json_encode($array);
         $event->save();
-        if ($post->status !== null && $post->published_at->isPast() or
+        if (
+            $post->status !== null && $post->published_at->isPast() or
             \Auth::user()
         ) {
             return view('posts.view')

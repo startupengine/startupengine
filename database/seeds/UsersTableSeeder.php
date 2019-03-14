@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use App\Role;
 use App\User;
@@ -23,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'status' => 'ACTIVE',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('admin');
             $user->assignRole('staff');
@@ -39,7 +38,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Kevin Flynn',
                 'email' => 'user@example.com',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('user');
             $user->assignRole('staff');
@@ -49,7 +48,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Aaron Sorkin',
                 'email' => 'writer@example.com',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('writer');
             $user->assignRole('staff');
@@ -59,7 +58,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Ira Glass',
                 'email' => 'editor@example.com',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('editor');
             $user->assignRole('staff');
@@ -69,7 +68,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Linus Torvalds',
                 'email' => 'developer@example.com',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('developer');
             $user->assignRole('staff');
@@ -79,7 +78,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Steve Jobs',
                 'email' => 'executive@example.com',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('executive');
             $user->assignRole('staff');
@@ -89,7 +88,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Nate Silver',
                 'email' => 'analyst@example.com',
                 'password' => 'password',
-                'remember_token' => Str::random(60)
+                'remember_token' => str_random(60)
             ]);
             $user->assignRole('analyst');
             $user->assignRole('staff');

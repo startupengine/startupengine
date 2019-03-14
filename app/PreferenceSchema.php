@@ -11,15 +11,13 @@ class PreferenceSchema extends Model implements \Altek\Accountant\Contracts\Reco
 
     use IsApiResource;
 
-    public function content()
-    {
+    public function content() {
         $path = $this->json;
-        $json = json_decode($path, true);
+        $json = json_decode($path,  true);
         return $json;
     }
 
-    public function schema()
-    {
+    public function schema() {
         $path = file_get_contents(storage_path().'/schemas/preference_schema.json');
         $baseSchema = json_decode($path);
         return $baseSchema;

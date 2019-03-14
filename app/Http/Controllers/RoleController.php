@@ -33,21 +33,20 @@ class RoleController extends Controller
         return view('app.role.edit')->with('role', $role)->with('permissions', $permissions);
     }
 
-    public function saveRole(Request $request)
-    {
-        if (\Auth::user()->hasPermissionTo('edit roles')) {
+    public function saveRole(Request $request) {
+        if(\Auth::user()->hasPermissionTo('edit roles')) {
             $role = Role::where('id', '=', $request->input('id'))->first();
-            if ($role == null) {
+            if($role == null) {
                 $role = new \App\Role();
             }
-            if ($request->input('display_name') !== null) {
+            if($request->input('display_name') !== null) {
                 $role->display_name = $request->input('display_name');
             }
-            if ($request->input('name') !== null) {
+            if($request->input('name') !== null) {
                 $role->name = $request->input('name');
             }
             $role->save();
-            if ($request->input('permissions') !== null) {
+            if($request->input('permissions') !== null) {
                 foreach ($request->input('permissions') as $permission => $value) {
                     if ($value == "on") {
                         $permissions[] = $permission;

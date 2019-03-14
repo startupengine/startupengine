@@ -39,7 +39,7 @@
 
     <!-- Related Content Section -->
     <div class="blog section section-invert pt-4 pb-0" style="min-height:100vh;">
-        <h3 class="section-title text-center mb-5 mt-3">{{ Str::plural($type->title) }}</h3>
+        <h3 class="section-title text-center mb-5 mt-3">{{ str_plural($type->title) }}</h3>
 
         <div class="container">
             <div class="pt-0 mb-0 col-md-12">

@@ -13,12 +13,12 @@ class Preference extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function preferenceSchema()
     {
-        return $this->belongsTo(\App\PreferenceSchema::class)->first();
+        return $this->belongsTo('App\PreferenceSchema')->first();
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->first();
+        return $this->belongsTo('App\User')->first();
     }
 
     public function schema()

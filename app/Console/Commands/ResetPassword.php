@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,14 +42,15 @@ class ResetPassword extends Command
         $show = $this->argument('show');
         $password = $this->argument('password');
         $user = \App\User::where('email', '=', $email)->firstOrFail();
-        if ($password == null) {
-            $password = Hash::make(Str::random(13));
+        if($password == null) {
+            $password = Hash::make(str_random(13));
         }
         $user->password = bcrypt($password);
         $user->save();
-        if ($show) {
+        if($show) {
             echo("New password: $password \n");
-        } else {
+        }
+        else {
             echo "Password reset. \n";
         }
     }

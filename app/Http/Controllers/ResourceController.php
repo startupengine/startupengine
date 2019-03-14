@@ -63,12 +63,13 @@ class ResourceController extends Controller
                 'data' => $jsonResponse->data
             ];
 
-            if (count(
-                addIncludedRelationshipsMetadataToApiResource(
-                    request(),
-                    $model
-                )
-            ) > 0
+            if (
+                count(
+                    addIncludedRelationshipsMetadataToApiResource(
+                        request(),
+                        $model
+                    )
+                ) > 0
             ) {
                 $response[
                     'include'
@@ -129,7 +130,8 @@ class ResourceController extends Controller
         if (isResource($type)) {
             $type = ucwords(pathToModel($type));
             $name = "\\App\\$type";
-            if ($request->input('undelete') == 'true' &&
+            if (
+                $request->input('undelete') == 'true' &&
                 $request->input('save') == 'true'
             ) {
                 $item = $name::withTrashed()->find($id);
@@ -160,7 +162,8 @@ class ResourceController extends Controller
 
             //dd($item->overRideEdit());
 
-            if ($jsonInput == null &&
+            if (
+                $jsonInput == null &&
                 ($request->input('delete') == null or
                     $request->input('undelete') == null)
             ) {
@@ -244,8 +247,10 @@ class ResourceController extends Controller
                         $response['data']['fields'][$field][
                             'first_error'
                         ] = $validator->errors($field)->first();
-                        foreach ($response['data']['fields']
- as $field => $result) {
+                        foreach (
+                            $response['data']['fields']
+                            as $field => $result
+                        ) {
                             if ($result['valid'] == false) {
                                 $errors[$field] = "Error";
                             }
@@ -312,7 +317,8 @@ class ResourceController extends Controller
                         $item->name = $request->input('data')['name'];
                     }
                     if (isset($request->input('data')['status'])) {
-                        if (strtolower($request->input('data')['status']) ==
+                        if (
+                            strtolower($request->input('data')['status']) ==
                                 'published' or
                             strtolower($request->input('data')['status']) ==
                                 'pending' or
@@ -367,8 +373,10 @@ class ResourceController extends Controller
             if (isset($schema->sections)) {
                 $requiredJsonFields = [];
                 foreach ($schema->sections as $key => $sectionContents) {
-                    foreach ($sectionContents->fields
- as $virtualField => $fieldContents) {
+                    foreach (
+                        $sectionContents->fields
+                        as $virtualField => $fieldContents
+                    ) {
                         if (isset($fieldContents->validations->required)) {
                             $requiredJsonFields[
                                 'json.sections.' .
@@ -462,8 +470,10 @@ class ResourceController extends Controller
                         $response['meta']['fields'][$field][
                             'first_error'
                         ] = $validator->errors($field)->first();
-                        foreach ($response['meta']['fields']
- as $field => $result) {
+                        foreach (
+                            $response['meta']['fields']
+                            as $field => $result
+                        ) {
                             if ($result['valid'] == false) {
                                 $errors[$field] = "Error";
                             }
@@ -553,7 +563,8 @@ class ResourceController extends Controller
     {
         if (isResource($type)) {
             $name = "\\App\\$type";
-            if ($request->input('undelete') == 'true' &&
+            if (
+                $request->input('undelete') == 'true' &&
                 $request->input('save') == 'true'
             ) {
                 $item = $name::withTrashed()->find($id);
@@ -576,7 +587,7 @@ class ResourceController extends Controller
         if ($eventType == null) {
             $eventType = 'page viewed';
         }
-        $name = \App\AnalyticEvent::class;
+        $name = "\\App\\AnalyticEvent";
         $model = new $name();
         $table = $model->getTable();
         //$query = DB::select(DB::raw('SELECT date(created_at), count(id) as TOTAL  FROM '.$table.' GROUP BY date(created_at) ORDER BY date(created_at)')); //Works

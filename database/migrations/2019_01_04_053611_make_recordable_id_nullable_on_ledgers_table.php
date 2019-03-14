@@ -13,9 +13,11 @@ class MakeRecordableIdNullableOnLedgersTable extends Migration
      */
     public function up()
     {
-        Schema::table('ledgers', function ($table) {
+        Schema::table('ledgers', function($table)
+        {
             $table->integer('recordable_id')->nullable()->change();
         });
+
     }
 
     /**

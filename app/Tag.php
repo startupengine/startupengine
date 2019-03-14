@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
+
 {
     /**
      * The table associated with the model.
@@ -16,20 +17,18 @@ class Tag extends Model
     public function content()
     {
         $post = \App\Post::where('slug', '=', $this->slug)->where('status', '=', 'PUBLISHED')->first();
-        if ($post !== null) {
+        if($post !== null) {
             return $post->content();
-        } else {
-            return null;
         }
+        else { return null; }
     }
 
     public function post()
     {
         $post = \App\Post::where('slug', '=', $this->slug)->first();
-        if ($post !== null) {
+        if($post !== null) {
             return $post;
-        } else {
-            return null;
         }
+        else { return null; }
     }
 }

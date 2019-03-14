@@ -11,11 +11,11 @@ class JsController extends Controller
          *
          * @return \Illuminate\Http\Response
          */
-    public function render($file)
-    {
-        $path = resource_path().'/views/scripts/'.$file;
-        //dd($path);
-        //dd(file_exists($path));
-        return file_get_contents($path);
-    }
+        public function render($file)
+        {
+            $path = resource_path().'/views/scripts/'.$file;
+            //dd($path);
+            //dd(file_exists($path));
+            return file_get_contents($path);
+        }
 }

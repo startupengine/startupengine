@@ -21,13 +21,13 @@ class Payment extends JsonResource
         $fields['currency'] = $this->currency;
         $fields['description'] = $this->description;
 
-        if ($this->created_at != null) {
+        if($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
-        if ($this->updated_at != null) {
+        if($this->updated_at != null) {
             $fields['updated_at'] = $this->updated_at->toDateTimeString();
         }
-        if ($this->deleted_at != null) {
+        if($this->deleted_at != null) {
             $fields['deleted_at'] = $this->deleted_at->toDateTimeString();
         }
         $fields = sparseFields($fields, 'payment');

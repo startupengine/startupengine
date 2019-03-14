@@ -35,9 +35,7 @@ class PostType extends Model implements
      * @var array
      */
 
-    protected $dates = [
-        'published_at'
-    ];
+    protected $dates = ['deleted_at', 'published_at'];
 
     public function json()
     {
@@ -51,7 +49,7 @@ class PostType extends Model implements
 
     public function posts()
     {
-        return $this->hasMany(\App\Post::class, 'post_type', 'slug');
+        return $this->hasMany('App\Post', 'post_type', 'slug');
     }
 
     public function schema()

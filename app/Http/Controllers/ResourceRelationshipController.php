@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ResourceRelationshipController extends Controller
 {
-    public function browse()
-    {
+    public function browse(){
+
     }
 }

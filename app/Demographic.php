@@ -10,5 +10,6 @@ class Demographic extends Model
     {
         $json = json_decode($this->json);
         return $json;
+
     }
 }

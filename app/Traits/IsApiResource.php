@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Str;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 trait IsApiResource
@@ -72,9 +71,9 @@ trait IsApiResource
         if (isset($schema->lang->en->plural)) {
             $term = $schema->lang->en->plural;
         } elseif (isset($schema->lang->en->singular)) {
-            $term = Str::plural($schema->lang->en->singular);
+            $term = str_plural($schema->lang->en->singular);
         } elseif (isset($this->title)) {
-            $term = Str::plural($this->title);
+            $term = str_plural($this->title);
         }
 
         return $term;
@@ -87,7 +86,8 @@ trait IsApiResource
                 foreach ($this->schema()->sections as $section) {
                     if ($section->fields != null) {
                         foreach ($section->fields as $field => $value) {
-                            if (isset($value->isThumbnail) &&
+                            if (
+                                isset($value->isThumbnail) &&
                                 $value->isThumbnail == true
                             ) {
                                 $slug = $section->slug;
@@ -98,7 +98,8 @@ trait IsApiResource
                                     '][fields][' .
                                     $field .
                                     ']';
-                                if ($this->getJsonContent($contentstring) !=
+                                if (
+                                    $this->getJsonContent($contentstring) !=
                                     null
                                 ) {
                                     return $this->getJsonContent(
@@ -121,7 +122,8 @@ trait IsApiResource
             foreach ($this->schema()->sections as $section) {
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
-                        if (isset($value->isThumbnail) &&
+                        if (
+                            isset($value->isThumbnail) &&
                             $value->isThumbnail == true
                         ) {
                             $slug = $section->slug;

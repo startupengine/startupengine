@@ -26,13 +26,13 @@ class Subscription extends JsonResource
         $fields['details'] = $this->details();
         //$fields['product'] = $this->product();
         //$fields['plans'] = $this->plans();
-        if ($this->created_at != null) {
+        if($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
-        if ($this->updated_at != null) {
+        if($this->updated_at != null) {
             $fields['updated_at'] = $this->updated_at->toDateTimeString();
         }
-        if ($this->deleted_at != null) {
+        if($this->deleted_at != null) {
             $fields['deleted_at'] = $this->deleted_at->toDateTimeString();
         }
         $fields['schema'] = $this->schema();

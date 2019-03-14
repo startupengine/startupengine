@@ -176,14 +176,16 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
             foreach ($this->schema()->sections as $section) {
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
-                        if (isset($value->isThumbnail) &&
+                        if (
+                            isset($value->isThumbnail) &&
                             $value->isThumbnail == true
                         ) {
                             $slug = $section->slug;
                             $string =
                                 "sections->" . $slug . "->fields->" . $field;
                             //dd($this->content()->sections->$slug->fields->$field);
-                            if ($this->content() != null &&
+                            if (
+                                $this->content() != null &&
                                 isset($this->content()->sections) &&
                                 $this->content()->sections->$slug != null &&
                                 isset(
@@ -251,7 +253,7 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
         } else {
             $endDate = new Carbon();
         }
-        $purchases = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
+        $purchases = $this->hasMany('App\AnalyticEvent', 'model_id')
             ->where('event_type', '=', 'product purchased')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

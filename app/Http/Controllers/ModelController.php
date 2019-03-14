@@ -10,13 +10,11 @@ class ModelController extends Controller
 {
     use Api;
 
-    protected function model()
-    {
+    protected function model() {
         return Model::class;
     }
 
-    protected function validationRules(array $data, $id = null)
-    {
+    protected function validationRules(array $data, $id = null) {
         return [
             'title' => 'required|string|max:50',
             'content' => 'sometimes|string',

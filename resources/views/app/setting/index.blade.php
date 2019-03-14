@@ -106,7 +106,7 @@
                                             <?php $filtered = $value->where('key', strtolower($key) . '.settings_description')->first(); if ($filtered !== null) {
                                                 echo "<p>" . $filtered->value . "</p>";
                                             } if ($filtered == null) {
-                                                echo "Settings for " . strtolower(Str::plural($key));
+                                                echo "Settings for " . strtolower(str_plural($key));
                                             } ?>
                                         </div>
                                         <div class="card-footer" align="center">

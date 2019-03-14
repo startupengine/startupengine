@@ -116,7 +116,8 @@ class PageController
             ->first();
         if ($page == null) {
             if ($slug == 'features') {
-                if (hasSubscriptionProductsForSale() &&
+                if (
+                    hasSubscriptionProductsForSale() &&
                     count(getSubscriptionProducts()) == 1
                 ) {
                     $product = getSubscriptionProducts()[0];
@@ -147,7 +148,8 @@ class PageController
             $event->user_name = \Auth::user()->name;
         }
 
-        if ($page->content() !== null &&
+        if (
+            $page->content() !== null &&
             $page->content()->meta &&
             $page->content()->meta->slug !== null
         ) {
@@ -199,7 +201,8 @@ class PageController
         }
         //dd($page->tagNames());
 
-        if ($request->input('json') !== null &&
+        if (
+            $request->input('json') !== null &&
             \Auth::user()->hasPermissionTo('edit pages')
         ) {
             $page->json = json_encode($request->input('json'));
@@ -213,27 +216,32 @@ class PageController
             }
             $page->json = json_encode(["versions" => $newjsonversions]);
         }
-        if ($request->has('schema') &&
+        if (
+            $request->has('schema') &&
             \Auth::user()->hasPermissionTo('write code fields')
         ) {
             $page->schema = json_encode($request->input('schema'));
         }
-        if ($request->has('scripts') &&
+        if (
+            $request->has('scripts') &&
             \Auth::user()->hasPermissionTo('write code fields')
         ) {
             $page->scripts = $request->input('scripts');
         }
-        if ($request->has('css') &&
+        if (
+            $request->has('css') &&
             \Auth::user()->hasPermissionTo('write code fields')
         ) {
             $page->css = $request->input('css');
         }
-        if ($request->has('html') &&
+        if (
+            $request->has('html') &&
             \Auth::user()->hasPermissionTo('write code fields')
         ) {
             $page->html = $request->input('html');
         }
-        if ($request->has('status') &&
+        if (
+            $request->has('status') &&
             \Auth::user()->hasPermissionTo('publish pages')
         ) {
             $page->status = $request->input('status');

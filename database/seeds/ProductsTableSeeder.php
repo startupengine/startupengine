@@ -10,9 +10,9 @@ class ProductsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(){
 
         Artisan::call('command:SyncStripeProducts');
+
     }
 }

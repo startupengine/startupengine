@@ -52,12 +52,12 @@ class SubscriptionController extends Controller
     public function saveSubscription(Request $request)
     {
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $product = \Stripe\Product::create([
+        $product = \Stripe\Product::create(array(
             "name" => $request->input('name'),
             "type" => "service",
             "description" => null,
             "attributes" => []
-        ]);
+        ));
         $record = new \App\Product();
         $record->stripe_id = $product->id;
         $record->name = $request->input("name");
@@ -98,14 +98,14 @@ class SubscriptionController extends Controller
 
         //Stripe Logic
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $subscription = \Stripe\Subscription::create([
+        $subscription = \Stripe\Subscription::create(array(
             "customer" => $user->stripeCustomer()->id,
-            "items" => [
-                [
+            "items" => array(
+                array(
                     "plan" => $request->input('plan')
-                ]
-            ]
-        ]);
+                )
+            )
+        ));
 
         $record = new \App\Subscription();
         $record->price = $plan->price;
@@ -147,13 +147,13 @@ class SubscriptionController extends Controller
             $interval = $request->input('interval');
         }
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $plan = \Stripe\Plan::create([
+        $plan = \Stripe\Plan::create(array(
             "interval" => $interval,
             "currency" => "usd",
             "amount" => $amount,
             "product" => $product->stripe_id,
             "nickname" => $request->input("nickname")
-        ]);
+        ));
         $record = new \App\Plan();
         $record->stripe_id = $plan->id;
         $record->name = $plan->nickname;

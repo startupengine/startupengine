@@ -16,13 +16,13 @@ class Permission extends JsonResource
     {
         $fields = [];
         $fields['id'] = $this->id;
-        if ($this->created_at != null) {
+        if($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
-        if ($this->updated_at != null) {
+        if($this->updated_at != null) {
             $fields['updated_at'] = $this->updated_at->toDateTimeString();
         }
-        if ($this->name != null) {
+        if($this->name != null) {
             $fields['name'] = $this->name;
         }
         $fields = sparseFields($fields, 'permission');

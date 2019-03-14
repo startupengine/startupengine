@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
 
+
 class SyncPage extends Command
 {
     /**
@@ -66,6 +67,7 @@ class SyncPage extends Command
 
         //Inject Pages if they don't yet exist
         if (Schema::hasTable('pages')) {
+
             $page = Page::where('slug', '=', $slug)->first();
 
             if ($page == null) {
@@ -86,20 +88,20 @@ class SyncPage extends Command
             }
 
             $json = file_exists($pagejson);
-            if ($json == true && ($mode == 'json' or $mode == 'all' or $mode == 'reset' or $mode == 'schema')) {
+            if ($json == true && ($mode == 'json' OR $mode == 'all' or $mode == 'reset' or $mode == 'schema')) {
                 $json = json_decode(file_get_contents($pagejson));
-                if ($mode == 'json' or $mode == 'reset') {
+                if ($mode == 'json' OR $mode == 'reset') {
                     if (isset($json->default)) {
                         $page->json = json_encode($json->default);
                     }
                 }
-                if ($mode == 'schema' or $mode == 'reset') {
+                if ($mode == 'schema' OR $mode == 'reset') {
                     $page->schema = json_encode($json);
                 }
             }
 
             $html = file_exists($pagepath . '/body.html');
-            if ($html == true && ($mode == 'html' or $mode == 'all' or $mode == 'reset')) {
+            if ($html == true && ($mode == 'html' OR $mode == 'all' OR $mode == 'reset')) {
                 $html = file_get_contents($pagepath . '/body.html');
                 if ($html !== null) {
                     $page->html = $html;
@@ -107,7 +109,7 @@ class SyncPage extends Command
             }
 
             $css = file_exists($pagepath . '/css.html');
-            if ($css == true && ($mode == 'css' or $mode == 'all' or $mode == 'reset')) {
+            if ($css == true && ($mode == 'css' OR $mode == 'all' OR $mode == 'reset')) {
                 $css = file_get_contents($pagepath . '/css.html');
                 if ($css !== null) {
                     $page->css = $css;
@@ -115,7 +117,7 @@ class SyncPage extends Command
             }
 
             $scripts = file_exists($pagepath . '/scripts.html');
-            if ($scripts == true && ($mode == 'json' or $mode == 'all' or $mode == 'reset')) {
+            if ($scripts == true && ($mode == 'json' OR $mode == 'all' OR $mode == 'reset')) {
                 $scripts = file_get_contents($pagepath . '/scripts.html');
                 if ($scripts !== null) {
                     $page->scripts = $scripts;

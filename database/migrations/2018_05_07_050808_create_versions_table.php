@@ -23,6 +23,7 @@ class CreateVersionsTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

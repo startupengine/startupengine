@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
 
         $stackTrace = $request->input('stackTrace');
 
-        if ($request->wantsJson() or $request->expectsJson() or $isJson && $stackTrace != true) {
+        if ($request->wantsJson() OR $request->expectsJson() OR $isJson && $stackTrace != true) {
             return $this->jsonResponse($exception);
             //return $this->jsonResponse($exception);
         }

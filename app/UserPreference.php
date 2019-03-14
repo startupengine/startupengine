@@ -29,7 +29,7 @@ class UserPreference extends Model
     {
         $user = \App\User::find($userId);
         $preference = \App\Preference::where('user_id', $userId)->where('preference_schema_id', $this->id)->orderBy('created_at')->first();
-        if ($preference == null) {
+        if($preference == null){
             $preference = new \App\Preference();
             $preference->preference_schema_id = $this->id;
             $preference->user_id = $userId;
@@ -55,9 +55,10 @@ class UserPreference extends Model
 
     public function schema()
     {
-        if (gettype($this->json) == 'string') {
+        if( gettype($this->json) == 'string'){
             return json_decode($this->json, true);
-        } else {
+        }
+        else {
             return $this->json;
         }
     }

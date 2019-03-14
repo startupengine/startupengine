@@ -6,22 +6,22 @@ use Illuminate\Http\Request;
 
 class StripeController extends Controller
 {
-    public function storePaymentMethod(Request $request)
-    {
+    public function storePaymentMethod(Request $request){
         $data = $request->input();
         $token = $request->input('data')['token'];
         $userId = $request->input('data')['userId'];
         $user = \App\User::find($userId);
         $meta = [];
         $errors = [];
-        if ($user != null) {
+        if($user != null) {
             try {
                 \Stripe\Stripe::setApiKey(stripeKey('secret'));
                 if ($user->stripe_id == null) {
                     $stripeCustomer = $user->stripeCustomer($token['id']);
                     //$response = $stripeCustomer->sources->create(["source" => $token['id']]);
                     $response = $stripeCustomer;
-                } else {
+                }
+                else {
                     $stripeCustomer = \Stripe\Customer::retrieve($user->stripe_id);
                     $stripeCustomer->sources->create(["source" => $token['id']]);
                     $response = $stripeCustomer;
@@ -68,7 +68,8 @@ class StripeController extends Controller
             } else {
                 $meta['status'] = "success";
             }
-        } else {
+        }
+        else {
             $errors['User'] = "User does not exist.";
             $meta['status'] = "error";
         }

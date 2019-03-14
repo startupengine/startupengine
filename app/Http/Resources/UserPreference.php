@@ -20,7 +20,7 @@ class UserPreference extends JsonResource
         $fields['name'] = $this->name;
         $fields['description'] = $this->description;
         $fields['schema'] = $this->schema();
-        if ($request->input('user_id') != null) {
+        if($request->input('user_id') != null){
             $userId = $request->input('user_id');
             $content = json_decode($this->resource->content($userId));
             $fields['content'] = $content;

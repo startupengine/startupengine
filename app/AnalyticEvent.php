@@ -24,13 +24,11 @@ class AnalyticEvent extends Model
 
     //protected $casts = ['created_at' => 'string'];
 
-    public function amount()
-    {
+    public function amount(){
         return json_decode($this->event_data)->amount;
     }
 
-    public function createFromRequest(Request $request)
-    {
+    public function createFromRequest(Request $request){
         $this->instance = json_encode($request->instance());
         $this->server = json_encode($request->server);
         $this->segments = json_encode($request->segments());
@@ -80,7 +78,7 @@ class AnalyticEvent extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withDefault(function ($user) {
+        return $this->belongsTo('App\User')->withDefault(function ($user) {
             $user->id = 'User ID';
         });
     }
@@ -90,4 +88,5 @@ class AnalyticEvent extends Model
         $occurrences = \App\AnalyticEvent::where('created_at', '>=', \Carbon\Carbon::now()->subDays($days))->get();
         return $occurrences;
     }
+
 }

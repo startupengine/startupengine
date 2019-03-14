@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable;
@@ -16,4 +15,5 @@ class Role extends SpatieRole implements AuditableContract, RoleContract
     use Auditable;
 
     public $guarded = ['id'];
+
 }
