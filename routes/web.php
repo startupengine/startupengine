@@ -95,7 +95,7 @@ Route::group(['middleware' => ['web']], function () {
     );
 
     //Feature Pages
-    Route::get('/features/{id}', 'FeatureController@viewFeaturePage')->name(
+    Route::get('/features/{slug}', 'FeatureController@viewFeaturePage')->name(
         'viewFeaturePage'
     );
 

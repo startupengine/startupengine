@@ -26,9 +26,9 @@ class FeatureController extends Controller
             ->with('options', $options);
     }
 
-    public function viewFeaturePage($id)
+    public function viewFeaturePage($slug)
     {
-        $feature = \App\Feature::find($id);
+        $feature = \App\Feature::where('slug', $slug)->firstOrFail();
 
         return view('features.view')->with('feature', $feature);
     }

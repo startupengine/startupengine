@@ -63,6 +63,13 @@
           }
         },
         "image": {
+          "isThumbnail":true,
+          "type": "image",
+          "validations": {
+            "url": true
+          }
+        },
+        "background": {
           "type": "image",
           "validations": {
             "url": true

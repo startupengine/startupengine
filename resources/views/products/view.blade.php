@@ -10,7 +10,7 @@
 
 
 @section('splash-style')
-     @if($product->thumbnail() != null) background-image:url('{{ $product->thumbnail() }}');  @endif
+     @if($product->getJsonContent('[sections][about][fields][background]')  != null) background-image:url('{{ $product->getJsonContent('[sections][about][fields][background]')  }}');  @endif
 @endsection
 
 @section('css')
@@ -31,8 +31,8 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background: linear-gradient(45deg, #ff7ccb, #ff8883) !important;
-            opacity:1 !important;
+            background: #3f7bff !important;
+            @if($product->getJsonContent('[sections][about][fields][background]')  == null) opacity:1 !important; @else opacity:0.9 !important; @endif
             color:#fff !important;
             /*border-bottom:30px rgba(0,0,0,0.25) solid;*/
             /*box-shadow:0px 0px 90px rgba(0,0,150,0.5);*/
@@ -89,7 +89,7 @@
                                     <div class="col-md-6">
                                         <h3 class="text-left"><span class="underlined text-capitalize bg-white">{{ $feature->name }}</span></h3>
                                         <p class="card-text text-left py-4" style="font-size:150%;text-transform:unset !important;">{!! $feature->getJsonContent('[sections][heading][fields][description]') !!}</p>
-                                        <div align="left" class="mb-4"><a href="/features/{{ $feature->id }}" class="btn btn-primary">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More @endif</a></div>
+                                        <div align="left" class="mb-4"><a href="/features/{{ $feature->slug }}" class="btn btn-primary">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More @endif</a></div>
                                     </div>
                                     <div class="col-md-6">
                                         <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" style="max-width:100%;"/>

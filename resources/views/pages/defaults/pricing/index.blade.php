@@ -341,12 +341,19 @@
                             <div class="row justify-content-center text-center" id="contentApp">
                                 <div class="col-md-5 mx-auto">
                                     <div class="card  h-auto" style="@if(count($softwares) == 1)margin-top:-72px; @else margin-top:30px; @endif min-height:auto !important;">
-                                        <div class="card-header text-dark-green bg-light-green">{{ $product->name }}</div>
-                                        <div class="card-body h-auto text-center">
-                                            <p class="card-text">@if($product->getJsonContent('[sections][about][fields][description]') != null){{ $product->getJsonContent('[sections][about][fields][description]') }} @endif</p>
-                                            <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $product->price/100 }}</h5>
-                                            <h6 class="card-subtitle mb-4 text-muted">per month</h6>
-                                            <div class="p-3">{{ $product->description }}</div>
+
+                                        <div class="card-body @if($product->getJsonContent('[sections][about][fields][description]') != null) pt-0 px-0 @endif h-auto text-center">
+                                            @if($product->getJsonContent('[sections][about][fields][image]') != null OR $product->getJsonContent('[sections][about][fields][background]') != null)
+                                                <div class="card-post__image bg-light-blue text-center justify-content-center" style="background-image:url({{$product->getJsonContent('[sections][about][fields][background]')}}">
+                                                    @if($product->getJsonContent('[sections][about][fields][image]') != null)
+                                                        <div class="rounded-circle bg-white p-5 mx-auto mt-5" style="position: absolute;
+                                                                left: calc(50% - 75px);
+                                                                bottom: calc(50% - 45px);border:15px solid #fff;height:150px;width:150px;background-image:url({{$product->getJsonContent('[sections][about][fields][image]')}}) !important; background-size:contain;"></div>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                            <h6 class="mt-3" @if($product->getJsonContent('[sections][about][fields][image]') != null) style="margin-top:80px !important;" @endif >{{ $product->name }}</h6>
+                                            <p class="card-text">{{ $product->getJsonContent('[sections][about][fields][description]') }}</p>
                                         </div>
                                         <div class="card-footer text-center pt-0 pb-5">
                                             <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started</a>
@@ -379,7 +386,7 @@
                                         <?php $dbEntry = \App\Plan::where('stripe_id', '=', $plan->id)->first(); ?>
                                         <div class="@if(count($plans) > 2) col-md-4 @else col-md-6 @endif mb-5 mx-auto">
                                             <div class="card h-auto " style="min-height:auto !important;">
-                                                <div class="card-header text-dark-green bg-light-green">{{ $plan->nickname }}</div>
+                                                <div class="card-header text-dark-blue bg-light-blue">{{ $plan->nickname }}</div>
                                                 <div class="card-body h-auto text-center">
                                                     @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][description]') != null) <p class="card-text">{{ $dbEntry->getJsonContent('[sections][about][fields][description]')  }}</p>@endif
                                                     <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $plan->amount/100 }}</h5>

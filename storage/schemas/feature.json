@@ -35,6 +35,7 @@
       "description": "The URL slug of this content.",
       "type": "text",
       "validations": {
+        "unique": "features,slug"
       }
     },
     "status": {
@@ -75,28 +76,8 @@
           "validations": {
             "url": true
           }
-        }
-      }
-    },
-    "heading": {
-      "slug": "heading",
-      "title": "Heading",
-      "fields": {
-        "description": {
-          "type": "textarea",
-          "description": "This appears at the top of the page.",
-          "validations": {
-            "required": true
-          }
         },
-        "button": {
-          "type": "text",
-          "description": "Text for the 'read more' button.",
-          "validations": {
-            "required": true
-          }
-        },
-        "thumbnail": {
+        "background": {
           "type": "image",
           "isThumbnail": true,
           "validations": {

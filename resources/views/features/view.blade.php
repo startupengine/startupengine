@@ -8,6 +8,10 @@
     <?php echo setting('admin.description'); ?>
 @endsection
 
+@section('splash-style')
+    @if($feature->getJsonContent('[sections][heading][fields][background]')  != null) background-image:url('{{ $feature->getJsonContent('[sections][heading][fields][background]')  }}');  @endif
+@endsection
+
 
 @section('css')
     <style>
@@ -27,8 +31,8 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background: linear-gradient(235deg, #62d3ff 10%, #7277ff 100%) !important;
-            opacity:1 !important;
+            background: #3f7bff !important;
+            @if($feature->getJsonContent('[sections][heading][fields][background]')  == null) opacity:1 !important; @else opacity:0.9 !important; @endif
             color:#fff !important;
             /*border-bottom:30px rgba(0,0,0,0.25) solid;*/
             /*box-shadow:0px 0px 90px rgba(0,0,150,0.5);*/
@@ -84,86 +88,50 @@
                     </div>
                 </div>
             </div>
-
-                <div class="row px-3 mt-0 pb-5">
+                @if($feature->getJsonContent('[sections][heading][fields][body]') != null)
+                <div class="row px-3 mt-0 pb-0">
                     <div class="col-md-12 px-4">
-                        <div class="card flat mb-5" style="display:contents;min-height:50px !important;">
-                            <div class="card-body text-left bg-white text-dark br-5 p-5" style="font-size:115%;">
+                        <div class="card flat mb-0" style="display:contents;min-height:50px !important;">
+                            <div class="card-body text-left bg-white text-dark br-5 pt-5 px-5" style="font-size:115%;">
                                 {!! $feature->getJsonContent('[sections][heading][fields][body]') !!}
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
 
         </div>
 
-        <?php /*
-        <?php $plans = $feature->stripePlans()->data; ?>
-        @if(count($plans) <= 1)
-            <div class="blog section bg-white p-4"  style="min-height:calc(100% - 300px);">
+        @if(count($feature->products()->get()) >= 1)
+            <div class="blog section bg-white pt-3 pb-5">
                 <div class="container">
-                    <h4 class="section-title text-center mb-5 mt-3">Pricing</h4>
-                    <div class="row px-0 pt-3 pb-5" >
-                            <div class="col-md-5 mx-auto">
+                    <h4 class="section-title text-center mb-5 mt-3">Related Products</h4>
+                    <div class="row px-0 pt-3 pb-0 mx-2" >
+                        @foreach($feature->products()->get() as $product)
+                            <div class="col-md-5 mb-5 mx-auto">
                                 <div class="card text-center  h-auto" style=" min-height:auto !important;">
-                                    <div class="card-header text-dark-green bg-light-green">{{ $feature->name }}</div>
-                                    <div class="card-body h-auto text-center">
-                                        <p class="card-text">@if($feature->getJsonContent('[sections][about][fields][description]') != null){{ $feature->getJsonContent('[sections][about][fields][description]') }} @endif</p>
-                                        <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $feature->price/100 }}</h5>
-                                        <h6 class="card-subtitle mb-4 text-muted">per month</h6>
-                                        <div class="p-3">{{ $feature->description }}</div>
-                                    </div>
-                                    <div class="card-footer text-center pt-0 pb-5">
-                                        <a href="/subscribe" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started</a>
+                                    <div class="card-body @if($product->getJsonContent('[sections][about][fields][description]') != null) pt-0 px-0 @endif">
+                                        @if($product->getJsonContent('[sections][about][fields][image]') != null OR $product->getJsonContent('[sections][about][fields][background]') != null)
+                                            <div class="card-post__image bg-light-blue text-center justify-content-center" style="background-image:url({{$product->getJsonContent('[sections][about][fields][background]')}}">
+                                                @if($product->getJsonContent('[sections][about][fields][image]') != null)
+                                                    <div class="rounded-circle bg-white p-5 mx-auto mt-5" style="position: absolute;
+                                                            left: calc(50% - 75px);
+                                                            bottom: calc(50% - 55px);border:15px solid #fff;height:150px;width:150px;background-image:url({{$product->getJsonContent('[sections][about][fields][image]')}}) !important; background-size:contain;"></div>
+                                                @endif
+                                            </div>
+                                        @endif
+                                        <h6 class="mt-3" @if($product->getJsonContent('[sections][about][fields][image]') != null) style="margin-top:80px !important;" @endif >{{ $product->name }}</h6>
+                                        <p class="card-text">{{ $product->getJsonContent('[sections][about][fields][description]') }}</p>
+                                        <a href="/products/{{ $product->stripe_id }}" class="btn btn-primary">Read More <i class="fa fa-fw fa-arrow-right ml-2"></i></a>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
                     </div>
-                </div>
-            </div>
-        @elseif(count($plans) > 1)
-            <div class="blog section section-invert p-4 pt-5 border-none" style="min-height:calc(100% - 300px);">
-                <div class="container">
-
-                        <div class="row mb-4 pt-4 pb-0">
-                            <div class="col-md-12 text-dull-blue mb-0">
-                                <div class=" h-auto pt-3 px-4 pb-3 " style="min-height:auto !important;border-radius:5px !important;xwxw">
-                                    <h5>{{ $feature->name }}</h5>
-                                    @if($feature->getJsonContent('[sections][about][fields][description]') != null) <h6 class="dimmed">{{ $feature->getJsonContent('[sections][about][fields][description]') }}</h6> @endif
-                                    @if($feature->description != null) <div class="p-3">{{ $feature->description }} </div>@endif
-                                </div>
-                            </div>
-                        </div>
-
-
-                    <div class="row" >
-                        <div class="row justify-content-center text-center" id="contentApp" >
-                            @foreach($plans as $plan)
-                                <?php $dbEntry = \App\Plan::where('stripe_id', '=', $plan->id)->first(); ?>
-                                <div class="@if(count($plans) > 2) col-md-4 @else col-md-6 @endif mb-5 mx-auto">
-                                    <div class="card h-auto " style="min-height:auto !important;">
-                                        <div class="card-header text-dark-green bg-light-green">{{ $plan->nickname }}</div>
-                                        <div class="card-body h-auto text-center">
-                                            @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][description]') != null) <p class="card-text">{{ $dbEntry->getJsonContent('[sections][about][fields][description]')  }}</p>@endif
-                                            <h5 class="card-title mb-4"><small style="font-weight:400;  ">$</small>{{ $plan->amount/100 }}</h5>
-                                            <h6 class="card-subtitle mb-4 text-muted">per {{ $plan->interval }}</h6>
-                                            @if($dbEntry != null && $dbEntry->getJsonContent('[sections][about][fields][features]') != null)<div>{!!  $dbEntry->getJsonContent('[sections][about][fields][features]') !!}</div>@endif
-                                            @if($dbEntry->description != null) <div class="p-3">{{ $dbEntry->description }} </div>@endif
-                                        </div>
-                                        <div class="card-footer text-center pt-0 pb-5">
-                                            <a href="/subscribe/{{ $feature->stripe_id }}/{{ $plan->id }}" class="btn btn-default btn-cta btn-pill raised mt-0 ">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-
                 </div>
             </div>
         @endif
 
- */ ?>
     </main>
 @endsection
 

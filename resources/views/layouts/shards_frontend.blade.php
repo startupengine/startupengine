@@ -347,7 +347,9 @@
                 <ul class="list-group">
                     <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-newspaper mr-2 text-primary"></i>Content</li>
                     @foreach(\App\PostType::all() as $postType)
+                        @if(count($postType->posts()->get()) > 0)
                         <li class="list-group-item text-capitalize text-white"><a href="/content/type/{{ $postType->slug }}">{{ $postType->getPluralName() }}</a></li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
