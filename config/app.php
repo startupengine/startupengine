@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -137,7 +136,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -163,14 +161,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Laravolt\Avatar\ServiceProvider::class,
-
 
         /*
          * Package Service Providers...
          */
         //Way\Generators\GeneratorsServiceProvider::class,
         //Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
         Appstract\Meta\MetaServiceProvider::class,
         \Conner\Tagging\Providers\TaggingServiceProvider::class,
@@ -183,11 +180,14 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+
+        /*
+         * First-Party Packages
+         */
         App\Providers\HorizonServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
-
+        Laravel\Passport\PassportServiceProvider::class
     ],
 
     /*
@@ -202,7 +202,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -238,8 +237,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        /*
+         * Third-Party Packages
+         */
         'Module' => Caffeinated\Modules\Facades\Module::class,
-        'Avatar'    => Laravolt\Avatar\Facade::class,
+        'Avatar' => Laravolt\Avatar\Facade::class
     ],
 
     /*
@@ -251,11 +253,13 @@ return [
     |
     */
 
-    'template_git_repository' => env('TEMPLATE_GIT_REPOSITORY', 'Startup-Engine-Template'),
+    'template_git_repository' => env(
+        'TEMPLATE_GIT_REPOSITORY',
+        'Startup-Engine-Template'
+    ),
     'template_git_username' => env('TEMPLATE_GIT_USERNAME', 'luckyrabbitllc'),
     'template_git_password' => env('TEMPLATE_GIT_PASSWORD', null),
     'template_git_branch' => env('TEMPLATE_GIT_BRANCH', 'master'),
     'github_username' => env('GITHUB_USERNAME', null),
-    'github_password' => env('GITHUB_PASSWORD', null),
-
+    'github_password' => env('GITHUB_PASSWORD', null)
 ];
