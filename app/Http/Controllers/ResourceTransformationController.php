@@ -19,11 +19,10 @@ class ResourceTransformationController extends Controller
                 try {
                     $result = $name::where($primaryKey, '=', $id)->first();
                     //dd($result->details());
-                    if($result == null){
+                    if ($result == null) {
                         return jsonErrorMessage('Item not found.');
                     }
-                }
-                catch(\Exception $e){
+                } catch (\Exception $e) {
                     report($e);
                     return jsonErrorMessage('Item not found.');
                 }
@@ -45,9 +44,7 @@ class ResourceTransformationController extends Controller
                             abort(500);
                         }
                     });
-                }
-                catch(\Exception $e){
-
+                } catch (\Exception $e) {
                     report($e);
                     return jsonErrorMessage('Action failed.');
                 }
@@ -66,9 +63,10 @@ class ResourceTransformationController extends Controller
                 ];
 
                 return response()->json($response);
-            } else abort(404);
-        }
-        catch(\Exception $e){
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
             report($e);
             dd($e);
 

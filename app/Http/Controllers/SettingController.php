@@ -26,7 +26,6 @@ class SettingController extends Controller
         return view('admin.settings.index')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
         */
         return view('admin.settings.index');
-
     }
 
     public function view(Request $request, $id)
@@ -87,26 +86,24 @@ class SettingController extends Controller
         }
 
 
-        if($request->input('group') !== null) {
+        if ($request->input('group') !== null) {
             $group = $request->input('group');
-        }
-        else {
+        } else {
             $group = explode(".", $request->input('key'), 2);
             $group = ucfirst($group[0]);
         }
 
         $setting->group = $group;
 
-        if($setting->id == null) {
+        if ($setting->id == null) {
             $redirect = 'new';
-        }
-        else {
+        } else {
             $redirect = "/app/settings?group=$group";
         }
 
         $setting->save();
 
-        if($redirect == 'new') {
+        if ($redirect == 'new') {
             $redirect = "/app/edit/setting/$setting->id";
         }
         return redirect($redirect);

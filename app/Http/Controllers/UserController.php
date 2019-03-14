@@ -96,6 +96,5 @@ class UserController extends Controller
         }
         $user->save();
         return redirect('/app/users');
-
     }
 }

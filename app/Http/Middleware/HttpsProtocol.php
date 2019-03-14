@@ -9,11 +9,9 @@ class HttpsProtocol
 
     public function handle($request, Closure $next)
     {
-        if (!$request->secure() && env('FORCE_HTTPS') == TRUE) {
+        if (!$request->secure() && env('FORCE_HTTPS') == true) {
             return redirect()->secure($request->getRequestUri());
         }
         return $next($request);
     }
 }
-
-?>

@@ -28,15 +28,13 @@ class WebRbac
             if (request()->route()->action['as'] != 'homepage') {
                 abort(404);
             }
-        } elseif (
-            isset($model) &&
+        } elseif (isset($model) &&
             (request()->route()->action['as'] == 'view page' or
                 request()->route()->action['as'] == 'homepage') &&
             defaultPageExists($id)
         ) {
         } else {
-            if (
-                method_exists($model, 'schema') &&
+            if (method_exists($model, 'schema') &&
                 $model->schema() != null &&
                 isset($model->schema()->permissions) &&
                 isset($model->schema()->permissions->read)
@@ -46,29 +44,25 @@ class WebRbac
                     true
                 );
 
-                if (
-                    isset($rules['requires_auth']) &&
+                if (isset($rules['requires_auth']) &&
                     $rules['requires_auth'] == true &&
                     \Auth::user() == null
                 ) {
                     abort(401);
                 }
-                if (
-                    isset($rules['requires_permission']) &&
+                if (isset($rules['requires_permission']) &&
                     \Auth::user() == null
                 ) {
                     abort(401);
                 }
-                if (
-                    isset($rules['requires_permission']) &&
+                if (isset($rules['requires_permission']) &&
                     \Auth::user() != null
                 ) {
                     foreach ($rules['requires_permission'] as $permission) {
                         try {
-                            if (
-                                \Auth::user()->hasPermissionTo(
-                                    $rules['requires_permission'] !== true
-                                )
+                            if (\Auth::user()->hasPermissionTo(
+                                $rules['requires_permission'] !== true
+                            )
                             ) {
                                 abort(403);
                             }

@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\RequestLog as RequestLogResource;
 
-
 class LogAPIResponse
 {
-    public function getRequests(Request $request) {
+    public function getRequests(Request $request)
+    {
         $paginatedResults = \App\RequestLog::orderBy('created_at', 'desc')->simplePaginate(20);
 
         $response = json_decode(json_encode($paginatedResults));

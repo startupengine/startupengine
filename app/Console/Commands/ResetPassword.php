@@ -42,15 +42,14 @@ class ResetPassword extends Command
         $show = $this->argument('show');
         $password = $this->argument('password');
         $user = \App\User::where('email', '=', $email)->firstOrFail();
-        if($password == null) {
+        if ($password == null) {
             $password = Hash::make(str_random(13));
         }
         $user->password = bcrypt($password);
         $user->save();
-        if($show) {
+        if ($show) {
             echo("New password: $password \n");
-        }
-        else {
+        } else {
             echo "Password reset. \n";
         }
     }

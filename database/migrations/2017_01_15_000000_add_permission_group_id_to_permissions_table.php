@@ -25,6 +25,5 @@ class AddPermissionGroupIdToPermissionsTable extends Migration
      */
     public function down()
     {
-
     }
 }

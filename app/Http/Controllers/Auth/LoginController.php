@@ -100,8 +100,7 @@ class LoginController extends Controller
                 $route = '/' . $page->slug;
             }
         }
-        if (
-            !isset($route) &&
+        if (!isset($route) &&
             \Auth::user()->hasPermissionTo('view backend') == true
         ) {
             $route = '/admin';

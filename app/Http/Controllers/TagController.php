@@ -15,6 +15,5 @@ class TagController extends Controller
         }
 
         return view('app.tag.index')->with('tags', $tags)->with('request', $request);
-
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\IsApiResource;
 
@@ -34,7 +33,7 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
     public function details($refresh = null, $object = null)
     {
 
-        if ($refresh == true OR $this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
+        if ($refresh == true or $this->content() == null or ($this->content() != null && !isset($this->content()->remote_data))) {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
             $details = \Stripe\Subscription::retrieve($this->stripe_id);
             $product = \Stripe\Product::retrieve($details->plan->product);
@@ -48,24 +47,21 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
             //dump($details);
             if ($details->status != 'active') {
                 $this->status = "INACTIVE";
-                if($details->canceled_at != null) {
+                if ($details->canceled_at != null) {
                     $this->ends_at = \Carbon\Carbon::createFromTimestamp($details->canceled_at)->toDateTimeString();
                 }
-            }
-            else {
+            } else {
                 $this->status = 'ACTIVE';
                 $this->ends_at = null;
             }
             $this->save();
             //dd($this->json);
-            if($object != null){
-             return $details;
-            }
-            else {
+            if ($object != null) {
+                return $details;
+            } else {
                 return $this->content()->remote_data;
             }
         } else {
-
             return $this->content()->remote_data;
         }
     }
@@ -77,10 +73,8 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
         if (gettype($json) == 'string') {
             $json = json_decode($json, true);
         }
-        if (gettype($json) == 'object' OR gettype($json) == 'array') {
-
+        if (gettype($json) == 'object' or gettype($json) == 'array') {
             $json = json_decode(json_encode($json));
-
         }
         return $json;
     }
@@ -119,7 +113,6 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
             $plans = $this->plans()->data;
             $options = [];
             if ($plans != null) {
-
                 foreach ($plans as $plan) {
                     $item = [];
                     $item['value'] = $plan->id;
@@ -127,7 +120,6 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
                     $amount = "$" . $plan->amount / 100 . " " . strtoupper($plan->currency);
                     $item['description'] = $amount . " / " . ucwords($plan->interval);
                     $options[$plan->id] = $item;
-
                 }
             }
             $schema = [

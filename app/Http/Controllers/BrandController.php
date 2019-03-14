@@ -14,6 +14,5 @@ class BrandController extends Controller
         $settings = $logo->merge($settings);
         $settings = $name->merge($settings);
         return view('app.brand.index')->with('settings', $settings)->with('request', $request);
-
     }
 }

@@ -44,7 +44,7 @@ class EditUserRole extends Command
         $user = \App\User::where('email', '=', $email)->firstOrFail();
         $user->syncRoles($roles);
         echo "\n$user->email now has the following roles:\n";
-        foreach($roles as $role) {
+        foreach ($roles as $role) {
             $roleRecord = Role::where("name", "=", $role)->first();
             echo $roleRecord->display_name."\n";
         }

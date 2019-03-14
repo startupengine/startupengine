@@ -133,8 +133,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         $baseSchema = json_decode($path, true);
 
         if ($this->postType() != null) {
-            if (
-                $this->postType()->first() != null &&
+            if ($this->postType()->first() != null &&
                 isset($this->postType()->first()->json)
             ) {
                 $postTypeSchema = json_decode(
@@ -179,15 +178,13 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
                         dd($section->fields);
-                        if (
-                            isset($value->isExcerpt) &&
+                        if (isset($value->isExcerpt) &&
                             $value->isExcerpt == true
                         ) {
                             $slug = $section->slug;
                             $string =
                                 "sections->" . $slug . "->fields->" . $field;
-                            if (
-                                $this->content()->sections->$slug->fields
+                            if ($this->content()->sections->$slug->fields
                                     ->$field
                             ) {
                                 return $this->content()->sections->$slug->fields

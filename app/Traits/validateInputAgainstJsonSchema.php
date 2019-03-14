@@ -86,7 +86,7 @@ trait validateInputAgainstJsonSchema
                     $this->title = $request->input('title');
                 }
                 if ($request->input('status') !== null) {
-                    if (strtolower($request->input('status')) == 'published' OR strtolower($request->input('status')) == 'pending' OR strtolower($request->input('status')) == 'private') {
+                    if (strtolower($request->input('status')) == 'published' or strtolower($request->input('status')) == 'pending' or strtolower($request->input('status')) == 'private') {
                         $this->status = strtoupper($request->input('status'));
                     }
                 }

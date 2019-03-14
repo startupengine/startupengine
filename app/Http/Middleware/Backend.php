@@ -26,18 +26,14 @@ class Backend
             if ($request->path() == 'admin/login') {
                 //continue
                 return $next($request);
-            }
-            //otherwise,
+            } //otherwise,
             else {
                 //abort
                 return abort('404');
             }
-        }
-
-        //If the user IS logged in
+        } //If the user IS logged in
         else {
-
-            if($user->status !== 'ACTIVE' OR $user->deleted_at !== null) {
+            if ($user->status !== 'ACTIVE' or $user->deleted_at !== null) {
                 return abort(404);
             }
 
@@ -45,14 +41,11 @@ class Backend
             if ($user->hasPermissionTo('view backend')) {
                 //continue...
                 return $next($request);
-
-            }
-            //Otherwise...
+            } //Otherwise...
             else {
                 //abort
                 return abort('404');
             }
-
         }
     }
 }

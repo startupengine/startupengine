@@ -19,15 +19,17 @@ class PermissionController extends Controller
         return view('app.permission.index')->with('permissions', $permissions);
     }
 
-    public function addPermission(Request $request){
+    public function addPermission(Request $request)
+    {
         return view('app.permission.add');
     }
 
-    public function savePermission(Request $request){
+    public function savePermission(Request $request)
+    {
         $name = $request->input('name');
         $guard = $request->input('guard_name');
-        $permission = Permission::where('name', '=', $name)->where('guard_name','=',$guard)->first();
-        if($permission == null) {
+        $permission = Permission::where('name', '=', $name)->where('guard_name', '=', $guard)->first();
+        if ($permission == null) {
             $permission = new Permission();
             $permission->guard_name = $request->input('guard_name');
             $permission->name = $request->input('name');

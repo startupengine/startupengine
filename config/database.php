@@ -1,12 +1,11 @@
 <?php
-if(getenv("DATABASE_URL") != null) {
+if (getenv("DATABASE_URL") != null) {
     $url = parse_url(getenv("DATABASE_URL"));
     $host = $url["host"];
     $username = $url["user"];
     $password = $url["pass"];
     $database = substr($url["path"], 1);
-}
-else {
+} else {
     $host = env('DB_HOST', '127.0.0.1');
     $database = env('DB_DATABASE', 'homestead');
     $username = env('DB_USERNAME', 'homestead');

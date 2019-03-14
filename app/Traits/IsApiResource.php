@@ -86,8 +86,7 @@ trait IsApiResource
                 foreach ($this->schema()->sections as $section) {
                     if ($section->fields != null) {
                         foreach ($section->fields as $field => $value) {
-                            if (
-                                isset($value->isThumbnail) &&
+                            if (isset($value->isThumbnail) &&
                                 $value->isThumbnail == true
                             ) {
                                 $slug = $section->slug;
@@ -98,8 +97,7 @@ trait IsApiResource
                                     '][fields][' .
                                     $field .
                                     ']';
-                                if (
-                                    $this->getJsonContent($contentstring) !=
+                                if ($this->getJsonContent($contentstring) !=
                                     null
                                 ) {
                                     return $this->getJsonContent(
@@ -122,8 +120,7 @@ trait IsApiResource
             foreach ($this->schema()->sections as $section) {
                 if ($section->fields != null) {
                     foreach ($section->fields as $field => $value) {
-                        if (
-                            isset($value->isThumbnail) &&
+                        if (isset($value->isThumbnail) &&
                             $value->isThumbnail == true
                         ) {
                             $slug = $section->slug;

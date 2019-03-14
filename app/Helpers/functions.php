@@ -567,8 +567,7 @@ function addIncludedRelationshipsToModel($request, $model)
                     $model->relationships[$include] = $model->$include();
                 }
             }
-        }
-        //If model has no relationships...
+        } //If model has no relationships...
         else {
             throw new Exception('Model has no relationships.');
         }
@@ -617,8 +616,7 @@ function addIncludedRelationshipsToApiResource($request, $model)
                     }
                 }
             }
-        }
-        //If model has no relationships...
+        } //If model has no relationships...
         else {
             throw new Exception('Model has no relationships.');
         }
@@ -1201,8 +1199,7 @@ function formatcurrency($floatcurr, $curr = "USD")
         }
         $num = substr($input, -3); //get the last 3 digits
         $input = substr($input, 0, -3); //omit the last 3 digits already stored in $num
-        while (
-            strlen($input) > 0 //loop the process - further get digits 2 by 2
+        while (strlen($input) > 0 //loop the process - further get digits 2 by 2
         ) {
             $num = substr($input, -2) . "," . $num;
             $input = substr($input, 0, -2);
@@ -1362,8 +1359,7 @@ function docFiles($folder)
     $array = scandir(base_path('storage/docs/content/' . $folder));
     $results = [];
     foreach ($array as $result) {
-        if (
-            strpos($result, 'description.md') !== true &&
+        if (strpos($result, 'description.md') !== true &&
             strpos($result, '.md') !== false
         ) {
             $results[] = $result;
@@ -1399,8 +1395,7 @@ function hasDocs()
     $array = scandir($basepath);
     $results = [];
     foreach ($array as $path) {
-        if (
-            $path !== '.' &&
+        if ($path !== '.' &&
             $path !== '..' &&
             strtolower($path) !== '.ds_store' &&
             is_dir($basepath . $path)
@@ -1433,8 +1428,7 @@ function docsFolders($root = null)
     $array = scandir($basepath);
     $results = [];
     foreach ($array as $path) {
-        if (
-            $path !== '.' &&
+        if ($path !== '.' &&
             $path !== '..' &&
             strtolower($path) !== '.ds_store' &&
             is_dir($basepath . $path)

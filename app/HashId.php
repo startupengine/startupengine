@@ -4,7 +4,8 @@ namespace App;
 
 class HashId
 {
-    static function encode($input) {
+    static function encode($input)
+    {
         return $input;
     }
 }

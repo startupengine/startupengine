@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class DemoController extends Controller
 {
-    public function menu() {
+    public function menu()
+    {
         $response = [
             "1" => ["icon" => "view_module", "text" => "Dashboard", "url" => "/admin/dashboard"],
             "2" => ["icon" => "library_books", "text" => "Pages", "url" => "/admin/pages"],
@@ -22,7 +23,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function notifications() {
+    public function notifications()
+    {
         $response = [
             "items" =>
             ["1" => ["category" => "Analytics", "text" => "This is a demo notification", "url" => "/admin/analytics"]],
@@ -32,13 +34,15 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function user() {
+    public function user()
+    {
         $response = ["userName" => "John Doe"];
         return response()
             ->json($response);
     }
 
-    public function dashboardAnalytics() {
+    public function dashboardAnalytics()
+    {
         $response = [
             "clickCount" => 1423,
             "contentViewCount" => 9921,
@@ -50,7 +54,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function dashboardSocialFeed() {
+    public function dashboardSocialFeed()
+    {
         $response = [
 
                 "1" => ["name" => "Daishi Ishihara", "message" => "Well, the way they make shows is, they make one show ...", "image"=> "https://images.unsplash.com/photo-1520271348391-049dd132bb7c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5bc9b3a7c6af8a6f5eff9f9a214dae1&auto=format&fit=crop&w=800&q=60", "url" => null],
@@ -61,7 +66,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function dashboardRecentContent () {
+    public function dashboardRecentContent()
+    {
         $response = [
 
             "1" => ["id" => 33, "title" => "The State of Business Automation in 2018", "name" => "James Johnson", "message" => "Well, the way they make shows is, they make one show ...", "image"=> "https://images.unsplash.com/photo-1520271348391-049dd132bb7c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5bc9b3a7c6af8a6f5eff9f9a214dae1&auto=format&fit=crop&w=800&q=60", "url" => null],
@@ -74,7 +80,8 @@ class DemoController extends Controller
     }
 
 
-    public function pages (Request $request) {
+    public function pages(Request $request)
+    {
         $page = $request->input('page');
         $response = [
             "data"=> [
@@ -101,7 +108,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function products (Request $request) {
+    public function products(Request $request)
+    {
         $page = $request->input('page');
         $response = [
             "data"=> [
@@ -125,7 +133,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function users (Request $request) {
+    public function users(Request $request)
+    {
         $page = $request->input('page');
         $response = [
             "data"=> [
@@ -148,7 +157,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function userActivities (Request $request) {
+    public function userActivities(Request $request)
+    {
         $page = $request->input('page');
         $response = [
             "data"=> [
@@ -172,7 +182,8 @@ class DemoController extends Controller
             ->json($response);
     }
 
-    public function contentModels (Request $request) {
+    public function contentModels(Request $request)
+    {
 
         $models = PostType::all();
         $response = [

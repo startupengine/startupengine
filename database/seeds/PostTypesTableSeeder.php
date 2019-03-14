@@ -9,13 +9,14 @@ class PostTypesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(){
+    public function run()
+    {
 
         $path = storage_path().'/schemas/post_types';
 
         $files = scandir($path);
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             if (strpos($file, '.json') !== false) {
                 $postType = new \App\PostType();
                 $json = json_decode(file_get_contents($path.'/'.$file));
@@ -26,6 +27,5 @@ class PostTypesTableSeeder extends Seeder
                 $postType->save();
             }
         }
-
     }
 }

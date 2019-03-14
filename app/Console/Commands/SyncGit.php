@@ -77,8 +77,7 @@ class SyncGit extends Command
                     );
                 }
 
-                if (
-                    file_exists($tempdir . "/resources/views") &&
+                if (file_exists($tempdir . "/resources/views") &&
                     ($mode == "default" or $mode == "reset")
                 ) {
                     $files = File::allFiles($tempdir . "/resources/views");
@@ -95,8 +94,7 @@ class SyncGit extends Command
                     }
                 }
 
-                if (
-                    file_exists($tempdir . "/resources/views/theme/pages") &&
+                if (file_exists($tempdir . "/resources/views/theme/pages") &&
                     $mode == "pages"
                 ) {
                     $files = File::allFiles(
@@ -115,8 +113,7 @@ class SyncGit extends Command
                     }
                 }
 
-                if (
-                    file_exists($tempdir . "/app/modules") &&
+                if (file_exists($tempdir . "/app/modules") &&
                     ($mode == "modules" or $mode == "reset")
                 ) {
                     $files = File::directories($tempdir . "/app/modules");
@@ -193,36 +190,31 @@ class SyncGit extends Command
                                 );
                                 if (isset($json->content_types->active)) {
                                     $schemas = $json->content_types->active;
-                                    foreach (
-                                        $schemas
-                                        as $schema => $schemaValue
-                                    ) {
+                                    foreach ($schemas
+                                    as $schema => $schemaValue) {
                                         $schemapath =
                                             $themepath .
                                             '/templates/' .
                                             $schema .
                                             '/schema.json';
-                                        if (
-                                            file_exists(
-                                                $themepath .
+                                        if (file_exists(
+                                            $themepath .
                                                     '/templates/' .
                                                     $schema .
                                                     '/schema.json'
-                                            )
+                                        )
                                         ) {
                                             $entry = PostType::where(
                                                 'slug',
                                                 '=',
                                                 $schema
                                             )->first();
-                                            if (
-                                                $entry == null or
+                                            if ($entry == null or
                                                 $mode == 'default'
                                             ) {
                                                 $entry = new \App\PostType();
                                             }
-                                            if (
-                                                $entry == null or
+                                            if ($entry == null or
                                                 $mode == 'reset' or
                                                 $mode == 'schema'
                                             ) {
@@ -248,8 +240,7 @@ class SyncGit extends Command
                             //Inject Pages if they don't yet exist
                             $pages = [];
                             if (Schema::hasTable('pages')) {
-                                if (
-                                    count(\App\Page::all()) < 1 or
+                                if (count(\App\Page::all()) < 1 or
                                     $mode == 'reset' or
                                     $mode == 'pages'
                                 ) {
@@ -259,21 +250,18 @@ class SyncGit extends Command
                                     $pagepath =
                                         \Config::get('view.paths')[0] .
                                         '/theme/pages';
-                                    foreach (
-                                        glob($pagepath . "/*")
-                                        as $filename
-                                    ) {
+                                    foreach (glob($pagepath . "/*")
+                                    as $filename) {
                                         $filename = substr(
                                             $filename,
                                             strrpos($filename, '/') + 1
                                         );
-                                        if (
-                                            file_exists(
-                                                $pagepath .
+                                        if (file_exists(
+                                            $pagepath .
                                                     '/' .
                                                     $filename .
                                                     '/page.json'
-                                            )
+                                        )
                                         ) {
                                             $pages[] = $filename;
                                             $page = \App\Page::where(
@@ -333,8 +321,7 @@ class SyncGit extends Command
                                         if ($page == null) {
                                             $page = new Page();
                                         }
-                                        if (
-                                            $page->id == null or
+                                        if ($page->id == null or
                                             $mode == 'reset'
                                         ) {
                                             $json = file_exists(
