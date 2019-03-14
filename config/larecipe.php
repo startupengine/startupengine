@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'docs'        => [
-        'route'   => '/docs',
-        'path'    => '/resources/docs',
-        'landing' => 'overview',
+    'docs' => [
+        'route' => '/docs',
+        'path' => '/resources/docs',
+        'landing' => 'overview'
     ],
 
     /*
@@ -31,11 +31,9 @@ return [
     |
     */
 
-    'versions'      => [
-        'default'   => '0.1',
-        'published' => [
-            '0.1'
-        ]
+    'versions' => [
+        'default' => '0.1',
+        'published' => ['0.1']
     ],
 
     /*
@@ -51,7 +49,7 @@ return [
     */
 
     'settings' => [
-        'auth'  => false,
+        'auth' => false,
         'ga_id' => ''
     ],
 
@@ -68,9 +66,9 @@ return [
     |
     */
 
-    'cache'       => [
+    'cache' => [
         'enabled' => false,
-        'period'  => 5
+        'period' => 5
     ],
 
     /*
@@ -86,12 +84,12 @@ return [
     |
     */
 
-    'search'            => [
-        'enabled'       => false,
-        'default'       => 'algolia',
-        'engines'       => [
-            'algolia'   => [
-                'key'   => '',
+    'search' => [
+        'enabled' => false,
+        'default' => 'algolia',
+        'engines' => [
+            'algolia' => [
+                'key' => '',
                 'index' => ''
             ]
         ]
@@ -109,9 +107,9 @@ return [
     |
     */
 
-    'repository'   => [
+    'repository' => [
         'provider' => 'github',
-        'url'      => 'https://github.com/StartupEngineIO/StartupEngine'
+        'url' => 'https://github.com/StartupEngineIO/StartupEngine'
     ],
 
     /*
@@ -127,25 +125,21 @@ return [
     |
     */
 
-    'ui'                 => [
-        'show_app_name'  => true,
-        'logo'           => '/images/startup-engine-logo.png', // e.g.: /images/logo.svg
-        'fav'            => '/images/startup-engine-logo.png', // e.g.: /fav.png
-        'theme'          => 'light',
-        'code'           => 'dark',
-        'back_to_top'    => true,
-        'show_side_bar'  => true,
-        'colors'         => [
-            'primary'    => '#007bff',
-            'secondary'  => '#2b9cf2',
-            'selection'  => '#f4f5f7'
+    'ui' => [
+        'show_app_name' => true,
+        'logo' => '/images/startup-engine-logo.png', // e.g.: /images/logo.svg
+        'fav' => '/images/startup-engine-logo.png', // e.g.: /fav.png
+        'theme' => 'light',
+        'code' => 'dark',
+        'back_to_top' => true,
+        'show_side_bar' => true,
+        'colors' => [
+            'primary' => '#007bff',
+            'secondary' => '#2b9cf2',
+            'selection' => '#f4f5f7'
         ],
-        'additional_css' => [
-            'css/docs.css',
-        ],
-        'additional_js'  => [
-            'js/docs.js'
-        ],
+        'additional_css' => ['css/docs.css'],
+        'additional_js' => ['js/docs.js']
     ],
 
     /*
@@ -160,20 +154,20 @@ return [
     |
     */
 
-    'seo'                 => [
-        'author'          => '',
-        'description'     => '',
-        'keywords'        => '',
-        'og'              => [
-            'title'       => '',
-            'type'        => 'article',
-            'url'         => '',
-            'image'       => '',
-            'description' => '',
+    'seo' => [
+        'author' => '',
+        'description' => '',
+        'keywords' => '',
+        'og' => [
+            'title' => '',
+            'type' => 'article',
+            'url' => '',
+            'image' => '',
+            'description' => ''
         ]
     ],
 
-   /*
+    /*
    |--------------------------------------------------------------------------
    | Forum
    |--------------------------------------------------------------------------
@@ -186,12 +180,12 @@ return [
    |
    */
 
-  'forum'                 => [
-        'enabled'           => false,
-        'default'           => 'disqus',
-        'services'          => [
-            'disqus'        => [
-                'site_name' => '', // yoursite.disqus.com
+    'forum' => [
+        'enabled' => false,
+        'default' => 'disqus',
+        'services' => [
+            'disqus' => [
+                'site_name' => '' // yoursite.disqus.com
             ]
         ]
     ]

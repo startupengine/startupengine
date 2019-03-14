@@ -2,11 +2,11 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\IsApiResource;
 
-class Subscription extends Model implements \Altek\Accountant\Contracts\Recordable
+class Subscription extends Model implements
+    \Altek\Accountant\Contracts\Recordable
 {
     use \Altek\Accountant\Recordable;
 
@@ -16,7 +16,6 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
 
     public function transformations()
     {
-
         $allowed = [];
 
         if ($this->status == 'ACTIVE') {
@@ -33,8 +32,11 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
 
     public function details($refresh = null, $object = null)
     {
-
-        if ($refresh == true OR $this->content() == null OR ($this->content() != null && !isset($this->content()->remote_data))) {
+        if (
+            $refresh == true or
+            $this->content() == null or
+            $this->content() != null && !isset($this->content()->remote_data)
+        ) {
             \Stripe\Stripe::setApiKey(stripeKey('secret'));
             $details = \Stripe\Subscription::retrieve($this->stripe_id);
             $product = \Stripe\Product::retrieve($details->plan->product);
@@ -42,30 +44,28 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
                 'json->remote_data' => [
                     "subscription" => $details,
                     "product" => $product
-
                 ]
             ]);
             //dump($details);
             if ($details->status != 'active') {
                 $this->status = "INACTIVE";
-                if($details->canceled_at != null) {
-                    $this->ends_at = \Carbon\Carbon::createFromTimestamp($details->canceled_at)->toDateTimeString();
+                if ($details->canceled_at != null) {
+                    $this->ends_at = \Carbon\Carbon::createFromTimestamp(
+                        $details->canceled_at
+                    )->toDateTimeString();
                 }
-            }
-            else {
+            } else {
                 $this->status = 'ACTIVE';
                 $this->ends_at = null;
             }
             $this->save();
             //dd($this->json);
-            if($object != null){
-             return $details;
-            }
-            else {
+            if ($object != null) {
+                return $details;
+            } else {
                 return $this->content()->remote_data;
             }
         } else {
-
             return $this->content()->remote_data;
         }
     }
@@ -77,10 +77,8 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
         if (gettype($json) == 'string') {
             $json = json_decode($json, true);
         }
-        if (gettype($json) == 'object' OR gettype($json) == 'array') {
-
+        if (gettype($json) == 'object' or gettype($json) == 'array') {
             $json = json_decode(json_encode($json));
-
         }
         return $json;
     }
@@ -93,12 +91,14 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
                 'slug' => 'cancel',
                 'description' => 'Cancel this subscription.',
                 'require_confirmation' => true,
-                'confirmation_message' => 'Are you sure you want to cancel this subscription?',
+                'confirmation_message' =>
+                    'Are you sure you want to cancel this subscription?',
                 'success_message' => "Subscription cancelled.",
                 'requirements' => [
                     'permissions_any' => [
                         'cancel own subscription',
-                        'cancel others subscription']
+                        'cancel others subscription'
+                    ]
                 ]
             ];
             return $schema;
@@ -119,15 +119,18 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
             $plans = $this->plans()->data;
             $options = [];
             if ($plans != null) {
-
                 foreach ($plans as $plan) {
                     $item = [];
                     $item['value'] = $plan->id;
                     $item['label'] = $plan->nickname;
-                    $amount = "$" . $plan->amount / 100 . " " . strtoupper($plan->currency);
-                    $item['description'] = $amount . " / " . ucwords($plan->interval);
+                    $amount =
+                        "$" .
+                        $plan->amount / 100 .
+                        " " .
+                        strtoupper($plan->currency);
+                    $item['description'] =
+                        $amount . " / " . ucwords($plan->interval);
                     $options[$plan->id] = $item;
-
                 }
             }
             $schema = [
@@ -141,7 +144,8 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
                 'requirements' => [
                     'permissions_any' => [
                         'change own subscription',
-                        'change others subscription']
+                        'change others subscription'
+                    ]
                 ]
             ];
             return $schema;
@@ -156,22 +160,20 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
                 'items' => [
                     [
                         'id' => $subscription->subscription->items->data[0]->id,
-                        'plan' => $input,
-                    ],
-                ],
+                        'plan' => $input
+                    ]
+                ]
             ]);
         }
     }
 
     public function plans()
     {
-        $product_id = ($this->details(true)->subscription->plan->product);
+        $product_id = $this->details(true)->subscription->plan->product;
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
         $plans = \Stripe\Plan::all(["product" => $product_id]);
         return $plans;
     }
-
-
 
     public function user()
     {
@@ -181,7 +183,7 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
 
     public function product()
     {
-        $product_id = ($this->details()->plan->product);
+        $product_id = $this->details()->plan->product;
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
         $product = \Stripe\Product::retrieve(["id" => $product_id]);
         return $product;
@@ -189,7 +191,9 @@ class Subscription extends Model implements \Altek\Accountant\Contracts\Recordab
 
     public function schema()
     {
-        $path = file_get_contents(storage_path() . '/schemas/subscription.json');
+        $path = file_get_contents(
+            storage_path() . '/schemas/subscription.json'
+        );
         $schema = json_decode($path);
         return $schema;
     }

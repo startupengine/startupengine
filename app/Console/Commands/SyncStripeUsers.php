@@ -38,37 +38,37 @@ class SyncStripeUsers extends Command
      */
     public function handle()
     {
-
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
         $stripeCustomers = \Stripe\Customer::all();
 
-        if($stripeCustomers != null){
-            foreach($stripeCustomers->data as $stripeCustomer){
-
-                $user = \App\User::where('email', $stripeCustomer->email)->first();
-                if($user == null) {
-                    $user = new \App\User;
+        if ($stripeCustomers != null) {
+            foreach ($stripeCustomers->data as $stripeCustomer) {
+                $user = \App\User::where(
+                    'email',
+                    $stripeCustomer->email
+                )->first();
+                if ($user == null) {
+                    $user = new \App\User();
                 }
                 $user->stripe_id = $stripeCustomer->id;
                 $user->email = $stripeCustomer->email;
-                if($stripeCustomer->name != null) {
+                if ($stripeCustomer->name != null) {
                     $user->name = $stripeCustomer->name;
-                }
-                else {
+                } else {
                     $user->name = "User";
                 }
 
-                if($user->password == null) {
+                if ($user->password == null) {
                     $user->password = Hash::make(str_random(11));
                 }
 
-                if($stripeCustomer->metadata['se_json'] != null){
+                if ($stripeCustomer->metadata['se_json'] != null) {
                     $user->syncFromStripe();
                 }
                 $user->save();
             }
         }
-      echo "\nSynced users from Stripe account.\n\n";
+        echo "\nSynced users from Stripe account.\n\n";
     }
 }

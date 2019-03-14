@@ -9,7 +9,6 @@ use App\Role;
 
 class SettingController extends Controller
 {
-
     public function index(Request $request)
     {
         /*
@@ -26,7 +25,6 @@ class SettingController extends Controller
         return view('admin.settings.index')->with('settings', $settings)->with('postTypes', $postTypes)->with('request', $request)->with('settingsGroups', $settingsGroups);
         */
         return view('admin.settings.index');
-
     }
 
     public function view(Request $request, $id)
@@ -35,9 +33,11 @@ class SettingController extends Controller
         $options = [
             'id' => $item->id,
             'type' => 'setting',
-            'index_uri' => '/admin/settings/group/'.$item->group
+            'index_uri' => '/admin/settings/group/' . $item->group
         ];
-        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+        return view('admin.components.resource_view')
+            ->with('item', $item)
+            ->with('options', $options);
     }
 
     public function addSetting(Request $request)
@@ -86,27 +86,24 @@ class SettingController extends Controller
             $setting->type = $request->input('type');
         }
 
-
-        if($request->input('group') !== null) {
+        if ($request->input('group') !== null) {
             $group = $request->input('group');
-        }
-        else {
+        } else {
             $group = explode(".", $request->input('key'), 2);
             $group = ucfirst($group[0]);
         }
 
         $setting->group = $group;
 
-        if($setting->id == null) {
+        if ($setting->id == null) {
             $redirect = 'new';
-        }
-        else {
+        } else {
             $redirect = "/app/settings?group=$group";
         }
 
         $setting->save();
 
-        if($redirect == 'new') {
+        if ($redirect == 'new') {
             $redirect = "/app/edit/setting/$setting->id";
         }
         return redirect($redirect);

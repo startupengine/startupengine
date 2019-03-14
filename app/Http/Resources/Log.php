@@ -14,7 +14,6 @@ class Log extends JsonResource
      */
     public function toArray($request)
     {
-
         $fields = [];
         $fields['uuid'] = $this->getIdAttribute();
         $fields['description'] = $this->description();
@@ -23,7 +22,7 @@ class Log extends JsonResource
         $fields['sequence'] = $this->sequence;
         $fields['type'] = $this->type;
         $fields['should_display_on_index'] = $this->should_display_on_index;
-        if($this->created_at != null) {
+        if ($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
         $fields = sparseFields($fields, 'log');
@@ -41,8 +40,8 @@ class Log extends JsonResource
     {
         return [
             'meta' => [
-                'type' => 'log',
-            ],
+                'type' => 'log'
+            ]
         ];
     }
 }

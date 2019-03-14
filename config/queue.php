@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Queue Driver
@@ -29,23 +28,22 @@ return [
     */
 
     'connections' => [
-
         'sync' => [
-            'driver' => 'sync',
+            'driver' => 'sync'
         ],
 
         'database' => [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 90
         ],
 
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'localhost',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 90
         ],
 
         'sqs' => [
@@ -54,16 +52,15 @@ return [
             'secret' => 'your-secret-key',
             'prefix' => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
             'queue' => 'your-queue-name',
-            'region' => 'us-east-1',
+            'region' => 'us-east-1'
         ],
 
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
             'queue' => 'default',
-            'retry_after' => 90,
-        ],
-
+            'retry_after' => 90
+        ]
     ],
 
     /*
@@ -79,7 +76,6 @@ return [
 
     'failed' => [
         'database' => env('DB_CONNECTION', 'mysql'),
-        'table' => 'failed_jobs',
-    ],
-
+        'table' => 'failed_jobs'
+    ]
 ];

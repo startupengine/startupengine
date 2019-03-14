@@ -13,7 +13,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Audit implementation
@@ -38,8 +37,8 @@ return [
     'user' => [
         'primary_key' => 'id',
         'foreign_key' => 'user_id',
-        'model'       => App\User::class,
-        'resolver'    => App\User::class,
+        'model' => App\User::class,
+        'resolver' => App\User::class
     ],
 
     /*
@@ -63,9 +62,9 @@ return [
     */
     'drivers' => [
         'database' => [
-            'table'      => 'audits',
-            'connection' => null,
-        ],
+            'table' => 'audits',
+            'connection' => null
+        ]
     ],
 
     /*
@@ -77,5 +76,5 @@ return [
     |
     */
 
-    'console' => false,
+    'console' => false
 ];

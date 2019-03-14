@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Blueprint Docs
@@ -13,7 +12,6 @@ return [
     |
     */
 
-
     'route' => null, //'api-docs'
 
     'condense_navigation' => false,
@@ -21,5 +19,4 @@ return [
     'blueprint_file' => base_path('blueprint.apib'),
 
     'drafter' => base_path('vendor/bin/drafter')
-
 ];

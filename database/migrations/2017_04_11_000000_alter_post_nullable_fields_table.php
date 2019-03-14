@@ -18,13 +18,22 @@ class AlterPostNullableFieldsTable extends Migration
 
         Schema::table('posts', function (Blueprint $table) {
             if (Schema::hasColumn('posts', 'excerpt')) {
-                $table->text('excerpt')->nullable()->change();
+                $table
+                    ->text('excerpt')
+                    ->nullable()
+                    ->change();
             }
             if (Schema::hasColumn('posts', 'meta_description')) {
-                $table->text('meta_description')->nullable()->change();
+                $table
+                    ->text('meta_description')
+                    ->nullable()
+                    ->change();
             }
             if (Schema::hasColumn('posts', 'meta_keywords')) {
-                $table->text('meta_keywords')->nullable()->change();
+                $table
+                    ->text('meta_keywords')
+                    ->nullable()
+                    ->change();
             }
         });
     }

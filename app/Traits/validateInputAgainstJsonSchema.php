@@ -6,8 +6,10 @@ trait validateInputAgainstJsonSchema
 {
     public function validateInput($request)
     {
-
-        if ($request->input('undelete') == 'true' && $request->input('save') == 'true') {
+        if (
+            $request->input('undelete') == 'true' &&
+            $request->input('save') == 'true'
+        ) {
             $this - restore();
             $this->save();
         }
@@ -28,7 +30,13 @@ trait validateInputAgainstJsonSchema
             }
         }
 
-        if ($jsonInput == null && $request->input('title') == null && $request->input('slug') == null && $request->input('status') == null && $request->input('delete') == null) {
+        if (
+            $jsonInput == null &&
+            $request->input('title') == null &&
+            $request->input('slug') == null &&
+            $request->input('status') == null &&
+            $request->input('delete') == null
+        ) {
             $response["status"] = "pending";
             $response["message"] = "No input.";
             $response['data'] = null;
@@ -42,28 +50,52 @@ trait validateInputAgainstJsonSchema
                 if (strpos($field, '.') !== false) {
                     $arrayIndexes = explode(".", $field);
                 }
-                $schemaFieldDefinition = (get_array_value($schema, $arrayIndexes));
+                $schemaFieldDefinition = get_array_value(
+                    $schema,
+                    $arrayIndexes
+                );
                 if ($schemaFieldDefinition == false) {
                     $schemaFieldDefinition = [];
                 }
 
-                $hasvalidations = array_key_exists("validations", $schemaFieldDefinition);
+                $hasvalidations = array_key_exists(
+                    "validations",
+                    $schemaFieldDefinition
+                );
                 if ($hasvalidations) {
                     $validations = $schemaFieldDefinition["validations"];
-                    $validationParameters = convertSchemaToValidationArray($field, $validations);
+                    $validationParameters = convertSchemaToValidationArray(
+                        $field,
+                        $validations
+                    );
                     $input = [strtolower($field) => $value];
-                    $validator = \Validator::make($input, $validationParameters);
-                    $newArray[] = ['json->' . convertDotsToArrows($field), $value];
-                    $response['data']['fields'][$field]['valid'] = $validator->passes();
-                    $response['data']['fields'][$field]['errors'] = $validator->errors($field);
-                    $response['data']['fields'][$field]['first_error'] = $validator->errors($field)->first();
+                    $validator = \Validator::make(
+                        $input,
+                        $validationParameters
+                    );
+                    $newArray[] = [
+                        'json->' . convertDotsToArrows($field),
+                        $value
+                    ];
+                    $response['data']['fields'][$field][
+                        'valid'
+                    ] = $validator->passes();
+                    $response['data']['fields'][$field][
+                        'errors'
+                    ] = $validator->errors($field);
+                    $response['data']['fields'][$field][
+                        'first_error'
+                    ] = $validator->errors($field)->first();
                     foreach ($response['data']['fields'] as $field => $result) {
                         if ($result['valid'] == false) {
                             $errors[$field] = "Error";
                         }
                     }
                 } else {
-                    $newArray[] = ['json->' . convertDotsToArrows($field), $value];
+                    $newArray[] = [
+                        'json->' . convertDotsToArrows($field),
+                        $value
+                    ];
                 }
             }
         }
@@ -86,7 +118,11 @@ trait validateInputAgainstJsonSchema
                     $this->title = $request->input('title');
                 }
                 if ($request->input('status') !== null) {
-                    if (strtolower($request->input('status')) == 'published' OR strtolower($request->input('status')) == 'pending' OR strtolower($request->input('status')) == 'private') {
+                    if (
+                        strtolower($request->input('status')) == 'published' or
+                        strtolower($request->input('status')) == 'pending' or
+                        strtolower($request->input('status')) == 'private'
+                    ) {
                         $this->status = strtoupper($request->input('status'));
                     }
                 }

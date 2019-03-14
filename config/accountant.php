@@ -1,9 +1,7 @@
 <?php
 
 return [
-
     'ledger' => [
-
         /*
         |--------------------------------------------------------------------------
         | Ledger Implementation
@@ -36,7 +34,7 @@ return [
         |
         */
 
-        'driver' => 'database',
+        'driver' => 'database'
     ],
 
     /*
@@ -50,11 +48,11 @@ return [
     */
 
     'resolvers' => [
-        'context'    => Altek\Accountant\Resolvers\ContextResolver::class,
+        'context' => Altek\Accountant\Resolvers\ContextResolver::class,
         'ip_address' => Altek\Accountant\Resolvers\IpAddressResolver::class,
-        'url'        => Altek\Accountant\Resolvers\UrlResolver::class,
+        'url' => Altek\Accountant\Resolvers\UrlResolver::class,
         'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
-        'user'       => Altek\Accountant\Resolvers\UserResolver::class,
+        'user' => Altek\Accountant\Resolvers\UserResolver::class
     ],
 
     /*
@@ -88,13 +86,7 @@ return [
     |
     */
 
-    'events' => [
-        'created',
-        'updated',
-        'restored',
-        'deleted',
-        'forceDeleted',
-    ],
+    'events' => ['created', 'updated', 'restored', 'deleted', 'forceDeleted'],
 
     /*
     |--------------------------------------------------------------------------
@@ -108,10 +100,6 @@ return [
 
     'user' => [
         'prefix' => 'user',
-        'guards' => [
-            'web',
-            'api',
-        ],
-    ],
-
+        'guards' => ['web', 'api']
+    ]
 ];

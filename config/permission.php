@@ -1,9 +1,7 @@
 <?php
 
 return [
-
     'models' => [
-
         /*
          * When using the "HasRoles" trait from this package, we need to know which
          * Eloquent model should be used to retrieve your permissions. Of course, it
@@ -24,12 +22,10 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role' => Spatie\Permission\Models\Role::class,
-
+        'role' => Spatie\Permission\Models\Role::class
     ],
 
     'table_names' => [
-
         /*
          * When using the "HasRoles" trait from this package, we need to know which
          * table should be used to retrieve your roles. We have chosen a basic
@@ -68,7 +64,7 @@ return [
          * basic default value but you may easily change it to any table you like.
          */
 
-        'role_has_permissions' => 'role_has_permissions',
+        'role_has_permissions' => 'role_has_permissions'
     ],
 
     /*
@@ -76,5 +72,5 @@ return [
      * role is updated. Then the cache will be flushed immediately.
      */
 
-    'cache_expiration_time' => 60 * 24,
+    'cache_expiration_time' => 60 * 24
 ];

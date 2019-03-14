@@ -15,5 +15,4 @@ class Role extends SpatieRole implements AuditableContract, RoleContract
     use Auditable;
 
     public $guarded = ['id'];
-
 }

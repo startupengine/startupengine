@@ -36,8 +36,7 @@ class Backend
 
         //If the user IS logged in
         else {
-
-            if($user->status !== 'ACTIVE' OR $user->deleted_at !== null) {
+            if ($user->status !== 'ACTIVE' or $user->deleted_at !== null) {
                 return abort(404);
             }
 
@@ -45,14 +44,12 @@ class Backend
             if ($user->hasPermissionTo('view backend')) {
                 //continue...
                 return $next($request);
-
             }
             //Otherwise...
             else {
                 //abort
                 return abort('404');
             }
-
         }
     }
 }

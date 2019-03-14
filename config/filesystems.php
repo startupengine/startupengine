@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -42,10 +41,9 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app')
         ],
 
         'public' => [
@@ -53,12 +51,12 @@ return [
             'key' => env('AWS_KEY'),
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
-            'bucket' => env('AWS_BUCKET'),
+            'bucket' => env('AWS_BUCKET')
         ],
 
         'snapshots' => [
             'driver' => 'local',
-            'root' => database_path('snapshots'),
+            'root' => database_path('snapshots')
         ],
 
         's3' => [
@@ -66,9 +64,7 @@ return [
             'key' => env('AWS_KEY'),
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-        ],
-
-    ],
-
+            'bucket' => env('AWS_BUCKET')
+        ]
+    ]
 ];

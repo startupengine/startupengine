@@ -24,25 +24,36 @@ class CreatePermissionTables extends Migration
             $table->string('guard_name')->nullable();
         });
 
-        Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames) {
-            $permissionsForeignKeyName = str_singular($tableNames['permissions']).'_id';
+        Schema::create($tableNames['model_has_permissions'], function (
+            Blueprint $table
+        ) use ($tableNames) {
+            $permissionsForeignKeyName =
+                str_singular($tableNames['permissions']) . '_id';
             $table->integer($permissionsForeignKeyName)->unsigned();
             $table->morphs('model');
 
-            $table->foreign($permissionsForeignKeyName)
+            $table
+                ->foreign($permissionsForeignKeyName)
                 ->references('id')
                 ->on($tableNames['permissions'])
                 ->onDelete('cascade');
 
-            $table->primary([$permissionsForeignKeyName, 'model_id', 'model_type']);
+            $table->primary([
+                $permissionsForeignKeyName,
+                'model_id',
+                'model_type'
+            ]);
         });
 
-        Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames) {
-            $rolesForeignKeyName = str_singular($tableNames['roles']).'_id';
+        Schema::create($tableNames['model_has_roles'], function (
+            Blueprint $table
+        ) use ($tableNames) {
+            $rolesForeignKeyName = str_singular($tableNames['roles']) . '_id';
             $table->integer($rolesForeignKeyName)->unsigned();
             $table->morphs('model');
 
-            $table->foreign($rolesForeignKeyName)
+            $table
+                ->foreign($rolesForeignKeyName)
                 ->references('id')
                 ->on($tableNames['roles'])
                 ->onDelete('cascade');
@@ -50,19 +61,24 @@ class CreatePermissionTables extends Migration
             $table->primary([$rolesForeignKeyName, 'model_id', 'model_type']);
         });
 
-        Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
-            $permissionsForeignKeyName = str_singular($tableNames['permissions']).'_id';
-            $rolesForeignKeyName = str_singular($tableNames['roles']).'_id';
+        Schema::create($tableNames['role_has_permissions'], function (
+            Blueprint $table
+        ) use ($tableNames) {
+            $permissionsForeignKeyName =
+                str_singular($tableNames['permissions']) . '_id';
+            $rolesForeignKeyName = str_singular($tableNames['roles']) . '_id';
 
             $table->integer($permissionsForeignKeyName)->unsigned();
             $table->integer($rolesForeignKeyName)->unsigned();
 
-            $table->foreign($permissionsForeignKeyName)
+            $table
+                ->foreign($permissionsForeignKeyName)
                 ->references('id')
                 ->on($tableNames['permissions'])
                 ->onDelete('cascade');
 
-            $table->foreign($rolesForeignKeyName)
+            $table
+                ->foreign($rolesForeignKeyName)
                 ->references('id')
                 ->on($tableNames['roles'])
                 ->onDelete('cascade');

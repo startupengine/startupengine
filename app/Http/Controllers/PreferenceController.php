@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class PreferenceController extends Controller
 {
-
     public function view(Request $request, $id)
     {
         /*dd(\Auth::user()->permissions);
@@ -27,6 +26,8 @@ class PreferenceController extends Controller
             'index_uri' => '/admin/preference'
         ];
 
-        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+        return view('admin.components.resource_view')
+            ->with('item', $item)
+            ->with('options', $options);
     }
 }

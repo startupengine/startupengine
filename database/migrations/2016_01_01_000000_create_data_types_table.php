@@ -41,8 +41,12 @@ class CreateDataTypesTable extends Migration
             $table->boolean('delete')->default(true);
             $table->text('details')->nullable();
 
-            $table->foreign('data_type_id')->references('id')->on('data_types')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('data_type_id')
+                ->references('id')
+                ->on('data_types')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

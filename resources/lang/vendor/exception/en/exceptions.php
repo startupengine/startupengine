@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Exception Language Lines
@@ -12,22 +11,22 @@ return [
     */
 
     'authentication' => [
-        'detail' => 'The request was made by an unauthenticated user.',
+        'detail' => 'The request was made by an unauthenticated user.'
     ],
     'authorization' => [
-        'title' => 'Action not allowed.',
+        'title' => 'Action not allowed.'
     ],
     'model_not_found' => [
-        'title' => ':Model not found',
+        'title' => ':Model not found'
     ],
     'not_found_http' => [
-        'message' => 'Route not found.',
+        'message' => 'Route not found.'
     ],
     'validation' => [
-        'title' => ':Fails validation failed on field :field',
+        'title' => ':Fails validation failed on field :field'
     ],
     'client' => [
-        'unavailable' => 'Service unavailable now.',
+        'unavailable' => 'Service unavailable now.'
     ],
 
     /*
@@ -35,6 +34,6 @@ return [
     |
     */
     'models' => [
-        'User' => 'Usuário',
+        'User' => 'Usuário'
     ]
 ];

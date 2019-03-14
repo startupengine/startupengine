@@ -8,8 +8,10 @@ class ComposerStaticInit5e1f6f53c34d4a14f348d55b9406bf79
 {
     public static function getInitializer(ClassLoader $loader)
     {
-        return \Closure::bind(function () use ($loader) {
-
-        }, null, ClassLoader::class);
+        return \Closure::bind(
+            function () use ($loader) {},
+            null,
+            ClassLoader::class
+        );
     }
 }

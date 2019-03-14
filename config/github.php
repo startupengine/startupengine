@@ -12,7 +12,6 @@ declare(strict_types=1);
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Connection Name
@@ -39,10 +38,9 @@ return [
     */
 
     'connections' => [
-
         'main' => [
-            'token'      => env('GITHUB_TOKEN'),
-            'method'     => 'token',
+            'token' => env('GITHUB_TOKEN'),
+            'method' => 'token'
             // 'backoff'    => false,
             // 'cache'      => false,
             // 'version'    => 'v3',
@@ -50,9 +48,9 @@ return [
         ],
 
         'app' => [
-            'clientId'     => env('GITHUB_CLIENT_ID'),
+            'clientId' => env('GITHUB_CLIENT_ID'),
             'clientSecret' => env('GITHUB_CLIENT_SECRET'),
-            'method'       => 'application',
+            'method' => 'application'
             // 'backoff'      => false,
             // 'cache'        => false,
             // 'version'      => 'v3',
@@ -60,8 +58,8 @@ return [
         ],
 
         'jwt' => [
-            'token'        => env('GITHUB_JWT_TOKEN'),
-            'method'       => 'jwt',
+            'token' => env('GITHUB_JWT_TOKEN'),
+            'method' => 'jwt'
             // 'backoff'      => false,
             // 'cache'        => false,
             // 'version'      => 'v3',
@@ -69,15 +67,13 @@ return [
         ],
 
         'other' => [
-            'username'   => env('GITHUB_USERNAME'),
-            'password'   => env('GITHUB_PASSWORD'),
-            'method'     => 'password',
+            'username' => env('GITHUB_USERNAME'),
+            'password' => env('GITHUB_PASSWORD'),
+            'method' => 'password'
             // 'backoff'    => false,
             // 'cache'      => false,
             // 'version'    => 'v3',
             // 'enterprise' => false,
-        ],
-
-    ],
-
+        ]
+    ]
 ];

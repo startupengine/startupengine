@@ -11,7 +11,13 @@ class SettingGroupController extends Controller
         $groupFilter = $group;
         $groupSlug = strtolower($group);
         //dd($groupSlug);
-        $group = \App\Setting::where('key', '=', $groupSlug.'.settings_description')->first();
-        return view('admin.settings.groups.index')->with('group', $group)->with('groupFilter', $groupFilter);
+        $group = \App\Setting::where(
+            'key',
+            '=',
+            $groupSlug . '.settings_description'
+        )->first();
+        return view('admin.settings.groups.index')
+            ->with('group', $group)
+            ->with('groupFilter', $groupFilter);
     }
 }

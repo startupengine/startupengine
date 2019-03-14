@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
-
     public function index(Request $request)
     {
         return view('admin.content.index');
@@ -22,16 +21,18 @@ class ContentController extends Controller
             'buttons' => [
                 'top_nav' => [
                     'View' => [
-                        'link'=> '/content/'.$item->id,
-                        'class'=> 'btn btn-dark',
-                        'text' => '<i class="material-icons mr-2">search</i>View',
+                        'link' => '/content/' . $item->id,
+                        'class' => 'btn btn-dark',
+                        'text' =>
+                            '<i class="material-icons mr-2">search</i>View',
                         'target' => '_blank'
                     ]
                 ]
             ]
         ];
 
-        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+        return view('admin.components.resource_view')
+            ->with('item', $item)
+            ->with('options', $options);
     }
-
 }

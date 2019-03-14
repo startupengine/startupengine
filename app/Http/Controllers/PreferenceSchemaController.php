@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class PreferenceSchemaController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +26,8 @@ class PreferenceSchemaController extends Controller
             'index_uri' => '/admin/preferences/schemas'
         ];
 
-        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+        return view('admin.components.resource_view')
+            ->with('item', $item)
+            ->with('options', $options);
     }
 }

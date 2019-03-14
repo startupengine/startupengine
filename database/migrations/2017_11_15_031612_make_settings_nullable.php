@@ -14,7 +14,11 @@ class MakeSettingsNullable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('value')->nullable()->default(null)->change();
+            $table
+                ->text('value')
+                ->nullable()
+                ->default(null)
+                ->change();
         });
     }
 

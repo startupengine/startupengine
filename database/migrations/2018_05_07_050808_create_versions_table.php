@@ -20,10 +20,12 @@ class CreateVersionsTable extends Migration
             $table->string('name');
             $table->text('data');
             $table->string('hash');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table
+                ->integer('user_id')
+                ->unsigned()
+                ->nullable();
             $table->timestamps();
         });
-
     }
 
     /**

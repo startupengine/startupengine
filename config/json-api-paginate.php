@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * The maximum number of results that will be returned
      * when using the JSON API paginator.
@@ -32,5 +31,5 @@ return [
     /*
      * Here you can override the base url to be used in the link items.
      */
-    'base_url' => null,
+    'base_url' => null
 ];

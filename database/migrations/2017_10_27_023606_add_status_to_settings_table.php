@@ -14,7 +14,9 @@ class AddStatusToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->enum('status', ['PUBLISHED', 'PRIVATE'])->default('PRIVATE');
+            $table
+                ->enum('status', ['PUBLISHED', 'PRIVATE'])
+                ->default('PRIVATE');
         });
     }
 

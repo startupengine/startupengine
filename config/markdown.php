@@ -12,7 +12,6 @@ declare(strict_types=1);
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Enable View Integration
@@ -61,7 +60,7 @@ return [
     'renderer' => [
         'block_separator' => "\n",
         'inner_separator' => "\n",
-        'soft_break'      => "\n",
+        'soft_break' => "\n"
     ],
 
     /*
@@ -140,6 +139,5 @@ return [
     |
     */
 
-    'allow_unsafe_links' => true,
-
+    'allow_unsafe_links' => true
 ];

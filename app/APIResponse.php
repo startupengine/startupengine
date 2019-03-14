@@ -12,12 +12,16 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\Page as PageResource;
 
-
 class APIResponse extends Model
 {
-
-    public function getUsers(Request $request, $perPage = 10, $limit = 10, $pageNumber = 1, $sortBy = 'created_at', $sortDirection = 'asc')
-    {
+    public function getUsers(
+        Request $request,
+        $perPage = 10,
+        $limit = 10,
+        $pageNumber = 1,
+        $sortBy = 'created_at',
+        $sortDirection = 'asc'
+    ) {
         if ($request->input('perPage') !== null) {
             $perPage = $request->input('perPage');
         }
@@ -32,12 +36,28 @@ class APIResponse extends Model
                     $totalUsers->where($array['name'], '=', $array['value'][0]);
                 }
                 if (count($array['value']) == 2) {
-                    $users->where($array['name'], $array['value'][1], $array['value'][0]);
-                    $totalUsers->where($array['name'], $array['value'][1], $array['value'][0]);
+                    $users->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
+                    $totalUsers->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
                 }
                 if (count($array['value']) == 3 && $array['value'][2] == true) {
-                    $users->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
-                    $totalUsers->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
+                    $users->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
+                    $totalUsers->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
                 }
             }
         }
@@ -58,13 +78,20 @@ class APIResponse extends Model
         return $response;
     }
 
-
-    public function getContentModels(Request $request, $perPage = 10, $limit = 10, $pageNumber = 1, $sortBy = 'created_at', $sortDirection = 'asc')
-    {
+    public function getContentModels(
+        Request $request,
+        $perPage = 10,
+        $limit = 10,
+        $pageNumber = 1,
+        $sortBy = 'created_at',
+        $sortDirection = 'asc'
+    ) {
         if ($request->input('perPage') !== null) {
             $perPage = $request->input('perPage');
         }
-        $models = PostType::orderBy($sortBy, $sortDirection)->limit($limit)->simplePaginate($perPage);
+        $models = PostType::orderBy($sortBy, $sortDirection)
+            ->limit($limit)
+            ->simplePaginate($perPage);
         $totalModels = PostType::orderBy($sortBy, $sortDirection)->get();
         $models->transform(function ($item, $key) {
             $item->member_since = $item->created_at->diffForHumans();
@@ -77,7 +104,6 @@ class APIResponse extends Model
         return $response;
     }
 
-
     public function getStripePlans($request)
     {
         if ($request->input('product_id') !== null) {
@@ -85,8 +111,7 @@ class APIResponse extends Model
         } else {
             $plans = getStripePlans();
         }
-        return response()
-            ->json($plans);
+        return response()->json($plans);
     }
 
     public function getStripeProducts($request)
@@ -94,7 +119,11 @@ class APIResponse extends Model
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
         $products = \Stripe\Product::all(array("limit" => 100));
         foreach ($products->data as $product) {
-            $item = \App\Product::where('stripe_id', '=', $product->id)->first();
+            $item = \App\Product::where(
+                'stripe_id',
+                '=',
+                $product->id
+            )->first();
             if ($item == null) {
                 $item = new \App\Product();
             }
@@ -103,8 +132,7 @@ class APIResponse extends Model
             $item->json = json_encode($product);
             $item->save();
         }
-        return response()
-            ->json($products);
+        return response()->json($products);
     }
 
     public function createProduct($request)
@@ -114,8 +142,7 @@ class APIResponse extends Model
             "name" => $request->input('name'),
             "type" => "service"
         ));
-        return response()
-            ->json($product);
+        return response()->json($product);
     }
 
     public function findProduct($request, $id)
@@ -126,24 +153,27 @@ class APIResponse extends Model
         $product->schema = $product->schema();
         $product->tags = $product->tagNames();
 
-        $response = ["data"=>(json_decode(json_encode($product->toArray()))), "status" => "success"];
+        $response = [
+            "data" => json_decode(json_encode($product->toArray())),
+            "status" => "success"
+        ];
 
-        return response()
-            ->json($response);
+        return response()->json($response);
     }
 
     public function createProductPlan($request)
     {
         $plan = createProductPlan($request);
-        return response()
-            ->json($plan);
+        return response()->json($plan);
     }
 
     public function createSubscription($request)
     {
         $user = User::find($request->input('user_id'));
         $plan_id = $request->input('plan_id');
-        $newplan = $user->newSubscription('main', $plan_id)->create($request->input('token'));
+        $newplan = $user
+            ->newSubscription('main', $plan_id)
+            ->create($request->input('token'));
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
         $stripeplan = \Stripe\Plan::retrieve($plan_id);
         $newplan->price = $stripeplan->amount;
@@ -154,33 +184,38 @@ class APIResponse extends Model
         $event->user_id = $user->id;
         $event->user_email = $user->email;
         $event->user_name = $user->name;
-        $event->event_data = json_encode("{\"plan_id\":$plan_id, \"amount\":'" . $newplan->amount . "'}");
+        $event->event_data = json_encode(
+            "{\"plan_id\":$plan_id, \"amount\":'" . $newplan->amount . "'}"
+        );
         $event->save();
-        return response()
-            ->json($newplan);
+        return response()->json($newplan);
     }
 
     public function getInvoices($id)
     {
         $user = User::find($id);
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
-        $invoices = \Stripe\Invoice::all(array("customer" => $user->stripe_id, "limit" => 10));
-        return response()
-            ->json($invoices);
+        $invoices = \Stripe\Invoice::all(array(
+            "customer" => $user->stripe_id,
+            "limit" => 10
+        ));
+        return response()->json($invoices);
     }
 
-    public function newItem($request){
-
-        if($request->input('title') != null ) {
+    public function newItem($request)
+    {
+        if ($request->input('title') != null) {
             $title = $request->input('title');
         }
-        if($request->input('type') != null) {
-            $type = \App\PostType::where('slug', '=', $request->input('type'))->first();
-
+        if ($request->input('type') != null) {
+            $type = \App\PostType::where(
+                'slug',
+                '=',
+                $request->input('type')
+            )->first();
         }
 
-        if(isset($type) && isset($title)) {
-
+        if (isset($type) && isset($title)) {
             $record = new \App\Post();
             $record->title = $request->input("title");
             $record->post_type = $type->slug;
@@ -191,11 +226,11 @@ class APIResponse extends Model
             $response = [];
             $response['status'] = 'success';
             $response['data'] = $record;
-        }
-        else {
+        } else {
             $response = [];
             $response['status'] = 'error';
-            $response['message'] = 'Something went wrong. Product was not created.';
+            $response['message'] =
+                'Something went wrong. Product was not created.';
         }
         return $response;
     }
@@ -276,14 +311,17 @@ class APIResponse extends Model
                 ->jsonPaginate();
         } else {
             if (isset($search)) {
-
                 $items = Post::select(\DB::raw($fields))
                     ->where('status', '=', 'PUBLISHED')
                     ->where('post_type', '=', $posttype)
                     ->where('title', 'ILIKE', "%$search%")
                     ->limit($limit)
                     ->orderBy('published_at', 'desc')
-                    ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                    ->where(
+                        'published_at',
+                        '<',
+                        Carbon::now()->toDateTimeString()
+                    )
                     ->jsonPaginate();
             } else {
                 $items = Post::select(\DB::raw($fields))
@@ -291,7 +329,11 @@ class APIResponse extends Model
                     ->where('post_type', '=', $posttype)
                     ->limit($limit)
                     ->orderBy('published_at', 'desc')
-                    ->where('published_at', '<', Carbon::now()->toDateTimeString())
+                    ->where(
+                        'published_at',
+                        '<',
+                        Carbon::now()->toDateTimeString()
+                    )
                     ->jsonPaginate();
             }
         }
@@ -320,10 +362,9 @@ class APIResponse extends Model
 
         //$items = $items->sortBy('views')->reverse();
 
-        $response = (json_decode(json_encode($items->toArray())));
+        $response = json_decode(json_encode($items->toArray()));
 
-        return response()
-            ->json($response);
+        return response()->json($response);
     }
 
     public function getRandomItem($request)
@@ -376,7 +417,6 @@ class APIResponse extends Model
 
         if (\Schema::hasColumn($type, 'body')) {
             $items->transform(function ($item) {
-
                 if ($item->image() !== null) {
                     $item->image = $item->content()->body->image;
                 }
@@ -384,11 +424,9 @@ class APIResponse extends Model
             });
         }
 
-        $response = (json_decode(json_encode($items->toArray())));
+        $response = json_decode(json_encode($items->toArray()));
 
-
-        return response()
-            ->json($items);
+        return response()->json($items);
     }
 
     public function getItem($request)
@@ -447,25 +485,25 @@ class APIResponse extends Model
             return $item;
         });
 
-        $response = (json_decode(json_encode($items->toArray())));
+        $response = json_decode(json_encode($items->toArray()));
 
-        return response()
-            ->json($response);
+        return response()->json($response);
     }
 
     public function findItem($request, $id)
     {
-
         $post = Post::find($id);
         $json = json_decode($post->json);
         $post->content = $json;
         $post->schema = $post->schema();
         $post->tags = $post->tags;
 
-        $response = ["data"=>(json_decode(json_encode($post->toArray()))), "status" => "success"];
+        $response = [
+            "data" => json_decode(json_encode($post->toArray())),
+            "status" => "success"
+        ];
 
-        return response()
-            ->json($response);
+        return response()->json($response);
     }
 
     public function search($request)
@@ -494,18 +532,16 @@ class APIResponse extends Model
             return $item;
         });
 
-        $response = (json_decode(json_encode($items->toArray())));
+        $response = json_decode(json_encode($items->toArray()));
 
-        return response()
-            ->json($response);
+        return response()->json($response);
     }
 
     public function getPage($input)
     {
-        if(is_numeric($input)){
+        if (is_numeric($input)) {
             $page = \App\Page::where('id', '=', $input)->firstOrFail();
-        }
-        else {
+        } else {
             $page = \App\Page::where('slug', '=', $input)->firstOrFail();
         }
 
@@ -521,16 +557,13 @@ class APIResponse extends Model
 
     public function editPage(Request $request, $input)
     {
-
-        if(is_numeric($input)){
+        if (is_numeric($input)) {
             $page = \App\Page::where('id', '=', $input)->firstOrFail();
-        }
-        else {
+        } else {
             $page = \App\Page::where('slug', '=', $input)->firstOrFail();
         }
 
         $response = $page->validateInput($request);
-
 
         $resource = new PageResource($page);
         $page = $resource->resource;
@@ -545,14 +578,22 @@ class APIResponse extends Model
 
     public function getPageById($id)
     {
-        $page = Page::where('id', '=', $id)->where('status', '=', 'ACTIVE')->firstOrFail();
+        $page = Page::where('id', '=', $id)
+            ->where('status', '=', 'ACTIVE')
+            ->firstOrFail();
         if ($page !== null) {
             return $page;
         }
     }
 
-    public function getPages(Request $request, $perPage = 10, $limit = 10, $pageNumber = 1, $sortBy = 'updated_at', $sortDirection = 'desc')
-    {
+    public function getPages(
+        Request $request,
+        $perPage = 10,
+        $limit = 10,
+        $pageNumber = 1,
+        $sortBy = 'updated_at',
+        $sortDirection = 'desc'
+    ) {
         if ($request->input('perPage') !== null) {
             $perPage = $request->input('perPage');
         }
@@ -567,12 +608,28 @@ class APIResponse extends Model
                     $totalPages->where($array['name'], '=', $array['value'][0]);
                 }
                 if (count($array['value']) == 2) {
-                    $pages->where($array['name'], $array['value'][1], $array['value'][0]);
-                    $totalPages->where($array['name'], $array['value'][1], $array['value'][0]);
+                    $pages->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
+                    $totalPages->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
                 }
                 if (count($array['value']) == 3 && $array['value'][2] == true) {
-                    $pages->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
-                    $totalPages->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
+                    $pages->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
+                    $totalPages->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
                 }
             }
         }
@@ -593,8 +650,14 @@ class APIResponse extends Model
         return $response;
     }
 
-    public function getPosts(Request $request, $perPage = 10, $limit = 10, $pageNumber = 1, $sortBy = 'updated_at', $sortDirection = 'desc')
-    {
+    public function getPosts(
+        Request $request,
+        $perPage = 10,
+        $limit = 10,
+        $pageNumber = 1,
+        $sortBy = 'updated_at',
+        $sortDirection = 'desc'
+    ) {
         if ($request->input('perPage') !== null) {
             $perPage = $request->input('perPage');
         }
@@ -609,26 +672,55 @@ class APIResponse extends Model
                     $totalPosts->where($array['name'], '=', $array['value'][0]);
                 }
                 if (count($array['value']) == 2) {
-                    $posts->where($array['name'], $array['value'][1], $array['value'][0]);
-                    $totalPosts->where($array['name'], $array['value'][1], $array['value'][0]);
+                    $posts->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
+                    $totalPosts->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
                 }
                 if (count($array['value']) == 3 && $array['value'][2] == true) {
-                    $posts->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
-                    $totalPosts->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
+                    $posts->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
+                    $totalPosts->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
                 }
             }
         }
 
-        if ($request->input('sortBy') !== null && $request->input('sortDirection') == null) {
+        if (
+            $request->input('sortBy') !== null &&
+            $request->input('sortDirection') == null
+        ) {
             $posts->orderBy($request->input('sortBy'), 'desc');
         }
-        if ($request->input('sortBy') !== null && $request->input('sortDirection') !== null) {
-            $posts->orderBy($request->input('sortBy'), $request->input('sortDirection'));
+        if (
+            $request->input('sortBy') !== null &&
+            $request->input('sortDirection') !== null
+        ) {
+            $posts->orderBy(
+                $request->input('sortBy'),
+                $request->input('sortDirection')
+            );
         }
 
         if ($request->input('s') !== null) {
             $posts->where('title', 'ILIKE', '%' . $request->input('s') . '%');
-            $totalPosts->where('title', 'ILIKE', '%' . $request->input('s') . '%');
+            $totalPosts->where(
+                'title',
+                'ILIKE',
+                '%' . $request->input('s') . '%'
+            );
         }
 
         if ($request->input('showDeleted') == 'true') {
@@ -656,15 +748,19 @@ class APIResponse extends Model
         return $response;
     }
 
-    public function getProductPlans(Request $request) {
-        if($request->input('product_id') !== null) {
+    public function getProductPlans(Request $request)
+    {
+        if ($request->input('product_id') !== null) {
             $response = [];
-            $product = \App\Product::where('id', '=', $request->input('product_id'))->first();
-            if($product == null){
+            $product = \App\Product::where(
+                'id',
+                '=',
+                $request->input('product_id')
+            )->first();
+            if ($product == null) {
                 $response['status'] = 'error';
                 $response['message'] = 'Product not found.';
-            }
-            else {
+            } else {
                 $plans = $product->plans();
                 $response['status'] = 'success';
                 $response['message'] = 'Product found.';
@@ -672,57 +768,67 @@ class APIResponse extends Model
                 $response['pages'] = 1;
                 $response['data'] = $plans;
             }
-        }
-        else {
+        } else {
             $response['status'] = 'error';
             $response['message'] = 'Product ID not supplied.';
         }
         return $response;
-
     }
 
-    public function getProductPlanSchema(){
-        $plan = new \App\Plan;
+    public function getProductPlanSchema()
+    {
+        $plan = new \App\Plan();
         return $plan->schema();
     }
 
-    public function editProductPlans(Request $request) {
+    public function editProductPlans(Request $request)
+    {
         $productId = $request->input('product_id');
-        if($request->input('newItem') != null){
-            $newItemJson = json_decode($request->input('newItem'), TRUE);
-            if($newItemJson != null){
+        if ($request->input('newItem') != null) {
+            $newItemJson = json_decode($request->input('newItem'), true);
+            if ($newItemJson != null) {
                 $validatedData = \Validator::make($newItemJson, [
                     'name' => 'required|max:255',
                     'description' => 'required',
                     'price' => 'numeric|required',
-                    'interval' => ['required', Rule::in(['day', 'week', 'month', 'year'])],
-                    ]);
-                if($validatedData->passes()) {
+                    'interval' => [
+                        'required',
+                        Rule::in(['day', 'week', 'month', 'year'])
+                    ]
+                ]);
+                if ($validatedData->passes()) {
                     $response['status'] = 'success';
                     $response['message'] = 'Input is valid.';
-                    if($validatedData->passes()){
-                        $newItem = new \App\Plan;
+                    if ($validatedData->passes()) {
+                        $newItem = new \App\Plan();
 
-                        if($request->input('save') == 'true'){
-                            $newItem = \App\Plan::create($validatedData->valid());
-                            $newItem->product_id = $request->input('product_id');
+                        if ($request->input('save') == 'true') {
+                            $newItem = \App\Plan::create(
+                                $validatedData->valid()
+                            );
+                            $newItem->product_id = $request->input(
+                                'product_id'
+                            );
                             $newItem->save();
                             $response['status'] = 'success';
                             $response['message'] = 'New item saved.';
                         }
-
                     }
-                }
-                else {
+                } else {
                     $response['status'] = 'error';
                     $response['message'] = 'Input has errors.';
-                    foreach($validatedData->valid() as $key => $invalidField) {
+                    foreach ($validatedData->valid() as $key => $invalidField) {
                         $response['data']['fields'][$key]['valid'] = true;
                         $response['data']['fields'][$key]['first_error'] = null;
                     }
-                    foreach($validatedData->invalid() as $key => $invalidField) {
+                    foreach (
+                        $validatedData->invalid()
+                        as $key => $invalidField
+                    ) {
                         $response['data']['fields'][$key]['valid'] = false;
-                        $response['data']['fields'][$key]['first_error'] = $validatedData->errors($key)->first();
+                        $response['data']['fields'][$key][
+                            'first_error'
+                        ] = $validatedData->errors($key)->first();
                     }
                 }
                 return $response;
@@ -730,16 +836,24 @@ class APIResponse extends Model
         }
 
         $planId = $request->input('plan_id');
-        if($productId) {
+        if ($productId) {
             $response = [];
-            $product = \App\Product::where('id', '=', $request->input('product_id'))->first();
-            if($product == null){
+            $product = \App\Product::where(
+                'id',
+                '=',
+                $request->input('product_id')
+            )->first();
+            if ($product == null) {
                 $response['status'] = 'error';
                 $response['message'] = 'Product not found.';
-            }
-            else {
-                if($request->input('new') == 'true' && $request->input('name') != null  && $request->input('price') != null && $request->input('interval') != null ) {
-                    $plan = new \App\Plan;
+            } else {
+                if (
+                    $request->input('new') == 'true' &&
+                    $request->input('name') != null &&
+                    $request->input('price') != null &&
+                    $request->input('interval') != null
+                ) {
+                    $plan = new \App\Plan();
                     $plan->save();
                     \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
                     $stripePlan = \Stripe\Plan::create(array(
@@ -756,30 +870,35 @@ class APIResponse extends Model
                     $plan->remote_data = json_encode($stripePlan);
                     $plan->product_id = $request->input('product_id');
                     $plan->save();
+                } else {
+                    $plan = \App\Plan::where('id', '=', $planId)
+                        ->where('product_id', '=', $productId)
+                        ->first();
                 }
-                else {
-                    $plan = \App\Plan::where('id', '=', $planId)->where('product_id', '=', $productId)->first();
-                }
-                if($plan != null){
+                if ($plan != null) {
                     $schema = json_decode(json_encode($plan->schema()), true);
-                    if($request->input('delete') == 'true'){
+                    if ($request->input('delete') == 'true') {
                         $plan->delete();
-                    }
-                    else {
+                    } else {
                         foreach ($schema['fields'] as $field => $value) {
                             if ($request->input($field) != null) {
                                 $plan->$field = $request->input($field);
-                                $response['data']['fields'][$field]['valid'] = true;
-                                $response['data']['fields'][$field]['errors'] = json_decode(json_encode('{}'));
-                                $response['data']['fields'][$field]['first_error'] = null;
+                                $response['data']['fields'][$field][
+                                    'valid'
+                                ] = true;
+                                $response['data']['fields'][$field][
+                                    'errors'
+                                ] = json_decode(json_encode('{}'));
+                                $response['data']['fields'][$field][
+                                    'first_error'
+                                ] = null;
                             }
                         }
                     }
 
-                    if($request->input('save') == 'true') {
-                       $plan->save();
+                    if ($request->input('save') == 'true') {
+                        $plan->save();
                     }
-
                 }
                 /*
                 $hasvalidations = array_key_exists("validations", $schemaFieldDefinition);
@@ -808,17 +927,22 @@ class APIResponse extends Model
                 $response['pages'] = 1;
                 //$response['data'] = $plan;
             }
-        }
-        else {
+        } else {
             $response['status'] = 'error';
             $response['message'] = 'Product ID not supplied.';
         }
         return $response;
-
     }
 
-    public function getProducts(Request $request, $perPage = 10, $limit = 10, $pageNumber = 1, $sortBy = 'created_at', $sortDirection = 'asc', $showDeleted = false)
-    {
+    public function getProducts(
+        Request $request,
+        $perPage = 10,
+        $limit = 10,
+        $pageNumber = 1,
+        $sortBy = 'created_at',
+        $sortDirection = 'asc',
+        $showDeleted = false
+    ) {
         updateSubscriptionPlans();
 
         if ($request->input('perPage') !== null) {
@@ -832,29 +956,62 @@ class APIResponse extends Model
                 $array = ['name' => $filter, 'value' => explode(',', $value)];
                 if (count($array['value']) == 1) {
                     $products->where($array['name'], '=', $array['value'][0]);
-                    $totalProducts->where($array['name'], '=', $array['value'][0]);
+                    $totalProducts->where(
+                        $array['name'],
+                        '=',
+                        $array['value'][0]
+                    );
                 }
                 if (count($array['value']) == 2) {
-                    $products->where($array['name'], $array['value'][1], $array['value'][0]);
-                    $totalProducts->where($array['name'], $array['value'][1], $array['value'][0]);
+                    $products->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
+                    $totalProducts->where(
+                        $array['name'],
+                        $array['value'][1],
+                        $array['value'][0]
+                    );
                 }
                 if (count($array['value']) == 3 && $array['value'][2] == true) {
-                    $products->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
-                    $totalProducts->where($array['name'], $array['value'][1], '%' . $array['value'][0] . '%');
+                    $products->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
+                    $totalProducts->where(
+                        $array['name'],
+                        $array['value'][1],
+                        '%' . $array['value'][0] . '%'
+                    );
                 }
             }
         }
 
-        if ($request->input('sortBy') !== null && $request->input('sortDirection') == null) {
+        if (
+            $request->input('sortBy') !== null &&
+            $request->input('sortDirection') == null
+        ) {
             $products->orderBy($request->input('sortBy'), 'desc');
         }
-        if ($request->input('sortBy') !== null && $request->input('sortDirection') !== null) {
-            $products->orderBy($request->input('sortBy'), $request->input('sortDirection'));
+        if (
+            $request->input('sortBy') !== null &&
+            $request->input('sortDirection') !== null
+        ) {
+            $products->orderBy(
+                $request->input('sortBy'),
+                $request->input('sortDirection')
+            );
         }
 
         if ($request->input('s') !== null) {
             $products->where('name', 'ILIKE', '%' . $request->input('s') . '%');
-            $totalProducts->where('name', 'ILIKE', '%' . $request->input('s') . '%');
+            $totalProducts->where(
+                'name',
+                'ILIKE',
+                '%' . $request->input('s') . '%'
+            );
         }
         if ($request->input('showDeleted') == 'true') {
             $products->withTrashed();
@@ -883,11 +1040,11 @@ class APIResponse extends Model
 
     public function editProduct($request, $id)
     {
-
-        if($request->input('undelete') != null) {
-            $item = \App\Product::where('id', '=', $id)->withTrashed()->first();
-        }
-        else {
+        if ($request->input('undelete') != null) {
+            $item = \App\Product::where('id', '=', $id)
+                ->withTrashed()
+                ->first();
+        } else {
             $item = \App\Product::where('id', '=', $id)->first();
         }
         $schema = $item->schema();
@@ -895,18 +1052,18 @@ class APIResponse extends Model
         $response = [];
 
         $tags = json_decode($request->input('tags'));
-        if($tags !== null){
-            foreach($tags as $action => $tag) {
-                if($action == 'add') {
+        if ($tags !== null) {
+            foreach ($tags as $action => $tag) {
+                if ($action == 'add') {
                     $item->tag($tag);
                 }
-                if($action == 'untag'){
+                if ($action == 'untag') {
                     $item->untag($tag);
                 }
             }
         }
 
-        if($request->input('undelete') == 'true'){
+        if ($request->input('undelete') == 'true') {
             $item->restore();
             $item->status = 'INACTIVE';
             $item->save();
@@ -918,7 +1075,12 @@ class APIResponse extends Model
             return $response;
         }
 
-        if ($jsonInput == null && $request->input('title') == null && $request->input('slug') == null && $request->input('status') == null) {
+        if (
+            $jsonInput == null &&
+            $request->input('title') == null &&
+            $request->input('slug') == null &&
+            $request->input('status') == null
+        ) {
             $response["status"] = "pending";
             $response["message"] = "No input.";
             $response['data'] = null;
@@ -926,34 +1088,58 @@ class APIResponse extends Model
         }
         $newArray = [];
         $errors = [];
-        if($jsonInput !== null) {
+        if ($jsonInput !== null) {
             foreach ($jsonInput as $field => $value) {
                 if (strpos($field, '.') !== false) {
                     $arrayIndexes = explode(".", $field);
                 }
-                $schemaFieldDefinition = (get_array_value(json_decode(json_encode($schema),TRUE), $arrayIndexes));
+                $schemaFieldDefinition = get_array_value(
+                    json_decode(json_encode($schema), true),
+                    $arrayIndexes
+                );
 
-                if($schemaFieldDefinition == false){
+                if ($schemaFieldDefinition == false) {
                     $schemaFieldDefinition = [];
                 }
 
-                $hasvalidations = array_key_exists("validations", $schemaFieldDefinition);
+                $hasvalidations = array_key_exists(
+                    "validations",
+                    $schemaFieldDefinition
+                );
                 if ($hasvalidations) {
                     $validations = $schemaFieldDefinition["validations"];
-                    $validationParameters = convertSchemaToValidationArray($field, $validations);
+                    $validationParameters = convertSchemaToValidationArray(
+                        $field,
+                        $validations
+                    );
                     $input = [strtolower($field) => $value];
-                    $validator = \Validator::make($input, $validationParameters);
-                    $newArray[] = ['json->' . convertDotsToArrows($field), $value];
-                    $response['data']['fields'][$field]['valid'] = $validator->passes();
-                    $response['data']['fields'][$field]['errors'] = $validator->errors($field);
-                    $response['data']['fields'][$field]['first_error'] = $validator->errors($field)->first();
+                    $validator = \Validator::make(
+                        $input,
+                        $validationParameters
+                    );
+                    $newArray[] = [
+                        'json->' . convertDotsToArrows($field),
+                        $value
+                    ];
+                    $response['data']['fields'][$field][
+                        'valid'
+                    ] = $validator->passes();
+                    $response['data']['fields'][$field][
+                        'errors'
+                    ] = $validator->errors($field);
+                    $response['data']['fields'][$field][
+                        'first_error'
+                    ] = $validator->errors($field)->first();
                     foreach ($response['data']['fields'] as $field => $result) {
                         if ($result['valid'] == false) {
                             $errors[$field] = "Error";
                         }
                     }
                 } else {
-                    $newArray[] = ['json->' . convertDotsToArrows($field), $value];
+                    $newArray[] = [
+                        'json->' . convertDotsToArrows($field),
+                        $value
+                    ];
                 }
             }
         }
@@ -965,30 +1151,31 @@ class APIResponse extends Model
             $response["message"] = "Validation successful.";
             if ($request->input('save') != null) {
                 foreach ($newArray as $field => $data) {
-                    if($data[1] == 'null' OR $data[1] == '') {
+                    if ($data[1] == 'null' or $data[1] == '') {
                         $data[1] = null;
                     }
                     $item->forceFill([
                         $data[0] => $data[1]
                     ]);
                 }
-                if($request->input('slug') !== null){
+                if ($request->input('slug') !== null) {
                     $item->slug = createSlug($request->input('slug'));
                 }
-                if($request->input('title') !== null){
+                if ($request->input('title') !== null) {
                     $item->name = $request->input('title');
-
                 }
-                if($request->input('status') !== null){
-                    if(strtolower($request->input('status')) == 'active' OR strtolower($request->input('status')) == 'inactive') {
+                if ($request->input('status') !== null) {
+                    if (
+                        strtolower($request->input('status')) == 'active' or
+                        strtolower($request->input('status')) == 'inactive'
+                    ) {
                         $item->status = strtoupper($request->input('status'));
                     }
                 }
 
-                if($request->input('delete') == 'true') {
+                if ($request->input('delete') == 'true') {
                     $item->delete();
-                }
-                else {
+                } else {
                     $item->save();
                 }
 
@@ -1000,17 +1187,19 @@ class APIResponse extends Model
         return $response;
     }
 
-    public function newProduct($request){
-
-        if($request->input('name') != null ) {
+    public function newProduct($request)
+    {
+        if ($request->input('name') != null) {
             $name = $request->input('name');
         }
-        if($request->input('type') == 'service' OR $request->input('type') == 'good' ) {
+        if (
+            $request->input('type') == 'service' or
+            $request->input('type') == 'good'
+        ) {
             $type = $request->input('type');
         }
 
-        if(isset($type) && isset($name)) {
-
+        if (isset($type) && isset($name)) {
             \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
             $product = \Stripe\Product::create(array(
                 "name" => $name,
@@ -1020,11 +1209,19 @@ class APIResponse extends Model
             ));
             $record = new \App\Product();
             $record->stripe_id = $product->id;
-            if($type == 'good'){
-                $record->json = json_encode( ["sections" => ["about" => ["fields" => ["type" => 'Physical Product']]]] );
+            if ($type == 'good') {
+                $record->json = json_encode([
+                    "sections" => [
+                        "about" => ["fields" => ["type" => 'Physical Product']]
+                    ]
+                ]);
             }
-            if($type == 'service'){
-                $record->json = json_encode( ["sections" => ["about" => ["fields" => ["type" => 'Service']]]] );
+            if ($type == 'service') {
+                $record->json = json_encode([
+                    "sections" => [
+                        "about" => ["fields" => ["type" => 'Service']]
+                    ]
+                ]);
             }
             $record->name = $request->input("name");
             $record->remote_data = json_encode($product);
@@ -1033,26 +1230,26 @@ class APIResponse extends Model
 
             $response = [];
             $response['status'] = 'success';
-            $response['data']['url'] = ("/api/products/view/$record->id");
-        }
-        else {
+            $response['data']['url'] = "/api/products/view/$record->id";
+        } else {
             $response = [];
             $response['status'] = 'error';
-            $response['message'] = 'Something went wrong. Product was not created.';
+            $response['message'] =
+                'Something went wrong. Product was not created.';
         }
         return $response;
     }
 
-
     public function getRandomPageVariation($request, $slug)
     {
-        $page = Page::where('slug', '=', $slug)->where('status', '=', 'ACTIVE')->firstOrFail();
+        $page = Page::where('slug', '=', $slug)
+            ->where('status', '=', 'ACTIVE')
+            ->firstOrFail();
         if ($page !== null) {
             $versions = json_decode($page->json, true)['versions'];
             $random = $versions[rand(1, count($versions))];
             $page->json = $random;
-            return response()
-                ->json($page);
+            return response()->json($page);
         }
     }
 
@@ -1075,36 +1272,40 @@ class APIResponse extends Model
 
     public function validateInput($request, $id)
     {
-
-        if($request->input('undelete') == 'true' && $request->input('save') == 'true') {
+        if (
+            $request->input('undelete') == 'true' &&
+            $request->input('save') == 'true'
+        ) {
             $item = \App\Post::withTrashed()->find($id);
             $item->restore();
             $item->save();
-        }
-        else {
+        } else {
             $item = \App\Post::where('id', '=', $id)->first();
         }
-
 
         $schema = json_decode($item->postType()->json, true);
         $jsonInput = json_decode($request->input('json'), true);
         $response = [];
 
-
-
         $tags = json_decode($request->input('tags'));
-        if($tags !== null){
-            foreach($tags as $action => $tag) {
-                if($action == 'add') {
+        if ($tags !== null) {
+            foreach ($tags as $action => $tag) {
+                if ($action == 'add') {
                     $item->tag($tag);
                 }
-                if($action == 'untag'){
+                if ($action == 'untag') {
                     $item->untag($tag);
                 }
             }
         }
 
-        if ($jsonInput == null && $request->input('title') == null && $request->input('slug') == null && $request->input('status') == null && $request->input('delete') == null) {
+        if (
+            $jsonInput == null &&
+            $request->input('title') == null &&
+            $request->input('slug') == null &&
+            $request->input('status') == null &&
+            $request->input('delete') == null
+        ) {
             $response["status"] = "pending";
             $response["message"] = "No input.";
             $response['data'] = null;
@@ -1112,33 +1313,57 @@ class APIResponse extends Model
         }
         $newArray = [];
         $errors = [];
-        if($jsonInput !== null) {
+        if ($jsonInput !== null) {
             foreach ($jsonInput as $field => $value) {
                 if (strpos($field, '.') !== false) {
                     $arrayIndexes = explode(".", $field);
                 }
-                $schemaFieldDefinition = (get_array_value($schema, $arrayIndexes));
-                if($schemaFieldDefinition == false){
+                $schemaFieldDefinition = get_array_value(
+                    $schema,
+                    $arrayIndexes
+                );
+                if ($schemaFieldDefinition == false) {
                     $schemaFieldDefinition = [];
                 }
 
-                $hasvalidations = array_key_exists("validations", $schemaFieldDefinition);
+                $hasvalidations = array_key_exists(
+                    "validations",
+                    $schemaFieldDefinition
+                );
                 if ($hasvalidations) {
                     $validations = $schemaFieldDefinition["validations"];
-                    $validationParameters = convertSchemaToValidationArray($field, $validations);
+                    $validationParameters = convertSchemaToValidationArray(
+                        $field,
+                        $validations
+                    );
                     $input = [strtolower($field) => $value];
-                    $validator = \Validator::make($input, $validationParameters);
-                    $newArray[] = ['json->' . convertDotsToArrows($field), $value];
-                    $response['data']['fields'][$field]['valid'] = $validator->passes();
-                    $response['data']['fields'][$field]['errors'] = $validator->errors($field);
-                    $response['data']['fields'][$field]['first_error'] = $validator->errors($field)->first();
+                    $validator = \Validator::make(
+                        $input,
+                        $validationParameters
+                    );
+                    $newArray[] = [
+                        'json->' . convertDotsToArrows($field),
+                        $value
+                    ];
+                    $response['data']['fields'][$field][
+                        'valid'
+                    ] = $validator->passes();
+                    $response['data']['fields'][$field][
+                        'errors'
+                    ] = $validator->errors($field);
+                    $response['data']['fields'][$field][
+                        'first_error'
+                    ] = $validator->errors($field)->first();
                     foreach ($response['data']['fields'] as $field => $result) {
                         if ($result['valid'] == false) {
                             $errors[$field] = "Error";
                         }
                     }
                 } else {
-                    $newArray[] = ['json->' . convertDotsToArrows($field), $value];
+                    $newArray[] = [
+                        'json->' . convertDotsToArrows($field),
+                        $value
+                    ];
                 }
             }
         }
@@ -1154,24 +1379,26 @@ class APIResponse extends Model
                         $data[0] => $data[1]
                     ]);
                 }
-                if($request->input('slug') !== null){
+                if ($request->input('slug') !== null) {
                     $item->slug = createSlug($request->input('slug'));
                 }
-                if($request->input('title') !== null){
+                if ($request->input('title') !== null) {
                     $item->title = $request->input('title');
                 }
-                if($request->input('status') !== null){
-                    if(strtolower($request->input('status')) == 'published' OR strtolower($request->input('status')) == 'pending' OR strtolower($request->input('status')) == 'private') {
+                if ($request->input('status') !== null) {
+                    if (
+                        strtolower($request->input('status')) == 'published' or
+                        strtolower($request->input('status')) == 'pending' or
+                        strtolower($request->input('status')) == 'private'
+                    ) {
                         $item->status = strtoupper($request->input('status'));
                     }
                 }
-                if($request->input('delete') == 'true') {
+                if ($request->input('delete') == 'true') {
                     $item->delete();
-                }
-                else {
+                } else {
                     $item->save();
                 }
-
 
                 $response["message"] = "Input saved.";
             }

@@ -14,7 +14,11 @@ class MakeTableNameNullableInPermissionsTable extends Migration
     public function up()
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->string('table_name')->nullable()->default(null)->change();
+            $table
+                ->string('table_name')
+                ->nullable()
+                ->default(null)
+                ->change();
         });
     }
 

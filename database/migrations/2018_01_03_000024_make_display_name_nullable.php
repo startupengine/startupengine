@@ -14,7 +14,11 @@ class MakeDisplayNameNullable extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->text('display_name')->nullable()->default(null)->change();
+            $table
+                ->text('display_name')
+                ->nullable()
+                ->default(null)
+                ->change();
         });
     }
 

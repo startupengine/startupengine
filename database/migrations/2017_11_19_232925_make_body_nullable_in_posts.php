@@ -15,7 +15,11 @@ class MakeBodyNullableInPosts extends Migration
     {
         if (Schema::hasColumn('posts', 'body')) {
             Schema::table('posts', function (Blueprint $table) {
-                $table->text('body')->nullable()->default(null)->change();
+                $table
+                    ->text('body')
+                    ->nullable()
+                    ->default(null)
+                    ->change();
             });
         }
     }

@@ -8,29 +8,30 @@ class ResourceTransformationController extends Controller
 {
     public function add(Request $request, $type, $id)
     {
-
         try {
             if (isResource($type)) {
                 $type = pathToModel($type);
                 $name = "\\App\\$type";
-                $model = new $name;
+                $model = new $name();
                 $primaryKey = $model->getKeyName();
-                $this->resourceName = "\\App\\Http\\Resources\\" . ucfirst($type);
+                $this->resourceName =
+                    "\\App\\Http\\Resources\\" . ucfirst($type);
                 try {
                     $result = $name::where($primaryKey, '=', $id)->first();
                     //dd($result->details());
-                    if($result == null){
+                    if ($result == null) {
                         return jsonErrorMessage('Item not found.');
                     }
-                }
-                catch(\Exception $e){
+                } catch (\Exception $e) {
                     report($e);
                     return jsonErrorMessage('Item not found.');
                 }
                 try {
                     $resource = collect([$result]);
                     $resource->transform(function ($item, $key) {
-                        $transformation = app('request')->input('transformation');
+                        $transformation = app('request')->input(
+                            'transformation'
+                        );
                         $action = app('request')->input('action');
                         if ($transformation != null) {
                             if ($action != null) {
@@ -45,9 +46,7 @@ class ResourceTransformationController extends Controller
                             abort(500);
                         }
                     });
-                }
-                catch(\Exception $e){
-
+                } catch (\Exception $e) {
                     report($e);
                     return jsonErrorMessage('Action failed.');
                 }
@@ -56,19 +55,18 @@ class ResourceTransformationController extends Controller
 
                 $response = [
                     'meta' => [
-                        'status' => 'success',
+                        'status' => 'success'
                     ],
-                    'links' => [
-                        $result->links()
-                    ],
+                    'links' => [$result->links()],
                     'errors' => [],
                     'data' => $jsonResponse[0]
                 ];
 
                 return response()->json($response);
-            } else abort(404);
-        }
-        catch(\Exception $e){
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
             report($e);
             dd($e);
 

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -137,7 +136,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -165,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
 
-
         /*
          * Package Service Providers...
          */
@@ -186,8 +183,7 @@ return [
         App\Providers\HorizonServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
-
+        Laravel\Passport\PassportServiceProvider::class
     ],
 
     /*
@@ -202,9 +198,7 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
-        'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
@@ -234,12 +228,11 @@ return [
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
-        'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Module' => Caffeinated\Modules\Facades\Module::class,
-        'Avatar'    => Laravolt\Avatar\Facade::class,
+        'Avatar' => Laravolt\Avatar\Facade::class
     ],
 
     /*
@@ -251,11 +244,13 @@ return [
     |
     */
 
-    'template_git_repository' => env('TEMPLATE_GIT_REPOSITORY', 'Startup-Engine-Template'),
+    'template_git_repository' => env(
+        'TEMPLATE_GIT_REPOSITORY',
+        'Startup-Engine-Template'
+    ),
     'template_git_username' => env('TEMPLATE_GIT_USERNAME', 'luckyrabbitllc'),
     'template_git_password' => env('TEMPLATE_GIT_PASSWORD', null),
     'template_git_branch' => env('TEMPLATE_GIT_BRANCH', 'master'),
     'github_username' => env('GITHUB_USERNAME', null),
-    'github_password' => env('GITHUB_PASSWORD', null),
-
+    'github_password' => env('GITHUB_PASSWORD', null)
 ];

@@ -24,10 +24,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['password', 'password_confirmation'];
 
     /**
      * Report or log an exception.
@@ -51,14 +48,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
         $currentUrl = $request->url();
         $baseApiUrl = \App::make('url')->to('/api/resources');
         $isJson = strpos($currentUrl, $baseApiUrl) !== false;
 
         $stackTrace = $request->input('stackTrace');
 
-        if ($request->wantsJson() OR $request->expectsJson() OR $isJson && $stackTrace != true) {
+        if (
+            $request->wantsJson() or
+            $request->expectsJson() or
+            $isJson && $stackTrace != true
+        ) {
             return $this->jsonResponse($exception);
             //return $this->jsonResponse($exception);
         }

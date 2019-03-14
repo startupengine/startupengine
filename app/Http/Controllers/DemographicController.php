@@ -5,50 +5,56 @@ namespace App\Http\Controllers;
 use App\Subreddit;
 use Illuminate\Http\Request;
 
-
 class DemographicController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $user = \Auth::user();
-        if($user && $user->hasPermissionTo('view backend')) {
+        if ($user && $user->hasPermissionTo('view backend')) {
             return view('app.demographics.index');
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function addDemographic(Request $request) {
+    public function addDemographic(Request $request)
+    {
         $user = \Auth::user();
-        if($user && $user->hasPermissionTo('view backend')) {
+        if ($user && $user->hasPermissionTo('view backend')) {
             return view('app.demographics.add');
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function editDemographic(Request $request, $id) {
+    public function editDemographic(Request $request, $id)
+    {
         $user = \Auth::user();
-        if($user && $user->hasPermissionTo('view backend')) {
+        if ($user && $user->hasPermissionTo('view backend')) {
             $demo = \App\Demographic::where('id', '=', $id)->firstOrFail();
             return view('app.demographics.edit')->with('demographic', $demo);
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function saveDemographic(Request $request) {
+    public function saveDemographic(Request $request)
+    {
         $user = \Auth::user();
-        if($user && $user->hasPermissionTo('view backend')) {
+        if ($user && $user->hasPermissionTo('view backend')) {
             $name = $request->input('name');
             $description = $request->input('description');
-            $json = json_encode(["subreddits" => $request->input('subreddits')]);
+            $json = json_encode([
+                "subreddits" => $request->input('subreddits')
+            ]);
 
-            foreach($request->input('subreddits') as $subreddit) {
-                $existing = \App\SocialChannel::where('slug', '=', $subreddit)->first();
-                if($existing == null) {
+            foreach ($request->input('subreddits') as $subreddit) {
+                $existing = \App\SocialChannel::where(
+                    'slug',
+                    '=',
+                    $subreddit
+                )->first();
+                if ($existing == null) {
                     $new = new \App\SocialChannel();
                     $new->slug = $subreddit;
                     $new->platform = "reddit";
@@ -56,10 +62,9 @@ class DemographicController extends Controller
                 }
             }
 
-            if($request->input('id') !== null) {
+            if ($request->input('id') !== null) {
                 $demo = \App\Demographic::find($request->input('id'));
-            }
-            else {
+            } else {
                 $demo = new \App\Demographic();
             }
             $demo->name = $name;
@@ -67,21 +72,21 @@ class DemographicController extends Controller
             $demo->json = $json;
             $demo->save();
             return view('app.demographics.index');
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function deleteDemographic(Request $request, $id) {
-        if(\Auth::user()->hasPermissionTo('edit users')) {
-            if($id !== null ){
+    public function deleteDemographic(Request $request, $id)
+    {
+        if (\Auth::user()->hasPermissionTo('edit users')) {
+            if ($id !== null) {
                 $demo = \App\Demographic::find($id);
                 $demo->delete();
             }
             return redirect('/app/demographics');
+        } else {
+            abort(500);
         }
-        else { abort(500); }
     }
-
 }

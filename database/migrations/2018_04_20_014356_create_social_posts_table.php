@@ -21,7 +21,15 @@ class CreateSocialPostsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('platform_id')->nullable();
             $table->timestamp('published_at')->nullable();
-            $table->enum('status', ['PUBLISHED', 'PENDING', 'APPROVED', 'UNPUBLISHED'])->default('UNPUBLISHED')->nullable();
+            $table
+                ->enum('status', [
+                    'PUBLISHED',
+                    'PENDING',
+                    'APPROVED',
+                    'UNPUBLISHED'
+                ])
+                ->default('UNPUBLISHED')
+                ->nullable();
         });
     }
 

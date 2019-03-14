@@ -8,13 +8,26 @@ use App\Role;
 
 class PackageController extends Controller
 {
-
     public function index(Request $request)
     {
         if ($request->input('s') !== null) {
-            $packages = \App\Package::where('url', 'ILIKE', '%' . $request->input('s') . '%')->orWhere('description', 'ILIKE', '%' . $request->input('s') . '%')->limit(100)->orderBy('updated_at', 'desc')->get();
+            $packages = \App\Package::where(
+                'url',
+                'ILIKE',
+                '%' . $request->input('s') . '%'
+            )
+                ->orWhere(
+                    'description',
+                    'ILIKE',
+                    '%' . $request->input('s') . '%'
+                )
+                ->limit(100)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         } else {
-            $packages = \App\Package::limit(100)->orderBy('updated_at', 'desc')->get();
+            $packages = \App\Package::limit(100)
+                ->orderBy('updated_at', 'desc')
+                ->get();
         }
         return view('app.packages.index')->with('packages', $packages);
     }

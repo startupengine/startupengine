@@ -55,19 +55,23 @@ class SyncSchema extends Command
 
         //Inject Post Type Schema
         if (Schema::hasTable('post_types')) {
-
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
             $schemas = $json->schemas;
 
             foreach ($schemas as $schema) {
-                $schemapath = $themepath . '/templates/' . $schema . '/schema.json';
-                if (file_exists($themepath . '/templates/' . $schema . '/schema.json')) {
+                $schemapath =
+                    $themepath . '/templates/' . $schema . '/schema.json';
+                if (
+                    file_exists(
+                        $themepath . '/templates/' . $schema . '/schema.json'
+                    )
+                ) {
                     $contents = json_decode(file_get_contents($schemapath));
                     $entry = PostType::where('slug', '=', $schema)->first();
                     if ($entry == null) {
                         $entry = new \App\PostType();
                     }
-                    if ($entry == null OR $mode == 'reset') {
+                    if ($entry == null or $mode == 'reset') {
                         $entry->json = json_encode($contents);
                         $entry->slug = $schema;
                         $entry->title = $contents->title;
@@ -80,7 +84,10 @@ class SyncSchema extends Command
 
         $file = new Filesystem();
         File::deleteDirectory($themepath . "/templates/$slug");
-        $file->moveDirectory($temppath . "/templates/$slug", $themepath . "/templates/$slug");
+        $file->moveDirectory(
+            $temppath . "/templates/$slug",
+            $themepath . "/templates/$slug"
+        );
         File::deleteDirectory($temppath);
     }
 }

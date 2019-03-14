@@ -19,7 +19,7 @@ class CssController extends Controller
 
     public function view($file)
     {
-        $path = resource_path().'/views/styles/'.$file;
+        $path = resource_path() . '/views/styles/' . $file;
         $contents = file_get_contents($path);
         $response = Response::make($contents, 200);
         $response->header('Content-Type', 'text/css');

@@ -19,16 +19,50 @@ class AnalyticEvent extends Model
      * @var array
      */
     protected $hidden = [
-        'id', "segments", "decoded_path", 'cookies', "encodings", "base_path", "user_id", "client_ips", "languages", "script_name", "fingerprint", "headers", "input", "content", "attributes", "user_email", "user_name", "server", "instance", "json", "scheme_and_host", "query_string", "full_url", "deleted_at", "user_agent", "updated_at", "scheme", "request_uri", "session", "session_id", "client_ip", "client_locale", "event_data"
+        'id',
+        "segments",
+        "decoded_path",
+        'cookies',
+        "encodings",
+        "base_path",
+        "user_id",
+        "client_ips",
+        "languages",
+        "script_name",
+        "fingerprint",
+        "headers",
+        "input",
+        "content",
+        "attributes",
+        "user_email",
+        "user_name",
+        "server",
+        "instance",
+        "json",
+        "scheme_and_host",
+        "query_string",
+        "full_url",
+        "deleted_at",
+        "user_agent",
+        "updated_at",
+        "scheme",
+        "request_uri",
+        "session",
+        "session_id",
+        "client_ip",
+        "client_locale",
+        "event_data"
     ];
 
     //protected $casts = ['created_at' => 'string'];
 
-    public function amount(){
+    public function amount()
+    {
         return json_decode($this->event_data)->amount;
     }
 
-    public function createFromRequest(Request $request){
+    public function createFromRequest(Request $request)
+    {
         $this->instance = json_encode($request->instance());
         $this->server = json_encode($request->server);
         $this->segments = json_encode($request->segments());
@@ -85,8 +119,11 @@ class AnalyticEvent extends Model
 
     public function occurrences($days = 30)
     {
-        $occurrences = \App\AnalyticEvent::where('created_at', '>=', \Carbon\Carbon::now()->subDays($days))->get();
+        $occurrences = \App\AnalyticEvent::where(
+            'created_at',
+            '>=',
+            \Carbon\Carbon::now()->subDays($days)
+        )->get();
         return $occurrences;
     }
-
 }

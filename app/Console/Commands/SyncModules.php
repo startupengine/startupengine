@@ -40,9 +40,13 @@ class SyncModules extends Command
     public function handle()
     {
         $modules = Module::all();
-        foreach($modules as $module){
-            $current = \App\Module::where('slug', '=', $module['slug'])->first();
-            if($current == null) {
+        foreach ($modules as $module) {
+            $current = \App\Module::where(
+                'slug',
+                '=',
+                $module['slug']
+            )->first();
+            if ($current == null) {
                 $newmodule = new \App\Module();
                 $newmodule->slug = $module['slug'];
                 $newmodule->save();

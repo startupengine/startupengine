@@ -23,16 +23,19 @@ class UserController extends Controller
             'index_uri' => '/admin/users',
             'buttons' => [
                 "top_nav" => [
-                    "Preferences" =>[
+                    "Preferences" => [
                         "class" => "btn-dark",
-                        "text" => "<i class='material-icons'>list_alt</i> View Preferences",
+                        "text" =>
+                            "<i class='material-icons'>list_alt</i> View Preferences",
                         "link" => "/admin/users/$item->id/preferences"
                     ]
                 ]
             ]
         ];
 
-        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+        return view('admin.components.resource_view')
+            ->with('item', $item)
+            ->with('options', $options);
     }
 
     public function newUser()
@@ -43,13 +46,17 @@ class UserController extends Controller
     public function viewUser($id)
     {
         $user = User::where('id', '=', $id)->firstOrFail();
-        return view('app.profile.view')->with('user', $user)->with('disabled', 'disabled');
+        return view('app.profile.view')
+            ->with('user', $user)
+            ->with('disabled', 'disabled');
     }
 
     public function editUser($id)
     {
         $user = User::where('id', '=', $id)->firstOrFail();
-        return view('app.profile.edit')->with('user', $user)->with('disabled', null);
+        return view('app.profile.edit')
+            ->with('user', $user)
+            ->with('disabled', null);
     }
 
     public function deleteUser($id)
@@ -59,12 +66,14 @@ class UserController extends Controller
         return redirect('/app/users');
     }
 
-
     public function saveUser(Request $request)
     {
-
         if ($request->input('user_id') !== null) {
-            $user = User::where('id', '=', $request->input('user_id'))->firstOrFail();
+            $user = User::where(
+                'id',
+                '=',
+                $request->input('user_id')
+            )->firstOrFail();
         } else {
             $user = new User();
         }
@@ -80,7 +89,11 @@ class UserController extends Controller
         if ($request->input('status') !== null) {
             $user->status = $request->input('status');
         }
-        if ($request->input('password') !== null && $request->input('confirm_password') !== null && $request->input('password') == $request->input('confirm_password')) {
+        if (
+            $request->input('password') !== null &&
+            $request->input('confirm_password') !== null &&
+            $request->input('password') == $request->input('confirm_password')
+        ) {
             $user->password = bcrypt($request->input('password'));
         }
         if ($user->password == null) {
@@ -96,6 +109,5 @@ class UserController extends Controller
         }
         $user->save();
         return redirect('/app/users');
-
     }
 }

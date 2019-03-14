@@ -15,7 +15,10 @@ class AddStripeFieldsToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('stripe_id')->nullable();
-            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('INACTIVE')->nullable();
+            $table
+                ->enum('status', ['ACTIVE', 'INACTIVE'])
+                ->default('INACTIVE')
+                ->nullable();
         });
     }
 

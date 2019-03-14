@@ -22,7 +22,10 @@ class CreatePlansTable extends Migration
             $table->text('description')->nullable();
             $table->text('image')->nullable();
             $table->string('stripe_id')->nullable();
-            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('INACTIVE')->nullable();
+            $table
+                ->enum('status', ['ACTIVE', 'INACTIVE'])
+                ->default('INACTIVE')
+                ->nullable();
             $table->json('json')->nullable();
         });
     }

@@ -16,29 +16,20 @@ class DropVoyagerPermissions extends Migration
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permission_groups');
 
+        if (Schema::hasColumn('permissions', 'permission_group_id'));
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->dropColumn(['permission_group_id']);
+        });
 
-        if (Schema::hasColumn('permissions', 'permission_group_id')) ;
-        {
-            Schema::table('permissions', function (Blueprint $table) {
-                $table->dropColumn(['permission_group_id']);
-            });
-        }
+        if (Schema::hasColumn('permissions', 'key'));
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->dropColumn(['key']);
+        });
 
-        if (Schema::hasColumn('permissions', 'key')) ;
-        {
-            Schema::table('permissions', function (Blueprint $table) {
-                $table->dropColumn(['key']);
-            });
-        }
-
-        if (Schema::hasColumn('permissions', 'table_name')) ;
-        {
-            Schema::table('permissions', function (Blueprint $table) {
-                $table->dropColumn(['table_name']);
-            });
-        }
-
-
+        if (Schema::hasColumn('permissions', 'table_name'));
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->dropColumn(['table_name']);
+        });
     }
 
     /**
@@ -48,6 +39,5 @@ class DropVoyagerPermissions extends Migration
      */
     public function down()
     {
-
     }
 }

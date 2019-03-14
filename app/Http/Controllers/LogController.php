@@ -6,15 +6,13 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.logs.index');
     }
 
     public function view(Request $request, $id)
     {
-
-
-
         $item = \App\Log::find($id);
         $options = [
             'id' => $item->id,
@@ -25,6 +23,8 @@ class LogController extends Controller
 
         ///dd($options);
 
-        return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
+        return view('admin.components.resource_view')
+            ->with('item', $item)
+            ->with('options', $options);
     }
 }

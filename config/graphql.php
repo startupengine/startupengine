@@ -1,8 +1,6 @@
 <?php
 
-
 return [
-
     /*
      * The prefix for routes
      */
@@ -41,7 +39,7 @@ return [
      *     'mutation' => '\Folklore\GraphQL\GraphQLController@mutation'
      * ]
      */
-    'controllers' => \Folklore\GraphQL\GraphQLController::class.'@query',
+    'controllers' => \Folklore\GraphQL\GraphQLController::class . '@query',
 
     /*
      * The name of the input variable that contain variables when you query the
@@ -59,7 +57,7 @@ return [
      * Any middleware for a specific 'graphql' schema
      */
     'middleware_schema' => [
-        'default' => [],
+        'default' => []
     ],
 
     /*
@@ -79,10 +77,11 @@ return [
      */
     'graphiql' => [
         'routes' => '/graphiql/{graphql_schema?}',
-        'controller' => \Folklore\GraphQL\GraphQLController::class.'@graphiql',
+        'controller' =>
+            \Folklore\GraphQL\GraphQLController::class . '@graphiql',
         'middleware' => [],
         'view' => 'graphql::graphiql',
-        'composer' => \Folklore\GraphQL\View\GraphiQLComposer::class,
+        'composer' => \Folklore\GraphQL\View\GraphiQLComposer::class
     ],
 
     /*
@@ -118,12 +117,8 @@ return [
      */
     'schemas' => [
         'default' => [
-            'query' => [
-
-            ],
-            'mutation' => [
-
-            ]
+            'query' => [],
+            'mutation' => []
         ]
     ],
 
@@ -143,9 +138,7 @@ return [
      *     'App\GraphQL\Type\UserType'
      * ]
      */
-    'types' => [
-
-    ],
+    'types' => [],
 
     /*
      * This callable will receive all the Exception objects that are caught by GraphQL.

@@ -10,7 +10,7 @@ class WebsocketController extends Controller
     public function index(Request $request, AppProvider $apps)
     {
         return view('admin.websockets.index', [
-            'apps' => $apps->all(),
+            'apps' => $apps->all()
         ]);
     }
 }

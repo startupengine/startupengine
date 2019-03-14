@@ -37,11 +37,11 @@ class ContainerCLI extends Command
      */
     public function handle()
     {
-        echo ("\n");
-        echo('To access the container CLI, run:');
-        echo ("\n cd laradock");
-        echo ("\n docker-compose exec php-fpm bash");
-        echo ("\n");
-        echo ("\n");
+        echo "\n";
+        echo 'To access the container CLI, run:';
+        echo "\n cd laradock";
+        echo "\n docker-compose exec php-fpm bash";
+        echo "\n";
+        echo "\n";
     }
 }

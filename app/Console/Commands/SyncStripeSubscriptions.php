@@ -39,34 +39,38 @@ class SyncStripeSubscriptions extends Command
      */
     public function handle()
     {
-
         \Stripe\Stripe::setApiKey(stripeKey('secret'));
 
         $stripeSubscriptions = \Stripe\Subscription::all(['status' => 'all']);
 
-        if($this->verbose == true) {
+        if ($this->verbose == true) {
             echo $stripeSubscriptions->data[0];
         }
 
-        if($stripeSubscriptions != null){
-
-            foreach($stripeSubscriptions->data as $stripeSubscription){
-                $subscription = \App\Subscription::where('stripe_id', $stripeSubscription->id)->first();
-                if($subscription  == null) {
-                    $subscription  = new \App\Subscription();
-                    $subscription ->stripe_id = $stripeSubscription->id;
+        if ($stripeSubscriptions != null) {
+            foreach ($stripeSubscriptions->data as $stripeSubscription) {
+                $subscription = \App\Subscription::where(
+                    'stripe_id',
+                    $stripeSubscription->id
+                )->first();
+                if ($subscription == null) {
+                    $subscription = new \App\Subscription();
+                    $subscription->stripe_id = $stripeSubscription->id;
                 }
                 $subscription->stripe_plan = $stripeSubscription->plan->id;
 
-                if($stripeSubscription->status == 'active'){
+                if ($stripeSubscription->status == 'active') {
                     $subscription->status = 'ACTIVE';
-                }
-                else {
+                } else {
                     $subscription->status = 'INACTIVE';
                 }
-                $user = \App\User::where('stripe_id', '=', $stripeSubscription->customer)->first();
+                $user = \App\User::where(
+                    'stripe_id',
+                    '=',
+                    $stripeSubscription->customer
+                )->first();
 
-                if($user != null) {
+                if ($user != null) {
                     $subscription->user_id = $user->id;
                 }
                 $subscription->save();
@@ -74,7 +78,7 @@ class SyncStripeSubscriptions extends Command
                 $subscription->save();
             }
         }
-        if($this->verbose == true) {
+        if ($this->verbose == true) {
             echo "\nSynced subscriptions from Stripe account.\n\n";
         }
         return null;

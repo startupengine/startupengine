@@ -31,10 +31,7 @@ class CreateLedgersTable extends Migration
             $table->string('signature');
             $table->timestamps();
 
-            $table->index([
-                'user_id',
-                'user_type',
-            ]);
+            $table->index(['user_id', 'user_type']);
         });
     }
 

@@ -12,9 +12,9 @@ return [
 
     'user' => [
         'add_default_role_on_register' => true,
-        'default_role'                 => 'user',
-        'namespace'                    => App\User::class,
-        'default_avatar'               => 'users/default.png',
+        'default_role' => 'user',
+        'namespace' => App\User::class,
+        'default_avatar' => 'users/default.png'
     ],
 
     /*
@@ -27,7 +27,7 @@ return [
     */
 
     'controllers' => [
-        'namespace' => 'App\\Http\\Controllers\\Admin',
+        'namespace' => 'App\\Http\\Controllers\\Admin'
     ],
 
     /*
@@ -66,7 +66,7 @@ return [
     */
 
     'storage' => [
-        'disk' => 'public',
+        'disk' => 'public'
     ],
 
     /*
@@ -91,8 +91,21 @@ return [
 
     'database' => [
         'tables' => [
-            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'permission_role', 'settings', 'translations', 'permission_groups', 'roles', 'permissions',  'menus'],
-        ],
+            'hidden' => [
+                'migrations',
+                'data_rows',
+                'data_types',
+                'menu_items',
+                'password_resets',
+                'permission_role',
+                'settings',
+                'translations',
+                'permission_groups',
+                'roles',
+                'permissions',
+                'menus'
+            ]
+        ]
     ],
 
     /*
@@ -132,9 +145,9 @@ return [
          * Select languages that are supported.
          */
         'locales' => [
-            'en',
+            'en'
             //'pt',
-        ],
+        ]
     ],
 
     /*
@@ -150,27 +163,26 @@ return [
         // Add custom list items to navbar's dropdown
         'navbar_items' => [
             'Profile' => [
-                'route'         => 'voyager.profile',
-                'classes'       => 'class-full-of-rum',
-                'icon_class'    => 'voyager-person',
+                'route' => 'voyager.profile',
+                'classes' => 'class-full-of-rum',
+                'icon_class' => 'voyager-person'
             ],
             'Home' => [
-                'route'         => '/',
-                'icon_class'    => 'voyager-home',
-                'target_blank'  => true,
+                'route' => '/',
+                'icon_class' => 'voyager-home',
+                'target_blank' => true
             ],
             'Logout' => [
-                'route'      => 'voyager.logout',
-                'icon_class' => 'voyager-power',
-            ],
+                'route' => 'voyager.logout',
+                'icon_class' => 'voyager-power'
+            ]
         ],
 
         'widgets' => [
             'TCG\\Voyager\\Widgets\\UserDimmer',
             'TCG\\Voyager\\Widgets\\PostDimmer',
-            'TCG\\Voyager\\Widgets\\PageDimmer',
-        ],
-
+            'TCG\\Voyager\\Widgets\\PageDimmer'
+        ]
     ],
 
     /*
@@ -196,12 +208,11 @@ return [
     ],
 
     'googlemaps' => [
-         'key'    => env('GOOGLE_MAPS_KEY', ''),
-         'center' => [
-             'lat' => env('GOOGLE_MAPS_DEFAULT_CENTER_LAT', '32.715738'),
-             'lng' => env('GOOGLE_MAPS_DEFAULT_CENTER_LNG', '-117.161084'),
-         ],
-         'zoom' => env('GOOGLE_MAPS_DEFAULT_ZOOM', 11),
-     ],
-
+        'key' => env('GOOGLE_MAPS_KEY', ''),
+        'center' => [
+            'lat' => env('GOOGLE_MAPS_DEFAULT_CENTER_LAT', '32.715738'),
+            'lng' => env('GOOGLE_MAPS_DEFAULT_CENTER_LNG', '-117.161084')
+        ],
+        'zoom' => env('GOOGLE_MAPS_DEFAULT_ZOOM', 11)
+    ]
 ];

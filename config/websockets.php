@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * This package comes with multi tenancy out of the box. Here you can
      * configure the different apps that can use the webSockets server.
@@ -16,8 +15,8 @@ return [
             'key' => env('PUSHER_APP_KEY'),
             'secret' => env('PUSHER_APP_SECRET'),
             'enable_client_messages' => false,
-            'enable_statistics' => true,
-        ],
+            'enable_statistics' => true
+        ]
     ],
 
     /*
@@ -27,7 +26,8 @@ return [
      * You can create a custom provider by implementing the
      * `AppProvider` interface.
      */
-    'app_provider' => BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
+    'app_provider' =>
+        BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
 
     /*
      * This array contains the hosts of which you want to allow incoming requests.
@@ -53,7 +53,8 @@ return [
          * The only requirement is that the model should extend
          * `WebSocketsStatisticsEntry` provided by this package.
          */
-        'model' => \BeyondCode\LaravelWebSockets\Statistics\Models\WebSocketsStatisticsEntry::class,
+        'model' =>
+            \BeyondCode\LaravelWebSockets\Statistics\Models\WebSocketsStatisticsEntry::class,
 
         /*
          * Here you can specify the interval in seconds at which statistics should be logged.
@@ -64,7 +65,7 @@ return [
          * When the clean-command is executed, all recorded statistics older than
          * the number of days specified here will be deleted.
          */
-        'delete_statistics_older_than_days' => 60,
+        'delete_statistics_older_than_days' => 60
     ],
 
     /*
@@ -89,6 +90,6 @@ return [
         /*
          * Passphrase for your local_cert file.
          */
-        'passphrase' => null,
-    ],
+        'passphrase' => null
+    ]
 ];

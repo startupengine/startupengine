@@ -14,7 +14,10 @@ class AddControllerToDataTypesTable extends Migration
     public function up()
     {
         Schema::table('data_types', function (Blueprint $table) {
-            $table->string('controller')->nullable()->after('model_name');
+            $table
+                ->string('controller')
+                ->nullable()
+                ->after('model_name');
         });
     }
 

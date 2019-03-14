@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |---------------------------------------------------------------------------
     | Exceptions Codes
@@ -13,36 +12,36 @@ return [
     | array. The `default` code is from not managed exceptions.
     */
     'codes' => [
-        'default'           => 1,
-        'authorization'     => 12,
-        'model_not_found'   => 13,
-        'validation'        => 14,
+        'default' => 1,
+        'authorization' => 12,
+        'model_not_found' => 13,
+        'validation' => 14,
         'validation_fields' => [
             'name' => [
-                'default'   => 141,
-                'required'  => 1411,
-                'string'    => 1412,
+                'default' => 141,
+                'required' => 1411,
+                'string' => 1412
             ],
             'email' => [
-                'default'   => 142,
-                'email'     => 1421,
+                'default' => 142,
+                'email' => 1421
             ],
             'password' => [
-                'default'   => 143,
-                'string'    => 1431,
+                'default' => 143,
+                'string' => 1431,
                 'confirmed' => 1432,
-                'min'       => 1433,
-            ],
+                'min' => 1433
+            ]
         ],
         'not_found_http' => 15,
         'authentication' => 16,
-        'oauth_server'   => 17,
-        'bad_request'    => 18,
-        'client'         => [
+        'oauth_server' => 17,
+        'bad_request' => 18,
+        'client' => [
             'default' => 19,
             'pagarme' => 20,
-            'mailgun' => 21,
-        ],
+            'mailgun' => 21
+        ]
     ],
 
     /*
@@ -53,6 +52,5 @@ return [
     | The http code value to not managed exceptions. Generally the code used is
     | 500 - Internal Server Error.
     */
-    'http_code' => 500,
-
+    'http_code' => 500
 ];

@@ -33,7 +33,15 @@ class CreatePlatformsTable extends Migration
             $table->text('access_key')->nullable();
             $table->text('access_key_description')->nullable();
             $table->text('access_key_name')->nullable();
-            $table->enum('status', ['PUBLISHED', 'PENDING', 'APPROVED', 'UNPUBLISHED'])->default('UNPUBLISHED')->nullable();
+            $table
+                ->enum('status', [
+                    'PUBLISHED',
+                    'PENDING',
+                    'APPROVED',
+                    'UNPUBLISHED'
+                ])
+                ->default('UNPUBLISHED')
+                ->nullable();
         });
     }
 
@@ -46,5 +54,4 @@ class CreatePlatformsTable extends Migration
     {
         Schema::dropIfExists('platforms');
     }
-
 }

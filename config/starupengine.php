@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Deployment Type
@@ -12,6 +11,5 @@ return [
     |
     */
 
-    'deployment_type' => env('APP_DEPLOYMENT_TYPE', 'master'),
-
+    'deployment_type' => env('APP_DEPLOYMENT_TYPE', 'master')
 ];

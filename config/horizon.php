@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Horizon Redis Connection
@@ -14,7 +13,6 @@ return [
     */
 
     'use' => 'default',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +52,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 60,
+        'redis:default' => 60
     ],
 
     /*
@@ -70,7 +68,7 @@ return [
 
     'trim' => [
         'recent' => 60,
-        'failed' => 10080,
+        'failed' => 10080
     ],
 
     /*
@@ -106,8 +104,8 @@ return [
                 'queue' => ['default'],
                 'balance' => 'simple',
                 'processes' => 10,
-                'tries' => 3,
-            ],
+                'tries' => 3
+            ]
         ],
 
         'local' => [
@@ -116,8 +114,8 @@ return [
                 'queue' => ['default'],
                 'balance' => 'simple',
                 'processes' => 3,
-                'tries' => 3,
-            ],
-        ],
-    ],
+                'tries' => 3
+            ]
+        ]
+    ]
 ];

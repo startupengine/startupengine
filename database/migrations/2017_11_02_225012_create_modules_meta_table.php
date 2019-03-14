@@ -16,8 +16,15 @@ class CreateModulesMetaTable extends Migration
         Schema::create('modules_meta', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('module_id')->unsigned()->index();
-            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
+            $table
+                ->integer('module_id')
+                ->unsigned()
+                ->index();
+            $table
+                ->foreign('module_id')
+                ->references('id')
+                ->on('modules')
+                ->onDelete('cascade');
 
             $table->string('type')->default('null');
 
