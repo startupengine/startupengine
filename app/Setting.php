@@ -14,17 +14,19 @@ class Setting extends Model implements \Altek\Accountant\Contracts\Recordable
     protected $fillable = ['value'];
     protected $casts = ['json' => 'json'];
 
-    public function appSettings() {
+    public function appSettings()
+    {
         $settings = \App\Setting::whereIn('key', ['site.title', 'site.description', 'admin.title', 'admin.description', 'site.google_analytics_tracking_id', 'admin.google_analytics_client_id'])
             ->get();
         return $settings;
     }
 
-    public function schema() {
+    public function schema()
+    {
         $path = file_get_contents(storage_path().'/schemas/setting.json');
-        $baseSchema = json_decode($path,  true);
+        $baseSchema = json_decode($path, true);
         $settingSchema = json_decode($this->schema, true);
-        if($settingSchema == null){
+        if ($settingSchema == null) {
             $settingSchema = [];
         }
         $merged = array_merge($baseSchema, $settingSchema);

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use App\Traits\IsApiResource;
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
@@ -95,7 +96,7 @@ class User extends AuthUser implements
 
     public function subscriptions()
     {
-        return $this->hasMany('App\Subscription');
+        return $this->hasMany(\App\Subscription::class);
     }
 
     public function stripeCustomer($source = null)
@@ -105,11 +106,11 @@ class User extends AuthUser implements
             $customer = \Stripe\Customer::retrieve($this->stripe_id);
             return $customer;
         } else {
-            $customer = \Stripe\Customer::create(array(
+            $customer = \Stripe\Customer::create([
                 "description" => "Customer for $this->email",
                 "source" => "$source", // obtained with Stripe.js
                 "email" => $this->email
-            ));
+            ]);
 
             $this->stripe_id = $customer->id;
             $this->save();
@@ -310,7 +311,7 @@ class User extends AuthUser implements
 
     public function resetPassword()
     {
-        $this->password = Hash::make(str_random(11));
+        $this->password = Hash::make(Str::random(11));
         $this->save();
     }
 

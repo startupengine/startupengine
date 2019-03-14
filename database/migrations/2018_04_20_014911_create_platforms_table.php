@@ -46,5 +46,4 @@ class CreatePlatformsTable extends Migration
     {
         Schema::dropIfExists('platforms');
     }
-
 }

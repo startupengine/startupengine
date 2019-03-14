@@ -335,7 +335,7 @@
 
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="my-2">{{ str_replace('_', ' ', ucwords($docFolder)) }}</h5>
-                                            <small class="badge badge-light badge-pill px-3 my-2"><?php echo count(docFiles($docFolder)) .' '.str_plural('Item'); ?></small>
+                                            <small class="badge badge-light badge-pill px-3 my-2"><?php echo count(docFiles($docFolder)) .' '.Str::plural('Item'); ?></small>
                                         </div>
                                         <p class="m-0 pb-2">{!! strip_tags(GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(str_replace('#', '', file_get_contents(docsPath().'/'.$docFolder.'/description.md')))) !!} </p>
                                     </a>

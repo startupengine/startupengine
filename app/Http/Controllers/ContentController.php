@@ -33,5 +33,4 @@ class ContentController extends Controller
 
         return view('admin.components.resource_view')->with('item', $item)->with('options', $options);
     }
-
 }

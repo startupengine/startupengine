@@ -40,7 +40,7 @@ class SyncFromStripe extends Command
     public function handle()
     {
         $type = $this->argument('type');
-        if($type == null){
+        if ($type == null) {
             $type = 'charge';
         }
         echo "\nSyncing $type objects from Stripe.\n";

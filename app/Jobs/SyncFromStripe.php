@@ -39,23 +39,23 @@ class SyncFromStripe implements ShouldQueue
 
         if ($this->type == 'charge') {
             $stripeModel = "\\Stripe\\Charge";
-            $localModel = "\\App\\Payment";
+            $localModel = \App\Payment::class;
         }
         if ($this->type == 'customer') {
             $stripeModel = "\\Stripe\\Customer";
-            $localModel = "\\App\\User";
+            $localModel = \App\User::class;
         }
         if ($this->type == 'product') {
             $stripeModel = "\\Stripe\\Product";
-            $localModel = "\\App\\Product";
+            $localModel = \App\Product::class;
         }
         if ($this->type == 'plan') {
             $stripeModel = "\\Stripe\\Plan";
-            $localModel = "\\App\\Plan";
+            $localModel = \App\Plan::class;
         }
         if ($this->type == 'subscription') {
             $stripeModel = "\\Stripe\\Subscription";
-            $localModel = "\\App\\Subscription";
+            $localModel = \App\Subscription::class;
         }
         if ($this->starting_after == null) {
             $stripeObjects = $stripeModel::all();

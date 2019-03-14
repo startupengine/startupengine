@@ -42,8 +42,7 @@ class AccountController extends Controller
     public function subView($accountView, $subView)
     {
         if (\Auth::user()) {
-            if (
-                in_array($subView, ["view"]) &&
+            if (in_array($subView, ["view"]) &&
                 View::exists("app.account.$accountView.$subView")
             ) {
                 return view("app.account.$accountView.$subView")->with(

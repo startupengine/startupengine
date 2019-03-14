@@ -9,17 +9,20 @@ use Illuminate\Http\Request;
 class APIController extends Controller
 {
 
-    public function getUsers(Request $request) {
+    public function getUsers(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getUsers($request));
     }
 
-    public function getPages(Request $request) {
+    public function getPages(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getPages($request));
     }
 
-    public function getPosts(Request $request) {
+    public function getPosts(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getPosts($request));
     }
@@ -30,48 +33,57 @@ class APIController extends Controller
         return $items->newItem($request);
     }
 
-    public function getProducts(Request $request) {
+    public function getProducts(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getProducts($request));
     }
 
-    public function getProductPlans(Request $request) {
+    public function getProductPlans(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getProductPlans($request));
     }
 
-    public function getProductPlanSchema(Request $request) {
+    public function getProductPlanSchema(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getProductPlanSchema($request));
     }
 
-    public function editProductPlans(Request $request) {
+    public function editProductPlans(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->editProductPlans($request));
     }
 
-    public function getContentModels(Request $request) {
+    public function getContentModels(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getContentModels($request));
     }
 
 
-    public function getStripeProducts(Request $request) {
+    public function getStripeProducts(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getStripeProducts($request));
     }
 
-    public function createProductPlan(Request $request) {
+    public function createProductPlan(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->createProductPlan($request));
     }
 
-    public function getStripePlans(Request $request) {
+    public function getStripePlans(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->getStripePlans($request));
     }
 
-    public function createProduct(Request $request) {
+    public function createProduct(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->createProduct($request));
     }
@@ -94,27 +106,32 @@ class APIController extends Controller
         return $items->newProduct($request);
     }
 
-    public function createSubscription(Request $request) {
+    public function createSubscription(Request $request)
+    {
         $response = new APIResponse();
         return response()->json($response->createSubscription($request));
     }
 
-    public function getInvoices(Request $request, $id) {
+    public function getInvoices(Request $request, $id)
+    {
         $response = new APIResponse();
         return response()->json($response->getInvoices($id));
     }
 
-    public function getEvents($type) {
+    public function getEvents($type)
+    {
         $events = AnalyticEvent::where('event_type', '=', $type)->get();
         return response()->json($events);
     }
 
-    public function getEventsWithKey($type, $key) {
+    public function getEventsWithKey($type, $key)
+    {
         $events = AnalyticEvent::where('event_type', '=', $type)->whereNotNull("event_data->$key")->get();
         return response()->json($events);
     }
 
-    public function getEventsByKeyAndValue($type, $key, $value) {
+    public function getEventsByKeyAndValue($type, $key, $value)
+    {
         $events = AnalyticEvent::where('event_type', '=', $type)->where("event_data->$key", $value)->get();
         return response()->json($events);
     }
@@ -162,11 +179,11 @@ class APIController extends Controller
         $event->languages = json_encode($request->getLanguages());
         $event->script_name = $request->getScriptName();
         $event->event_data = json_encode($request->input('data'));
-        if($request->input('event_type') !== null) {
+        if ($request->input('event_type') !== null) {
             $event->event_type = $request->input('event_type');
         }
         $event->save();
-        if($event !== null) {
+        if ($event !== null) {
             $event->status = 'success';
         }
 
@@ -217,12 +234,14 @@ class APIController extends Controller
         return $items->getItems($request);
     }
 
-    public function editItem(Request $request, $id) {
+    public function editItem(Request $request, $id)
+    {
         $response = new APIResponse();
         return response()->json($response->editItem($request, $id));
     }
 
-    public function validateInput(Request $request, $id) {
+    public function validateInput(Request $request, $id)
+    {
         $response = new APIResponse();
         return response()->json($response->validateInput($request, $id));
     }

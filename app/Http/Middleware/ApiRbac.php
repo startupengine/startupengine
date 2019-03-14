@@ -33,8 +33,7 @@ class ApiRbac
             $type = "\\App\\" . ucwords(pathToModel($type));
             $model = new $type();
 
-            if (
-                method_exists($model, 'schema') &&
+            if (method_exists($model, 'schema') &&
                 $model->schema() != null &&
                 isset($model->schema()->permissions) &&
                 isset($model->schema()->permissions->$action)
@@ -45,8 +44,7 @@ class ApiRbac
                 );
                 $rules = $rules[$action];
 
-                if (
-                    isset($rules['requires_auth']) &&
+                if (isset($rules['requires_auth']) &&
                     $rules['requires_auth'] == true &&
                     \Auth::user() == null
                 ) {
@@ -55,8 +53,7 @@ class ApiRbac
                     );
                 }
 
-                if (
-                    isset($rules['requires_permission']) &&
+                if (isset($rules['requires_permission']) &&
                     \Auth::user() != null
                 ) {
                     foreach ($rules['requires_permission'] as $permission) {
@@ -67,10 +64,9 @@ class ApiRbac
                                 $rules['requires_permission']
                             );
 
-                            if (
-                                \Auth::user()->hasPermissionTo(
-                                    $permission == false
-                                )
+                            if (\Auth::user()->hasPermissionTo(
+                                $permission == false
+                            )
                             ) {
                                 abort(403);
                             }
@@ -80,8 +76,7 @@ class ApiRbac
                     }
                 }
 
-                if (
-                    isset($rules['requires_permission']) &&
+                if (isset($rules['requires_permission']) &&
                     \Auth::user() == null
                 ) {
                     abort(401, 'Permission denied.');

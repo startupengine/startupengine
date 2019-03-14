@@ -13,7 +13,6 @@ class DropVoyagerDataTables extends Migration
      */
     public function up()
     {
-
     }
 
     /**

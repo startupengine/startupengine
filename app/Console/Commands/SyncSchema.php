@@ -55,7 +55,6 @@ class SyncSchema extends Command
 
         //Inject Post Type Schema
         if (Schema::hasTable('post_types')) {
-
             $json = json_decode(file_get_contents($themepath . '/theme.json'));
             $schemas = $json->schemas;
 
@@ -67,7 +66,7 @@ class SyncSchema extends Command
                     if ($entry == null) {
                         $entry = new \App\PostType();
                     }
-                    if ($entry == null OR $mode == 'reset') {
+                    if ($entry == null or $mode == 'reset') {
                         $entry->json = json_encode($contents);
                         $entry->slug = $schema;
                         $entry->title = $contents->title;

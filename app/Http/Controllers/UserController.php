@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
@@ -84,7 +85,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
         if ($user->password == null) {
-            $user->password = Hash::make(str_random(8));
+            $user->password = Hash::make(Str::random(8));
         }
         if ($user->role_id == null) {
             $userrole = Role::where('name', '=', 'user')->first();
@@ -96,6 +97,5 @@ class UserController extends Controller
         }
         $user->save();
         return redirect('/app/users');
-
     }
 }

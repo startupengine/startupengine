@@ -23,7 +23,7 @@ class Log extends JsonResource
         $fields['sequence'] = $this->sequence;
         $fields['type'] = $this->type;
         $fields['should_display_on_index'] = $this->should_display_on_index;
-        if($this->created_at != null) {
+        if ($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();
         }
         $fields = sparseFields($fields, 'log');

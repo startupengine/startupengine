@@ -32,54 +32,55 @@ class Log extends Model
 
 
 
-    public function getIdAttribute(){
+    public function getIdAttribute()
+    {
         //return json_decode(json_encode($this->uuid));
         return $this->getKey();
     }
 
-    public function description(){
-        if($this->type == 'exception') {
+    public function description()
+    {
+        if ($this->type == 'exception') {
             return $this->content['class'];
         }
-        if($this->type == 'cache') {
+        if ($this->type == 'cache') {
             return $this->content['key'];
         }
-        if($this->type == 'query') {
+        if ($this->type == 'query') {
             return $this->content['sql'];
         }
-        if($this->type == 'request') {
+        if ($this->type == 'request') {
             return $this->content['uri'];
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public function searchFields() {
+    public function searchFields()
+    {
         return ['type', 'content'];
     }
 
     public function occurrences($hours = 1)
     {
 
-        if($this->type == 'exception') {
+        if ($this->type == 'exception') {
             $occurrences = \App\Log::where('created_at', '>=', \Carbon\Carbon::now()->subHours($hours))->whereJsonContains('content->class', $this->content['class'])->get();
-        }
-        elseif($this->type == 'cache') {
+        } elseif ($this->type == 'cache') {
             $occurrences = \App\Log::where('created_at', '>=', \Carbon\Carbon::now()->subHours($hours))->whereJsonContains('content->key', $this->content['key'])->get();
-        }
-        elseif($this->type == 'request') {
+        } elseif ($this->type == 'request') {
             $occurrences = \App\Log::where('created_at', '>=', \Carbon\Carbon::now()->subHours($hours))->whereJsonContains('content->uri', $this->content['uri'])->get();
-        }
-        elseif($this->type == 'query') {
+        } elseif ($this->type == 'query') {
             $occurrences = \App\Log::where('created_at', '>=', \Carbon\Carbon::now()->subHours($hours))->whereJsonContains('content->uri', $this->content['sql'])->get();
+        } else {
+            $occurrences = null;
         }
-        else { $occurrences = null; }
 
         return $occurrences;
     }
 
-    public function content(){
+    public function content()
+    {
         return json_decode(json_encode($this->content));
     }
 
