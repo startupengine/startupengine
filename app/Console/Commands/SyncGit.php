@@ -191,7 +191,7 @@ class SyncGit extends Command
                                 if (isset($json->content_types->active)) {
                                     $schemas = $json->content_types->active;
                                     foreach ($schemas
-                                    as $schema => $schemaValue) {
+ as $schema => $schemaValue) {
                                         $schemapath =
                                             $themepath .
                                             '/templates/' .
@@ -251,7 +251,7 @@ class SyncGit extends Command
                                         \Config::get('view.paths')[0] .
                                         '/theme/pages';
                                     foreach (glob($pagepath . "/*")
-                                    as $filename) {
+ as $filename) {
                                         $filename = substr(
                                             $filename,
                                             strrpos($filename, '/') + 1

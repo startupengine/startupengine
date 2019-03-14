@@ -245,7 +245,7 @@ class ResourceController extends Controller
                             'first_error'
                         ] = $validator->errors($field)->first();
                         foreach ($response['data']['fields']
-                        as $field => $result) {
+ as $field => $result) {
                             if ($result['valid'] == false) {
                                 $errors[$field] = "Error";
                             }
@@ -368,7 +368,7 @@ class ResourceController extends Controller
                 $requiredJsonFields = [];
                 foreach ($schema->sections as $key => $sectionContents) {
                     foreach ($sectionContents->fields
-                    as $virtualField => $fieldContents) {
+ as $virtualField => $fieldContents) {
                         if (isset($fieldContents->validations->required)) {
                             $requiredJsonFields[
                                 'json.sections.' .
@@ -463,7 +463,7 @@ class ResourceController extends Controller
                             'first_error'
                         ] = $validator->errors($field)->first();
                         foreach ($response['meta']['fields']
-                        as $field => $result) {
+ as $field => $result) {
                             if ($result['valid'] == false) {
                                 $errors[$field] = "Error";
                             }
