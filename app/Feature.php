@@ -44,7 +44,7 @@ class Feature extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    
 
     /**
      * The "booting" method of the model.

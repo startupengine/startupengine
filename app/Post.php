@@ -47,7 +47,9 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
      *
      * @var array
      */
-    protected $dates = ['deleted_at', 'published_at'];
+    protected $dates = [
+        'published_at'
+    ];
 
     protected $fillable = ['json', 'excerpt'];
 

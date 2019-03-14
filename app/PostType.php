@@ -35,7 +35,9 @@ class PostType extends Model implements
      * @var array
      */
 
-    protected $dates = ['deleted_at', 'published_at'];
+    protected $dates = [
+        'published_at'
+    ];
 
     public function json()
     {
