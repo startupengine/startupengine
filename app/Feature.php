@@ -131,7 +131,7 @@ class Feature extends Model
         } else {
             $endDate = new Carbon();
         }
-        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
+        $views = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
             ->where('event_type', '=', 'content viewed')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

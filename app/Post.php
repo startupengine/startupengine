@@ -159,7 +159,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         if ($this->post_type == null) {
             $this->setType();
         }
-        return $this->hasOne('App\PostType', 'slug', 'post_type');
+        return $this->hasOne(\App\PostType::class, 'slug', 'post_type');
     }
 
     public function excerpt()
@@ -235,7 +235,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'author_id')->withDefault(
+        return $this->hasOne(\App\User::class, 'id', 'author_id')->withDefault(
             function ($user) {
                 $user->id = 'User ID';
             }
@@ -270,7 +270,7 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
         } else {
             $endDate = new Carbon();
         }
-        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
+        $views = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
             ->where('event_type', '=', 'content viewed')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

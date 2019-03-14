@@ -251,7 +251,7 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
         } else {
             $endDate = new Carbon();
         }
-        $purchases = $this->hasMany('App\AnalyticEvent', 'model_id')
+        $purchases = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
             ->where('event_type', '=', 'product purchased')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

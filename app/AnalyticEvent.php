@@ -80,7 +80,7 @@ class AnalyticEvent extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User')->withDefault(function ($user) {
+        return $this->belongsTo(\App\User::class)->withDefault(function ($user) {
             $user->id = 'User ID';
         });
     }

@@ -49,7 +49,7 @@ class PostType extends Model implements
 
     public function posts()
     {
-        return $this->hasMany('App\Post', 'post_type', 'slug');
+        return $this->hasMany(\App\Post::class, 'post_type', 'slug');
     }
 
     public function schema()

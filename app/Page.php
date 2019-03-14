@@ -205,7 +205,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
       dd($views);
       */
         //dd($endDate);
-        $views = $this->hasMany('App\AnalyticEvent', 'model_id')
+        $views = $this->hasMany(\App\AnalyticEvent::class, 'model_id')
             ->where('event_type', '=', 'page viewed')
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate);

@@ -576,7 +576,7 @@ class ResourceController extends Controller
         if ($eventType == null) {
             $eventType = 'page viewed';
         }
-        $name = "\\App\\AnalyticEvent";
+        $name = \App\AnalyticEvent::class;
         $model = new $name();
         $table = $model->getTable();
         //$query = DB::select(DB::raw('SELECT date(created_at), count(id) as TOTAL  FROM '.$table.' GROUP BY date(created_at) ORDER BY date(created_at)')); //Works

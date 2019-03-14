@@ -95,7 +95,7 @@ class User extends AuthUser implements
 
     public function subscriptions()
     {
-        return $this->hasMany('App\Subscription');
+        return $this->hasMany(\App\Subscription::class);
     }
 
     public function stripeCustomer($source = null)
