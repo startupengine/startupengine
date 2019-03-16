@@ -42,7 +42,10 @@ class BundleTest extends TestCase
     {
         $bundle = new GuessedNameBundle();
 
-        $this->assertSame('Symfony\Component\HttpKernel\Tests\Bundle', $bundle->getNamespace());
+        $this->assertSame(
+            'Symfony\Component\HttpKernel\Tests\Bundle',
+            $bundle->getNamespace()
+        );
         $this->assertSame('GuessedNameBundle', $bundle->getName());
     }
 
@@ -51,7 +54,10 @@ class BundleTest extends TestCase
         $bundle = new NamedBundle();
 
         $this->assertSame('ExplicitlyNamedBundle', $bundle->getName());
-        $this->assertSame('Symfony\Component\HttpKernel\Tests\Bundle', $bundle->getNamespace());
+        $this->assertSame(
+            'Symfony\Component\HttpKernel\Tests\Bundle',
+            $bundle->getNamespace()
+        );
         $this->assertSame('ExplicitlyNamedBundle', $bundle->getName());
     }
 }

@@ -24,8 +24,11 @@ class CloneVarDataCollector extends DataCollector
         $this->varToClone = $varToClone;
     }
 
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         $this->data = $this->cloneVar($this->varToClone);
     }
 
