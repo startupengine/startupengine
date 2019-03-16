@@ -13,7 +13,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Transport_FailoverTransport extends Swift_Transport_LoadBalancedTransport
+class Swift_Transport_FailoverTransport extends
+    Swift_Transport_LoadBalancedTransport
 {
     /**
      * Registered transport currently used.
@@ -34,8 +35,11 @@ class Swift_Transport_FailoverTransport extends Swift_Transport_LoadBalancedTran
     public function ping()
     {
         $maxTransports = count($this->transports);
-        for ($i = 0; $i < $maxTransports
-            && $transport = $this->getNextTransport(); ++$i) {
+        for (
+            $i = 0;
+            $i < $maxTransports && ($transport = $this->getNextTransport());
+            ++$i
+        ) {
             if ($transport->ping()) {
                 return true;
             } else {
@@ -56,20 +60,25 @@ class Swift_Transport_FailoverTransport extends Swift_Transport_LoadBalancedTran
      *
      * @return int
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
-    {
+    public function send(
+        Swift_Mime_SimpleMessage $message,
+        &$failedRecipients = null
+    ) {
         $maxTransports = count($this->transports);
         $sent = 0;
         $this->lastUsedTransport = null;
 
-        for ($i = 0; $i < $maxTransports
-            && $transport = $this->getNextTransport(); ++$i) {
+        for (
+            $i = 0;
+            $i < $maxTransports && ($transport = $this->getNextTransport());
+            ++$i
+        ) {
             try {
                 if (!$transport->isStarted()) {
                     $transport->start();
                 }
 
-                if ($sent = $transport->send($message, $failedRecipients)) {
+                if (($sent = $transport->send($message, $failedRecipients))) {
                     $this->lastUsedTransport = $transport;
 
                     return $sent;
@@ -82,7 +91,7 @@ class Swift_Transport_FailoverTransport extends Swift_Transport_LoadBalancedTran
         if (0 == count($this->transports)) {
             throw new Swift_TransportException(
                 'All Transports in FailoverTransport failed, or no Transports available'
-                );
+            );
         }
 
         return $sent;

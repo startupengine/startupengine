@@ -61,8 +61,15 @@ class RequestMatcher implements RequestMatcherInterface
      * @param array                $attributes
      * @param string|string[]|null $schemes
      */
-    public function __construct(string $path = null, string $host = null, $methods = null, $ips = null, array $attributes = [], $schemes = null, int $port = null)
-    {
+    public function __construct(
+        string $path = null,
+        string $host = null,
+        $methods = null,
+        $ips = null,
+        array $attributes = [],
+        $schemes = null,
+        int $port = null
+    ) {
         $this->matchPath($path);
         $this->matchHost($host);
         $this->matchMethod($methods);
@@ -82,7 +89,8 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchScheme($scheme)
     {
-        $this->schemes = null !== $scheme ? array_map('strtolower', (array) $scheme) : [];
+        $this->schemes =
+            null !== $scheme ? array_map('strtolower', (array) $scheme) : [];
     }
 
     /**
@@ -142,7 +150,8 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchMethod($method)
     {
-        $this->methods = null !== $method ? array_map('strtoupper', (array) $method) : [];
+        $this->methods =
+            null !== $method ? array_map('strtoupper', (array) $method) : [];
     }
 
     /**
@@ -161,29 +170,53 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matches(Request $request)
     {
-        if ($this->schemes && !\in_array($request->getScheme(), $this->schemes, true)) {
+        if (
+            $this->schemes &&
+            !\in_array($request->getScheme(), $this->schemes, true)
+        ) {
             return false;
         }
 
-        if ($this->methods && !\in_array($request->getMethod(), $this->methods, true)) {
+        if (
+            $this->methods &&
+            !\in_array($request->getMethod(), $this->methods, true)
+        ) {
             return false;
         }
 
         foreach ($this->attributes as $key => $pattern) {
-            if (!preg_match('{'.$pattern.'}', $request->attributes->get($key))) {
+            if (
+                !preg_match(
+                    '{' . $pattern . '}',
+                    $request->attributes->get($key)
+                )
+            ) {
                 return false;
             }
         }
 
-        if (null !== $this->path && !preg_match('{'.$this->path.'}', rawurldecode($request->getPathInfo()))) {
+        if (
+            null !== $this->path &&
+            !preg_match(
+                '{' . $this->path . '}',
+                rawurldecode($request->getPathInfo())
+            )
+        ) {
             return false;
         }
 
-        if (null !== $this->host && !preg_match('{'.$this->host.'}i', $request->getHost())) {
+        if (
+            null !== $this->host &&
+            !preg_match('{' . $this->host . '}i', $request->getHost())
+        ) {
             return false;
         }
 
-        if (null !== $this->port && 0 < $this->port && $request->getPort() !== $this->port) {
+        if (
+            null !== $this->port &&
+            0 < $this->port &&
+            $request->getPort() !== $this->port
+        ) {
             return false;
         }
 

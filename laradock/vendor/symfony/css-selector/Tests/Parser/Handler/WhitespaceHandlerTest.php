@@ -24,17 +24,13 @@ class WhitespaceHandlerTest extends AbstractHandlerTest
             ["\t", new Token(Token::TYPE_WHITESPACE, "\t", 0), ''],
 
             [' foo', new Token(Token::TYPE_WHITESPACE, ' ', 0), 'foo'],
-            [' .foo', new Token(Token::TYPE_WHITESPACE, ' ', 0), '.foo'],
+            [' .foo', new Token(Token::TYPE_WHITESPACE, ' ', 0), '.foo']
         ];
     }
 
     public function getDontHandleValueTestData()
     {
-        return [
-            ['>'],
-            ['1'],
-            ['a'],
-        ];
+        return [['>'], ['1'], ['a']];
     }
 
     protected function generateHandler()

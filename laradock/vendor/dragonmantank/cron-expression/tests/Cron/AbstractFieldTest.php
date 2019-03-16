@@ -131,8 +131,14 @@ class AbstractFieldTest extends TestCase
     public function testGetRangeForExpressionExpandsCorrectly()
     {
         $f = new HoursField();
-        $this->assertSame([5, 6, 7, 11, 12, 13], $f->getRangeForExpression('5-7,11-13', 23));
-        $this->assertSame(['5', '6', '7', '11', '12', '13'], $f->getRangeForExpression('5,6,7,11,12,13', 23));
+        $this->assertSame(
+            [5, 6, 7, 11, 12, 13],
+            $f->getRangeForExpression('5-7,11-13', 23)
+        );
+        $this->assertSame(
+            ['5', '6', '7', '11', '12', '13'],
+            $f->getRangeForExpression('5,6,7,11,12,13', 23)
+        );
         $this->assertSame([0, 6, 12, 18], $f->getRangeForExpression('*/6', 23));
         $this->assertSame([5, 11], $f->getRangeForExpression('5-13/6', 23));
     }

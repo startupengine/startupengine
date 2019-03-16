@@ -17,7 +17,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_ContentEncoder
+class Swift_Mime_ContentEncoder_PlainContentEncoder implements
+    Swift_Mime_ContentEncoder
 {
     /**
      * The name of this encoding scheme (probably 7bit or 8bit).
@@ -54,8 +55,11 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      *
      * @return string
      */
-    public function encodeString($string, $firstLineOffset = 0, $maxLineLength = 0)
-    {
+    public function encodeString(
+        $string,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    ) {
         if ($this->canonical) {
             $string = $this->canonicalize($string);
         }
@@ -69,11 +73,15 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      * @param int $firstLineOffset ignored
      * @param int $maxLineLength   optional, 0 means no wrapping will occur
      */
-    public function encodeByteStream(Swift_OutputByteStream $os, Swift_InputByteStream $is, $firstLineOffset = 0, $maxLineLength = 0)
-    {
+    public function encodeByteStream(
+        Swift_OutputByteStream $os,
+        Swift_InputByteStream $is,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    ) {
         $leftOver = '';
-        while (false !== $bytes = $os->read(8192)) {
-            $toencode = $leftOver.$bytes;
+        while (false !== ($bytes = $os->read(8192))) {
+            $toencode = $leftOver . $bytes;
             if ($this->canonical) {
                 $toencode = $this->canonicalize($toencode);
             }
@@ -134,8 +142,10 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
             $chunks = preg_split('/(?<=\s)/', $originalLine);
 
             foreach ($chunks as $chunk) {
-                if (0 != strlen($currentLine)
-                    && strlen($currentLine.$chunk) > $length) {
+                if (
+                    0 != strlen($currentLine) &&
+                    strlen($currentLine . $chunk) > $length
+                ) {
                     $lines[] = '';
                     $currentLine = &$lines[$lineCount++];
                 }
@@ -155,10 +165,6 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      */
     private function canonicalize($string)
     {
-        return str_replace(
-            ["\r\n", "\r", "\n"],
-            ["\n", "\n", "\r\n"],
-            $string
-            );
+        return str_replace(["\r\n", "\r", "\n"], ["\n", "\n", "\r\n"], $string);
     }
 }

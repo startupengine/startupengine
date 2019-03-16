@@ -23,7 +23,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RequestDataCollector extends DataCollector implements EventSubscriberInterface, LateDataCollectorInterface
+class RequestDataCollector extends DataCollector implements
+    EventSubscriberInterface,
+    LateDataCollectorInterface
 {
     protected $controllers;
 
@@ -35,8 +37,11 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         // attributes are serialized and as they can be anything, they need to be converted to strings.
         $attributes = [];
         $route = '';
@@ -64,9 +69,17 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         if ($request->hasSession()) {
             $session = $request->getSession();
             if ($session->isStarted()) {
-                $sessionMetadata['Created'] = date(DATE_RFC822, $session->getMetadataBag()->getCreated());
-                $sessionMetadata['Last used'] = date(DATE_RFC822, $session->getMetadataBag()->getLastUsed());
-                $sessionMetadata['Lifetime'] = $session->getMetadataBag()->getLifetime();
+                $sessionMetadata['Created'] = date(
+                    DATE_RFC822,
+                    $session->getMetadataBag()->getCreated()
+                );
+                $sessionMetadata['Last used'] = date(
+                    DATE_RFC822,
+                    $session->getMetadataBag()->getLastUsed()
+                );
+                $sessionMetadata[
+                    'Lifetime'
+                ] = $session->getMetadataBag()->getLifetime();
                 $sessionAttributes = $session->all();
                 $flashes = $session->getFlashBag()->peekAll();
             }
@@ -81,7 +94,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
 
         $dotenvVars = [];
         foreach (explode(',', getenv('SYMFONY_DOTENV_VARS')) as $name) {
-            if ('' !== $name && false !== $value = getenv($name)) {
+            if ('' !== $name && false !== ($value = getenv($name))) {
                 $dotenvVars[$name] = $value;
             }
         }
@@ -90,8 +103,13 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             'method' => $request->getMethod(),
             'format' => $request->getRequestFormat(),
             'content' => $content,
-            'content_type' => $response->headers->get('Content-Type', 'text/html'),
-            'status_text' => isset(Response::$statusTexts[$statusCode]) ? Response::$statusTexts[$statusCode] : '',
+            'content_type' => $response->headers->get(
+                'Content-Type',
+                'text/html'
+            ),
+            'status_text' => isset(Response::$statusTexts[$statusCode])
+                ? Response::$statusTexts[$statusCode]
+                : '',
             'status_code' => $statusCode,
             'request_query' => $request->query->all(),
             'request_request' => $request->request->all(),
@@ -109,7 +127,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             'path_info' => $request->getPathInfo(),
             'controller' => 'n/a',
             'locale' => $request->getLocale(),
-            'dotenv_vars' => $dotenvVars,
+            'dotenv_vars' => $dotenvVars
         ];
 
         if (isset($this->data['request_headers']['php-auth-pw'])) {
@@ -129,40 +147,67 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
                 continue;
             }
             if ('request_headers' === $key || 'response_headers' === $key) {
-                $this->data[$key] = array_map(function ($v) { return isset($v[0]) && !isset($v[1]) ? $v[0] : $v; }, $value);
+                $this->data[$key] = array_map(function ($v) {
+                    return isset($v[0]) && !isset($v[1]) ? $v[0] : $v;
+                }, $value);
             }
         }
 
         if (isset($this->controllers[$request])) {
-            $this->data['controller'] = $this->parseController($this->controllers[$request]);
+            $this->data['controller'] = $this->parseController(
+                $this->controllers[$request]
+            );
             unset($this->controllers[$request]);
         }
 
-        if ($request->attributes->has('_redirected') && $redirectCookie = $request->cookies->get('sf_redirect')) {
+        if (
+            $request->attributes->has('_redirected') &&
+            ($redirectCookie = $request->cookies->get('sf_redirect'))
+        ) {
             $this->data['redirect'] = json_decode($redirectCookie, true);
 
             $response->headers->clearCookie('sf_redirect');
         }
 
         if ($response->isRedirect()) {
-            $response->headers->setCookie(new Cookie(
-                'sf_redirect',
-                json_encode([
-                    'token' => $response->headers->get('x-debug-token'),
-                    'route' => $request->attributes->get('_route', 'n/a'),
-                    'method' => $request->getMethod(),
-                    'controller' => $this->parseController($request->attributes->get('_controller')),
-                    'status_code' => $statusCode,
-                    'status_text' => Response::$statusTexts[(int) $statusCode],
-                ]),
-                0, '/', null, $request->isSecure(), true, false, 'lax'
-            ));
+            $response->headers->setCookie(
+                new Cookie(
+                    'sf_redirect',
+                    json_encode([
+                        'token' => $response->headers->get('x-debug-token'),
+                        'route' => $request->attributes->get('_route', 'n/a'),
+                        'method' => $request->getMethod(),
+                        'controller' => $this->parseController(
+                            $request->attributes->get('_controller')
+                        ),
+                        'status_code' => $statusCode,
+                        'status_text' =>
+                            Response::$statusTexts[(int) $statusCode]
+                    ]),
+                    0,
+                    '/',
+                    null,
+                    $request->isSecure(),
+                    true,
+                    false,
+                    'lax'
+                )
+            );
         }
 
-        $this->data['identifier'] = $this->data['route'] ?: (\is_array($this->data['controller']) ? $this->data['controller']['class'].'::'.$this->data['controller']['method'].'()' : $this->data['controller']);
+        $this->data['identifier'] =
+            $this->data['route'] ?:
+            (\is_array($this->data['controller'])
+                ? $this->data['controller']['class'] .
+                    '::' .
+                    $this->data['controller']['method'] .
+                    '()'
+                : $this->data['controller']);
 
         if ($response->headers->has('x-previous-debug-token')) {
-            $this->data['forward_token'] = $response->headers->get('x-previous-debug-token');
+            $this->data['forward_token'] = $response->headers->get(
+                'x-previous-debug-token'
+            );
         }
     }
 
@@ -308,7 +353,9 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
      */
     public function getRouteParams()
     {
-        return isset($this->data['request_attributes']['_route_params']) ? $this->data['request_attributes']['_route_params']->getValue() : [];
+        return isset($this->data['request_attributes']['_route_params'])
+            ? $this->data['request_attributes']['_route_params']->getValue()
+            : [];
     }
 
     /**
@@ -335,7 +382,9 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
 
     public function getForwardToken()
     {
-        return isset($this->data['forward_token']) ? $this->data['forward_token'] : null;
+        return isset($this->data['forward_token'])
+            ? $this->data['forward_token']
+            : null;
     }
 
     public function onKernelController(FilterControllerEvent $event)
@@ -358,7 +407,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
     {
         return [
             KernelEvents::CONTROLLER => 'onKernelController',
-            KernelEvents::RESPONSE => 'onKernelResponse',
+            KernelEvents::RESPONSE => 'onKernelResponse'
         ];
     }
 
@@ -388,19 +437,23 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
                 $r = new \ReflectionMethod($controller[0], $controller[1]);
 
                 return [
-                    'class' => \is_object($controller[0]) ? \get_class($controller[0]) : $controller[0],
+                    'class' => \is_object($controller[0])
+                        ? \get_class($controller[0])
+                        : $controller[0],
                     'method' => $controller[1],
                     'file' => $r->getFileName(),
-                    'line' => $r->getStartLine(),
+                    'line' => $r->getStartLine()
                 ];
             } catch (\ReflectionException $e) {
                 if (\is_callable($controller)) {
                     // using __call or  __callStatic
                     return [
-                        'class' => \is_object($controller[0]) ? \get_class($controller[0]) : $controller[0],
+                        'class' => \is_object($controller[0])
+                            ? \get_class($controller[0])
+                            : $controller[0],
                         'method' => $controller[1],
                         'file' => 'n/a',
-                        'line' => 'n/a',
+                        'line' => 'n/a'
                     ];
                 }
             }
@@ -413,7 +466,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
                 'class' => $r->getName(),
                 'method' => null,
                 'file' => $r->getFileName(),
-                'line' => $r->getStartLine(),
+                'line' => $r->getStartLine()
             ];
 
             if (false !== strpos($r->name, '{closure}')) {
@@ -421,7 +474,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             }
             $controller['method'] = $r->name;
 
-            if ($class = $r->getClosureScopeClass()) {
+            if (($class = $r->getClosureScopeClass())) {
                 $controller['class'] = $class->name;
             } else {
                 return $r->name;
@@ -437,7 +490,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
                 'class' => $r->getName(),
                 'method' => null,
                 'file' => $r->getFileName(),
-                'line' => $r->getStartLine(),
+                'line' => $r->getStartLine()
             ];
         }
 

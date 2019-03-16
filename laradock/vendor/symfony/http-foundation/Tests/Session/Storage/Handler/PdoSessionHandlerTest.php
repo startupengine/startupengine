@@ -35,7 +35,7 @@ class PdoSessionHandlerTest extends TestCase
     {
         $this->dbFile = tempnam(sys_get_temp_dir(), 'sf_sqlite_sessions');
 
-        return 'sqlite:'.$this->dbFile;
+        return 'sqlite:' . $this->dbFile;
     }
 
     protected function getMemorySqlitePdo()
@@ -64,7 +64,9 @@ class PdoSessionHandlerTest extends TestCase
      */
     public function testInexistentTable()
     {
-        $storage = new PdoSessionHandler($this->getMemorySqlitePdo(), ['db_table' => 'inexistent_table']);
+        $storage = new PdoSessionHandler($this->getMemorySqlitePdo(), [
+            'db_table' => 'inexistent_table'
+        ]);
         $storage->open('', 'sid');
         $storage->read('id');
         $storage->write('id', 'data');
@@ -95,7 +97,11 @@ class PdoSessionHandlerTest extends TestCase
         $storage->open('', 'sid');
         $data = $storage->read('id');
         $storage->close();
-        $this->assertSame('data', $data, 'Written value can be read back correctly');
+        $this->assertSame(
+            'data',
+            $data,
+            'Written value can be read back correctly'
+        );
     }
 
     public function testWithLazySavePathConnection()
@@ -114,24 +120,36 @@ class PdoSessionHandlerTest extends TestCase
         $storage->open($dsn, 'sid');
         $data = $storage->read('id');
         $storage->close();
-        $this->assertSame('data', $data, 'Written value can be read back correctly');
+        $this->assertSame(
+            'data',
+            $data,
+            'Written value can be read back correctly'
+        );
     }
 
     public function testReadWriteReadWithNullByte()
     {
-        $sessionData = 'da'."\0".'ta';
+        $sessionData = 'da' . "\0" . 'ta';
 
         $storage = new PdoSessionHandler($this->getMemorySqlitePdo());
         $storage->open('', 'sid');
         $readData = $storage->read('id');
         $storage->write('id', $sessionData);
         $storage->close();
-        $this->assertSame('', $readData, 'New session returns empty string data');
+        $this->assertSame(
+            '',
+            $readData,
+            'New session returns empty string data'
+        );
 
         $storage->open('', 'sid');
         $readData = $storage->read('id');
         $storage->close();
-        $this->assertSame($sessionData, $readData, 'Written value can be read back correctly');
+        $this->assertSame(
+            $sessionData,
+            $readData,
+            'Written value can be read back correctly'
+        );
     }
 
     public function testReadConvertsStreamToString()
@@ -142,7 +160,9 @@ class PdoSessionHandlerTest extends TestCase
         $content = 'foobar';
         $stream = $this->createStream($content);
 
-        $pdo->prepareResult->expects($this->once())->method('fetchAll')
+        $pdo->prepareResult
+            ->expects($this->once())
+            ->method('fetchAll')
             ->will($this->returnValue([[$stream, 42, time()]]));
 
         $storage = new PdoSessionHandler($pdo);
@@ -153,31 +173,51 @@ class PdoSessionHandlerTest extends TestCase
 
     public function testReadLockedConvertsStreamToString()
     {
-        if (filter_var(ini_get('session.use_strict_mode'), FILTER_VALIDATE_BOOLEAN)) {
-            $this->markTestSkipped('Strict mode needs no locking for new sessions.');
+        if (
+            filter_var(
+                ini_get('session.use_strict_mode'),
+                FILTER_VALIDATE_BOOLEAN
+            )
+        ) {
+            $this->markTestSkipped(
+                'Strict mode needs no locking for new sessions.'
+            );
         }
 
         $pdo = new MockPdo('pgsql');
         $selectStmt = $this->getMockBuilder('PDOStatement')->getMock();
         $insertStmt = $this->getMockBuilder('PDOStatement')->getMock();
 
-        $pdo->prepareResult = function ($statement) use ($selectStmt, $insertStmt) {
-            return 0 === strpos($statement, 'INSERT') ? $insertStmt : $selectStmt;
+        $pdo->prepareResult = function ($statement) use (
+            $selectStmt,
+            $insertStmt
+        ) {
+            return 0 === strpos($statement, 'INSERT')
+                ? $insertStmt
+                : $selectStmt;
         };
 
         $content = 'foobar';
         $stream = $this->createStream($content);
         $exception = null;
 
-        $selectStmt->expects($this->atLeast(2))->method('fetchAll')
-            ->will($this->returnCallback(function () use (&$exception, $stream) {
-                return $exception ? [[$stream, 42, time()]] : [];
-            }));
+        $selectStmt
+            ->expects($this->atLeast(2))
+            ->method('fetchAll')
+            ->will(
+                $this->returnCallback(function () use (&$exception, $stream) {
+                    return $exception ? [[$stream, 42, time()]] : [];
+                })
+            );
 
-        $insertStmt->expects($this->once())->method('execute')
-            ->will($this->returnCallback(function () use (&$exception) {
-                throw $exception = new \PDOException('', '23');
-            }));
+        $insertStmt
+            ->expects($this->once())
+            ->method('execute')
+            ->will(
+                $this->returnCallback(function () use (&$exception) {
+                    throw ($exception = new \PDOException('', '23'));
+                })
+            );
 
         $storage = new PdoSessionHandler($pdo);
         $result = $storage->read('foo');
@@ -201,10 +241,26 @@ class PdoSessionHandlerTest extends TestCase
         $readDataExtraSpace = $storage->read('space  ');
         $storage->close();
 
-        $this->assertSame('', $readDataCaseSensitive, 'Retrieval by ID should be case-sensitive (collation setting)');
-        $this->assertSame('', $readDataNoCharFolding, 'Retrieval by ID should not do character folding (collation setting)');
-        $this->assertSame('data', $readDataKeepSpace, 'Retrieval by ID requires spaces as-is');
-        $this->assertSame('', $readDataExtraSpace, 'Retrieval by ID requires spaces as-is');
+        $this->assertSame(
+            '',
+            $readDataCaseSensitive,
+            'Retrieval by ID should be case-sensitive (collation setting)'
+        );
+        $this->assertSame(
+            '',
+            $readDataNoCharFolding,
+            'Retrieval by ID should not do character folding (collation setting)'
+        );
+        $this->assertSame(
+            'data',
+            $readDataKeepSpace,
+            'Retrieval by ID requires spaces as-is'
+        );
+        $this->assertSame(
+            '',
+            $readDataExtraSpace,
+            'Retrieval by ID requires spaces as-is'
+        );
     }
 
     /**
@@ -223,7 +279,11 @@ class PdoSessionHandlerTest extends TestCase
         $data = $storage->read('new_id');
         $storage->close();
 
-        $this->assertSame('data_of_new_session_id', $data, 'Data of regenerated session id is available');
+        $this->assertSame(
+            'data_of_new_session_id',
+            $data,
+            'Data of regenerated session id is available'
+        );
     }
 
     public function testWrongUsageStillWorks()
@@ -251,13 +311,19 @@ class PdoSessionHandlerTest extends TestCase
         $storage->read('id');
         $storage->write('id', 'data');
         $storage->close();
-        $this->assertEquals(1, $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn());
+        $this->assertEquals(
+            1,
+            $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn()
+        );
 
         $storage->open('', 'sid');
         $storage->read('id');
         $storage->destroy('id');
         $storage->close();
-        $this->assertEquals(0, $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn());
+        $this->assertEquals(
+            0,
+            $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn()
+        );
 
         $storage->open('', 'sid');
         $data = $storage->read('id');
@@ -284,7 +350,11 @@ class PdoSessionHandlerTest extends TestCase
         ini_set('session.gc_maxlifetime', -1); // test that you can set lifetime of a session after it has been read
         $storage->write('gc_id', 'data');
         $storage->close();
-        $this->assertEquals(2, $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn(), 'No session pruned because gc not called');
+        $this->assertEquals(
+            2,
+            $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn(),
+            'No session pruned because gc not called'
+        );
 
         $storage->open('', 'sid');
         $data = $storage->read('gc_id');
@@ -293,8 +363,16 @@ class PdoSessionHandlerTest extends TestCase
 
         ini_set('session.gc_maxlifetime', $previousLifeTime);
 
-        $this->assertSame('', $data, 'Session already considered garbage, so not returning data even if it is not pruned yet');
-        $this->assertEquals(1, $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn(), 'Expired session is pruned');
+        $this->assertSame(
+            '',
+            $data,
+            'Session already considered garbage, so not returning data even if it is not pruned yet'
+        );
+        $this->assertEquals(
+            1,
+            $pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn(),
+            'Expired session is pruned'
+        );
     }
 
     public function testGetConnection()
@@ -320,8 +398,12 @@ class PdoSessionHandlerTest extends TestCase
     /**
      * @dataProvider provideUrlDsnPairs
      */
-    public function testUrlDsn($url, $expectedDsn, $expectedUser = null, $expectedPassword = null)
-    {
+    public function testUrlDsn(
+        $url,
+        $expectedDsn,
+        $expectedUser = null,
+        $expectedPassword = null
+    ) {
         $storage = new PdoSessionHandler($url);
 
         $this->assertAttributeEquals($expectedDsn, 'dsn', $storage);
@@ -331,25 +413,66 @@ class PdoSessionHandlerTest extends TestCase
         }
 
         if (null !== $expectedPassword) {
-            $this->assertAttributeEquals($expectedPassword, 'password', $storage);
+            $this->assertAttributeEquals(
+                $expectedPassword,
+                'password',
+                $storage
+            );
         }
     }
 
     public function provideUrlDsnPairs()
     {
         yield ['mysql://localhost/test', 'mysql:host=localhost;dbname=test;'];
-        yield ['mysql://localhost:56/test', 'mysql:host=localhost;port=56;dbname=test;'];
-        yield ['mysql2://root:pwd@localhost/test', 'mysql:host=localhost;dbname=test;', 'root', 'pwd'];
-        yield ['postgres://localhost/test', 'pgsql:host=localhost;dbname=test;'];
-        yield ['postgresql://localhost:5634/test', 'pgsql:host=localhost;port=5634;dbname=test;'];
-        yield ['postgres://root:pwd@localhost/test', 'pgsql:host=localhost;dbname=test;', 'root', 'pwd'];
-        yield 'sqlite relative path' => ['sqlite://localhost/tmp/test', 'sqlite:tmp/test'];
-        yield 'sqlite absolute path' => ['sqlite://localhost//tmp/test', 'sqlite:/tmp/test'];
-        yield 'sqlite relative path without host' => ['sqlite:///tmp/test', 'sqlite:tmp/test'];
-        yield 'sqlite absolute path without host' => ['sqlite3:////tmp/test', 'sqlite:/tmp/test'];
+        yield [
+            'mysql://localhost:56/test',
+            'mysql:host=localhost;port=56;dbname=test;'
+        ];
+        yield [
+            'mysql2://root:pwd@localhost/test',
+            'mysql:host=localhost;dbname=test;',
+            'root',
+            'pwd'
+        ];
+        yield [
+            'postgres://localhost/test',
+            'pgsql:host=localhost;dbname=test;'
+        ];
+        yield [
+            'postgresql://localhost:5634/test',
+            'pgsql:host=localhost;port=5634;dbname=test;'
+        ];
+        yield [
+            'postgres://root:pwd@localhost/test',
+            'pgsql:host=localhost;dbname=test;',
+            'root',
+            'pwd'
+        ];
+        yield 'sqlite relative path' => [
+            'sqlite://localhost/tmp/test',
+            'sqlite:tmp/test'
+        ];
+        yield 'sqlite absolute path' => [
+            'sqlite://localhost//tmp/test',
+            'sqlite:/tmp/test'
+        ];
+        yield 'sqlite relative path without host' => [
+            'sqlite:///tmp/test',
+            'sqlite:tmp/test'
+        ];
+        yield 'sqlite absolute path without host' => [
+            'sqlite3:////tmp/test',
+            'sqlite:/tmp/test'
+        ];
         yield ['sqlite://localhost/:memory:', 'sqlite::memory:'];
-        yield ['mssql://localhost/test', 'sqlsrv:server=localhost;Database=test'];
-        yield ['mssql://localhost:56/test', 'sqlsrv:server=localhost,56;Database=test'];
+        yield [
+            'mssql://localhost/test',
+            'sqlsrv:server=localhost;Database=test'
+        ];
+        yield [
+            'mssql://localhost:56/test',
+            'sqlsrv:server=localhost,56;Database=test'
+        ];
     }
 
     private function createStream($content)

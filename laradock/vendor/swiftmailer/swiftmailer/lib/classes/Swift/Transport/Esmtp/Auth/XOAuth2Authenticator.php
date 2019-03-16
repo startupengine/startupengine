@@ -23,7 +23,8 @@
  *
  * @see        https://developers.google.com/google-apps/gmail/xoauth2_protocol
  */
-class Swift_Transport_Esmtp_Auth_XOAuth2Authenticator implements Swift_Transport_Esmtp_Authenticator
+class Swift_Transport_Esmtp_Auth_XOAuth2Authenticator implements
+    Swift_Transport_Esmtp_Authenticator
 {
     /**
      * Get the name of the AUTH mechanism this Authenticator handles.
@@ -38,11 +39,14 @@ class Swift_Transport_Esmtp_Auth_XOAuth2Authenticator implements Swift_Transport
     /**
      * {@inheritdoc}
      */
-    public function authenticate(Swift_Transport_SmtpAgent $agent, $email, $token)
-    {
+    public function authenticate(
+        Swift_Transport_SmtpAgent $agent,
+        $email,
+        $token
+    ) {
         try {
             $param = $this->constructXOAuth2Params($email, $token);
-            $agent->executeCommand('AUTH XOAUTH2 '.$param."\r\n", [235]);
+            $agent->executeCommand('AUTH XOAUTH2 ' . $param . "\r\n", [235]);
 
             return true;
         } catch (Swift_TransportException $e) {

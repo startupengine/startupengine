@@ -157,10 +157,15 @@ final class LazyOption extends Option
     private function option()
     {
         if (null === $this->option) {
-            $this->option = call_user_func_array($this->callback, $this->arguments);
+            $this->option = call_user_func_array(
+                $this->callback,
+                $this->arguments
+            );
             if (!$this->option instanceof Option) {
                 $this->option = null;
-                throw new \RuntimeException('Expected instance of \PhpOption\Option');
+                throw new \RuntimeException(
+                    'Expected instance of \PhpOption\Option'
+                );
             }
         }
 

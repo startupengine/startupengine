@@ -23,7 +23,10 @@ interface Swift_Events_EventDispatcher
      *
      * @return Swift_Events_SendEvent
      */
-    public function createSendEvent(Swift_Transport $source, Swift_Mime_SimpleMessage $message);
+    public function createSendEvent(
+        Swift_Transport $source,
+        Swift_Mime_SimpleMessage $message
+    );
 
     /**
      * Create a new CommandEvent for $source and $command.
@@ -34,7 +37,11 @@ interface Swift_Events_EventDispatcher
      *
      * @return Swift_Events_CommandEvent
      */
-    public function createCommandEvent(Swift_Transport $source, $command, $successCodes = []);
+    public function createCommandEvent(
+        Swift_Transport $source,
+        $command,
+        $successCodes = []
+    );
 
     /**
      * Create a new ResponseEvent for $source and $response.
@@ -45,7 +52,11 @@ interface Swift_Events_EventDispatcher
      *
      * @return Swift_Events_ResponseEvent
      */
-    public function createResponseEvent(Swift_Transport $source, $response, $valid);
+    public function createResponseEvent(
+        Swift_Transport $source,
+        $response,
+        $valid
+    );
 
     /**
      * Create a new TransportChangeEvent for $source.
@@ -64,7 +75,10 @@ interface Swift_Events_EventDispatcher
      *
      * @return Swift_Events_TransportExceptionEvent
      */
-    public function createTransportExceptionEvent(Swift_Transport $source, Swift_TransportException $ex);
+    public function createTransportExceptionEvent(
+        Swift_Transport $source,
+        Swift_TransportException $ex
+    );
 
     /**
      * Bind an event listener to this dispatcher.

@@ -13,7 +13,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_CharacterReaderFactory_SimpleCharacterReaderFactory implements Swift_CharacterReaderFactory
+class Swift_CharacterReaderFactory_SimpleCharacterReaderFactory implements
+    Swift_CharacterReaderFactory
 {
     /**
      * A map of charset patterns to their implementation classes.
@@ -51,25 +52,25 @@ class Swift_CharacterReaderFactory_SimpleCharacterReaderFactory implements Swift
         $prefix = 'Swift_CharacterReader_';
 
         $singleByte = [
-            'class' => $prefix.'GenericFixedWidthReader',
-            'constructor' => [1],
-            ];
+            'class' => $prefix . 'GenericFixedWidthReader',
+            'constructor' => [1]
+        ];
 
         $doubleByte = [
-            'class' => $prefix.'GenericFixedWidthReader',
-            'constructor' => [2],
-            ];
+            'class' => $prefix . 'GenericFixedWidthReader',
+            'constructor' => [2]
+        ];
 
         $fourBytes = [
-            'class' => $prefix.'GenericFixedWidthReader',
-            'constructor' => [4],
-            ];
+            'class' => $prefix . 'GenericFixedWidthReader',
+            'constructor' => [4]
+        ];
 
         // Utf-8
         self::$map['utf-?8'] = [
-            'class' => $prefix.'Utf8Reader',
-            'constructor' => [],
-            ];
+            'class' => $prefix . 'Utf8Reader',
+            'constructor' => []
+        ];
 
         //7-8 bit charsets
         self::$map['(us-)?ascii'] = $singleByte;
@@ -105,12 +106,14 @@ class Swift_CharacterReaderFactory_SimpleCharacterReaderFactory implements Swift
     {
         $charset = strtolower(trim($charset));
         foreach (self::$map as $pattern => $spec) {
-            $re = '/^'.$pattern.'$/D';
+            $re = '/^' . $pattern . '$/D';
             if (preg_match($re, $charset)) {
                 if (!array_key_exists($pattern, self::$loaded)) {
                     $reflector = new ReflectionClass($spec['class']);
                     if ($reflector->getConstructor()) {
-                        $reader = $reflector->newInstanceArgs($spec['constructor']);
+                        $reader = $reflector->newInstanceArgs(
+                            $spec['constructor']
+                        );
                     } else {
                         $reader = $reflector->newInstance();
                     }

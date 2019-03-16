@@ -54,15 +54,17 @@ class AcceptHeader
 
         $parts = HeaderUtils::split((string) $headerValue, ',;=');
 
-        return new self(array_map(function ($subParts) use (&$index) {
-            $part = array_shift($subParts);
-            $attributes = HeaderUtils::combine($subParts);
+        return new self(
+            array_map(function ($subParts) use (&$index) {
+                $part = array_shift($subParts);
+                $attributes = HeaderUtils::combine($subParts);
 
-            $item = new AcceptHeaderItem($part[0], $attributes);
-            $item->setIndex($index++);
+                $item = new AcceptHeaderItem($part[0], $attributes);
+                $item->setIndex($index++);
 
-            return $item;
-        }, $parts));
+                return $item;
+            }, $parts)
+        );
     }
 
     /**
@@ -96,7 +98,11 @@ class AcceptHeader
      */
     public function get($value)
     {
-        return $this->items[$value] ?? $this->items[explode('/', $value)[0].'/*'] ?? $this->items['*/*'] ?? $this->items['*'] ?? null;
+        return $this->items[$value] ??
+            $this->items[explode('/', $value)[0] . '/*'] ??
+            $this->items['*/*'] ??
+            $this->items['*'] ??
+            null;
     }
 
     /**
@@ -133,9 +139,13 @@ class AcceptHeader
      */
     public function filter($pattern)
     {
-        return new self(array_filter($this->items, function (AcceptHeaderItem $item) use ($pattern) {
-            return preg_match($pattern, $item->getValue());
-        }));
+        return new self(
+            array_filter($this->items, function (AcceptHeaderItem $item) use (
+                $pattern
+            ) {
+                return preg_match($pattern, $item->getValue());
+            })
+        );
     }
 
     /**
@@ -156,7 +166,10 @@ class AcceptHeader
     private function sort()
     {
         if (!$this->sorted) {
-            uasort($this->items, function (AcceptHeaderItem $a, AcceptHeaderItem $b) {
+            uasort($this->items, function (
+                AcceptHeaderItem $a,
+                AcceptHeaderItem $b
+            ) {
                 $qA = $a->getQuality();
                 $qB = $b->getQuality();
 

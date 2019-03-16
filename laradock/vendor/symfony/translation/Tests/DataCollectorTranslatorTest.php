@@ -37,7 +37,7 @@ class DataCollectorTranslatorTest extends TestCase
             'domain' => 'messages',
             'state' => DataCollectorTranslator::MESSAGE_DEFINED,
             'parameters' => [],
-            'transChoiceNumber' => null,
+            'transChoiceNumber' => null
         ];
         $expectedMessages[] = [
             'id' => 'bar',
@@ -46,7 +46,7 @@ class DataCollectorTranslatorTest extends TestCase
             'domain' => 'messages',
             'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
             'parameters' => [],
-            'transChoiceNumber' => null,
+            'transChoiceNumber' => null
         ];
         $expectedMessages[] = [
             'id' => 'choice',
@@ -55,7 +55,7 @@ class DataCollectorTranslatorTest extends TestCase
             'domain' => 'messages',
             'state' => DataCollectorTranslator::MESSAGE_MISSING,
             'parameters' => ['%count%' => 0],
-            'transChoiceNumber' => 0,
+            'transChoiceNumber' => 0
         ];
         $expectedMessages[] = [
             'id' => 'bar_ru',
@@ -64,7 +64,7 @@ class DataCollectorTranslatorTest extends TestCase
             'domain' => 'messages',
             'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
             'parameters' => [],
-            'transChoiceNumber' => null,
+            'transChoiceNumber' => null
         ];
         $expectedMessages[] = [
             'id' => 'bar_ru',
@@ -73,10 +73,13 @@ class DataCollectorTranslatorTest extends TestCase
             'domain' => 'messages',
             'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
             'parameters' => ['foo' => 'bar'],
-            'transChoiceNumber' => null,
+            'transChoiceNumber' => null
         ];
 
-        $this->assertEquals($expectedMessages, $collector->getCollectedMessages());
+        $this->assertEquals(
+            $expectedMessages,
+            $collector->getCollectedMessages()
+        );
     }
 
     /**
@@ -91,16 +94,19 @@ class DataCollectorTranslatorTest extends TestCase
         $expectedMessages = [];
 
         $expectedMessages[] = [
-              'id' => 'choice',
-              'translation' => 'choice',
-              'locale' => 'en',
-              'domain' => 'messages',
-              'state' => DataCollectorTranslator::MESSAGE_MISSING,
-              'parameters' => ['%count%' => 0],
-              'transChoiceNumber' => 0,
+            'id' => 'choice',
+            'translation' => 'choice',
+            'locale' => 'en',
+            'domain' => 'messages',
+            'state' => DataCollectorTranslator::MESSAGE_MISSING,
+            'parameters' => ['%count%' => 0],
+            'transChoiceNumber' => 0
         ];
 
-        $this->assertEquals($expectedMessages, $collector->getCollectedMessages());
+        $this->assertEquals(
+            $expectedMessages,
+            $collector->getCollectedMessages()
+        );
     }
 
     private function createCollector()

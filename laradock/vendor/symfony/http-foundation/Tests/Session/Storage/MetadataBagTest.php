@@ -32,7 +32,11 @@ class MetadataBagTest extends TestCase
     {
         parent::setUp();
         $this->bag = new MetadataBag();
-        $this->array = [MetadataBag::CREATED => 1234567, MetadataBag::UPDATED => 12345678, MetadataBag::LIFETIME => 0];
+        $this->array = [
+            MetadataBag::CREATED => 1234567,
+            MetadataBag::UPDATED => 12345678,
+            MetadataBag::LIFETIME => 0
+        ];
         $this->bag->initialize($this->array);
     }
 
@@ -82,7 +86,11 @@ class MetadataBagTest extends TestCase
     public function testGetLifetime()
     {
         $bag = new MetadataBag();
-        $array = [MetadataBag::CREATED => 1234567, MetadataBag::UPDATED => 12345678, MetadataBag::LIFETIME => 1000];
+        $array = [
+            MetadataBag::CREATED => 1234567,
+            MetadataBag::UPDATED => 12345678,
+            MetadataBag::LIFETIME => 1000
+        ];
         $bag->initialize($array);
         $this->assertEquals(1000, $bag->getLifetime());
     }
@@ -114,7 +122,7 @@ class MetadataBagTest extends TestCase
         $sessionMetadata = [
             MetadataBag::CREATED => $created,
             MetadataBag::UPDATED => $created,
-            MetadataBag::LIFETIME => 1000,
+            MetadataBag::LIFETIME => 1000
         ];
         $bag->initialize($sessionMetadata);
 
@@ -130,7 +138,7 @@ class MetadataBagTest extends TestCase
         $sessionMetadata = [
             MetadataBag::CREATED => $created,
             MetadataBag::UPDATED => $created,
-            MetadataBag::LIFETIME => 1000,
+            MetadataBag::LIFETIME => 1000
         ];
         $bag->initialize($sessionMetadata);
 

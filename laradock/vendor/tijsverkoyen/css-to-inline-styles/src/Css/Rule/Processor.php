@@ -3,7 +3,7 @@
 namespace TijsVerkoyen\CssToInlineStyles\Css\Rule;
 
 use Symfony\Component\CssSelector\Node\Specificity;
-use \TijsVerkoyen\CssToInlineStyles\Css\Property\Processor as PropertyProcessor;
+use TijsVerkoyen\CssToInlineStyles\Css\Property\Processor as PropertyProcessor;
 
 class Processor
 {
@@ -56,15 +56,22 @@ class Processor
         $propertiesProcessor = new PropertyProcessor();
         $rules = array();
         $selectors = (array) explode(',', trim($chunks[0]));
-        $properties = $propertiesProcessor->splitIntoSeparateProperties($chunks[1]);
+        $properties = $propertiesProcessor->splitIntoSeparateProperties(
+            $chunks[1]
+        );
 
         foreach ($selectors as $selector) {
             $selector = trim($selector);
-            $specificity = $this->calculateSpecificityBasedOnASelector($selector);
+            $specificity = $this->calculateSpecificityBasedOnASelector(
+                $selector
+            );
 
             $rules[] = new Rule(
                 $selector,
-                $propertiesProcessor->convertArrayToObjects($properties, $specificity),
+                $propertiesProcessor->convertArrayToObjects(
+                    $properties,
+                    $specificity
+                ),
                 $specificity,
                 $originalOrder
             );
@@ -112,8 +119,16 @@ class Processor
 
         return new Specificity(
             preg_match_all("/{$idSelectorsPattern}/ix", $selector, $matches),
-            preg_match_all("/{$classAttributesPseudoClassesSelectorsPattern}/ix", $selector, $matches),
-            preg_match_all("/{$typePseudoElementsSelectorPattern}/ix", $selector, $matches)
+            preg_match_all(
+                "/{$classAttributesPseudoClassesSelectorsPattern}/ix",
+                $selector,
+                $matches
+            ),
+            preg_match_all(
+                "/{$typePseudoElementsSelectorPattern}/ix",
+                $selector,
+                $matches
+            )
         );
     }
 
@@ -121,11 +136,16 @@ class Processor
      * @param array $rules
      * @return Rule[]
      */
-    public function convertArrayToObjects(array $rules, array $objects = array())
-    {
+    public function convertArrayToObjects(
+        array $rules,
+        array $objects = array()
+    ) {
         $order = 1;
         foreach ($rules as $rule) {
-            $objects = array_merge($objects, $this->convertToObjects($rule, $order));
+            $objects = array_merge(
+                $objects,
+                $this->convertToObjects($rule, $order)
+            );
             $order++;
         }
 

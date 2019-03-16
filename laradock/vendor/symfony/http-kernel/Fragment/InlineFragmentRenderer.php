@@ -30,8 +30,10 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
     private $kernel;
     private $dispatcher;
 
-    public function __construct(HttpKernelInterface $kernel, EventDispatcherInterface $dispatcher = null)
-    {
+    public function __construct(
+        HttpKernelInterface $kernel,
+        EventDispatcherInterface $dispatcher = null
+    ) {
         $this->kernel = $kernel;
         $this->dispatcher = $dispatcher;
     }
@@ -65,7 +67,10 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
 
             $uri = $this->generateFragmentUri($uri, $request, false, false);
 
-            $reference->attributes = array_merge($attributes, $reference->attributes);
+            $reference->attributes = array_merge(
+                $attributes,
+                $reference->attributes
+            );
         }
 
         $subRequest = $this->createSubRequest($uri, $request);
@@ -77,12 +82,26 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
 
         $level = ob_get_level();
         try {
-            return SubRequestHandler::handle($this->kernel, $subRequest, HttpKernelInterface::SUB_REQUEST, false);
+            return SubRequestHandler::handle(
+                $this->kernel,
+                $subRequest,
+                HttpKernelInterface::SUB_REQUEST,
+                false
+            );
         } catch (\Exception $e) {
             // we dispatch the exception event to trigger the logging
             // the response that comes back is ignored
-            if (isset($options['ignore_errors']) && $options['ignore_errors'] && $this->dispatcher) {
-                $event = new GetResponseForExceptionEvent($this->kernel, $request, HttpKernelInterface::SUB_REQUEST, $e);
+            if (
+                isset($options['ignore_errors']) &&
+                $options['ignore_errors'] &&
+                $this->dispatcher
+            ) {
+                $event = new GetResponseForExceptionEvent(
+                    $this->kernel,
+                    $request,
+                    HttpKernelInterface::SUB_REQUEST,
+                    $e
+                );
 
                 $this->dispatcher->dispatch(KernelEvents::EXCEPTION, $event);
             }
@@ -97,7 +116,10 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
                 return $this->render($alt, $request, $options);
             }
 
-            if (!isset($options['ignore_errors']) || !$options['ignore_errors']) {
+            if (
+                !isset($options['ignore_errors']) ||
+                !$options['ignore_errors']
+            ) {
                 throw $e;
             }
 
@@ -115,13 +137,22 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
 
         $subRequest = Request::create($uri, 'get', [], $cookies, [], $server);
         if ($request->headers->has('Surrogate-Capability')) {
-            $subRequest->headers->set('Surrogate-Capability', $request->headers->get('Surrogate-Capability'));
+            $subRequest->headers->set(
+                'Surrogate-Capability',
+                $request->headers->get('Surrogate-Capability')
+            );
         }
 
         static $setSession;
 
         if (null === $setSession) {
-            $setSession = \Closure::bind(function ($subRequest, $request) { $subRequest->session = $request->session; }, null, Request::class);
+            $setSession = \Closure::bind(
+                function ($subRequest, $request) {
+                    $subRequest->session = $request->session;
+                },
+                null,
+                Request::class
+            );
         }
         $setSession($subRequest, $request);
 

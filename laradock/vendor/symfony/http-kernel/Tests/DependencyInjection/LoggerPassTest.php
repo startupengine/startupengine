@@ -29,7 +29,9 @@ class LoggerPassTest extends TestCase
 
         (new LoggerPass())->process($container);
 
-        $this->assertFalse($container->getAlias(LoggerInterface::class)->isPublic());
+        $this->assertFalse(
+            $container->getAlias(LoggerInterface::class)->isPublic()
+        );
     }
 
     public function testDoNotOverrideExistingLogger()
@@ -39,7 +41,10 @@ class LoggerPassTest extends TestCase
 
         (new LoggerPass())->process($container);
 
-        $this->assertSame('Foo', $container->getDefinition('logger')->getClass());
+        $this->assertSame(
+            'Foo',
+            $container->getDefinition('logger')->getClass()
+        );
     }
 
     public function testRegisterLogger()

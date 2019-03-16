@@ -25,19 +25,13 @@ class HashHandlerTest extends AbstractHandlerTest
             ['#123', new Token(Token::TYPE_HASH, '123', 0), ''],
 
             ['#id.class', new Token(Token::TYPE_HASH, 'id', 0), '.class'],
-            ['#id element', new Token(Token::TYPE_HASH, 'id', 0), ' element'],
+            ['#id element', new Token(Token::TYPE_HASH, 'id', 0), ' element']
         ];
     }
 
     public function getDontHandleValueTestData()
     {
-        return [
-            ['id'],
-            ['123'],
-            ['<'],
-            ['<'],
-            ['#'],
-        ];
+        return [['id'], ['123'], ['<'], ['<'], ['#']];
     }
 
     protected function generateHandler()

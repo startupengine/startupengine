@@ -23,7 +23,8 @@ use Symfony\Contracts\Service\ResetInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class EventDataCollector extends DataCollector implements LateDataCollectorInterface
+class EventDataCollector extends DataCollector implements
+    LateDataCollectorInterface
 {
     protected $dispatcher;
 
@@ -35,12 +36,15 @@ class EventDataCollector extends DataCollector implements LateDataCollectorInter
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         $this->data = [
             'called_listeners' => [],
             'not_called_listeners' => [],
-            'orphaned_events' => [],
+            'orphaned_events' => []
         ];
     }
 
@@ -57,7 +61,9 @@ class EventDataCollector extends DataCollector implements LateDataCollectorInter
     {
         if ($this->dispatcher instanceof TraceableEventDispatcherInterface) {
             $this->setCalledListeners($this->dispatcher->getCalledListeners());
-            $this->setNotCalledListeners($this->dispatcher->getNotCalledListeners());
+            $this->setNotCalledListeners(
+                $this->dispatcher->getNotCalledListeners()
+            );
         }
 
         if ($this->dispatcher instanceof TraceableEventDispatcher) {

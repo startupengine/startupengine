@@ -46,8 +46,12 @@ abstract class RoutableFragmentRenderer implements FragmentRendererInterface
      *
      * @return string A fragment URI
      */
-    protected function generateFragmentUri(ControllerReference $reference, Request $request, $absolute = false, $strict = true)
-    {
+    protected function generateFragmentUri(
+        ControllerReference $reference,
+        Request $request,
+        $absolute = false,
+        $strict = true
+    ) {
         if ($strict) {
             $this->checkNonScalar($reference->attributes);
         }
@@ -66,15 +70,22 @@ abstract class RoutableFragmentRenderer implements FragmentRendererInterface
 
         $reference->attributes['_controller'] = $reference->controller;
 
-        $reference->query['_path'] = http_build_query($reference->attributes, '', '&');
+        $reference->query['_path'] = http_build_query(
+            $reference->attributes,
+            '',
+            '&'
+        );
 
-        $path = $this->fragmentPath.'?'.http_build_query($reference->query, '', '&');
+        $path =
+            $this->fragmentPath .
+            '?' .
+            http_build_query($reference->query, '', '&');
 
         if ($absolute) {
             return $request->getUriForPath($path);
         }
 
-        return $request->getBaseUrl().$path;
+        return $request->getBaseUrl() . $path;
     }
 
     private function checkNonScalar($values)
@@ -83,7 +94,12 @@ abstract class RoutableFragmentRenderer implements FragmentRendererInterface
             if (\is_array($value)) {
                 $this->checkNonScalar($value);
             } elseif (!is_scalar($value) && null !== $value) {
-                throw new \LogicException(sprintf('Controller attributes cannot contain non-scalar/non-null values (value for key "%s" is not a scalar or null).', $key));
+                throw new \LogicException(
+                    sprintf(
+                        'Controller attributes cannot contain non-scalar/non-null values (value for key "%s" is not a scalar or null).',
+                        $key
+                    )
+                );
             }
         }
     }

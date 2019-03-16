@@ -16,7 +16,9 @@ class CssToInlineStyles
 
     public function __construct()
     {
-        if (class_exists('Symfony\Component\CssSelector\CssSelectorConverter')) {
+        if (
+            class_exists('Symfony\Component\CssSelector\CssSelectorConverter')
+        ) {
             $this->cssConverter = new CssSelectorConverter();
         }
     }
@@ -37,9 +39,7 @@ class CssToInlineStyles
         $processor = new Processor();
 
         // get all styles from the style-tags
-        $rules = $processor->getRules(
-            $processor->getCssFromStyleTags($html)
-        );
+        $rules = $processor->getRules($processor->getCssFromStyleTags($html));
 
         if ($css !== null) {
             $rules = $processor->getRules($css, $rules);
@@ -110,7 +110,9 @@ class CssToInlineStyles
     {
         $document = new \DOMDocument('1.0', 'UTF-8');
         $internalErrors = libxml_use_internal_errors(true);
-        $document->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+        $document->loadHTML(
+            mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8')
+        );
         libxml_use_internal_errors($internalErrors);
         $document->formatOutput = true;
 
@@ -139,7 +141,7 @@ class CssToInlineStyles
             $doctype = strtolower($doctype);
         }
 
-        return $doctype."\n".$html;
+        return $doctype . "\n" . $html;
     }
 
     /**
@@ -162,7 +164,9 @@ class CssToInlineStyles
         foreach ($rules as $rule) {
             try {
                 if (null !== $this->cssConverter) {
-                    $expression = $this->cssConverter->toXPath($rule->getSelector());
+                    $expression = $this->cssConverter->toXPath(
+                        $rule->getSelector()
+                    );
                 } else {
                     // Compatibility layer for Symfony 2.7 and older
                     $expression = CssSelector::toXPath($rule->getSelector());
@@ -178,9 +182,13 @@ class CssToInlineStyles
             }
 
             foreach ($elements as $element) {
-                $propertyStorage[$element] = $this->calculatePropertiesToBeApplied(
+                $propertyStorage[
+                    $element
+                ] = $this->calculatePropertiesToBeApplied(
                     $rule->getProperties(),
-                    $propertyStorage->contains($element) ? $propertyStorage[$element] : array()
+                    $propertyStorage->contains($element)
+                        ? $propertyStorage[$element]
+                        : array()
                 );
             }
         }
@@ -200,8 +208,10 @@ class CssToInlineStyles
      *
      * @return Css\Property\Property[] updated properties, indexed by name
      */
-    private function calculatePropertiesToBeApplied(array $properties, array $cssProperties)
-    {
+    private function calculatePropertiesToBeApplied(
+        array $properties,
+        array $cssProperties
+    ) {
         if (empty($properties)) {
             return $cssProperties;
         }
@@ -211,14 +221,23 @@ class CssToInlineStyles
                 $existingProperty = $cssProperties[$property->getName()];
 
                 //skip check to overrule if existing property is important and current is not
-                if ($existingProperty->isImportant() && !$property->isImportant()) {
+                if (
+                    $existingProperty->isImportant() &&
+                    !$property->isImportant()
+                ) {
                     continue;
                 }
 
                 //overrule if current property is important and existing is not, else check specificity
-                $overrule = !$existingProperty->isImportant() && $property->isImportant();
+                $overrule =
+                    !$existingProperty->isImportant() &&
+                    $property->isImportant();
                 if (!$overrule) {
-                    $overrule = $existingProperty->getOriginalSpecificity()->compareTo($property->getOriginalSpecificity()) <= 0;
+                    $overrule =
+                        $existingProperty
+                            ->getOriginalSpecificity()
+                            ->compareTo($property->getOriginalSpecificity()) <=
+                        0;
                 }
 
                 if ($overrule) {

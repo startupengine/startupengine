@@ -21,10 +21,8 @@ class Swift_Plugins_AntiFloodPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginStopsConnectionAfterThreshold()
     {
         $transport = $this->createTransport();
-        $transport->expects($this->once())
-                  ->method('start');
-        $transport->expects($this->once())
-                  ->method('stop');
+        $transport->expects($this->once())->method('start');
+        $transport->expects($this->once())->method('stop');
 
         $evt = $this->createSendEvent($transport);
 
@@ -37,10 +35,8 @@ class Swift_Plugins_AntiFloodPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginCanStopAndStartMultipleTimes()
     {
         $transport = $this->createTransport();
-        $transport->expects($this->exactly(5))
-                  ->method('start');
-        $transport->expects($this->exactly(5))
-                  ->method('stop');
+        $transport->expects($this->exactly(5))->method('start');
+        $transport->expects($this->exactly(5))->method('stop');
 
         $evt = $this->createSendEvent($transport);
 
@@ -53,15 +49,14 @@ class Swift_Plugins_AntiFloodPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginCanSleepDuringRestart()
     {
         $sleeper = $this->getMockBuilder('Swift_Plugins_Sleeper')->getMock();
-        $sleeper->expects($this->once())
-                ->method('sleep')
-                ->with(10);
+        $sleeper
+            ->expects($this->once())
+            ->method('sleep')
+            ->with(10);
 
         $transport = $this->createTransport();
-        $transport->expects($this->once())
-                  ->method('start');
-        $transport->expects($this->once())
-                  ->method('stop');
+        $transport->expects($this->once())->method('start');
+        $transport->expects($this->once())->method('stop');
 
         $evt = $this->createSendEvent($transport);
 
@@ -79,12 +74,14 @@ class Swift_Plugins_AntiFloodPluginTest extends \PHPUnit\Framework\TestCase
     private function createSendEvent($transport)
     {
         $evt = $this->getMockBuilder('Swift_Events_SendEvent')
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        $evt->expects($this->any())
+            ->disableOriginalConstructor()
+            ->getMock();
+        $evt
+            ->expects($this->any())
             ->method('getSource')
             ->will($this->returnValue($transport));
-        $evt->expects($this->any())
+        $evt
+            ->expects($this->any())
             ->method('getTransport')
             ->will($this->returnValue($transport));
 

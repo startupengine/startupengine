@@ -2,12 +2,16 @@
 
 use Egulias\EmailValidator\EmailValidator;
 
-class Swift_Mime_Headers_IdentificationHeaderTest extends \PHPUnit\Framework\TestCase
+class Swift_Mime_Headers_IdentificationHeaderTest extends
+    \PHPUnit\Framework\TestCase
 {
     public function testTypeIsIdHeader()
     {
         $header = $this->getHeader('Message-ID');
-        $this->assertEquals(Swift_Mime_Header::TYPE_ID, $header->getFieldType());
+        $this->assertEquals(
+            Swift_Mime_Header::TYPE_ID,
+            $header->getFieldType()
+        );
     }
 
     public function testValueMatchesMsgIdSpec()
@@ -182,11 +186,18 @@ class Swift_Mime_Headers_IdentificationHeaderTest extends \PHPUnit\Framework\Tes
     {
         $header = $this->getHeader('References');
         $header->setIds(['a@b', 'x@y']);
-        $this->assertEquals('References: <a@b> <x@y>'."\r\n", $header->toString());
+        $this->assertEquals(
+            'References: <a@b> <x@y>' . "\r\n",
+            $header->toString()
+        );
     }
 
     private function getHeader($name)
     {
-        return new Swift_Mime_Headers_IdentificationHeader($name, new EmailValidator(), new Swift_AddressEncoder_IdnAddressEncoder());
+        return new Swift_Mime_Headers_IdentificationHeader(
+            $name,
+            new EmailValidator(),
+            new Swift_AddressEncoder_IdnAddressEncoder()
+        );
     }
 }

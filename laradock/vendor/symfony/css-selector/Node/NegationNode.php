@@ -26,8 +26,10 @@ class NegationNode extends AbstractNode
     private $selector;
     private $subSelector;
 
-    public function __construct(NodeInterface $selector, NodeInterface $subSelector)
-    {
+    public function __construct(
+        NodeInterface $selector,
+        NodeInterface $subSelector
+    ) {
         $this->selector = $selector;
         $this->subSelector = $subSelector;
     }
@@ -53,7 +55,9 @@ class NegationNode extends AbstractNode
      */
     public function getSpecificity(): Specificity
     {
-        return $this->selector->getSpecificity()->plus($this->subSelector->getSpecificity());
+        return $this->selector
+            ->getSpecificity()
+            ->plus($this->subSelector->getSpecificity());
     }
 
     /**
@@ -61,6 +65,11 @@ class NegationNode extends AbstractNode
      */
     public function __toString(): string
     {
-        return sprintf('%s[%s:not(%s)]', $this->getNodeName(), $this->selector, $this->subSelector);
+        return sprintf(
+            '%s[%s:not(%s)]',
+            $this->getNodeName(),
+            $this->selector,
+            $this->subSelector
+        );
     }
 }

@@ -32,11 +32,20 @@ abstract class ConfigurableExtension extends Extension
      */
     final public function load(array $configs, ContainerBuilder $container)
     {
-        $this->loadInternal($this->processConfiguration($this->getConfiguration($configs, $container), $configs), $container);
+        $this->loadInternal(
+            $this->processConfiguration(
+                $this->getConfiguration($configs, $container),
+                $configs
+            ),
+            $container
+        );
     }
 
     /**
      * Configures the passed container according to the merged configuration.
      */
-    abstract protected function loadInternal(array $mergedConfig, ContainerBuilder $container);
+    abstract protected function loadInternal(
+        array $mergedConfig,
+        ContainerBuilder $container
+    );
 }

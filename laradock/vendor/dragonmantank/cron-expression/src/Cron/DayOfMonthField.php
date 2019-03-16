@@ -36,10 +36,16 @@ class DayOfMonthField extends AbstractField
      *
      * @return \DateTime Returns the nearest date
      */
-    private static function getNearestWeekday($currentYear, $currentMonth, $targetDay)
-    {
+    private static function getNearestWeekday(
+        $currentYear,
+        $currentMonth,
+        $targetDay
+    ) {
         $tday = str_pad($targetDay, 2, '0', STR_PAD_LEFT);
-        $target = DateTime::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tday");
+        $target = DateTime::createFromFormat(
+            'Y-m-d',
+            "$currentYear-$currentMonth-$tday"
+        );
         $currentWeekday = (int) $target->format('N');
 
         if ($currentWeekday < 6) {
@@ -52,7 +58,10 @@ class DayOfMonthField extends AbstractField
             $adjusted = $targetDay + $i;
             if ($adjusted > 0 && $adjusted <= $lastDayOfMonth) {
                 $target->setDate($currentYear, $currentMonth, $adjusted);
-                if ($target->format('N') < 6 && $target->format('m') == $currentMonth) {
+                if (
+                    $target->format('N') < 6 &&
+                    $target->format('m') == $currentMonth
+                ) {
                     return $target;
                 }
             }
@@ -78,11 +87,12 @@ class DayOfMonthField extends AbstractField
             // Parse the target day
             $targetDay = substr($value, 0, strpos($value, 'W'));
             // Find out if the current day is the nearest day of the week
-            return $date->format('j') == self::getNearestWeekday(
-                $date->format('Y'),
-                $date->format('m'),
-                $targetDay
-            )->format('j');
+            return $date->format('j') ==
+                self::getNearestWeekday(
+                    $date->format('Y'),
+                    $date->format('m'),
+                    $targetDay
+                )->format('j');
         }
 
         return $this->isSatisfied($date->format('d'), $value);
@@ -109,12 +119,14 @@ class DayOfMonthField extends AbstractField
         $basicChecks = parent::validate($value);
 
         // Validate that a list don't have W or L
-        if (strpos($value, ',') !== false && (strpos($value, 'W') !== false || strpos($value, 'L') !== false)) {
+        if (
+            strpos($value, ',') !== false &&
+            (strpos($value, 'W') !== false || strpos($value, 'L') !== false)
+        ) {
             return false;
         }
 
         if (!$basicChecks) {
-
             if ($value === 'L') {
                 return true;
             }

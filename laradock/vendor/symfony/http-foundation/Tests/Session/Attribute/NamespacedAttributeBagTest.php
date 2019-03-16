@@ -36,14 +36,14 @@ class NamespacedAttributeBagTest extends TestCase
             'user.login' => 'drak',
             'csrf.token' => [
                 'a' => '1234',
-                'b' => '4321',
+                'b' => '4321'
             ],
             'category' => [
                 'fishing' => [
                     'first' => 'cod',
-                    'second' => 'sole',
-                ],
-            ],
+                    'second' => 'sole'
+                ]
+            ]
         ];
         $this->bag = new NamespacedAttributeBag('_sf2', '/');
         $this->bag->initialize($this->array);
@@ -104,7 +104,10 @@ class NamespacedAttributeBagTest extends TestCase
     public function testGetDefaults()
     {
         $this->assertNull($this->bag->get('user2.login'));
-        $this->assertEquals('default', $this->bag->get('user2.login', 'default'));
+        $this->assertEquals(
+            'default',
+            $this->bag->get('user2.login', 'default')
+        );
     }
 
     /**
@@ -189,7 +192,11 @@ class NamespacedAttributeBagTest extends TestCase
             ['csrf.token', ['a' => '1234', 'b' => '4321'], true],
             ['csrf.token/a', '1234', true],
             ['csrf.token/b', '4321', true],
-            ['category', ['fishing' => ['first' => 'cod', 'second' => 'sole']], true],
+            [
+                'category',
+                ['fishing' => ['first' => 'cod', 'second' => 'sole']],
+                true
+            ],
             ['category/fishing', ['first' => 'cod', 'second' => 'sole'], true],
             ['category/fishing/missing/first', null, false],
             ['category/fishing/first', 'cod', true],
@@ -198,7 +205,7 @@ class NamespacedAttributeBagTest extends TestCase
             ['user2.login', null, false],
             ['never', null, false],
             ['bye', null, false],
-            ['bye/for/now', null, false],
+            ['bye/for/now', null, false]
         ];
     }
 }

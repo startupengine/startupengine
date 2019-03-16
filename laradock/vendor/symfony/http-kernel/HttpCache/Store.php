@@ -34,8 +34,16 @@ class Store implements StoreInterface
     public function __construct(string $root)
     {
         $this->root = $root;
-        if (!file_exists($this->root) && !@mkdir($this->root, 0777, true) && !is_dir($this->root)) {
-            throw new \RuntimeException(sprintf('Unable to create the store directory (%s).', $this->root));
+        if (
+            !file_exists($this->root) &&
+            !@mkdir($this->root, 0777, true) && !is_dir($this->root)
+        ) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Unable to create the store directory (%s).',
+                    $this->root
+                )
+            );
         }
         $this->keyCache = new \SplObjectStorage();
         $this->locks = [];
@@ -66,7 +74,12 @@ class Store implements StoreInterface
 
         if (!isset($this->locks[$key])) {
             $path = $this->getPath($key);
-            if (!file_exists(\dirname($path)) && false === @mkdir(\dirname($path), 0777, true) && !is_dir(\dirname($path))) {
+            if (
+                !file_exists(\dirname($path)) &&
+                false ===
+                    @mkdir(\dirname($path), 0777, true) &&
+                        !is_dir(\dirname($path))
+            ) {
                 return $path;
             }
             $h = fopen($path, 'cb');
@@ -110,7 +123,7 @@ class Store implements StoreInterface
             return true; // shortcut if lock held by this process
         }
 
-        if (!file_exists($path = $this->getPath($key))) {
+        if (!file_exists(($path = $this->getPath($key)))) {
             return false;
         }
 
@@ -131,14 +144,22 @@ class Store implements StoreInterface
     {
         $key = $this->getCacheKey($request);
 
-        if (!$entries = $this->getMetadata($key)) {
+        if (!($entries = $this->getMetadata($key))) {
             return;
         }
 
         // find a cached entry that matches the request.
         $match = null;
         foreach ($entries as $entry) {
-            if ($this->requestsMatch(isset($entry[1]['vary'][0]) ? implode(', ', $entry[1]['vary']) : '', $request->headers->all(), $entry[0])) {
+            if (
+                $this->requestsMatch(
+                    isset($entry[1]['vary'][0])
+                        ? implode(', ', $entry[1]['vary'])
+                        : '',
+                    $request->headers->all(),
+                    $entry[0]
+                )
+            ) {
                 $match = $entry;
 
                 break;
@@ -150,7 +171,11 @@ class Store implements StoreInterface
         }
 
         $headers = $match[1];
-        if (file_exists($body = $this->getPath($headers['x-content-digest'][0]))) {
+        if (
+            file_exists(
+                ($body = $this->getPath($headers['x-content-digest'][0]))
+            )
+        ) {
             return $this->restoreResponse($headers, $body);
         }
 
@@ -185,7 +210,10 @@ class Store implements StoreInterface
             $response->headers->set('X-Content-Digest', $digest);
 
             if (!$response->headers->has('Transfer-Encoding')) {
-                $response->headers->set('Content-Length', \strlen($response->getContent()));
+                $response->headers->set(
+                    'Content-Length',
+                    \strlen($response->getContent())
+                );
             }
         }
 
@@ -197,7 +225,10 @@ class Store implements StoreInterface
                 $entry[1]['vary'] = [''];
             }
 
-            if ($entry[1]['vary'][0] != $vary || !$this->requestsMatch($vary, $entry[0], $storedEnv)) {
+            if (
+                $entry[1]['vary'][0] != $vary ||
+                !$this->requestsMatch($vary, $entry[0], $storedEnv)
+            ) {
                 $entries[] = $entry;
             }
         }
@@ -221,7 +252,7 @@ class Store implements StoreInterface
      */
     protected function generateContentDigest(Response $response)
     {
-        return 'en'.hash('sha256', $response->getContent());
+        return 'en' . hash('sha256', $response->getContent());
     }
 
     /**
@@ -290,7 +321,7 @@ class Store implements StoreInterface
      */
     private function getMetadata($key)
     {
-        if (!$entries = $this->load($key)) {
+        if (!($entries = $this->load($key))) {
             return [];
         }
 
@@ -333,7 +364,7 @@ class Store implements StoreInterface
             unset($this->locks[$key]);
         }
 
-        if (file_exists($path = $this->getPath($key))) {
+        if (file_exists(($path = $this->getPath($key)))) {
             unlink($path);
 
             return true;
@@ -379,12 +410,17 @@ class Store implements StoreInterface
                 return false;
             }
         } else {
-            if (!file_exists(\dirname($path)) && false === @mkdir(\dirname($path), 0777, true) && !is_dir(\dirname($path))) {
+            if (
+                !file_exists(\dirname($path)) &&
+                false ===
+                    @mkdir(\dirname($path), 0777, true) &&
+                        !is_dir(\dirname($path))
+            ) {
                 return false;
             }
 
             $tmpFile = tempnam(\dirname($path), basename($path));
-            if (false === $fp = @fopen($tmpFile, 'wb')) {
+            if (false === ($fp = @fopen($tmpFile, 'wb'))) {
                 @unlink($tmpFile);
 
                 return false;
@@ -410,7 +446,15 @@ class Store implements StoreInterface
 
     public function getPath($key)
     {
-        return $this->root.\DIRECTORY_SEPARATOR.substr($key, 0, 2).\DIRECTORY_SEPARATOR.substr($key, 2, 2).\DIRECTORY_SEPARATOR.substr($key, 4, 2).\DIRECTORY_SEPARATOR.substr($key, 6);
+        return $this->root .
+            \DIRECTORY_SEPARATOR .
+            substr($key, 0, 2) .
+            \DIRECTORY_SEPARATOR .
+            substr($key, 2, 2) .
+            \DIRECTORY_SEPARATOR .
+            substr($key, 4, 2) .
+            \DIRECTORY_SEPARATOR .
+            substr($key, 6);
     }
 
     /**
@@ -427,7 +471,7 @@ class Store implements StoreInterface
      */
     protected function generateCacheKey(Request $request)
     {
-        return 'md'.hash('sha256', $request->getUri());
+        return 'md' . hash('sha256', $request->getUri());
     }
 
     /**

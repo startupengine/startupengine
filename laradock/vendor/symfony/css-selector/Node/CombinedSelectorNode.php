@@ -27,8 +27,11 @@ class CombinedSelectorNode extends AbstractNode
     private $combinator;
     private $subSelector;
 
-    public function __construct(NodeInterface $selector, string $combinator, NodeInterface $subSelector)
-    {
+    public function __construct(
+        NodeInterface $selector,
+        string $combinator,
+        NodeInterface $subSelector
+    ) {
         $this->selector = $selector;
         $this->combinator = $combinator;
         $this->subSelector = $subSelector;
@@ -54,7 +57,9 @@ class CombinedSelectorNode extends AbstractNode
      */
     public function getSpecificity(): Specificity
     {
-        return $this->selector->getSpecificity()->plus($this->subSelector->getSpecificity());
+        return $this->selector
+            ->getSpecificity()
+            ->plus($this->subSelector->getSpecificity());
     }
 
     /**
@@ -62,8 +67,15 @@ class CombinedSelectorNode extends AbstractNode
      */
     public function __toString(): string
     {
-        $combinator = ' ' === $this->combinator ? '<followed>' : $this->combinator;
+        $combinator =
+            ' ' === $this->combinator ? '<followed>' : $this->combinator;
 
-        return sprintf('%s[%s %s %s]', $this->getNodeName(), $this->selector, $combinator, $this->subSelector);
+        return sprintf(
+            '%s[%s %s %s]',
+            $this->getNodeName(),
+            $this->selector,
+            $combinator,
+            $this->subSelector
+        );
     }
 }

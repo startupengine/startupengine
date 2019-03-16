@@ -13,7 +13,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Mime_Headers_UnstructuredHeader extends Swift_Mime_Headers_AbstractHeader
+class Swift_Mime_Headers_UnstructuredHeader extends
+    Swift_Mime_Headers_AbstractHeader
 {
     /**
      * The value of this Header.
@@ -99,9 +100,7 @@ class Swift_Mime_Headers_UnstructuredHeader extends Swift_Mime_Headers_AbstractH
     public function getFieldBody()
     {
         if (!$this->getCachedValue()) {
-            $this->setCachedValue(
-                $this->encodeWords($this, $this->value)
-                );
+            $this->setCachedValue($this->encodeWords($this, $this->value));
         }
 
         return $this->getCachedValue();

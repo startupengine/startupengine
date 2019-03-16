@@ -47,7 +47,7 @@ class MockArraySessionStorageTest extends TestCase
 
         $this->data = [
             $this->attributes->getStorageKey() => ['foo' => 'bar'],
-            $this->flashes->getStorageKey() => ['notice' => 'hello'],
+            $this->flashes->getStorageKey() => ['notice' => 'hello']
         ];
 
         $this->storage = new MockArraySessionStorage();
@@ -80,14 +80,26 @@ class MockArraySessionStorageTest extends TestCase
         $id = $this->storage->getId();
         $this->storage->regenerate();
         $this->assertNotEquals($id, $this->storage->getId());
-        $this->assertEquals(['foo' => 'bar'], $this->storage->getBag('attributes')->all());
-        $this->assertEquals(['notice' => 'hello'], $this->storage->getBag('flashes')->peekAll());
+        $this->assertEquals(
+            ['foo' => 'bar'],
+            $this->storage->getBag('attributes')->all()
+        );
+        $this->assertEquals(
+            ['notice' => 'hello'],
+            $this->storage->getBag('flashes')->peekAll()
+        );
 
         $id = $this->storage->getId();
         $this->storage->regenerate(true);
         $this->assertNotEquals($id, $this->storage->getId());
-        $this->assertEquals(['foo' => 'bar'], $this->storage->getBag('attributes')->all());
-        $this->assertEquals(['notice' => 'hello'], $this->storage->getBag('flashes')->peekAll());
+        $this->assertEquals(
+            ['foo' => 'bar'],
+            $this->storage->getBag('attributes')->all()
+        );
+        $this->assertEquals(
+            ['notice' => 'hello'],
+            $this->storage->getBag('flashes')->peekAll()
+        );
     }
 
     public function testGetId()

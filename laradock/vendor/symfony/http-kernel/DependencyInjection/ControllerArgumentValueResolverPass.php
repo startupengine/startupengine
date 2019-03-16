@@ -32,8 +32,11 @@ class ControllerArgumentValueResolverPass implements CompilerPassInterface
     private $argumentValueResolverTag;
     private $traceableResolverStopwatch;
 
-    public function __construct(string $argumentResolverService = 'argument_resolver', string $argumentValueResolverTag = 'controller.argument_value_resolver', string $traceableResolverStopwatch = 'debug.stopwatch')
-    {
+    public function __construct(
+        string $argumentResolverService = 'argument_resolver',
+        string $argumentValueResolverTag = 'controller.argument_value_resolver',
+        string $traceableResolverStopwatch = 'debug.stopwatch'
+    ) {
         $this->argumentResolverService = $argumentResolverService;
         $this->argumentValueResolverTag = $argumentValueResolverTag;
         $this->traceableResolverStopwatch = $traceableResolverStopwatch;
@@ -45,20 +48,30 @@ class ControllerArgumentValueResolverPass implements CompilerPassInterface
             return;
         }
 
-        $resolvers = $this->findAndSortTaggedServices($this->argumentValueResolverTag, $container);
+        $resolvers = $this->findAndSortTaggedServices(
+            $this->argumentValueResolverTag,
+            $container
+        );
 
-        if ($container->getParameter('kernel.debug') && class_exists(Stopwatch::class) && $container->has($this->traceableResolverStopwatch)) {
+        if (
+            $container->getParameter('kernel.debug') &&
+            class_exists(Stopwatch::class) &&
+            $container->has($this->traceableResolverStopwatch)
+        ) {
             foreach ($resolvers as $resolverReference) {
                 $id = (string) $resolverReference;
-                $container->register("debug.$id", TraceableValueResolver::class)
+                $container
+                    ->register("debug.$id", TraceableValueResolver::class)
                     ->setDecoratedService($id)
-                    ->setArguments([new Reference("debug.$id.inner"), new Reference($this->traceableResolverStopwatch)]);
+                    ->setArguments([
+                        new Reference("debug.$id.inner"),
+                        new Reference($this->traceableResolverStopwatch)
+                    ]);
             }
         }
 
         $container
             ->getDefinition($this->argumentResolverService)
-            ->replaceArgument(1, new IteratorArgument($resolvers))
-        ;
+            ->replaceArgument(1, new IteratorArgument($resolvers));
     }
 }

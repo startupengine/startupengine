@@ -23,7 +23,12 @@ interface Swift_Mime_ContentEncoder extends Swift_Encoder
      * @param int                    $firstLineOffset
      * @param int                    $maxLineLength   - 0 indicates the default length for this encoding
      */
-    public function encodeByteStream(Swift_OutputByteStream $os, Swift_InputByteStream $is, $firstLineOffset = 0, $maxLineLength = 0);
+    public function encodeByteStream(
+        Swift_OutputByteStream $os,
+        Swift_InputByteStream $is,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    );
 
     /**
      * Get the MIME name of this content encoding scheme.

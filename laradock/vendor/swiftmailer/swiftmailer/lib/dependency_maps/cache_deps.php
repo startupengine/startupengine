@@ -19,5 +19,4 @@ Swift_DependencyContainer::getInstance()
     ->withDependencies(['cache.inputstream', 'tempdir'])
 
     ->register('cache.inputstream')
-    ->asNewInstanceOf('Swift_KeyCache_SimpleKeyCacheInputStream')
-;
+    ->asNewInstanceOf('Swift_KeyCache_SimpleKeyCacheInputStream');

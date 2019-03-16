@@ -40,7 +40,7 @@ class EventDispatcher implements EventDispatcherInterface
             $event = new Event();
         }
 
-        if ($listeners = $this->getListeners($eventName)) {
+        if (($listeners = $this->getListeners($eventName))) {
             $this->doDispatch($listeners, $eventName, $event);
         }
 
@@ -82,13 +82,22 @@ class EventDispatcher implements EventDispatcherInterface
             return;
         }
 
-        if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure) {
+        if (
+            \is_array($listener) &&
+            isset($listener[0]) &&
+            $listener[0] instanceof \Closure
+        ) {
             $listener[0] = $listener[0]();
         }
 
         foreach ($this->listeners[$eventName] as $priority => $listeners) {
             foreach ($listeners as $k => $v) {
-                if ($v !== $listener && \is_array($v) && isset($v[0]) && $v[0] instanceof \Closure) {
+                if (
+                    $v !== $listener &&
+                    \is_array($v) &&
+                    isset($v[0]) &&
+                    $v[0] instanceof \Closure
+                ) {
                     $v[0] = $v[0]();
                     $this->listeners[$eventName][$priority][$k] = $v;
                 }
@@ -135,13 +144,22 @@ class EventDispatcher implements EventDispatcherInterface
             return;
         }
 
-        if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure) {
+        if (
+            \is_array($listener) &&
+            isset($listener[0]) &&
+            $listener[0] instanceof \Closure
+        ) {
             $listener[0] = $listener[0]();
         }
 
         foreach ($this->listeners[$eventName] as $priority => $listeners) {
             foreach ($listeners as $k => $v) {
-                if ($v !== $listener && \is_array($v) && isset($v[0]) && $v[0] instanceof \Closure) {
+                if (
+                    $v !== $listener &&
+                    \is_array($v) &&
+                    isset($v[0]) &&
+                    $v[0] instanceof \Closure
+                ) {
                     $v[0] = $v[0]();
                 }
                 if ($v === $listener) {
@@ -168,10 +186,18 @@ class EventDispatcher implements EventDispatcherInterface
             if (\is_string($params)) {
                 $this->addListener($eventName, [$subscriber, $params]);
             } elseif (\is_string($params[0])) {
-                $this->addListener($eventName, [$subscriber, $params[0]], isset($params[1]) ? $params[1] : 0);
+                $this->addListener(
+                    $eventName,
+                    [$subscriber, $params[0]],
+                    isset($params[1]) ? $params[1] : 0
+                );
             } else {
                 foreach ($params as $listener) {
-                    $this->addListener($eventName, [$subscriber, $listener[0]], isset($listener[1]) ? $listener[1] : 0);
+                    $this->addListener(
+                        $eventName,
+                        [$subscriber, $listener[0]],
+                        isset($listener[1]) ? $listener[1] : 0
+                    );
                 }
             }
         }
@@ -185,10 +211,16 @@ class EventDispatcher implements EventDispatcherInterface
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_array($params) && \is_array($params[0])) {
                 foreach ($params as $listener) {
-                    $this->removeListener($eventName, [$subscriber, $listener[0]]);
+                    $this->removeListener($eventName, [
+                        $subscriber,
+                        $listener[0]
+                    ]);
                 }
             } else {
-                $this->removeListener($eventName, [$subscriber, \is_string($params) ? $params : $params[0]]);
+                $this->removeListener($eventName, [
+                    $subscriber,
+                    \is_string($params) ? $params : $params[0]
+                ]);
             }
         }
     }
@@ -225,7 +257,11 @@ class EventDispatcher implements EventDispatcherInterface
 
         foreach ($this->listeners[$eventName] as $priority => $listeners) {
             foreach ($listeners as $k => $listener) {
-                if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure) {
+                if (
+                    \is_array($listener) &&
+                    isset($listener[0]) &&
+                    $listener[0] instanceof \Closure
+                ) {
                     $listener[0] = $listener[0]();
                     $this->listeners[$eventName][$priority][$k] = $listener;
                 }

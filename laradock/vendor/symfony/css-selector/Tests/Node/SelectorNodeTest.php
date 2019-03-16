@@ -20,7 +20,10 @@ class SelectorNodeTest extends AbstractNodeTest
     {
         return [
             [new SelectorNode(new ElementNode()), 'Selector[Element[*]]'],
-            [new SelectorNode(new ElementNode(), 'pseudo'), 'Selector[Element[*]::pseudo]'],
+            [
+                new SelectorNode(new ElementNode(), 'pseudo'),
+                'Selector[Element[*]::pseudo]'
+            ]
         ];
     }
 
@@ -28,7 +31,7 @@ class SelectorNodeTest extends AbstractNodeTest
     {
         return [
             [new SelectorNode(new ElementNode()), 0],
-            [new SelectorNode(new ElementNode(), 'pseudo'), 1],
+            [new SelectorNode(new ElementNode(), 'pseudo'), 1]
         ];
     }
 }

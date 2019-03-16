@@ -57,7 +57,7 @@ class PhpStringTokenParser
         't' => "\t",
         'f' => "\f",
         'v' => "\v",
-        'e' => "\x1B",
+        'e' => "\x1B"
     ];
 
     /**
@@ -81,7 +81,10 @@ class PhpStringTokenParser
                 substr($str, $bLength + 1, -1)
             );
         } else {
-            return self::parseEscapeSequences(substr($str, $bLength + 1, -1), '"');
+            return self::parseEscapeSequences(
+                substr($str, $bLength + 1, -1),
+                '"'
+            );
         }
     }
 
@@ -96,7 +99,7 @@ class PhpStringTokenParser
     public static function parseEscapeSequences($str, $quote)
     {
         if (null !== $quote) {
-            $str = str_replace('\\'.$quote, $quote, $str);
+            $str = str_replace('\\' . $quote, $quote, $str);
         }
 
         return preg_replace_callback(

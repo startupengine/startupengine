@@ -239,7 +239,9 @@ class Profile
     public function getCollector($name)
     {
         if (!isset($this->collectors[$name])) {
-            throw new \InvalidArgumentException(sprintf('Collector "%s" does not exist.', $name));
+            throw new \InvalidArgumentException(
+                sprintf('Collector "%s" does not exist.', $name)
+            );
         }
 
         return $this->collectors[$name];
@@ -290,6 +292,16 @@ class Profile
 
     public function __sleep()
     {
-        return ['token', 'parent', 'children', 'collectors', 'ip', 'method', 'url', 'time', 'statusCode'];
+        return [
+            'token',
+            'parent',
+            'children',
+            'collectors',
+            'ip',
+            'method',
+            'url',
+            'time',
+            'statusCode'
+        ];
     }
 }

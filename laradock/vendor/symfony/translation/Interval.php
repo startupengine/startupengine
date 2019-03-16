@@ -11,7 +11,13 @@
 
 namespace Symfony\Component\Translation;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Symfony 4.2, use IdentityTranslator instead.', Interval::class), E_USER_DEPRECATED);
+@trigger_error(
+    sprintf(
+        'The "%s" class is deprecated since Symfony 4.2, use IdentityTranslator instead.',
+        Interval::class
+    ),
+    E_USER_DEPRECATED
+);
 
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
 
@@ -52,8 +58,16 @@ class Interval
     {
         $interval = trim($interval);
 
-        if (!preg_match('/^'.self::getIntervalRegexp().'$/x', $interval, $matches)) {
-            throw new InvalidArgumentException(sprintf('"%s" is not a valid interval.', $interval));
+        if (
+            !preg_match(
+                '/^' . self::getIntervalRegexp() . '$/x',
+                $interval,
+                $matches
+            )
+        ) {
+            throw new InvalidArgumentException(
+                sprintf('"%s" is not a valid interval.', $interval)
+            );
         }
 
         if ($matches[1]) {
@@ -66,10 +80,12 @@ class Interval
             $leftNumber = self::convertNumber($matches['left']);
             $rightNumber = self::convertNumber($matches['right']);
 
-            return
-                ('[' === $matches['left_delimiter'] ? $number >= $leftNumber : $number > $leftNumber)
-                && (']' === $matches['right_delimiter'] ? $number <= $rightNumber : $number < $rightNumber)
-            ;
+            return ('[' === $matches['left_delimiter']
+                ? $number >= $leftNumber
+                : $number > $leftNumber) &&
+                (']' === $matches['right_delimiter']
+                    ? $number <= $rightNumber
+                    : $number < $rightNumber);
         }
 
         return false;

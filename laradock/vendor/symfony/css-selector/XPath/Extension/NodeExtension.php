@@ -73,49 +73,67 @@ class NodeExtension extends AbstractExtension
             'Attribute' => [$this, 'translateAttribute'],
             'Class' => [$this, 'translateClass'],
             'Hash' => [$this, 'translateHash'],
-            'Element' => [$this, 'translateElement'],
+            'Element' => [$this, 'translateElement']
         ];
     }
 
-    public function translateSelector(Node\SelectorNode $node, Translator $translator): XPathExpr
-    {
+    public function translateSelector(
+        Node\SelectorNode $node,
+        Translator $translator
+    ): XPathExpr {
         return $translator->nodeToXPath($node->getTree());
     }
 
-    public function translateCombinedSelector(Node\CombinedSelectorNode $node, Translator $translator): XPathExpr
-    {
-        return $translator->addCombination($node->getCombinator(), $node->getSelector(), $node->getSubSelector());
+    public function translateCombinedSelector(
+        Node\CombinedSelectorNode $node,
+        Translator $translator
+    ): XPathExpr {
+        return $translator->addCombination(
+            $node->getCombinator(),
+            $node->getSelector(),
+            $node->getSubSelector()
+        );
     }
 
-    public function translateNegation(Node\NegationNode $node, Translator $translator): XPathExpr
-    {
+    public function translateNegation(
+        Node\NegationNode $node,
+        Translator $translator
+    ): XPathExpr {
         $xpath = $translator->nodeToXPath($node->getSelector());
         $subXpath = $translator->nodeToXPath($node->getSubSelector());
         $subXpath->addNameTest();
 
         if ($subXpath->getCondition()) {
-            return $xpath->addCondition(sprintf('not(%s)', $subXpath->getCondition()));
+            return $xpath->addCondition(
+                sprintf('not(%s)', $subXpath->getCondition())
+            );
         }
 
         return $xpath->addCondition('0');
     }
 
-    public function translateFunction(Node\FunctionNode $node, Translator $translator): XPathExpr
-    {
+    public function translateFunction(
+        Node\FunctionNode $node,
+        Translator $translator
+    ): XPathExpr {
         $xpath = $translator->nodeToXPath($node->getSelector());
 
         return $translator->addFunction($xpath, $node);
     }
 
-    public function translatePseudo(Node\PseudoNode $node, Translator $translator): XPathExpr
-    {
+    public function translatePseudo(
+        Node\PseudoNode $node,
+        Translator $translator
+    ): XPathExpr {
         $xpath = $translator->nodeToXPath($node->getSelector());
 
         return $translator->addPseudoClass($xpath, $node->getIdentifier());
     }
 
-    public function translateAttribute(Node\AttributeNode $node, Translator $translator): XPathExpr
-    {
+    public function translateAttribute(
+        Node\AttributeNode $node,
+        Translator $translator
+    ): XPathExpr {
         $name = $node->getAttribute();
         $safe = $this->isSafeName($name);
 
@@ -128,7 +146,12 @@ class NodeExtension extends AbstractExtension
             $safe = $safe && $this->isSafeName($node->getNamespace());
         }
 
-        $attribute = $safe ? '@'.$name : sprintf('attribute::*[name() = %s]', Translator::getXpathLiteral($name));
+        $attribute = $safe
+            ? '@' . $name
+            : sprintf(
+                'attribute::*[name() = %s]',
+                Translator::getXpathLiteral($name)
+            );
         $value = $node->getValue();
         $xpath = $translator->nodeToXPath($node->getSelector());
 
@@ -136,21 +159,40 @@ class NodeExtension extends AbstractExtension
             $value = strtolower($value);
         }
 
-        return $translator->addAttributeMatching($xpath, $node->getOperator(), $attribute, $value);
+        return $translator->addAttributeMatching(
+            $xpath,
+            $node->getOperator(),
+            $attribute,
+            $value
+        );
     }
 
-    public function translateClass(Node\ClassNode $node, Translator $translator): XPathExpr
-    {
+    public function translateClass(
+        Node\ClassNode $node,
+        Translator $translator
+    ): XPathExpr {
         $xpath = $translator->nodeToXPath($node->getSelector());
 
-        return $translator->addAttributeMatching($xpath, '~=', '@class', $node->getName());
+        return $translator->addAttributeMatching(
+            $xpath,
+            '~=',
+            '@class',
+            $node->getName()
+        );
     }
 
-    public function translateHash(Node\HashNode $node, Translator $translator): XPathExpr
-    {
+    public function translateHash(
+        Node\HashNode $node,
+        Translator $translator
+    ): XPathExpr {
         $xpath = $translator->nodeToXPath($node->getSelector());
 
-        return $translator->addAttributeMatching($xpath, '=', '@id', $node->getId());
+        return $translator->addAttributeMatching(
+            $xpath,
+            '=',
+            '@id',
+            $node->getId()
+        );
     }
 
     public function translateElement(Node\ElementNode $node): XPathExpr

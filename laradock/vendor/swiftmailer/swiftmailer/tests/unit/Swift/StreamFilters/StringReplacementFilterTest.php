@@ -1,6 +1,7 @@
 <?php
 
-class Swift_StreamFilters_StringReplacementFilterTest extends \PHPUnit\Framework\TestCase
+class Swift_StreamFilters_StringReplacementFilterTest extends
+    \PHPUnit\Framework\TestCase
 {
     public function testBasicReplacementsAreMade()
     {
@@ -11,10 +12,11 @@ class Swift_StreamFilters_StringReplacementFilterTest extends \PHPUnit\Framework
     public function testShouldBufferReturnsTrueIfPartialMatchAtEndOfBuffer()
     {
         $filter = $this->createFilter('foo', 'bar');
-        $this->assertTrue($filter->shouldBuffer('XfooYf'),
-            '%s: Filter should buffer since "foo" is the needle and the ending '.
-            '"f" could be from "foo"'
-            );
+        $this->assertTrue(
+            $filter->shouldBuffer('XfooYf'),
+            '%s: Filter should buffer since "foo" is the needle and the ending ' .
+                '"f" could be from "foo"'
+        );
     }
 
     public function testFilterCanMakeMultipleReplacements()
@@ -32,18 +34,20 @@ class Swift_StreamFilters_StringReplacementFilterTest extends \PHPUnit\Framework
     public function testShouldBufferReturnsFalseIfPartialMatchNotAtEndOfString()
     {
         $filter = $this->createFilter("\r\n", "\n");
-        $this->assertFalse($filter->shouldBuffer("foo\r\nbar"),
+        $this->assertFalse(
+            $filter->shouldBuffer("foo\r\nbar"),
             '%s: Filter should not buffer since x0Dx0A is the needle and is not at EOF'
-            );
+        );
     }
 
     public function testShouldBufferReturnsTrueIfAnyOfMultipleMatchesAtEndOfString()
     {
         $filter = $this->createFilter(['foo', 'zip'], 'bar');
-        $this->assertTrue($filter->shouldBuffer('XfooYzi'),
-            '%s: Filter should buffer since "zip" is a needle and the ending '.
-            '"zi" could be from "zip"'
-            );
+        $this->assertTrue(
+            $filter->shouldBuffer('XfooYzi'),
+            '%s: Filter should buffer since "zip" is a needle and the ending ' .
+                '"zi" could be from "zip"'
+        );
     }
 
     public function testShouldBufferReturnsFalseOnEmptyBuffer()
@@ -54,6 +58,9 @@ class Swift_StreamFilters_StringReplacementFilterTest extends \PHPUnit\Framework
 
     private function createFilter($search, $replace)
     {
-        return new Swift_StreamFilters_StringReplacementFilter($search, $replace);
+        return new Swift_StreamFilters_StringReplacementFilter(
+            $search,
+            $replace
+        );
     }
 }

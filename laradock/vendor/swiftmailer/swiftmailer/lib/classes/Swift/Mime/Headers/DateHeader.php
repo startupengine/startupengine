@@ -82,9 +82,11 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
      */
     public function setDateTime(DateTimeInterface $dateTime)
     {
-        $this->clearCachedValueIf($this->getCachedValue() != $dateTime->format(DateTime::RFC2822));
+        $this->clearCachedValueIf(
+            $this->getCachedValue() != $dateTime->format(DateTime::RFC2822)
+        );
         if ($dateTime instanceof DateTime) {
-            $immutable = new DateTimeImmutable('@'.$dateTime->getTimestamp());
+            $immutable = new DateTimeImmutable('@' . $dateTime->getTimestamp());
             $dateTime = $immutable->setTimezone($dateTime->getTimezone());
         }
         $this->dateTime = $dateTime;
@@ -104,7 +106,9 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
     {
         if (!$this->getCachedValue()) {
             if (isset($this->dateTime)) {
-                $this->setCachedValue($this->dateTime->format(DateTime::RFC2822));
+                $this->setCachedValue(
+                    $this->dateTime->format(DateTime::RFC2822)
+                );
             }
         }
 

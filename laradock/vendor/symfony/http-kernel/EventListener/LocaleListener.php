@@ -35,8 +35,11 @@ class LocaleListener implements EventSubscriberInterface
      * @param string                            $defaultLocale The default locale
      * @param RequestContextAwareInterface|null $router        The router
      */
-    public function __construct(RequestStack $requestStack, string $defaultLocale = 'en', RequestContextAwareInterface $router = null)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        string $defaultLocale = 'en',
+        RequestContextAwareInterface $router = null
+    ) {
         $this->defaultLocale = $defaultLocale;
         $this->requestStack = $requestStack;
         $this->router = $router;
@@ -53,14 +56,16 @@ class LocaleListener implements EventSubscriberInterface
 
     public function onKernelFinishRequest(FinishRequestEvent $event)
     {
-        if (null !== $parentRequest = $this->requestStack->getParentRequest()) {
+        if (
+            null !== ($parentRequest = $this->requestStack->getParentRequest())
+        ) {
             $this->setRouterContext($parentRequest);
         }
     }
 
     private function setLocale(Request $request)
     {
-        if ($locale = $request->attributes->get('_locale')) {
+        if (($locale = $request->attributes->get('_locale'))) {
             $request->setLocale($locale);
         }
     }
@@ -68,7 +73,9 @@ class LocaleListener implements EventSubscriberInterface
     private function setRouterContext(Request $request)
     {
         if (null !== $this->router) {
-            $this->router->getContext()->setParameter('_locale', $request->getLocale());
+            $this->router
+                ->getContext()
+                ->setParameter('_locale', $request->getLocale());
         }
     }
 
@@ -77,7 +84,7 @@ class LocaleListener implements EventSubscriberInterface
         return [
             // must be registered after the Router to have access to the _locale
             KernelEvents::REQUEST => [['onKernelRequest', 16]],
-            KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]],
+            KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]]
         ];
     }
 }

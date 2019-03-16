@@ -43,8 +43,13 @@ class ProfilerListener implements EventSubscriberInterface
      * @param bool                         $onlyException      True if the profiler only collects data when an exception occurs, false otherwise
      * @param bool                         $onlyMasterRequests True if the profiler only collects data when the request is a master request, false otherwise
      */
-    public function __construct(Profiler $profiler, RequestStack $requestStack, RequestMatcherInterface $matcher = null, bool $onlyException = false, bool $onlyMasterRequests = false)
-    {
+    public function __construct(
+        Profiler $profiler,
+        RequestStack $requestStack,
+        RequestMatcherInterface $matcher = null,
+        bool $onlyException = false,
+        bool $onlyMasterRequests = false
+    ) {
         $this->profiler = $profiler;
         $this->matcher = $matcher;
         $this->onlyException = $onlyException;
@@ -88,7 +93,13 @@ class ProfilerListener implements EventSubscriberInterface
             return;
         }
 
-        if (!$profile = $this->profiler->collect($request, $event->getResponse(), $exception)) {
+        if (
+            !($profile = $this->profiler->collect(
+                $request,
+                $event->getResponse(),
+                $exception
+            ))
+        ) {
             return;
         }
 
@@ -101,9 +112,11 @@ class ProfilerListener implements EventSubscriberInterface
     {
         // attach children to parents
         foreach ($this->profiles as $request) {
-            if (null !== $parentRequest = $this->parents[$request]) {
+            if (null !== ($parentRequest = $this->parents[$request])) {
                 if (isset($this->profiles[$parentRequest])) {
-                    $this->profiles[$parentRequest]->addChild($this->profiles[$request]);
+                    $this->profiles[$parentRequest]->addChild(
+                        $this->profiles[$request]
+                    );
                 }
             }
         }
@@ -122,7 +135,7 @@ class ProfilerListener implements EventSubscriberInterface
         return [
             KernelEvents::RESPONSE => ['onKernelResponse', -100],
             KernelEvents::EXCEPTION => ['onKernelException', 0],
-            KernelEvents::TERMINATE => ['onKernelTerminate', -1024],
+            KernelEvents::TERMINATE => ['onKernelTerminate', -1024]
         ];
     }
 }

@@ -66,7 +66,12 @@ interface SurrogateInterface
      *
      * @return string
      */
-    public function renderIncludeTag($uri, $alt = null, $ignoreErrors = true, $comment = '');
+    public function renderIncludeTag(
+        $uri,
+        $alt = null,
+        $ignoreErrors = true,
+        $comment = ''
+    );
 
     /**
      * Replaces a Response Surrogate tags with the included resource content.

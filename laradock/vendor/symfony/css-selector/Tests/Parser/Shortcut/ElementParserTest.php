@@ -38,7 +38,7 @@ class ElementParserTest extends TestCase
             ['*', 'Element[*]'],
             ['testel', 'Element[testel]'],
             ['testns|*', 'Element[testns|*]'],
-            ['testns|testel', 'Element[testns|testel]'],
+            ['testns|testel', 'Element[testns|testel]']
         ];
     }
 }

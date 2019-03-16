@@ -8,10 +8,10 @@ class Swift_Bug76Test extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $this->inputFile = sys_get_temp_dir().'/in.bin';
+        $this->inputFile = sys_get_temp_dir() . '/in.bin';
         file_put_contents($this->inputFile, '');
 
-        $this->outputFile = sys_get_temp_dir().'/out.bin';
+        $this->outputFile = sys_get_temp_dir() . '/out.bin';
         file_put_contents($this->outputFile, '');
 
         $this->encoder = $this->createEncoder();
@@ -32,7 +32,9 @@ class Swift_Bug76Test extends \PHPUnit\Framework\TestCase
 
         $this->encoder->encodeByteStream($os, $is, 0, 80); //Exceeds 76
 
-        $this->assertMaxLineLength(76, $this->outputFile,
+        $this->assertMaxLineLength(
+            76,
+            $this->outputFile,
             '%s: Line length should not exceed 76 characters'
         );
     }
@@ -41,7 +43,7 @@ class Swift_Bug76Test extends \PHPUnit\Framework\TestCase
     {
         $lines = file($filePath);
         foreach ($lines as $line) {
-            $this->assertTrue((strlen(trim($line)) <= 76), $message);
+            $this->assertTrue(strlen(trim($line)) <= 76, $message);
         }
     }
 

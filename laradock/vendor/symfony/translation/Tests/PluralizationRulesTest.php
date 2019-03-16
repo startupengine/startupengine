@@ -63,11 +63,27 @@ class PluralizationRulesTest extends TestCase
     public function successLangcodes()
     {
         return [
-            ['1', ['ay', 'bo', 'cgg', 'dz', 'id', 'ja', 'jbo', 'ka', 'kk', 'km', 'ko', 'ky']],
+            [
+                '1',
+                [
+                    'ay',
+                    'bo',
+                    'cgg',
+                    'dz',
+                    'id',
+                    'ja',
+                    'jbo',
+                    'ka',
+                    'kk',
+                    'km',
+                    'ko',
+                    'ky'
+                ]
+            ],
             ['2', ['nl', 'fr', 'en', 'de', 'de_GE', 'hy', 'hy_AM']],
             ['3', ['be', 'bs', 'cs', 'hr']],
             ['4', ['cy', 'mt', 'sl']],
-            ['6', ['ar']],
+            ['6', ['ar']]
         ];
     }
 
@@ -86,7 +102,7 @@ class PluralizationRulesTest extends TestCase
             ['2', ['jbo']],
             ['3', ['cbs']],
             ['4', ['gd', 'kw']],
-            ['5', ['ga']],
+            ['5', ['ga']]
         ];
     }
 
@@ -102,9 +118,17 @@ class PluralizationRulesTest extends TestCase
         foreach ($matrix as $langCode => $data) {
             $indexes = array_flip($data);
             if ($expectSuccess) {
-                $this->assertEquals($nplural, \count($indexes), "Langcode '$langCode' has '$nplural' plural forms.");
+                $this->assertEquals(
+                    $nplural,
+                    \count($indexes),
+                    "Langcode '$langCode' has '$nplural' plural forms."
+                );
             } else {
-                $this->assertNotEquals((int) $nplural, \count($indexes), "Langcode '$langCode' has '$nplural' plural forms.");
+                $this->assertNotEquals(
+                    (int) $nplural,
+                    \count($indexes),
+                    "Langcode '$langCode' has '$nplural' plural forms."
+                );
             }
         }
     }

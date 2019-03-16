@@ -19,7 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class MemoryDataCollector extends DataCollector implements LateDataCollectorInterface
+class MemoryDataCollector extends DataCollector implements
+    LateDataCollectorInterface
 {
     public function __construct()
     {
@@ -29,8 +30,11 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         $this->updateMemoryUsage();
     }
 
@@ -41,7 +45,7 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
     {
         $this->data = [
             'memory' => 0,
-            'memory_limit' => $this->convertToBytes(ini_get('memory_limit')),
+            'memory_limit' => $this->convertToBytes(ini_get('memory_limit'))
         ];
     }
 
@@ -106,13 +110,17 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
         }
 
         switch (substr($memoryLimit, -1)) {
-            case 't': $max *= 1024;
+            case 't':
+                $max *= 1024;
             // no break
-            case 'g': $max *= 1024;
+            case 'g':
+                $max *= 1024;
             // no break
-            case 'm': $max *= 1024;
+            case 'm':
+                $max *= 1024;
             // no break
-            case 'k': $max *= 1024;
+            case 'k':
+                $max *= 1024;
         }
 
         return $max;

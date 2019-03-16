@@ -27,7 +27,14 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
     /**
      * Cache-Control headers that are sent to the final response if they appear in ANY of the responses.
      */
-    private static $overrideDirectives = ['private', 'no-cache', 'no-store', 'no-transform', 'must-revalidate', 'proxy-revalidate'];
+    private static $overrideDirectives = [
+        'private',
+        'no-cache',
+        'no-store',
+        'no-transform',
+        'must-revalidate',
+        'proxy-revalidate'
+    ];
 
     /**
      * Cache-Control headers that are sent to the final response if they appear in ALL of the responses.
@@ -45,12 +52,12 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
         'proxy-revalidate' => null,
         'public' => null,
         'private' => null,
-        'immutable' => null,
+        'immutable' => null
     ];
     private $ageDirectives = [
         'max-age' => null,
         's-maxage' => null,
-        'expires' => null,
+        'expires' => null
     ];
 
     /**
@@ -68,7 +75,9 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
 
         foreach (self::$inheritDirectives as $directive) {
             if (false !== $this->flagDirectives[$directive]) {
-                $this->flagDirectives[$directive] = $response->headers->hasCacheControlDirective($directive);
+                $this->flagDirectives[
+                    $directive
+                ] = $response->headers->hasCacheControlDirective($directive);
             }
         }
 
@@ -81,12 +90,28 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
             return;
         }
 
-        $this->storeRelativeAgeDirective('max-age', $response->headers->getCacheControlDirective('max-age'), $age);
-        $this->storeRelativeAgeDirective('s-maxage', $response->headers->getCacheControlDirective('s-maxage') ?: $response->headers->getCacheControlDirective('max-age'), $age);
+        $this->storeRelativeAgeDirective(
+            'max-age',
+            $response->headers->getCacheControlDirective('max-age'),
+            $age
+        );
+        $this->storeRelativeAgeDirective(
+            's-maxage',
+            $response->headers->getCacheControlDirective('s-maxage') ?:
+            $response->headers->getCacheControlDirective('max-age'),
+            $age
+        );
 
         $expires = $response->getExpires();
-        $expires = null !== $expires ? $expires->format('U') - $response->getDate()->format('U') : null;
-        $this->storeRelativeAgeDirective('expires', $expires >= 0 ? $expires : null, 0);
+        $expires =
+            null !== $expires
+                ? $expires->format('U') - $response->getDate()->format('U')
+                : null;
+        $this->storeRelativeAgeDirective(
+            'expires',
+            $expires >= 0 ? $expires : null,
+            0
+        );
     }
 
     /**
@@ -113,9 +138,15 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
             $response->setExpires($response->getDate());
 
             if ($this->flagDirectives['no-store']) {
-                $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+                $response->headers->set(
+                    'Cache-Control',
+                    'no-cache, no-store, must-revalidate'
+                );
             } else {
-                $response->headers->set('Cache-Control', 'no-cache, must-revalidate');
+                $response->headers->set(
+                    'Cache-Control',
+                    'no-cache, must-revalidate'
+                );
             }
 
             return;
@@ -127,7 +158,10 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
             $flags['no-cache'] = true;
         }
 
-        $response->headers->set('Cache-Control', implode(', ', array_keys($flags)));
+        $response->headers->set(
+            'Cache-Control',
+            implode(', ', array_keys($flags))
+        );
 
         $maxAge = null;
         $sMaxage = null;
@@ -141,13 +175,20 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
             $sMaxage = $this->ageDirectives['s-maxage'] + $this->age;
 
             if ($maxAge !== $sMaxage) {
-                $response->headers->addCacheControlDirective('s-maxage', $sMaxage);
+                $response->headers->addCacheControlDirective(
+                    's-maxage',
+                    $sMaxage
+                );
             }
         }
 
         if (\is_numeric($this->ageDirectives['expires'])) {
             $date = clone $response->getDate();
-            $date->modify('+'.($this->ageDirectives['expires'] + $this->age).' seconds');
+            $date->modify(
+                '+' .
+                    ($this->ageDirectives['expires'] + $this->age) .
+                    ' seconds'
+            );
             $response->setExpires($date);
         }
     }
@@ -163,17 +204,19 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
     {
         // RFC2616: A response received with a status code of 200, 203, 300, 301 or 410
         // MAY be stored by a cache […] unless a cache-control directive prohibits caching.
-        if ($response->headers->hasCacheControlDirective('no-cache')
-            || $response->headers->getCacheControlDirective('no-store')
+        if (
+            $response->headers->hasCacheControlDirective('no-cache') ||
+            $response->headers->getCacheControlDirective('no-store')
         ) {
             return true;
         }
 
         // Last-Modified and Etag headers cannot be merged, they render the response uncacheable
         // by default (except if the response also has max-age etc.).
-        if (\in_array($response->getStatusCode(), [200, 203, 300, 301, 410])
-            && null === $response->getLastModified()
-            && null === $response->getEtag()
+        if (
+            \in_array($response->getStatusCode(), [200, 203, 300, 301, 410]) &&
+            null === $response->getLastModified() &&
+            null === $response->getEtag()
         ) {
             return false;
         }
@@ -181,7 +224,14 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
         // RFC2616: A response received with any other status code (e.g. status codes 302 and 307)
         // MUST NOT be returned in a reply to a subsequent request unless there are
         // cache-control directives or another header(s) that explicitly allow it.
-        $cacheControl = ['max-age', 's-maxage', 'must-revalidate', 'proxy-revalidate', 'public', 'private'];
+        $cacheControl = [
+            'max-age',
+            's-maxage',
+            'must-revalidate',
+            'proxy-revalidate',
+            'public',
+            'private'
+        ];
         foreach ($cacheControl as $key) {
             if ($response->headers->hasCacheControlDirective($key)) {
                 return false;
@@ -216,7 +266,10 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
 
         if (false !== $this->ageDirectives[$directive]) {
             $value = $value - $age;
-            $this->ageDirectives[$directive] = null !== $this->ageDirectives[$directive] ? min($this->ageDirectives[$directive], $value) : $value;
+            $this->ageDirectives[$directive] =
+                null !== $this->ageDirectives[$directive]
+                    ? min($this->ageDirectives[$directive], $value)
+                    : $value;
         }
     }
 }

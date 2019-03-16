@@ -20,28 +20,35 @@ class YamlFileDumperTest extends TestCase
     public function testTreeFormatCatalogue()
     {
         $catalogue = new MessageCatalogue('en');
-        $catalogue->add(
-            [
-                'foo.bar1' => 'value1',
-                'foo.bar2' => 'value2',
-            ]);
+        $catalogue->add([
+            'foo.bar1' => 'value1',
+            'foo.bar2' => 'value2'
+        ]);
 
         $dumper = new YamlFileDumper();
 
-        $this->assertStringEqualsFile(__DIR__.'/../fixtures/messages.yml', $dumper->formatCatalogue($catalogue, 'messages', ['as_tree' => true, 'inline' => 999]));
+        $this->assertStringEqualsFile(
+            __DIR__ . '/../fixtures/messages.yml',
+            $dumper->formatCatalogue($catalogue, 'messages', [
+                'as_tree' => true,
+                'inline' => 999
+            ])
+        );
     }
 
     public function testLinearFormatCatalogue()
     {
         $catalogue = new MessageCatalogue('en');
-        $catalogue->add(
-            [
-                'foo.bar1' => 'value1',
-                'foo.bar2' => 'value2',
-            ]);
+        $catalogue->add([
+            'foo.bar1' => 'value1',
+            'foo.bar2' => 'value2'
+        ]);
 
         $dumper = new YamlFileDumper();
 
-        $this->assertStringEqualsFile(__DIR__.'/../fixtures/messages_linear.yml', $dumper->formatCatalogue($catalogue, 'messages'));
+        $this->assertStringEqualsFile(
+            __DIR__ . '/../fixtures/messages_linear.yml',
+            $dumper->formatCatalogue($catalogue, 'messages')
+        );
     }
 }

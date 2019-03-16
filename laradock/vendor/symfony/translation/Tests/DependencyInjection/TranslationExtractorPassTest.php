@@ -22,13 +22,17 @@ class TranslationExtractorPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $extractorDefinition = $container->register('translation.extractor');
-        $container->register('foo.id')
+        $container
+            ->register('foo.id')
             ->addTag('translation.extractor', ['alias' => 'bar.alias']);
 
         $translationDumperPass = new TranslationExtractorPass();
         $translationDumperPass->process($container);
 
-        $this->assertEquals([['addExtractor', ['bar.alias', new Reference('foo.id')]]], $extractorDefinition->getMethodCalls());
+        $this->assertEquals(
+            [['addExtractor', ['bar.alias', new Reference('foo.id')]]],
+            $extractorDefinition->getMethodCalls()
+        );
     }
 
     public function testProcessNoDefinitionFound()
@@ -52,11 +56,14 @@ class TranslationExtractorPassTest extends TestCase
      */
     public function testProcessMissingAlias()
     {
-        $definition = $this->getMockBuilder('Symfony\Component\DependencyInjection\Definition')->disableOriginalConstructor()->getMock();
+        $definition = $this->getMockBuilder(
+            'Symfony\Component\DependencyInjection\Definition'
+        )
+            ->disableOriginalConstructor()
+            ->getMock();
         $container = new ContainerBuilder();
         $container->register('translation.extractor');
-        $container->register('foo.id')
-            ->addTag('translation.extractor', []);
+        $container->register('foo.id')->addTag('translation.extractor', []);
 
         $definition->expects($this->never())->method('addMethodCall');
 

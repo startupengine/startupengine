@@ -1,6 +1,7 @@
 <?php
 
-class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends \PHPUnit\Framework\TestCase
+class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends
+    \PHPUnit\Framework\TestCase
 {
     protected $_samplesDir;
 
@@ -11,28 +12,30 @@ class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends \PH
 
     protected function setUp()
     {
-        $this->samplesDir = realpath(__DIR__.'/../../../../_samples/charsets');
+        $this->samplesDir = realpath(
+            __DIR__ . '/../../../../_samples/charsets'
+        );
         $this->encoder = new Swift_Mime_ContentEncoder_NativeQpContentEncoder();
     }
 
     public function testEncodingAndDecodingSamples()
     {
         $sampleFp = opendir($this->samplesDir);
-        while (false !== $encodingDir = readdir($sampleFp)) {
+        while (false !== ($encodingDir = readdir($sampleFp))) {
             if ('.' == substr($encodingDir, 0, 1)) {
                 continue;
             }
 
-            $sampleDir = $this->samplesDir.'/'.$encodingDir;
+            $sampleDir = $this->samplesDir . '/' . $encodingDir;
 
             if (is_dir($sampleDir)) {
                 $fileFp = opendir($sampleDir);
-                while (false !== $sampleFile = readdir($fileFp)) {
+                while (false !== ($sampleFile = readdir($fileFp))) {
                     if ('.' == substr($sampleFile, 0, 1)) {
                         continue;
                     }
 
-                    $text = file_get_contents($sampleDir.'/'.$sampleFile);
+                    $text = file_get_contents($sampleDir . '/' . $sampleFile);
 
                     $os = new Swift_ByteStream_ArrayByteStream();
                     $os->write($text);
@@ -41,7 +44,7 @@ class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends \PH
                     $this->encoder->encodeByteStream($os, $is);
 
                     $encoded = '';
-                    while (false !== $bytes = $is->read(8192)) {
+                    while (false !== ($bytes = $is->read(8192))) {
                         $encoded .= $bytes;
                     }
 
@@ -49,7 +52,10 @@ class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends \PH
                         quoted_printable_decode($encoded),
                         // CR and LF are converted to CRLF
                         preg_replace('~\r(?!\n)|(?<!\r)\n~', "\r\n", $text),
-                        '%s: Encoded string should decode back to original string for sample '.$sampleDir.'/'.$sampleFile
+                        '%s: Encoded string should decode back to original string for sample ' .
+                            $sampleDir .
+                            '/' .
+                            $sampleFile
                     );
                 }
                 closedir($fileFp);
@@ -61,7 +67,10 @@ class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends \PH
     public function testEncodingAndDecodingSamplesFromDiConfiguredInstance()
     {
         $encoder = $this->createEncoderFromContainer();
-        $this->assertSame('=C3=A4=C3=B6=C3=BC=C3=9F', $encoder->encodeString('äöüß'));
+        $this->assertSame(
+            '=C3=A4=C3=B6=C3=BC=C3=9F',
+            $encoder->encodeString('äöüß')
+        );
     }
 
     /**
@@ -81,8 +90,8 @@ class Swift_Mime_ContentEncoder_NativeQpContentEncoderAcceptanceTest extends \PH
 
     private function createEncoderFromContainer()
     {
-        return Swift_DependencyContainer::getInstance()
-            ->lookup('mime.nativeqpcontentencoder')
-            ;
+        return Swift_DependencyContainer::getInstance()->lookup(
+            'mime.nativeqpcontentencoder'
+        );
     }
 }

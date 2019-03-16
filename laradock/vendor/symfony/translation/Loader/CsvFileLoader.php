@@ -34,14 +34,22 @@ class CsvFileLoader extends FileLoader
         try {
             $file = new \SplFileObject($resource, 'rb');
         } catch (\RuntimeException $e) {
-            throw new NotFoundResourceException(sprintf('Error opening file "%s".', $resource), 0, $e);
+            throw new NotFoundResourceException(
+                sprintf('Error opening file "%s".', $resource),
+                0,
+                $e
+            );
         }
 
         $file->setFlags(\SplFileObject::READ_CSV | \SplFileObject::SKIP_EMPTY);
         $file->setCsvControl($this->delimiter, $this->enclosure, $this->escape);
 
         foreach ($file as $data) {
-            if ('#' !== substr($data[0], 0, 1) && isset($data[1]) && 2 === \count($data)) {
+            if (
+                '#' !== substr($data[0], 0, 1) &&
+                isset($data[1]) &&
+                2 === \count($data)
+            ) {
                 $messages[$data[0]] = $data[1];
             }
         }
@@ -56,8 +64,11 @@ class CsvFileLoader extends FileLoader
      * @param string $enclosure Enclosure character
      * @param string $escape    Escape character
      */
-    public function setCsvControl($delimiter = ';', $enclosure = '"', $escape = '\\')
-    {
+    public function setCsvControl(
+        $delimiter = ';',
+        $enclosure = '"',
+        $escape = '\\'
+    ) {
         $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
         $this->escape = $escape;

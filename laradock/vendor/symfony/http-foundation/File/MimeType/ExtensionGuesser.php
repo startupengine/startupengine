@@ -86,7 +86,7 @@ class ExtensionGuesser implements ExtensionGuesserInterface
     public function guess($mimeType)
     {
         foreach ($this->guessers as $guesser) {
-            if (null !== $extension = $guesser->guess($mimeType)) {
+            if (null !== ($extension = $guesser->guess($mimeType))) {
                 return $extension;
             }
         }

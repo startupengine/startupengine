@@ -45,7 +45,7 @@ abstract class Swift
             return;
         }
 
-        $path = __DIR__.'/'.str_replace('_', '/', $class).'.php';
+        $path = __DIR__ . '/' . str_replace('_', '/', $class) . '.php';
 
         if (!file_exists($path)) {
             return;

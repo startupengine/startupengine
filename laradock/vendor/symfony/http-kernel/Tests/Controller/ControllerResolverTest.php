@@ -21,11 +21,19 @@ class ControllerResolverTest extends TestCase
     public function testGetControllerWithoutControllerParameter()
     {
         $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
-        $logger->expects($this->once())->method('warning')->with('Unable to look for the controller as the "_controller" parameter is missing.');
+        $logger
+            ->expects($this->once())
+            ->method('warning')
+            ->with(
+                'Unable to look for the controller as the "_controller" parameter is missing.'
+            );
         $resolver = $this->createControllerResolver($logger);
 
         $request = Request::create('/');
-        $this->assertFalse($resolver->getController($request), '->getController() returns false when the request has no _controller attribute');
+        $this->assertFalse(
+            $resolver->getController($request),
+            '->getController() returns false when the request has no _controller attribute'
+        );
     }
 
     public function testGetControllerWithLambda()
@@ -33,7 +41,7 @@ class ControllerResolverTest extends TestCase
         $resolver = $this->createControllerResolver();
 
         $request = Request::create('/');
-        $request->attributes->set('_controller', $lambda = function () {});
+        $request->attributes->set('_controller', ($lambda = function () {}));
         $controller = $resolver->getController($request);
         $this->assertSame($lambda, $controller);
     }
@@ -65,7 +73,10 @@ class ControllerResolverTest extends TestCase
         $resolver = $this->createControllerResolver();
 
         $request = Request::create('/');
-        $request->attributes->set('_controller', [ControllerTest::class, 'publicAction']);
+        $request->attributes->set('_controller', [
+            ControllerTest::class,
+            'publicAction'
+        ]);
         $controller = $resolver->getController($request);
         $this->assertInstanceOf(ControllerTest::class, $controller[0]);
         $this->assertSame('publicAction', $controller[1]);
@@ -76,7 +87,10 @@ class ControllerResolverTest extends TestCase
         $resolver = $this->createControllerResolver();
 
         $request = Request::create('/');
-        $request->attributes->set('_controller', ControllerTest::class.'::publicAction');
+        $request->attributes->set(
+            '_controller',
+            ControllerTest::class . '::publicAction'
+        );
         $controller = $resolver->getController($request);
         $this->assertInstanceOf(ControllerTest::class, $controller[0]);
         $this->assertSame('publicAction', $controller[1]);
@@ -109,9 +123,15 @@ class ControllerResolverTest extends TestCase
         $resolver = $this->createControllerResolver();
 
         $request = Request::create('/');
-        $request->attributes->set('_controller', 'Symfony\Component\HttpKernel\Tests\Controller\some_controller_function');
+        $request->attributes->set(
+            '_controller',
+            'Symfony\Component\HttpKernel\Tests\Controller\some_controller_function'
+        );
         $controller = $resolver->getController($request);
-        $this->assertSame('Symfony\Component\HttpKernel\Tests\Controller\some_controller_function', $controller);
+        $this->assertSame(
+            'Symfony\Component\HttpKernel\Tests\Controller\some_controller_function',
+            $controller
+        );
     }
 
     public function testGetControllerWithClosure()
@@ -132,8 +152,10 @@ class ControllerResolverTest extends TestCase
     /**
      * @dataProvider getStaticControllers
      */
-    public function testGetControllerWithStaticController($staticController, $returnValue)
-    {
+    public function testGetControllerWithStaticController(
+        $staticController,
+        $returnValue
+    ) {
         $resolver = $this->createControllerResolver();
 
         $request = Request::create('/');
@@ -146,18 +168,21 @@ class ControllerResolverTest extends TestCase
     public function getStaticControllers()
     {
         return [
-            [TestAbstractController::class.'::staticAction', 'foo'],
+            [TestAbstractController::class . '::staticAction', 'foo'],
             [[TestAbstractController::class, 'staticAction'], 'foo'],
-            [PrivateConstructorController::class.'::staticAction', 'bar'],
-            [[PrivateConstructorController::class, 'staticAction'], 'bar'],
+            [PrivateConstructorController::class . '::staticAction', 'bar'],
+            [[PrivateConstructorController::class, 'staticAction'], 'bar']
         ];
     }
 
     /**
      * @dataProvider getUndefinedControllers
      */
-    public function testGetControllerWithUndefinedController($controller, $exceptionName = null, $exceptionMessage = null)
-    {
+    public function testGetControllerWithUndefinedController(
+        $controller,
+        $exceptionName = null,
+        $exceptionMessage = null
+    ) {
         $resolver = $this->createControllerResolver();
         if (method_exists($this, 'expectException')) {
             $this->expectException($exceptionName);
@@ -179,17 +204,61 @@ class ControllerResolverTest extends TestCase
             ['foo', \Error::class, 'Class \'foo\' not found'],
             ['oof::bar', \Error::class, 'Class \'oof\' not found'],
             [['oof', 'bar'], \Error::class, 'Class \'oof\' not found'],
-            ['Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::staticsAction', \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Expected method "staticsAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest", did you mean "staticAction"?'],
-            ['Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::privateAction', \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Method "privateAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'],
-            ['Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::protectedAction', \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Method "protectedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'],
-            ['Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::undefinedAction', \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Expected method "undefinedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest". Available methods: "publicAction", "staticAction"'],
-            ['Symfony\Component\HttpKernel\Tests\Controller\ControllerTest', \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Controller class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" cannot be called without a method name. You need to implement "__invoke" or use one of the available methods: "publicAction", "staticAction".'],
-            [[$controller, 'staticsAction'], \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Expected method "staticsAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest", did you mean "staticAction"?'],
-            [[$controller, 'privateAction'], \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Method "privateAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'],
-            [[$controller, 'protectedAction'], \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Method "protectedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'],
-            [[$controller, 'undefinedAction'], \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Expected method "undefinedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest". Available methods: "publicAction", "staticAction"'],
-            [$controller, \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Controller class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" cannot be called without a method name. You need to implement "__invoke" or use one of the available methods: "publicAction", "staticAction".'],
-            [['a' => 'foo', 'b' => 'bar'], \InvalidArgumentException::class, 'The controller for URI "/" is not callable. Invalid array callable, expected [controller, method].'],
+            [
+                'Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::staticsAction',
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Expected method "staticsAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest", did you mean "staticAction"?'
+            ],
+            [
+                'Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::privateAction',
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Method "privateAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'
+            ],
+            [
+                'Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::protectedAction',
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Method "protectedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'
+            ],
+            [
+                'Symfony\Component\HttpKernel\Tests\Controller\ControllerTest::undefinedAction',
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Expected method "undefinedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest". Available methods: "publicAction", "staticAction"'
+            ],
+            [
+                'Symfony\Component\HttpKernel\Tests\Controller\ControllerTest',
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Controller class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" cannot be called without a method name. You need to implement "__invoke" or use one of the available methods: "publicAction", "staticAction".'
+            ],
+            [
+                [$controller, 'staticsAction'],
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Expected method "staticsAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest", did you mean "staticAction"?'
+            ],
+            [
+                [$controller, 'privateAction'],
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Method "privateAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'
+            ],
+            [
+                [$controller, 'protectedAction'],
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Method "protectedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" should be public and non-abstract'
+            ],
+            [
+                [$controller, 'undefinedAction'],
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Expected method "undefinedAction" on class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest". Available methods: "publicAction", "staticAction"'
+            ],
+            [
+                $controller,
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Controller class "Symfony\Component\HttpKernel\Tests\Controller\ControllerTest" cannot be called without a method name. You need to implement "__invoke" or use one of the available methods: "publicAction", "staticAction".'
+            ],
+            [
+                ['a' => 'foo', 'b' => 'bar'],
+                \InvalidArgumentException::class,
+                'The controller for URI "/" is not callable. Invalid array callable, expected [controller, method].'
+            ]
         ];
     }
 

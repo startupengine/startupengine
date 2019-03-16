@@ -46,7 +46,7 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
             ',',
             self::METHOD_ARGUMENTS_TOKEN,
             ',',
-            self::DOMAIN_TOKEN,
+            self::DOMAIN_TOKEN
         ],
         [
             '->',
@@ -58,20 +58,10 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
             ',',
             self::METHOD_ARGUMENTS_TOKEN,
             ',',
-            self::DOMAIN_TOKEN,
+            self::DOMAIN_TOKEN
         ],
-        [
-            '->',
-            'trans',
-            '(',
-            self::MESSAGE_TOKEN,
-        ],
-        [
-            '->',
-            'transChoice',
-            '(',
-            self::MESSAGE_TOKEN,
-        ],
+        ['->', 'trans', '(', self::MESSAGE_TOKEN],
+        ['->', 'transChoice', '(', self::MESSAGE_TOKEN]
     ];
 
     /**
@@ -81,7 +71,10 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
     {
         $files = $this->extractFiles($resource);
         foreach ($files as $file) {
-            $this->parseTokens(token_get_all(file_get_contents($file)), $catalog);
+            $this->parseTokens(
+                token_get_all(file_get_contents($file)),
+                $catalog
+            );
 
             // PHP 7 memory manager will not release after token_get_all(), see https://bugs.php.net/70098
             gc_mem_caches();
@@ -140,7 +133,10 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
                 --$openBraces;
             }
 
-            if ((0 === $openBraces && ',' === $t[0]) || (-1 === $openBraces && ')' === $t[0])) {
+            if (
+                (0 === $openBraces && ',' === $t[0]) ||
+                (-1 === $openBraces && ')' === $t[0])
+            ) {
                 break;
             }
         }
@@ -179,7 +175,10 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
                     }
                     break;
                 case T_END_HEREDOC:
-                    $message .= PhpStringTokenParser::parseDocString($docToken, $docPart);
+                    $message .= PhpStringTokenParser::parseDocString(
+                        $docToken,
+                        $docPart
+                    );
                     $docToken = '';
                     $docPart = '';
                     break;
@@ -212,13 +211,16 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
                 foreach ($sequence as $sequenceKey => $item) {
                     $this->seekToNextRelevantToken($tokenIterator);
 
-                    if ($this->normalizeToken($tokenIterator->current()) === $item) {
+                    if (
+                        $this->normalizeToken($tokenIterator->current()) ===
+                        $item
+                    ) {
                         $tokenIterator->next();
                         continue;
                     } elseif (self::MESSAGE_TOKEN === $item) {
                         $message = $this->getValue($tokenIterator);
 
-                        if (\count($sequence) === ($sequenceKey + 1)) {
+                        if (\count($sequence) === $sequenceKey + 1) {
                             break;
                         }
                     } elseif (self::METHOD_ARGUMENTS_TOKEN === $item) {
@@ -233,7 +235,7 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
                 }
 
                 if ($message) {
-                    $catalog->set($message, $this->prefix.$message, $domain);
+                    $catalog->set($message, $this->prefix . $message, $domain);
                     break;
                 }
             }
@@ -249,7 +251,8 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
      */
     protected function canBeExtracted($file)
     {
-        return $this->isFile($file) && 'php' === pathinfo($file, PATHINFO_EXTENSION);
+        return $this->isFile($file) &&
+            'php' === pathinfo($file, PATHINFO_EXTENSION);
     }
 
     /**
@@ -261,6 +264,9 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
     {
         $finder = new Finder();
 
-        return $finder->files()->name('*.php')->in($directory);
+        return $finder
+            ->files()
+            ->name('*.php')
+            ->in($directory);
     }
 }

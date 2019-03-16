@@ -21,7 +21,8 @@
  *
  * @author Christian Schmidt
  */
-class Swift_Transport_Esmtp_SmtpUtf8Handler implements Swift_Transport_EsmtpHandler
+class Swift_Transport_Esmtp_SmtpUtf8Handler implements
+    Swift_Transport_EsmtpHandler
 {
     public function __construct()
     {
@@ -72,8 +73,13 @@ class Swift_Transport_Esmtp_SmtpUtf8Handler implements Swift_Transport_EsmtpHand
     /**
      * Not used.
      */
-    public function onCommand(Swift_Transport_SmtpAgent $agent, $command, $codes = [], &$failedRecipients = null, &$stop = false)
-    {
+    public function onCommand(
+        Swift_Transport_SmtpAgent $agent,
+        $command,
+        $codes = [],
+        &$failedRecipients = null,
+        &$stop = false
+    ) {
     }
 
     /**

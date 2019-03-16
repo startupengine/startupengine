@@ -56,13 +56,20 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
         if ($request->hasSession()) {
             // no-op
         } elseif (method_exists($request, 'setSessionFactory')) {
-            $request->setSessionFactory(function () { return $this->getSession(); });
-        } elseif ($session = $this->getSession()) {
+            $request->setSessionFactory(function () {
+                return $this->getSession();
+            });
+        } elseif (($session = $this->getSession())) {
             $request->setSession($session);
         }
 
-        $session = $session ?? ($this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null);
-        $this->sessionUsageStack[] = $session instanceof Session ? $session->getUsageIndex() : 0;
+        $session =
+            $session ??
+            ($this->container && $this->container->has('initialized_session')
+                ? $this->container->get('initialized_session')
+                : null);
+        $this->sessionUsageStack[] =
+            $session instanceof Session ? $session->getUsageIndex() : 0;
     }
 
     public function onKernelResponse(FilterResponseEvent $event)
@@ -72,15 +79,26 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
         }
 
         $response = $event->getResponse();
-        $autoCacheControl = !$response->headers->has(self::NO_AUTO_CACHE_CONTROL_HEADER);
+        $autoCacheControl = !$response->headers->has(
+            self::NO_AUTO_CACHE_CONTROL_HEADER
+        );
         // Always remove the internal header if present
         $response->headers->remove(self::NO_AUTO_CACHE_CONTROL_HEADER);
 
-        if (!$session = $this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : $event->getRequest()->getSession()) {
+        if (
+            !($session =
+                $this->container && $this->container->has('initialized_session')
+                    ? $this->container->get('initialized_session')
+                    : $event->getRequest()->getSession())
+        ) {
             return;
         }
 
-        if ($session instanceof Session ? $session->getUsageIndex() !== end($this->sessionUsageStack) : $session->isStarted()) {
+        if (
+            $session instanceof Session
+                ? $session->getUsageIndex() !== end($this->sessionUsageStack)
+                : $session->isStarted()
+        ) {
             if ($autoCacheControl) {
                 $response
                     ->setPrivate()
@@ -135,7 +153,7 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
             KernelEvents::REQUEST => ['onKernelRequest', 128],
             // low priority to come after regular response listeners, but higher than StreamedResponseListener
             KernelEvents::RESPONSE => ['onKernelResponse', -1000],
-            KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
+            KernelEvents::FINISH_REQUEST => ['onFinishRequest']
         ];
     }
 

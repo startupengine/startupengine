@@ -30,9 +30,14 @@ class ResponseListenerTest extends TestCase
     {
         $this->dispatcher = new EventDispatcher();
         $listener = new ResponseListener('UTF-8');
-        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse']);
+        $this->dispatcher->addListener(KernelEvents::RESPONSE, [
+            $listener,
+            'onKernelResponse'
+        ]);
 
-        $this->kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')->getMock();
+        $this->kernel = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\HttpKernelInterface'
+        )->getMock();
     }
 
     protected function tearDown()
@@ -45,20 +50,37 @@ class ResponseListenerTest extends TestCase
     {
         $response = new Response('foo');
 
-        $event = new FilterResponseEvent($this->kernel, new Request(), HttpKernelInterface::SUB_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            new Request(),
+            HttpKernelInterface::SUB_REQUEST,
+            $response
+        );
         $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
 
-        $this->assertEquals('', $event->getResponse()->headers->get('content-type'));
+        $this->assertEquals(
+            '',
+            $event->getResponse()->headers->get('content-type')
+        );
     }
 
     public function testFilterSetsNonDefaultCharsetIfNotOverridden()
     {
         $listener = new ResponseListener('ISO-8859-15');
-        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse'], 1);
+        $this->dispatcher->addListener(
+            KernelEvents::RESPONSE,
+            [$listener, 'onKernelResponse'],
+            1
+        );
 
         $response = new Response('foo');
 
-        $event = new FilterResponseEvent($this->kernel, Request::create('/'), HttpKernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            Request::create('/'),
+            HttpKernelInterface::MASTER_REQUEST,
+            $response
+        );
         $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
 
         $this->assertEquals('ISO-8859-15', $response->getCharset());
@@ -67,12 +89,21 @@ class ResponseListenerTest extends TestCase
     public function testFilterDoesNothingIfCharsetIsOverridden()
     {
         $listener = new ResponseListener('ISO-8859-15');
-        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse'], 1);
+        $this->dispatcher->addListener(
+            KernelEvents::RESPONSE,
+            [$listener, 'onKernelResponse'],
+            1
+        );
 
         $response = new Response('foo');
         $response->setCharset('ISO-8859-1');
 
-        $event = new FilterResponseEvent($this->kernel, Request::create('/'), HttpKernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            Request::create('/'),
+            HttpKernelInterface::MASTER_REQUEST,
+            $response
+        );
         $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
 
         $this->assertEquals('ISO-8859-1', $response->getCharset());
@@ -81,13 +112,22 @@ class ResponseListenerTest extends TestCase
     public function testFiltersSetsNonDefaultCharsetIfNotOverriddenOnNonTextContentType()
     {
         $listener = new ResponseListener('ISO-8859-15');
-        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse'], 1);
+        $this->dispatcher->addListener(
+            KernelEvents::RESPONSE,
+            [$listener, 'onKernelResponse'],
+            1
+        );
 
         $response = new Response('foo');
         $request = Request::create('/');
         $request->setRequestFormat('application/json');
 
-        $event = new FilterResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
+        $event = new FilterResponseEvent(
+            $this->kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST,
+            $response
+        );
         $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
 
         $this->assertEquals('ISO-8859-15', $response->getCharset());

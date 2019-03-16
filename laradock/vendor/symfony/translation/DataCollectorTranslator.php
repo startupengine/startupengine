@@ -19,7 +19,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @author Abdellatif Ait boudad <a.aitboudad@gmail.com>
  */
-class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorInterface, TranslatorBagInterface
+class DataCollectorTranslator implements
+    LegacyTranslatorInterface,
+    TranslatorInterface,
+    TranslatorBagInterface
 {
     const MESSAGE_DEFINED = 0;
     const MESSAGE_MISSING = 1;
@@ -37,11 +40,31 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
      */
     public function __construct($translator)
     {
-        if (!$translator instanceof LegacyTranslatorInterface && !$translator instanceof TranslatorInterface) {
-            throw new \TypeError(sprintf('Argument 1 passed to %s() must be an instance of %s, %s given.', __METHOD__, TranslatorInterface::class, \is_object($translator) ? \get_class($translator) : \gettype($translator)));
+        if (
+            !$translator instanceof LegacyTranslatorInterface &&
+            !$translator instanceof TranslatorInterface
+        ) {
+            throw new \TypeError(
+                sprintf(
+                    'Argument 1 passed to %s() must be an instance of %s, %s given.',
+                    __METHOD__,
+                    TranslatorInterface::class,
+                    \is_object($translator)
+                        ? \get_class($translator)
+                        : \gettype($translator)
+                )
+            );
         }
-        if (!$translator instanceof TranslatorBagInterface || !$translator instanceof LocaleAwareInterface) {
-            throw new InvalidArgumentException(sprintf('The Translator "%s" must implement TranslatorInterface, TranslatorBagInterface and LocaleAwareInterface.', \get_class($translator)));
+        if (
+            !$translator instanceof TranslatorBagInterface ||
+            !$translator instanceof LocaleAwareInterface
+        ) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The Translator "%s" must implement TranslatorInterface, TranslatorBagInterface and LocaleAwareInterface.',
+                    \get_class($translator)
+                )
+            );
         }
 
         $this->translator = $translator;
@@ -50,8 +73,12 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
     /**
      * {@inheritdoc}
      */
-    public function trans($id, array $parameters = [], $domain = null, $locale = null)
-    {
+    public function trans(
+        $id,
+        array $parameters = [],
+        $domain = null,
+        $locale = null
+    ) {
         $trans = $this->translator->trans($id, $parameters, $domain, $locale);
         $this->collectMessage($locale, $domain, $id, $trans, $parameters);
 
@@ -63,15 +90,37 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
      *
      * @deprecated since Symfony 4.2, use the trans() method instead with a %count% parameter
      */
-    public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
-    {
+    public function transChoice(
+        $id,
+        $number,
+        array $parameters = [],
+        $domain = null,
+        $locale = null
+    ) {
         if ($this->translator instanceof TranslatorInterface) {
-            $trans = $this->translator->trans($id, ['%count%' => $number] + $parameters, $domain, $locale);
+            $trans = $this->translator->trans(
+                $id,
+                ['%count%' => $number] + $parameters,
+                $domain,
+                $locale
+            );
         }
 
-        $trans = $this->translator->transChoice($id, $number, $parameters, $domain, $locale);
+        $trans = $this->translator->transChoice(
+            $id,
+            $number,
+            $parameters,
+            $domain,
+            $locale
+        );
 
-        $this->collectMessage($locale, $domain, $id, $trans, ['%count%' => $number] + $parameters);
+        $this->collectMessage(
+            $locale,
+            $domain,
+            $id,
+            $trans,
+            ['%count%' => $number] + $parameters
+        );
 
         return $trans;
     }
@@ -107,7 +156,10 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
      */
     public function getFallbackLocales()
     {
-        if ($this->translator instanceof Translator || method_exists($this->translator, 'getFallbackLocales')) {
+        if (
+            $this->translator instanceof Translator ||
+            method_exists($this->translator, 'getFallbackLocales')
+        ) {
             return $this->translator->getFallbackLocales();
         }
 
@@ -119,7 +171,7 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
      */
     public function __call($method, $args)
     {
-        return $this->translator->{$method}(...$args);
+        return $this->translator->$method(...$args);
     }
 
     /**
@@ -137,8 +189,13 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
      * @param string      $translation
      * @param array|null  $parameters
      */
-    private function collectMessage($locale, $domain, $id, $translation, $parameters = [])
-    {
+    private function collectMessage(
+        $locale,
+        $domain,
+        $id,
+        $translation,
+        $parameters = []
+    ) {
         if (null === $domain) {
             $domain = 'messages';
         }
@@ -171,7 +228,11 @@ class DataCollectorTranslator implements LegacyTranslatorInterface, TranslatorIn
             'translation' => $translation,
             'parameters' => $parameters,
             'state' => $state,
-            'transChoiceNumber' => isset($parameters['%count%']) && is_numeric($parameters['%count%']) ? $parameters['%count%'] : null,
+            'transChoiceNumber' =>
+                isset($parameters['%count%']) &&
+                is_numeric($parameters['%count%'])
+                    ? $parameters['%count%']
+                    : null
         ];
     }
 }

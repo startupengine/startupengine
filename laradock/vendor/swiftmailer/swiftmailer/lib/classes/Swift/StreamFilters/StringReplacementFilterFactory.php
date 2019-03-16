@@ -13,7 +13,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_StreamFilters_StringReplacementFilterFactory implements Swift_ReplacementFilterFactory
+class Swift_StreamFilters_StringReplacementFilterFactory implements
+    Swift_ReplacementFilterFactory
 {
     /** Lazy-loaded filters */
     private $filters = [];
@@ -37,7 +38,12 @@ class Swift_StreamFilters_StringReplacementFilterFactory implements Swift_Replac
                 $this->filters[$search][$replace] = [];
             }
 
-            $this->filters[$search][$replace] = new Swift_StreamFilters_StringReplacementFilter($search, $replace);
+            $this->filters[$search][
+                $replace
+            ] = new Swift_StreamFilters_StringReplacementFilter(
+                $search,
+                $replace
+            );
         }
 
         return $this->filters[$search][$replace];

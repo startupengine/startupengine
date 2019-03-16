@@ -46,7 +46,9 @@ class Swift_Preferences
      */
     public function setCharset($charset)
     {
-        Swift_DependencyContainer::getInstance()->register('properties.charset')->asValue($charset);
+        Swift_DependencyContainer::getInstance()
+            ->register('properties.charset')
+            ->asValue($charset);
 
         return $this;
     }
@@ -60,7 +62,9 @@ class Swift_Preferences
      */
     public function setTempDir($dir)
     {
-        Swift_DependencyContainer::getInstance()->register('tempdir')->asValue($dir);
+        Swift_DependencyContainer::getInstance()
+            ->register('tempdir')
+            ->asValue($dir);
 
         return $this;
     }
@@ -74,7 +78,9 @@ class Swift_Preferences
      */
     public function setCacheType($type)
     {
-        Swift_DependencyContainer::getInstance()->register('cache')->asAliasOf(sprintf('cache.%s', $type));
+        Swift_DependencyContainer::getInstance()
+            ->register('cache')
+            ->asAliasOf(sprintf('cache.%s', $type));
 
         return $this;
     }

@@ -1,24 +1,27 @@
 <?php
 
 /*
-* This file is part of SwiftMailer.
-* (c) 2004-2009 Chris Corbyn
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of SwiftMailer.
+ * (c) 2004-2009 Chris Corbyn
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * @author Romain-Geissler
  */
-class Swift_ByteStream_TemporaryFileByteStream extends Swift_ByteStream_FileByteStream
+class Swift_ByteStream_TemporaryFileByteStream extends
+    Swift_ByteStream_FileByteStream
 {
     public function __construct()
     {
         $filePath = tempnam(sys_get_temp_dir(), 'FileByteStream');
 
         if (false === $filePath) {
-            throw new Swift_IoException('Failed to retrieve temporary file name.');
+            throw new Swift_IoException(
+                'Failed to retrieve temporary file name.'
+            );
         }
 
         parent::__construct($filePath, true);
@@ -27,7 +30,9 @@ class Swift_ByteStream_TemporaryFileByteStream extends Swift_ByteStream_FileByte
     public function getContent()
     {
         if (false === ($content = file_get_contents($this->getPath()))) {
-            throw new Swift_IoException('Failed to get temporary file content.');
+            throw new Swift_IoException(
+                'Failed to get temporary file content.'
+            );
         }
 
         return $content;

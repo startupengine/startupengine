@@ -87,7 +87,10 @@ class Swift_Transport_LoadBalancedTransport implements Swift_Transport
      */
     public function start()
     {
-        $this->transports = array_merge($this->transports, $this->deadTransports);
+        $this->transports = array_merge(
+            $this->transports,
+            $this->deadTransports
+        );
     }
 
     /**
@@ -124,19 +127,24 @@ class Swift_Transport_LoadBalancedTransport implements Swift_Transport
      *
      * @return int
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
-    {
+    public function send(
+        Swift_Mime_SimpleMessage $message,
+        &$failedRecipients = null
+    ) {
         $maxTransports = count($this->transports);
         $sent = 0;
         $this->lastUsedTransport = null;
 
-        for ($i = 0; $i < $maxTransports
-            && $transport = $this->getNextTransport(); ++$i) {
+        for (
+            $i = 0;
+            $i < $maxTransports && ($transport = $this->getNextTransport());
+            ++$i
+        ) {
             try {
                 if (!$transport->isStarted()) {
                     $transport->start();
                 }
-                if ($sent = $transport->send($message, $failedRecipients)) {
+                if (($sent = $transport->send($message, $failedRecipients))) {
                     $this->lastUsedTransport = $transport;
                     break;
                 }
@@ -148,7 +156,7 @@ class Swift_Transport_LoadBalancedTransport implements Swift_Transport
         if (0 == count($this->transports)) {
             throw new Swift_TransportException(
                 'All Transports in LoadBalancedTransport failed, or no Transports available'
-                );
+            );
         }
 
         return $sent;
@@ -171,7 +179,7 @@ class Swift_Transport_LoadBalancedTransport implements Swift_Transport
      */
     protected function getNextTransport()
     {
-        if ($next = array_shift($this->transports)) {
+        if (($next = array_shift($this->transports))) {
             $this->transports[] = $next;
         }
 
@@ -183,7 +191,7 @@ class Swift_Transport_LoadBalancedTransport implements Swift_Transport
      */
     protected function killCurrentTransport()
     {
-        if ($transport = array_pop($this->transports)) {
+        if (($transport = array_pop($this->transports))) {
             try {
                 $transport->stop();
             } catch (Exception $e) {

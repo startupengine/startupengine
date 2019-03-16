@@ -19,27 +19,44 @@ class StreamedResponseTest extends TestCase
 {
     public function testConstructor()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; }, 404, ['Content-Type' => 'text/plain']);
+        $response = new StreamedResponse(
+            function () {
+                echo 'foo';
+            },
+            404,
+            ['Content-Type' => 'text/plain']
+        );
 
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertEquals('text/plain', $response->headers->get('Content-Type'));
+        $this->assertEquals(
+            'text/plain',
+            $response->headers->get('Content-Type')
+        );
     }
 
     public function testPrepareWith11Protocol()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; });
+        $response = new StreamedResponse(function () {
+            echo 'foo';
+        });
         $request = Request::create('/');
         $request->server->set('SERVER_PROTOCOL', 'HTTP/1.1');
 
         $response->prepare($request);
 
         $this->assertEquals('1.1', $response->getProtocolVersion());
-        $this->assertNotEquals('chunked', $response->headers->get('Transfer-Encoding'), 'Apache assumes responses with a Transfer-Encoding header set to chunked to already be encoded.');
+        $this->assertNotEquals(
+            'chunked',
+            $response->headers->get('Transfer-Encoding'),
+            'Apache assumes responses with a Transfer-Encoding header set to chunked to already be encoded.'
+        );
     }
 
     public function testPrepareWith10Protocol()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; });
+        $response = new StreamedResponse(function () {
+            echo 'foo';
+        });
         $request = Request::create('/');
         $request->server->set('SERVER_PROTOCOL', 'HTTP/1.0');
 
@@ -51,7 +68,13 @@ class StreamedResponseTest extends TestCase
 
     public function testPrepareWithHeadRequest()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; }, 200, ['Content-Length' => '123']);
+        $response = new StreamedResponse(
+            function () {
+                echo 'foo';
+            },
+            200,
+            ['Content-Length' => '123']
+        );
         $request = Request::create('/', 'HEAD');
 
         $response->prepare($request);
@@ -61,18 +84,29 @@ class StreamedResponseTest extends TestCase
 
     public function testPrepareWithCacheHeaders()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; }, 200, ['Cache-Control' => 'max-age=600, public']);
+        $response = new StreamedResponse(
+            function () {
+                echo 'foo';
+            },
+            200,
+            ['Cache-Control' => 'max-age=600, public']
+        );
         $request = Request::create('/', 'GET');
 
         $response->prepare($request);
-        $this->assertEquals('max-age=600, public', $response->headers->get('Cache-Control'));
+        $this->assertEquals(
+            'max-age=600, public',
+            $response->headers->get('Cache-Control')
+        );
     }
 
     public function testSendContent()
     {
         $called = 0;
 
-        $response = new StreamedResponse(function () use (&$called) { ++$called; });
+        $response = new StreamedResponse(function () use (&$called) {
+            ++$called;
+        });
 
         $response->sendContent();
         $this->assertEquals(1, $called);
@@ -95,13 +129,17 @@ class StreamedResponseTest extends TestCase
      */
     public function testSetContent()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; });
+        $response = new StreamedResponse(function () {
+            echo 'foo';
+        });
         $response->setContent('foo');
     }
 
     public function testGetContent()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; });
+        $response = new StreamedResponse(function () {
+            echo 'foo';
+        });
         $this->assertFalse($response->getContent());
     }
 
@@ -109,24 +147,41 @@ class StreamedResponseTest extends TestCase
     {
         $response = StreamedResponse::create(function () {}, 204);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\StreamedResponse', $response);
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\StreamedResponse',
+            $response
+        );
         $this->assertEquals(204, $response->getStatusCode());
     }
 
     public function testReturnThis()
     {
         $response = new StreamedResponse(function () {});
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\StreamedResponse', $response->sendContent());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\StreamedResponse', $response->sendContent());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\StreamedResponse',
+            $response->sendContent()
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\StreamedResponse',
+            $response->sendContent()
+        );
 
         $response = new StreamedResponse(function () {});
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\StreamedResponse', $response->sendHeaders());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\StreamedResponse', $response->sendHeaders());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\StreamedResponse',
+            $response->sendHeaders()
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\StreamedResponse',
+            $response->sendHeaders()
+        );
     }
 
     public function testSetNotModified()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; });
+        $response = new StreamedResponse(function () {
+            echo 'foo';
+        });
         $modified = $response->setNotModified();
         $this->assertObjectHasAttribute('headers', $modified);
         $this->assertObjectHasAttribute('content', $modified);

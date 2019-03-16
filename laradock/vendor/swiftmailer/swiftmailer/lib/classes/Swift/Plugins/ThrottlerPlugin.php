@@ -13,7 +13,11 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin implements Swift_Plugins_Sleeper, Swift_Plugins_Timer
+class Swift_Plugins_ThrottlerPlugin
+    extends Swift_Plugins_BandwidthMonitorPlugin
+    implements
+        Swift_Plugins_Sleeper,
+        Swift_Plugins_Timer
 {
     /** Flag for throttling in bytes per minute */
     const BYTES_PER_MINUTE = 0x01;
@@ -76,8 +80,12 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
      * @param Swift_Plugins_Sleeper $sleeper (only needed in testing)
      * @param Swift_Plugins_Timer   $timer   (only needed in testing)
      */
-    public function __construct($rate, $mode = self::BYTES_PER_MINUTE, Swift_Plugins_Sleeper $sleeper = null, Swift_Plugins_Timer $timer = null)
-    {
+    public function __construct(
+        $rate,
+        $mode = self::BYTES_PER_MINUTE,
+        Swift_Plugins_Sleeper $sleeper = null,
+        Swift_Plugins_Timer $timer = null
+    ) {
         $this->rate = $rate;
         $this->mode = $mode;
         $this->sleeper = $sleeper;

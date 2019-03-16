@@ -27,8 +27,12 @@ class XPathExpr
     private $element;
     private $condition;
 
-    public function __construct(string $path = '', string $element = '*', string $condition = '', bool $starPrefix = false)
-    {
+    public function __construct(
+        string $path = '',
+        string $element = '*',
+        string $condition = '',
+        bool $starPrefix = false
+    ) {
         $this->path = $path;
         $this->element = $element;
         $this->condition = $condition;
@@ -45,7 +49,9 @@ class XPathExpr
 
     public function addCondition(string $condition): self
     {
-        $this->condition = $this->condition ? sprintf('(%s) and (%s)', $this->condition, $condition) : $condition;
+        $this->condition = $this->condition
+            ? sprintf('(%s) and (%s)', $this->condition, $condition)
+            : $condition;
 
         return $this;
     }
@@ -58,7 +64,9 @@ class XPathExpr
     public function addNameTest(): self
     {
         if ('*' !== $this->element) {
-            $this->addCondition('name() = '.Translator::getXpathLiteral($this->element));
+            $this->addCondition(
+                'name() = ' . Translator::getXpathLiteral($this->element)
+            );
             $this->element = '*';
         }
 
@@ -79,7 +87,7 @@ class XPathExpr
      */
     public function join(string $combiner, self $expr): self
     {
-        $path = $this->__toString().$combiner;
+        $path = $this->__toString() . $combiner;
 
         if ('*/' !== $expr->path) {
             $path .= $expr->path;
@@ -94,9 +102,12 @@ class XPathExpr
 
     public function __toString(): string
     {
-        $path = $this->path.$this->element;
-        $condition = null === $this->condition || '' === $this->condition ? '' : '['.$this->condition.']';
+        $path = $this->path . $this->element;
+        $condition =
+            null === $this->condition || '' === $this->condition
+                ? ''
+                : '[' . $this->condition . ']';
 
-        return $path.$condition;
+        return $path . $condition;
     }
 }

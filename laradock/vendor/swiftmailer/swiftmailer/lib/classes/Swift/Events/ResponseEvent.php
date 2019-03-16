@@ -35,8 +35,11 @@ class Swift_Events_ResponseEvent extends Swift_Events_EventObject
      * @param string $response
      * @param bool   $valid
      */
-    public function __construct(Swift_Transport $source, $response, $valid = false)
-    {
+    public function __construct(
+        Swift_Transport $source,
+        $response,
+        $valid = false
+    ) {
         parent::__construct($source);
         $this->response = $response;
         $this->valid = $valid;

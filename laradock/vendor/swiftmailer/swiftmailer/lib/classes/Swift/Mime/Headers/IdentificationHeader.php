@@ -16,7 +16,8 @@ use Egulias\EmailValidator\Validation\RFCValidation;
  *
  * @author Chris Corbyn
  */
-class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_AbstractHeader
+class Swift_Mime_Headers_IdentificationHeader extends
+    Swift_Mime_Headers_AbstractHeader
 {
     /**
      * The IDs used in the value of this Header.
@@ -41,11 +42,15 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
      *
      * @param string $name
      */
-    public function __construct($name, EmailValidator $emailValidator, Swift_AddressEncoder $addressEncoder = null)
-    {
+    public function __construct(
+        $name,
+        EmailValidator $emailValidator,
+        Swift_AddressEncoder $addressEncoder = null
+    ) {
         $this->setFieldName($name);
         $this->emailValidator = $emailValidator;
-        $this->addressEncoder = $addressEncoder ?? new Swift_AddressEncoder_IdnAddressEncoder();
+        $this->addressEncoder =
+            $addressEncoder ?? new Swift_AddressEncoder_IdnAddressEncoder();
     }
 
     /**
@@ -161,7 +166,8 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
             $angleAddrs = [];
 
             foreach ($this->ids as $id) {
-                $angleAddrs[] = '<'.$this->addressEncoder->encodeString($id).'>';
+                $angleAddrs[] =
+                    '<' . $this->addressEncoder->encodeString($id) . '>';
             }
 
             $this->setCachedValue(implode(' ', $angleAddrs));
@@ -180,7 +186,9 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
     private function assertValidId($id)
     {
         if (!$this->emailValidator->isValid($id, new RFCValidation())) {
-            throw new Swift_RfcComplianceException('Invalid ID given <'.$id.'>');
+            throw new Swift_RfcComplianceException(
+                'Invalid ID given <' . $id . '>'
+            );
         }
     }
 }

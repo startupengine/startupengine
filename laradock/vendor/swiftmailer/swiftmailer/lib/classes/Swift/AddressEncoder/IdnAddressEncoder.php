@@ -37,11 +37,18 @@ class Swift_AddressEncoder_IdnAddressEncoder implements Swift_AddressEncoder
             $domain = substr($address, $i + 1);
 
             if (preg_match('/[^\x00-\x7F]/', $local)) {
-                throw new Swift_AddressEncoderException('Non-ASCII characters not supported in local-part', $address);
+                throw new Swift_AddressEncoderException(
+                    'Non-ASCII characters not supported in local-part',
+                    $address
+                );
             }
 
             if (preg_match('/[^\x00-\x7F]/', $domain)) {
-                $address = sprintf('%s@%s', $local, idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46));
+                $address = sprintf(
+                    '%s@%s',
+                    $local,
+                    idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46)
+                );
             }
         }
 

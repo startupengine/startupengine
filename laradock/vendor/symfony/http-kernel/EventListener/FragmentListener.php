@@ -38,8 +38,10 @@ class FragmentListener implements EventSubscriberInterface
      * @param UriSigner $signer       A UriSigner instance
      * @param string    $fragmentPath The path that triggers this listener
      */
-    public function __construct(UriSigner $signer, string $fragmentPath = '/_fragment')
-    {
+    public function __construct(
+        UriSigner $signer,
+        string $fragmentPath = '/_fragment'
+    ) {
         $this->signer = $signer;
         $this->fragmentPath = $fragmentPath;
     }
@@ -70,7 +72,13 @@ class FragmentListener implements EventSubscriberInterface
 
         parse_str($request->query->get('_path', ''), $attributes);
         $request->attributes->add($attributes);
-        $request->attributes->set('_route_params', array_replace($request->attributes->get('_route_params', []), $attributes));
+        $request->attributes->set(
+            '_route_params',
+            array_replace(
+                $request->attributes->get('_route_params', []),
+                $attributes
+            )
+        );
         $request->query->remove('_path');
     }
 
@@ -83,7 +91,16 @@ class FragmentListener implements EventSubscriberInterface
 
         // is the Request signed?
         // we cannot use $request->getUri() here as we want to work with the original URI (no query string reordering)
-        if ($this->signer->check($request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo().(null !== ($qs = $request->server->get('QUERY_STRING')) ? '?'.$qs : ''))) {
+        if (
+            $this->signer->check(
+                $request->getSchemeAndHttpHost() .
+                    $request->getBaseUrl() .
+                    $request->getPathInfo() .
+                    (null !== ($qs = $request->server->get('QUERY_STRING'))
+                        ? '?' . $qs
+                        : '')
+            )
+        ) {
             return;
         }
 
@@ -93,7 +110,7 @@ class FragmentListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => [['onKernelRequest', 48]],
+            KernelEvents::REQUEST => [['onKernelRequest', 48]]
         ];
     }
 }

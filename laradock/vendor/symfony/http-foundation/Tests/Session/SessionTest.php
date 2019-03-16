@@ -39,7 +39,11 @@ class SessionTest extends TestCase
     protected function setUp()
     {
         $this->storage = new MockArraySessionStorage();
-        $this->session = new Session($this->storage, new AttributeBag(), new FlashBag());
+        $this->session = new Session(
+            $this->storage,
+            new AttributeBag(),
+            new FlashBag()
+        );
     }
 
     protected function tearDown()
@@ -122,13 +126,19 @@ class SessionTest extends TestCase
     {
         $this->session->set($key, $value);
         $this->assertTrue($this->session->has($key));
-        $this->assertFalse($this->session->has($key.'non_value'));
+        $this->assertFalse($this->session->has($key . 'non_value'));
     }
 
     public function testReplace()
     {
-        $this->session->replace(['happiness' => 'be good', 'symfony' => 'awesome']);
-        $this->assertEquals(['happiness' => 'be good', 'symfony' => 'awesome'], $this->session->all());
+        $this->session->replace([
+            'happiness' => 'be good',
+            'symfony' => 'awesome'
+        ]);
+        $this->assertEquals(
+            ['happiness' => 'be good', 'symfony' => 'awesome'],
+            $this->session->all()
+        );
         $this->session->replace([]);
         $this->assertEquals([], $this->session->all());
     }
@@ -158,7 +168,7 @@ class SessionTest extends TestCase
         return [
             ['foo', 'bar', ['foo' => 'bar']],
             ['foo.bar', 'too much beer', ['foo.bar' => 'too much beer']],
-            ['great', 'symfony is great', ['great' => 'symfony is great']],
+            ['great', 'symfony is great', ['great' => 'symfony is great']]
         ];
     }
 
@@ -170,7 +180,10 @@ class SessionTest extends TestCase
         $this->session->set('hi.world', 'have a nice day');
         $this->session->set($key, $value);
         $this->session->remove($key);
-        $this->assertEquals(['hi.world' => 'have a nice day'], $this->session->all());
+        $this->assertEquals(
+            ['hi.world' => 'have a nice day'],
+            $this->session->all()
+        );
     }
 
     public function testInvalidate()
@@ -211,7 +224,10 @@ class SessionTest extends TestCase
 
     public function testGetFlashBag()
     {
-        $this->assertInstanceOf('Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface', $this->session->getFlashBag());
+        $this->assertInstanceOf(
+            'Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface',
+            $this->session->getFlashBag()
+        );
     }
 
     public function testGetIterator()
@@ -240,7 +256,10 @@ class SessionTest extends TestCase
 
     public function testGetMeta()
     {
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\MetadataBag', $this->session->getMetadataBag());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\MetadataBag',
+            $this->session->getMetadataBag()
+        );
     }
 
     public function testIsEmpty()

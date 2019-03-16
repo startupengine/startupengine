@@ -81,7 +81,9 @@ class ParameterBag implements \IteratorAggregate, \Countable
      */
     public function get($key, $default = null)
     {
-        return \array_key_exists($key, $this->parameters) ? $this->parameters[$key] : $default;
+        return \array_key_exists($key, $this->parameters)
+            ? $this->parameters[$key]
+            : $default;
     }
 
     /**
@@ -154,7 +156,11 @@ class ParameterBag implements \IteratorAggregate, \Countable
     public function getDigits($key, $default = '')
     {
         // we need to remove - and + because they're allowed in the filter
-        return str_replace(['-', '+'], '', $this->filter($key, $default, FILTER_SANITIZE_NUMBER_INT));
+        return str_replace(
+            ['-', '+'],
+            '',
+            $this->filter($key, $default, FILTER_SANITIZE_NUMBER_INT)
+        );
     }
 
     /**
@@ -195,8 +201,12 @@ class ParameterBag implements \IteratorAggregate, \Countable
      *
      * @return mixed
      */
-    public function filter($key, $default = null, $filter = FILTER_DEFAULT, $options = [])
-    {
+    public function filter(
+        $key,
+        $default = null,
+        $filter = FILTER_DEFAULT,
+        $options = []
+    ) {
         $value = $this->get($key, $default);
 
         // Always turn $options into an array - this allows filter_var option shortcuts.

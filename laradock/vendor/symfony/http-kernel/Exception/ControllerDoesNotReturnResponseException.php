@@ -16,11 +16,19 @@ namespace Symfony\Component\HttpKernel\Exception;
  */
 class ControllerDoesNotReturnResponseException extends \LogicException
 {
-    public function __construct(string $message, callable $controller, string $file, int $line)
-    {
+    public function __construct(
+        string $message,
+        callable $controller,
+        string $file,
+        int $line
+    ) {
         parent::__construct($message);
 
-        if (!$controllerDefinition = $this->parseControllerDefinition($controller)) {
+        if (
+            !($controllerDefinition = $this->parseControllerDefinition(
+                $controller
+            ))
+        ) {
             return;
         }
 
@@ -28,12 +36,18 @@ class ControllerDoesNotReturnResponseException extends \LogicException
         $this->line = $controllerDefinition['line'];
         $r = new \ReflectionProperty(\Exception::class, 'trace');
         $r->setAccessible(true);
-        $r->setValue($this, array_merge([
-            [
-                'line' => $line,
-                'file' => $file,
-            ],
-        ], $this->getTrace()));
+        $r->setValue(
+            $this,
+            array_merge(
+                [
+                    [
+                        'line' => $line,
+                        'file' => $file
+                    ]
+                ],
+                $this->getTrace()
+            )
+        );
     }
 
     private function parseControllerDefinition(callable $controller): ?array
@@ -48,7 +62,7 @@ class ControllerDoesNotReturnResponseException extends \LogicException
 
                 return [
                     'file' => $r->getFileName(),
-                    'line' => $r->getEndLine(),
+                    'line' => $r->getEndLine()
                 ];
             } catch (\ReflectionException $e) {
                 return null;
@@ -60,7 +74,7 @@ class ControllerDoesNotReturnResponseException extends \LogicException
 
             return [
                 'file' => $r->getFileName(),
-                'line' => $r->getEndLine(),
+                'line' => $r->getEndLine()
             ];
         }
 
@@ -69,7 +83,7 @@ class ControllerDoesNotReturnResponseException extends \LogicException
 
             return [
                 'file' => $r->getFileName(),
-                'line' => $r->getEndLine(),
+                'line' => $r->getEndLine()
             ];
         }
 

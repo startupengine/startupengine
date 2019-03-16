@@ -33,7 +33,10 @@ final class SessionValueResolver implements ArgumentValueResolverInterface
         }
 
         $type = $argument->getType();
-        if (SessionInterface::class !== $type && !is_subclass_of($type, SessionInterface::class)) {
+        if (
+            SessionInterface::class !== $type &&
+            !is_subclass_of($type, SessionInterface::class)
+        ) {
             return false;
         }
 

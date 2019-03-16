@@ -3,32 +3,69 @@
 /**
  * @group legacy
  */
-class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCase
+class Swift_CharacterStream_ArrayCharacterStreamTest extends
+    \SwiftMailerTestCase
 {
     public function testValidatorAlgorithmOnImportString()
     {
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*',
-            0xD0, 0x94,
-            0xD0, 0xB6,
-            0xD0, 0xBE,
-            0xD1, 0x8D,
-            0xD0, 0xBB,
-            0xD0, 0xB0
+        $stream->importString(
+            pack(
+                'C*',
+                0xd0,
+                0x94,
+                0xd0,
+                0xb6,
+                0xd0,
+                0xbe,
+                0xd1,
+                0x8d,
+                0xd0,
+                0xbb,
+                0xd0,
+                0xb0
             )
         );
     }
@@ -38,28 +75,71 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
-        $stream->write(pack('C*',
-            0xD0, 0xBB,
-            0xD1, 0x8E,
-            0xD0, 0xB1,
-            0xD1, 0x8B,
-            0xD1, 0x85
+        $stream->write(
+            pack(
+                'C*',
+                0xd0,
+                0xbb,
+                0xd1,
+                0x8e,
+                0xd0,
+                0xb1,
+                0xd1,
+                0x8b,
+                0xd1,
+                0x85
             )
         );
     }
@@ -69,42 +149,87 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
         //String
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
         //Stream
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
-        $stream->write(pack('C*',
-            0xD0, 0xBB,
-            0xD1, 0x8E,
-            0xD0, 0xB1,
-            0xD1, 0x8B,
-            0xD1, 0x85
+        $stream->write(
+            pack(
+                'C*',
+                0xd0,
+                0xbb,
+                0xd1,
+                0x8e,
+                0xd0,
+                0xb1,
+                0xd1,
+                0x8b,
+                0xd1,
+                0x85
             )
         );
 
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0x94), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0x94), $stream->read(1));
         $this->assertIdenticalBinary(
-            pack('C*', 0xD0, 0xB6, 0xD0, 0xBE), $stream->read(2)
-            );
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0xBB), $stream->read(1));
+            pack('C*', 0xd0, 0xb6, 0xd0, 0xbe),
+            $stream->read(2)
+        );
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0xbb), $stream->read(1));
         $this->assertIdenticalBinary(
-            pack('C*', 0xD1, 0x8E, 0xD0, 0xB1, 0xD1, 0x8B), $stream->read(3)
-            );
-        $this->assertIdenticalBinary(pack('C*', 0xD1, 0x85), $stream->read(1));
+            pack('C*', 0xd1, 0x8e, 0xd0, 0xb1, 0xd1, 0x8b),
+            $stream->read(3)
+        );
+        $this->assertIdenticalBinary(pack('C*', 0xd1, 0x85), $stream->read(1));
 
         $this->assertFalse($stream->read(1));
     }
@@ -114,40 +239,84 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
         //String
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
         //Stream
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
-        $stream->write(pack('C*',
-            0xD0, 0xBB,
-            0xD1, 0x8E,
-            0xD0, 0xB1,
-            0xD1, 0x8B,
-            0xD1, 0x85
+        $stream->write(
+            pack(
+                'C*',
+                0xd0,
+                0xbb,
+                0xd1,
+                0x8e,
+                0xd0,
+                0xb1,
+                0xd1,
+                0x8b,
+                0xd1,
+                0x85
             )
         );
 
-        $this->assertEquals([0xD0, 0x94], $stream->readBytes(1));
-        $this->assertEquals([0xD0, 0xB6, 0xD0, 0xBE], $stream->readBytes(2));
-        $this->assertEquals([0xD0, 0xBB], $stream->readBytes(1));
+        $this->assertEquals([0xd0, 0x94], $stream->readBytes(1));
+        $this->assertEquals([0xd0, 0xb6, 0xd0, 0xbe], $stream->readBytes(2));
+        $this->assertEquals([0xd0, 0xbb], $stream->readBytes(1));
         $this->assertEquals(
-            [0xD1, 0x8E, 0xD0, 0xB1, 0xD1, 0x8B], $stream->readBytes(3)
-            );
-        $this->assertEquals([0xD1, 0x85], $stream->readBytes(1));
+            [0xd1, 0x8e, 0xd0, 0xb1, 0xd1, 0x8b],
+            $stream->readBytes(3)
+        );
+        $this->assertEquals([0xd1, 0x85], $stream->readBytes(1));
 
         $this->assertFalse($stream->readBytes(1));
     }
@@ -157,20 +326,37 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE),
+        $this->assertIdenticalBinary(
+            pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe),
             $stream->read(100)
-            );
+        );
 
         $this->assertFalse($stream->read(1));
     }
@@ -180,20 +366,37 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
-        $this->assertEquals([0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE],
+        $this->assertEquals(
+            [0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe],
             $stream->readBytes(100)
-            );
+        );
 
         $this->assertFalse($stream->readBytes(1));
     }
@@ -203,26 +406,42 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0x94), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0x94), $stream->read(1));
 
         $stream->setPointer(0);
 
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0x94), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0x94), $stream->read(1));
 
         $stream->setPointer(2);
 
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0xBE), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0xbe), $stream->read(1));
     }
 
     public function testContentsCanBeFlushed()
@@ -230,16 +449,32 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
-        $stream->importString(pack('C*', 0xD0, 0x94, 0xD0, 0xB6, 0xD0, 0xBE));
+        $stream->importString(pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
 
         $stream->flushContents();
 
@@ -252,27 +487,63 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $factory = $this->getFactory($reader);
         $os = $this->getByteStream();
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $os->shouldReceive('setReadPointer')
-           ->between(0, 1)
-           ->with(0);
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xD0));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0x94));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xD0));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xB6));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xD0));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xBE));
-        $os->shouldReceive('read')
-           ->zeroOrMoreTimes()
-           ->andReturn(false);
+        $os
+            ->shouldReceive('setReadPointer')
+            ->between(0, 1)
+            ->with(0);
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xd0));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0x94));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xd0));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xb6));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xd0));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xbe));
+        $os
+            ->shouldReceive('read')
+            ->zeroOrMoreTimes()
+            ->andReturn(false);
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
         $stream->importByteStream($os);
     }
@@ -283,33 +554,69 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $factory = $this->getFactory($reader);
         $os = $this->getByteStream();
 
-        $stream = new Swift_CharacterStream_ArrayCharacterStream($factory, 'utf-8');
+        $stream = new Swift_CharacterStream_ArrayCharacterStream(
+            $factory,
+            'utf-8'
+        );
 
-        $os->shouldReceive('setReadPointer')
-           ->between(0, 1)
-           ->with(0);
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xD0));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0x94));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xD0));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xB6));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xD0));
-        $os->shouldReceive('read')->once()->andReturn(pack('C*', 0xBE));
-        $os->shouldReceive('read')
-           ->zeroOrMoreTimes()
-           ->andReturn(false);
+        $os
+            ->shouldReceive('setReadPointer')
+            ->between(0, 1)
+            ->with(0);
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xd0));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0x94));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xd0));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xb6));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xd0));
+        $os
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn(pack('C*', 0xbe));
+        $os
+            ->shouldReceive('read')
+            ->zeroOrMoreTimes()
+            ->andReturn(false);
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0], 1)->andReturn(1);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0], 1)
+            ->andReturn(1);
 
         $stream->importByteStream($os);
 
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0x94), $stream->read(1));
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0xB6), $stream->read(1));
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0xBE), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0x94), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0xb6), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0xbe), $stream->read(1));
 
         $this->assertFalse($stream->read(1));
     }
@@ -319,21 +626,32 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
         $reader = $this->getReader();
         $factory = $this->getFactory($reader);
 
-        $reader->shouldReceive('getInitialByteSize')
-               ->zeroOrMoreTimes()
-               ->andReturn(2);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD1, 0x8D], 2);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0, 0xBB], 2);
-        $reader->shouldReceive('validateByteSequence')->once()->with([0xD0, 0xB0], 2);
+        $reader
+            ->shouldReceive('getInitialByteSize')
+            ->zeroOrMoreTimes()
+            ->andReturn(2);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd1, 0x8d], 2);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0, 0xbb], 2);
+        $reader
+            ->shouldReceive('validateByteSequence')
+            ->once()
+            ->with([0xd0, 0xb0], 2);
 
         $stream = new Swift_CharacterStream_ArrayCharacterStream(
-            $factory, 'utf-8'
+            $factory,
+            'utf-8'
         );
-        $stream->importString(pack('C*', 0xD1, 0x8D, 0xD0, 0xBB, 0xD0, 0xB0));
+        $stream->importString(pack('C*', 0xd1, 0x8d, 0xd0, 0xbb, 0xd0, 0xb0));
 
-        $this->assertIdenticalBinary(pack('C*', 0xD1, 0x8D), $stream->read(1));
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0xBB), $stream->read(1));
-        $this->assertIdenticalBinary(pack('C*', 0xD0, 0xB0), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd1, 0x8d), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0xbb), $stream->read(1));
+        $this->assertIdenticalBinary(pack('C*', 0xd0, 0xb0), $stream->read(1));
 
         $this->assertFalse($stream->read(1));
     }
@@ -346,10 +664,11 @@ class Swift_CharacterStream_ArrayCharacterStreamTest extends \SwiftMailerTestCas
     private function getFactory($reader)
     {
         $factory = $this->getMockery('Swift_CharacterReaderFactory');
-        $factory->shouldReceive('getReaderFor')
-                ->zeroOrMoreTimes()
-                ->with('utf-8')
-                ->andReturn($reader);
+        $factory
+            ->shouldReceive('getReaderFor')
+            ->zeroOrMoreTimes()
+            ->with('utf-8')
+            ->andReturn($reader);
 
         return $factory;
     }

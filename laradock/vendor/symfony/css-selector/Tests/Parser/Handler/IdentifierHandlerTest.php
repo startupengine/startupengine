@@ -23,27 +23,32 @@ class IdentifierHandlerTest extends AbstractHandlerTest
         return [
             ['foo', new Token(Token::TYPE_IDENTIFIER, 'foo', 0), ''],
             ['foo|bar', new Token(Token::TYPE_IDENTIFIER, 'foo', 0), '|bar'],
-            ['foo.class', new Token(Token::TYPE_IDENTIFIER, 'foo', 0), '.class'],
-            ['foo[attr]', new Token(Token::TYPE_IDENTIFIER, 'foo', 0), '[attr]'],
-            ['foo bar', new Token(Token::TYPE_IDENTIFIER, 'foo', 0), ' bar'],
+            [
+                'foo.class',
+                new Token(Token::TYPE_IDENTIFIER, 'foo', 0),
+                '.class'
+            ],
+            [
+                'foo[attr]',
+                new Token(Token::TYPE_IDENTIFIER, 'foo', 0),
+                '[attr]'
+            ],
+            ['foo bar', new Token(Token::TYPE_IDENTIFIER, 'foo', 0), ' bar']
         ];
     }
 
     public function getDontHandleValueTestData()
     {
-        return [
-            ['>'],
-            ['+'],
-            [' '],
-            ['*|foo'],
-            ['/* comment */'],
-        ];
+        return [['>'], ['+'], [' '], ['*|foo'], ['/* comment */']];
     }
 
     protected function generateHandler()
     {
         $patterns = new TokenizerPatterns();
 
-        return new IdentifierHandler($patterns, new TokenizerEscaping($patterns));
+        return new IdentifierHandler(
+            $patterns,
+            new TokenizerEscaping($patterns)
+        );
     }
 }

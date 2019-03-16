@@ -35,7 +35,7 @@ class MockFileSessionStorageTest extends TestCase
 
     protected function setUp()
     {
-        $this->sessionDir = sys_get_temp_dir().'/sftest';
+        $this->sessionDir = sys_get_temp_dir() . '/sftest';
         $this->storage = $this->getStorage();
     }
 
@@ -43,7 +43,7 @@ class MockFileSessionStorageTest extends TestCase
     {
         $this->sessionDir = null;
         $this->storage = null;
-        array_map('unlink', glob($this->sessionDir.'/*.session'));
+        array_map('unlink', glob($this->sessionDir . '/*.session'));
         if (is_dir($this->sessionDir)) {
             rmdir($this->sessionDir);
         }
@@ -64,9 +64,15 @@ class MockFileSessionStorageTest extends TestCase
         $this->storage->start();
         $this->storage->getBag('attributes')->set('regenerate', 1234);
         $this->storage->regenerate();
-        $this->assertEquals(1234, $this->storage->getBag('attributes')->get('regenerate'));
+        $this->assertEquals(
+            1234,
+            $this->storage->getBag('attributes')->get('regenerate')
+        );
         $this->storage->regenerate(true);
-        $this->assertEquals(1234, $this->storage->getBag('attributes')->get('regenerate'));
+        $this->assertEquals(
+            1234,
+            $this->storage->getBag('attributes')->get('regenerate')
+        );
     }
 
     public function testGetId()
@@ -80,7 +86,10 @@ class MockFileSessionStorageTest extends TestCase
     {
         $this->storage->start();
         $id = $this->storage->getId();
-        $this->assertNotEquals('108', $this->storage->getBag('attributes')->get('new'));
+        $this->assertNotEquals(
+            '108',
+            $this->storage->getBag('attributes')->get('new')
+        );
         $this->assertFalse($this->storage->getBag('flashes')->has('newkey'));
         $this->storage->getBag('attributes')->set('new', '108');
         $this->storage->getBag('flashes')->set('newkey', 'test');
@@ -91,7 +100,10 @@ class MockFileSessionStorageTest extends TestCase
         $storage->start();
         $this->assertEquals('108', $storage->getBag('attributes')->get('new'));
         $this->assertTrue($storage->getBag('flashes')->has('newkey'));
-        $this->assertEquals(['test'], $storage->getBag('flashes')->peek('newkey'));
+        $this->assertEquals(
+            ['test'],
+            $storage->getBag('flashes')->peek('newkey')
+        );
     }
 
     public function testMultipleInstances()
@@ -104,7 +116,11 @@ class MockFileSessionStorageTest extends TestCase
         $storage2 = $this->getStorage();
         $storage2->setId($storage1->getId());
         $storage2->start();
-        $this->assertEquals('bar', $storage2->getBag('attributes')->get('foo'), 'values persist between instances');
+        $this->assertEquals(
+            'bar',
+            $storage2->getBag('attributes')->get('foo'),
+            'values persist between instances'
+        );
     }
 
     /**

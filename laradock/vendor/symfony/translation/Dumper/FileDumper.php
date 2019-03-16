@@ -51,10 +51,18 @@ abstract class FileDumper implements DumperInterface
      */
     public function setBackup($backup)
     {
-        @trigger_error(sprintf('The "%s()" method is deprecated since Symfony 4.1.', __METHOD__), E_USER_DEPRECATED);
+        @trigger_error(
+            sprintf(
+                'The "%s()" method is deprecated since Symfony 4.1.',
+                __METHOD__
+            ),
+            E_USER_DEPRECATED
+        );
 
         if (false !== $backup) {
-            throw new \LogicException('The backup feature is no longer supported.');
+            throw new \LogicException(
+                'The backup feature is no longer supported.'
+            );
         }
     }
 
@@ -64,31 +72,50 @@ abstract class FileDumper implements DumperInterface
     public function dump(MessageCatalogue $messages, $options = [])
     {
         if (!\array_key_exists('path', $options)) {
-            throw new InvalidArgumentException('The file dumper needs a path option.');
+            throw new InvalidArgumentException(
+                'The file dumper needs a path option.'
+            );
         }
 
         // save a file for each domain
         foreach ($messages->getDomains() as $domain) {
-            $fullpath = $options['path'].'/'.$this->getRelativePath($domain, $messages->getLocale());
+            $fullpath =
+                $options['path'] .
+                '/' .
+                $this->getRelativePath($domain, $messages->getLocale());
             if (!file_exists($fullpath)) {
                 $directory = \dirname($fullpath);
-                if (!file_exists($directory) && !@mkdir($directory, 0777, true)) {
-                    throw new RuntimeException(sprintf('Unable to create directory "%s".', $directory));
+                if (
+                    !file_exists($directory) &&
+                    !@mkdir($directory, 0777, true)
+                ) {
+                    throw new RuntimeException(
+                        sprintf('Unable to create directory "%s".', $directory)
+                    );
                 }
             }
 
-            $intlDomain = $domain.MessageCatalogue::INTL_DOMAIN_SUFFIX;
+            $intlDomain = $domain . MessageCatalogue::INTL_DOMAIN_SUFFIX;
             $intlMessages = $messages->all($intlDomain);
 
             if ($intlMessages) {
-                $intlPath = $options['path'].'/'.$this->getRelativePath($intlDomain, $messages->getLocale());
-                file_put_contents($intlPath, $this->formatCatalogue($messages, $intlDomain, $options));
+                $intlPath =
+                    $options['path'] .
+                    '/' .
+                    $this->getRelativePath($intlDomain, $messages->getLocale());
+                file_put_contents(
+                    $intlPath,
+                    $this->formatCatalogue($messages, $intlDomain, $options)
+                );
 
                 $messages->replace([], $intlDomain);
 
                 try {
                     if ($messages->all($domain)) {
-                        file_put_contents($fullpath, $this->formatCatalogue($messages, $domain, $options));
+                        file_put_contents(
+                            $fullpath,
+                            $this->formatCatalogue($messages, $domain, $options)
+                        );
                     }
                     continue;
                 } finally {
@@ -96,7 +123,10 @@ abstract class FileDumper implements DumperInterface
                 }
             }
 
-            file_put_contents($fullpath, $this->formatCatalogue($messages, $domain, $options));
+            file_put_contents(
+                $fullpath,
+                $this->formatCatalogue($messages, $domain, $options)
+            );
         }
     }
 
@@ -109,7 +139,11 @@ abstract class FileDumper implements DumperInterface
      *
      * @return string representation
      */
-    abstract public function formatCatalogue(MessageCatalogue $messages, $domain, array $options = []);
+    abstract public function formatCatalogue(
+        MessageCatalogue $messages,
+        $domain,
+        array $options = []
+    );
 
     /**
      * Gets the file extension of the dumper.
@@ -126,7 +160,7 @@ abstract class FileDumper implements DumperInterface
         return strtr($this->relativePathTemplate, [
             '%domain%' => $domain,
             '%locale%' => $locale,
-            '%extension%' => $this->getExtension(),
+            '%extension%' => $this->getExtension()
         ]);
     }
 }

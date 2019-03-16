@@ -29,11 +29,15 @@ class IcuResFileLoader implements LoaderInterface
     public function load($resource, $locale, $domain = 'messages')
     {
         if (!stream_is_local($resource)) {
-            throw new InvalidResourceException(sprintf('This is not a local file "%s".', $resource));
+            throw new InvalidResourceException(
+                sprintf('This is not a local file "%s".', $resource)
+            );
         }
 
         if (!is_dir($resource)) {
-            throw new NotFoundResourceException(sprintf('File "%s" not found.', $resource));
+            throw new NotFoundResourceException(
+                sprintf('File "%s" not found.', $resource)
+            );
         }
 
         try {
@@ -43,16 +47,23 @@ class IcuResFileLoader implements LoaderInterface
         }
 
         if (!$rb) {
-            throw new InvalidResourceException(sprintf('Cannot load resource "%s"', $resource));
+            throw new InvalidResourceException(
+                sprintf('Cannot load resource "%s"', $resource)
+            );
         } elseif (intl_is_failure($rb->getErrorCode())) {
-            throw new InvalidResourceException($rb->getErrorMessage(), $rb->getErrorCode());
+            throw new InvalidResourceException(
+                $rb->getErrorMessage(),
+                $rb->getErrorCode()
+            );
         }
 
         $messages = $this->flatten($rb);
         $catalogue = new MessageCatalogue($locale);
         $catalogue->add($messages, $domain);
 
-        if (class_exists('Symfony\Component\Config\Resource\DirectoryResource')) {
+        if (
+            class_exists('Symfony\Component\Config\Resource\DirectoryResource')
+        ) {
             $catalogue->addResource(new DirectoryResource($resource));
         }
 
@@ -75,10 +86,13 @@ class IcuResFileLoader implements LoaderInterface
      *
      * @return array the flattened ResourceBundle
      */
-    protected function flatten(\ResourceBundle $rb, array &$messages = [], $path = null)
-    {
+    protected function flatten(
+        \ResourceBundle $rb,
+        array &$messages = [],
+        $path = null
+    ) {
         foreach ($rb as $key => $value) {
-            $nodePath = $path ? $path.'.'.$key : $key;
+            $nodePath = $path ? $path . '.' . $key : $key;
             if ($value instanceof \ResourceBundle) {
                 $this->flatten($value, $messages, $nodePath);
             } else {

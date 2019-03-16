@@ -13,7 +13,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Mailer_ArrayRecipientIterator implements Swift_Mailer_RecipientIterator
+class Swift_Mailer_ArrayRecipientIterator implements
+    Swift_Mailer_RecipientIterator
 {
     /**
      * The list of recipients.

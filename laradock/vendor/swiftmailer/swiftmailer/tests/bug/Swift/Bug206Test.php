@@ -16,21 +16,41 @@ class Swift_Bug206Test extends \PHPUnit\Framework\TestCase
             new Swift_CharacterStream_CharacterStream($factory, 'utf-8')
         );
         $emailValidator = new EmailValidator();
-        $this->factory = new Swift_Mime_SimpleHeaderFactory($headerEncoder, $paramEncoder, $emailValidator);
+        $this->factory = new Swift_Mime_SimpleHeaderFactory(
+            $headerEncoder,
+            $paramEncoder,
+            $emailValidator
+        );
     }
 
     public function testMailboxHeaderEncoding()
     {
-        $this->doTestHeaderIsFullyEncoded('email@example.org', 'Family Name, Name', ' "Family Name, Name" <email@example.org>');
-        $this->doTestHeaderIsFullyEncoded('email@example.org', 'Family Namé, Name', ' Family =?utf-8?Q?Nam=C3=A9=2C?= Name');
-        $this->doTestHeaderIsFullyEncoded('email@example.org', 'Family Namé , Name', ' Family =?utf-8?Q?Nam=C3=A9_=2C?= Name');
-        $this->doTestHeaderIsFullyEncoded('email@example.org', 'Family Namé ;Name', ' Family =?utf-8?Q?Nam=C3=A9_=3BName?= ');
+        $this->doTestHeaderIsFullyEncoded(
+            'email@example.org',
+            'Family Name, Name',
+            ' "Family Name, Name" <email@example.org>'
+        );
+        $this->doTestHeaderIsFullyEncoded(
+            'email@example.org',
+            'Family Namé, Name',
+            ' Family =?utf-8?Q?Nam=C3=A9=2C?= Name'
+        );
+        $this->doTestHeaderIsFullyEncoded(
+            'email@example.org',
+            'Family Namé , Name',
+            ' Family =?utf-8?Q?Nam=C3=A9_=2C?= Name'
+        );
+        $this->doTestHeaderIsFullyEncoded(
+            'email@example.org',
+            'Family Namé ;Name',
+            ' Family =?utf-8?Q?Nam=C3=A9_=3BName?= '
+        );
     }
 
     private function doTestHeaderIsFullyEncoded($email, $name, $expected)
     {
         $mailboxHeader = $this->factory->createMailboxHeader('To', [
-            $email => $name,
+            $email => $name
         ]);
 
         $headerBody = substr($mailboxHeader->toString(), 3, strlen($expected));

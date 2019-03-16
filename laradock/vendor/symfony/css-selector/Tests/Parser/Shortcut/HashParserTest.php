@@ -39,7 +39,7 @@ class HashParserTest extends TestCase
             ['testel#testid', 'Hash[Element[testel]#testid]'],
             ['testns|#testid', 'Hash[Element[testns|*]#testid]'],
             ['testns|*#testid', 'Hash[Element[testns|*]#testid]'],
-            ['testns|testel#testid', 'Hash[Element[testns|testel]#testid]'],
+            ['testns|testel#testid', 'Hash[Element[testns|testel]#testid]']
         ];
     }
 }

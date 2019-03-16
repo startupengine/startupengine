@@ -48,12 +48,25 @@ class DebugHandlersListener implements EventSubscriberInterface
      * @param string|array         $fileLinkFormat   The format for links to source files
      * @param bool                 $scope            Enables/disables scoping mode
      */
-    public function __construct(callable $exceptionHandler = null, LoggerInterface $logger = null, $levels = E_ALL, ?int $throwAt = E_ALL, bool $scream = true, $fileLinkFormat = null, bool $scope = true)
-    {
+    public function __construct(
+        callable $exceptionHandler = null,
+        LoggerInterface $logger = null,
+        $levels = E_ALL,
+        ?int $throwAt = E_ALL,
+        bool $scream = true,
+        $fileLinkFormat = null,
+        bool $scope = true
+    ) {
         $this->exceptionHandler = $exceptionHandler;
         $this->logger = $logger;
         $this->levels = null === $levels ? E_ALL : $levels;
-        $this->throwAt = \is_int($throwAt) ? $throwAt : (null === $throwAt ? null : ($throwAt ? E_ALL : null));
+        $this->throwAt = \is_int($throwAt)
+            ? $throwAt
+            : (null === $throwAt
+                ? null
+                : ($throwAt
+                    ? E_ALL
+                    : null));
         $this->scream = $scream;
         $this->fileLinkFormat = $fileLinkFormat;
         $this->scope = $scope;
@@ -64,7 +77,11 @@ class DebugHandlersListener implements EventSubscriberInterface
      */
     public function configure(Event $event = null)
     {
-        if (!$event instanceof KernelEvent ? !$this->firstCall : !$event->isMasterRequest()) {
+        if (
+            !$event instanceof KernelEvent
+                ? !$this->firstCall
+                : !$event->isMasterRequest()
+        ) {
             return;
         }
         $this->firstCall = $this->hasTerminatedWithException = false;
@@ -89,7 +106,9 @@ class DebugHandlersListener implements EventSubscriberInterface
                         $handler->screamAt($levels);
                     }
                     if ($this->scope) {
-                        $handler->scopeAt($levels & ~E_USER_DEPRECATED & ~E_DEPRECATED);
+                        $handler->scopeAt(
+                            $levels & ~E_USER_DEPRECATED & ~E_DEPRECATED
+                        );
                     } else {
                         $handler->scopeAt(0, true);
                     }
@@ -102,10 +121,19 @@ class DebugHandlersListener implements EventSubscriberInterface
         }
         if (!$this->exceptionHandler) {
             if ($event instanceof KernelEvent) {
-                if (method_exists($kernel = $event->getKernel(), 'terminateWithException')) {
+                if (
+                    method_exists(
+                        ($kernel = $event->getKernel()),
+                        'terminateWithException'
+                    )
+                ) {
                     $request = $event->getRequest();
                     $hasRun = &$this->hasTerminatedWithException;
-                    $this->exceptionHandler = function (\Exception $e) use ($kernel, $request, &$hasRun) {
+                    $this->exceptionHandler = function (\Exception $e) use (
+                        $kernel,
+                        $request,
+                        &$hasRun
+                    ) {
                         if ($hasRun) {
                             throw $e;
                         }
@@ -113,7 +141,10 @@ class DebugHandlersListener implements EventSubscriberInterface
                         $kernel->terminateWithException($e, $request);
                     };
                 }
-            } elseif ($event instanceof ConsoleEvent && $app = $event->getCommand()->getApplication()) {
+            } elseif (
+                $event instanceof ConsoleEvent &&
+                ($app = $event->getCommand()->getApplication())
+            ) {
                 $output = $event->getOutput();
                 if ($output instanceof ConsoleOutputInterface) {
                     $output = $output->getErrorOutput();
@@ -147,7 +178,10 @@ class DebugHandlersListener implements EventSubscriberInterface
     {
         $events = [KernelEvents::REQUEST => ['configure', 2048]];
 
-        if ('cli' === \PHP_SAPI && \defined('Symfony\Component\Console\ConsoleEvents::COMMAND')) {
+        if (
+            'cli' === \PHP_SAPI &&
+            \defined('Symfony\Component\Console\ConsoleEvents::COMMAND')
+        ) {
             $events[ConsoleEvents::COMMAND] = ['configure', 2048];
         }
 

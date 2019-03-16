@@ -18,12 +18,15 @@ class Swift_Plugins_Loggers_ArrayLoggerTest extends \PHPUnit\Framework\TestCase
         $logger->add("<< 250 OK\r\n");
 
         $this->assertEquals(
-            ">> FOO\r\n".PHP_EOL.
-            "<< 502 That makes no sense\r\n".PHP_EOL.
-            ">> RSET\r\n".PHP_EOL.
-            "<< 250 OK\r\n",
+            ">> FOO\r\n" .
+                PHP_EOL .
+                "<< 502 That makes no sense\r\n" .
+                PHP_EOL .
+                ">> RSET\r\n" .
+                PHP_EOL .
+                "<< 250 OK\r\n",
             $logger->dump()
-            );
+        );
     }
 
     public function testLogCanBeCleared()
@@ -35,12 +38,15 @@ class Swift_Plugins_Loggers_ArrayLoggerTest extends \PHPUnit\Framework\TestCase
         $logger->add("<< 250 OK\r\n");
 
         $this->assertEquals(
-            ">> FOO\r\n".PHP_EOL.
-            "<< 502 That makes no sense\r\n".PHP_EOL.
-            ">> RSET\r\n".PHP_EOL.
-            "<< 250 OK\r\n",
+            ">> FOO\r\n" .
+                PHP_EOL .
+                "<< 502 That makes no sense\r\n" .
+                PHP_EOL .
+                ">> RSET\r\n" .
+                PHP_EOL .
+                "<< 250 OK\r\n",
             $logger->dump()
-            );
+        );
 
         $logger->clear();
 
@@ -56,10 +62,9 @@ class Swift_Plugins_Loggers_ArrayLoggerTest extends \PHPUnit\Framework\TestCase
         $logger->add("<< 250 OK\r\n");
 
         $this->assertEquals(
-            ">> RSET\r\n".PHP_EOL.
-            "<< 250 OK\r\n",
+            ">> RSET\r\n" . PHP_EOL . "<< 250 OK\r\n",
             $logger->dump(),
             '%s: Log should be truncated to last 2 entries'
-            );
+        );
     }
 }

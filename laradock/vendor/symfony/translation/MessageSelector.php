@@ -11,7 +11,13 @@
 
 namespace Symfony\Component\Translation;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Symfony 4.2, use IdentityTranslator instead.', MessageSelector::class), E_USER_DEPRECATED);
+@trigger_error(
+    sprintf(
+        'The "%s" class is deprecated since Symfony 4.2, use IdentityTranslator instead.',
+        MessageSelector::class
+    ),
+    E_USER_DEPRECATED
+);
 
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
 
@@ -65,7 +71,15 @@ class MessageSelector
         foreach ($parts as $part) {
             $part = trim(str_replace('||', '|', $part));
 
-            if (preg_match('/^(?P<interval>'.Interval::getIntervalRegexp().')\s*(?P<message>.*?)$/xs', $part, $matches)) {
+            if (
+                preg_match(
+                    '/^(?P<interval>' .
+                        Interval::getIntervalRegexp() .
+                        ')\s*(?P<message>.*?)$/xs',
+                    $part,
+                    $matches
+                )
+            ) {
                 $explicitRules[$matches['interval']] = $matches['message'];
             } elseif (preg_match('/^\w+\:\s*(.*?)$/', $part, $matches)) {
                 $standardRules[] = $matches[1];
@@ -90,7 +104,14 @@ class MessageSelector
                 return $standardRules[0];
             }
 
-            throw new InvalidArgumentException(sprintf('Unable to choose a translation for "%s" with locale "%s" for value "%d". Double check that this translation has the correct plural options (e.g. "There is one apple|There are %%count%% apples").', $message, $locale, $number));
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Unable to choose a translation for "%s" with locale "%s" for value "%d". Double check that this translation has the correct plural options (e.g. "There is one apple|There are %%count%% apples").',
+                    $message,
+                    $locale,
+                    $number
+                )
+            );
         }
 
         return $standardRules[$position];

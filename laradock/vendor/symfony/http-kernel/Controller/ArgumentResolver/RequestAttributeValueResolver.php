@@ -20,14 +20,16 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class RequestAttributeValueResolver implements ArgumentValueResolverInterface
+final class RequestAttributeValueResolver implements
+    ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
      */
     public function supports(Request $request, ArgumentMetadata $argument)
     {
-        return !$argument->isVariadic() && $request->attributes->has($argument->getName());
+        return !$argument->isVariadic() &&
+            $request->attributes->has($argument->getName());
     }
 
     /**

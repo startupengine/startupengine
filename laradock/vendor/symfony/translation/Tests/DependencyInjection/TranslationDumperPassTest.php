@@ -22,13 +22,17 @@ class TranslationDumperPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $writerDefinition = $container->register('translation.writer');
-        $container->register('foo.id')
+        $container
+            ->register('foo.id')
             ->addTag('translation.dumper', ['alias' => 'bar.alias']);
 
         $translationDumperPass = new TranslationDumperPass();
         $translationDumperPass->process($container);
 
-        $this->assertEquals([['addDumper', ['bar.alias', new Reference('foo.id')]]], $writerDefinition->getMethodCalls());
+        $this->assertEquals(
+            [['addDumper', ['bar.alias', new Reference('foo.id')]]],
+            $writerDefinition->getMethodCalls()
+        );
     }
 
     public function testProcessNoDefinitionFound()

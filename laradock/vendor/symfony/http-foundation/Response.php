@@ -20,8 +20,8 @@ class Response
 {
     const HTTP_CONTINUE = 100;
     const HTTP_SWITCHING_PROTOCOLS = 101;
-    const HTTP_PROCESSING = 102;            // RFC2518
-    const HTTP_EARLY_HINTS = 103;           // RFC8297
+    const HTTP_PROCESSING = 102; // RFC2518
+    const HTTP_EARLY_HINTS = 103; // RFC8297
     const HTTP_OK = 200;
     const HTTP_CREATED = 201;
     const HTTP_ACCEPTED = 202;
@@ -29,9 +29,9 @@ class Response
     const HTTP_NO_CONTENT = 204;
     const HTTP_RESET_CONTENT = 205;
     const HTTP_PARTIAL_CONTENT = 206;
-    const HTTP_MULTI_STATUS = 207;          // RFC4918
-    const HTTP_ALREADY_REPORTED = 208;      // RFC5842
-    const HTTP_IM_USED = 226;               // RFC3229
+    const HTTP_MULTI_STATUS = 207; // RFC4918
+    const HTTP_ALREADY_REPORTED = 208; // RFC5842
+    const HTTP_IM_USED = 226; // RFC3229
     const HTTP_MULTIPLE_CHOICES = 300;
     const HTTP_MOVED_PERMANENTLY = 301;
     const HTTP_FOUND = 302;
@@ -40,7 +40,7 @@ class Response
     const HTTP_USE_PROXY = 305;
     const HTTP_RESERVED = 306;
     const HTTP_TEMPORARY_REDIRECT = 307;
-    const HTTP_PERMANENTLY_REDIRECT = 308;  // RFC7238
+    const HTTP_PERMANENTLY_REDIRECT = 308; // RFC7238
     const HTTP_BAD_REQUEST = 400;
     const HTTP_UNAUTHORIZED = 401;
     const HTTP_PAYMENT_REQUIRED = 402;
@@ -59,21 +59,21 @@ class Response
     const HTTP_UNSUPPORTED_MEDIA_TYPE = 415;
     const HTTP_REQUESTED_RANGE_NOT_SATISFIABLE = 416;
     const HTTP_EXPECTATION_FAILED = 417;
-    const HTTP_I_AM_A_TEAPOT = 418;                                               // RFC2324
-    const HTTP_MISDIRECTED_REQUEST = 421;                                         // RFC7540
-    const HTTP_UNPROCESSABLE_ENTITY = 422;                                        // RFC4918
-    const HTTP_LOCKED = 423;                                                      // RFC4918
-    const HTTP_FAILED_DEPENDENCY = 424;                                           // RFC4918
+    const HTTP_I_AM_A_TEAPOT = 418; // RFC2324
+    const HTTP_MISDIRECTED_REQUEST = 421; // RFC7540
+    const HTTP_UNPROCESSABLE_ENTITY = 422; // RFC4918
+    const HTTP_LOCKED = 423; // RFC4918
+    const HTTP_FAILED_DEPENDENCY = 424; // RFC4918
 
     /**
      * @deprecated
      */
-    const HTTP_RESERVED_FOR_WEBDAV_ADVANCED_COLLECTIONS_EXPIRED_PROPOSAL = 425;   // RFC2817
-    const HTTP_TOO_EARLY = 425;                                                   // RFC-ietf-httpbis-replay-04
-    const HTTP_UPGRADE_REQUIRED = 426;                                            // RFC2817
-    const HTTP_PRECONDITION_REQUIRED = 428;                                       // RFC6585
-    const HTTP_TOO_MANY_REQUESTS = 429;                                           // RFC6585
-    const HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431;                             // RFC6585
+    const HTTP_RESERVED_FOR_WEBDAV_ADVANCED_COLLECTIONS_EXPIRED_PROPOSAL = 425; // RFC2817
+    const HTTP_TOO_EARLY = 425; // RFC-ietf-httpbis-replay-04
+    const HTTP_UPGRADE_REQUIRED = 426; // RFC2817
+    const HTTP_PRECONDITION_REQUIRED = 428; // RFC6585
+    const HTTP_TOO_MANY_REQUESTS = 429; // RFC6585
+    const HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431; // RFC6585
     const HTTP_UNAVAILABLE_FOR_LEGAL_REASONS = 451;
     const HTTP_INTERNAL_SERVER_ERROR = 500;
     const HTTP_NOT_IMPLEMENTED = 501;
@@ -81,11 +81,11 @@ class Response
     const HTTP_SERVICE_UNAVAILABLE = 503;
     const HTTP_GATEWAY_TIMEOUT = 504;
     const HTTP_VERSION_NOT_SUPPORTED = 505;
-    const HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506;                        // RFC2295
-    const HTTP_INSUFFICIENT_STORAGE = 507;                                        // RFC4918
-    const HTTP_LOOP_DETECTED = 508;                                               // RFC5842
-    const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
-    const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;                             // RFC6585
+    const HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506; // RFC2295
+    const HTTP_INSUFFICIENT_STORAGE = 507; // RFC4918
+    const HTTP_LOOP_DETECTED = 508; // RFC5842
+    const HTTP_NOT_EXTENDED = 510; // RFC2774
+    const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511; // RFC6585
 
     /**
      * @var \Symfony\Component\HttpFoundation\ResponseHeaderBag
@@ -131,7 +131,7 @@ class Response
     public static $statusTexts = [
         100 => 'Continue',
         101 => 'Switching Protocols',
-        102 => 'Processing',            // RFC2518
+        102 => 'Processing', // RFC2518
         103 => 'Early Hints',
         200 => 'OK',
         201 => 'Created',
@@ -140,9 +140,9 @@ class Response
         204 => 'No Content',
         205 => 'Reset Content',
         206 => 'Partial Content',
-        207 => 'Multi-Status',          // RFC4918
-        208 => 'Already Reported',      // RFC5842
-        226 => 'IM Used',               // RFC3229
+        207 => 'Multi-Status', // RFC4918
+        208 => 'Already Reported', // RFC5842
+        226 => 'IM Used', // RFC3229
         300 => 'Multiple Choices',
         301 => 'Moved Permanently',
         302 => 'Found',
@@ -150,7 +150,7 @@ class Response
         304 => 'Not Modified',
         305 => 'Use Proxy',
         307 => 'Temporary Redirect',
-        308 => 'Permanent Redirect',    // RFC7238
+        308 => 'Permanent Redirect', // RFC7238
         400 => 'Bad Request',
         401 => 'Unauthorized',
         402 => 'Payment Required',
@@ -169,35 +169,38 @@ class Response
         415 => 'Unsupported Media Type',
         416 => 'Range Not Satisfiable',
         417 => 'Expectation Failed',
-        418 => 'I\'m a teapot',                                               // RFC2324
-        421 => 'Misdirected Request',                                         // RFC7540
-        422 => 'Unprocessable Entity',                                        // RFC4918
-        423 => 'Locked',                                                      // RFC4918
-        424 => 'Failed Dependency',                                           // RFC4918
-        425 => 'Too Early',                                                   // RFC-ietf-httpbis-replay-04
-        426 => 'Upgrade Required',                                            // RFC2817
-        428 => 'Precondition Required',                                       // RFC6585
-        429 => 'Too Many Requests',                                           // RFC6585
-        431 => 'Request Header Fields Too Large',                             // RFC6585
-        451 => 'Unavailable For Legal Reasons',                               // RFC7725
+        418 => 'I\'m a teapot', // RFC2324
+        421 => 'Misdirected Request', // RFC7540
+        422 => 'Unprocessable Entity', // RFC4918
+        423 => 'Locked', // RFC4918
+        424 => 'Failed Dependency', // RFC4918
+        425 => 'Too Early', // RFC-ietf-httpbis-replay-04
+        426 => 'Upgrade Required', // RFC2817
+        428 => 'Precondition Required', // RFC6585
+        429 => 'Too Many Requests', // RFC6585
+        431 => 'Request Header Fields Too Large', // RFC6585
+        451 => 'Unavailable For Legal Reasons', // RFC7725
         500 => 'Internal Server Error',
         501 => 'Not Implemented',
         502 => 'Bad Gateway',
         503 => 'Service Unavailable',
         504 => 'Gateway Timeout',
         505 => 'HTTP Version Not Supported',
-        506 => 'Variant Also Negotiates',                                     // RFC2295
-        507 => 'Insufficient Storage',                                        // RFC4918
-        508 => 'Loop Detected',                                               // RFC5842
-        510 => 'Not Extended',                                                // RFC2774
-        511 => 'Network Authentication Required',                             // RFC6585
+        506 => 'Variant Also Negotiates', // RFC2295
+        507 => 'Insufficient Storage', // RFC4918
+        508 => 'Loop Detected', // RFC5842
+        510 => 'Not Extended', // RFC2774
+        511 => 'Network Authentication Required' // RFC6585
     ];
 
     /**
      * @throws \InvalidArgumentException When the HTTP status code is not valid
      */
-    public function __construct($content = '', int $status = 200, array $headers = [])
-    {
+    public function __construct(
+        $content = '',
+        int $status = 200,
+        array $headers = []
+    ) {
         $this->headers = new ResponseHeaderBag($headers);
         $this->setContent($content);
         $this->setStatusCode($status);
@@ -236,9 +239,15 @@ class Response
      */
     public function __toString()
     {
-        return
-            sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText)."\r\n".
-            $this->headers."\r\n".
+        return sprintf(
+            'HTTP/%s %s %s',
+            $this->version,
+            $this->statusCode,
+            $this->statusText
+        ) .
+            "\r\n" .
+            $this->headers .
+            "\r\n" .
             $this->getContent();
     }
 
@@ -271,7 +280,10 @@ class Response
             // Content-type based on the Request
             if (!$headers->has('Content-Type')) {
                 $format = $request->getRequestFormat();
-                if (null !== $format && $mimeType = $request->getMimeType($format)) {
+                if (
+                    null !== $format &&
+                    ($mimeType = $request->getMimeType($format))
+                ) {
                     $headers->set('Content-Type', $mimeType);
                 }
             }
@@ -279,10 +291,16 @@ class Response
             // Fix Content-Type
             $charset = $this->charset ?: 'UTF-8';
             if (!$headers->has('Content-Type')) {
-                $headers->set('Content-Type', 'text/html; charset='.$charset);
-            } elseif (0 === stripos($headers->get('Content-Type'), 'text/') && false === stripos($headers->get('Content-Type'), 'charset')) {
+                $headers->set('Content-Type', 'text/html; charset=' . $charset);
+            } elseif (
+                0 === stripos($headers->get('Content-Type'), 'text/') &&
+                false === stripos($headers->get('Content-Type'), 'charset')
+            ) {
                 // add the charset
-                $headers->set('Content-Type', $headers->get('Content-Type').'; charset='.$charset);
+                $headers->set(
+                    'Content-Type',
+                    $headers->get('Content-Type') . '; charset=' . $charset
+                );
             }
 
             // Fix Content-Length
@@ -306,7 +324,10 @@ class Response
         }
 
         // Check if we need to send extra expire info headers
-        if ('1.0' == $this->getProtocolVersion() && false !== strpos($this->headers->get('Cache-Control'), 'no-cache')) {
+        if (
+            '1.0' == $this->getProtocolVersion() &&
+            false !== strpos($this->headers->get('Cache-Control'), 'no-cache')
+        ) {
             $this->headers->set('pragma', 'no-cache');
             $this->headers->set('expires', -1);
         }
@@ -335,20 +356,36 @@ class Response
         }
 
         // headers
-        foreach ($this->headers->allPreserveCaseWithoutCookies() as $name => $values) {
+        foreach (
+            $this->headers->allPreserveCaseWithoutCookies()
+            as $name => $values
+        ) {
             $replace = 0 === strcasecmp($name, 'Content-Type');
             foreach ($values as $value) {
-                header($name.': '.$value, $replace, $this->statusCode);
+                header($name . ': ' . $value, $replace, $this->statusCode);
             }
         }
 
         // cookies
         foreach ($this->headers->getCookies() as $cookie) {
-            header('Set-Cookie: '.$cookie->getName().strstr($cookie, '='), false, $this->statusCode);
+            header(
+                'Set-Cookie: ' . $cookie->getName() . strstr($cookie, '='),
+                false,
+                $this->statusCode
+            );
         }
 
         // status
-        header(sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText), true, $this->statusCode);
+        header(
+            sprintf(
+                'HTTP/%s %s %s',
+                $this->version,
+                $this->statusCode,
+                $this->statusText
+            ),
+            true,
+            $this->statusCode
+        );
 
         return $this;
     }
@@ -397,8 +434,18 @@ class Response
      */
     public function setContent($content)
     {
-        if (null !== $content && !\is_string($content) && !is_numeric($content) && !\is_callable([$content, '__toString'])) {
-            throw new \UnexpectedValueException(sprintf('The Response content must be a string or object implementing __toString(), "%s" given.', \gettype($content)));
+        if (
+            null !== $content &&
+            !\is_string($content) &&
+            !is_numeric($content) &&
+            !\is_callable([$content, '__toString'])
+        ) {
+            throw new \UnexpectedValueException(
+                sprintf(
+                    'The Response content must be a string or object implementing __toString(), "%s" given.',
+                    \gettype($content)
+                )
+            );
         }
 
         $this->content = (string) $content;
@@ -456,11 +503,15 @@ class Response
     {
         $this->statusCode = $code;
         if ($this->isInvalid()) {
-            throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not valid.', $code));
+            throw new \InvalidArgumentException(
+                sprintf('The HTTP status code "%s" is not valid.', $code)
+            );
         }
 
         if (null === $text) {
-            $this->statusText = isset(self::$statusTexts[$code]) ? self::$statusTexts[$code] : 'unknown status';
+            $this->statusText = isset(self::$statusTexts[$code])
+                ? self::$statusTexts[$code]
+                : 'unknown status';
 
             return $this;
         }
@@ -529,11 +580,16 @@ class Response
      */
     public function isCacheable(): bool
     {
-        if (!\in_array($this->statusCode, [200, 203, 300, 301, 302, 404, 410])) {
+        if (
+            !\in_array($this->statusCode, [200, 203, 300, 301, 302, 404, 410])
+        ) {
             return false;
         }
 
-        if ($this->headers->hasCacheControlDirective('no-store') || $this->headers->getCacheControlDirective('private')) {
+        if (
+            $this->headers->hasCacheControlDirective('no-store') ||
+            $this->headers->getCacheControlDirective('private')
+        ) {
             return false;
         }
 
@@ -562,7 +618,8 @@ class Response
      */
     public function isValidateable(): bool
     {
-        return $this->headers->has('Last-Modified') || $this->headers->has('ETag');
+        return $this->headers->has('Last-Modified') ||
+            $this->headers->has('ETag');
     }
 
     /**
@@ -639,7 +696,8 @@ class Response
      */
     public function mustRevalidate(): bool
     {
-        return $this->headers->hasCacheControlDirective('must-revalidate') || $this->headers->hasCacheControlDirective('proxy-revalidate');
+        return $this->headers->hasCacheControlDirective('must-revalidate') ||
+            $this->headers->hasCacheControlDirective('proxy-revalidate');
     }
 
     /**
@@ -668,7 +726,7 @@ class Response
         }
 
         $date = $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->headers->set('Date', $date->format('D, d M Y H:i:s').' GMT');
+        $this->headers->set('Date', $date->format('D, d M Y H:i:s') . ' GMT');
 
         return $this;
     }
@@ -680,7 +738,7 @@ class Response
      */
     public function getAge(): int
     {
-        if (null !== $age = $this->headers->get('Age')) {
+        if (null !== ($age = $this->headers->get('Age'))) {
             return (int) $age;
         }
 
@@ -739,7 +797,10 @@ class Response
         }
 
         $date = $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->headers->set('Expires', $date->format('D, d M Y H:i:s').' GMT');
+        $this->headers->set(
+            'Expires',
+            $date->format('D, d M Y H:i:s') . ' GMT'
+        );
 
         return $this;
     }
@@ -764,7 +825,8 @@ class Response
         }
 
         if (null !== $this->getExpires()) {
-            return (int) ($this->getExpires()->format('U') - $this->getDate()->format('U'));
+            return (int) ($this->getExpires()->format('U') -
+                $this->getDate()->format('U'));
         }
 
         return null;
@@ -886,7 +948,10 @@ class Response
         }
 
         $date = $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->headers->set('Last-Modified', $date->format('D, d M Y H:i:s').' GMT');
+        $this->headers->set(
+            'Last-Modified',
+            $date->format('D, d M Y H:i:s') . ' GMT'
+        );
 
         return $this;
     }
@@ -917,10 +982,10 @@ class Response
             $this->headers->remove('Etag');
         } else {
             if (0 !== strpos($etag, '"')) {
-                $etag = '"'.$etag.'"';
+                $etag = '"' . $etag . '"';
             }
 
-            $this->headers->set('ETag', (true === $weak ? 'W/' : '').$etag);
+            $this->headers->set('ETag', (true === $weak ? 'W/' : '') . $etag);
         }
 
         return $this;
@@ -939,8 +1004,23 @@ class Response
      */
     public function setCache(array $options)
     {
-        if ($diff = array_diff(array_keys($options), ['etag', 'last_modified', 'max_age', 's_maxage', 'private', 'public', 'immutable'])) {
-            throw new \InvalidArgumentException(sprintf('Response does not support the following options: "%s".', implode('", "', $diff)));
+        if (
+            ($diff = array_diff(array_keys($options), [
+                'etag',
+                'last_modified',
+                'max_age',
+                's_maxage',
+                'private',
+                'public',
+                'immutable'
+            ]))
+        ) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Response does not support the following options: "%s".',
+                    implode('", "', $diff)
+                )
+            );
         }
 
         if (isset($options['etag'])) {
@@ -1000,7 +1080,18 @@ class Response
         $this->setContent(null);
 
         // remove headers that MUST NOT be included with 304 Not Modified responses
-        foreach (['Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified'] as $header) {
+        foreach (
+            [
+                'Allow',
+                'Content-Encoding',
+                'Content-Language',
+                'Content-Length',
+                'Content-MD5',
+                'Content-Type',
+                'Last-Modified'
+            ]
+            as $header
+        ) {
             $this->headers->remove($header);
         }
 
@@ -1024,7 +1115,7 @@ class Response
      */
     public function getVary(): array
     {
-        if (!$vary = $this->headers->get('Vary', null, false)) {
+        if (!($vary = $this->headers->get('Vary', null, false))) {
             return [];
         }
 
@@ -1074,12 +1165,15 @@ class Response
         $lastModified = $this->headers->get('Last-Modified');
         $modifiedSince = $request->headers->get('If-Modified-Since');
 
-        if ($etags = $request->getETags()) {
-            $notModified = \in_array($this->getEtag(), $etags) || \in_array('*', $etags);
+        if (($etags = $request->getETags())) {
+            $notModified =
+                \in_array($this->getEtag(), $etags) || \in_array('*', $etags);
         }
 
         if ($modifiedSince && $lastModified) {
-            $notModified = strtotime($modifiedSince) >= strtotime($lastModified) && (!$etags || $notModified);
+            $notModified =
+                strtotime($modifiedSince) >= strtotime($lastModified) &&
+                (!$etags || $notModified);
         }
 
         if ($notModified) {
@@ -1188,7 +1282,9 @@ class Response
      */
     public function isRedirect(string $location = null): bool
     {
-        return \in_array($this->statusCode, [201, 301, 302, 303, 307, 308]) && (null === $location ?: $location == $this->headers->get('Location'));
+        return \in_array($this->statusCode, [201, 301, 302, 303, 307, 308]) &&
+            (null === $location ?:
+                $location == $this->headers->get('Location'));
     }
 
     /**
@@ -1212,9 +1308,19 @@ class Response
     {
         $status = ob_get_status(true);
         $level = \count($status);
-        $flags = PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE);
+        $flags =
+            PHP_OUTPUT_HANDLER_REMOVABLE |
+            ($flush
+                ? PHP_OUTPUT_HANDLER_FLUSHABLE
+                : PHP_OUTPUT_HANDLER_CLEANABLE);
 
-        while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || ($s['flags'] & $flags) === $flags : $s['del'])) {
+        while (
+            $level-- > $targetLevel &&
+            ($s = $status[$level]) &&
+            (!isset($s['del'])
+                ? !isset($s['flags']) || ($s['flags'] & $flags) === $flags
+                : $s['del'])
+        ) {
             if ($flush) {
                 ob_end_flush();
             } else {
@@ -1232,7 +1338,20 @@ class Response
      */
     protected function ensureIEOverSSLCompatibility(Request $request)
     {
-        if (false !== stripos($this->headers->get('Content-Disposition'), 'attachment') && 1 == preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) && true === $request->isSecure()) {
+        if (
+            false !==
+                stripos(
+                    $this->headers->get('Content-Disposition'),
+                    'attachment'
+                ) &&
+            1 ==
+                preg_match(
+                    '/MSIE (.*?);/i',
+                    $request->server->get('HTTP_USER_AGENT'),
+                    $match
+                ) &&
+            true === $request->isSecure()
+        ) {
             if ((int) preg_replace('/(MSIE )(.*?);/', '$2', $match[0]) < 9) {
                 $this->headers->remove('Cache-Control');
             }

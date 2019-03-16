@@ -48,7 +48,14 @@ class CronExpression
     /**
      * @var array Order in which to test of cron parts
      */
-    private static $order = array(self::YEAR, self::MONTH, self::DAY, self::WEEKDAY, self::HOUR, self::MINUTE);
+    private static $order = array(
+        self::YEAR,
+        self::MONTH,
+        self::DAY,
+        self::WEEKDAY,
+        self::HOUR,
+        self::MINUTE
+    );
 
     /**
      * Factory method to create a new CronExpression.
@@ -66,8 +73,10 @@ class CronExpression
      *
      * @return CronExpression
      */
-    public static function factory($expression, FieldFactory $fieldFactory = null)
-    {
+    public static function factory(
+        $expression,
+        FieldFactory $fieldFactory = null
+    ) {
         $mappings = array(
             '@yearly' => '0 0 1 1 *',
             '@annually' => '0 0 1 1 *',
@@ -152,7 +161,10 @@ class CronExpression
     {
         if (!$this->fieldFactory->getField($position)->validate($value)) {
             throw new InvalidArgumentException(
-                'Invalid CRON field value ' . $value . ' at position ' . $position
+                'Invalid CRON field value ' .
+                    $value .
+                    ' at position ' .
+                    $position
             );
         }
 
@@ -192,9 +204,19 @@ class CronExpression
      * @return \DateTime
      * @throws \RuntimeException on too many iterations
      */
-    public function getNextRunDate($currentTime = 'now', $nth = 0, $allowCurrentDate = false, $timeZone = null)
-    {
-        return $this->getRunDate($currentTime, $nth, false, $allowCurrentDate, $timeZone);
+    public function getNextRunDate(
+        $currentTime = 'now',
+        $nth = 0,
+        $allowCurrentDate = false,
+        $timeZone = null
+    ) {
+        return $this->getRunDate(
+            $currentTime,
+            $nth,
+            false,
+            $allowCurrentDate,
+            $timeZone
+        );
     }
 
     /**
@@ -210,9 +232,19 @@ class CronExpression
      * @throws \RuntimeException on too many iterations
      * @see \Cron\CronExpression::getNextRunDate
      */
-    public function getPreviousRunDate($currentTime = 'now', $nth = 0, $allowCurrentDate = false, $timeZone = null)
-    {
-        return $this->getRunDate($currentTime, $nth, true, $allowCurrentDate, $timeZone);
+    public function getPreviousRunDate(
+        $currentTime = 'now',
+        $nth = 0,
+        $allowCurrentDate = false,
+        $timeZone = null
+    ) {
+        return $this->getRunDate(
+            $currentTime,
+            $nth,
+            true,
+            $allowCurrentDate,
+            $timeZone
+        );
     }
 
     /**
@@ -227,12 +259,23 @@ class CronExpression
      *
      * @return array Returns an array of run dates
      */
-    public function getMultipleRunDates($total, $currentTime = 'now', $invert = false, $allowCurrentDate = false, $timeZone = null)
-    {
+    public function getMultipleRunDates(
+        $total,
+        $currentTime = 'now',
+        $invert = false,
+        $allowCurrentDate = false,
+        $timeZone = null
+    ) {
         $matches = array();
         for ($i = 0; $i < max(0, $total); $i++) {
             try {
-                $matches[] = $this->getRunDate($currentTime, $i, $invert, $allowCurrentDate, $timeZone);
+                $matches[] = $this->getRunDate(
+                    $currentTime,
+                    $i,
+                    $invert,
+                    $allowCurrentDate,
+                    $timeZone
+                );
             } catch (RuntimeException $e) {
                 break;
             }
@@ -290,17 +333,27 @@ class CronExpression
         } elseif ($currentTime instanceof DateTime) {
             //
         } elseif ($currentTime instanceof DateTimeImmutable) {
-            $currentTime = DateTime::createFromFormat('U', $currentTime->format('U'));
+            $currentTime = DateTime::createFromFormat(
+                'U',
+                $currentTime->format('U')
+            );
         } else {
             $currentTime = new DateTime($currentTime);
         }
         $currentTime->setTimeZone(new DateTimeZone($timeZone));
 
         // drop the seconds to 0
-        $currentTime = DateTime::createFromFormat('Y-m-d H:i', $currentTime->format('Y-m-d H:i'));
+        $currentTime = DateTime::createFromFormat(
+            'Y-m-d H:i',
+            $currentTime->format('Y-m-d H:i')
+        );
 
         try {
-            return $this->getNextRunDate($currentTime, 0, true)->getTimestamp() === $currentTime->getTimestamp();
+            return $this->getNextRunDate(
+                $currentTime,
+                0,
+                true
+            )->getTimestamp() === $currentTime->getTimestamp();
         } catch (Exception $e) {
             return false;
         }
@@ -319,20 +372,32 @@ class CronExpression
      * @return \DateTime
      * @throws \RuntimeException on too many iterations
      */
-    protected function getRunDate($currentTime = null, $nth = 0, $invert = false, $allowCurrentDate = false, $timeZone = null)
-    {
+    protected function getRunDate(
+        $currentTime = null,
+        $nth = 0,
+        $invert = false,
+        $allowCurrentDate = false,
+        $timeZone = null
+    ) {
         $timeZone = $this->determineTimeZone($currentTime, $timeZone);
 
         if ($currentTime instanceof DateTime) {
             $currentDate = clone $currentTime;
         } elseif ($currentTime instanceof DateTimeImmutable) {
-            $currentDate = DateTime::createFromFormat('U', $currentTime->format('U'));
+            $currentDate = DateTime::createFromFormat(
+                'U',
+                $currentTime->format('U')
+            );
         } else {
             $currentDate = new DateTime($currentTime ?: 'now');
         }
 
         $currentDate->setTimeZone(new DateTimeZone($timeZone));
-        $currentDate->setTime($currentDate->format('H'), $currentDate->format('i'), 0);
+        $currentDate->setTime(
+            $currentDate->format('H'),
+            $currentDate->format('i'),
+            0
+        );
         $nextRun = clone $currentDate;
         $nth = (int) $nth;
 
@@ -350,7 +415,6 @@ class CronExpression
 
         // Set a hard limit to bail on an impossible date
         for ($i = 0; $i < $this->maxIterationCount; $i++) {
-
             foreach ($parts as $position => $part) {
                 $satisfied = false;
                 // Get the field object used to validate this part
@@ -359,7 +423,10 @@ class CronExpression
                 if (strpos($part, ',') === false) {
                     $satisfied = $field->isSatisfiedBy($nextRun, $part);
                 } else {
-                    foreach (array_map('trim', explode(',', $part)) as $listPart) {
+                    foreach (
+                        array_map('trim', explode(',', $part))
+                        as $listPart
+                    ) {
                         if ($field->isSatisfiedBy($nextRun, $listPart)) {
                             $satisfied = true;
                             break;
@@ -375,8 +442,17 @@ class CronExpression
             }
 
             // Skip this match if needed
-            if ((!$allowCurrentDate && $nextRun == $currentDate) || --$nth > -1) {
-                $this->fieldFactory->getField(0)->increment($nextRun, $invert, isset($parts[0]) ? $parts[0] : null);
+            if (
+                (!$allowCurrentDate && $nextRun == $currentDate) ||
+                --$nth > -1
+            ) {
+                $this->fieldFactory
+                    ->getField(0)
+                    ->increment(
+                        $nextRun,
+                        $invert,
+                        isset($parts[0]) ? $parts[0] : null
+                    );
                 continue;
             }
 
@@ -398,11 +474,11 @@ class CronExpression
      */
     protected function determineTimeZone($currentTime, $timeZone)
     {
-        if (! is_null($timeZone)) {
+        if (!is_null($timeZone)) {
             return $timeZone;
         }
 
-        if ($currentTime instanceOf Datetime) {
+        if ($currentTime instanceof Datetime) {
             return $currentTime->getTimeZone()->getName();
         }
 

@@ -35,8 +35,11 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
     private $controllerTag;
     private $controllerLocator;
 
-    public function __construct(string $resolverServiceId = 'argument_resolver.service', string $controllerTag = 'controller.service_arguments', string $controllerLocator = 'argument_resolver.controller_locator')
-    {
+    public function __construct(
+        string $resolverServiceId = 'argument_resolver.service',
+        string $controllerTag = 'controller.service_arguments',
+        string $controllerLocator = 'argument_resolver.controller_locator'
+    ) {
         $this->resolverServiceId = $resolverServiceId;
         $this->controllerTag = $controllerTag;
         $this->controllerLocator = $controllerLocator;
@@ -51,7 +54,10 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
         $parameterBag = $container->getParameterBag();
         $controllers = [];
 
-        foreach ($container->findTaggedServiceIds($this->controllerTag, true) as $id => $tags) {
+        foreach (
+            $container->findTaggedServiceIds($this->controllerTag, true)
+            as $id => $tags
+        ) {
             $def = $container->getDefinition($id);
             $def->setPublic(true);
             $class = $def->getClass();
@@ -66,10 +72,18 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
             }
             $class = $parameterBag->resolveValue($class);
 
-            if (!$r = $container->getReflectionClass($class)) {
-                throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+            if (!($r = $container->getReflectionClass($class))) {
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Class "%s" used for service "%s" cannot be found.',
+                        $class,
+                        $id
+                    )
+                );
             }
-            $isContainerAware = $r->implementsInterface(ContainerAwareInterface::class) || is_subclass_of($class, AbstractController::class);
+            $isContainerAware =
+                $r->implementsInterface(ContainerAwareInterface::class) ||
+                is_subclass_of($class, AbstractController::class);
 
             // get regular public methods
             $methods = [];
@@ -78,24 +92,55 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                 if ('setContainer' === $r->name && $isContainerAware) {
                     continue;
                 }
-                if (!$r->isConstructor() && !$r->isDestructor() && !$r->isAbstract()) {
+                if (
+                    !$r->isConstructor() &&
+                    !$r->isDestructor() &&
+                    !$r->isAbstract()
+                ) {
                     $methods[strtolower($r->name)] = [$r, $r->getParameters()];
                 }
             }
 
             // validate and collect explicit per-actions and per-arguments service references
             foreach ($tags as $attributes) {
-                if (!isset($attributes['action']) && !isset($attributes['argument']) && !isset($attributes['id'])) {
+                if (
+                    !isset($attributes['action']) &&
+                    !isset($attributes['argument']) &&
+                    !isset($attributes['id'])
+                ) {
                     $autowire = true;
                     continue;
                 }
                 foreach (['action', 'argument', 'id'] as $k) {
                     if (!isset($attributes[$k][0])) {
-                        throw new InvalidArgumentException(sprintf('Missing "%s" attribute on tag "%s" %s for service "%s".', $k, $this->controllerTag, json_encode($attributes, JSON_UNESCAPED_UNICODE), $id));
+                        throw new InvalidArgumentException(
+                            sprintf(
+                                'Missing "%s" attribute on tag "%s" %s for service "%s".',
+                                $k,
+                                $this->controllerTag,
+                                json_encode(
+                                    $attributes,
+                                    JSON_UNESCAPED_UNICODE
+                                ),
+                                $id
+                            )
+                        );
                     }
                 }
-                if (!isset($methods[$action = strtolower($attributes['action'])])) {
-                    throw new InvalidArgumentException(sprintf('Invalid "action" attribute on tag "%s" for service "%s": no public "%s()" method found on class "%s".', $this->controllerTag, $id, $attributes['action'], $class));
+                if (
+                    !isset(
+                        $methods[($action = strtolower($attributes['action']))]
+                    )
+                ) {
+                    throw new InvalidArgumentException(
+                        sprintf(
+                            'Invalid "action" attribute on tag "%s" for service "%s": no public "%s()" method found on class "%s".',
+                            $this->controllerTag,
+                            $id,
+                            $attributes['action'],
+                            $class
+                        )
+                    );
                 }
                 list($r, $parameters) = $methods[$action];
                 $found = false;
@@ -111,7 +156,16 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                 }
 
                 if (!$found) {
-                    throw new InvalidArgumentException(sprintf('Invalid "%s" tag for service "%s": method "%s()" has no "%s" argument on class "%s".', $this->controllerTag, $id, $r->name, $attributes['argument'], $class));
+                    throw new InvalidArgumentException(
+                        sprintf(
+                            'Invalid "%s" tag for service "%s": method "%s()" has no "%s" argument on class "%s".',
+                            $this->controllerTag,
+                            $id,
+                            $r->name,
+                            $attributes['argument'],
+                            $class
+                        )
+                    );
                 }
             }
 
@@ -122,27 +176,50 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                 $args = [];
                 foreach ($parameters as $p) {
                     /** @var \ReflectionParameter $p */
-                    $type = ltrim($target = ProxyHelper::getTypeHint($r, $p), '\\');
-                    $invalidBehavior = ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
+                    $type = ltrim(
+                        ($target = ProxyHelper::getTypeHint($r, $p)),
+                        '\\'
+                    );
+                    $invalidBehavior =
+                        ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
 
                     if (isset($arguments[$r->name][$p->name])) {
                         $target = $arguments[$r->name][$p->name];
                         if ('?' !== $target[0]) {
-                            $invalidBehavior = ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE;
-                        } elseif ('' === $target = (string) substr($target, 1)) {
-                            throw new InvalidArgumentException(sprintf('A "%s" tag must have non-empty "id" attributes for service "%s".', $this->controllerTag, $id));
+                            $invalidBehavior =
+                                ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE;
+                        } elseif (
+                            '' === ($target = (string) substr($target, 1))
+                        ) {
+                            throw new InvalidArgumentException(
+                                sprintf(
+                                    'A "%s" tag must have non-empty "id" attributes for service "%s".',
+                                    $this->controllerTag,
+                                    $id
+                                )
+                            );
                         } elseif ($p->allowsNull() && !$p->isOptional()) {
-                            $invalidBehavior = ContainerInterface::NULL_ON_INVALID_REFERENCE;
+                            $invalidBehavior =
+                                ContainerInterface::NULL_ON_INVALID_REFERENCE;
                         }
-                    } elseif (isset($bindings[$bindingName = $type.' $'.$p->name]) || isset($bindings[$bindingName = '$'.$p->name]) || isset($bindings[$bindingName = $type])) {
+                    } elseif (
+                        isset(
+                            $bindings[($bindingName = $type . ' $' . $p->name)]
+                        ) ||
+                        isset($bindings[($bindingName = '$' . $p->name)]) ||
+                        isset($bindings[($bindingName = $type)])
+                    ) {
                         $binding = $bindings[$bindingName];
 
                         list($bindingValue, $bindingId) = $binding->getValues();
                         $binding->setValues([$bindingValue, $bindingId, true]);
 
                         if (!$bindingValue instanceof Reference) {
-                            $args[$p->name] = new Reference('.value.'.$container->hash($bindingValue));
-                            $container->register((string) $args[$p->name], 'mixed')
+                            $args[$p->name] = new Reference(
+                                '.value.' . $container->hash($bindingValue)
+                            );
+                            $container
+                                ->register((string) $args[$p->name], 'mixed')
                                 ->setFactory('current')
                                 ->addArgument([$bindingValue]);
                         } else {
@@ -153,37 +230,72 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                     } elseif (!$type || !$autowire || '\\' !== $target[0]) {
                         continue;
                     } elseif (!$p->allowsNull()) {
-                        $invalidBehavior = ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE;
+                        $invalidBehavior =
+                            ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE;
                     }
 
                     if (Request::class === $type) {
                         continue;
                     }
 
-                    if ($type && !$p->isOptional() && !$p->allowsNull() && !class_exists($type) && !interface_exists($type, false)) {
-                        $message = sprintf('Cannot determine controller argument for "%s::%s()": the $%s argument is type-hinted with the non-existent class or interface: "%s".', $class, $r->name, $p->name, $type);
+                    if (
+                        $type &&
+                        !$p->isOptional() &&
+                        !$p->allowsNull() &&
+                        !class_exists($type) &&
+                        !interface_exists($type, false)
+                    ) {
+                        $message = sprintf(
+                            'Cannot determine controller argument for "%s::%s()": the $%s argument is type-hinted with the non-existent class or interface: "%s".',
+                            $class,
+                            $r->name,
+                            $p->name,
+                            $type
+                        );
 
                         // see if the type-hint lives in the same namespace as the controller
-                        if (0 === strncmp($type, $class, strrpos($class, '\\'))) {
-                            $message .= ' Did you forget to add a use statement?';
+                        if (
+                            0 === strncmp($type, $class, strrpos($class, '\\'))
+                        ) {
+                            $message .=
+                                ' Did you forget to add a use statement?';
                         }
 
                         throw new InvalidArgumentException($message);
                     }
 
                     $target = ltrim($target, '\\');
-                    $args[$p->name] = $type ? new TypedReference($target, $type, $invalidBehavior, $p->name) : new Reference($target, $invalidBehavior);
+                    $args[$p->name] = $type
+                        ? new TypedReference(
+                            $target,
+                            $type,
+                            $invalidBehavior,
+                            $p->name
+                        )
+                        : new Reference($target, $invalidBehavior);
                 }
                 // register the maps as a per-method service-locators
                 if ($args) {
-                    $controllers[$id.'::'.$r->name] = ServiceLocatorTagPass::register($container, $args);
+                    $controllers[
+                        $id . '::' . $r->name
+                    ] = ServiceLocatorTagPass::register($container, $args);
                 }
             }
         }
 
-        $container->getDefinition($this->resolverServiceId)
-            ->replaceArgument(0, $controllerLocatorRef = ServiceLocatorTagPass::register($container, $controllers));
+        $container
+            ->getDefinition($this->resolverServiceId)
+            ->replaceArgument(
+                0,
+                ($controllerLocatorRef = ServiceLocatorTagPass::register(
+                    $container,
+                    $controllers
+                ))
+            );
 
-        $container->setAlias($this->controllerLocator, (string) $controllerLocatorRef);
+        $container->setAlias(
+            $this->controllerLocator,
+            (string) $controllerLocatorRef
+        );
     }
 }

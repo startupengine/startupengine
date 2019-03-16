@@ -47,7 +47,8 @@ class HeaderUtils
     {
         $quotedSeparators = preg_quote($separators, '/');
 
-        preg_match_all('
+        preg_match_all(
+            '
             /
                 (?!\s)
                     (?:
@@ -55,15 +56,23 @@ class HeaderUtils
                         "(?:[^"\\\\]|\\\\.)*(?:"|\\\\|$)
                     |
                         # token
-                        [^"'.$quotedSeparators.']+
+                        [^"' .
+                $quotedSeparators .
+                ']+
                     )+
                 (?<!\s)
             |
                 # separator
                 \s*
-                (?<separator>['.$quotedSeparators.'])
+                (?<separator>[' .
+                $quotedSeparators .
+                '])
                 \s*
-            /x', trim($header), $matches, PREG_SET_ORDER);
+            /x',
+            trim($header),
+            $matches,
+            PREG_SET_ORDER
+        );
 
         return self::groupParts($matches, $separators);
     }
@@ -112,11 +121,11 @@ class HeaderUtils
             if (true === $value) {
                 $parts[] = $name;
             } else {
-                $parts[] = $name.'='.self::quote($value);
+                $parts[] = $name . '=' . self::quote($value);
             }
         }
 
-        return implode($separator.' ', $parts);
+        return implode($separator . ' ', $parts);
     }
 
     /**
@@ -132,7 +141,7 @@ class HeaderUtils
             return $s;
         }
 
-        return '"'.addcslashes($s, '"\\"').'"';
+        return '"' . addcslashes($s, '"\\"') . '"';
     }
 
     /**
@@ -161,10 +170,24 @@ class HeaderUtils
      *
      * @see RFC 6266
      */
-    public static function makeDisposition(string $disposition, string $filename, string $filenameFallback = ''): string
-    {
-        if (!\in_array($disposition, [self::DISPOSITION_ATTACHMENT, self::DISPOSITION_INLINE])) {
-            throw new \InvalidArgumentException(sprintf('The disposition must be either "%s" or "%s".', self::DISPOSITION_ATTACHMENT, self::DISPOSITION_INLINE));
+    public static function makeDisposition(
+        string $disposition,
+        string $filename,
+        string $filenameFallback = ''
+    ): string {
+        if (
+            !\in_array($disposition, [
+                self::DISPOSITION_ATTACHMENT,
+                self::DISPOSITION_INLINE
+            ])
+        ) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The disposition must be either "%s" or "%s".',
+                    self::DISPOSITION_ATTACHMENT,
+                    self::DISPOSITION_INLINE
+                )
+            );
         }
 
         if ('' === $filenameFallback) {
@@ -173,36 +196,52 @@ class HeaderUtils
 
         // filenameFallback is not ASCII.
         if (!preg_match('/^[\x20-\x7e]*$/', $filenameFallback)) {
-            throw new \InvalidArgumentException('The filename fallback must only contain ASCII characters.');
+            throw new \InvalidArgumentException(
+                'The filename fallback must only contain ASCII characters.'
+            );
         }
 
         // percent characters aren't safe in fallback.
         if (false !== strpos($filenameFallback, '%')) {
-            throw new \InvalidArgumentException('The filename fallback cannot contain the "%" character.');
+            throw new \InvalidArgumentException(
+                'The filename fallback cannot contain the "%" character.'
+            );
         }
 
         // path separators aren't allowed in either.
-        if (false !== strpos($filename, '/') || false !== strpos($filename, '\\') || false !== strpos($filenameFallback, '/') || false !== strpos($filenameFallback, '\\')) {
-            throw new \InvalidArgumentException('The filename and the fallback cannot contain the "/" and "\\" characters.');
+        if (
+            false !== strpos($filename, '/') ||
+            false !== strpos($filename, '\\') ||
+            false !== strpos($filenameFallback, '/') ||
+            false !== strpos($filenameFallback, '\\')
+        ) {
+            throw new \InvalidArgumentException(
+                'The filename and the fallback cannot contain the "/" and "\\" characters.'
+            );
         }
 
         $params = ['filename' => $filenameFallback];
         if ($filename !== $filenameFallback) {
-            $params['filename*'] = "utf-8''".rawurlencode($filename);
+            $params['filename*'] = "utf-8''" . rawurlencode($filename);
         }
 
-        return $disposition.'; '.self::toString($params, ';');
+        return $disposition . '; ' . self::toString($params, ';');
     }
 
-    private static function groupParts(array $matches, string $separators): array
-    {
+    private static function groupParts(
+        array $matches,
+        string $separators
+    ): array {
         $separator = $separators[0];
         $partSeparators = substr($separators, 1);
 
         $i = 0;
         $partMatches = [];
         foreach ($matches as $match) {
-            if (isset($match['separator']) && $match['separator'] === $separator) {
+            if (
+                isset($match['separator']) &&
+                $match['separator'] === $separator
+            ) {
                 ++$i;
             } else {
                 $partMatches[$i][] = $match;

@@ -37,8 +37,11 @@ class Profiler implements ResetInterface
     private $initiallyEnabled = true;
     private $enabled = true;
 
-    public function __construct(ProfilerStorageInterface $storage, LoggerInterface $logger = null, bool $enable = true)
-    {
+    public function __construct(
+        ProfilerStorageInterface $storage,
+        LoggerInterface $logger = null,
+        bool $enable = true
+    ) {
         $this->storage = $storage;
         $this->logger = $logger;
         $this->initiallyEnabled = $this->enabled = $enable;
@@ -67,7 +70,7 @@ class Profiler implements ResetInterface
      */
     public function loadProfileFromResponse(Response $response)
     {
-        if (!$token = $response->headers->get('X-Debug-Token')) {
+        if (!($token = $response->headers->get('X-Debug-Token'))) {
             return false;
         }
 
@@ -100,8 +103,14 @@ class Profiler implements ResetInterface
             }
         }
 
-        if (!($ret = $this->storage->write($profile)) && null !== $this->logger) {
-            $this->logger->warning('Unable to store the profiler information.', ['configured_storage' => \get_class($this->storage)]);
+        if (
+            !($ret = $this->storage->write($profile)) &&
+            null !== $this->logger
+        ) {
+            $this->logger->warning(
+                'Unable to store the profiler information.',
+                ['configured_storage' => \get_class($this->storage)]
+            );
         }
 
         return $ret;
@@ -130,9 +139,24 @@ class Profiler implements ResetInterface
      *
      * @see http://php.net/manual/en/datetime.formats.php for the supported date/time formats
      */
-    public function find($ip, $url, $limit, $method, $start, $end, $statusCode = null)
-    {
-        return $this->storage->find($ip, $url, $limit, $method, $this->getTimestamp($start), $this->getTimestamp($end), $statusCode);
+    public function find(
+        $ip,
+        $url,
+        $limit,
+        $method,
+        $start,
+        $end,
+        $statusCode = null
+    ) {
+        return $this->storage->find(
+            $ip,
+            $url,
+            $limit,
+            $method,
+            $this->getTimestamp($start),
+            $this->getTimestamp($end),
+            $statusCode
+        );
     }
 
     /**
@@ -140,13 +164,18 @@ class Profiler implements ResetInterface
      *
      * @return Profile|null A Profile instance or null if the profiler is disabled
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         if (false === $this->enabled) {
             return;
         }
 
-        $profile = new Profile(substr(hash('sha256', uniqid(mt_rand(), true)), 0, 6));
+        $profile = new Profile(
+            substr(hash('sha256', uniqid(mt_rand(), true)), 0, 6)
+        );
         $profile->setTime(time());
         $profile->setUrl($request->getUri());
         $profile->setMethod($request->getMethod());
@@ -157,7 +186,7 @@ class Profiler implements ResetInterface
             $profile->setIp('Unknown');
         }
 
-        if ($prevToken = $response->headers->get('X-Debug-Token')) {
+        if (($prevToken = $response->headers->get('X-Debug-Token'))) {
             $response->headers->set('X-Previous-Debug-Token', $prevToken);
         }
 
@@ -236,7 +265,9 @@ class Profiler implements ResetInterface
     public function get($name)
     {
         if (!isset($this->collectors[$name])) {
-            throw new \InvalidArgumentException(sprintf('Collector "%s" does not exist.', $name));
+            throw new \InvalidArgumentException(
+                sprintf('Collector "%s" does not exist.', $name)
+            );
         }
 
         return $this->collectors[$name];
@@ -249,7 +280,7 @@ class Profiler implements ResetInterface
         }
 
         try {
-            $value = new \DateTime(is_numeric($value) ? '@'.$value : $value);
+            $value = new \DateTime(is_numeric($value) ? '@' . $value : $value);
         } catch (\Exception $e) {
             return;
         }

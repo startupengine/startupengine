@@ -11,55 +11,61 @@ class Swift_CharacterReader_Utf8ReaderTest extends \PHPUnit\Framework\TestCase
 
     public function testLeading7BitOctetCausesReturnZero()
     {
-        for ($ordinal = 0x00; $ordinal <= 0x7F; ++$ordinal) {
+        for ($ordinal = 0x00; $ordinal <= 0x7f; ++$ordinal) {
             $this->assertSame(
-                0, $this->reader->validateByteSequence([$ordinal], 1)
-                );
+                0,
+                $this->reader->validateByteSequence([$ordinal], 1)
+            );
         }
     }
 
     public function testLeadingByteOf2OctetCharCausesReturn1()
     {
-        for ($octet = 0xC0; $octet <= 0xDF; ++$octet) {
+        for ($octet = 0xc0; $octet <= 0xdf; ++$octet) {
             $this->assertSame(
-                1, $this->reader->validateByteSequence([$octet], 1)
-                );
+                1,
+                $this->reader->validateByteSequence([$octet], 1)
+            );
         }
     }
 
     public function testLeadingByteOf3OctetCharCausesReturn2()
     {
-        for ($octet = 0xE0; $octet <= 0xEF; ++$octet) {
+        for ($octet = 0xe0; $octet <= 0xef; ++$octet) {
             $this->assertSame(
-                2, $this->reader->validateByteSequence([$octet], 1)
-                );
+                2,
+                $this->reader->validateByteSequence([$octet], 1)
+            );
         }
     }
 
     public function testLeadingByteOf4OctetCharCausesReturn3()
     {
-        for ($octet = 0xF0; $octet <= 0xF7; ++$octet) {
+        for ($octet = 0xf0; $octet <= 0xf7; ++$octet) {
             $this->assertSame(
-                3, $this->reader->validateByteSequence([$octet], 1)
-                );
+                3,
+                $this->reader->validateByteSequence([$octet], 1)
+            );
         }
     }
 
     public function testLeadingByteOf5OctetCharCausesReturn4()
     {
-        for ($octet = 0xF8; $octet <= 0xFB; ++$octet) {
+        for ($octet = 0xf8; $octet <= 0xfb; ++$octet) {
             $this->assertSame(
-                4, $this->reader->validateByteSequence([$octet], 1)
-                );
+                4,
+                $this->reader->validateByteSequence([$octet], 1)
+            );
         }
     }
 
     public function testLeadingByteOf6OctetCharCausesReturn5()
     {
-        for ($octet = 0xFC; $octet <= 0xFD; ++$octet) {
+        for ($octet = 0xfc; $octet <= 0xfd; ++$octet) {
             $this->assertSame(
-                5, $this->reader->validateByteSequence([$octet], 1)
-                );
+                5,
+                $this->reader->validateByteSequence([$octet], 1)
+            );
         }
     }
 }

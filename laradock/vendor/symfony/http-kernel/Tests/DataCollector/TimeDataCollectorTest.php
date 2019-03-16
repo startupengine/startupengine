@@ -42,8 +42,13 @@ class TimeDataCollectorTest extends TestCase
         $c->collect($request, new Response());
         $this->assertEquals(0, $c->getStartTime());
 
-        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\KernelInterface')->getMock();
-        $kernel->expects($this->once())->method('getStartTime')->will($this->returnValue(123456));
+        $kernel = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\KernelInterface'
+        )->getMock();
+        $kernel
+            ->expects($this->once())
+            ->method('getStartTime')
+            ->will($this->returnValue(123456));
 
         $c = new TimeDataCollector($kernel);
         $request = new Request();

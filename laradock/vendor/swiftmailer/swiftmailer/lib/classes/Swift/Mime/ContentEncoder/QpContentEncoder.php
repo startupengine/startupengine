@@ -13,7 +13,9 @@
  *
  * @author     Chris Corbyn
  */
-class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder implements Swift_Mime_ContentEncoder
+class Swift_Mime_ContentEncoder_QpContentEncoder
+    extends Swift_Encoder_QpEncoder
+    implements Swift_Mime_ContentEncoder
 {
     protected $dotEscape;
 
@@ -24,8 +26,11 @@ class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder
      * @param Swift_StreamFilter    $filter     if canonicalization should occur
      * @param bool                  $dotEscape  if dot stuffing workaround must be enabled
      */
-    public function __construct(Swift_CharacterStream $charStream, Swift_StreamFilter $filter = null, $dotEscape = false)
-    {
+    public function __construct(
+        Swift_CharacterStream $charStream,
+        Swift_StreamFilter $filter = null,
+        $dotEscape = false
+    ) {
         $this->dotEscape = $dotEscape;
         parent::__construct($charStream, $filter);
     }
@@ -37,7 +42,7 @@ class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder
 
     protected function getSafeMapShareId()
     {
-        return get_class($this).($this->dotEscape ? '.dotEscape' : '');
+        return get_class($this) . ($this->dotEscape ? '.dotEscape' : '');
     }
 
     protected function initSafeMap()
@@ -61,8 +66,12 @@ class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder
      * @param int                    $firstLineOffset
      * @param int                    $maxLineLength
      */
-    public function encodeByteStream(Swift_OutputByteStream $os, Swift_InputByteStream $is, $firstLineOffset = 0, $maxLineLength = 0)
-    {
+    public function encodeByteStream(
+        Swift_OutputByteStream $os,
+        Swift_InputByteStream $is,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    ) {
         if ($maxLineLength > 76 || $maxLineLength <= 0) {
             $maxLineLength = 76;
         }
@@ -76,13 +85,13 @@ class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder
         $prepend = '';
         $size = $lineLen = 0;
 
-        while (false !== $bytes = $this->nextSequence()) {
+        while (false !== ($bytes = $this->nextSequence())) {
             // If we're filtering the input
             if (isset($this->filter)) {
                 // If we can't filter because we need more bytes
                 while ($this->filter->shouldBuffer($bytes)) {
                     // Then collect bytes into the buffer
-                    if (false === $moreBytes = $this->nextSequence(1)) {
+                    if (false === ($moreBytes = $this->nextSequence(1))) {
                         break;
                     }
 
@@ -100,7 +109,7 @@ class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder
             $newLineLength = $lineLen + (false === $i ? $size : $i);
 
             if ($currentLine && $newLineLength >= $thisLineLength) {
-                $is->write($prepend.$this->standardize($currentLine));
+                $is->write($prepend . $this->standardize($currentLine));
                 $currentLine = '';
                 $prepend = "=\r\n";
                 $thisLineLength = $maxLineLength;
@@ -117,7 +126,7 @@ class Swift_Mime_ContentEncoder_QpContentEncoder extends Swift_Encoder_QpEncoder
             }
         }
         if (strlen($currentLine)) {
-            $is->write($prepend.$this->standardize($currentLine));
+            $is->write($prepend . $this->standardize($currentLine));
         }
     }
 

@@ -14,7 +14,8 @@
  * @author     Chris Corbyn
  * @author     Xavier De Cock <xdecock@gmail.com>
  */
-class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterReader
+class Swift_CharacterReader_GenericFixedWidthReader implements
+    Swift_CharacterReader
 {
     /**
      * The number of bytes in a single character.
@@ -43,8 +44,12 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
      *
      * @return int
      */
-    public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
-    {
+    public function getCharPositions(
+        $string,
+        $startOffset,
+        &$currentMap,
+        &$ignoredChars
+    ) {
         $strlen = strlen($string);
         // % and / are CPU intensive, so, maybe find a better way
         $ignored = $strlen % $this->width;

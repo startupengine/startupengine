@@ -45,7 +45,9 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
         $header = new Swift_Mime_Headers_OpenDKIMHeader('DKIM-Signature');
         $headerVal = $this->dkimHandler->getSignatureHeader();
         if (false === $headerVal || is_int($headerVal)) {
-            throw new Swift_SwiftException('OpenDKIM Error: '.$this->dkimHandler->getError());
+            throw new Swift_SwiftException(
+                'OpenDKIM Error: ' . $this->dkimHandler->getError()
+            );
         }
         $header->setValue($headerVal);
         $headers->set($header);
@@ -55,18 +57,44 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
 
     public function setHeaders(Swift_Mime_SimpleHeaderSet $headers)
     {
-        $hash = 'rsa-sha1' == $this->hashAlgorithm ? OpenDKIMSign::ALG_RSASHA1 : OpenDKIMSign::ALG_RSASHA256;
-        $bodyCanon = 'simple' == $this->bodyCanon ? OpenDKIMSign::CANON_SIMPLE : OpenDKIMSign::CANON_RELAXED;
-        $headerCanon = 'simple' == $this->headerCanon ? OpenDKIMSign::CANON_SIMPLE : OpenDKIMSign::CANON_RELAXED;
-        $this->dkimHandler = new OpenDKIMSign($this->privateKey, $this->selector, $this->domainName, $headerCanon, $bodyCanon, $hash, -1);
+        $hash =
+            'rsa-sha1' == $this->hashAlgorithm
+                ? OpenDKIMSign::ALG_RSASHA1
+                : OpenDKIMSign::ALG_RSASHA256;
+        $bodyCanon =
+            'simple' == $this->bodyCanon
+                ? OpenDKIMSign::CANON_SIMPLE
+                : OpenDKIMSign::CANON_RELAXED;
+        $headerCanon =
+            'simple' == $this->headerCanon
+                ? OpenDKIMSign::CANON_SIMPLE
+                : OpenDKIMSign::CANON_RELAXED;
+        $this->dkimHandler = new OpenDKIMSign(
+            $this->privateKey,
+            $this->selector,
+            $this->domainName,
+            $headerCanon,
+            $bodyCanon,
+            $hash,
+            -1
+        );
         // Hardcode signature Margin for now
         $this->dkimHandler->setMargin(78);
 
         if (!is_numeric($this->signatureTimestamp)) {
             OpenDKIM::setOption(OpenDKIM::OPTS_FIXEDTIME, time());
         } else {
-            if (!OpenDKIM::setOption(OpenDKIM::OPTS_FIXEDTIME, $this->signatureTimestamp)) {
-                throw new Swift_SwiftException('Unable to force signature timestamp ['.openssl_error_string().']');
+            if (
+                !OpenDKIM::setOption(
+                    OpenDKIM::OPTS_FIXEDTIME,
+                    $this->signatureTimestamp
+                )
+            ) {
+                throw new Swift_SwiftException(
+                    'Unable to force signature timestamp [' .
+                        openssl_error_string() .
+                        ']'
+                );
             }
         }
         if (isset($this->signerIdentity)) {

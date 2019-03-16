@@ -188,10 +188,12 @@ $swift_mime_types = [
     'dna' => 'application/vnd.dna',
     'doc' => 'application/msword',
     'docm' => 'application/vnd.ms-word.document.macroenabled.12',
-    'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'docx' =>
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'dot' => 'application/msword',
     'dotm' => 'application/vnd.ms-word.template.macroenabled.12',
-    'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+    'dotx' =>
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
     'dp' => 'application/vnd.osgi.dp',
     'dpg' => 'application/vnd.dpgraph',
     'dra' => 'audio/vnd.dra',
@@ -621,16 +623,19 @@ $swift_mime_types = [
     'portpkg' => 'application/vnd.macports.portpkg',
     'pot' => 'application/vnd.ms-powerpoint',
     'potm' => 'application/vnd.ms-powerpoint.template.macroenabled.12',
-    'potx' => 'application/vnd.openxmlformats-officedocument.presentationml.template',
+    'potx' =>
+        'application/vnd.openxmlformats-officedocument.presentationml.template',
     'ppam' => 'application/vnd.ms-powerpoint.addin.macroenabled.12',
     'ppd' => 'application/vnd.cups-ppd',
     'ppm' => 'image/x-portable-pixmap',
     'pps' => 'application/vnd.ms-powerpoint',
     'ppsm' => 'application/vnd.ms-powerpoint.slideshow.macroenabled.12',
-    'ppsx' => 'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
+    'ppsx' =>
+        'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
     'ppt' => 'application/vnd.ms-powerpoint',
     'pptm' => 'application/vnd.ms-powerpoint.presentation.macroenabled.12',
-    'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'pptx' =>
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     'pqa' => 'application/vnd.palm',
     'prc' => 'application/x-mobipocket-ebook',
     'pre' => 'application/vnd.lotus-freelance',
@@ -738,7 +743,8 @@ $swift_mime_types = [
     'skp' => 'application/vnd.koan',
     'skt' => 'application/vnd.koan',
     'sldm' => 'application/vnd.ms-powerpoint.slide.macroenabled.12',
-    'sldx' => 'application/vnd.openxmlformats-officedocument.presentationml.slide',
+    'sldx' =>
+        'application/vnd.openxmlformats-officedocument.presentationml.slide',
     'slt' => 'application/vnd.epson.salt',
     'sm' => 'application/vnd.stepmania.stepchart',
     'smf' => 'application/vnd.stardivision.math',
@@ -962,10 +968,12 @@ $swift_mime_types = [
     'xls' => 'application/vnd.ms-excel',
     'xlsb' => 'application/vnd.ms-excel.sheet.binary.macroenabled.12',
     'xlsm' => 'application/vnd.ms-excel.sheet.macroenabled.12',
-    'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'xlsx' =>
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     'xlt' => 'application/vnd.ms-excel',
     'xltm' => 'application/vnd.ms-excel.template.macroenabled.12',
-    'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
+    'xltx' =>
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
     'xlw' => 'application/vnd.ms-excel',
     'xm' => 'audio/xm',
     'xml' => 'application/xml',
@@ -1003,5 +1011,5 @@ $swift_mime_types = [
     'zir' => 'application/vnd.zul',
     'zirz' => 'application/vnd.zul',
     'zmm' => 'application/vnd.handheld-entertainment+xml',
-    '123' => 'application/vnd.lotus-1-2-3',
+    '123' => 'application/vnd.lotus-1-2-3'
 ];

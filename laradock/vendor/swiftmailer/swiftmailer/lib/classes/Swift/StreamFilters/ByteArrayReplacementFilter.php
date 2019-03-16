@@ -15,7 +15,8 @@
  *
  * @author  Chris Corbyn
  */
-class Swift_StreamFilters_ByteArrayReplacementFilter implements Swift_StreamFilter
+class Swift_StreamFilters_ByteArrayReplacementFilter implements
+    Swift_StreamFilter
 {
     /** The replacement(s) to make */
     private $replace;
@@ -127,11 +128,17 @@ class Swift_StreamFilters_ByteArrayReplacementFilter implements Swift_StreamFilt
             // We try to find if the next byte is part of a search pattern
             for ($j = 0; $j <= $this->treeMaxLen; ++$j) {
                 // We have a new byte for a search pattern
-                if (isset($buffer[$p = $i + $j]) && isset($search_pos[$buffer[$p]])) {
+                if (
+                    isset($buffer[($p = $i + $j)]) &&
+                    isset($search_pos[$buffer[$p]])
+                ) {
                     $search_pos = $search_pos[$buffer[$p]];
                     // We have a complete pattern, save, in case we don't find a better match later
-                    if (isset($search_pos[-1]) && $search_pos[-1] < $last_found
-                        && $search_pos[-1] > $minReplaces) {
+                    if (
+                        isset($search_pos[-1]) &&
+                        $search_pos[-1] < $last_found &&
+                        $search_pos[-1] > $minReplaces
+                    ) {
                         $last_found = $search_pos[-1];
                         $last_size = $search_pos[-2];
                     }

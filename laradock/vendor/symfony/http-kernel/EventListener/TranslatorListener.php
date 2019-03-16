@@ -35,8 +35,20 @@ class TranslatorListener implements EventSubscriberInterface
      */
     public function __construct($translator, RequestStack $requestStack)
     {
-        if (!$translator instanceof TranslatorInterface && !$translator instanceof LocaleAwareInterface) {
-            throw new \TypeError(sprintf('Argument 1 passed to %s() must be an instance of %s, %s given.', __METHOD__, LocaleAwareInterface::class, \is_object($translator) ? \get_class($translator) : \gettype($translator)));
+        if (
+            !$translator instanceof TranslatorInterface &&
+            !$translator instanceof LocaleAwareInterface
+        ) {
+            throw new \TypeError(
+                sprintf(
+                    'Argument 1 passed to %s() must be an instance of %s, %s given.',
+                    __METHOD__,
+                    LocaleAwareInterface::class,
+                    \is_object($translator)
+                        ? \get_class($translator)
+                        : \gettype($translator)
+                )
+            );
         }
         $this->translator = $translator;
         $this->requestStack = $requestStack;
@@ -49,7 +61,9 @@ class TranslatorListener implements EventSubscriberInterface
 
     public function onKernelFinishRequest(FinishRequestEvent $event)
     {
-        if (null === $parentRequest = $this->requestStack->getParentRequest()) {
+        if (
+            null === ($parentRequest = $this->requestStack->getParentRequest())
+        ) {
             return;
         }
 
@@ -61,7 +75,7 @@ class TranslatorListener implements EventSubscriberInterface
         return [
             // must be registered after the Locale listener
             KernelEvents::REQUEST => [['onKernelRequest', 10]],
-            KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]],
+            KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]]
         ];
     }
 

@@ -106,8 +106,9 @@ class Swift_CharacterStream_CharacterStream implements Swift_CharacterStream
     /**
      * Set the CharacterReaderFactory for multi charset support.
      */
-    public function setCharacterReaderFactory(Swift_CharacterReaderFactory $factory)
-    {
+    public function setCharacterReaderFactory(
+        Swift_CharacterReaderFactory $factory
+    ) {
         $this->charReaderFactory = $factory;
     }
 
@@ -142,13 +143,18 @@ class Swift_CharacterStream_CharacterStream implements Swift_CharacterStream
             return false;
         }
         $ret = false;
-        $length = ($this->currentPos + $length > $this->charCount) ? $this->charCount - $this->currentPos : $length;
+        $length =
+            $this->currentPos + $length > $this->charCount
+                ? $this->charCount - $this->currentPos
+                : $length;
         switch ($this->mapType) {
             case Swift_CharacterReader::MAP_TYPE_FIXED_LEN:
                 $len = $length * $this->map;
-                $ret = substr($this->datas,
-                        $this->currentPos * $this->map,
-                        $len);
+                $ret = substr(
+                    $this->datas,
+                    $this->currentPos * $this->map,
+                    $len
+                );
                 $this->currentPos += $length;
                 break;
 
@@ -174,7 +180,8 @@ class Swift_CharacterStream_CharacterStream implements Swift_CharacterStream
                 $to = $start;
                 for (; $this->currentPos < $end; ++$this->currentPos) {
                     if (isset($this->map['i'][$this->currentPos])) {
-                        $ret .= substr($this->datas, $start, $to - $start).'?';
+                        $ret .=
+                            substr($this->datas, $start, $to - $start) . '?';
                         $start = $this->map['p'][$this->currentPos];
                     } else {
                         $to = $this->map['p'][$this->currentPos];
@@ -211,13 +218,19 @@ class Swift_CharacterStream_CharacterStream implements Swift_CharacterStream
     {
         if (!isset($this->charReader)) {
             $this->charReader = $this->charReaderFactory->getReaderFor(
-                $this->charset);
+                $this->charset
+            );
             $this->map = [];
             $this->mapType = $this->charReader->getMapType();
         }
         $ignored = '';
         $this->datas .= $chars;
-        $this->charCount += $this->charReader->getCharPositions(substr($this->datas, $this->datasSize), $this->datasSize, $this->map, $ignored);
+        $this->charCount += $this->charReader->getCharPositions(
+            substr($this->datas, $this->datasSize),
+            $this->datasSize,
+            $this->map,
+            $ignored
+        );
         if (false !== $ignored) {
             $this->datasSize = strlen($this->datas) - strlen($ignored);
         } else {

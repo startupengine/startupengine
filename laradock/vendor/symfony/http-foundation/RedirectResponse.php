@@ -32,14 +32,22 @@ class RedirectResponse extends Response
      *
      * @see http://tools.ietf.org/html/rfc2616#section-10.3
      */
-    public function __construct(?string $url, int $status = 302, array $headers = [])
-    {
+    public function __construct(
+        ?string $url,
+        int $status = 302,
+        array $headers = []
+    ) {
         parent::__construct('', $status, $headers);
 
         $this->setTargetUrl($url);
 
         if (!$this->isRedirect()) {
-            throw new \InvalidArgumentException(sprintf('The HTTP status code is not a redirect ("%s" given).', $status));
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The HTTP status code is not a redirect ("%s" given).',
+                    $status
+                )
+            );
         }
 
         if (301 == $status && !\array_key_exists('cache-control', $headers)) {
@@ -83,13 +91,16 @@ class RedirectResponse extends Response
     public function setTargetUrl($url)
     {
         if (empty($url)) {
-            throw new \InvalidArgumentException('Cannot redirect to an empty URL.');
+            throw new \InvalidArgumentException(
+                'Cannot redirect to an empty URL.'
+            );
         }
 
         $this->targetUrl = $url;
 
         $this->setContent(
-            sprintf('<!DOCTYPE html>
+            sprintf(
+                '<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -100,7 +111,10 @@ class RedirectResponse extends Response
     <body>
         Redirecting to <a href="%1$s">%1$s</a>.
     </body>
-</html>', htmlspecialchars($url, ENT_QUOTES, 'UTF-8')));
+</html>',
+                htmlspecialchars($url, ENT_QUOTES, 'UTF-8')
+            )
+        );
 
         $this->headers->set('Location', $url);
 

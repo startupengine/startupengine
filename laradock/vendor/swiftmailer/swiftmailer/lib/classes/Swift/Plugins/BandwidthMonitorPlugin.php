@@ -13,7 +13,11 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Plugins_BandwidthMonitorPlugin implements Swift_Events_SendListener, Swift_Events_CommandListener, Swift_Events_ResponseListener, Swift_InputByteStream
+class Swift_Plugins_BandwidthMonitorPlugin implements
+    Swift_Events_SendListener,
+    Swift_Events_CommandListener,
+    Swift_Events_ResponseListener,
+    Swift_InputByteStream
 {
     /**
      * The outgoing traffic counter.

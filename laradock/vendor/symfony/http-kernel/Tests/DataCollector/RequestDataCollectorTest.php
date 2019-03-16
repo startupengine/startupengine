@@ -33,18 +33,39 @@ class RequestDataCollectorTest extends TestCase
     {
         $c = new RequestDataCollector();
 
-        $c->collect($request = $this->createRequest(), $this->createResponse());
+        $c->collect(
+            ($request = $this->createRequest()),
+            $this->createResponse()
+        );
         $c->lateCollect();
 
         $attributes = $c->getRequestAttributes();
 
         $this->assertSame('request', $c->getName());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $c->getRequestHeaders());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $c->getRequestServer());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $c->getRequestCookies());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $attributes);
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $c->getRequestRequest());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $c->getRequestQuery());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $c->getRequestHeaders()
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $c->getRequestServer()
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $c->getRequestCookies()
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $attributes
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $c->getRequestRequest()
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $c->getRequestQuery()
+        );
         $this->assertInstanceOf(ParameterBag::class, $c->getResponseCookies());
         $this->assertSame('html', $c->getFormat());
         $this->assertEquals('foobar', $c->getRoute());
@@ -54,7 +75,10 @@ class RequestDataCollectorTest extends TestCase
         $this->assertContains(__FILE__, $attributes->get('resource'));
         $this->assertSame('stdClass', $attributes->get('object')->getType());
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $c->getResponseHeaders());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $c->getResponseHeaders()
+        );
         $this->assertSame('OK', $c->getStatusText());
         $this->assertSame(200, $c->getStatusCode());
         $this->assertSame('application/json', $c->getContentType());
@@ -83,7 +107,11 @@ class RequestDataCollectorTest extends TestCase
         $c->collect($request, $response);
         $c->lateCollect();
 
-        $this->assertSame($expected, $c->getController()->getValue(true), sprintf('Testing: %s', $name));
+        $this->assertSame(
+            $expected,
+            $c->getController()->getValue(true),
+            sprintf('Testing: %s', $name)
+        );
     }
 
     public function provideControllerCallables()
@@ -99,89 +127,104 @@ class RequestDataCollectorTest extends TestCase
                 '"Regular" callable',
                 [$this, 'testControllerInspection'],
                 [
-                    'class' => __NAMESPACE__.'\RequestDataCollectorTest',
+                    'class' => __NAMESPACE__ . '\RequestDataCollectorTest',
                     'method' => 'testControllerInspection',
                     'file' => __FILE__,
-                    'line' => $r1->getStartLine(),
-                ],
+                    'line' => $r1->getStartLine()
+                ]
             ],
 
             [
                 'Closure',
-                function () { return 'foo'; },
+                function () {
+                    return 'foo';
+                },
                 [
-                    'class' => __NAMESPACE__.'\{closure}',
+                    'class' => __NAMESPACE__ . '\{closure}',
                     'method' => null,
                     'file' => __FILE__,
-                    'line' => __LINE__ - 5,
-                ],
+                    'line' => __LINE__ - 5
+                ]
             ],
 
             [
                 'Static callback as string',
-                __NAMESPACE__.'\RequestDataCollectorTest::staticControllerMethod',
+                __NAMESPACE__ .
+                    '\RequestDataCollectorTest::staticControllerMethod',
                 [
-                    'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'class' =>
+                        'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => 'staticControllerMethod',
                     'file' => __FILE__,
-                    'line' => $r2->getStartLine(),
-                ],
+                    'line' => $r2->getStartLine()
+                ]
             ],
 
             [
                 'Static callable with instance',
                 [$this, 'staticControllerMethod'],
                 [
-                    'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'class' =>
+                        'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => 'staticControllerMethod',
                     'file' => __FILE__,
-                    'line' => $r2->getStartLine(),
-                ],
+                    'line' => $r2->getStartLine()
+                ]
             ],
 
             [
                 'Static callable with class name',
-                ['Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest', 'staticControllerMethod'],
                 [
-                    'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'staticControllerMethod'
+                ],
+                [
+                    'class' =>
+                        'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => 'staticControllerMethod',
                     'file' => __FILE__,
-                    'line' => $r2->getStartLine(),
-                ],
+                    'line' => $r2->getStartLine()
+                ]
             ],
 
             [
                 'Callable with instance depending on __call()',
                 [$this, 'magicMethod'],
                 [
-                    'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'class' =>
+                        'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => 'magicMethod',
                     'file' => 'n/a',
-                    'line' => 'n/a',
-                ],
+                    'line' => 'n/a'
+                ]
             ],
 
             [
                 'Callable with class name depending on __callStatic()',
-                ['Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest', 'magicMethod'],
                 [
-                    'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'magicMethod'
+                ],
+                [
+                    'class' =>
+                        'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => 'magicMethod',
                     'file' => 'n/a',
-                    'line' => 'n/a',
-                ],
+                    'line' => 'n/a'
+                ]
             ],
 
             [
                 'Invokable controller',
                 $this,
                 [
-                    'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
+                    'class' =>
+                        'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => null,
                     'file' => __FILE__,
-                    'line' => $r3->getStartLine(),
-                ],
-            ],
+                    'line' => $r3->getStartLine()
+                ]
+            ]
         ];
     }
 
@@ -200,13 +243,20 @@ class RequestDataCollectorTest extends TestCase
     {
         $request = $this->createRequest();
         $request->cookies->add([
-            'sf_redirect' => '{}',
+            'sf_redirect' => '{}'
         ]);
 
         $kernel = $this->getMockBuilder(HttpKernelInterface::class)->getMock();
 
         $c = new RequestDataCollector();
-        $c->onKernelResponse(new FilterResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $this->createResponse()));
+        $c->onKernelResponse(
+            new FilterResponseEvent(
+                $kernel,
+                $request,
+                HttpKernelInterface::MASTER_REQUEST,
+                $this->createResponse()
+            )
+        );
 
         $this->assertTrue($request->attributes->get('_redirected'));
     }
@@ -219,7 +269,7 @@ class RequestDataCollectorTest extends TestCase
         $response->setStatusCode(302);
         $response->headers->set('Location', '/somewhere-else');
 
-        $c->collect($request = $this->createRequest(), $response);
+        $c->collect(($request = $this->createRequest()), $response);
         $c->lateCollect();
 
         $cookie = $this->getCookieByName($response, 'sf_redirect');
@@ -236,10 +286,10 @@ class RequestDataCollectorTest extends TestCase
         $request = $this->createRequest();
         $request->attributes->set('_redirected', true);
         $request->cookies->add([
-            'sf_redirect' => '{"method": "POST"}',
+            'sf_redirect' => '{"method": "POST"}'
         ]);
 
-        $c->collect($request, $response = $this->createResponse());
+        $c->collect($request, ($response = $this->createResponse()));
         $c->lateCollect();
 
         $this->assertEquals('POST', $c->getRedirect()['method']);
@@ -276,9 +326,45 @@ class RequestDataCollectorTest extends TestCase
         $response->setStatusCode(200);
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('X-Foo-Bar', null);
-        $response->headers->setCookie(new Cookie('foo', 'bar', 1, '/foo', 'localhost', true, true, false, null));
-        $response->headers->setCookie(new Cookie('bar', 'foo', new \DateTime('@946684800'), '/', null, false, true, false, null));
-        $response->headers->setCookie(new Cookie('bazz', 'foo', '2000-12-12', '/', null, false, true, false, null));
+        $response->headers->setCookie(
+            new Cookie(
+                'foo',
+                'bar',
+                1,
+                '/foo',
+                'localhost',
+                true,
+                true,
+                false,
+                null
+            )
+        );
+        $response->headers->setCookie(
+            new Cookie(
+                'bar',
+                'foo',
+                new \DateTime('@946684800'),
+                '/',
+                null,
+                false,
+                true,
+                false,
+                null
+            )
+        );
+        $response->headers->setCookie(
+            new Cookie(
+                'bazz',
+                'foo',
+                '2000-12-12',
+                '/',
+                null,
+                false,
+                true,
+                false,
+                null
+            )
+        );
 
         return $response;
     }
@@ -288,9 +374,21 @@ class RequestDataCollectorTest extends TestCase
      */
     protected function injectController($collector, $controller, $request)
     {
-        $resolver = $this->getMockBuilder('Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface')->getMock();
-        $httpKernel = new HttpKernel(new EventDispatcher(), $resolver, null, $this->getMockBuilder(ArgumentResolverInterface::class)->getMock());
-        $event = new FilterControllerEvent($httpKernel, $controller, $request, HttpKernelInterface::MASTER_REQUEST);
+        $resolver = $this->getMockBuilder(
+            'Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface'
+        )->getMock();
+        $httpKernel = new HttpKernel(
+            new EventDispatcher(),
+            $resolver,
+            null,
+            $this->getMockBuilder(ArgumentResolverInterface::class)->getMock()
+        );
+        $event = new FilterControllerEvent(
+            $httpKernel,
+            $controller,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
         $collector->onKernelController($event);
     }
 
@@ -331,6 +429,8 @@ class RequestDataCollectorTest extends TestCase
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Cookie named "%s" is not in response', $name));
+        throw new \InvalidArgumentException(
+            sprintf('Cookie named "%s" is not in response', $name)
+        );
     }
 }

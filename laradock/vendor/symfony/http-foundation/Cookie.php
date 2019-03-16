@@ -49,14 +49,18 @@ class Cookie
             'secure' => false,
             'httponly' => false,
             'raw' => !$decode,
-            'samesite' => null,
+            'samesite' => null
         ];
 
         $parts = HeaderUtils::split($cookie, ';=');
         $part = array_shift($parts);
 
         $name = $decode ? urldecode($part[0]) : $part[0];
-        $value = isset($part[1]) ? ($decode ? urldecode($part[1]) : $part[1]) : null;
+        $value = isset($part[1])
+            ? ($decode
+                ? urldecode($part[1])
+                : $part[1])
+            : null;
 
         $data = HeaderUtils::combine($parts) + $data;
 
@@ -64,12 +68,41 @@ class Cookie
             $data['expires'] = time() + (int) $data['max-age'];
         }
 
-        return new static($name, $value, $data['expires'], $data['path'], $data['domain'], $data['secure'], $data['httponly'], $data['raw'], $data['samesite']);
+        return new static(
+            $name,
+            $value,
+            $data['expires'],
+            $data['path'],
+            $data['domain'],
+            $data['secure'],
+            $data['httponly'],
+            $data['raw'],
+            $data['samesite']
+        );
     }
 
-    public static function create(string $name, string $value = null, $expire = 0, ?string $path = '/', string $domain = null, bool $secure = null, bool $httpOnly = true, bool $raw = false, ?string $sameSite = self::SAMESITE_LAX): self
-    {
-        return new self($name, $value, $expire, $path, $domain, $secure, $httpOnly, $raw, $sameSite);
+    public static function create(
+        string $name,
+        string $value = null,
+        $expire = 0,
+        ?string $path = '/',
+        string $domain = null,
+        bool $secure = null,
+        bool $httpOnly = true,
+        bool $raw = false,
+        ?string $sameSite = self::SAMESITE_LAX
+    ): self {
+        return new self(
+            $name,
+            $value,
+            $expire,
+            $path,
+            $domain,
+            $secure,
+            $httpOnly,
+            $raw,
+            $sameSite
+        );
     }
 
     /**
@@ -85,19 +118,41 @@ class Cookie
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $name, string $value = null, $expire = 0, ?string $path = '/', string $domain = null, ?bool $secure = false, bool $httpOnly = true, bool $raw = false, string $sameSite = null)
-    {
+    public function __construct(
+        string $name,
+        string $value = null,
+        $expire = 0,
+        ?string $path = '/',
+        string $domain = null,
+        ?bool $secure = false,
+        bool $httpOnly = true,
+        bool $raw = false,
+        string $sameSite = null
+    ) {
         if (9 > \func_num_args()) {
-            @trigger_error(sprintf('The default value of the "$secure" and "$samesite" arguments of "%s"\'s constructor will respectively change from "false" to "null" and from "null" to "lax" in Symfony 5.0, you should define their values explicitly or use "Cookie::create()" instead.', __METHOD__), E_USER_DEPRECATED);
+            @trigger_error(
+                sprintf(
+                    'The default value of the "$secure" and "$samesite" arguments of "%s"\'s constructor will respectively change from "false" to "null" and from "null" to "lax" in Symfony 5.0, you should define their values explicitly or use "Cookie::create()" instead.',
+                    __METHOD__
+                ),
+                E_USER_DEPRECATED
+            );
         }
 
         // from PHP source code
         if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
-            throw new \InvalidArgumentException(sprintf('The cookie name "%s" contains invalid characters.', $name));
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The cookie name "%s" contains invalid characters.',
+                    $name
+                )
+            );
         }
 
         if (empty($name)) {
-            throw new \InvalidArgumentException('The cookie name cannot be empty.');
+            throw new \InvalidArgumentException(
+                'The cookie name cannot be empty.'
+            );
         }
 
         // convert expiration time to a Unix timestamp
@@ -107,7 +162,9 @@ class Cookie
             $expire = strtotime($expire);
 
             if (false === $expire) {
-                throw new \InvalidArgumentException('The cookie expiration time is not valid.');
+                throw new \InvalidArgumentException(
+                    'The cookie expiration time is not valid.'
+                );
             }
         }
 
@@ -126,8 +183,16 @@ class Cookie
             $sameSite = strtolower($sameSite);
         }
 
-        if (!\in_array($sameSite, [self::SAMESITE_LAX, self::SAMESITE_STRICT, null], true)) {
-            throw new \InvalidArgumentException('The "sameSite" parameter value is not valid.');
+        if (
+            !\in_array(
+                $sameSite,
+                [self::SAMESITE_LAX, self::SAMESITE_STRICT, null],
+                true
+            )
+        ) {
+            throw new \InvalidArgumentException(
+                'The "sameSite" parameter value is not valid.'
+            );
         }
 
         $this->sameSite = $sameSite;
@@ -140,24 +205,35 @@ class Cookie
      */
     public function __toString()
     {
-        $str = ($this->isRaw() ? $this->getName() : urlencode($this->getName())).'=';
+        $str =
+            ($this->isRaw() ? $this->getName() : urlencode($this->getName())) .
+            '=';
 
         if ('' === (string) $this->getValue()) {
-            $str .= 'deleted; expires='.gmdate('D, d-M-Y H:i:s T', time() - 31536001).'; Max-Age=0';
+            $str .=
+                'deleted; expires=' .
+                gmdate('D, d-M-Y H:i:s T', time() - 31536001) .
+                '; Max-Age=0';
         } else {
-            $str .= $this->isRaw() ? $this->getValue() : rawurlencode($this->getValue());
+            $str .= $this->isRaw()
+                ? $this->getValue()
+                : rawurlencode($this->getValue());
 
             if (0 !== $this->getExpiresTime()) {
-                $str .= '; expires='.gmdate('D, d-M-Y H:i:s T', $this->getExpiresTime()).'; Max-Age='.$this->getMaxAge();
+                $str .=
+                    '; expires=' .
+                    gmdate('D, d-M-Y H:i:s T', $this->getExpiresTime()) .
+                    '; Max-Age=' .
+                    $this->getMaxAge();
             }
         }
 
         if ($this->getPath()) {
-            $str .= '; path='.$this->getPath();
+            $str .= '; path=' . $this->getPath();
         }
 
         if ($this->getDomain()) {
-            $str .= '; domain='.$this->getDomain();
+            $str .= '; domain=' . $this->getDomain();
         }
 
         if (true === $this->isSecure()) {
@@ -169,7 +245,7 @@ class Cookie
         }
 
         if (null !== $this->getSameSite()) {
-            $str .= '; samesite='.$this->getSameSite();
+            $str .= '; samesite=' . $this->getSameSite();
         }
 
         return $str;

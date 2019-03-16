@@ -20,14 +20,26 @@ class NegationNodeTest extends AbstractNodeTest
     public function getToStringConversionTestData()
     {
         return [
-            [new NegationNode(new ElementNode(), new ClassNode(new ElementNode(), 'class')), 'Negation[Element[*]:not(Class[Element[*].class])]'],
+            [
+                new NegationNode(
+                    new ElementNode(),
+                    new ClassNode(new ElementNode(), 'class')
+                ),
+                'Negation[Element[*]:not(Class[Element[*].class])]'
+            ]
         ];
     }
 
     public function getSpecificityValueTestData()
     {
         return [
-            [new NegationNode(new ElementNode(), new ClassNode(new ElementNode(), 'class')), 10],
+            [
+                new NegationNode(
+                    new ElementNode(),
+                    new ClassNode(new ElementNode(), 'class')
+                ),
+                10
+            ]
         ];
     }
 }

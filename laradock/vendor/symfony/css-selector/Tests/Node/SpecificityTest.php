@@ -25,7 +25,10 @@ class SpecificityTest extends TestCase
     /** @dataProvider getValueTestData */
     public function testPlusValue(Specificity $specificity, $value)
     {
-        $this->assertEquals($value + 123, $specificity->plus(new Specificity(1, 2, 3))->getValue());
+        $this->assertEquals(
+            $value + 123,
+            $specificity->plus(new Specificity(1, 2, 3))->getValue()
+        );
     }
 
     public function getValueTestData()
@@ -35,7 +38,7 @@ class SpecificityTest extends TestCase
             [new Specificity(0, 0, 2), 2],
             [new Specificity(0, 3, 0), 30],
             [new Specificity(4, 0, 0), 400],
-            [new Specificity(4, 3, 2), 432],
+            [new Specificity(4, 3, 2), 432]
         ];
     }
 
@@ -57,7 +60,7 @@ class SpecificityTest extends TestCase
             [new Specificity(0, 7, 0), new Specificity(0, 8, 0), -1],
             [new Specificity(9, 0, 0), new Specificity(9, 0, 0), 0],
             [new Specificity(11, 0, 0), new Specificity(10, 11, 0), 1],
-            [new Specificity(12, 11, 0), new Specificity(13, 0, 0), -1],
+            [new Specificity(12, 11, 0), new Specificity(13, 0, 0), -1]
         ];
     }
 }

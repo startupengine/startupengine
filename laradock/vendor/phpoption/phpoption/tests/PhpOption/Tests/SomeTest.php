@@ -12,7 +12,10 @@ class SomeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $some->get());
         $this->assertEquals('foo', $some->getOrElse(null));
         $this->assertEquals('foo', $some->getOrCall('does_not_exist'));
-        $this->assertEquals('foo', $some->getOrThrow(new \RuntimeException('Not found')));
+        $this->assertEquals(
+            'foo',
+            $some->getOrThrow(new \RuntimeException('Not found'))
+        );
         $this->assertFalse($some->isEmpty());
     }
 
@@ -22,7 +25,10 @@ class SomeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $some->get());
         $this->assertEquals('foo', $some->getOrElse(null));
         $this->assertEquals('foo', $some->getOrCall('does_not_exist'));
-        $this->assertEquals('foo', $some->getOrThrow(new \RuntimeException('Not found')));
+        $this->assertEquals(
+            'foo',
+            $some->getOrThrow(new \RuntimeException('Not found'))
+        );
         $this->assertFalse($some->isEmpty());
     }
 
@@ -38,10 +44,12 @@ class SomeTest extends \PHPUnit_Framework_TestCase
         $called = false;
         $self = $this;
         $some = new Some('foo');
-        $this->assertNull($some->ifDefined(function($v) use (&$called, $self) {
-            $called = true;
-            $self->assertEquals('foo', $v);
-        }));
+        $this->assertNull(
+            $some->ifDefined(function ($v) use (&$called, $self) {
+                $called = true;
+                $self->assertEquals('foo', $v);
+            })
+        );
         $this->assertTrue($called);
     }
 
@@ -50,42 +58,76 @@ class SomeTest extends \PHPUnit_Framework_TestCase
         $called = false;
         $self = $this;
         $some = new Some('foo');
-        $this->assertSame($some, $some->forAll(function($v) use (&$called, $self) {
-            $called = true;
-            $self->assertEquals('foo', $v);
-        }));
+        $this->assertSame(
+            $some,
+            $some->forAll(function ($v) use (&$called, $self) {
+                $called = true;
+                $self->assertEquals('foo', $v);
+            })
+        );
         $this->assertTrue($called);
     }
 
     public function testMap()
     {
         $some = new Some('foo');
-        $this->assertEquals('o', $some->map(function($v) { return substr($v, 1, 1); })->get());
+        $this->assertEquals(
+            'o',
+            $some
+                ->map(function ($v) {
+                    return substr($v, 1, 1);
+                })
+                ->get()
+        );
     }
 
     public function testFlatMap()
     {
         $repo = new Repository(array('foo'));
 
-        $this->assertEquals(array('name' => 'foo'), $repo->getLastRegisteredUsername()
-                                                        ->flatMap(array($repo, 'getUser'))
-                                                        ->getOrCall(array($repo, 'getDefaultUser')));
+        $this->assertEquals(
+            array('name' => 'foo'),
+            $repo
+                ->getLastRegisteredUsername()
+                ->flatMap(array($repo, 'getUser'))
+                ->getOrCall(array($repo, 'getDefaultUser'))
+        );
     }
 
     public function testFilter()
     {
         $some = new Some('foo');
 
-        $this->assertInstanceOf('PhpOption\None', $some->filter(function($v) { return 0 === strlen($v); }));
-        $this->assertSame($some, $some->filter(function($v) { return strlen($v) > 0; }));
+        $this->assertInstanceOf(
+            'PhpOption\None',
+            $some->filter(function ($v) {
+                return 0 === strlen($v);
+            })
+        );
+        $this->assertSame(
+            $some,
+            $some->filter(function ($v) {
+                return strlen($v) > 0;
+            })
+        );
     }
 
     public function testFilterNot()
     {
         $some = new Some('foo');
 
-        $this->assertInstanceOf('PhpOption\None', $some->filterNot(function($v) { return strlen($v) > 0; }));
-        $this->assertSame($some, $some->filterNot(function($v) { return strlen($v) === 0; }));
+        $this->assertInstanceOf(
+            'PhpOption\None',
+            $some->filterNot(function ($v) {
+                return strlen($v) > 0;
+            })
+        );
+        $this->assertSame(
+            $some,
+            $some->filterNot(function ($v) {
+                return strlen($v) === 0;
+            })
+        );
     }
 
     public function testSelect()
@@ -110,19 +152,25 @@ class SomeTest extends \PHPUnit_Framework_TestCase
     {
         $some = new Some(5);
 
-        $this->assertSame(6, $some->foldLeft(1, function($a, $b) {
-            $this->assertEquals(1, $a);
-            $this->assertEquals(5, $b);
+        $this->assertSame(
+            6,
+            $some->foldLeft(1, function ($a, $b) {
+                $this->assertEquals(1, $a);
+                $this->assertEquals(5, $b);
 
-            return $a + $b;
-        }));
+                return $a + $b;
+            })
+        );
 
-        $this->assertSame(6, $some->foldRight(1, function($a, $b) {
-            $this->assertEquals(1, $b);
-            $this->assertEquals(5, $a);
+        $this->assertSame(
+            6,
+            $some->foldRight(1, function ($a, $b) {
+                $this->assertEquals(1, $b);
+                $this->assertEquals(5, $a);
 
-            return $a + $b;
-        }));
+                return $a + $b;
+            })
+        );
     }
 
     public function testForeach()

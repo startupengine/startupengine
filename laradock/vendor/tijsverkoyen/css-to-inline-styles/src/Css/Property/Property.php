@@ -71,7 +71,7 @@ final class Property
      */
     public function isImportant()
     {
-        return (stripos($this->value, '!important') !== false);
+        return stripos($this->value, '!important') !== false;
     }
 
     /**
@@ -81,10 +81,6 @@ final class Property
      */
     public function toString()
     {
-        return sprintf(
-            '%1$s: %2$s;',
-            $this->name,
-            $this->value
-        );
+        return sprintf('%1$s: %2$s;', $this->name, $this->value);
     }
 }

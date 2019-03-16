@@ -9,7 +9,10 @@ class Swift_Mime_Headers_DateHeaderTest extends \PHPUnit\Framework\TestCase
     public function testTypeIsDateHeader()
     {
         $header = $this->getHeader('Date');
-        $this->assertEquals(Swift_Mime_Header::TYPE_DATE, $header->getFieldType());
+        $this->assertEquals(
+            Swift_Mime_Header::TYPE_DATE,
+            $header->getFieldType()
+        );
     }
 
     public function testGetDateTime()
@@ -34,8 +37,14 @@ class Swift_Mime_Headers_DateHeaderTest extends \PHPUnit\Framework\TestCase
         $header = $this->getHeader('Date');
         $header->setDateTime($dateTime);
         $this->assertInstanceOf('DateTimeImmutable', $header->getDateTime());
-        $this->assertEquals($dateTime->getTimestamp(), $header->getDateTime()->getTimestamp());
-        $this->assertEquals($dateTime->getTimezone(), $header->getDateTime()->getTimezone());
+        $this->assertEquals(
+            $dateTime->getTimestamp(),
+            $header->getDateTime()->getTimestamp()
+        );
+        $this->assertEquals(
+            $dateTime->getTimezone(),
+            $header->getDateTime()->getTimezone()
+        );
     }
 
     public function testDateTimeIsImmutable()
@@ -45,8 +54,14 @@ class Swift_Mime_Headers_DateHeaderTest extends \PHPUnit\Framework\TestCase
         $header->setDateTime($dateTime);
 
         $dateTime->setDate(2002, 2, 2);
-        $this->assertEquals('Sat, 01 Jan 2000 12:00:00 +0100', $header->getDateTime()->format('r'));
-        $this->assertEquals('Sat, 01 Jan 2000 12:00:00 +0100', $header->getFieldBody());
+        $this->assertEquals(
+            'Sat, 01 Jan 2000 12:00:00 +0100',
+            $header->getDateTime()->format('r')
+        );
+        $this->assertEquals(
+            'Sat, 01 Jan 2000 12:00:00 +0100',
+            $header->getFieldBody()
+        );
     }
 
     public function testDateTimeIsConvertedToRfc2822Date()
@@ -54,7 +69,10 @@ class Swift_Mime_Headers_DateHeaderTest extends \PHPUnit\Framework\TestCase
         $dateTime = new DateTimeImmutable('2000-01-01 12:00:00 Europe/Berlin');
         $header = $this->getHeader('Date');
         $header->setDateTime($dateTime);
-        $this->assertEquals('Sat, 01 Jan 2000 12:00:00 +0100', $header->getFieldBody());
+        $this->assertEquals(
+            'Sat, 01 Jan 2000 12:00:00 +0100',
+            $header->getFieldBody()
+        );
     }
 
     public function testSetBodyModel()
@@ -78,9 +96,10 @@ class Swift_Mime_Headers_DateHeaderTest extends \PHPUnit\Framework\TestCase
         $dateTime = new DateTimeImmutable('2000-01-01 12:00:00 Europe/Berlin');
         $header = $this->getHeader('Date');
         $header->setDateTime($dateTime);
-        $this->assertEquals("Date: Sat, 01 Jan 2000 12:00:00 +0100\r\n",
+        $this->assertEquals(
+            "Date: Sat, 01 Jan 2000 12:00:00 +0100\r\n",
             $header->toString()
-            );
+        );
     }
 
     private function getHeader($name)

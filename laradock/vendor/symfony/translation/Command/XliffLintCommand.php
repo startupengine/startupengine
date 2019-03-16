@@ -37,8 +37,12 @@ class XliffLintCommand extends Command
     private $isReadableProvider;
     private $requireStrictFileNames;
 
-    public function __construct(string $name = null, callable $directoryIteratorProvider = null, callable $isReadableProvider = null, bool $requireStrictFileNames = true)
-    {
+    public function __construct(
+        string $name = null,
+        callable $directoryIteratorProvider = null,
+        callable $isReadableProvider = null,
+        bool $requireStrictFileNames = true
+    ) {
         parent::__construct($name);
 
         $this->directoryIteratorProvider = $directoryIteratorProvider;
@@ -51,11 +55,23 @@ class XliffLintCommand extends Command
      */
     protected function configure()
     {
-        $this
-            ->setDescription('Lints a XLIFF file and outputs encountered errors')
-            ->addArgument('filename', InputArgument::IS_ARRAY, 'A file or a directory or STDIN')
-            ->addOption('format', null, InputOption::VALUE_REQUIRED, 'The output format', 'txt')
-            ->setHelp(<<<EOF
+        $this->setDescription(
+            'Lints a XLIFF file and outputs encountered errors'
+        )
+            ->addArgument(
+                'filename',
+                InputArgument::IS_ARRAY,
+                'A file or a directory or STDIN'
+            )
+            ->addOption(
+                'format',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'The output format',
+                'txt'
+            )
+            ->setHelp(
+                <<<EOF
 The <info>%command.name%</info> command lints a XLIFF file and outputs to STDOUT
 the first encountered syntax error.
 
@@ -73,8 +89,7 @@ Or of a whole directory:
   <info>php %command.full_name% dirname --format=json</info>
 
 EOF
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -85,8 +100,10 @@ EOF
         $this->displayCorrectFiles = $output->isVerbose();
 
         if (0 === \count($filenames)) {
-            if (!$stdin = $this->getStdin()) {
-                throw new RuntimeException('Please provide a filename or pipe file content to STDIN.');
+            if (!($stdin = $this->getStdin())) {
+                throw new RuntimeException(
+                    'Please provide a filename or pipe file content to STDIN.'
+                );
             }
 
             return $this->display($io, [$this->validate($stdin)]);
@@ -95,7 +112,12 @@ EOF
         $filesInfo = [];
         foreach ($filenames as $filename) {
             if (!$this->isReadable($filename)) {
-                throw new RuntimeException(sprintf('File or directory "%s" is not readable.', $filename));
+                throw new RuntimeException(
+                    sprintf(
+                        'File or directory "%s" is not readable.',
+                        $filename
+                    )
+                );
             }
 
             foreach ($this->getFiles($filename) as $file) {
@@ -120,17 +142,33 @@ EOF
         $document = new \DOMDocument();
         $document->loadXML($content);
 
-        if (null !== $targetLanguage = $this->getTargetLanguageFromFile($document)) {
-            $normalizedLocale = preg_quote(str_replace('-', '_', $targetLanguage), '/');
+        if (
+            null !==
+            ($targetLanguage = $this->getTargetLanguageFromFile($document))
+        ) {
+            $normalizedLocale = preg_quote(
+                str_replace('-', '_', $targetLanguage),
+                '/'
+            );
             // strict file names require translation files to be named '____.locale.xlf'
             // otherwise, both '____.locale.xlf' and 'locale.____.xlf' are allowed
-            $expectedFilenamePattern = $this->requireStrictFileNames ? sprintf('/^.*\.%s\.xlf/', $normalizedLocale) : sprintf('/^(.*\.%s\.xlf|%s\..*\.xlf)/', $normalizedLocale, $normalizedLocale);
+            $expectedFilenamePattern = $this->requireStrictFileNames
+                ? sprintf('/^.*\.%s\.xlf/', $normalizedLocale)
+                : sprintf(
+                    '/^(.*\.%s\.xlf|%s\..*\.xlf)/',
+                    $normalizedLocale,
+                    $normalizedLocale
+                );
 
             if (0 === preg_match($expectedFilenamePattern, basename($file))) {
                 $errors[] = [
                     'line' => -1,
                     'column' => -1,
-                    'message' => sprintf('There is a mismatch between the language included in the file name ("%s") and the "%s" value used in the "target-language" attribute of the file.', basename($file), $targetLanguage),
+                    'message' => sprintf(
+                        'There is a mismatch between the language included in the file name ("%s") and the "%s" value used in the "target-language" attribute of the file.',
+                        basename($file),
+                        $targetLanguage
+                    )
                 ];
             }
         }
@@ -139,11 +177,15 @@ EOF
             $errors[] = [
                 'line' => $xmlError['line'],
                 'column' => $xmlError['column'],
-                'message' => $xmlError['message'],
+                'message' => $xmlError['message']
             ];
         }
 
-        return ['file' => $file, 'valid' => 0 === \count($errors), 'messages' => $errors];
+        return [
+            'file' => $file,
+            'valid' => 0 === \count($errors),
+            'messages' => $errors
+        ];
     }
 
     private function display(SymfonyStyle $io, array $files)
@@ -154,7 +196,9 @@ EOF
             case 'json':
                 return $this->displayJson($io, $files);
             default:
-                throw new InvalidArgumentException(sprintf('The format "%s" is not supported.', $this->format));
+                throw new InvalidArgumentException(
+                    sprintf('The format "%s" is not supported.', $this->format)
+                );
         }
     }
 
@@ -165,21 +209,44 @@ EOF
 
         foreach ($filesInfo as $info) {
             if ($info['valid'] && $this->displayCorrectFiles) {
-                $io->comment('<info>OK</info>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
+                $io->comment(
+                    '<info>OK</info>' .
+                        ($info['file'] ? sprintf(' in %s', $info['file']) : '')
+                );
             } elseif (!$info['valid']) {
                 ++$erroredFiles;
-                $io->text('<error> ERROR </error>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
-                $io->listing(array_map(function ($error) {
-                    // general document errors have a '-1' line number
-                    return -1 === $error['line'] ? $error['message'] : sprintf('Line %d, Column %d: %s', $error['line'], $error['column'], $error['message']);
-                }, $info['messages']));
+                $io->text(
+                    '<error> ERROR </error>' .
+                        ($info['file'] ? sprintf(' in %s', $info['file']) : '')
+                );
+                $io->listing(
+                    array_map(function ($error) {
+                        // general document errors have a '-1' line number
+                        return -1 === $error['line']
+                            ? $error['message']
+                            : sprintf(
+                                'Line %d, Column %d: %s',
+                                $error['line'],
+                                $error['column'],
+                                $error['message']
+                            );
+                    }, $info['messages'])
+                );
             }
         }
 
         if (0 === $erroredFiles) {
-            $io->success(sprintf('All %d XLIFF files contain valid syntax.', $countFiles));
+            $io->success(
+                sprintf('All %d XLIFF files contain valid syntax.', $countFiles)
+            );
         } else {
-            $io->warning(sprintf('%d XLIFF files have valid syntax and %d contain errors.', $countFiles - $erroredFiles, $erroredFiles));
+            $io->warning(
+                sprintf(
+                    '%d XLIFF files have valid syntax and %d contain errors.',
+                    $countFiles - $erroredFiles,
+                    $erroredFiles
+                )
+            );
         }
 
         return min($erroredFiles, 1);
@@ -196,7 +263,9 @@ EOF
             }
         });
 
-        $io->writeln(json_encode($filesInfo, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $io->writeln(
+            json_encode($filesInfo, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+        );
 
         return min($errors, 1);
     }
@@ -236,7 +305,11 @@ EOF
     {
         $default = function ($directory) {
             return new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($directory, \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS),
+                new \RecursiveDirectoryIterator(
+                    $directory,
+                    \FilesystemIterator::SKIP_DOTS |
+                        \FilesystemIterator::FOLLOW_SYMLINKS
+                ),
                 \RecursiveIteratorIterator::LEAVES_ONLY
             );
         };
@@ -261,9 +334,13 @@ EOF
         return $default($fileOrDirectory);
     }
 
-    private function getTargetLanguageFromFile(\DOMDocument $xliffContents): ?string
-    {
-        foreach ($xliffContents->getElementsByTagName('file')[0]->attributes ?? [] as $attribute) {
+    private function getTargetLanguageFromFile(
+        \DOMDocument $xliffContents
+    ): ?string {
+        foreach (
+            $xliffContents->getElementsByTagName('file')[0]->attributes ?? []
+            as $attribute
+        ) {
             if ('target-language' === $attribute->nodeName) {
                 return $attribute->nodeValue;
             }

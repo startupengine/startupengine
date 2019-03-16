@@ -121,13 +121,19 @@ class MimeTypeGuesser implements MimeTypeGuesserInterface
         }
 
         foreach ($this->guessers as $guesser) {
-            if (null !== $mimeType = $guesser->guess($path)) {
+            if (null !== ($mimeType = $guesser->guess($path))) {
                 return $mimeType;
             }
         }
 
-        if (2 === \count($this->guessers) && !FileBinaryMimeTypeGuesser::isSupported() && !FileinfoMimeTypeGuesser::isSupported()) {
-            throw new \LogicException('Unable to guess the mime type as no guessers are available (Did you enable the php_fileinfo extension?)');
+        if (
+            2 === \count($this->guessers) &&
+            !FileBinaryMimeTypeGuesser::isSupported() &&
+            !FileinfoMimeTypeGuesser::isSupported()
+        ) {
+            throw new \LogicException(
+                'Unable to guess the mime type as no guessers are available (Did you enable the php_fileinfo extension?)'
+            );
         }
     }
 }

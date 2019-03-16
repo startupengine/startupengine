@@ -43,7 +43,12 @@ interface Swift_KeyCache
      * @param Swift_OutputByteStream $os
      * @param int                    $mode
      */
-    public function importFromByteStream($nsKey, $itemKey, Swift_OutputByteStream $os, $mode);
+    public function importFromByteStream(
+        $nsKey,
+        $itemKey,
+        Swift_OutputByteStream $os,
+        $mode
+    );
 
     /**
      * Provides a ByteStream which when written to, writes data to $itemKey.
@@ -57,7 +62,11 @@ interface Swift_KeyCache
      *
      * @return Swift_InputByteStream
      */
-    public function getInputByteStream($nsKey, $itemKey, Swift_InputByteStream $is = null);
+    public function getInputByteStream(
+        $nsKey,
+        $itemKey,
+        Swift_InputByteStream $is = null
+    );
 
     /**
      * Get data back out of the cache as a string.
@@ -76,7 +85,11 @@ interface Swift_KeyCache
      * @param string                $itemKey
      * @param Swift_InputByteStream $is      stream to write the data to
      */
-    public function exportToByteStream($nsKey, $itemKey, Swift_InputByteStream $is);
+    public function exportToByteStream(
+        $nsKey,
+        $itemKey,
+        Swift_InputByteStream $is
+    );
 
     /**
      * Check if the given $itemKey exists in the namespace $nsKey.

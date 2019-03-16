@@ -38,7 +38,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function __toString()
     {
-        if (!$headers = $this->all()) {
+        if (!($headers = $this->all())) {
             return '';
         }
 
@@ -48,7 +48,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
         foreach ($headers as $name => $values) {
             $name = ucwords($name, '-');
             foreach ($values as $value) {
-                $content .= sprintf("%-{$max}s %s\r\n", $name.':', $value);
+                $content .= sprintf("%-{$max}s %s\r\n", $name . ':', $value);
             }
         }
 
@@ -144,7 +144,10 @@ class HeaderBag implements \IteratorAggregate, \Countable
             if (true === $replace || !isset($this->headers[$key])) {
                 $this->headers[$key] = $values;
             } else {
-                $this->headers[$key] = array_merge($this->headers[$key], $values);
+                $this->headers[$key] = array_merge(
+                    $this->headers[$key],
+                    $values
+                );
             }
         } else {
             if (true === $replace || !isset($this->headers[$key])) {
@@ -155,7 +158,9 @@ class HeaderBag implements \IteratorAggregate, \Countable
         }
 
         if ('cache-control' === $key) {
-            $this->cacheControl = $this->parseCacheControl(implode(', ', $this->headers[$key]));
+            $this->cacheControl = $this->parseCacheControl(
+                implode(', ', $this->headers[$key])
+            );
         }
     }
 
@@ -168,7 +173,10 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function has($key)
     {
-        return \array_key_exists(str_replace('_', '-', strtolower($key)), $this->all());
+        return \array_key_exists(
+            str_replace('_', '-', strtolower($key)),
+            $this->all()
+        );
     }
 
     /**
@@ -212,12 +220,21 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function getDate($key, \DateTime $default = null)
     {
-        if (null === $value = $this->get($key)) {
+        if (null === ($value = $this->get($key))) {
             return $default;
         }
 
-        if (false === $date = \DateTime::createFromFormat(DATE_RFC2822, $value)) {
-            throw new \RuntimeException(sprintf('The %s HTTP header is not parseable (%s).', $key, $value));
+        if (
+            false ===
+            ($date = \DateTime::createFromFormat(DATE_RFC2822, $value))
+        ) {
+            throw new \RuntimeException(
+                sprintf(
+                    'The %s HTTP header is not parseable (%s).',
+                    $key,
+                    $value
+                )
+            );
         }
 
         return $date;
@@ -257,7 +274,9 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function getCacheControlDirective($key)
     {
-        return \array_key_exists($key, $this->cacheControl) ? $this->cacheControl[$key] : null;
+        return \array_key_exists($key, $this->cacheControl)
+            ? $this->cacheControl[$key]
+            : null;
     }
 
     /**

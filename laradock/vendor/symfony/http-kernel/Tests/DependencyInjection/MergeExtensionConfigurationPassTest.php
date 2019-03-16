@@ -25,7 +25,10 @@ class MergeExtensionConfigurationPassTest extends TestCase
         $container->registerExtension(new NotLoadedExtension());
         $container->loadFromExtension('loaded', []);
 
-        $configPass = new MergeExtensionConfigurationPass(['loaded', 'not_loaded']);
+        $configPass = new MergeExtensionConfigurationPass([
+            'loaded',
+            'not_loaded'
+        ]);
         $configPass->process($container);
 
         $this->assertTrue($container->hasDefinition('loaded.foo'));

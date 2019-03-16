@@ -60,13 +60,28 @@ class UploadedFile extends File
      * @throws FileException         If file_uploads is disabled
      * @throws FileNotFoundException If the file does not exist
      */
-    public function __construct(string $path, string $originalName, string $mimeType = null, int $error = null, $test = false)
-    {
+    public function __construct(
+        string $path,
+        string $originalName,
+        string $mimeType = null,
+        int $error = null,
+        $test = false
+    ) {
         $this->originalName = $this->getName($originalName);
         $this->mimeType = $mimeType ?: 'application/octet-stream';
 
-        if (4 < \func_num_args() ? !\is_bool($test) : null !== $error && @filesize($path) === $error) {
-            @trigger_error(sprintf('Passing a size as 4th argument to the constructor of "%s" is deprecated since Symfony 4.1.', __CLASS__), E_USER_DEPRECATED);
+        if (
+            4 < \func_num_args()
+                ? !\is_bool($test)
+                : null !== $error && @filesize($path) === $error
+        ) {
+            @trigger_error(
+                sprintf(
+                    'Passing a size as 4th argument to the constructor of "%s" is deprecated since Symfony 4.1.',
+                    __CLASS__
+                ),
+                E_USER_DEPRECATED
+            );
             $error = $test;
             $test = 5 < \func_num_args() ? func_get_arg(5) : false;
         }
@@ -158,7 +173,13 @@ class UploadedFile extends File
      */
     public function getClientSize()
     {
-        @trigger_error(sprintf('The "%s()" method is deprecated since Symfony 4.1. Use getSize() instead.', __METHOD__), E_USER_DEPRECATED);
+        @trigger_error(
+            sprintf(
+                'The "%s()" method is deprecated since Symfony 4.1. Use getSize() instead.',
+                __METHOD__
+            ),
+            E_USER_DEPRECATED
+        );
 
         return $this->getSize();
     }
@@ -185,7 +206,9 @@ class UploadedFile extends File
     {
         $isOk = UPLOAD_ERR_OK === $this->error;
 
-        return $this->test ? $isOk : $isOk && is_uploaded_file($this->getPathname());
+        return $this->test
+            ? $isOk
+            : $isOk && is_uploaded_file($this->getPathname());
     }
 
     /**
@@ -207,11 +230,20 @@ class UploadedFile extends File
 
             $target = $this->getTargetFile($directory, $name);
 
-            set_error_handler(function ($type, $msg) use (&$error) { $error = $msg; });
+            set_error_handler(function ($type, $msg) use (&$error) {
+                $error = $msg;
+            });
             $moved = move_uploaded_file($this->getPathname(), $target);
             restore_error_handler();
             if (!$moved) {
-                throw new FileException(sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, strip_tags($error)));
+                throw new FileException(
+                    sprintf(
+                        'Could not move the file "%s" to "%s" (%s)',
+                        $this->getPathname(),
+                        $target,
+                        strip_tags($error)
+                    )
+                );
             }
 
             @chmod($target, 0666 & ~umask());
@@ -262,13 +294,17 @@ class UploadedFile extends File
         }
 
         switch (substr($iniMax, -1)) {
-            case 't': $max *= 1024;
+            case 't':
+                $max *= 1024;
             // no break
-            case 'g': $max *= 1024;
+            case 'g':
+                $max *= 1024;
             // no break
-            case 'm': $max *= 1024;
+            case 'm':
+                $max *= 1024;
             // no break
-            case 'k': $max *= 1024;
+            case 'k':
+                $max *= 1024;
         }
 
         return $max;
@@ -288,12 +324,17 @@ class UploadedFile extends File
             UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
             UPLOAD_ERR_CANT_WRITE => 'The file "%s" could not be written on disk.',
             UPLOAD_ERR_NO_TMP_DIR => 'File could not be uploaded: missing temporary directory.',
-            UPLOAD_ERR_EXTENSION => 'File upload was stopped by a PHP extension.',
+            UPLOAD_ERR_EXTENSION => 'File upload was stopped by a PHP extension.'
         ];
 
         $errorCode = $this->error;
-        $maxFilesize = UPLOAD_ERR_INI_SIZE === $errorCode ? self::getMaxFilesize() / 1024 : 0;
-        $message = isset($errors[$errorCode]) ? $errors[$errorCode] : 'The file "%s" was not uploaded due to an unknown error.';
+        $maxFilesize =
+            UPLOAD_ERR_INI_SIZE === $errorCode
+                ? self::getMaxFilesize() / 1024
+                : 0;
+        $message = isset($errors[$errorCode])
+            ? $errors[$errorCode]
+            : 'The file "%s" was not uploaded due to an unknown error.';
 
         return sprintf($message, $this->getClientOriginalName(), $maxFilesize);
     }

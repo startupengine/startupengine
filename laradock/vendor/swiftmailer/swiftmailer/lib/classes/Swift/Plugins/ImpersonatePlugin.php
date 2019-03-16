@@ -41,7 +41,10 @@ class Swift_Plugins_ImpersonatePlugin implements Swift_Events_SendListener
         $headers = $message->getHeaders();
 
         // save current recipients
-        $headers->addPathHeader('X-Swift-Return-Path', $message->getReturnPath());
+        $headers->addPathHeader(
+            'X-Swift-Return-Path',
+            $message->getReturnPath()
+        );
 
         // replace them with the one to send to
         $message->setReturnPath($this->sender);
@@ -58,7 +61,9 @@ class Swift_Plugins_ImpersonatePlugin implements Swift_Events_SendListener
         $headers = $message->getHeaders();
 
         if ($headers->has('X-Swift-Return-Path')) {
-            $message->setReturnPath($headers->get('X-Swift-Return-Path')->getAddress());
+            $message->setReturnPath(
+                $headers->get('X-Swift-Return-Path')->getAddress()
+            );
             $headers->removeAll('X-Swift-Return-Path');
         }
     }

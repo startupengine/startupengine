@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/common.inc';
+require __DIR__ . '/common.inc';
 
 setcookie('abc', 'def');
 

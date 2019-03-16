@@ -29,22 +29,22 @@ class AcceptHeaderItemTest extends TestCase
     public function provideFromStringData()
     {
         return [
-            [
-                'text/html',
-                'text/html', [],
-            ],
-            [
-                '"this;should,not=matter"',
-                'this;should,not=matter', [],
-            ],
+            ['text/html', 'text/html', []],
+            ['"this;should,not=matter"', 'this;should,not=matter', []],
             [
                 "text/plain; charset=utf-8;param=\"this;should,not=matter\";\tfootnotes=true",
-                'text/plain', ['charset' => 'utf-8', 'param' => 'this;should,not=matter', 'footnotes' => 'true'],
+                'text/plain',
+                [
+                    'charset' => 'utf-8',
+                    'param' => 'this;should,not=matter',
+                    'footnotes' => 'true'
+                ]
             ],
             [
                 '"this;should,not=matter";charset=utf-8',
-                'this;should,not=matter', ['charset' => 'utf-8'],
-            ],
+                'this;should,not=matter',
+                ['charset' => 'utf-8']
+            ]
         ];
     }
 
@@ -60,14 +60,16 @@ class AcceptHeaderItemTest extends TestCase
     public function provideToStringData()
     {
         return [
+            ['text/html', [], 'text/html'],
             [
-                'text/html', [],
-                'text/html',
-            ],
-            [
-                'text/plain', ['charset' => 'utf-8', 'param' => 'this;should,not=matter', 'footnotes' => 'true'],
-                'text/plain; charset=utf-8; param="this;should,not=matter"; footnotes=true',
-            ],
+                'text/plain',
+                [
+                    'charset' => 'utf-8',
+                    'param' => 'this;should,not=matter',
+                    'footnotes' => 'true'
+                ],
+                'text/plain; charset=utf-8; param="this;should,not=matter"; footnotes=true'
+            ]
         ];
     }
 

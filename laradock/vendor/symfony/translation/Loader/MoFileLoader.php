@@ -48,7 +48,9 @@ class MoFileLoader extends FileLoader
         $stat = fstat($stream);
 
         if ($stat['size'] < self::MO_HEADER_SIZE) {
-            throw new InvalidResourceException('MO stream content has an invalid format.');
+            throw new InvalidResourceException(
+                'MO stream content has an invalid format.'
+            );
         }
         $magic = unpack('V1', fread($stream, 4));
         $magic = hexdec(substr(dechex(current($magic)), -8));
@@ -58,7 +60,9 @@ class MoFileLoader extends FileLoader
         } elseif (self::MO_BIG_ENDIAN_MAGIC == $magic) {
             $isBigEndian = true;
         } else {
-            throw new InvalidResourceException('MO stream content has an invalid format.');
+            throw new InvalidResourceException(
+                'MO stream content has an invalid format.'
+            );
         }
 
         // formatRevision
@@ -112,16 +116,22 @@ class MoFileLoader extends FileLoader
             $item = compact('ids', 'translated');
 
             if (\is_array($item['translated'])) {
-                $messages[$item['ids']['singular']] = stripcslashes($item['translated'][0]);
+                $messages[$item['ids']['singular']] = stripcslashes(
+                    $item['translated'][0]
+                );
                 if (isset($item['ids']['plural'])) {
                     $plurals = [];
                     foreach ($item['translated'] as $plural => $translated) {
                         $plurals[] = sprintf('{%d} %s', $plural, $translated);
                     }
-                    $messages[$item['ids']['plural']] = stripcslashes(implode('|', $plurals));
+                    $messages[$item['ids']['plural']] = stripcslashes(
+                        implode('|', $plurals)
+                    );
                 }
             } elseif (!empty($item['ids']['singular'])) {
-                $messages[$item['ids']['singular']] = stripcslashes($item['translated']);
+                $messages[$item['ids']['singular']] = stripcslashes(
+                    $item['translated']
+                );
             }
         }
 

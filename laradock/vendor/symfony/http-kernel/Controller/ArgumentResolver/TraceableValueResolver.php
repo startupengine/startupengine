@@ -26,8 +26,10 @@ final class TraceableValueResolver implements ArgumentValueResolverInterface
     private $inner;
     private $stopwatch;
 
-    public function __construct(ArgumentValueResolverInterface $inner, Stopwatch $stopwatch)
-    {
+    public function __construct(
+        ArgumentValueResolverInterface $inner,
+        Stopwatch $stopwatch
+    ) {
         $this->inner = $inner;
         $this->stopwatch = $stopwatch;
     }
@@ -37,7 +39,7 @@ final class TraceableValueResolver implements ArgumentValueResolverInterface
      */
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        $method = \get_class($this->inner).'::'.__FUNCTION__;
+        $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');
 
         $return = $this->inner->supports($request, $argument);
@@ -50,9 +52,11 @@ final class TraceableValueResolver implements ArgumentValueResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(Request $request, ArgumentMetadata $argument): iterable
-    {
-        $method = \get_class($this->inner).'::'.__FUNCTION__;
+    public function resolve(
+        Request $request,
+        ArgumentMetadata $argument
+    ): iterable {
+        $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');
 
         yield from $this->inner->resolve($request, $argument);

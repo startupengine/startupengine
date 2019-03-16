@@ -5,5 +5,4 @@ Swift_DependencyContainer::getInstance()
     ->asNewInstanceOf('Swift_Message')
 
     ->register('message.mimepart')
-    ->asNewInstanceOf('Swift_MimePart')
-;
+    ->asNewInstanceOf('Swift_MimePart');

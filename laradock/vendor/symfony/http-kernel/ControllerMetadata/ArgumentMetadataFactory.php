@@ -28,13 +28,24 @@ final class ArgumentMetadataFactory implements ArgumentMetadataFactoryInterface
         if (\is_array($controller)) {
             $reflection = new \ReflectionMethod($controller[0], $controller[1]);
         } elseif (\is_object($controller) && !$controller instanceof \Closure) {
-            $reflection = (new \ReflectionObject($controller))->getMethod('__invoke');
+            $reflection = (new \ReflectionObject($controller))->getMethod(
+                '__invoke'
+            );
         } else {
             $reflection = new \ReflectionFunction($controller);
         }
 
         foreach ($reflection->getParameters() as $param) {
-            $arguments[] = new ArgumentMetadata($param->getName(), $this->getType($param, $reflection), $param->isVariadic(), $param->isDefaultValueAvailable(), $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null, $param->allowsNull());
+            $arguments[] = new ArgumentMetadata(
+                $param->getName(),
+                $this->getType($param, $reflection),
+                $param->isVariadic(),
+                $param->isDefaultValueAvailable(),
+                $param->isDefaultValueAvailable()
+                    ? $param->getDefaultValue()
+                    : null,
+                $param->allowsNull()
+            );
         }
 
         return $arguments;
@@ -47,9 +58,11 @@ final class ArgumentMetadataFactory implements ArgumentMetadataFactoryInterface
      *
      * @return string|null
      */
-    private function getType(\ReflectionParameter $parameter, \ReflectionFunctionAbstract $function)
-    {
-        if (!$type = $parameter->getType()) {
+    private function getType(
+        \ReflectionParameter $parameter,
+        \ReflectionFunctionAbstract $function
+    ) {
+        if (!($type = $parameter->getType())) {
             return;
         }
         $name = $type->getName();
@@ -64,7 +77,7 @@ final class ArgumentMetadataFactory implements ArgumentMetadataFactoryInterface
         if ('self' === $lcName) {
             return $function->getDeclaringClass()->name;
         }
-        if ($parent = $function->getDeclaringClass()->getParentClass()) {
+        if (($parent = $function->getDeclaringClass()->getParentClass())) {
             return $parent->name;
         }
     }

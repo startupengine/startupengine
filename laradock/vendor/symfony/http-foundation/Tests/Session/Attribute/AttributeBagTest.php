@@ -36,14 +36,14 @@ class AttributeBagTest extends TestCase
             'user.login' => 'drak',
             'csrf.token' => [
                 'a' => '1234',
-                'b' => '4321',
+                'b' => '4321'
             ],
             'category' => [
                 'fishing' => [
                     'first' => 'cod',
-                    'second' => 'sole',
-                ],
-            ],
+                    'second' => 'sole'
+                ]
+            ]
         ];
         $this->bag = new AttributeBag('_sf');
         $this->bag->initialize($this->array);
@@ -98,7 +98,10 @@ class AttributeBagTest extends TestCase
     public function testGetDefaults()
     {
         $this->assertNull($this->bag->get('user2.login'));
-        $this->assertEquals('default', $this->bag->get('user2.login', 'default'));
+        $this->assertEquals(
+            'default',
+            $this->bag->get('user2.login', 'default')
+        );
     }
 
     /**
@@ -160,11 +163,15 @@ class AttributeBagTest extends TestCase
             ['always', 'be happy', true],
             ['user.login', 'drak', true],
             ['csrf.token', ['a' => '1234', 'b' => '4321'], true],
-            ['category', ['fishing' => ['first' => 'cod', 'second' => 'sole']], true],
+            [
+                'category',
+                ['fishing' => ['first' => 'cod', 'second' => 'sole']],
+                true
+            ],
             ['user2.login', null, false],
             ['never', null, false],
             ['bye', null, false],
-            ['bye/for/now', null, false],
+            ['bye/for/now', null, false]
         ];
     }
 

@@ -44,7 +44,7 @@ class Tokenizer
             new Handler\HashHandler($patterns, $escaping),
             new Handler\StringHandler($patterns, $escaping),
             new Handler\NumberHandler($patterns),
-            new Handler\CommentHandler(),
+            new Handler\CommentHandler()
         ];
     }
 
@@ -64,12 +64,20 @@ class Tokenizer
                 }
             }
 
-            $stream->push(new Token(Token::TYPE_DELIMITER, $reader->getSubstring(1), $reader->getPosition()));
+            $stream->push(
+                new Token(
+                    Token::TYPE_DELIMITER,
+                    $reader->getSubstring(1),
+                    $reader->getPosition()
+                )
+            );
             $reader->moveForward(1);
         }
 
         return $stream
-            ->push(new Token(Token::TYPE_FILE_END, null, $reader->getPosition()))
+            ->push(
+                new Token(Token::TYPE_FILE_END, null, $reader->getPosition())
+            )
             ->freeze();
     }
 }

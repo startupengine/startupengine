@@ -26,7 +26,12 @@ class NoneTest extends \PHPUnit_Framework_TestCase
     public function testGetOrCall()
     {
         $none = \PhpOption\None::create();
-        $this->assertEquals('foo', $none->getOrCall(function() { return 'foo'; }));
+        $this->assertEquals(
+            'foo',
+            $none->getOrCall(function () {
+                return 'foo';
+            })
+        );
     }
 
     /**
@@ -52,44 +57,61 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 
     public function testifDefined()
     {
-        $this->assertNull($this->none->ifDefined(function() {
-            throw new \LogicException('Should never be called.');
-        }));
+        $this->assertNull(
+            $this->none->ifDefined(function () {
+                throw new \LogicException('Should never be called.');
+            })
+        );
     }
 
     public function testForAll()
     {
-        $this->assertSame($this->none, $this->none->forAll(function() {
-            throw new \LogicException('Should never be called.');
-        }));
+        $this->assertSame(
+            $this->none,
+            $this->none->forAll(function () {
+                throw new \LogicException('Should never be called.');
+            })
+        );
     }
 
     public function testMap()
     {
-        $this->assertSame($this->none, $this->none->map(function() {
-            throw new \LogicException('Should not be called.');
-        }));
+        $this->assertSame(
+            $this->none,
+            $this->none->map(function () {
+                throw new \LogicException('Should not be called.');
+            })
+        );
     }
 
     public function testFlatMap()
     {
-        $this->assertSame($this->none, $this->none->flatMap(function() {
-            throw new \LogicException('Should not be called.');
-        }));
+        $this->assertSame(
+            $this->none,
+            $this->none->flatMap(function () {
+                throw new \LogicException('Should not be called.');
+            })
+        );
     }
 
     public function testFilter()
     {
-        $this->assertSame($this->none, $this->none->filter(function() {
-            throw new \LogicException('Should not be called.');
-        }));
+        $this->assertSame(
+            $this->none,
+            $this->none->filter(function () {
+                throw new \LogicException('Should not be called.');
+            })
+        );
     }
 
     public function testFilterNot()
     {
-        $this->assertSame($this->none, $this->none->filterNot(function() {
-            throw new \LogicException('Should not be called.');
-        }));
+        $this->assertSame(
+            $this->none,
+            $this->none->filterNot(function () {
+                throw new \LogicException('Should not be called.');
+            })
+        );
     }
 
     public function testSelect()
@@ -116,8 +138,18 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 
     public function testFoldLeftRight()
     {
-        $this->assertSame(1, $this->none->foldLeft(1, function() { $this->fail(); }));
-        $this->assertSame(1, $this->none->foldRight(1, function() { $this->fail(); }));
+        $this->assertSame(
+            1,
+            $this->none->foldLeft(1, function () {
+                $this->fail();
+            })
+        );
+        $this->assertSame(
+            1,
+            $this->none->foldRight(1, function () {
+                $this->fail();
+            })
+        );
     }
 
     protected function setUp()

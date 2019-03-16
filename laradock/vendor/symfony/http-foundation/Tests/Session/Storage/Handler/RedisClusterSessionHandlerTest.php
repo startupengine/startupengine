@@ -19,13 +19,18 @@ class RedisClusterSessionHandlerTest extends AbstractRedisSessionHandlerTestCase
             self::markTestSkipped('The RedisCluster class is required.');
         }
 
-        if (!$hosts = getenv('REDIS_CLUSTER_HOSTS')) {
-            self::markTestSkipped('REDIS_CLUSTER_HOSTS env var is not defined.');
+        if (!($hosts = getenv('REDIS_CLUSTER_HOSTS'))) {
+            self::markTestSkipped(
+                'REDIS_CLUSTER_HOSTS env var is not defined.'
+            );
         }
     }
 
     protected function createRedisClient(string $host): \RedisCluster
     {
-        return new \RedisCluster(null, explode(' ', getenv('REDIS_CLUSTER_HOSTS')));
+        return new \RedisCluster(
+            null,
+            explode(' ', getenv('REDIS_CLUSTER_HOSTS'))
+        );
     }
 }

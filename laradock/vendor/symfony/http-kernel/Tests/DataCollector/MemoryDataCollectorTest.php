@@ -53,7 +53,7 @@ class MemoryDataCollectorTest extends TestCase
             ['1G', 1024 * 1024 * 1024],
             ['-1', -1],
             ['0', 0],
-            ['2mk', 2048], // the unit must be the last char, so in this case 'k', not 'm'
+            ['2mk', 2048] // the unit must be the last char, so in this case 'k', not 'm'
         ];
     }
 }

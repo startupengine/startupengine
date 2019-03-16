@@ -36,15 +36,16 @@ class CssSelectorConverter
         $this->translator = new Translator();
 
         if ($html) {
-            $this->translator->registerExtension(new HtmlExtension($this->translator));
+            $this->translator->registerExtension(
+                new HtmlExtension($this->translator)
+            );
         }
 
         $this->translator
             ->registerParserShortcut(new EmptyStringParser())
             ->registerParserShortcut(new ElementParser())
             ->registerParserShortcut(new ClassParser())
-            ->registerParserShortcut(new HashParser())
-        ;
+            ->registerParserShortcut(new HashParser());
     }
 
     /**

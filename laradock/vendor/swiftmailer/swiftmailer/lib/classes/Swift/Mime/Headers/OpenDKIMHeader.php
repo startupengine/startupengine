@@ -113,7 +113,7 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      */
     public function toString()
     {
-        return $this->fieldName.': '.$this->value."\r\n";
+        return $this->fieldName . ': ' . $this->value . "\r\n";
     }
 
     /**

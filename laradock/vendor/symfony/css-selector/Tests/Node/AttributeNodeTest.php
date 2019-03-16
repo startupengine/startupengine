@@ -19,19 +19,82 @@ class AttributeNodeTest extends AbstractNodeTest
     public function getToStringConversionTestData()
     {
         return [
-            [new AttributeNode(new ElementNode(), null, 'attribute', 'exists', null), 'Attribute[Element[*][attribute]]'],
-            [new AttributeNode(new ElementNode(), null, 'attribute', '$=', 'value'), "Attribute[Element[*][attribute $= 'value']]"],
-            [new AttributeNode(new ElementNode(), 'namespace', 'attribute', '$=', 'value'), "Attribute[Element[*][namespace|attribute $= 'value']]"],
+            [
+                new AttributeNode(
+                    new ElementNode(),
+                    null,
+                    'attribute',
+                    'exists',
+                    null
+                ),
+                'Attribute[Element[*][attribute]]'
+            ],
+            [
+                new AttributeNode(
+                    new ElementNode(),
+                    null,
+                    'attribute',
+                    '$=',
+                    'value'
+                ),
+                "Attribute[Element[*][attribute $= 'value']]"
+            ],
+            [
+                new AttributeNode(
+                    new ElementNode(),
+                    'namespace',
+                    'attribute',
+                    '$=',
+                    'value'
+                ),
+                "Attribute[Element[*][namespace|attribute $= 'value']]"
+            ]
         ];
     }
 
     public function getSpecificityValueTestData()
     {
         return [
-            [new AttributeNode(new ElementNode(), null, 'attribute', 'exists', null), 10],
-            [new AttributeNode(new ElementNode(null, 'element'), null, 'attribute', 'exists', null), 11],
-            [new AttributeNode(new ElementNode(), null, 'attribute', '$=', 'value'), 10],
-            [new AttributeNode(new ElementNode(), 'namespace', 'attribute', '$=', 'value'), 10],
+            [
+                new AttributeNode(
+                    new ElementNode(),
+                    null,
+                    'attribute',
+                    'exists',
+                    null
+                ),
+                10
+            ],
+            [
+                new AttributeNode(
+                    new ElementNode(null, 'element'),
+                    null,
+                    'attribute',
+                    'exists',
+                    null
+                ),
+                11
+            ],
+            [
+                new AttributeNode(
+                    new ElementNode(),
+                    null,
+                    'attribute',
+                    '$=',
+                    'value'
+                ),
+                10
+            ],
+            [
+                new AttributeNode(
+                    new ElementNode(),
+                    'namespace',
+                    'attribute',
+                    '$=',
+                    'value'
+                ),
+                10
+            ]
         ];
     }
 }

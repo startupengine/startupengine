@@ -35,8 +35,11 @@ class StreamedResponse extends Response
      * @param int           $status   The response status code
      * @param array         $headers  An array of response headers
      */
-    public function __construct(callable $callback = null, int $status = 200, array $headers = [])
-    {
+    public function __construct(
+        callable $callback = null,
+        int $status = 200,
+        array $headers = []
+    ) {
         parent::__construct(null, $status, $headers);
 
         if (null !== $callback) {
@@ -55,8 +58,11 @@ class StreamedResponse extends Response
      *
      * @return static
      */
-    public static function create($callback = null, $status = 200, $headers = [])
-    {
+    public static function create(
+        $callback = null,
+        $status = 200,
+        $headers = []
+    ) {
         return new static($callback, $status, $headers);
     }
 
@@ -108,7 +114,9 @@ class StreamedResponse extends Response
         $this->streamed = true;
 
         if (null === $this->callback) {
-            throw new \LogicException('The Response callback must not be null.');
+            throw new \LogicException(
+                'The Response callback must not be null.'
+            );
         }
 
         ($this->callback)();
@@ -126,7 +134,9 @@ class StreamedResponse extends Response
     public function setContent($content)
     {
         if (null !== $content) {
-            throw new \LogicException('The content cannot be set on a StreamedResponse instance.');
+            throw new \LogicException(
+                'The content cannot be set on a StreamedResponse instance.'
+            );
         }
 
         $this->streamed = true;

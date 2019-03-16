@@ -37,8 +37,11 @@ class FragmentHandler
      * @param FragmentRendererInterface[] $renderers    An array of FragmentRendererInterface instances
      * @param bool                        $debug        Whether the debug mode is enabled or not
      */
-    public function __construct(RequestStack $requestStack, array $renderers = [], bool $debug = false)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        array $renderers = [],
+        bool $debug = false
+    ) {
         $this->requestStack = $requestStack;
         foreach ($renderers as $renderer) {
             $this->addRenderer($renderer);
@@ -77,14 +80,20 @@ class FragmentHandler
         }
 
         if (!isset($this->renderers[$renderer])) {
-            throw new \InvalidArgumentException(sprintf('The "%s" renderer does not exist.', $renderer));
+            throw new \InvalidArgumentException(
+                sprintf('The "%s" renderer does not exist.', $renderer)
+            );
         }
 
-        if (!$request = $this->requestStack->getCurrentRequest()) {
-            throw new \LogicException('Rendering a fragment can only be done when handling a Request.');
+        if (!($request = $this->requestStack->getCurrentRequest())) {
+            throw new \LogicException(
+                'Rendering a fragment can only be done when handling a Request.'
+            );
         }
 
-        return $this->deliver($this->renderers[$renderer]->render($uri, $request, $options));
+        return $this->deliver(
+            $this->renderers[$renderer]->render($uri, $request, $options)
+        );
     }
 
     /**
@@ -100,7 +109,13 @@ class FragmentHandler
     protected function deliver(Response $response)
     {
         if (!$response->isSuccessful()) {
-            throw new \RuntimeException(sprintf('Error when rendering "%s" (Status code is %s).', $this->requestStack->getCurrentRequest()->getUri(), $response->getStatusCode()));
+            throw new \RuntimeException(
+                sprintf(
+                    'Error when rendering "%s" (Status code is %s).',
+                    $this->requestStack->getCurrentRequest()->getUri(),
+                    $response->getStatusCode()
+                )
+            );
         }
 
         if (!$response instanceof StreamedResponse) {

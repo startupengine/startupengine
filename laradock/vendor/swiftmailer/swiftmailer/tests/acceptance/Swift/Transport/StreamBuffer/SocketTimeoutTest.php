@@ -1,6 +1,7 @@
 <?php
 
-class Swift_Transport_StreamBuffer_SocketTimeoutTest extends \PHPUnit\Framework\TestCase
+class Swift_Transport_StreamBuffer_SocketTimeoutTest extends
+    \PHPUnit\Framework\TestCase
 {
     protected $buffer;
     protected $server;
@@ -10,15 +11,17 @@ class Swift_Transport_StreamBuffer_SocketTimeoutTest extends \PHPUnit\Framework\
     {
         if (!defined('SWIFT_SMTP_HOST')) {
             $this->markTestSkipped(
-                'Cannot run test without an SMTP host to connect to (define '.
-                'SWIFT_SMTP_HOST in tests/acceptance.conf.php if you wish to run this test)'
-             );
+                'Cannot run test without an SMTP host to connect to (define ' .
+                    'SWIFT_SMTP_HOST in tests/acceptance.conf.php if you wish to run this test)'
+            );
         }
 
         $serverStarted = false;
         for ($i = 0; $i < 5; ++$i) {
             $this->randomHighPort = random_int(50000, 65000);
-            $this->server = stream_socket_server('tcp://127.0.0.1:'.$this->randomHighPort);
+            $this->server = stream_socket_server(
+                'tcp://127.0.0.1:' . $this->randomHighPort
+            );
             if ($this->server) {
                 $serverStarted = true;
             }
@@ -40,7 +43,7 @@ class Swift_Transport_StreamBuffer_SocketTimeoutTest extends \PHPUnit\Framework\
             'port' => $port,
             'protocol' => 'tcp',
             'blocking' => 1,
-            'timeout' => 1,
+            'timeout' => 1
         ]);
     }
 
@@ -52,7 +55,11 @@ class Swift_Transport_StreamBuffer_SocketTimeoutTest extends \PHPUnit\Framework\
             $line = $this->buffer->readLine(0);
         } catch (Exception $e) {
         }
-        $this->assertInstanceOf('Swift_IoException', $e, 'IO Exception Not Thrown On Connection Timeout');
+        $this->assertInstanceOf(
+            'Swift_IoException',
+            $e,
+            'IO Exception Not Thrown On Connection Timeout'
+        );
         $this->assertRegExp('/Connection to .* Timed Out/', $e->getMessage());
     }
 

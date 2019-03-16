@@ -55,9 +55,10 @@ class AcceptHeaderItem
      */
     public function __toString()
     {
-        $string = $this->value.($this->quality < 1 ? ';q='.$this->quality : '');
+        $string =
+            $this->value . ($this->quality < 1 ? ';q=' . $this->quality : '');
         if (\count($this->attributes) > 0) {
-            $string .= '; '.HeaderUtils::toString($this->attributes, ';');
+            $string .= '; ' . HeaderUtils::toString($this->attributes, ';');
         }
 
         return $string;
@@ -157,7 +158,9 @@ class AcceptHeaderItem
      */
     public function getAttribute($name, $default = null)
     {
-        return isset($this->attributes[$name]) ? $this->attributes[$name] : $default;
+        return isset($this->attributes[$name])
+            ? $this->attributes[$name]
+            : $default;
     }
 
     /**

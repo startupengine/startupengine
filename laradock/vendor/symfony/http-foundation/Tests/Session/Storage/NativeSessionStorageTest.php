@@ -36,7 +36,10 @@ class NativeSessionStorageTest extends TestCase
     protected function setUp()
     {
         $this->iniSet('session.save_handler', 'files');
-        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir().'/sftest');
+        $this->iniSet(
+            'session.save_path',
+            ($this->savePath = sys_get_temp_dir() . '/sftest')
+        );
         if (!is_dir($this->savePath)) {
             mkdir($this->savePath);
         }
@@ -45,7 +48,7 @@ class NativeSessionStorageTest extends TestCase
     protected function tearDown()
     {
         session_write_close();
-        array_map('unlink', glob($this->savePath.'/*'));
+        array_map('unlink', glob($this->savePath . '/*'));
         if (is_dir($this->savePath)) {
             rmdir($this->savePath);
         }
@@ -94,7 +97,11 @@ class NativeSessionStorageTest extends TestCase
     public function testGetId()
     {
         $storage = $this->getStorage();
-        $this->assertSame('', $storage->getId(), 'Empty ID before starting session');
+        $this->assertSame(
+            '',
+            $storage->getId(),
+            'Empty ID before starting session'
+        );
 
         $storage->start();
         $id = $storage->getId();
@@ -102,7 +109,11 @@ class NativeSessionStorageTest extends TestCase
         $this->assertNotSame('', $id);
 
         $storage->save();
-        $this->assertSame($id, $storage->getId(), 'ID stays after saving session');
+        $this->assertSame(
+            $id,
+            $storage->getId(),
+            'ID stays after saving session'
+        );
     }
 
     public function testRegenerate()
@@ -168,7 +179,7 @@ class NativeSessionStorageTest extends TestCase
             'cookie_path' => '/my/cookie/path',
             'cookie_domain' => 'symfony.example.com',
             'cookie_secure' => true,
-            'cookie_httponly' => false,
+            'cookie_httponly' => false
         ];
 
         if (\PHP_VERSION_ID >= 70300) {
@@ -180,7 +191,7 @@ class NativeSessionStorageTest extends TestCase
         $gco = [];
 
         foreach ($temp as $key => $value) {
-            $gco['cookie_'.$key] = $value;
+            $gco['cookie_' . $key] = $value;
         }
 
         $this->assertEquals($options, $gco);
@@ -194,7 +205,7 @@ class NativeSessionStorageTest extends TestCase
 
         $options = [
             'url_rewriter.tags' => 'a=href',
-            'cache_expire' => '200',
+            'cache_expire' => '200'
         ];
 
         $this->getStorage($options);
@@ -217,17 +228,39 @@ class NativeSessionStorageTest extends TestCase
         $this->iniSet('session.save_handler', 'files');
         $storage = $this->getStorage();
         $storage->setSaveHandler();
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy', $storage->getSaveHandler());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy',
+            $storage->getSaveHandler()
+        );
         $storage->setSaveHandler(null);
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy', $storage->getSaveHandler());
-        $storage->setSaveHandler(new SessionHandlerProxy(new NativeFileSessionHandler()));
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy', $storage->getSaveHandler());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy',
+            $storage->getSaveHandler()
+        );
+        $storage->setSaveHandler(
+            new SessionHandlerProxy(new NativeFileSessionHandler())
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy',
+            $storage->getSaveHandler()
+        );
         $storage->setSaveHandler(new NativeFileSessionHandler());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy', $storage->getSaveHandler());
-        $storage->setSaveHandler(new SessionHandlerProxy(new NullSessionHandler()));
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy', $storage->getSaveHandler());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy',
+            $storage->getSaveHandler()
+        );
+        $storage->setSaveHandler(
+            new SessionHandlerProxy(new NullSessionHandler())
+        );
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy',
+            $storage->getSaveHandler()
+        );
         $storage->setSaveHandler(new NullSessionHandler());
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy', $storage->getSaveHandler());
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy',
+            $storage->getSaveHandler()
+        );
     }
 
     /**
@@ -260,8 +293,16 @@ class NativeSessionStorageTest extends TestCase
         $storage->getBag('attributes')->set('lucky', 7);
         $storage->save();
         $storage->start();
-        $this->assertSame($id, $storage->getId(), 'Same session ID after restarting');
-        $this->assertSame(7, $storage->getBag('attributes')->get('lucky'), 'Data still available');
+        $this->assertSame(
+            $id,
+            $storage->getId(),
+            'Same session ID after restarting'
+        );
+        $this->assertSame(
+            7,
+            $storage->getBag('attributes')->get('lucky'),
+            'Data still available'
+        );
     }
 
     public function testCanCreateNativeSessionStorageWhenSessionAlreadyStarted()
@@ -277,7 +318,7 @@ class NativeSessionStorageTest extends TestCase
     {
         session_start();
         $this->getStorage([
-            'name' => 'something-else',
+            'name' => 'something-else'
         ]);
 
         // Assert no exception has been thrown by `getStorage()`

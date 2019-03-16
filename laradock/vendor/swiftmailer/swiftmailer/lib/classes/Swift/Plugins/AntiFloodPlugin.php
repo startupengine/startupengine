@@ -13,7 +13,9 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Plugins_AntiFloodPlugin implements Swift_Events_SendListener, Swift_Plugins_Sleeper
+class Swift_Plugins_AntiFloodPlugin implements
+    Swift_Events_SendListener,
+    Swift_Plugins_Sleeper
 {
     /**
      * The number of emails to send before restarting Transport.
@@ -50,8 +52,11 @@ class Swift_Plugins_AntiFloodPlugin implements Swift_Events_SendListener, Swift_
      * @param int                   $sleep     time
      * @param Swift_Plugins_Sleeper $sleeper   (not needed really)
      */
-    public function __construct($threshold = 99, $sleep = 0, Swift_Plugins_Sleeper $sleeper = null)
-    {
+    public function __construct(
+        $threshold = 99,
+        $sleep = 0,
+        Swift_Plugins_Sleeper $sleeper = null
+    ) {
         $this->setThreshold($threshold);
         $this->setSleepTime($sleep);
         $this->sleeper = $sleeper;

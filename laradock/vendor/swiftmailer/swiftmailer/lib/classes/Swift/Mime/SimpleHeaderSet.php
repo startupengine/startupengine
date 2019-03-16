@@ -35,8 +35,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      *
      * @param string $charset
      */
-    public function __construct(Swift_Mime_SimpleHeaderFactory $factory, $charset = null)
-    {
+    public function __construct(
+        Swift_Mime_SimpleHeaderFactory $factory,
+        $charset = null
+    ) {
         $this->factory = $factory;
         if (isset($charset)) {
             $this->setCharset($charset);
@@ -68,7 +70,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      */
     public function addMailboxHeader($name, $addresses = null)
     {
-        $this->storeHeader($name, $this->factory->createMailboxHeader($name, $addresses));
+        $this->storeHeader(
+            $name,
+            $this->factory->createMailboxHeader($name, $addresses)
+        );
     }
 
     /**
@@ -78,7 +83,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      */
     public function addDateHeader($name, DateTimeInterface $dateTime = null)
     {
-        $this->storeHeader($name, $this->factory->createDateHeader($name, $dateTime));
+        $this->storeHeader(
+            $name,
+            $this->factory->createDateHeader($name, $dateTime)
+        );
     }
 
     /**
@@ -89,7 +97,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      */
     public function addTextHeader($name, $value = null)
     {
-        $this->storeHeader($name, $this->factory->createTextHeader($name, $value));
+        $this->storeHeader(
+            $name,
+            $this->factory->createTextHeader($name, $value)
+        );
     }
 
     /**
@@ -101,7 +112,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      */
     public function addParameterizedHeader($name, $value = null, $params = [])
     {
-        $this->storeHeader($name, $this->factory->createParameterizedHeader($name, $value, $params));
+        $this->storeHeader(
+            $name,
+            $this->factory->createParameterizedHeader($name, $value, $params)
+        );
     }
 
     /**
@@ -123,7 +137,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      */
     public function addPathHeader($name, $path = null)
     {
-        $this->storeHeader($name, $this->factory->createPathHeader($name, $path));
+        $this->storeHeader(
+            $name,
+            $this->factory->createPathHeader($name, $path)
+        );
     }
 
     /**
@@ -306,7 +323,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
         }
         foreach ($headers as $collection) {
             foreach ($collection as $header) {
-                if ($this->isDisplayed($header) || '' != $header->getFieldBody()) {
+                if (
+                    $this->isDisplayed($header) ||
+                    '' != $header->getFieldBody()
+                ) {
                     $string .= $header->toString();
                 }
             }
@@ -328,8 +348,11 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
     }
 
     /** Save a Header to the internal collection */
-    private function storeHeader($name, Swift_Mime_Header $header, $offset = null)
-    {
+    private function storeHeader(
+        $name,
+        Swift_Mime_Header $header,
+        $offset = null
+    ) {
         if (!isset($this->headers[strtolower($name)])) {
             $this->headers[strtolower($name)] = [];
         }
@@ -351,8 +374,12 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
     {
         $lowerA = strtolower($a);
         $lowerB = strtolower($b);
-        $aPos = array_key_exists($lowerA, $this->order) ? $this->order[$lowerA] : -1;
-        $bPos = array_key_exists($lowerB, $this->order) ? $this->order[$lowerB] : -1;
+        $aPos = array_key_exists($lowerA, $this->order)
+            ? $this->order[$lowerA]
+            : -1;
+        $bPos = array_key_exists($lowerB, $this->order)
+            ? $this->order[$lowerB]
+            : -1;
 
         if (-1 === $aPos && -1 === $bPos) {
             // just be sure to be determinist here
@@ -371,7 +398,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
     /** Test if the given Header is always displayed */
     private function isDisplayed(Swift_Mime_Header $header)
     {
-        return array_key_exists(strtolower($header->getFieldName()), $this->required);
+        return array_key_exists(
+            strtolower($header->getFieldName()),
+            $this->required
+        );
     }
 
     /** Notify all Headers of the new charset */

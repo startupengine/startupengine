@@ -22,25 +22,40 @@ class MigratingSessionHandlerTest extends TestCase
 
     protected function setUp()
     {
-        $this->currentHandler = $this->createMock(\SessionHandlerInterface::class);
-        $this->writeOnlyHandler = $this->createMock(\SessionHandlerInterface::class);
+        $this->currentHandler = $this->createMock(
+            \SessionHandlerInterface::class
+        );
+        $this->writeOnlyHandler = $this->createMock(
+            \SessionHandlerInterface::class
+        );
 
-        $this->dualHandler = new MigratingSessionHandler($this->currentHandler, $this->writeOnlyHandler);
+        $this->dualHandler = new MigratingSessionHandler(
+            $this->currentHandler,
+            $this->writeOnlyHandler
+        );
     }
 
     public function testInstanceOf()
     {
-        $this->assertInstanceOf(\SessionHandlerInterface::class, $this->dualHandler);
-        $this->assertInstanceOf(\SessionUpdateTimestampHandlerInterface::class, $this->dualHandler);
+        $this->assertInstanceOf(
+            \SessionHandlerInterface::class,
+            $this->dualHandler
+        );
+        $this->assertInstanceOf(
+            \SessionUpdateTimestampHandlerInterface::class,
+            $this->dualHandler
+        );
     }
 
     public function testClose()
     {
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('close')
             ->will($this->returnValue(true));
 
-        $this->writeOnlyHandler->expects($this->once())
+        $this->writeOnlyHandler
+            ->expects($this->once())
             ->method('close')
             ->will($this->returnValue(false));
 
@@ -53,12 +68,14 @@ class MigratingSessionHandlerTest extends TestCase
     {
         $sessionId = 'xyz';
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('destroy')
             ->with($sessionId)
             ->will($this->returnValue(true));
 
-        $this->writeOnlyHandler->expects($this->once())
+        $this->writeOnlyHandler
+            ->expects($this->once())
             ->method('destroy')
             ->with($sessionId)
             ->will($this->returnValue(false));
@@ -72,12 +89,14 @@ class MigratingSessionHandlerTest extends TestCase
     {
         $maxlifetime = 357;
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('gc')
             ->with($maxlifetime)
             ->will($this->returnValue(true));
 
-        $this->writeOnlyHandler->expects($this->once())
+        $this->writeOnlyHandler
+            ->expects($this->once())
             ->method('gc')
             ->with($maxlifetime)
             ->will($this->returnValue(false));
@@ -91,12 +110,14 @@ class MigratingSessionHandlerTest extends TestCase
         $savePath = '/path/to/save/location';
         $sessionName = 'xyz';
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('open')
             ->with($savePath, $sessionName)
             ->will($this->returnValue(true));
 
-        $this->writeOnlyHandler->expects($this->once())
+        $this->writeOnlyHandler
+            ->expects($this->once())
             ->method('open')
             ->with($savePath, $sessionName)
             ->will($this->returnValue(false));
@@ -111,12 +132,14 @@ class MigratingSessionHandlerTest extends TestCase
         $sessionId = 'xyz';
         $readValue = 'something';
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('read')
             ->with($sessionId)
             ->will($this->returnValue($readValue));
 
-        $this->writeOnlyHandler->expects($this->never())
+        $this->writeOnlyHandler
+            ->expects($this->never())
             ->method('read')
             ->with($this->any());
 
@@ -130,12 +153,14 @@ class MigratingSessionHandlerTest extends TestCase
         $sessionId = 'xyz';
         $data = 'my-serialized-data';
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('write')
             ->with($sessionId, $data)
             ->will($this->returnValue(true));
 
-        $this->writeOnlyHandler->expects($this->once())
+        $this->writeOnlyHandler
+            ->expects($this->once())
             ->method('write')
             ->with($sessionId, $data)
             ->will($this->returnValue(false));
@@ -150,12 +175,14 @@ class MigratingSessionHandlerTest extends TestCase
         $sessionId = 'xyz';
         $readValue = 'something';
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('read')
             ->with($sessionId)
             ->will($this->returnValue($readValue));
 
-        $this->writeOnlyHandler->expects($this->never())
+        $this->writeOnlyHandler
+            ->expects($this->never())
             ->method('read')
             ->with($this->any());
 
@@ -169,12 +196,14 @@ class MigratingSessionHandlerTest extends TestCase
         $sessionId = 'xyz';
         $data = 'my-serialized-data';
 
-        $this->currentHandler->expects($this->once())
+        $this->currentHandler
+            ->expects($this->once())
             ->method('write')
             ->with($sessionId, $data)
             ->will($this->returnValue(true));
 
-        $this->writeOnlyHandler->expects($this->once())
+        $this->writeOnlyHandler
+            ->expects($this->once())
             ->method('write')
             ->with($sessionId, $data)
             ->will($this->returnValue(false));

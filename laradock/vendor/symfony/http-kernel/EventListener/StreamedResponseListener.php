@@ -43,7 +43,7 @@ class StreamedResponseListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::RESPONSE => ['onKernelResponse', -1024],
+            KernelEvents::RESPONSE => ['onKernelResponse', -1024]
         ];
     }
 }

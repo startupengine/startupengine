@@ -37,7 +37,7 @@ class Logger implements LoggerInterface
             'warning' => [],
             'notice' => [],
             'info' => [],
-            'debug' => [],
+            'debug' => []
         ];
     }
 

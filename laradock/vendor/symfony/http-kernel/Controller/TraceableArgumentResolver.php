@@ -22,8 +22,10 @@ class TraceableArgumentResolver implements ArgumentResolverInterface
     private $resolver;
     private $stopwatch;
 
-    public function __construct(ArgumentResolverInterface $resolver, Stopwatch $stopwatch)
-    {
+    public function __construct(
+        ArgumentResolverInterface $resolver,
+        Stopwatch $stopwatch
+    ) {
         $this->resolver = $resolver;
         $this->stopwatch = $stopwatch;
     }

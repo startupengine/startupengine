@@ -30,7 +30,9 @@ class AddRequestFormatsListenerTest extends TestCase
 
     protected function setUp()
     {
-        $this->listener = new AddRequestFormatsListener(['csv' => ['text/csv', 'text/plain']]);
+        $this->listener = new AddRequestFormatsListener([
+            'csv' => ['text/csv', 'text/plain']
+        ]);
     }
 
     protected function tearDown()
@@ -40,7 +42,10 @@ class AddRequestFormatsListenerTest extends TestCase
 
     public function testIsAnEventSubscriber()
     {
-        $this->assertInstanceOf('Symfony\Component\EventDispatcher\EventSubscriberInterface', $this->listener);
+        $this->assertInstanceOf(
+            'Symfony\Component\EventDispatcher\EventSubscriberInterface',
+            $this->listener
+        );
     }
 
     public function testRegisteredEvent()
@@ -56,7 +61,8 @@ class AddRequestFormatsListenerTest extends TestCase
         $request = $this->getRequestMock();
         $event = $this->getGetResponseEventMock($request);
 
-        $request->expects($this->once())
+        $request
+            ->expects($this->once())
             ->method('setFormat')
             ->with('csv', ['text/csv', 'text/plain']);
 
@@ -65,17 +71,21 @@ class AddRequestFormatsListenerTest extends TestCase
 
     protected function getRequestMock()
     {
-        return $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
+        return $this->getMockBuilder(
+            'Symfony\Component\HttpFoundation\Request'
+        )->getMock();
     }
 
     protected function getGetResponseEventMock(Request $request)
     {
-        $event = $this
-            ->getMockBuilder('Symfony\Component\HttpKernel\Event\GetResponseEvent')
+        $event = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\Event\GetResponseEvent'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->any())
+        $event
+            ->expects($this->any())
             ->method('getRequest')
             ->will($this->returnValue($request));
 

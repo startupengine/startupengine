@@ -13,7 +13,9 @@
  *
  * @author Chris Corbyn
  */
-class Swift_Mime_HeaderEncoder_QpHeaderEncoder extends Swift_Encoder_QpEncoder implements Swift_Mime_HeaderEncoder
+class Swift_Mime_HeaderEncoder_QpHeaderEncoder
+    extends Swift_Encoder_QpEncoder
+    implements Swift_Mime_HeaderEncoder
 {
     /**
      * Creates a new QpHeaderEncoder for the given CharacterStream.
@@ -27,10 +29,15 @@ class Swift_Mime_HeaderEncoder_QpHeaderEncoder extends Swift_Encoder_QpEncoder i
 
     protected function initSafeMap()
     {
-        foreach (array_merge(
-            range(0x61, 0x7A), range(0x41, 0x5A),
-            range(0x30, 0x39), [0x20, 0x21, 0x2A, 0x2B, 0x2D, 0x2F]
-        ) as $byte) {
+        foreach (
+            array_merge(
+                range(0x61, 0x7a),
+                range(0x41, 0x5a),
+                range(0x30, 0x39),
+                [0x20, 0x21, 0x2a, 0x2b, 0x2d, 0x2f]
+            )
+            as $byte
+        ) {
             $this->safeMap[$byte] = chr($byte);
         }
     }
@@ -56,9 +63,14 @@ class Swift_Mime_HeaderEncoder_QpHeaderEncoder extends Swift_Encoder_QpEncoder i
      *
      * @return string
      */
-    public function encodeString($string, $firstLineOffset = 0, $maxLineLength = 0)
-    {
-        return str_replace([' ', '=20', "=\r\n"], ['_', '_', "\r\n"],
+    public function encodeString(
+        $string,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    ) {
+        return str_replace(
+            [' ', '=20', "=\r\n"],
+            ['_', '_', "\r\n"],
             parent::encodeString($string, $firstLineOffset, $maxLineLength)
         );
     }

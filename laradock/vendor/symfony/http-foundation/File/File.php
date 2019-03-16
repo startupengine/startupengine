@@ -93,11 +93,20 @@ class File extends \SplFileInfo
     {
         $target = $this->getTargetFile($directory, $name);
 
-        set_error_handler(function ($type, $msg) use (&$error) { $error = $msg; });
+        set_error_handler(function ($type, $msg) use (&$error) {
+            $error = $msg;
+        });
         $renamed = rename($this->getPathname(), $target);
         restore_error_handler();
         if (!$renamed) {
-            throw new FileException(sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, strip_tags($error)));
+            throw new FileException(
+                sprintf(
+                    'Could not move the file "%s" to "%s" (%s)',
+                    $this->getPathname(),
+                    $target,
+                    strip_tags($error)
+                )
+            );
         }
 
         @chmod($target, 0666 & ~umask());
@@ -108,14 +117,23 @@ class File extends \SplFileInfo
     protected function getTargetFile($directory, $name = null)
     {
         if (!is_dir($directory)) {
-            if (false === @mkdir($directory, 0777, true) && !is_dir($directory)) {
-                throw new FileException(sprintf('Unable to create the "%s" directory', $directory));
+            if (
+                false === @mkdir($directory, 0777, true) && !is_dir($directory)
+            ) {
+                throw new FileException(
+                    sprintf('Unable to create the "%s" directory', $directory)
+                );
             }
         } elseif (!is_writable($directory)) {
-            throw new FileException(sprintf('Unable to write in the "%s" directory', $directory));
+            throw new FileException(
+                sprintf('Unable to write in the "%s" directory', $directory)
+            );
         }
 
-        $target = rtrim($directory, '/\\').\DIRECTORY_SEPARATOR.(null === $name ? $this->getBasename() : $this->getName($name));
+        $target =
+            rtrim($directory, '/\\') .
+            \DIRECTORY_SEPARATOR .
+            (null === $name ? $this->getBasename() : $this->getName($name));
 
         return new self($target, false);
     }
@@ -131,7 +149,8 @@ class File extends \SplFileInfo
     {
         $originalName = str_replace('\\', '/', $name);
         $pos = strrpos($originalName, '/');
-        $originalName = false === $pos ? $originalName : substr($originalName, $pos + 1);
+        $originalName =
+            false === $pos ? $originalName : substr($originalName, $pos + 1);
 
         return $originalName;
     }

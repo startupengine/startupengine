@@ -39,12 +39,17 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      *
      * @param string $name of Header
      */
-    public function __construct($name, Swift_Mime_HeaderEncoder $encoder, EmailValidator $emailValidator, Swift_AddressEncoder $addressEncoder = null)
-    {
+    public function __construct(
+        $name,
+        Swift_Mime_HeaderEncoder $encoder,
+        EmailValidator $emailValidator,
+        Swift_AddressEncoder $addressEncoder = null
+    ) {
         $this->setFieldName($name);
         $this->setEncoder($encoder);
         $this->emailValidator = $emailValidator;
-        $this->addressEncoder = $addressEncoder ?? new Swift_AddressEncoder_IdnAddressEncoder();
+        $this->addressEncoder =
+            $addressEncoder ?? new Swift_AddressEncoder_IdnAddressEncoder();
     }
 
     /**
@@ -243,7 +248,9 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     {
         // Compute the string value of the header only if needed
         if (null === $this->getCachedValue()) {
-            $this->setCachedValue($this->createMailboxListString($this->mailboxes));
+            $this->setCachedValue(
+                $this->createMailboxListString($this->mailboxes)
+            );
         }
 
         return $this->getCachedValue();
@@ -286,7 +293,13 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     protected function createDisplayNameString($displayName, $shorten = false)
     {
-        return $this->createPhrase($this, $displayName, $this->getCharset(), $this->getEncoder(), $shorten);
+        return $this->createPhrase(
+            $this,
+            $displayName,
+            $this->getCharset(),
+            $this->getEncoder(),
+            $shorten
+        );
     }
 
     /**
@@ -316,7 +329,8 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     protected function tokenNeedsEncoding($token)
     {
-        return preg_match('/[()<>\[\]:;@\,."]/', $token) || parent::tokenNeedsEncoding($token);
+        return preg_match('/[()<>\[\]:;@\,."]/', $token) ||
+            parent::tokenNeedsEncoding($token);
     }
 
     /**
@@ -333,8 +347,11 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
         foreach ($mailboxes as $email => $name) {
             $mailboxStr = $this->addressEncoder->encodeString($email);
             if (null !== $name) {
-                $nameStr = $this->createDisplayNameString($name, empty($strings));
-                $mailboxStr = $nameStr.' <'.$mailboxStr.'>';
+                $nameStr = $this->createDisplayNameString(
+                    $name,
+                    empty($strings)
+                );
+                $mailboxStr = $nameStr . ' <' . $mailboxStr . '>';
             }
             $strings[] = $mailboxStr;
         }
@@ -353,7 +370,9 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     {
         if (!$this->emailValidator->isValid($address, new RFCValidation())) {
             throw new Swift_RfcComplianceException(
-                'Address in mailbox given ['.$address.'] does not comply with RFC 2822, 3.6.2.'
+                'Address in mailbox given [' .
+                    $address .
+                    '] does not comply with RFC 2822, 3.6.2.'
             );
         }
     }

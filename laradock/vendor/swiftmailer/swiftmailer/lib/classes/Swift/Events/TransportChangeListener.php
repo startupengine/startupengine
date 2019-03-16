@@ -13,14 +13,17 @@
  *
  * @author Chris Corbyn
  */
-interface Swift_Events_TransportChangeListener extends Swift_Events_EventListener
+interface Swift_Events_TransportChangeListener extends
+    Swift_Events_EventListener
 {
     /**
      * Invoked just before a Transport is started.
      *
      * @param Swift_Events_TransportChangeEvent $evt
      */
-    public function beforeTransportStarted(Swift_Events_TransportChangeEvent $evt);
+    public function beforeTransportStarted(
+        Swift_Events_TransportChangeEvent $evt
+    );
 
     /**
      * Invoked immediately after the Transport is started.
@@ -34,7 +37,9 @@ interface Swift_Events_TransportChangeListener extends Swift_Events_EventListene
      *
      * @param Swift_Events_TransportChangeEvent $evt
      */
-    public function beforeTransportStopped(Swift_Events_TransportChangeEvent $evt);
+    public function beforeTransportStopped(
+        Swift_Events_TransportChangeEvent $evt
+    );
 
     /**
      * Invoked immediately after the Transport is stopped.

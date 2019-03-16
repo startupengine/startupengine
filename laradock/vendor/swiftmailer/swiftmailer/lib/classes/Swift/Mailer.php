@@ -37,8 +37,9 @@ class Swift_Mailer
      */
     public function createMessage($service = 'message')
     {
-        return Swift_DependencyContainer::getInstance()
-            ->lookup('message.'.$service);
+        return Swift_DependencyContainer::getInstance()->lookup(
+            'message.' . $service
+        );
     }
 
     /**
@@ -56,8 +57,10 @@ class Swift_Mailer
      *
      * @return int The number of successful recipients. Can be 0 which indicates failure
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
-    {
+    public function send(
+        Swift_Mime_SimpleMessage $message,
+        &$failedRecipients = null
+    ) {
         $failedRecipients = (array) $failedRecipients;
 
         // FIXME: to be removed in 7.0 (as transport must now start itself on send)

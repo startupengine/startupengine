@@ -14,7 +14,9 @@
  * @author Chris Corbyn
  * @author Fabien Potencier
  */
-class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_Plugins_Decorator_Replacements
+class Swift_Plugins_DecoratorPlugin implements
+    Swift_Events_SendListener,
+    Swift_Plugins_Decorator_Replacements
 {
     /** The replacement map */
     private $replacements;
@@ -81,13 +83,11 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
         $this->restoreMessage($message);
         $to = array_keys($message->getTo());
         $address = array_shift($to);
-        if ($replacements = $this->getReplacementsFor($address)) {
+        if (($replacements = $this->getReplacementsFor($address))) {
             $body = $message->getBody();
             $search = array_keys($replacements);
             $replace = array_values($replacements);
-            $bodyReplaced = str_replace(
-                $search, $replace, $body
-                );
+            $bodyReplaced = str_replace($search, $replace, $body);
             if ($body != $bodyReplaced) {
                 $this->originalBody = $body;
                 $message->setBody($bodyReplaced);
@@ -101,8 +101,12 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
                     foreach ($body as $key => $value) {
                         $count1 = 0;
                         $count2 = 0;
-                        $key = is_string($key) ? str_replace($search, $replace, $key, $count1) : $key;
-                        $value = is_string($value) ? str_replace($search, $replace, $value, $count2) : $value;
+                        $key = is_string($key)
+                            ? str_replace($search, $replace, $key, $count1)
+                            : $key;
+                        $value = is_string($value)
+                            ? str_replace($search, $replace, $value, $count2)
+                            : $value;
                         $bodyReplaced[$key] = $value;
 
                         if (!$count && ($count1 || $count2)) {
@@ -110,7 +114,12 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
                         }
                     }
                 } elseif (is_string($body)) {
-                    $bodyReplaced = str_replace($search, $replace, $body, $count);
+                    $bodyReplaced = str_replace(
+                        $search,
+                        $replace,
+                        $body,
+                        $count
+                    );
                 }
 
                 if ($count) {
@@ -124,9 +133,7 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
                 list($type) = sscanf($child->getContentType(), '%[^/]/%s');
                 if ('text' == $type) {
                     $body = $child->getBody();
-                    $bodyReplaced = str_replace(
-                        $search, $replace, $body
-                        );
+                    $bodyReplaced = str_replace($search, $replace, $body);
                     if ($body != $bodyReplaced) {
                         $child->setBody($bodyReplaced);
                         $this->originalChildBodies[$child->getId()] = $body;
@@ -153,7 +160,9 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
      */
     public function getReplacementsFor($address)
     {
-        if ($this->replacements instanceof Swift_Plugins_Decorator_Replacements) {
+        if (
+            $this->replacements instanceof Swift_Plugins_Decorator_Replacements
+        ) {
             return $this->replacements->getReplacementsFor($address);
         }
 
@@ -178,8 +187,15 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
             }
             if (!empty($this->originalHeaders)) {
                 foreach ($message->getHeaders()->getAll() as $header) {
-                    if (array_key_exists($header->getFieldName(), $this->originalHeaders)) {
-                        $header->setFieldBodyModel($this->originalHeaders[$header->getFieldName()]);
+                    if (
+                        array_key_exists(
+                            $header->getFieldName(),
+                            $this->originalHeaders
+                        )
+                    ) {
+                        $header->setFieldBodyModel(
+                            $this->originalHeaders[$header->getFieldName()]
+                        );
                     }
                 }
                 $this->originalHeaders = [];

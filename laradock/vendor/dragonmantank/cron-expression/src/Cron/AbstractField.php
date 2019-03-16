@@ -31,7 +31,6 @@ abstract class AbstractField implements FieldInterface
      */
     protected $rangeEnd;
 
-
     public function __construct()
     {
         $this->fullRange = range($this->rangeStart, $this->rangeEnd);
@@ -90,14 +89,11 @@ abstract class AbstractField implements FieldInterface
      */
     public function isInRange($dateValue, $value)
     {
-        $parts = array_map(function($value) {
-                $value = trim($value);
-                $value = $this->convertLiterals($value);
-                return $value;
-            },
-            explode('-', $value, 2)
-        );
-
+        $parts = array_map(function ($value) {
+            $value = trim($value);
+            $value = $this->convertLiterals($value);
+            return $value;
+        }, explode('-', $value, 2));
 
         return $dateValue >= $parts[0] && $dateValue <= $parts[1];
     }
@@ -131,11 +127,19 @@ abstract class AbstractField implements FieldInterface
         $rangeStart = $rangeChunks[0];
         $rangeEnd = isset($rangeChunks[1]) ? $rangeChunks[1] : $rangeStart;
 
-        if ($rangeStart < $this->rangeStart || $rangeStart > $this->rangeEnd || $rangeStart > $rangeEnd) {
+        if (
+            $rangeStart < $this->rangeStart ||
+            $rangeStart > $this->rangeEnd ||
+            $rangeStart > $rangeEnd
+        ) {
             throw new \OutOfRangeException('Invalid range start requested');
         }
 
-        if ($rangeEnd < $this->rangeStart || $rangeEnd > $this->rangeEnd || $rangeEnd < $rangeStart) {
+        if (
+            $rangeEnd < $this->rangeStart ||
+            $rangeEnd > $this->rangeEnd ||
+            $rangeEnd < $rangeStart
+        ) {
             throw new \OutOfRangeException('Invalid range end requested');
         }
 
@@ -166,20 +170,25 @@ abstract class AbstractField implements FieldInterface
             $ranges = explode(',', $expression);
             $values = [];
             foreach ($ranges as $range) {
-                $expanded = $this->getRangeForExpression($range, $this->rangeEnd);
+                $expanded = $this->getRangeForExpression(
+                    $range,
+                    $this->rangeEnd
+                );
                 $values = array_merge($values, $expanded);
             }
             return $values;
         }
 
-        if ($this->isRange($expression) || $this->isIncrementsOfRanges($expression)) {
+        if (
+            $this->isRange($expression) ||
+            $this->isIncrementsOfRanges($expression)
+        ) {
             if (!$this->isIncrementsOfRanges($expression)) {
-                list ($offset, $to) = explode('-', $expression);
+                list($offset, $to) = explode('-', $expression);
                 $offset = $this->convertLiterals($offset);
                 $to = $this->convertLiterals($to);
                 $stepSize = 1;
-            }
-            else {
+            } else {
                 $range = array_map('trim', explode('/', $expression, 2));
                 $stepSize = isset($range[1]) ? $range[1] : 0;
                 $range = $range[0];
@@ -189,15 +198,16 @@ abstract class AbstractField implements FieldInterface
             }
             $offset = $offset == '*' ? $this->rangeStart : $offset;
             if ($stepSize >= $this->rangeEnd) {
-                $values = [$this->fullRange[$stepSize % count($this->fullRange)]];
+                $values = [
+                    $this->fullRange[$stepSize % count($this->fullRange)]
+                ];
             } else {
                 for ($i = $offset; $i <= $to; $i += $stepSize) {
-                    $values[] = (int)$i;
+                    $values[] = (int) $i;
                 }
             }
             sort($values);
-        }
-        else {
+        } else {
             $values = array($expression);
         }
 
@@ -233,7 +243,8 @@ abstract class AbstractField implements FieldInterface
 
         if (strpos($value, '/') !== false) {
             list($range, $step) = explode('/', $value);
-            return $this->validate($range) && filter_var($step, FILTER_VALIDATE_INT);
+            return $this->validate($range) &&
+                filter_var($step, FILTER_VALIDATE_INT);
         }
 
         // Validate each chunk of a list individually

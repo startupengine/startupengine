@@ -24,85 +24,145 @@ class ServiceValueResolverTest extends TestCase
     public function testDoNotSupportWhenControllerDoNotExists()
     {
         $resolver = new ServiceValueResolver(new ServiceLocator([]));
-        $argument = new ArgumentMetadata('dummy', DummyService::class, false, false, null);
-        $request = $this->requestWithAttributes(['_controller' => 'my_controller']);
+        $argument = new ArgumentMetadata(
+            'dummy',
+            DummyService::class,
+            false,
+            false,
+            null
+        );
+        $request = $this->requestWithAttributes([
+            '_controller' => 'my_controller'
+        ]);
 
         $this->assertFalse($resolver->supports($request, $argument));
     }
 
     public function testExistingController()
     {
-        $resolver = new ServiceValueResolver(new ServiceLocator([
-            'App\\Controller\\Mine::method' => function () {
-                return new ServiceLocator([
-                    'dummy' => function () {
-                        return new DummyService();
-                    },
-                ]);
-            },
-        ]));
+        $resolver = new ServiceValueResolver(
+            new ServiceLocator([
+                'App\\Controller\\Mine::method' => function () {
+                    return new ServiceLocator([
+                        'dummy' => function () {
+                            return new DummyService();
+                        }
+                    ]);
+                }
+            ])
+        );
 
-        $request = $this->requestWithAttributes(['_controller' => 'App\\Controller\\Mine::method']);
-        $argument = new ArgumentMetadata('dummy', DummyService::class, false, false, null);
+        $request = $this->requestWithAttributes([
+            '_controller' => 'App\\Controller\\Mine::method'
+        ]);
+        $argument = new ArgumentMetadata(
+            'dummy',
+            DummyService::class,
+            false,
+            false,
+            null
+        );
 
         $this->assertTrue($resolver->supports($request, $argument));
-        $this->assertYieldEquals([new DummyService()], $resolver->resolve($request, $argument));
+        $this->assertYieldEquals(
+            [new DummyService()],
+            $resolver->resolve($request, $argument)
+        );
     }
 
     public function testExistingControllerWithATrailingBackSlash()
     {
-        $resolver = new ServiceValueResolver(new ServiceLocator([
-            'App\\Controller\\Mine::method' => function () {
-                return new ServiceLocator([
-                    'dummy' => function () {
-                        return new DummyService();
-                    },
-                ]);
-            },
-        ]));
+        $resolver = new ServiceValueResolver(
+            new ServiceLocator([
+                'App\\Controller\\Mine::method' => function () {
+                    return new ServiceLocator([
+                        'dummy' => function () {
+                            return new DummyService();
+                        }
+                    ]);
+                }
+            ])
+        );
 
-        $request = $this->requestWithAttributes(['_controller' => '\\App\\Controller\\Mine::method']);
-        $argument = new ArgumentMetadata('dummy', DummyService::class, false, false, null);
+        $request = $this->requestWithAttributes([
+            '_controller' => '\\App\\Controller\\Mine::method'
+        ]);
+        $argument = new ArgumentMetadata(
+            'dummy',
+            DummyService::class,
+            false,
+            false,
+            null
+        );
 
         $this->assertTrue($resolver->supports($request, $argument));
-        $this->assertYieldEquals([new DummyService()], $resolver->resolve($request, $argument));
+        $this->assertYieldEquals(
+            [new DummyService()],
+            $resolver->resolve($request, $argument)
+        );
     }
 
     public function testExistingControllerWithMethodNameStartUppercase()
     {
-        $resolver = new ServiceValueResolver(new ServiceLocator([
-            'App\\Controller\\Mine::method' => function () {
-                return new ServiceLocator([
-                    'dummy' => function () {
-                        return new DummyService();
-                    },
-                ]);
-            },
-        ]));
-        $request = $this->requestWithAttributes(['_controller' => 'App\\Controller\\Mine::Method']);
-        $argument = new ArgumentMetadata('dummy', DummyService::class, false, false, null);
+        $resolver = new ServiceValueResolver(
+            new ServiceLocator([
+                'App\\Controller\\Mine::method' => function () {
+                    return new ServiceLocator([
+                        'dummy' => function () {
+                            return new DummyService();
+                        }
+                    ]);
+                }
+            ])
+        );
+        $request = $this->requestWithAttributes([
+            '_controller' => 'App\\Controller\\Mine::Method'
+        ]);
+        $argument = new ArgumentMetadata(
+            'dummy',
+            DummyService::class,
+            false,
+            false,
+            null
+        );
 
         $this->assertTrue($resolver->supports($request, $argument));
-        $this->assertYieldEquals([new DummyService()], $resolver->resolve($request, $argument));
+        $this->assertYieldEquals(
+            [new DummyService()],
+            $resolver->resolve($request, $argument)
+        );
     }
 
     public function testControllerNameIsAnArray()
     {
-        $resolver = new ServiceValueResolver(new ServiceLocator([
-            'App\\Controller\\Mine::method' => function () {
-                return new ServiceLocator([
-                    'dummy' => function () {
-                        return new DummyService();
-                    },
-                ]);
-            },
-        ]));
+        $resolver = new ServiceValueResolver(
+            new ServiceLocator([
+                'App\\Controller\\Mine::method' => function () {
+                    return new ServiceLocator([
+                        'dummy' => function () {
+                            return new DummyService();
+                        }
+                    ]);
+                }
+            ])
+        );
 
-        $request = $this->requestWithAttributes(['_controller' => ['App\\Controller\\Mine', 'method']]);
-        $argument = new ArgumentMetadata('dummy', DummyService::class, false, false, null);
+        $request = $this->requestWithAttributes([
+            '_controller' => ['App\\Controller\\Mine', 'method']
+        ]);
+        $argument = new ArgumentMetadata(
+            'dummy',
+            DummyService::class,
+            false,
+            false,
+            null
+        );
 
         $this->assertTrue($resolver->supports($request, $argument));
-        $this->assertYieldEquals([new DummyService()], $resolver->resolve($request, $argument));
+        $this->assertYieldEquals(
+            [new DummyService()],
+            $resolver->resolve($request, $argument)
+        );
     }
 
     /**
@@ -112,16 +172,35 @@ class ServiceValueResolverTest extends TestCase
     public function testErrorIsTruncated()
     {
         $container = new ContainerBuilder();
-        $container->addCompilerPass(new RegisterControllerArgumentLocatorsPass());
+        $container->addCompilerPass(
+            new RegisterControllerArgumentLocatorsPass()
+        );
 
-        $container->register('argument_resolver.service', ServiceValueResolver::class)->addArgument(null)->setPublic(true);
-        $container->register(DummyController::class)->addTag('controller.service_arguments')->setPublic(true);
+        $container
+            ->register('argument_resolver.service', ServiceValueResolver::class)
+            ->addArgument(null)
+            ->setPublic(true);
+        $container
+            ->register(DummyController::class)
+            ->addTag('controller.service_arguments')
+            ->setPublic(true);
 
         $container->compile();
 
-        $request = $this->requestWithAttributes(['_controller' => [DummyController::class, 'index']]);
-        $argument = new ArgumentMetadata('dummy', DummyService::class, false, false, null);
-        $container->get('argument_resolver.service')->resolve($request, $argument)->current();
+        $request = $this->requestWithAttributes([
+            '_controller' => [DummyController::class, 'index']
+        ]);
+        $argument = new ArgumentMetadata(
+            'dummy',
+            DummyService::class,
+            false,
+            false,
+            null
+        );
+        $container
+            ->get('argument_resolver.service')
+            ->resolve($request, $argument)
+            ->current();
     }
 
     private function requestWithAttributes(array $attributes)

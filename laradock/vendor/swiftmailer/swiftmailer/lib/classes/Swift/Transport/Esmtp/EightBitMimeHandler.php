@@ -20,7 +20,8 @@
  *
  * @author Christian Schmidt
  */
-class Swift_Transport_Esmtp_EightBitMimeHandler implements Swift_Transport_EsmtpHandler
+class Swift_Transport_Esmtp_EightBitMimeHandler implements
+    Swift_Transport_EsmtpHandler
 {
     protected $encoding;
 
@@ -64,7 +65,7 @@ class Swift_Transport_Esmtp_EightBitMimeHandler implements Swift_Transport_Esmtp
      */
     public function getMailParams()
     {
-        return ['BODY='.$this->encoding];
+        return ['BODY=' . $this->encoding];
     }
 
     /**
@@ -78,8 +79,13 @@ class Swift_Transport_Esmtp_EightBitMimeHandler implements Swift_Transport_Esmtp
     /**
      * Not used.
      */
-    public function onCommand(Swift_Transport_SmtpAgent $agent, $command, $codes = [], &$failedRecipients = null, &$stop = false)
-    {
+    public function onCommand(
+        Swift_Transport_SmtpAgent $agent,
+        $command,
+        $codes = [],
+        &$failedRecipients = null,
+        &$stop = false
+    ) {
     }
 
     /**

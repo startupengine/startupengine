@@ -14,7 +14,8 @@
  *
  * @author Jan Flora <jf@penneo.com>
  */
-class Swift_Mime_ContentEncoder_NullContentEncoder implements Swift_Mime_ContentEncoder
+class Swift_Mime_ContentEncoder_NullContentEncoder implements
+    Swift_Mime_ContentEncoder
 {
     /**
      * The name of this encoding scheme (probably 7bit or 8bit).
@@ -42,8 +43,11 @@ class Swift_Mime_ContentEncoder_NullContentEncoder implements Swift_Mime_Content
      *
      * @return string
      */
-    public function encodeString($string, $firstLineOffset = 0, $maxLineLength = 0)
-    {
+    public function encodeString(
+        $string,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    ) {
         return $string;
     }
 
@@ -53,8 +57,12 @@ class Swift_Mime_ContentEncoder_NullContentEncoder implements Swift_Mime_Content
      * @param int $firstLineOffset ignored
      * @param int $maxLineLength   ignored
      */
-    public function encodeByteStream(Swift_OutputByteStream $os, Swift_InputByteStream $is, $firstLineOffset = 0, $maxLineLength = 0)
-    {
+    public function encodeByteStream(
+        Swift_OutputByteStream $os,
+        Swift_InputByteStream $is,
+        $firstLineOffset = 0,
+        $maxLineLength = 0
+    ) {
         while (false !== ($bytes = $os->read(8192))) {
             $is->write($bytes);
         }

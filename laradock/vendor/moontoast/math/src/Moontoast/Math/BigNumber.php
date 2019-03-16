@@ -268,7 +268,7 @@ class BigNumber
      */
     public function isEqualTo($number)
     {
-        return ($this->compareTo($number) == 0);
+        return $this->compareTo($number) == 0;
     }
 
     /**
@@ -280,7 +280,7 @@ class BigNumber
      */
     public function isGreaterThan($number)
     {
-        return ($this->compareTo($number) == 1);
+        return $this->compareTo($number) == 1;
     }
 
     /**
@@ -292,7 +292,7 @@ class BigNumber
      */
     public function isGreaterThanOrEqualTo($number)
     {
-        return ($this->compareTo($number) >= 0);
+        return $this->compareTo($number) >= 0;
     }
 
     /**
@@ -304,7 +304,7 @@ class BigNumber
      */
     public function isLessThan($number)
     {
-        return ($this->compareTo($number) == -1);
+        return $this->compareTo($number) == -1;
     }
 
     /**
@@ -316,7 +316,7 @@ class BigNumber
      */
     public function isLessThanOrEqualTo($number)
     {
-        return ($this->compareTo($number) <= 0);
+        return $this->compareTo($number) <= 0;
     }
 
     /**
@@ -326,7 +326,7 @@ class BigNumber
      */
     public function isNegative()
     {
-        return ($this->signum() == -1);
+        return $this->signum() == -1;
     }
 
     /**
@@ -336,7 +336,7 @@ class BigNumber
      */
     public function isPositive()
     {
-        return ($this->signum() == 1);
+        return $this->signum() == 1;
     }
 
     /**
@@ -356,10 +356,7 @@ class BigNumber
             throw new Exception\ArithmeticException('Division by zero');
         }
 
-        $this->numberValue = bcmod(
-            $this->numberValue,
-            $number
-        );
+        $this->numberValue = bcmod($this->numberValue, $number);
 
         return $this;
     }
@@ -470,11 +467,7 @@ class BigNumber
             $roundedDiff = round($diff);
         }
 
-        $this->numberValue = bcadd(
-            $floored,
-            $roundedDiff,
-            0
-        );
+        $this->numberValue = bcadd($floored, $roundedDiff, 0);
 
         return $this;
     }
@@ -503,11 +496,7 @@ class BigNumber
     public function setValue($number)
     {
         // Set the scale for the number to the scale value passed in
-        $number = bcadd(
-            $this->filterNumber($number),
-            '0',
-            $this->getScale()
-        );
+        $number = bcadd($this->filterNumber($number), '0', $this->getScale());
 
         $this->numberValue = $number;
 
@@ -522,10 +511,7 @@ class BigNumber
      */
     public function shiftLeft($bits)
     {
-        $this->numberValue = bcmul(
-            $this->numberValue,
-            bcpow('2', $bits)
-        );
+        $this->numberValue = bcmul($this->numberValue, bcpow('2', $bits));
 
         return $this;
     }
@@ -538,10 +524,7 @@ class BigNumber
      */
     public function shiftRight($bits)
     {
-        $this->numberValue = bcdiv(
-            $this->numberValue,
-            bcpow('2', $bits)
-        );
+        $this->numberValue = bcdiv($this->numberValue, bcpow('2', $bits));
 
         return $this;
     }
@@ -570,10 +553,7 @@ class BigNumber
      */
     public function sqrt()
     {
-        $this->numberValue = bcsqrt(
-            $this->numberValue,
-            $this->getScale()
-        );
+        $this->numberValue = bcsqrt($this->numberValue, $this->getScale());
 
         return $this;
     }
@@ -638,7 +618,9 @@ class BigNumber
     public static function convertFromBase10($number, $toBase)
     {
         if ($toBase < 2 || $toBase > 36) {
-            throw new \InvalidArgumentException("Invalid `to base' ({$toBase})");
+            throw new \InvalidArgumentException(
+                "Invalid `to base' ({$toBase})"
+            );
         }
 
         $bn = new self($number);
@@ -647,7 +629,10 @@ class BigNumber
         $outNumber = '';
         $returnDigitCount = 0;
 
-        while (bcdiv($number, bcpow($toBase, (string) $returnDigitCount, 0), 0) > ($toBase - 1)) {
+        while (
+            bcdiv($number, bcpow($toBase, (string) $returnDigitCount, 0), 0) >
+            $toBase - 1
+        ) {
             $returnDigitCount++;
         }
 
@@ -672,7 +657,9 @@ class BigNumber
     public static function convertToBase10($number, $fromBase)
     {
         if ($fromBase < 2 || $fromBase > 36) {
-            throw new \InvalidArgumentException("Invalid `from base' ({$fromBase})");
+            throw new \InvalidArgumentException(
+                "Invalid `from base' ({$fromBase})"
+            );
         }
 
         $number = (string) $number;

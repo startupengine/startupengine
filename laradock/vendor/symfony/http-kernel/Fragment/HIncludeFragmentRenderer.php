@@ -38,8 +38,12 @@ class HIncludeFragmentRenderer extends RoutableFragmentRenderer
      * @param string                      $globalDefaultTemplate The global default content (it can be a template name or the content)
      * @param string                      $charset
      */
-    public function __construct($templating = null, UriSigner $signer = null, string $globalDefaultTemplate = null, string $charset = 'utf-8')
-    {
+    public function __construct(
+        $templating = null,
+        UriSigner $signer = null,
+        string $globalDefaultTemplate = null,
+        string $charset = 'utf-8'
+    ) {
         $this->setTemplating($templating);
         $this->globalDefaultTemplate = $globalDefaultTemplate;
         $this->signer = $signer;
@@ -55,8 +59,14 @@ class HIncludeFragmentRenderer extends RoutableFragmentRenderer
      */
     public function setTemplating($templating)
     {
-        if (null !== $templating && !$templating instanceof EngineInterface && !$templating instanceof Environment) {
-            throw new \InvalidArgumentException('The hinclude rendering strategy needs an instance of Twig\Environment or Symfony\Component\Templating\EngineInterface');
+        if (
+            null !== $templating &&
+            !$templating instanceof EngineInterface &&
+            !$templating instanceof Environment
+        ) {
+            throw new \InvalidArgumentException(
+                'The hinclude rendering strategy needs an instance of Twig\Environment or Symfony\Component\Templating\EngineInterface'
+            );
         }
 
         $this->templating = $templating;
@@ -85,24 +95,40 @@ class HIncludeFragmentRenderer extends RoutableFragmentRenderer
     {
         if ($uri instanceof ControllerReference) {
             if (null === $this->signer) {
-                throw new \LogicException('You must use a proper URI when using the Hinclude rendering strategy or set a URL signer.');
+                throw new \LogicException(
+                    'You must use a proper URI when using the Hinclude rendering strategy or set a URL signer.'
+                );
             }
 
             // we need to sign the absolute URI, but want to return the path only.
-            $uri = substr($this->signer->sign($this->generateFragmentUri($uri, $request, true)), \strlen($request->getSchemeAndHttpHost()));
+            $uri = substr(
+                $this->signer->sign(
+                    $this->generateFragmentUri($uri, $request, true)
+                ),
+                \strlen($request->getSchemeAndHttpHost())
+            );
         }
 
         // We need to replace ampersands in the URI with the encoded form in order to return valid html/xml content.
         $uri = str_replace('&', '&amp;', $uri);
 
-        $template = isset($options['default']) ? $options['default'] : $this->globalDefaultTemplate;
-        if (null !== $this->templating && $template && $this->templateExists($template)) {
+        $template = isset($options['default'])
+            ? $options['default']
+            : $this->globalDefaultTemplate;
+        if (
+            null !== $this->templating &&
+            $template &&
+            $this->templateExists($template)
+        ) {
             $content = $this->templating->render($template);
         } else {
             $content = $template;
         }
 
-        $attributes = isset($options['attributes']) && \is_array($options['attributes']) ? $options['attributes'] : [];
+        $attributes =
+            isset($options['attributes']) && \is_array($options['attributes'])
+                ? $options['attributes']
+                : [];
         if (isset($options['id']) && $options['id']) {
             $attributes['id'] = $options['id'];
         }
@@ -118,7 +144,14 @@ class HIncludeFragmentRenderer extends RoutableFragmentRenderer
             }
         }
 
-        return new Response(sprintf('<hx:include src="%s"%s>%s</hx:include>', $uri, $renderedAttributes, $content));
+        return new Response(
+            sprintf(
+                '<hx:include src="%s"%s>%s</hx:include>',
+                $uri,
+                $renderedAttributes,
+                $content
+            )
+        );
     }
 
     private function templateExists(string $template): bool
@@ -132,7 +165,10 @@ class HIncludeFragmentRenderer extends RoutableFragmentRenderer
         }
 
         $loader = $this->templating->getLoader();
-        if ($loader instanceof ExistsLoaderInterface || method_exists($loader, 'exists')) {
+        if (
+            $loader instanceof ExistsLoaderInterface ||
+            method_exists($loader, 'exists')
+        ) {
             return $loader->exists($template);
         }
 

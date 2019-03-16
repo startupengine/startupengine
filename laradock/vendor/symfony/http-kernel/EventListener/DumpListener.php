@@ -29,8 +29,11 @@ class DumpListener implements EventSubscriberInterface
     private $dumper;
     private $connection;
 
-    public function __construct(ClonerInterface $cloner, DataDumperInterface $dumper, Connection $connection = null)
-    {
+    public function __construct(
+        ClonerInterface $cloner,
+        DataDumperInterface $dumper,
+        Connection $connection = null
+    ) {
         $this->cloner = $cloner;
         $this->dumper = $dumper;
         $this->connection = $connection;
@@ -42,7 +45,11 @@ class DumpListener implements EventSubscriberInterface
         $dumper = $this->dumper;
         $connection = $this->connection;
 
-        VarDumper::setHandler(static function ($var) use ($cloner, $dumper, $connection) {
+        VarDumper::setHandler(static function ($var) use (
+            $cloner,
+            $dumper,
+            $connection
+        ) {
             $data = $cloner->cloneVar($var);
 
             if (!$connection || !$connection->write($data)) {

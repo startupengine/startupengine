@@ -7,7 +7,10 @@ class Swift_Mime_Headers_PathHeaderTest extends \PHPUnit\Framework\TestCase
     public function testTypeIsPathHeader()
     {
         $header = $this->getHeader('Return-Path');
-        $this->assertEquals(Swift_Mime_Header::TYPE_PATH, $header->getFieldType());
+        $this->assertEquals(
+            Swift_Mime_Header::TYPE_PATH,
+            $header->getFieldType()
+        );
     }
 
     public function testSingleAddressCanBeSetAndFetched()
@@ -45,7 +48,10 @@ class Swift_Mime_Headers_PathHeaderTest extends \PHPUnit\Framework\TestCase
     {
         $header = $this->getHeader('Return-Path');
         $header->setAddress('chris@swïftmailer.org');
-        $this->assertEquals('<chris@xn--swftmailer-78a.org>', $header->getFieldBody());
+        $this->assertEquals(
+            '<chris@xn--swftmailer-78a.org>',
+            $header->getFieldBody()
+        );
     }
 
     /**
@@ -83,13 +89,18 @@ class Swift_Mime_Headers_PathHeaderTest extends \PHPUnit\Framework\TestCase
     {
         $header = $this->getHeader('Return-Path');
         $header->setAddress('chris@swiftmailer.org');
-        $this->assertEquals('Return-Path: <chris@swiftmailer.org>'."\r\n",
+        $this->assertEquals(
+            'Return-Path: <chris@swiftmailer.org>' . "\r\n",
             $header->toString()
-            );
+        );
     }
 
     private function getHeader($name)
     {
-        return new Swift_Mime_Headers_PathHeader($name, new EmailValidator(), new Swift_AddressEncoder_IdnAddressEncoder());
+        return new Swift_Mime_Headers_PathHeader(
+            $name,
+            new EmailValidator(),
+            new Swift_AddressEncoder_IdnAddressEncoder()
+        );
     }
 }

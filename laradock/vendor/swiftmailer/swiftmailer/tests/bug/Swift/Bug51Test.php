@@ -7,10 +7,10 @@ class Swift_Bug51Test extends \SwiftMailerTestCase
 
     protected function setUp()
     {
-        $this->attachmentFile = sys_get_temp_dir().'/attach.rand.bin';
+        $this->attachmentFile = sys_get_temp_dir() . '/attach.rand.bin';
         file_put_contents($this->attachmentFile, '');
 
-        $this->outputFile = sys_get_temp_dir().'/attach.out.bin';
+        $this->outputFile = sys_get_temp_dir() . '/attach.out.bin';
         file_put_contents($this->outputFile, '');
     }
 
@@ -25,7 +25,8 @@ class Swift_Bug51Test extends \SwiftMailerTestCase
         //Run 100 times with 10KB attachments
         for ($i = 0; $i < 10; ++$i) {
             $message = $this->createMessageWithRandomAttachment(
-                10000, $this->attachmentFile
+                10000,
+                $this->attachmentFile
             );
 
             file_put_contents($this->outputFile, '');
@@ -47,7 +48,8 @@ class Swift_Bug51Test extends \SwiftMailerTestCase
         //Run 100 times with 10KB attachments
         for ($i = 0; $i < 10; ++$i) {
             $message = $this->createMessageWithRandomAttachment(
-                10000, $this->attachmentFile
+                10000,
+                $this->attachmentFile
             );
 
             $emailSource = $message->toString();
@@ -70,13 +72,19 @@ class Swift_Bug51Test extends \SwiftMailerTestCase
         if (false === $attachmentDataEnd) {
             $attachmentBase64 = trim(substr($source, $attachmentDataStart));
         } else {
-            $attachmentBase64 = trim(substr(
-                $source, $attachmentDataStart,
-                $attachmentDataEnd - $attachmentDataStart
-            ));
+            $attachmentBase64 = trim(
+                substr(
+                    $source,
+                    $attachmentDataStart,
+                    $attachmentDataEnd - $attachmentDataStart
+                )
+            );
         }
 
-        $this->assertIdenticalBinary($attachmentData, base64_decode($attachmentBase64));
+        $this->assertIdenticalBinary(
+            $attachmentData,
+            base64_decode($attachmentBase64)
+        );
     }
 
     private function fillFileWithRandomBytes($byteCount, $file)
@@ -102,8 +110,7 @@ class Swift_Bug51Test extends \SwiftMailerTestCase
             ->setBody('test')
             ->setFrom('a@b.c')
             ->setTo('d@e.f')
-            ->attach(Swift_Attachment::fromPath($attachmentPath))
-            ;
+            ->attach(Swift_Attachment::fromPath($attachmentPath));
 
         return $message;
     }

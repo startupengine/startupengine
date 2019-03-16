@@ -64,7 +64,7 @@ abstract class Option implements IteratorAggregate
      */
     public static function fromArraysValue($array, $key)
     {
-        if ( ! isset($array[$key])) {
+        if (!isset($array[$key])) {
             return None::create();
         }
 
@@ -85,9 +85,16 @@ abstract class Option implements IteratorAggregate
      *
      * @return Option
      */
-    public static function fromReturn($callback, array $arguments = array(), $noneValue = null)
-    {
-        return new LazyOption(function() use ($callback, $arguments, $noneValue) {
+    public static function fromReturn(
+        $callback,
+        array $arguments = array(),
+        $noneValue = null
+    ) {
+        return new LazyOption(function () use (
+            $callback,
+            $arguments,
+            $noneValue
+        ) {
             $return = call_user_func_array($callback, $arguments);
 
             if ($return === $noneValue) {
@@ -115,7 +122,7 @@ abstract class Option implements IteratorAggregate
         if ($value instanceof Option) {
             return $value;
         } elseif ($value instanceof \Closure) {
-            return new LazyOption(function() use ($value, $noneValue) {
+            return new LazyOption(function () use ($value, $noneValue) {
                 $return = $value();
 
                 if ($return instanceof Option) {

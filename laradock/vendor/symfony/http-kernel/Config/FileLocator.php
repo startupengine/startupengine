@@ -29,8 +29,11 @@ class FileLocator extends BaseFileLocator
      * @param string|null     $path   The path the global resource directory
      * @param array           $paths  An array of paths where to look for resources
      */
-    public function __construct(KernelInterface $kernel, string $path = null, array $paths = [])
-    {
+    public function __construct(
+        KernelInterface $kernel,
+        string $path = null,
+        array $paths = []
+    ) {
         $this->kernel = $kernel;
         if (null !== $path) {
             $this->path = $path;

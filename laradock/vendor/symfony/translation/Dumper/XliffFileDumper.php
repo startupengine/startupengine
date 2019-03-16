@@ -24,8 +24,11 @@ class XliffFileDumper extends FileDumper
     /**
      * {@inheritdoc}
      */
-    public function formatCatalogue(MessageCatalogue $messages, $domain, array $options = [])
-    {
+    public function formatCatalogue(
+        MessageCatalogue $messages,
+        $domain,
+        array $options = []
+    ) {
         $xliffVersion = '1.2';
         if (\array_key_exists('xliff_version', $options)) {
             $xliffVersion = $options['xliff_version'];
@@ -38,13 +41,28 @@ class XliffFileDumper extends FileDumper
         }
 
         if ('1.2' === $xliffVersion) {
-            return $this->dumpXliff1($defaultLocale, $messages, $domain, $options);
+            return $this->dumpXliff1(
+                $defaultLocale,
+                $messages,
+                $domain,
+                $options
+            );
         }
         if ('2.0' === $xliffVersion) {
-            return $this->dumpXliff2($defaultLocale, $messages, $domain, $options);
+            return $this->dumpXliff2(
+                $defaultLocale,
+                $messages,
+                $domain,
+                $options
+            );
         }
 
-        throw new InvalidArgumentException(sprintf('No support implemented for dumping XLIFF version "%s".', $xliffVersion));
+        throw new InvalidArgumentException(
+            sprintf(
+                'No support implemented for dumping XLIFF version "%s".',
+                $xliffVersion
+            )
+        );
     }
 
     /**
@@ -55,8 +73,12 @@ class XliffFileDumper extends FileDumper
         return 'xlf';
     }
 
-    private function dumpXliff1($defaultLocale, MessageCatalogue $messages, $domain, array $options = [])
-    {
+    private function dumpXliff1(
+        $defaultLocale,
+        MessageCatalogue $messages,
+        $domain,
+        array $options = []
+    ) {
         $toolInfo = ['tool-id' => 'symfony', 'tool-name' => 'Symfony'];
         if (\array_key_exists('tool_info', $options)) {
             $toolInfo = array_merge($toolInfo, $options['tool_info']);
@@ -70,8 +92,14 @@ class XliffFileDumper extends FileDumper
         $xliff->setAttribute('xmlns', 'urn:oasis:names:tc:xliff:document:1.2');
 
         $xliffFile = $xliff->appendChild($dom->createElement('file'));
-        $xliffFile->setAttribute('source-language', str_replace('_', '-', $defaultLocale));
-        $xliffFile->setAttribute('target-language', str_replace('_', '-', $messages->getLocale()));
+        $xliffFile->setAttribute(
+            'source-language',
+            str_replace('_', '-', $defaultLocale)
+        );
+        $xliffFile->setAttribute(
+            'target-language',
+            str_replace('_', '-', $messages->getLocale())
+        );
         $xliffFile->setAttribute('datatype', 'plaintext');
         $xliffFile->setAttribute('original', 'file.ext');
 
@@ -85,14 +113,24 @@ class XliffFileDumper extends FileDumper
         foreach ($messages->all($domain) as $source => $target) {
             $translation = $dom->createElement('trans-unit');
 
-            $translation->setAttribute('id', strtr(substr(base64_encode(hash('sha256', $source, true)), 0, 7), '/+', '._'));
+            $translation->setAttribute(
+                'id',
+                strtr(
+                    substr(base64_encode(hash('sha256', $source, true)), 0, 7),
+                    '/+',
+                    '._'
+                )
+            );
             $translation->setAttribute('resname', $source);
 
             $s = $translation->appendChild($dom->createElement('source'));
             $s->appendChild($dom->createTextNode($source));
 
             // Does the target contain characters requiring a CDATA section?
-            $text = 1 === preg_match('/[&<>]/', $target) ? $dom->createCDATASection($target) : $dom->createTextNode($target);
+            $text =
+                1 === preg_match('/[&<>]/', $target)
+                    ? $dom->createCDATASection($target)
+                    : $dom->createTextNode($target);
 
             $targetElement = $dom->createElement('target');
             $metadata = $messages->getMetadata($source, $domain);
@@ -129,8 +167,12 @@ class XliffFileDumper extends FileDumper
         return $dom->saveXML();
     }
 
-    private function dumpXliff2($defaultLocale, MessageCatalogue $messages, $domain, array $options = [])
-    {
+    private function dumpXliff2(
+        $defaultLocale,
+        MessageCatalogue $messages,
+        $domain,
+        array $options = []
+    ) {
         $dom = new \DOMDocument('1.0', 'utf-8');
         $dom->formatOutput = true;
 
@@ -138,18 +180,42 @@ class XliffFileDumper extends FileDumper
         $xliff->setAttribute('xmlns', 'urn:oasis:names:tc:xliff:document:2.0');
         $xliff->setAttribute('version', '2.0');
         $xliff->setAttribute('srcLang', str_replace('_', '-', $defaultLocale));
-        $xliff->setAttribute('trgLang', str_replace('_', '-', $messages->getLocale()));
+        $xliff->setAttribute(
+            'trgLang',
+            str_replace('_', '-', $messages->getLocale())
+        );
 
         $xliffFile = $xliff->appendChild($dom->createElement('file'));
-        if (MessageCatalogue::INTL_DOMAIN_SUFFIX === substr($domain, -($suffixLength = \strlen(MessageCatalogue::INTL_DOMAIN_SUFFIX)))) {
-            $xliffFile->setAttribute('id', substr($domain, 0, -$suffixLength).'.'.$messages->getLocale());
+        if (
+            MessageCatalogue::INTL_DOMAIN_SUFFIX ===
+            substr(
+                $domain,
+                -($suffixLength = \strlen(MessageCatalogue::INTL_DOMAIN_SUFFIX))
+            )
+        ) {
+            $xliffFile->setAttribute(
+                'id',
+                substr($domain, 0, -$suffixLength) .
+                    '.' .
+                    $messages->getLocale()
+            );
         } else {
-            $xliffFile->setAttribute('id', $domain.'.'.$messages->getLocale());
+            $xliffFile->setAttribute(
+                'id',
+                $domain . '.' . $messages->getLocale()
+            );
         }
 
         foreach ($messages->all($domain) as $source => $target) {
             $translation = $dom->createElement('unit');
-            $translation->setAttribute('id', strtr(substr(base64_encode(hash('sha256', $source, true)), 0, 7), '/+', '._'));
+            $translation->setAttribute(
+                'id',
+                strtr(
+                    substr(base64_encode(hash('sha256', $source, true)), 0, 7),
+                    '/+',
+                    '._'
+                )
+            );
             $name = $source;
             if (\strlen($source) > 80) {
                 $name = substr(md5($source), -7);
@@ -162,7 +228,11 @@ class XliffFileDumper extends FileDumper
                 $notesElement = $dom->createElement('notes');
                 foreach ($metadata['notes'] as $note) {
                     $n = $dom->createElement('note');
-                    $n->appendChild($dom->createTextNode(isset($note['content']) ? $note['content'] : ''));
+                    $n->appendChild(
+                        $dom->createTextNode(
+                            isset($note['content']) ? $note['content'] : ''
+                        )
+                    );
                     unset($note['content']);
 
                     foreach ($note as $name => $value) {
@@ -173,13 +243,18 @@ class XliffFileDumper extends FileDumper
                 $translation->appendChild($notesElement);
             }
 
-            $segment = $translation->appendChild($dom->createElement('segment'));
+            $segment = $translation->appendChild(
+                $dom->createElement('segment')
+            );
 
             $s = $segment->appendChild($dom->createElement('source'));
             $s->appendChild($dom->createTextNode($source));
 
             // Does the target contain characters requiring a CDATA section?
-            $text = 1 === preg_match('/[&<>]/', $target) ? $dom->createCDATASection($target) : $dom->createTextNode($target);
+            $text =
+                1 === preg_match('/[&<>]/', $target)
+                    ? $dom->createCDATASection($target)
+                    : $dom->createTextNode($target);
 
             $targetElement = $dom->createElement('target');
             if ($this->hasMetadataArrayInfo('target-attributes', $metadata)) {
@@ -204,6 +279,9 @@ class XliffFileDumper extends FileDumper
      */
     private function hasMetadataArrayInfo($key, $metadata = null)
     {
-        return null !== $metadata && \array_key_exists($key, $metadata) && ($metadata[$key] instanceof \Traversable || \is_array($metadata[$key]));
+        return null !== $metadata &&
+            \array_key_exists($key, $metadata) &&
+            ($metadata[$key] instanceof \Traversable ||
+                \is_array($metadata[$key]));
     }
 }

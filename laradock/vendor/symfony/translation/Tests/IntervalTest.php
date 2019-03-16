@@ -46,7 +46,7 @@ class IntervalTest extends TestCase
             [false, 1, ']1,2['],
             [false, 2, ']1,2['],
             [true, log(0), '[-Inf,2['],
-            [true, -log(0), '[-2,+Inf]'],
+            [true, -log(0), '[-2,+Inf]']
         ];
     }
 }

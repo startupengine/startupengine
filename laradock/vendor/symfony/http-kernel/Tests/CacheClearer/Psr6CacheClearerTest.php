@@ -20,9 +20,7 @@ class Psr6CacheClearerTest extends TestCase
     public function testClearPoolsInjectedInConstructor()
     {
         $pool = $this->getMockBuilder(CacheItemPoolInterface::class)->getMock();
-        $pool
-            ->expects($this->once())
-            ->method('clear');
+        $pool->expects($this->once())->method('clear');
 
         (new Psr6CacheClearer(['pool' => $pool]))->clear('');
     }
@@ -30,9 +28,7 @@ class Psr6CacheClearerTest extends TestCase
     public function testClearPool()
     {
         $pool = $this->getMockBuilder(CacheItemPoolInterface::class)->getMock();
-        $pool
-            ->expects($this->once())
-            ->method('clear');
+        $pool->expects($this->once())->method('clear');
 
         (new Psr6CacheClearer(['pool' => $pool]))->clearPool('pool');
     }

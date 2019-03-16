@@ -73,8 +73,10 @@ class Swift_MemorySpool implements Swift_Spool
      *
      * @return int The number of sent emails
      */
-    public function flushQueue(Swift_Transport $transport, &$failedRecipients = null)
-    {
+    public function flushQueue(
+        Swift_Transport $transport,
+        &$failedRecipients = null
+    ) {
         if (!$this->messages) {
             return 0;
         }
@@ -87,7 +89,7 @@ class Swift_MemorySpool implements Swift_Spool
         $retries = $this->flushRetries;
         while ($retries--) {
             try {
-                while ($message = array_pop($this->messages)) {
+                while (($message = array_pop($this->messages))) {
                     $count += $transport->send($message, $failedRecipients);
                 }
             } catch (Swift_TransportException $exception) {

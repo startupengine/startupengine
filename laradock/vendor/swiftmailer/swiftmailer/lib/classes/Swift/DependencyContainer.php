@@ -83,8 +83,8 @@ class Swift_DependencyContainer
      */
     public function has($itemName)
     {
-        return array_key_exists($itemName, $this->store)
-            && isset($this->store[$itemName]['lookupType']);
+        return array_key_exists($itemName, $this->store) &&
+            isset($this->store[$itemName]['lookupType']);
     }
 
     /**
@@ -102,8 +102,10 @@ class Swift_DependencyContainer
     {
         if (!$this->has($itemName)) {
             throw new Swift_DependencyException(
-                'Cannot lookup dependency "'.$itemName.'" since it is not registered.'
-                );
+                'Cannot lookup dependency "' .
+                    $itemName .
+                    '" since it is not registered.'
+            );
         }
 
         switch ($this->store[$itemName]['lookupType']) {
@@ -328,7 +330,7 @@ class Swift_DependencyContainer
         if ($reflector->getConstructor()) {
             return $reflector->newInstanceArgs(
                 $this->createDependenciesFor($itemName)
-                );
+            );
         }
 
         return $reflector->newInstance();
@@ -338,7 +340,9 @@ class Swift_DependencyContainer
     private function createSharedInstance($itemName)
     {
         if (!isset($this->store[$itemName]['instance'])) {
-            $this->store[$itemName]['instance'] = $this->createNewInstance($itemName);
+            $this->store[$itemName]['instance'] = $this->createNewInstance(
+                $itemName
+            );
         }
 
         return $this->store[$itemName]['instance'];
@@ -350,7 +354,7 @@ class Swift_DependencyContainer
         if (!isset($this->endPoint)) {
             throw new BadMethodCallException(
                 'Component must first be registered by calling register()'
-                );
+            );
         }
 
         return $this->endPoint;
@@ -363,7 +367,9 @@ class Swift_DependencyContainer
         foreach ($args as $argDefinition) {
             switch ($argDefinition['type']) {
                 case 'lookup':
-                    $resolved[] = $this->lookupRecursive($argDefinition['item']);
+                    $resolved[] = $this->lookupRecursive(
+                        $argDefinition['item']
+                    );
                     break;
                 case 'value':
                     $resolved[] = $argDefinition['item'];

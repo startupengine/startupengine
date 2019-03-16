@@ -28,10 +28,16 @@ interface TranslatorInterface
     /**
      * Translates a CSS selector to an XPath expression.
      */
-    public function cssToXPath(string $cssExpr, string $prefix = 'descendant-or-self::'): string;
+    public function cssToXPath(
+        string $cssExpr,
+        string $prefix = 'descendant-or-self::'
+    ): string;
 
     /**
      * Translates a parsed selector node to an XPath expression.
      */
-    public function selectorToXPath(SelectorNode $selector, string $prefix = 'descendant-or-self::'): string;
+    public function selectorToXPath(
+        SelectorNode $selector,
+        string $prefix = 'descendant-or-self::'
+    ): string;
 }

@@ -54,8 +54,10 @@ class Swift_Events_SendEvent extends Swift_Events_EventObject
     /**
      * Create a new SendEvent for $source and $message.
      */
-    public function __construct(Swift_Transport $source, Swift_Mime_SimpleMessage $message)
-    {
+    public function __construct(
+        Swift_Transport $source,
+        Swift_Mime_SimpleMessage $message
+    ) {
         parent::__construct($source);
         $this->message = $message;
         $this->result = self::RESULT_PENDING;

@@ -123,7 +123,8 @@ class FlashBag implements FlashBagInterface
      */
     public function has($type)
     {
-        return \array_key_exists($type, $this->flashes) && $this->flashes[$type];
+        return \array_key_exists($type, $this->flashes) &&
+            $this->flashes[$type];
     }
 
     /**

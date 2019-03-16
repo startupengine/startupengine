@@ -19,7 +19,11 @@ class TranslationDataCollectorTest extends TestCase
 {
     protected function setUp()
     {
-        if (!class_exists('Symfony\Component\HttpKernel\DataCollector\DataCollector')) {
+        if (
+            !class_exists(
+                'Symfony\Component\HttpKernel\DataCollector\DataCollector'
+            )
+        ) {
             $this->markTestSkipped('The "DataCollector" is not available');
         }
     }
@@ -27,7 +31,10 @@ class TranslationDataCollectorTest extends TestCase
     public function testCollectEmptyMessages()
     {
         $translator = $this->getTranslator();
-        $translator->expects($this->any())->method('getCollectedMessages')->will($this->returnValue([]));
+        $translator
+            ->expects($this->any())
+            ->method('getCollectedMessages')
+            ->will($this->returnValue([]));
 
         $dataCollector = new TranslationDataCollector($translator);
         $dataCollector->lateCollect();
@@ -48,7 +55,7 @@ class TranslationDataCollectorTest extends TestCase
                 'domain' => 'messages',
                 'state' => DataCollectorTranslator::MESSAGE_DEFINED,
                 'parameters' => [],
-                'transChoiceNumber' => null,
+                'transChoiceNumber' => null
             ],
             [
                 'id' => 'bar',
@@ -57,7 +64,7 @@ class TranslationDataCollectorTest extends TestCase
                 'domain' => 'messages',
                 'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
                 'parameters' => [],
-                'transChoiceNumber' => null,
+                'transChoiceNumber' => null
             ],
             [
                 'id' => 'choice',
@@ -66,7 +73,7 @@ class TranslationDataCollectorTest extends TestCase
                 'domain' => 'messages',
                 'state' => DataCollectorTranslator::MESSAGE_MISSING,
                 'parameters' => ['%count%' => 3],
-                'transChoiceNumber' => 3,
+                'transChoiceNumber' => 3
             ],
             [
                 'id' => 'choice',
@@ -75,7 +82,7 @@ class TranslationDataCollectorTest extends TestCase
                 'domain' => 'messages',
                 'state' => DataCollectorTranslator::MESSAGE_MISSING,
                 'parameters' => ['%count%' => 3],
-                'transChoiceNumber' => 3,
+                'transChoiceNumber' => 3
             ],
             [
                 'id' => 'choice',
@@ -84,8 +91,8 @@ class TranslationDataCollectorTest extends TestCase
                 'domain' => 'messages',
                 'state' => DataCollectorTranslator::MESSAGE_MISSING,
                 'parameters' => ['%count%' => 4, '%foo%' => 'bar'],
-                'transChoiceNumber' => 4,
-            ],
+                'transChoiceNumber' => 4
+            ]
         ];
         $expectedMessages = [
             [
@@ -96,7 +103,7 @@ class TranslationDataCollectorTest extends TestCase
                 'state' => DataCollectorTranslator::MESSAGE_DEFINED,
                 'count' => 1,
                 'parameters' => [],
-                'transChoiceNumber' => null,
+                'transChoiceNumber' => null
             ],
             [
                 'id' => 'bar',
@@ -106,7 +113,7 @@ class TranslationDataCollectorTest extends TestCase
                 'state' => DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK,
                 'count' => 1,
                 'parameters' => [],
-                'transChoiceNumber' => null,
+                'transChoiceNumber' => null
             ],
             [
                 'id' => 'choice',
@@ -118,14 +125,17 @@ class TranslationDataCollectorTest extends TestCase
                 'parameters' => [
                     ['%count%' => 3],
                     ['%count%' => 3],
-                    ['%count%' => 4, '%foo%' => 'bar'],
+                    ['%count%' => 4, '%foo%' => 'bar']
                 ],
-                'transChoiceNumber' => 3,
-            ],
+                'transChoiceNumber' => 3
+            ]
         ];
 
         $translator = $this->getTranslator();
-        $translator->expects($this->any())->method('getCollectedMessages')->will($this->returnValue($collectedMessages));
+        $translator
+            ->expects($this->any())
+            ->method('getCollectedMessages')
+            ->will($this->returnValue($collectedMessages));
 
         $dataCollector = new TranslationDataCollector($translator);
         $dataCollector->lateCollect();
@@ -134,16 +144,19 @@ class TranslationDataCollectorTest extends TestCase
         $this->assertEquals(1, $dataCollector->getCountFallbacks());
         $this->assertEquals(1, $dataCollector->getCountDefines());
 
-        $this->assertEquals($expectedMessages, array_values($dataCollector->getMessages()->getValue(true)));
+        $this->assertEquals(
+            $expectedMessages,
+            array_values($dataCollector->getMessages()->getValue(true))
+        );
     }
 
     private function getTranslator()
     {
-        $translator = $this
-            ->getMockBuilder('Symfony\Component\Translation\DataCollectorTranslator')
+        $translator = $this->getMockBuilder(
+            'Symfony\Component\Translation\DataCollectorTranslator'
+        )
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
 
         return $translator;
     }

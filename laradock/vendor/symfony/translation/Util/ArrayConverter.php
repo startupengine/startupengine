@@ -38,7 +38,10 @@ class ArrayConverter
         $tree = [];
 
         foreach ($messages as $id => $value) {
-            $referenceToElement = &self::getElementByPath($tree, explode('.', $id));
+            $referenceToElement = self::getElementByPath(
+                $tree,
+                explode('.', $id)
+            );
 
             $referenceToElement = $value;
 
@@ -90,9 +93,9 @@ class ArrayConverter
 
         foreach ($node as $id => $value) {
             if (\is_string($value)) {
-                $tree[$prefix.$id] = $value;
+                $tree[$prefix . $id] = $value;
             } else {
-                self::cancelExpand($tree, $prefix.$id, $value);
+                self::cancelExpand($tree, $prefix . $id, $value);
             }
         }
     }

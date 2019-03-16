@@ -21,13 +21,16 @@ use Symfony\Component\Stopwatch\Stopwatch;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TimeDataCollector extends DataCollector implements LateDataCollectorInterface
+class TimeDataCollector extends DataCollector implements
+    LateDataCollectorInterface
 {
     protected $kernel;
     protected $stopwatch;
 
-    public function __construct(KernelInterface $kernel = null, Stopwatch $stopwatch = null)
-    {
+    public function __construct(
+        KernelInterface $kernel = null,
+        Stopwatch $stopwatch = null
+    ) {
         $this->kernel = $kernel;
         $this->stopwatch = $stopwatch;
     }
@@ -35,8 +38,11 @@ class TimeDataCollector extends DataCollector implements LateDataCollectorInterf
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         if (null !== $this->kernel) {
             $startTime = $this->kernel->getStartTime();
         } else {
@@ -46,7 +52,7 @@ class TimeDataCollector extends DataCollector implements LateDataCollectorInterf
         $this->data = [
             'token' => $response->headers->get('X-Debug-Token'),
             'start_time' => $startTime * 1000,
-            'events' => [],
+            'events' => []
         ];
     }
 
@@ -68,7 +74,9 @@ class TimeDataCollector extends DataCollector implements LateDataCollectorInterf
     public function lateCollect()
     {
         if (null !== $this->stopwatch && isset($this->data['token'])) {
-            $this->setEvents($this->stopwatch->getSectionEvents($this->data['token']));
+            $this->setEvents(
+                $this->stopwatch->getSectionEvents($this->data['token'])
+            );
         }
         unset($this->data['token']);
     }
@@ -110,7 +118,9 @@ class TimeDataCollector extends DataCollector implements LateDataCollectorInterf
 
         $lastEvent = $this->data['events']['__section__'];
 
-        return $lastEvent->getOrigin() + $lastEvent->getDuration() - $this->getStartTime();
+        return $lastEvent->getOrigin() +
+            $lastEvent->getDuration() -
+            $this->getStartTime();
     }
 
     /**
@@ -126,7 +136,8 @@ class TimeDataCollector extends DataCollector implements LateDataCollectorInterf
             return 0;
         }
 
-        return $this->data['events']['__section__']->getOrigin() - $this->getStartTime();
+        return $this->data['events']['__section__']->getOrigin() -
+            $this->getStartTime();
     }
 
     /**

@@ -36,8 +36,11 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      * @param AttributeBagInterface   $attributes An AttributeBagInterface instance, (defaults null for default AttributeBag)
      * @param FlashBagInterface       $flashes    A FlashBagInterface instance (defaults null for default FlashBag)
      */
-    public function __construct(SessionStorageInterface $storage = null, AttributeBagInterface $attributes = null, FlashBagInterface $flashes = null)
-    {
+    public function __construct(
+        SessionStorageInterface $storage = null,
+        AttributeBagInterface $attributes = null,
+        FlashBagInterface $flashes = null
+    ) {
         $this->storage = $storage ?: new NativeSessionStorage();
 
         $attributes = $attributes ?: new AttributeBag();
@@ -245,7 +248,9 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
      */
     public function registerBag(SessionBagInterface $bag)
     {
-        $this->storage->registerBag(new SessionBagProxy($bag, $this->data, $this->usageIndex));
+        $this->storage->registerBag(
+            new SessionBagProxy($bag, $this->data, $this->usageIndex)
+        );
     }
 
     /**

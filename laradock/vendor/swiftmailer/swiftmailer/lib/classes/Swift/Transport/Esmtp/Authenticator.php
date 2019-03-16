@@ -33,5 +33,9 @@ interface Swift_Transport_Esmtp_Authenticator
      *
      * @throws Swift_TransportException Allows the message to bubble up when authentication was not successful
      */
-    public function authenticate(Swift_Transport_SmtpAgent $agent, $username, $password);
+    public function authenticate(
+        Swift_Transport_SmtpAgent $agent,
+        $username,
+        $password
+    );
 }

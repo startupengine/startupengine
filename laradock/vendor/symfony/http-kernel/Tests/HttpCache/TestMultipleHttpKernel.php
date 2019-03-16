@@ -19,7 +19,9 @@ use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class TestMultipleHttpKernel extends HttpKernel implements ControllerResolverInterface, ArgumentResolverInterface
+class TestMultipleHttpKernel extends HttpKernel implements
+    ControllerResolverInterface,
+    ArgumentResolverInterface
 {
     protected $bodies = [];
     protected $statuses = [];
@@ -43,8 +45,11 @@ class TestMultipleHttpKernel extends HttpKernel implements ControllerResolverInt
         return $this->backendRequest;
     }
 
-    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = false)
-    {
+    public function handle(
+        Request $request,
+        $type = HttpKernelInterface::MASTER_REQUEST,
+        $catch = false
+    ) {
         $this->backendRequest = $request;
 
         return parent::handle($request, $type, $catch);
@@ -64,7 +69,11 @@ class TestMultipleHttpKernel extends HttpKernel implements ControllerResolverInt
     {
         $this->called = true;
 
-        $response = new Response(array_shift($this->bodies), array_shift($this->statuses), array_shift($this->headers));
+        $response = new Response(
+            array_shift($this->bodies),
+            array_shift($this->statuses),
+            array_shift($this->headers)
+        );
 
         return $response;
     }

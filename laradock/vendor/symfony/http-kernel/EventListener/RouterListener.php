@@ -57,14 +57,30 @@ class RouterListener implements EventSubscriberInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($matcher, RequestStack $requestStack, RequestContext $context = null, LoggerInterface $logger = null, string $projectDir = null, bool $debug = true)
-    {
-        if (!$matcher instanceof UrlMatcherInterface && !$matcher instanceof RequestMatcherInterface) {
-            throw new \InvalidArgumentException('Matcher must either implement UrlMatcherInterface or RequestMatcherInterface.');
+    public function __construct(
+        $matcher,
+        RequestStack $requestStack,
+        RequestContext $context = null,
+        LoggerInterface $logger = null,
+        string $projectDir = null,
+        bool $debug = true
+    ) {
+        if (
+            !$matcher instanceof UrlMatcherInterface &&
+            !$matcher instanceof RequestMatcherInterface
+        ) {
+            throw new \InvalidArgumentException(
+                'Matcher must either implement UrlMatcherInterface or RequestMatcherInterface.'
+            );
         }
 
-        if (null === $context && !$matcher instanceof RequestContextAwareInterface) {
-            throw new \InvalidArgumentException('You must either pass a RequestContext or the matcher must implement RequestContextAwareInterface.');
+        if (
+            null === $context &&
+            !$matcher instanceof RequestContextAwareInterface
+        ) {
+            throw new \InvalidArgumentException(
+                'You must either pass a RequestContext or the matcher must implement RequestContextAwareInterface.'
+            );
         }
 
         $this->matcher = $matcher;
@@ -81,7 +97,11 @@ class RouterListener implements EventSubscriberInterface
             try {
                 $this->context->fromRequest($request);
             } catch (\UnexpectedValueException $e) {
-                throw new BadRequestHttpException($e->getMessage(), $e, $e->getCode());
+                throw new BadRequestHttpException(
+                    $e->getMessage(),
+                    $e,
+                    $e->getCode()
+                );
             }
         }
     }
@@ -119,10 +139,12 @@ class RouterListener implements EventSubscriberInterface
 
             if (null !== $this->logger) {
                 $this->logger->info('Matched route "{route}".', [
-                    'route' => isset($parameters['_route']) ? $parameters['_route'] : 'n/a',
+                    'route' => isset($parameters['_route'])
+                        ? $parameters['_route']
+                        : 'n/a',
                     'route_parameters' => $parameters,
                     'request_uri' => $request->getUri(),
-                    'method' => $request->getMethod(),
+                    'method' => $request->getMethod()
                 ]);
             }
 
@@ -130,23 +152,39 @@ class RouterListener implements EventSubscriberInterface
             unset($parameters['_route'], $parameters['_controller']);
             $request->attributes->set('_route_params', $parameters);
         } catch (ResourceNotFoundException $e) {
-            $message = sprintf('No route found for "%s %s"', $request->getMethod(), $request->getPathInfo());
+            $message = sprintf(
+                'No route found for "%s %s"',
+                $request->getMethod(),
+                $request->getPathInfo()
+            );
 
-            if ($referer = $request->headers->get('referer')) {
+            if (($referer = $request->headers->get('referer'))) {
                 $message .= sprintf(' (from "%s")', $referer);
             }
 
             throw new NotFoundHttpException($message, $e);
         } catch (MethodNotAllowedException $e) {
-            $message = sprintf('No route found for "%s %s": Method Not Allowed (Allow: %s)', $request->getMethod(), $request->getPathInfo(), implode(', ', $e->getAllowedMethods()));
+            $message = sprintf(
+                'No route found for "%s %s": Method Not Allowed (Allow: %s)',
+                $request->getMethod(),
+                $request->getPathInfo(),
+                implode(', ', $e->getAllowedMethods())
+            );
 
-            throw new MethodNotAllowedHttpException($e->getAllowedMethods(), $message, $e);
+            throw new MethodNotAllowedHttpException(
+                $e->getAllowedMethods(),
+                $message,
+                $e
+            );
         }
     }
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        if (!$this->debug || !($e = $event->getException()) instanceof NotFoundHttpException) {
+        if (
+            !$this->debug ||
+            !($e = $event->getException()) instanceof NotFoundHttpException
+        ) {
             return;
         }
 
@@ -160,18 +198,18 @@ class RouterListener implements EventSubscriberInterface
         return [
             KernelEvents::REQUEST => [['onKernelRequest', 32]],
             KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]],
-            KernelEvents::EXCEPTION => ['onKernelException', -64],
+            KernelEvents::EXCEPTION => ['onKernelException', -64]
         ];
     }
 
     private function createWelcomeResponse()
     {
         $version = Kernel::VERSION;
-        $baseDir = realpath($this->projectDir).\DIRECTORY_SEPARATOR;
+        $baseDir = realpath($this->projectDir) . \DIRECTORY_SEPARATOR;
         $docVersion = substr(Kernel::VERSION, 0, 3);
 
         ob_start();
-        include __DIR__.'/../Resources/welcome.html.php';
+        include __DIR__ . '/../Resources/welcome.html.php';
 
         return new Response(ob_get_clean(), Response::HTTP_NOT_FOUND);
     }

@@ -13,7 +13,9 @@
  *
  * @author     Chris Corbyn
  */
-class Swift_ByteStream_ArrayByteStream implements Swift_InputByteStream, Swift_OutputByteStream
+class Swift_ByteStream_ArrayByteStream implements
+    Swift_InputByteStream,
+    Swift_OutputByteStream
 {
     /**
      * The internal stack of bytes.

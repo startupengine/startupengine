@@ -51,7 +51,11 @@ class ResponseHeaderBag extends HeaderBag
     {
         $headers = [];
         foreach ($this->all() as $name => $value) {
-            $headers[isset($this->headerNames[$name]) ? $this->headerNames[$name] : $name] = $value;
+            $headers[
+                isset($this->headerNames[$name])
+                    ? $this->headerNames[$name]
+                    : $name
+            ] = $value;
         }
 
         return $headers;
@@ -122,7 +126,13 @@ class ResponseHeaderBag extends HeaderBag
         parent::set($key, $values, $replace);
 
         // ensure the cache-control header has sensible defaults
-        if (\in_array($uniqueKey, ['cache-control', 'etag', 'last-modified', 'expires'], true)) {
+        if (
+            \in_array(
+                $uniqueKey,
+                ['cache-control', 'etag', 'last-modified', 'expires'],
+                true
+            )
+        ) {
             $computed = $this->computeCacheControlValue();
             $this->headers['cache-control'] = [$computed];
             $this->headerNames['cache-control'] = 'Cache-Control';
@@ -168,12 +178,16 @@ class ResponseHeaderBag extends HeaderBag
      */
     public function getCacheControlDirective($key)
     {
-        return \array_key_exists($key, $this->computedCacheControl) ? $this->computedCacheControl[$key] : null;
+        return \array_key_exists($key, $this->computedCacheControl)
+            ? $this->computedCacheControl[$key]
+            : null;
     }
 
     public function setCookie(Cookie $cookie)
     {
-        $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
+        $this->cookies[$cookie->getDomain()][$cookie->getPath()][
+            $cookie->getName()
+        ] = $cookie;
         $this->headerNames['set-cookie'] = 'Set-Cookie';
     }
 
@@ -217,7 +231,13 @@ class ResponseHeaderBag extends HeaderBag
     public function getCookies($format = self::COOKIES_FLAT)
     {
         if (!\in_array($format, [self::COOKIES_FLAT, self::COOKIES_ARRAY])) {
-            throw new \InvalidArgumentException(sprintf('Format "%s" invalid (%s).', $format, implode(', ', [self::COOKIES_FLAT, self::COOKIES_ARRAY])));
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Format "%s" invalid (%s).',
+                    $format,
+                    implode(', ', [self::COOKIES_FLAT, self::COOKIES_ARRAY])
+                )
+            );
         }
 
         if (self::COOKIES_ARRAY === $format) {
@@ -245,17 +265,41 @@ class ResponseHeaderBag extends HeaderBag
      * @param bool   $secure
      * @param bool   $httpOnly
      */
-    public function clearCookie($name, $path = '/', $domain = null, $secure = false, $httpOnly = true)
-    {
-        $this->setCookie(new Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, false, null));
+    public function clearCookie(
+        $name,
+        $path = '/',
+        $domain = null,
+        $secure = false,
+        $httpOnly = true
+    ) {
+        $this->setCookie(
+            new Cookie(
+                $name,
+                null,
+                1,
+                $path,
+                $domain,
+                $secure,
+                $httpOnly,
+                false,
+                null
+            )
+        );
     }
 
     /**
      * @see HeaderUtils::makeDisposition()
      */
-    public function makeDisposition($disposition, $filename, $filenameFallback = '')
-    {
-        return HeaderUtils::makeDisposition((string) $disposition, (string) $filename, (string) $filenameFallback);
+    public function makeDisposition(
+        $disposition,
+        $filename,
+        $filenameFallback = ''
+    ) {
+        return HeaderUtils::makeDisposition(
+            (string) $disposition,
+            (string) $filename,
+            (string) $filenameFallback
+        );
     }
 
     /**
@@ -268,7 +312,12 @@ class ResponseHeaderBag extends HeaderBag
      */
     protected function computeCacheControlValue()
     {
-        if (!$this->cacheControl && !$this->has('ETag') && !$this->has('Last-Modified') && !$this->has('Expires')) {
+        if (
+            !$this->cacheControl &&
+            !$this->has('ETag') &&
+            !$this->has('Last-Modified') &&
+            !$this->has('Expires')
+        ) {
             return 'no-cache, private';
         }
 
@@ -278,13 +327,16 @@ class ResponseHeaderBag extends HeaderBag
         }
 
         $header = $this->getCacheControlHeader();
-        if (isset($this->cacheControl['public']) || isset($this->cacheControl['private'])) {
+        if (
+            isset($this->cacheControl['public']) ||
+            isset($this->cacheControl['private'])
+        ) {
             return $header;
         }
 
         // public if s-maxage is defined, private otherwise
         if (!isset($this->cacheControl['s-maxage'])) {
-            return $header.', private';
+            return $header . ', private';
         }
 
         return $header;
@@ -294,6 +346,6 @@ class ResponseHeaderBag extends HeaderBag
     {
         $now = \DateTime::createFromFormat('U', time());
         $now->setTimezone(new \DateTimeZone('UTC'));
-        $this->set('Date', $now->format('D, d M Y H:i:s').' GMT');
+        $this->set('Date', $now->format('D, d M Y H:i:s') . ' GMT');
     }
 }

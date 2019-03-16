@@ -38,8 +38,12 @@ class Swift_KeyCache_NullKeyCache implements Swift_KeyCache
      * @param string $itemKey
      * @param int    $mode
      */
-    public function importFromByteStream($nsKey, $itemKey, Swift_OutputByteStream $os, $mode)
-    {
+    public function importFromByteStream(
+        $nsKey,
+        $itemKey,
+        Swift_OutputByteStream $os,
+        $mode
+    ) {
     }
 
     /**
@@ -52,8 +56,11 @@ class Swift_KeyCache_NullKeyCache implements Swift_KeyCache
      *
      * @return Swift_InputByteStream
      */
-    public function getInputByteStream($nsKey, $itemKey, Swift_InputByteStream $writeThrough = null)
-    {
+    public function getInputByteStream(
+        $nsKey,
+        $itemKey,
+        Swift_InputByteStream $writeThrough = null
+    ) {
     }
 
     /**
@@ -75,8 +82,11 @@ class Swift_KeyCache_NullKeyCache implements Swift_KeyCache
      * @param string                $itemKey
      * @param Swift_InputByteStream $is      to write the data to
      */
-    public function exportToByteStream($nsKey, $itemKey, Swift_InputByteStream $is)
-    {
+    public function exportToByteStream(
+        $nsKey,
+        $itemKey,
+        Swift_InputByteStream $is
+    ) {
     }
 
     /**

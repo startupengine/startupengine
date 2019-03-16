@@ -28,8 +28,10 @@ class FragmentRendererPass implements CompilerPassInterface
     private $handlerService;
     private $rendererTag;
 
-    public function __construct(string $handlerService = 'fragment.handler', string $rendererTag = 'kernel.fragment_renderer')
-    {
+    public function __construct(
+        string $handlerService = 'fragment.handler',
+        string $rendererTag = 'kernel.fragment_renderer'
+    ) {
         $this->handlerService = $handlerService;
         $this->rendererTag = $rendererTag;
     }
@@ -42,15 +44,32 @@ class FragmentRendererPass implements CompilerPassInterface
 
         $definition = $container->getDefinition($this->handlerService);
         $renderers = [];
-        foreach ($container->findTaggedServiceIds($this->rendererTag, true) as $id => $tags) {
+        foreach (
+            $container->findTaggedServiceIds($this->rendererTag, true)
+            as $id => $tags
+        ) {
             $def = $container->getDefinition($id);
-            $class = $container->getParameterBag()->resolveValue($def->getClass());
+            $class = $container
+                ->getParameterBag()
+                ->resolveValue($def->getClass());
 
-            if (!$r = $container->getReflectionClass($class)) {
-                throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+            if (!($r = $container->getReflectionClass($class))) {
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Class "%s" used for service "%s" cannot be found.',
+                        $class,
+                        $id
+                    )
+                );
             }
             if (!$r->isSubclassOf(FragmentRendererInterface::class)) {
-                throw new InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, FragmentRendererInterface::class));
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Service "%s" must implement interface "%s".',
+                        $id,
+                        FragmentRendererInterface::class
+                    )
+                );
             }
 
             foreach ($tags as $tag) {
@@ -58,6 +77,9 @@ class FragmentRendererPass implements CompilerPassInterface
             }
         }
 
-        $definition->replaceArgument(0, ServiceLocatorTagPass::register($container, $renderers));
+        $definition->replaceArgument(
+            0,
+            ServiceLocatorTagPass::register($container, $renderers)
+        );
     }
 }

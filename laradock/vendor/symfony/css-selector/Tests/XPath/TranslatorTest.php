@@ -106,11 +106,15 @@ class TranslatorTest extends TestCase
     public function testXmlLang($css, array $elementsId)
     {
         $translator = new Translator();
-        $document = new \SimpleXMLElement(file_get_contents(__DIR__.'/Fixtures/lang.xml'));
+        $document = new \SimpleXMLElement(
+            file_get_contents(__DIR__ . '/Fixtures/lang.xml')
+        );
         $elements = $document->xpath($translator->cssToXPath($css));
         $this->assertCount(\count($elementsId), $elements);
         foreach ($elements as $element) {
-            $this->assertTrue(\in_array($element->attributes()->id, $elementsId));
+            $this->assertTrue(
+                \in_array($element->attributes()->id, $elementsId)
+            );
         }
     }
 
@@ -122,13 +126,15 @@ class TranslatorTest extends TestCase
         $document = new \DOMDocument();
         $document->strictErrorChecking = false;
         $internalErrors = libxml_use_internal_errors(true);
-        $document->loadHTMLFile(__DIR__.'/Fixtures/ids.html');
+        $document->loadHTMLFile(__DIR__ . '/Fixtures/ids.html');
         $document = simplexml_import_dom($document);
         $elements = $document->xpath($translator->cssToXPath($css));
         $this->assertCount(\count($elementsId), $elementsId);
         foreach ($elements as $element) {
             if (null !== $element->attributes()->id) {
-                $this->assertTrue(\in_array($element->attributes()->id, $elementsId));
+                $this->assertTrue(
+                    \in_array($element->attributes()->id, $elementsId)
+                );
             }
         }
         libxml_clear_errors();
@@ -142,7 +148,7 @@ class TranslatorTest extends TestCase
         $translator->registerExtension(new HtmlExtension($translator));
         $document = new \DOMDocument();
         $document->strictErrorChecking = false;
-        $document->loadHTMLFile(__DIR__.'/Fixtures/shakespear.html');
+        $document->loadHTMLFile(__DIR__ . '/Fixtures/shakespear.html');
         $document = simplexml_import_dom($document);
         $bodies = $document->xpath('//body');
         $elements = $bodies[0]->xpath($translator->cssToXPath($css));
@@ -154,8 +160,14 @@ class TranslatorTest extends TestCase
         return [
             ['foo', "'foo'"],
             ["foo's bar", '"foo\'s bar"'],
-            ["foo's \"middle\" bar", 'concat(\'foo\', "\'", \'s "middle" bar\')'],
-            ["foo's 'middle' \"bar\"", 'concat(\'foo\', "\'", \'s \', "\'", \'middle\', "\'", \' "bar"\')'],
+            [
+                "foo's \"middle\" bar",
+                'concat(\'foo\', "\'", \'s "middle" bar\')'
+            ],
+            [
+                "foo's 'middle' \"bar\"",
+                'concat(\'foo\', "\'", \'s \', "\'", \'middle\', "\'", \' "bar"\')'
+            ]
         ];
     }
 
@@ -169,19 +181,40 @@ class TranslatorTest extends TestCase
             ['e[foo]', 'e[@foo]'],
             ['e[foo|bar]', 'e[@foo:bar]'],
             ['e[foo="bar"]', "e[@foo = 'bar']"],
-            ['e[foo~="bar"]', "e[@foo and contains(concat(' ', normalize-space(@foo), ' '), ' bar ')]"],
+            [
+                'e[foo~="bar"]',
+                "e[@foo and contains(concat(' ', normalize-space(@foo), ' '), ' bar ')]"
+            ],
             ['e[foo^="bar"]', "e[@foo and starts-with(@foo, 'bar')]"],
-            ['e[foo$="bar"]', "e[@foo and substring(@foo, string-length(@foo)-2) = 'bar']"],
+            [
+                'e[foo$="bar"]',
+                "e[@foo and substring(@foo, string-length(@foo)-2) = 'bar']"
+            ],
             ['e[foo*="bar"]', "e[@foo and contains(@foo, 'bar')]"],
             ['e[foo!="bar"]', "e[not(@foo) or @foo != 'bar']"],
-            ['e[foo!="bar"][foo!="baz"]', "e[(not(@foo) or @foo != 'bar') and (not(@foo) or @foo != 'baz')]"],
-            ['e[hreflang|="en"]', "e[@hreflang and (@hreflang = 'en' or starts-with(@hreflang, 'en-'))]"],
+            [
+                'e[foo!="bar"][foo!="baz"]',
+                "e[(not(@foo) or @foo != 'bar') and (not(@foo) or @foo != 'baz')]"
+            ],
+            [
+                'e[hreflang|="en"]',
+                "e[@hreflang and (@hreflang = 'en' or starts-with(@hreflang, 'en-'))]"
+            ],
             ['e:nth-child(1)', "*/*[(name() = 'e') and (position() = 1)]"],
-            ['e:nth-last-child(1)', "*/*[(name() = 'e') and (position() = last() - 0)]"],
-            ['e:nth-last-child(2n+2)', "*/*[(name() = 'e') and (last() - position() - 1 >= 0 and (last() - position() - 1) mod 2 = 0)]"],
+            [
+                'e:nth-last-child(1)',
+                "*/*[(name() = 'e') and (position() = last() - 0)]"
+            ],
+            [
+                'e:nth-last-child(2n+2)',
+                "*/*[(name() = 'e') and (last() - position() - 1 >= 0 and (last() - position() - 1) mod 2 = 0)]"
+            ],
             ['e:nth-of-type(1)', '*/e[position() = 1]'],
             ['e:nth-last-of-type(1)', '*/e[position() = last() - 0]'],
-            ['div e:nth-last-of-type(1) .aclass', "div/descendant-or-self::*/e[position() = last() - 0]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' aclass ')]"],
+            [
+                'div e:nth-last-of-type(1) .aclass',
+                "div/descendant-or-self::*/e[position() = last() - 0]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' aclass ')]"
+            ],
             ['e:first-child', "*/*[(name() = 'e') and (position() = 1)]"],
             ['e:last-child', "*/*[(name() = 'e') and (position() = last())]"],
             ['e:first-of-type', '*/e[position() = 1]'],
@@ -194,15 +227,27 @@ class TranslatorTest extends TestCase
             ['e:hover', 'e[0]'],
             ['e:contains("foo")', "e[contains(string(.), 'foo')]"],
             ['e:ConTains(foo)', "e[contains(string(.), 'foo')]"],
-            ['e.warning', "e[@class and contains(concat(' ', normalize-space(@class), ' '), ' warning ')]"],
+            [
+                'e.warning',
+                "e[@class and contains(concat(' ', normalize-space(@class), ' '), ' warning ')]"
+            ],
             ['e#myid', "e[@id = 'myid']"],
-            ['e:not(:nth-child(odd))', 'e[not(position() - 1 >= 0 and (position() - 1) mod 2 = 0)]'],
+            [
+                'e:not(:nth-child(odd))',
+                'e[not(position() - 1 >= 0 and (position() - 1) mod 2 = 0)]'
+            ],
             ['e:nOT(*)', 'e[0]'],
             ['e f', 'e/descendant-or-self::*/f'],
             ['e > f', 'e/f'],
-            ['e + f', "e/following-sibling::*[(name() = 'f') and (position() = 1)]"],
+            [
+                'e + f',
+                "e/following-sibling::*[(name() = 'f') and (position() = 1)]"
+            ],
             ['e ~ f', 'e/following-sibling::f'],
-            ['div#container p', "div[@id = 'container']/descendant-or-self::*/p"],
+            [
+                'div#container p',
+                "div[@id = 'container']/descendant-or-self::*/p"
+            ]
         ];
     }
 
@@ -216,8 +261,11 @@ class TranslatorTest extends TestCase
             [':lang(ru)', ['sixth']],
             [":lang('ZH')", ['eighth']],
             [':lang(de) :lang(zh)', ['eighth']],
-            [':lang(en), :lang(zh)', ['first', 'second', 'third', 'fourth', 'eighth']],
-            [':lang(es)', []],
+            [
+                ':lang(en), :lang(zh)',
+                ['first', 'second', 'third', 'fourth', 'eighth']
+            ],
+            [':lang(es)', []]
         ];
     }
 
@@ -225,7 +273,7 @@ class TranslatorTest extends TestCase
     {
         return [
             ['div', ['outer-div', 'li-div', 'foobar-div']],
-            ['DIV', ['outer-div', 'li-div', 'foobar-div']],  // case-insensitive in HTML
+            ['DIV', ['outer-div', 'li-div', 'foobar-div']], // case-insensitive in HTML
             ['div div', ['li-div']],
             ['div, div div', ['outer-div', 'li-div', 'foobar-div']],
             ['a[name]', ['name-anchor']],
@@ -260,14 +308,56 @@ class TranslatorTest extends TestCase
             ['li:nth-child(2n)', ['second-li', 'fourth-li', 'sixth-li']],
             ['li:nth-child(even)', ['second-li', 'fourth-li', 'sixth-li']],
             ['li:nth-child(2n+0)', ['second-li', 'fourth-li', 'sixth-li']],
-            ['li:nth-child(+2n+1)', ['first-li', 'third-li', 'fifth-li', 'seventh-li']],
-            ['li:nth-child(odd)', ['first-li', 'third-li', 'fifth-li', 'seventh-li']],
+            [
+                'li:nth-child(+2n+1)',
+                ['first-li', 'third-li', 'fifth-li', 'seventh-li']
+            ],
+            [
+                'li:nth-child(odd)',
+                ['first-li', 'third-li', 'fifth-li', 'seventh-li']
+            ],
             ['li:nth-child(2n+4)', ['fourth-li', 'sixth-li']],
             ['li:nth-child(3n+1)', ['first-li', 'fourth-li', 'seventh-li']],
-            ['li:nth-child(n)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-child(n-1)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-child(n+1)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-child(n+3)', ['third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
+            [
+                'li:nth-child(n)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-child(n-1)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-child(n+1)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-child(n+3)',
+                ['third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']
+            ],
             ['li:nth-child(-n)', []],
             ['li:nth-child(-n-1)', []],
             ['li:nth-child(-n+1)', ['first-li']],
@@ -276,11 +366,58 @@ class TranslatorTest extends TestCase
             ['li:nth-last-child(2n)', ['second-li', 'fourth-li', 'sixth-li']],
             ['li:nth-last-child(even)', ['second-li', 'fourth-li', 'sixth-li']],
             ['li:nth-last-child(2n+2)', ['second-li', 'fourth-li', 'sixth-li']],
-            ['li:nth-last-child(n)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-last-child(n-1)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-last-child(n-3)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-last-child(n+1)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li', 'sixth-li', 'seventh-li']],
-            ['li:nth-last-child(n+3)', ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li']],
+            [
+                'li:nth-last-child(n)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-last-child(n-1)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-last-child(n-3)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-last-child(n+1)',
+                [
+                    'first-li',
+                    'second-li',
+                    'third-li',
+                    'fourth-li',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
+            [
+                'li:nth-last-child(n+3)',
+                ['first-li', 'second-li', 'third-li', 'fourth-li', 'fifth-li']
+            ],
             ['li:nth-last-child(-n)', []],
             ['li:nth-last-child(-n-1)', []],
             ['li:nth-last-child(-n+1)', ['seventh-li']],
@@ -300,11 +437,28 @@ class TranslatorTest extends TestCase
             ['html:root', ['html']],
             ['li:root', []],
             ['* :root', []],
-            ['*:contains("link")', ['html', 'outer-div', 'tag-anchor', 'nofollow-anchor']],
-            [':CONtains("link")', ['html', 'outer-div', 'tag-anchor', 'nofollow-anchor']],
-            ['*:contains("LInk")', []],  // case sensitive
-            ['*:contains("e")', ['html', 'nil', 'outer-div', 'first-ol', 'first-li', 'paragraph', 'p-em']],
-            ['*:contains("E")', []],  // case-sensitive
+            [
+                '*:contains("link")',
+                ['html', 'outer-div', 'tag-anchor', 'nofollow-anchor']
+            ],
+            [
+                ':CONtains("link")',
+                ['html', 'outer-div', 'tag-anchor', 'nofollow-anchor']
+            ],
+            ['*:contains("LInk")', []], // case sensitive
+            [
+                '*:contains("e")',
+                [
+                    'html',
+                    'nil',
+                    'outer-div',
+                    'first-ol',
+                    'first-li',
+                    'paragraph',
+                    'p-em'
+                ]
+            ],
+            ['*:contains("E")', []], // case-sensitive
             ['.a', ['first-ol']],
             ['.b', ['first-ol']],
             ['*.a', ['first-ol']],
@@ -330,17 +484,59 @@ class TranslatorTest extends TestCase
             ['ol#first-ol li:last-child', ['seventh-li']],
             ['ol#first-ol *:last-child', ['li-div', 'seventh-li']],
             ['#outer-div:first-child', ['outer-div']],
-            ['#outer-div :first-child', ['name-anchor', 'first-li', 'li-div', 'p-b', 'checkbox-fieldset-disabled', 'area-href']],
+            [
+                '#outer-div :first-child',
+                [
+                    'name-anchor',
+                    'first-li',
+                    'li-div',
+                    'p-b',
+                    'checkbox-fieldset-disabled',
+                    'area-href'
+                ]
+            ],
             ['a[href]', ['tag-anchor', 'nofollow-anchor']],
             [':not(*)', []],
             ['a:not([href])', ['name-anchor']],
-            ['ol :Not(li[class])', ['first-li', 'second-li', 'li-div', 'fifth-li', 'sixth-li', 'seventh-li']],
+            [
+                'ol :Not(li[class])',
+                [
+                    'first-li',
+                    'second-li',
+                    'li-div',
+                    'fifth-li',
+                    'sixth-li',
+                    'seventh-li'
+                ]
+            ],
             // HTML-specific
-            [':link', ['link-href', 'tag-anchor', 'nofollow-anchor', 'area-href']],
+            [
+                ':link',
+                ['link-href', 'tag-anchor', 'nofollow-anchor', 'area-href']
+            ],
             [':visited', []],
-            [':enabled', ['link-href', 'tag-anchor', 'nofollow-anchor', 'checkbox-unchecked', 'text-checked', 'checkbox-checked', 'area-href']],
-            [':disabled', ['checkbox-disabled', 'checkbox-disabled-checked', 'fieldset', 'checkbox-fieldset-disabled']],
-            [':checked', ['checkbox-checked', 'checkbox-disabled-checked']],
+            [
+                ':enabled',
+                [
+                    'link-href',
+                    'tag-anchor',
+                    'nofollow-anchor',
+                    'checkbox-unchecked',
+                    'text-checked',
+                    'checkbox-checked',
+                    'area-href'
+                ]
+            ],
+            [
+                ':disabled',
+                [
+                    'checkbox-disabled',
+                    'checkbox-disabled-checked',
+                    'fieldset',
+                    'checkbox-fieldset-disabled'
+                ]
+            ],
+            [':checked', ['checkbox-checked', 'checkbox-disabled-checked']]
         ];
     }
 
@@ -392,7 +588,7 @@ class TranslatorTest extends TestCase
             ['div[class*=sce]', 1],
             ['div[class|=dialog]', 50], // ? Seems right
             ['div[class!=madeup]', 243], // ? Seems right
-            ['div[class~=dialog]', 51], // ? Seems right
+            ['div[class~=dialog]', 51] // ? Seems right
         ];
     }
 }

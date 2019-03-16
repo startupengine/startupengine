@@ -68,7 +68,10 @@ interface Swift_Transport
      *
      * @return int
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null);
+    public function send(
+        Swift_Mime_SimpleMessage $message,
+        &$failedRecipients = null
+    );
 
     /**
      * Register a plugin in the Transport.

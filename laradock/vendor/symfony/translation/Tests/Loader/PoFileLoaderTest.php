@@ -20,34 +20,46 @@ class PoFileLoaderTest extends TestCase
     public function testLoad()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/resources.po';
+        $resource = __DIR__ . '/../fixtures/resources.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(['foo' => 'bar'], $catalogue->all('domain1'));
         $this->assertEquals('en', $catalogue->getLocale());
-        $this->assertEquals([new FileResource($resource)], $catalogue->getResources());
+        $this->assertEquals(
+            [new FileResource($resource)],
+            $catalogue->getResources()
+        );
     }
 
     public function testLoadPlurals()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/plurals.po';
+        $resource = __DIR__ . '/../fixtures/plurals.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
-        $this->assertEquals(['foo' => 'bar', 'foos' => 'bar|bars'], $catalogue->all('domain1'));
+        $this->assertEquals(
+            ['foo' => 'bar', 'foos' => 'bar|bars'],
+            $catalogue->all('domain1')
+        );
         $this->assertEquals('en', $catalogue->getLocale());
-        $this->assertEquals([new FileResource($resource)], $catalogue->getResources());
+        $this->assertEquals(
+            [new FileResource($resource)],
+            $catalogue->getResources()
+        );
     }
 
     public function testLoadDoesNothingIfEmpty()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/empty.po';
+        $resource = __DIR__ . '/../fixtures/empty.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals([], $catalogue->all('domain1'));
         $this->assertEquals('en', $catalogue->getLocale());
-        $this->assertEquals([new FileResource($resource)], $catalogue->getResources());
+        $this->assertEquals(
+            [new FileResource($resource)],
+            $catalogue->getResources()
+        );
     }
 
     /**
@@ -56,25 +68,28 @@ class PoFileLoaderTest extends TestCase
     public function testLoadNonExistingResource()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/non-existing.po';
+        $resource = __DIR__ . '/../fixtures/non-existing.po';
         $loader->load($resource, 'en', 'domain1');
     }
 
     public function testLoadEmptyTranslation()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/empty-translation.po';
+        $resource = __DIR__ . '/../fixtures/empty-translation.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(['foo' => ''], $catalogue->all('domain1'));
         $this->assertEquals('en', $catalogue->getLocale());
-        $this->assertEquals([new FileResource($resource)], $catalogue->getResources());
+        $this->assertEquals(
+            [new FileResource($resource)],
+            $catalogue->getResources()
+        );
     }
 
     public function testEscapedId()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/escaped-id.po';
+        $resource = __DIR__ . '/../fixtures/escaped-id.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $messages = $catalogue->all('domain1');
@@ -85,20 +100,23 @@ class PoFileLoaderTest extends TestCase
     public function testEscapedIdPlurals()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/escaped-id-plurals.po';
+        $resource = __DIR__ . '/../fixtures/escaped-id-plurals.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $messages = $catalogue->all('domain1');
         $this->assertArrayHasKey('escaped "foo"', $messages);
         $this->assertArrayHasKey('escaped "foos"', $messages);
         $this->assertEquals('escaped "bar"', $messages['escaped "foo"']);
-        $this->assertEquals('escaped "bar"|escaped "bars"', $messages['escaped "foos"']);
+        $this->assertEquals(
+            'escaped "bar"|escaped "bars"',
+            $messages['escaped "foos"']
+        );
     }
 
     public function testSkipFuzzyTranslations()
     {
         $loader = new PoFileLoader();
-        $resource = __DIR__.'/../fixtures/fuzzy-translations.po';
+        $resource = __DIR__ . '/../fixtures/fuzzy-translations.po';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $messages = $catalogue->all('domain1');

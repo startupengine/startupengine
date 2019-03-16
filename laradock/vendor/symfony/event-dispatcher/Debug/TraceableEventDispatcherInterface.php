@@ -19,7 +19,9 @@ use Symfony\Contracts\Service\ResetInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface TraceableEventDispatcherInterface extends EventDispatcherInterface, ResetInterface
+interface TraceableEventDispatcherInterface extends
+    EventDispatcherInterface,
+    ResetInterface
 {
     /**
      * Gets the called listeners.

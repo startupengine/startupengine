@@ -24,8 +24,11 @@ class Swift_Image extends Swift_EmbeddedFile
      * @param string                        $filename
      * @param string                        $contentType
      */
-    public function __construct($data = null, $filename = null, $contentType = null)
-    {
+    public function __construct(
+        $data = null,
+        $filename = null,
+        $contentType = null
+    ) {
         parent::__construct($data, $filename, $contentType);
     }
 
@@ -38,6 +41,8 @@ class Swift_Image extends Swift_EmbeddedFile
      */
     public static function fromPath($path)
     {
-        return (new self())->setFile(new Swift_ByteStream_FileByteStream($path));
+        return (new self())->setFile(
+            new Swift_ByteStream_FileByteStream($path)
+        );
     }
 }

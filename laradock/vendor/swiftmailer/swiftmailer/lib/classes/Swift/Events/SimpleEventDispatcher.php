@@ -33,9 +33,11 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
             'Swift_Events_CommandEvent' => 'Swift_Events_CommandListener',
             'Swift_Events_ResponseEvent' => 'Swift_Events_ResponseListener',
             'Swift_Events_SendEvent' => 'Swift_Events_SendListener',
-            'Swift_Events_TransportChangeEvent' => 'Swift_Events_TransportChangeListener',
-            'Swift_Events_TransportExceptionEvent' => 'Swift_Events_TransportExceptionListener',
-            ];
+            'Swift_Events_TransportChangeEvent' =>
+                'Swift_Events_TransportChangeListener',
+            'Swift_Events_TransportExceptionEvent' =>
+                'Swift_Events_TransportExceptionListener'
+        ];
     }
 
     /**
@@ -43,8 +45,10 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
      *
      * @return Swift_Events_SendEvent
      */
-    public function createSendEvent(Swift_Transport $source, Swift_Mime_SimpleMessage $message)
-    {
+    public function createSendEvent(
+        Swift_Transport $source,
+        Swift_Mime_SimpleMessage $message
+    ) {
         return new Swift_Events_SendEvent($source, $message);
     }
 
@@ -56,8 +60,11 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
      *
      * @return Swift_Events_CommandEvent
      */
-    public function createCommandEvent(Swift_Transport $source, $command, $successCodes = [])
-    {
+    public function createCommandEvent(
+        Swift_Transport $source,
+        $command,
+        $successCodes = []
+    ) {
         return new Swift_Events_CommandEvent($source, $command, $successCodes);
     }
 
@@ -69,8 +76,11 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
      *
      * @return Swift_Events_ResponseEvent
      */
-    public function createResponseEvent(Swift_Transport $source, $response, $valid)
-    {
+    public function createResponseEvent(
+        Swift_Transport $source,
+        $response,
+        $valid
+    ) {
         return new Swift_Events_ResponseEvent($source, $response, $valid);
     }
 
@@ -89,8 +99,10 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
      *
      * @return Swift_Events_TransportExceptionEvent
      */
-    public function createTransportExceptionEvent(Swift_Transport $source, Swift_TransportException $ex)
-    {
+    public function createTransportExceptionEvent(
+        Swift_Transport $source,
+        Swift_TransportException $ex
+    ) {
         return new Swift_Events_TransportExceptionEvent($source, $ex);
     }
 
@@ -125,8 +137,10 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
         $this->bubbleQueue = [];
         $evtClass = get_class($evt);
         foreach ($this->listeners as $listener) {
-            if (array_key_exists($evtClass, $this->eventMap)
-                && ($listener instanceof $this->eventMap[$evtClass])) {
+            if (
+                array_key_exists($evtClass, $this->eventMap) &&
+                $listener instanceof $this->eventMap[$evtClass]
+            ) {
                 $this->bubbleQueue[] = $listener;
             }
         }
@@ -135,7 +149,10 @@ class Swift_Events_SimpleEventDispatcher implements Swift_Events_EventDispatcher
     /** Bubble $evt up the stack calling $target() on each listener */
     private function bubble(Swift_Events_EventObject $evt, $target)
     {
-        if (!$evt->bubbleCancelled() && $listener = array_shift($this->bubbleQueue)) {
+        if (
+            !$evt->bubbleCancelled() &&
+            ($listener = array_shift($this->bubbleQueue))
+        ) {
             $listener->$target($evt);
             $this->bubble($evt, $target);
         }

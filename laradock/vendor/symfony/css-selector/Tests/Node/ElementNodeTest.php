@@ -20,7 +20,10 @@ class ElementNodeTest extends AbstractNodeTest
         return [
             [new ElementNode(), 'Element[*]'],
             [new ElementNode(null, 'element'), 'Element[element]'],
-            [new ElementNode('namespace', 'element'), 'Element[namespace|element]'],
+            [
+                new ElementNode('namespace', 'element'),
+                'Element[namespace|element]'
+            ]
         ];
     }
 
@@ -29,7 +32,7 @@ class ElementNodeTest extends AbstractNodeTest
         return [
             [new ElementNode(), 0],
             [new ElementNode(null, 'element'), 1],
-            [new ElementNode('namespace', 'element'), 1],
+            [new ElementNode('namespace', 'element'), 1]
         ];
     }
 }

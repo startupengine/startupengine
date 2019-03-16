@@ -26,13 +26,13 @@ class ControllerArgumentValueResolverPassTest extends TestCase
         $services = [
             'n3' => [[]],
             'n1' => [['priority' => 200]],
-            'n2' => [['priority' => 100]],
+            'n2' => [['priority' => 100]]
         ];
 
         $expected = [
             new Reference('n1'),
             new Reference('n2'),
-            new Reference('n3'),
+            new Reference('n3')
         ];
 
         $definition = new Definition(ArgumentResolver::class, [null, []]);
@@ -40,13 +40,18 @@ class ControllerArgumentValueResolverPassTest extends TestCase
         $container->setDefinition('argument_resolver', $definition);
 
         foreach ($services as $id => list($tag)) {
-            $container->register($id)->addTag('controller.argument_value_resolver', $tag);
+            $container
+                ->register($id)
+                ->addTag('controller.argument_value_resolver', $tag);
         }
 
         $container->setParameter('kernel.debug', false);
 
         (new ControllerArgumentValueResolverPass())->process($container);
-        $this->assertEquals($expected, $definition->getArgument(1)->getValues());
+        $this->assertEquals(
+            $expected,
+            $definition->getArgument(1)->getValues()
+        );
 
         $this->assertFalse($container->hasDefinition('n1.traceable'));
         $this->assertFalse($container->hasDefinition('n2.traceable'));
@@ -58,13 +63,13 @@ class ControllerArgumentValueResolverPassTest extends TestCase
         $services = [
             'n3' => [[]],
             'n1' => [['priority' => 200]],
-            'n2' => [['priority' => 100]],
+            'n2' => [['priority' => 100]]
         ];
 
         $expected = [
             new Reference('n1'),
             new Reference('n2'),
-            new Reference('n3'),
+            new Reference('n3')
         ];
 
         $definition = new Definition(ArgumentResolver::class, [null, []]);
@@ -73,13 +78,18 @@ class ControllerArgumentValueResolverPassTest extends TestCase
         $container->setDefinition('argument_resolver', $definition);
 
         foreach ($services as $id => list($tag)) {
-            $container->register($id)->addTag('controller.argument_value_resolver', $tag);
+            $container
+                ->register($id)
+                ->addTag('controller.argument_value_resolver', $tag);
         }
 
         $container->setParameter('kernel.debug', true);
 
         (new ControllerArgumentValueResolverPass())->process($container);
-        $this->assertEquals($expected, $definition->getArgument(1)->getValues());
+        $this->assertEquals(
+            $expected,
+            $definition->getArgument(1)->getValues()
+        );
 
         $this->assertTrue($container->hasDefinition('debug.n1'));
         $this->assertTrue($container->hasDefinition('debug.n2'));
@@ -96,13 +106,18 @@ class ControllerArgumentValueResolverPassTest extends TestCase
 
         $definition = new Definition(ArgumentResolver::class, [null, []]);
         $container = new ContainerBuilder();
-        $container->register('n1')->addTag('controller.argument_value_resolver');
+        $container
+            ->register('n1')
+            ->addTag('controller.argument_value_resolver');
         $container->setDefinition('argument_resolver', $definition);
 
         $container->setParameter('kernel.debug', true);
 
         (new ControllerArgumentValueResolverPass())->process($container);
-        $this->assertEquals($expected, $definition->getArgument(1)->getValues());
+        $this->assertEquals(
+            $expected,
+            $definition->getArgument(1)->getValues()
+        );
 
         $this->assertFalse($container->hasDefinition('debug.n1'));
         $this->assertTrue($container->hasDefinition('n1'));

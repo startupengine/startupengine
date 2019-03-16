@@ -18,16 +18,14 @@ class HashNodeTest extends AbstractNodeTest
 {
     public function getToStringConversionTestData()
     {
-        return [
-            [new HashNode(new ElementNode(), 'id'), 'Hash[Element[*]#id]'],
-        ];
+        return [[new HashNode(new ElementNode(), 'id'), 'Hash[Element[*]#id]']];
     }
 
     public function getSpecificityValueTestData()
     {
         return [
             [new HashNode(new ElementNode(), 'id'), 100],
-            [new HashNode(new ElementNode(null, 'id'), 'class'), 101],
+            [new HashNode(new ElementNode(null, 'id'), 'class'), 101]
         ];
     }
 }

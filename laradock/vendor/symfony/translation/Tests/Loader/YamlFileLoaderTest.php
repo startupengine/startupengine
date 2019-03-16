@@ -20,23 +20,29 @@ class YamlFileLoaderTest extends TestCase
     public function testLoad()
     {
         $loader = new YamlFileLoader();
-        $resource = __DIR__.'/../fixtures/resources.yml';
+        $resource = __DIR__ . '/../fixtures/resources.yml';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(['foo' => 'bar'], $catalogue->all('domain1'));
         $this->assertEquals('en', $catalogue->getLocale());
-        $this->assertEquals([new FileResource($resource)], $catalogue->getResources());
+        $this->assertEquals(
+            [new FileResource($resource)],
+            $catalogue->getResources()
+        );
     }
 
     public function testLoadDoesNothingIfEmpty()
     {
         $loader = new YamlFileLoader();
-        $resource = __DIR__.'/../fixtures/empty.yml';
+        $resource = __DIR__ . '/../fixtures/empty.yml';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals([], $catalogue->all('domain1'));
         $this->assertEquals('en', $catalogue->getLocale());
-        $this->assertEquals([new FileResource($resource)], $catalogue->getResources());
+        $this->assertEquals(
+            [new FileResource($resource)],
+            $catalogue->getResources()
+        );
     }
 
     /**
@@ -45,7 +51,7 @@ class YamlFileLoaderTest extends TestCase
     public function testLoadNonExistingResource()
     {
         $loader = new YamlFileLoader();
-        $resource = __DIR__.'/../fixtures/non-existing.yml';
+        $resource = __DIR__ . '/../fixtures/non-existing.yml';
         $loader->load($resource, 'en', 'domain1');
     }
 
@@ -65,7 +71,7 @@ class YamlFileLoaderTest extends TestCase
     public function testLoadThrowsAnExceptionIfNotAnArray()
     {
         $loader = new YamlFileLoader();
-        $resource = __DIR__.'/../fixtures/non-valid.yml';
+        $resource = __DIR__ . '/../fixtures/non-valid.yml';
         $loader->load($resource, 'en', 'domain1');
     }
 }

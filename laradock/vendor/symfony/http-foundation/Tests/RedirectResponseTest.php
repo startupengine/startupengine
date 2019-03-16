@@ -20,10 +20,17 @@ class RedirectResponseTest extends TestCase
     {
         $response = new RedirectResponse('foo.bar');
 
-        $this->assertEquals(1, preg_match(
-            '#<meta http-equiv="refresh" content="\d+;url=foo\.bar" />#',
-            preg_replace(['/\s+/', '/\'/'], [' ', '"'], $response->getContent())
-        ));
+        $this->assertEquals(
+            1,
+            preg_match(
+                '#<meta http-equiv="refresh" content="\d+;url=foo\.bar" />#',
+                preg_replace(
+                    ['/\s+/', '/\'/'],
+                    [' ', '"'],
+                    $response->getContent()
+                )
+            )
+        );
     }
 
     /**
@@ -78,20 +85,33 @@ class RedirectResponseTest extends TestCase
     {
         $response = RedirectResponse::create('foo', 301);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse', $response);
+        $this->assertInstanceOf(
+            'Symfony\Component\HttpFoundation\RedirectResponse',
+            $response
+        );
         $this->assertEquals(301, $response->getStatusCode());
     }
 
     public function testCacheHeaders()
     {
         $response = new RedirectResponse('foo.bar', 301);
-        $this->assertFalse($response->headers->hasCacheControlDirective('no-cache'));
+        $this->assertFalse(
+            $response->headers->hasCacheControlDirective('no-cache')
+        );
 
-        $response = new RedirectResponse('foo.bar', 301, ['cache-control' => 'max-age=86400']);
-        $this->assertFalse($response->headers->hasCacheControlDirective('no-cache'));
-        $this->assertTrue($response->headers->hasCacheControlDirective('max-age'));
+        $response = new RedirectResponse('foo.bar', 301, [
+            'cache-control' => 'max-age=86400'
+        ]);
+        $this->assertFalse(
+            $response->headers->hasCacheControlDirective('no-cache')
+        );
+        $this->assertTrue(
+            $response->headers->hasCacheControlDirective('max-age')
+        );
 
         $response = new RedirectResponse('foo.bar', 302);
-        $this->assertTrue($response->headers->hasCacheControlDirective('no-cache'));
+        $this->assertTrue(
+            $response->headers->hasCacheControlDirective('no-cache')
+        );
     }
 }

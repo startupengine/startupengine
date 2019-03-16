@@ -66,14 +66,14 @@ class PoFileLoader extends FileLoader
 
         $defaults = [
             'ids' => [],
-            'translated' => null,
+            'translated' => null
         ];
 
         $messages = [];
         $item = $defaults;
         $flags = [];
 
-        while ($line = fgets($stream)) {
+        while (($line = fgets($stream))) {
             $line = trim($line);
 
             if ('' === $line) {
@@ -98,7 +98,11 @@ class PoFileLoader extends FileLoader
 
                 if (\is_array($item[$continues])) {
                     end($item[$continues]);
-                    $item[$continues][key($item[$continues])] .= substr($line, 1, -1);
+                    $item[$continues][key($item[$continues])] .= substr(
+                        $line,
+                        1,
+                        -1
+                    );
                 } else {
                     $item[$continues] .= substr($line, 1, -1);
                 }
@@ -106,7 +110,11 @@ class PoFileLoader extends FileLoader
                 $item['ids']['plural'] = substr($line, 14, -1);
             } elseif ('msgstr[' === substr($line, 0, 7)) {
                 $size = strpos($line, ']');
-                $item['translated'][(int) substr($line, 7, 1)] = substr($line, $size + 3, -1);
+                $item['translated'][(int) substr($line, 7, 1)] = substr(
+                    $line,
+                    $size + 3,
+                    -1
+                );
             }
         }
         // save last item
@@ -127,7 +135,9 @@ class PoFileLoader extends FileLoader
     private function addMessage(array &$messages, array $item)
     {
         if (\is_array($item['translated'])) {
-            $messages[stripcslashes($item['ids']['singular'])] = stripcslashes($item['translated'][0]);
+            $messages[stripcslashes($item['ids']['singular'])] = stripcslashes(
+                $item['translated'][0]
+            );
             if (isset($item['ids']['plural'])) {
                 $plurals = $item['translated'];
                 // PO are by definition indexed so sort by index.
@@ -139,10 +149,14 @@ class PoFileLoader extends FileLoader
                 $empties = array_fill(0, $count + 1, '-');
                 $plurals += $empties;
                 ksort($plurals);
-                $messages[stripcslashes($item['ids']['plural'])] = stripcslashes(implode('|', $plurals));
+                $messages[
+                    stripcslashes($item['ids']['plural'])
+                ] = stripcslashes(implode('|', $plurals));
             }
         } elseif (!empty($item['ids']['singular'])) {
-            $messages[stripcslashes($item['ids']['singular'])] = stripcslashes($item['translated']);
+            $messages[stripcslashes($item['ids']['singular'])] = stripcslashes(
+                $item['translated']
+            );
         }
     }
 }

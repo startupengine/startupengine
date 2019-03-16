@@ -41,7 +41,10 @@ abstract class AbstractOperationTest extends TestCase
 
     public function testGetMessagesFromUnknownDomain()
     {
-        $this->{method_exists($this, $_ = 'expectException') ? $_ : 'setExpectedException'}('InvalidArgumentException');
+        $this->{method_exists($this, ($_ = 'expectException'))
+            ? $_
+            : 'setExpectedException'
+        }('InvalidArgumentException');
         $this->createOperation(
             new MessageCatalogue('en'),
             new MessageCatalogue('en')
@@ -70,5 +73,8 @@ abstract class AbstractOperationTest extends TestCase
         );
     }
 
-    abstract protected function createOperation(MessageCatalogueInterface $source, MessageCatalogueInterface $target);
+    abstract protected function createOperation(
+        MessageCatalogueInterface $source,
+        MessageCatalogueInterface $target
+    );
 }

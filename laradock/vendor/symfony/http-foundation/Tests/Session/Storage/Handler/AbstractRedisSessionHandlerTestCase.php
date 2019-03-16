@@ -48,10 +48,9 @@ abstract class AbstractRedisSessionHandlerTestCase extends TestCase
         $host = getenv('REDIS_HOST') ?: 'localhost';
 
         $this->redisClient = $this->createRedisClient($host);
-        $this->storage = new RedisSessionHandler(
-            $this->redisClient,
-            ['prefix' => self::PREFIX]
-        );
+        $this->storage = new RedisSessionHandler($this->redisClient, [
+            'prefix' => self::PREFIX
+        ]);
     }
 
     protected function tearDown()
@@ -74,8 +73,8 @@ abstract class AbstractRedisSessionHandlerTestCase extends TestCase
 
     public function testReadSession()
     {
-        $this->redisClient->set(self::PREFIX.'id1', null);
-        $this->redisClient->set(self::PREFIX.'id2', 'abc123');
+        $this->redisClient->set(self::PREFIX . 'id1', null);
+        $this->redisClient->set(self::PREFIX . 'id2', 'abc123');
 
         $this->assertEquals('', $this->storage->read('id1'));
         $this->assertEquals('abc123', $this->storage->read('id2'));
@@ -85,14 +84,19 @@ abstract class AbstractRedisSessionHandlerTestCase extends TestCase
     {
         $this->assertTrue($this->storage->write('id', 'data'));
 
-        $this->assertTrue((bool) $this->redisClient->exists(self::PREFIX.'id'));
-        $this->assertEquals('data', $this->redisClient->get(self::PREFIX.'id'));
+        $this->assertTrue(
+            (bool) $this->redisClient->exists(self::PREFIX . 'id')
+        );
+        $this->assertEquals(
+            'data',
+            $this->redisClient->get(self::PREFIX . 'id')
+        );
     }
 
     public function testUseSessionGcMaxLifetimeAsTimeToLive()
     {
         $this->storage->write('id', 'data');
-        $ttl = $this->redisClient->ttl(self::PREFIX.'id');
+        $ttl = $this->redisClient->ttl(self::PREFIX . 'id');
 
         $this->assertLessThanOrEqual(ini_get('session.gc_maxlifetime'), $ttl);
         $this->assertGreaterThanOrEqual(0, $ttl);
@@ -100,11 +104,15 @@ abstract class AbstractRedisSessionHandlerTestCase extends TestCase
 
     public function testDestroySession()
     {
-        $this->redisClient->set(self::PREFIX.'id', 'foo');
+        $this->redisClient->set(self::PREFIX . 'id', 'foo');
 
-        $this->assertTrue((bool) $this->redisClient->exists(self::PREFIX.'id'));
+        $this->assertTrue(
+            (bool) $this->redisClient->exists(self::PREFIX . 'id')
+        );
         $this->assertTrue($this->storage->destroy('id'));
-        $this->assertFalse((bool) $this->redisClient->exists(self::PREFIX.'id'));
+        $this->assertFalse(
+            (bool) $this->redisClient->exists(self::PREFIX . 'id')
+        );
     }
 
     public function testGcSession()
@@ -116,10 +124,13 @@ abstract class AbstractRedisSessionHandlerTestCase extends TestCase
     {
         $lowTtl = 10;
 
-        $this->redisClient->setex(self::PREFIX.'id', $lowTtl, 'foo');
+        $this->redisClient->setex(self::PREFIX . 'id', $lowTtl, 'foo');
         $this->storage->updateTimestamp('id', []);
 
-        $this->assertGreaterThan($lowTtl, $this->redisClient->ttl(self::PREFIX.'id'));
+        $this->assertGreaterThan(
+            $lowTtl,
+            $this->redisClient->ttl(self::PREFIX . 'id')
+        );
     }
 
     /**
@@ -139,7 +150,7 @@ abstract class AbstractRedisSessionHandlerTestCase extends TestCase
     {
         return [
             [['prefix' => 'session'], true],
-            [['prefix' => 'sfs', 'foo' => 'bar'], false],
+            [['prefix' => 'sfs', 'foo' => 'bar'], false]
         ];
     }
 }

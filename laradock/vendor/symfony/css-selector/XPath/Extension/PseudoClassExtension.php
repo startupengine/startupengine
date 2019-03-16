@@ -39,7 +39,7 @@ class PseudoClassExtension extends AbstractExtension
             'last-of-type' => [$this, 'translateLastOfType'],
             'only-child' => [$this, 'translateOnlyChild'],
             'only-of-type' => [$this, 'translateOnlyOfType'],
-            'empty' => [$this, 'translateEmpty'],
+            'empty' => [$this, 'translateEmpty']
         ];
     }
 
@@ -81,12 +81,12 @@ class PseudoClassExtension extends AbstractExtension
     public function translateFirstOfType(XPathExpr $xpath)
     {
         if ('*' === $xpath->getElement()) {
-            throw new ExpressionErrorException('"*:first-of-type" is not implemented.');
+            throw new ExpressionErrorException(
+                '"*:first-of-type" is not implemented.'
+            );
         }
 
-        return $xpath
-            ->addStarPrefix()
-            ->addCondition('position() = 1');
+        return $xpath->addStarPrefix()->addCondition('position() = 1');
     }
 
     /**
@@ -97,12 +97,12 @@ class PseudoClassExtension extends AbstractExtension
     public function translateLastOfType(XPathExpr $xpath)
     {
         if ('*' === $xpath->getElement()) {
-            throw new ExpressionErrorException('"*:last-of-type" is not implemented.');
+            throw new ExpressionErrorException(
+                '"*:last-of-type" is not implemented.'
+            );
         }
 
-        return $xpath
-            ->addStarPrefix()
-            ->addCondition('position() = last()');
+        return $xpath->addStarPrefix()->addCondition('position() = last()');
     }
 
     /**
@@ -124,7 +124,9 @@ class PseudoClassExtension extends AbstractExtension
     public function translateOnlyOfType(XPathExpr $xpath)
     {
         if ('*' === $xpath->getElement()) {
-            throw new ExpressionErrorException('"*:only-of-type" is not implemented.');
+            throw new ExpressionErrorException(
+                '"*:only-of-type" is not implemented.'
+            );
         }
 
         return $xpath->addCondition('last() = 1');

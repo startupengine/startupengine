@@ -39,7 +39,10 @@ class ClassParserTest extends TestCase
             ['testel.testclass', 'Class[Element[testel].testclass]'],
             ['testns|.testclass', 'Class[Element[testns|*].testclass]'],
             ['testns|*.testclass', 'Class[Element[testns|*].testclass]'],
-            ['testns|testel.testclass', 'Class[Element[testns|testel].testclass]'],
+            [
+                'testns|testel.testclass',
+                'Class[Element[testns|testel].testclass]'
+            ]
         ];
     }
 }

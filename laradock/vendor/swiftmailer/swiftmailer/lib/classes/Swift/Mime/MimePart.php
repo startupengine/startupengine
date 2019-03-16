@@ -32,8 +32,13 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
      *
      * @param string $charset
      */
-    public function __construct(Swift_Mime_SimpleHeaderSet $headers, Swift_Mime_ContentEncoder $encoder, Swift_KeyCache $cache, Swift_IdGenerator $idGenerator, $charset = null)
-    {
+    public function __construct(
+        Swift_Mime_SimpleHeaderSet $headers,
+        Swift_Mime_ContentEncoder $encoder,
+        Swift_KeyCache $cache,
+        Swift_IdGenerator $idGenerator,
+        $charset = null
+    ) {
         parent::__construct($headers, $encoder, $cache, $idGenerator);
         $this->setContentType('text/plain');
         if (null !== $charset) {
@@ -136,7 +141,11 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
      */
     public function setDelSp($delsp = true)
     {
-        $this->setHeaderParameter('Content-Type', 'delsp', $delsp ? 'yes' : null);
+        $this->setHeaderParameter(
+            'Content-Type',
+            'delsp',
+            $delsp ? 'yes' : null
+        );
         $this->userDelSp = $delsp;
 
         return $this;

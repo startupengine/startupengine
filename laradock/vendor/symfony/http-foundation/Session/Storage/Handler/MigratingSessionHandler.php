@@ -20,17 +20,26 @@ namespace Symfony\Component\HttpFoundation\Session\Storage\Handler;
  * @author Ross Motley <ross.motley@amara.com>
  * @author Oliver Radwell <oliver.radwell@amara.com>
  */
-class MigratingSessionHandler implements \SessionHandlerInterface, \SessionUpdateTimestampHandlerInterface
+class MigratingSessionHandler implements
+    \SessionHandlerInterface,
+    \SessionUpdateTimestampHandlerInterface
 {
     private $currentHandler;
     private $writeOnlyHandler;
 
-    public function __construct(\SessionHandlerInterface $currentHandler, \SessionHandlerInterface $writeOnlyHandler)
-    {
-        if (!$currentHandler instanceof \SessionUpdateTimestampHandlerInterface) {
+    public function __construct(
+        \SessionHandlerInterface $currentHandler,
+        \SessionHandlerInterface $writeOnlyHandler
+    ) {
+        if (
+            !$currentHandler instanceof \SessionUpdateTimestampHandlerInterface
+        ) {
             $currentHandler = new StrictSessionHandler($currentHandler);
         }
-        if (!$writeOnlyHandler instanceof \SessionUpdateTimestampHandlerInterface) {
+        if (
+            !$writeOnlyHandler instanceof
+            \SessionUpdateTimestampHandlerInterface
+        ) {
             $writeOnlyHandler = new StrictSessionHandler($writeOnlyHandler);
         }
 
@@ -116,7 +125,10 @@ class MigratingSessionHandler implements \SessionHandlerInterface, \SessionUpdat
      */
     public function updateTimestamp($sessionId, $sessionData)
     {
-        $result = $this->currentHandler->updateTimestamp($sessionId, $sessionData);
+        $result = $this->currentHandler->updateTimestamp(
+            $sessionId,
+            $sessionData
+        );
         $this->writeOnlyHandler->updateTimestamp($sessionId, $sessionData);
 
         return $result;

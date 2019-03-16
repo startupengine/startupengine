@@ -38,6 +38,4 @@ register_shutdown_function(function () {
 ob_start();
 
 $r = new Response();
-$r->headers->set('Date', 'Sat, 12 Nov 1955 20:04:00 GMT');
-
-return $r;
+$r->headers->set('Date', 'Sat, 12 Nov 1955 20:04:00 GMT'); return $r;

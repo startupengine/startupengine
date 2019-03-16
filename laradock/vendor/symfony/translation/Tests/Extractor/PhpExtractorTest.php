@@ -45,25 +45,36 @@ EOF;
                 'double-quoted key' => 'prefixdouble-quoted key',
                 'heredoc key' => 'prefixheredoc key',
                 'nowdoc key' => 'prefixnowdoc key',
-                "double-quoted key with whitespace and escaped \$\n\" sequences" => "prefixdouble-quoted key with whitespace and escaped \$\n\" sequences",
-                'single-quoted key with whitespace and nonescaped \$\n\' sequences' => 'prefixsingle-quoted key with whitespace and nonescaped \$\n\' sequences',
-                'single-quoted key with "quote mark at the end"' => 'prefixsingle-quoted key with "quote mark at the end"',
-                $expectedHeredoc => 'prefix'.$expectedHeredoc,
-                $expectedNowdoc => 'prefix'.$expectedNowdoc,
-                '{0} There is no apples|{1} There is one apple|]1,Inf[ There are %count% apples' => 'prefix{0} There is no apples|{1} There is one apple|]1,Inf[ There are %count% apples',
-                'concatenated message with heredoc and nowdoc' => 'prefixconcatenated message with heredoc and nowdoc',
+                "double-quoted key with whitespace and escaped \$\n\" sequences" =>
+                    "prefixdouble-quoted key with whitespace and escaped \$\n\" sequences",
+                'single-quoted key with whitespace and nonescaped \$\n\' sequences' =>
+                    'prefixsingle-quoted key with whitespace and nonescaped \$\n\' sequences',
+                'single-quoted key with "quote mark at the end"' =>
+                    'prefixsingle-quoted key with "quote mark at the end"',
+                $expectedHeredoc => 'prefix' . $expectedHeredoc,
+                $expectedNowdoc => 'prefix' . $expectedNowdoc,
+                '{0} There is no apples|{1} There is one apple|]1,Inf[ There are %count% apples' =>
+                    'prefix{0} There is no apples|{1} There is one apple|]1,Inf[ There are %count% apples',
+                'concatenated message with heredoc and nowdoc' =>
+                    'prefixconcatenated message with heredoc and nowdoc'
             ],
             'not_messages' => [
-                'other-domain-test-no-params-short-array' => 'prefixother-domain-test-no-params-short-array',
-                'other-domain-test-no-params-long-array' => 'prefixother-domain-test-no-params-long-array',
-                'other-domain-test-params-short-array' => 'prefixother-domain-test-params-short-array',
-                'other-domain-test-params-long-array' => 'prefixother-domain-test-params-long-array',
-                'other-domain-test-trans-choice-short-array-%count%' => 'prefixother-domain-test-trans-choice-short-array-%count%',
-                'other-domain-test-trans-choice-long-array-%count%' => 'prefixother-domain-test-trans-choice-long-array-%count%',
+                'other-domain-test-no-params-short-array' =>
+                    'prefixother-domain-test-no-params-short-array',
+                'other-domain-test-no-params-long-array' =>
+                    'prefixother-domain-test-no-params-long-array',
+                'other-domain-test-params-short-array' =>
+                    'prefixother-domain-test-params-short-array',
+                'other-domain-test-params-long-array' =>
+                    'prefixother-domain-test-params-long-array',
+                'other-domain-test-trans-choice-short-array-%count%' =>
+                    'prefixother-domain-test-trans-choice-short-array-%count%',
+                'other-domain-test-trans-choice-long-array-%count%' =>
+                    'prefixother-domain-test-trans-choice-long-array-%count%',
                 'typecast' => 'prefixtypecast',
                 'msg1' => 'prefixmsg1',
-                'msg2' => 'prefixmsg2',
-            ],
+                'msg2' => 'prefixmsg2'
+            ]
         ];
         $actualCatalogue = $catalogue->all();
 
@@ -72,7 +83,7 @@ EOF;
 
     public function resourcesProvider()
     {
-        $directory = __DIR__.'/../fixtures/extractor/';
+        $directory = __DIR__ . '/../fixtures/extractor/';
         $splFiles = [];
         foreach (new \DirectoryIterator($directory) as $fileInfo) {
             if ($fileInfo->isDot()) {
@@ -87,10 +98,10 @@ EOF;
         return [
             [$directory],
             [$phpFile],
-            [glob($directory.'*')],
+            [glob($directory . '*')],
             [$splFiles],
-            [new \ArrayObject(glob($directory.'*'))],
-            [new \ArrayObject($splFiles)],
+            [new \ArrayObject(glob($directory . '*'))],
+            [new \ArrayObject($splFiles)]
         ];
     }
 }

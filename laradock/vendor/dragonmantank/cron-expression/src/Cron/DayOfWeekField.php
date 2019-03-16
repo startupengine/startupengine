@@ -5,7 +5,6 @@ namespace Cron;
 use DateTime;
 use InvalidArgumentException;
 
-
 /**
  * Day of week field.  Allows: * / , - ? L #
  *
@@ -26,7 +25,15 @@ class DayOfWeekField extends AbstractField
 
     protected $nthRange;
 
-    protected $literals = [1 => 'MON', 2 => 'TUE', 3 => 'WED', 4 => 'THU', 5 => 'FRI', 6 => 'SAT', 7 => 'SUN'];
+    protected $literals = [
+        1 => 'MON',
+        2 => 'TUE',
+        3 => 'WED',
+        4 => 'THU',
+        5 => 'FRI',
+        6 => 'SAT',
+        7 => 'SUN'
+    ];
 
     public function __construct()
     {
@@ -49,7 +56,11 @@ class DayOfWeekField extends AbstractField
 
         // Find out if this is the last specific weekday of the month
         if (strpos($value, 'L')) {
-            $weekday = str_replace('7', '0', substr($value, 0, strpos($value, 'L')));
+            $weekday = str_replace(
+                '7',
+                '0',
+                substr($value, 0, strpos($value, 'L'))
+            );
             $tdate = clone $date;
             $tdate->setDate($currentYear, $currentMonth, $lastDayOfMonth);
             while ($tdate->format('w') != $weekday) {
@@ -67,7 +78,9 @@ class DayOfWeekField extends AbstractField
             list($weekday, $nth) = explode('#', $value);
 
             if (!is_numeric($nth)) {
-                throw new InvalidArgumentException("Hashed weekdays must be numeric, {$nth} given");
+                throw new InvalidArgumentException(
+                    "Hashed weekdays must be numeric, {$nth} given"
+                );
             } else {
                 $nth = (int) $nth;
             }
@@ -81,11 +94,15 @@ class DayOfWeekField extends AbstractField
 
             // Validate the hash fields
             if ($weekday < 0 || $weekday > 7) {
-                throw new InvalidArgumentException("Weekday must be a value between 0 and 7. {$weekday} given");
+                throw new InvalidArgumentException(
+                    "Weekday must be a value between 0 and 7. {$weekday} given"
+                );
             }
 
             if (!in_array($nth, $this->nthRange)) {
-                throw new InvalidArgumentException("There are never more than 5 or less than 1 of a given weekday in a month, {$nth} given");
+                throw new InvalidArgumentException(
+                    "There are never more than 5 or less than 1 of a given weekday in a month, {$nth} given"
+                );
             }
 
             // The current weekday must match the targeted weekday to proceed
@@ -153,7 +170,11 @@ class DayOfWeekField extends AbstractField
                 $chunks = explode('#', $value);
                 $chunks[0] = $this->convertLiterals($chunks[0]);
 
-                if (parent::validate($chunks[0]) && is_numeric($chunks[1]) && in_array($chunks[1], $this->nthRange)) {
+                if (
+                    parent::validate($chunks[0]) &&
+                    is_numeric($chunks[1]) &&
+                    in_array($chunks[1], $this->nthRange)
+                ) {
                     return true;
                 }
             }

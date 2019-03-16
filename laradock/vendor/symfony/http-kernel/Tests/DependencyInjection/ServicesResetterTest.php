@@ -26,13 +26,16 @@ class ServicesResetterTest extends TestCase
 
     public function testResetServices()
     {
-        $resetter = new ServicesResetter(new \ArrayIterator([
-            'id1' => new ResettableService(),
-            'id2' => new ClearableService(),
-        ]), [
-            'id1' => 'reset',
-            'id2' => 'clear',
-        ]);
+        $resetter = new ServicesResetter(
+            new \ArrayIterator([
+                'id1' => new ResettableService(),
+                'id2' => new ClearableService()
+            ]),
+            [
+                'id1' => 'reset',
+                'id2' => 'clear'
+            ]
+        );
 
         $resetter->reset();
 

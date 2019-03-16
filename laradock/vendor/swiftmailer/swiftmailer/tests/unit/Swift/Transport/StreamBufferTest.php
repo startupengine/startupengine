@@ -5,10 +5,11 @@ class Swift_Transport_StreamBufferTest extends \PHPUnit\Framework\TestCase
     public function testSettingWriteTranslationsCreatesFilters()
     {
         $factory = $this->createFactory();
-        $factory->expects($this->once())
-                ->method('createFilter')
-                ->with('a', 'b')
-                ->will($this->returnCallback([$this, 'createFilter']));
+        $factory
+            ->expects($this->once())
+            ->method('createFilter')
+            ->with('a', 'b')
+            ->will($this->returnCallback([$this, 'createFilter']));
 
         $buffer = $this->createBuffer($factory);
         $buffer->setWriteTranslations(['a' => 'b']);
@@ -17,9 +18,10 @@ class Swift_Transport_StreamBufferTest extends \PHPUnit\Framework\TestCase
     public function testOverridingTranslationsOnlyAddsNeededFilters()
     {
         $factory = $this->createFactory();
-        $factory->expects($this->exactly(2))
-                ->method('createFilter')
-                ->will($this->returnCallback([$this, 'createFilter']));
+        $factory
+            ->expects($this->exactly(2))
+            ->method('createFilter')
+            ->will($this->returnCallback([$this, 'createFilter']));
 
         $buffer = $this->createBuffer($factory);
         $buffer->setWriteTranslations(['a' => 'b']);
@@ -33,7 +35,9 @@ class Swift_Transport_StreamBufferTest extends \PHPUnit\Framework\TestCase
 
     private function createFactory()
     {
-        return $this->getMockBuilder('Swift_ReplacementFilterFactory')->getMock();
+        return $this->getMockBuilder(
+            'Swift_ReplacementFilterFactory'
+        )->getMock();
     }
 
     public function createFilter()

@@ -45,9 +45,14 @@ class Esi extends AbstractSurrogate
     /**
      * {@inheritdoc}
      */
-    public function renderIncludeTag($uri, $alt = null, $ignoreErrors = true, $comment = '')
-    {
-        $html = sprintf('<esi:include src="%s"%s%s />',
+    public function renderIncludeTag(
+        $uri,
+        $alt = null,
+        $ignoreErrors = true,
+        $comment = ''
+    ) {
+        $html = sprintf(
+            '<esi:include src="%s"%s%s />',
             $uri,
             $ignoreErrors ? ' onerror="continue"' : '',
             $alt ? sprintf(' alt="%s"', $alt) : ''
@@ -77,31 +82,59 @@ class Esi extends AbstractSurrogate
 
         // we don't use a proper XML parser here as we can have ESI tags in a plain text response
         $content = $response->getContent();
-        $content = preg_replace('#<esi\:remove>.*?</esi\:remove>#s', '', $content);
+        $content = preg_replace(
+            '#<esi\:remove>.*?</esi\:remove>#s',
+            '',
+            $content
+        );
         $content = preg_replace('#<esi\:comment[^>]+>#s', '', $content);
 
-        $chunks = preg_split('#<esi\:include\s+(.*?)\s*(?:/|</esi\:include)>#', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-        $chunks[0] = str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[0]);
+        $chunks = preg_split(
+            '#<esi\:include\s+(.*?)\s*(?:/|</esi\:include)>#',
+            $content,
+            -1,
+            PREG_SPLIT_DELIM_CAPTURE
+        );
+        $chunks[0] = str_replace(
+            $this->phpEscapeMap[0],
+            $this->phpEscapeMap[1],
+            $chunks[0]
+        );
 
         $i = 1;
         while (isset($chunks[$i])) {
             $options = [];
-            preg_match_all('/(src|onerror|alt)="([^"]*?)"/', $chunks[$i], $matches, PREG_SET_ORDER);
+            preg_match_all(
+                '/(src|onerror|alt)="([^"]*?)"/',
+                $chunks[$i],
+                $matches,
+                PREG_SET_ORDER
+            );
             foreach ($matches as $set) {
                 $options[$set[1]] = $set[2];
             }
 
             if (!isset($options['src'])) {
-                throw new \RuntimeException('Unable to process an ESI tag without a "src" attribute.');
+                throw new \RuntimeException(
+                    'Unable to process an ESI tag without a "src" attribute.'
+                );
             }
 
-            $chunks[$i] = sprintf('<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>'."\n",
+            $chunks[$i] = sprintf(
+                '<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>' .
+                    "\n",
                 var_export($options['src'], true),
                 var_export(isset($options['alt']) ? $options['alt'] : '', true),
-                isset($options['onerror']) && 'continue' === $options['onerror'] ? 'true' : 'false'
+                isset($options['onerror']) && 'continue' === $options['onerror']
+                    ? 'true'
+                    : 'false'
             );
             ++$i;
-            $chunks[$i] = str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[$i]);
+            $chunks[$i] = str_replace(
+                $this->phpEscapeMap[0],
+                $this->phpEscapeMap[1],
+                $chunks[$i]
+            );
             ++$i;
         }
         $content = implode('', $chunks);

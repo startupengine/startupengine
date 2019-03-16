@@ -22,8 +22,11 @@ class Swift_Events_CommandEventTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($transport, $ref);
     }
 
-    private function createEvent(Swift_Transport $source, $command, $successCodes = [])
-    {
+    private function createEvent(
+        Swift_Transport $source,
+        $command,
+        $successCodes = []
+    ) {
         return new Swift_Events_CommandEvent($source, $command, $successCodes);
     }
 

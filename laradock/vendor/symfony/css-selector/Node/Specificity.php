@@ -42,12 +42,18 @@ class Specificity
 
     public function plus(self $specificity): self
     {
-        return new self($this->a + $specificity->a, $this->b + $specificity->b, $this->c + $specificity->c);
+        return new self(
+            $this->a + $specificity->a,
+            $this->b + $specificity->b,
+            $this->c + $specificity->c
+        );
     }
 
     public function getValue(): int
     {
-        return $this->a * self::A_FACTOR + $this->b * self::B_FACTOR + $this->c * self::C_FACTOR;
+        return $this->a * self::A_FACTOR +
+            $this->b * self::B_FACTOR +
+            $this->c * self::C_FACTOR;
     }
 
     /**

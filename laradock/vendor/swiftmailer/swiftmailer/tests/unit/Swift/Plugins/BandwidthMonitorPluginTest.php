@@ -1,6 +1,7 @@
 <?php
 
-class Swift_Plugins_BandwidthMonitorPluginTest extends \PHPUnit\Framework\TestCase
+class Swift_Plugins_BandwidthMonitorPluginTest extends
+    \PHPUnit\Framework\TestCase
 {
     private $_monitor;
 
@@ -72,9 +73,10 @@ class Swift_Plugins_BandwidthMonitorPluginTest extends \PHPUnit\Framework\TestCa
     private function createSendEvent($message)
     {
         $evt = $this->getMockBuilder('Swift_Events_SendEvent')
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        $evt->expects($this->any())
+            ->disableOriginalConstructor()
+            ->getMock();
+        $evt
+            ->expects($this->any())
             ->method('getMessage')
             ->will($this->returnValue($message));
 
@@ -84,9 +86,10 @@ class Swift_Plugins_BandwidthMonitorPluginTest extends \PHPUnit\Framework\TestCa
     private function createCommandEvent($command)
     {
         $evt = $this->getMockBuilder('Swift_Events_CommandEvent')
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        $evt->expects($this->any())
+            ->disableOriginalConstructor()
+            ->getMock();
+        $evt
+            ->expects($this->any())
             ->method('getCommand')
             ->will($this->returnValue($command));
 
@@ -96,9 +99,10 @@ class Swift_Plugins_BandwidthMonitorPluginTest extends \PHPUnit\Framework\TestCa
     private function createResponseEvent($response)
     {
         $evt = $this->getMockBuilder('Swift_Events_ResponseEvent')
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        $evt->expects($this->any())
+            ->disableOriginalConstructor()
+            ->getMock();
+        $evt
+            ->expects($this->any())
             ->method('getResponse')
             ->will($this->returnValue($response));
 
@@ -108,8 +112,11 @@ class Swift_Plugins_BandwidthMonitorPluginTest extends \PHPUnit\Framework\TestCa
     private function createMessageWithByteCount($bytes)
     {
         $this->bytes = $bytes;
-        $msg = $this->getMockBuilder('Swift_Mime_SimpleMessage')->disableOriginalConstructor()->getMock();
-        $msg->expects($this->any())
+        $msg = $this->getMockBuilder('Swift_Mime_SimpleMessage')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $msg
+            ->expects($this->any())
             ->method('toByteStream')
             ->will($this->returnCallback([$this, 'write']));
         /*  $this->checking(Expectations::create()

@@ -32,8 +32,10 @@ class HashHandler implements HandlerInterface
     private $patterns;
     private $escaping;
 
-    public function __construct(TokenizerPatterns $patterns, TokenizerEscaping $escaping)
-    {
+    public function __construct(
+        TokenizerPatterns $patterns,
+        TokenizerEscaping $escaping
+    ) {
         $this->patterns = $patterns;
         $this->escaping = $escaping;
     }
@@ -50,7 +52,9 @@ class HashHandler implements HandlerInterface
         }
 
         $value = $this->escaping->escapeUnicode($match[1]);
-        $stream->push(new Token(Token::TYPE_HASH, $value, $reader->getPosition()));
+        $stream->push(
+            new Token(Token::TYPE_HASH, $value, $reader->getPosition())
+        );
         $reader->moveForward(\strlen($match[0]));
 
         return true;

@@ -65,9 +65,11 @@ class Swift_Transport_NullTransport implements Swift_Transport
      *
      * @return int The number of sent emails
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
-    {
-        if ($evt = $this->eventDispatcher->createSendEvent($this, $message)) {
+    public function send(
+        Swift_Mime_SimpleMessage $message,
+        &$failedRecipients = null
+    ) {
+        if (($evt = $this->eventDispatcher->createSendEvent($this, $message))) {
             $this->eventDispatcher->dispatchEvent($evt, 'beforeSendPerformed');
             if ($evt->bubbleCancelled()) {
                 return 0;
@@ -79,11 +81,10 @@ class Swift_Transport_NullTransport implements Swift_Transport
             $this->eventDispatcher->dispatchEvent($evt, 'sendPerformed');
         }
 
-        $count = (
-            count((array) $message->getTo())
-            + count((array) $message->getCc())
-            + count((array) $message->getBcc())
-            );
+        $count =
+            count((array) $message->getTo()) +
+            count((array) $message->getCc()) +
+            count((array) $message->getBcc());
 
         return $count;
     }

@@ -26,8 +26,13 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
      *
      * @param string $charset
      */
-    public function __construct(Swift_Mime_SimpleHeaderSet $headers, Swift_Mime_ContentEncoder $encoder, Swift_KeyCache $cache, Swift_IdGenerator $idGenerator, $charset = null)
-    {
+    public function __construct(
+        Swift_Mime_SimpleHeaderSet $headers,
+        Swift_Mime_ContentEncoder $encoder,
+        Swift_KeyCache $cache,
+        Swift_IdGenerator $idGenerator,
+        $charset = null
+    ) {
         parent::__construct($headers, $encoder, $cache, $idGenerator, $charset);
         $this->getHeaders()->defineOrdering([
             'Return-Path',
@@ -45,8 +50,8 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
             'Bcc',
             'MIME-Version',
             'Content-Type',
-            'Content-Transfer-Encoding',
-            ]);
+            'Content-Transfer-Encoding'
+        ]);
         $this->getHeaders()->setAlwaysDisplayed(['Date', 'Message-ID', 'From']);
         $this->getHeaders()->addTextHeader('MIME-Version', '1.0');
         $this->setDate(new DateTimeImmutable());
@@ -265,7 +270,10 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
         }
 
         if (!$this->setHeaderFieldModel('Reply-To', (array) $addresses)) {
-            $this->getHeaders()->addMailboxHeader('Reply-To', (array) $addresses);
+            $this->getHeaders()->addMailboxHeader(
+                'Reply-To',
+                (array) $addresses
+            );
         }
 
         return $this;
@@ -456,18 +464,24 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
             self::PRIORITY_HIGH => 'High',
             self::PRIORITY_NORMAL => 'Normal',
             self::PRIORITY_LOW => 'Low',
-            self::PRIORITY_LOWEST => 'Lowest',
-            ];
+            self::PRIORITY_LOWEST => 'Lowest'
+        ];
         $pMapKeys = array_keys($priorityMap);
         if ($priority > max($pMapKeys)) {
             $priority = max($pMapKeys);
         } elseif ($priority < min($pMapKeys)) {
             $priority = min($pMapKeys);
         }
-        if (!$this->setHeaderFieldModel('X-Priority',
-            sprintf('%d (%s)', $priority, $priorityMap[$priority]))) {
-            $this->getHeaders()->addTextHeader('X-Priority',
-                sprintf('%d (%s)', $priority, $priorityMap[$priority]));
+        if (
+            !$this->setHeaderFieldModel(
+                'X-Priority',
+                sprintf('%d (%s)', $priority, $priorityMap[$priority])
+            )
+        ) {
+            $this->getHeaders()->addTextHeader(
+                'X-Priority',
+                sprintf('%d (%s)', $priority, $priorityMap[$priority])
+            );
         }
 
         return $this;
@@ -483,9 +497,10 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
      */
     public function getPriority()
     {
-        list($priority) = sscanf($this->getHeaderFieldModel('X-Priority'),
+        list($priority) = sscanf(
+            $this->getHeaderFieldModel('X-Priority'),
             '%[1-5]'
-            );
+        );
 
         return $priority ?? 3;
     }
@@ -499,9 +514,16 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
      */
     public function setReadReceiptTo($addresses)
     {
-        if (!$this->setHeaderFieldModel('Disposition-Notification-To', $addresses)) {
-            $this->getHeaders()
-                ->addMailboxHeader('Disposition-Notification-To', $addresses);
+        if (
+            !$this->setHeaderFieldModel(
+                'Disposition-Notification-To',
+                $addresses
+            )
+        ) {
+            $this->getHeaders()->addMailboxHeader(
+                'Disposition-Notification-To',
+                $addresses
+            );
         }
 
         return $this;
@@ -558,7 +580,7 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
     {
         $this->attach($entity);
 
-        return 'cid:'.$entity->getId();
+        return 'cid:' . $entity->getId();
     }
 
     /**
@@ -568,8 +590,13 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
      */
     public function toString()
     {
-        if (count($children = $this->getChildren()) > 0 && '' != $this->getBody()) {
-            $this->setChildren(array_merge([$this->becomeMimePart()], $children));
+        if (
+            count(($children = $this->getChildren())) > 0 &&
+            '' != $this->getBody()
+        ) {
+            $this->setChildren(
+                array_merge([$this->becomeMimePart()], $children)
+            );
             $string = parent::toString();
             $this->setChildren($children);
         } else {
@@ -596,8 +623,13 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
      */
     public function toByteStream(Swift_InputByteStream $is)
     {
-        if (count($children = $this->getChildren()) > 0 && '' != $this->getBody()) {
-            $this->setChildren(array_merge([$this->becomeMimePart()], $children));
+        if (
+            count(($children = $this->getChildren())) > 0 &&
+            '' != $this->getBody()
+        ) {
+            $this->setChildren(
+                array_merge([$this->becomeMimePart()], $children)
+            );
             parent::toByteStream($is);
             $this->setChildren($children);
         } else {
@@ -614,9 +646,13 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart
     /** Turn the body of this message into a child of itself if needed */
     protected function becomeMimePart()
     {
-        $part = new parent($this->getHeaders()->newInstance(), $this->getEncoder(),
-            $this->getCache(), $this->getIdGenerator(), $this->userCharset
-            );
+        $part = new parent(
+            $this->getHeaders()->newInstance(),
+            $this->getEncoder(),
+            $this->getCache(),
+            $this->getIdGenerator(),
+            $this->userCharset
+        );
         $part->setContentType($this->userContentType);
         $part->setBody($this->getBody());
         $part->setFormat($this->userFormat);

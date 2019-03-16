@@ -69,7 +69,9 @@ class DebugHandlersListenerTest extends TestCase
         $listener = new DebugHandlersListener(null);
         $eHandler = new ErrorHandler();
         $event = new KernelEvent(
-            $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')->getMock(),
+            $this->getMockBuilder(
+                'Symfony\Component\HttpKernel\HttpKernelInterface'
+            )->getMock(),
             Request::create('/'),
             HttpKernelInterface::MASTER_REQUEST
         );
@@ -93,17 +95,26 @@ class DebugHandlersListenerTest extends TestCase
     {
         $dispatcher = new EventDispatcher();
         $listener = new DebugHandlersListener(null);
-        $app = $this->getMockBuilder('Symfony\Component\Console\Application')->getMock();
-        $app->expects($this->once())->method('getHelperSet')->will($this->returnValue(new HelperSet()));
+        $app = $this->getMockBuilder(
+            'Symfony\Component\Console\Application'
+        )->getMock();
+        $app
+            ->expects($this->once())
+            ->method('getHelperSet')
+            ->will($this->returnValue(new HelperSet()));
         $command = new Command(__FUNCTION__);
         $command->setApplication($app);
-        $event = new ConsoleEvent($command, new ArgvInput(), new ConsoleOutput());
+        $event = new ConsoleEvent(
+            $command,
+            new ArgvInput(),
+            new ConsoleOutput()
+        );
 
         $dispatcher->addSubscriber($listener);
 
         $xListeners = [
             KernelEvents::REQUEST => [[$listener, 'configure']],
-            ConsoleEvents::COMMAND => [[$listener, 'configure']],
+            ConsoleEvents::COMMAND => [[$listener, 'configure']]
         ];
         $this->assertSame($xListeners, $dispatcher->getListeners());
 
@@ -125,8 +136,7 @@ class DebugHandlersListenerTest extends TestCase
         $xHandler = $eHandler->setExceptionHandler('var_dump');
         $this->assertInstanceOf('Closure', $xHandler);
 
-        $app->expects($this->once())
-            ->method('renderException');
+        $app->expects($this->once())->method('renderException');
 
         $xHandler(new \Exception());
     }
@@ -150,6 +160,9 @@ class DebugHandlersListenerTest extends TestCase
             throw $exception;
         }
 
-        $this->assertSame($userHandler, $eHandler->setExceptionHandler('var_dump'));
+        $this->assertSame(
+            $userHandler,
+            $eHandler->setExceptionHandler('var_dump')
+        );
     }
 }

@@ -49,11 +49,20 @@ class MemcachedSessionHandler extends AbstractSessionHandler
     {
         $this->memcached = $memcached;
 
-        if ($diff = array_diff(array_keys($options), ['prefix', 'expiretime'])) {
-            throw new \InvalidArgumentException(sprintf('The following options are not supported "%s"', implode(', ', $diff)));
+        if (
+            ($diff = array_diff(array_keys($options), ['prefix', 'expiretime']))
+        ) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The following options are not supported "%s"',
+                    implode(', ', $diff)
+                )
+            );
         }
 
-        $this->ttl = isset($options['expiretime']) ? (int) $options['expiretime'] : 86400;
+        $this->ttl = isset($options['expiretime'])
+            ? (int) $options['expiretime']
+            : 86400;
         $this->prefix = isset($options['prefix']) ? $options['prefix'] : 'sf2s';
     }
 
@@ -70,7 +79,7 @@ class MemcachedSessionHandler extends AbstractSessionHandler
      */
     protected function doRead($sessionId)
     {
-        return $this->memcached->get($this->prefix.$sessionId) ?: '';
+        return $this->memcached->get($this->prefix . $sessionId) ?: '';
     }
 
     /**
@@ -78,7 +87,10 @@ class MemcachedSessionHandler extends AbstractSessionHandler
      */
     public function updateTimestamp($sessionId, $data)
     {
-        $this->memcached->touch($this->prefix.$sessionId, time() + $this->ttl);
+        $this->memcached->touch(
+            $this->prefix . $sessionId,
+            time() + $this->ttl
+        );
 
         return true;
     }
@@ -88,7 +100,11 @@ class MemcachedSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite($sessionId, $data)
     {
-        return $this->memcached->set($this->prefix.$sessionId, $data, time() + $this->ttl);
+        return $this->memcached->set(
+            $this->prefix . $sessionId,
+            $data,
+            time() + $this->ttl
+        );
     }
 
     /**
@@ -96,9 +112,10 @@ class MemcachedSessionHandler extends AbstractSessionHandler
      */
     protected function doDestroy($sessionId)
     {
-        $result = $this->memcached->delete($this->prefix.$sessionId);
+        $result = $this->memcached->delete($this->prefix . $sessionId);
 
-        return $result || \Memcached::RES_NOTFOUND == $this->memcached->getResultCode();
+        return $result ||
+            \Memcached::RES_NOTFOUND == $this->memcached->getResultCode();
     }
 
     /**

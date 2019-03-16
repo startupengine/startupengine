@@ -8,14 +8,22 @@
  * file that was distributed with this source code.
  */
 
-@trigger_error(sprintf('The "%s" class is deprecated since Swiftmailer 6.2; use "%s" instead.', Swift_CharacterStream_ArrayCharacterStream::class, Swift_CharacterStream_CharacterStream::class), E_USER_DEPRECATED);
+@trigger_error(
+    sprintf(
+        'The "%s" class is deprecated since Swiftmailer 6.2; use "%s" instead.',
+        Swift_CharacterStream_ArrayCharacterStream::class,
+        Swift_CharacterStream_CharacterStream::class
+    ),
+    E_USER_DEPRECATED
+);
 
 /**
  * A CharacterStream implementation which stores characters in an internal array.
  *
  * @author Chris Corbyn
  */
-class Swift_CharacterStream_ArrayCharacterStream implements Swift_CharacterStream
+class Swift_CharacterStream_ArrayCharacterStream implements
+    Swift_CharacterStream
 {
     /** A map of byte values and their respective characters */
     private static $charMap;
@@ -68,8 +76,9 @@ class Swift_CharacterStream_ArrayCharacterStream implements Swift_CharacterStrea
     /**
      * Set the CharacterReaderFactory for multi charset support.
      */
-    public function setCharacterReaderFactory(Swift_CharacterReaderFactory $factory)
-    {
+    public function setCharacterReaderFactory(
+        Swift_CharacterReaderFactory $factory
+    ) {
         $this->charReaderFactory = $factory;
     }
 
@@ -81,21 +90,20 @@ class Swift_CharacterStream_ArrayCharacterStream implements Swift_CharacterStrea
     public function importByteStream(Swift_OutputByteStream $os)
     {
         if (!isset($this->charReader)) {
-            $this->charReader = $this->charReaderFactory
-                ->getReaderFor($this->charset);
+            $this->charReader = $this->charReaderFactory->getReaderFor(
+                $this->charset
+            );
         }
 
         $startLength = $this->charReader->getInitialByteSize();
-        while (false !== $bytes = $os->read($startLength)) {
+        while (false !== ($bytes = $os->read($startLength))) {
             $c = [];
             for ($i = 0, $len = strlen($bytes); $i < $len; ++$i) {
                 $c[] = self::$byteMap[$bytes[$i]];
             }
             $size = count($c);
-            $need = $this->charReader
-                ->validateByteSequence($c, $size);
-            if ($need > 0 &&
-                false !== $bytes = $os->read($need)) {
+            $need = $this->charReader->validateByteSequence($c, $size);
+            if ($need > 0 && false !== ($bytes = $os->read($need))) {
                 for ($i = 0, $len = strlen($bytes); $i < $len; ++$i) {
                     $c[] = self::$byteMap[$bytes[$i]];
                 }
@@ -170,7 +178,7 @@ class Swift_CharacterStream_ArrayCharacterStream implements Swift_CharacterStrea
             }
             $arrays[] = $this->array[$i];
         }
-        $this->offset += ($i - $this->offset); // Limit function calls
+        $this->offset += $i - $this->offset; // Limit function calls
 
         return array_merge(...$arrays);
     }
@@ -184,7 +192,8 @@ class Swift_CharacterStream_ArrayCharacterStream implements Swift_CharacterStrea
     {
         if (!isset($this->charReader)) {
             $this->charReader = $this->charReaderFactory->getReaderFor(
-                $this->charset);
+                $this->charset
+            );
         }
 
         $startLength = $this->charReader->getInitialByteSize();
@@ -214,12 +223,15 @@ class Swift_CharacterStream_ArrayCharacterStream implements Swift_CharacterStrea
             }
             if ($buf_len - $buf_pos > 0) {
                 $size = 0;
-                for ($i = 0; $i < $startLength && isset($buffer[$buf_pos]); ++$i) {
+                for (
+                    $i = 0;
+                    $i < $startLength && isset($buffer[$buf_pos]);
+                    ++$i
+                ) {
                     ++$size;
                     $bytes[] = $buffer[$buf_pos++];
                 }
-                $need = $this->charReader->validateByteSequence(
-                    $bytes, $size);
+                $need = $this->charReader->validateByteSequence($bytes, $size);
                 if ($need > 0) {
                     if ($buf_len - $buf_pos < $need) {
                         $new = $this->reloadBuffer($fp, $need);

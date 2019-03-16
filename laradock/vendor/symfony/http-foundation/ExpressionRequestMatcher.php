@@ -32,7 +32,9 @@ class ExpressionRequestMatcher extends RequestMatcher
     public function matches(Request $request)
     {
         if (!$this->language) {
-            throw new \LogicException('Unable to match the request as the expression language is not available.');
+            throw new \LogicException(
+                'Unable to match the request as the expression language is not available.'
+            );
         }
 
         return $this->language->evaluate($this->expression, [
@@ -41,7 +43,7 @@ class ExpressionRequestMatcher extends RequestMatcher
             'path' => rawurldecode($request->getPathInfo()),
             'host' => $request->getHost(),
             'ip' => $request->getClientIp(),
-            'attributes' => $request->attributes->all(),
+            'attributes' => $request->attributes->all()
         ]) && parent::matches($request);
     }
 }

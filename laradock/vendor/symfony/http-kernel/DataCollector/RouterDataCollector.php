@@ -36,14 +36,20 @@ class RouterDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(
+        Request $request,
+        Response $response,
+        \Exception $exception = null
+    ) {
         if ($response instanceof RedirectResponse) {
             $this->data['redirect'] = true;
             $this->data['url'] = $response->getTargetUrl();
 
             if ($this->controllers->contains($request)) {
-                $this->data['route'] = $this->guessRoute($request, $this->controllers[$request]);
+                $this->data['route'] = $this->guessRoute(
+                    $request,
+                    $this->controllers[$request]
+                );
             }
         }
 
@@ -57,7 +63,7 @@ class RouterDataCollector extends DataCollector
         $this->data = [
             'redirect' => false,
             'url' => null,
-            'route' => null,
+            'route' => null
         ];
     }
 

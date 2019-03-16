@@ -5,8 +5,7 @@ class Swift_Plugins_PopBeforeSmtpPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginConnectsToPop3HostBeforeTransportStarts()
     {
         $connection = $this->createConnection();
-        $connection->expects($this->once())
-                   ->method('connect');
+        $connection->expects($this->once())->method('connect');
 
         $plugin = $this->createPlugin('pop.host.tld', 110);
         $plugin->setConnection($connection);
@@ -20,8 +19,7 @@ class Swift_Plugins_PopBeforeSmtpPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginDisconnectsFromPop3HostBeforeTransportStarts()
     {
         $connection = $this->createConnection();
-        $connection->expects($this->once())
-                   ->method('disconnect');
+        $connection->expects($this->once())->method('disconnect');
 
         $plugin = $this->createPlugin('pop.host.tld', 110);
         $plugin->setConnection($connection);
@@ -35,10 +33,8 @@ class Swift_Plugins_PopBeforeSmtpPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginDoesNotConnectToSmtpIfBoundToDifferentTransport()
     {
         $connection = $this->createConnection();
-        $connection->expects($this->never())
-                   ->method('disconnect');
-        $connection->expects($this->never())
-                   ->method('connect');
+        $connection->expects($this->never())->method('disconnect');
+        $connection->expects($this->never())->method('connect');
 
         $smtp = $this->createTransport();
 
@@ -55,8 +51,7 @@ class Swift_Plugins_PopBeforeSmtpPluginTest extends \PHPUnit\Framework\TestCase
     public function testPluginCanBindToSpecificTransport()
     {
         $connection = $this->createConnection();
-        $connection->expects($this->once())
-                   ->method('connect');
+        $connection->expects($this->once())->method('connect');
 
         $smtp = $this->createTransport();
 
@@ -77,12 +72,14 @@ class Swift_Plugins_PopBeforeSmtpPluginTest extends \PHPUnit\Framework\TestCase
     private function createTransportChangeEvent($transport)
     {
         $evt = $this->getMockBuilder('Swift_Events_TransportChangeEvent')
-                    ->disableOriginalConstructor()
-                    ->getMock();
-        $evt->expects($this->any())
+            ->disableOriginalConstructor()
+            ->getMock();
+        $evt
+            ->expects($this->any())
             ->method('getSource')
             ->will($this->returnValue($transport));
-        $evt->expects($this->any())
+        $evt
+            ->expects($this->any())
             ->method('getTransport')
             ->will($this->returnValue($transport));
 
@@ -91,7 +88,9 @@ class Swift_Plugins_PopBeforeSmtpPluginTest extends \PHPUnit\Framework\TestCase
 
     public function createConnection()
     {
-        return $this->getMockBuilder('Swift_Plugins_Pop_Pop3Connection')->getMock();
+        return $this->getMockBuilder(
+            'Swift_Plugins_Pop_Pop3Connection'
+        )->getMock();
     }
 
     public function createPlugin($host, $port, $crypto = null)

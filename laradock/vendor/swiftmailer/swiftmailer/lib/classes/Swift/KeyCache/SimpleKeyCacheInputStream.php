@@ -13,7 +13,8 @@
  *
  * @author Chris Corbyn
  */
-class Swift_KeyCache_SimpleKeyCacheInputStream implements Swift_KeyCache_KeyCacheInputStream
+class Swift_KeyCache_SimpleKeyCacheInputStream implements
+    Swift_KeyCache_KeyCacheInputStream
 {
     /** The KeyCache being written to */
     private $keyCache;
@@ -52,8 +53,11 @@ class Swift_KeyCache_SimpleKeyCacheInputStream implements Swift_KeyCache_KeyCach
     public function write($bytes, Swift_InputByteStream $is = null)
     {
         $this->keyCache->setString(
-            $this->nsKey, $this->itemKey, $bytes, Swift_KeyCache::MODE_APPEND
-            );
+            $this->nsKey,
+            $this->itemKey,
+            $bytes,
+            Swift_KeyCache::MODE_APPEND
+        );
         if (isset($is)) {
             $is->write($bytes);
         }

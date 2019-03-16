@@ -31,7 +31,9 @@ class SyntaxErrorException extends ParseException
      */
     public static function unexpectedToken($expectedValue, Token $foundToken)
     {
-        return new self(sprintf('Expected %s, but %s found.', $expectedValue, $foundToken));
+        return new self(
+            sprintf('Expected %s, but %s found.', $expectedValue, $foundToken)
+        );
     }
 
     /**
@@ -40,9 +42,17 @@ class SyntaxErrorException extends ParseException
      *
      * @return self
      */
-    public static function pseudoElementFound($pseudoElement, $unexpectedLocation)
-    {
-        return new self(sprintf('Unexpected pseudo-element "::%s" found %s.', $pseudoElement, $unexpectedLocation));
+    public static function pseudoElementFound(
+        $pseudoElement,
+        $unexpectedLocation
+    ) {
+        return new self(
+            sprintf(
+                'Unexpected pseudo-element "::%s" found %s.',
+                $pseudoElement,
+                $unexpectedLocation
+            )
+        );
     }
 
     /**

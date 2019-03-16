@@ -25,9 +25,12 @@ class ParserTest extends TestCase
     {
         $parser = new Parser();
 
-        $this->assertEquals($representation, array_map(function (SelectorNode $node) {
-            return (string) $node->getTree();
-        }, $parser->parse($source)));
+        $this->assertEquals(
+            $representation,
+            array_map(function (SelectorNode $node) {
+                return (string) $node->getTree();
+            }, $parser->parse($source))
+        );
     }
 
     /** @dataProvider getParserExceptionTestData */
@@ -77,7 +80,10 @@ class ParserTest extends TestCase
 
         /** @var FunctionNode $function */
         $function = $selectors[0]->getTree();
-        $this->assertEquals([$a, $b], Parser::parseSeries($function->getArguments()));
+        $this->assertEquals(
+            [$a, $b],
+            Parser::parseSeries($function->getArguments())
+        );
     }
 
     /** @dataProvider getParseSeriesExceptionTestData */
@@ -89,7 +95,10 @@ class ParserTest extends TestCase
 
         /** @var FunctionNode $function */
         $function = $selectors[0]->getTree();
-        $this->{method_exists($this, $_ = 'expectException') ? $_ : 'setExpectedException'}('Symfony\Component\CssSelector\Exception\SyntaxErrorException');
+        $this->{method_exists($this, ($_ = 'expectException'))
+            ? $_
+            : 'setExpectedException'
+        }('Symfony\Component\CssSelector\Exception\SyntaxErrorException');
         Parser::parseSeries($function->getArguments());
     }
 
@@ -102,72 +111,291 @@ class ParserTest extends TestCase
             ['foo|*', ['Element[foo|*]']],
             ['foo|bar', ['Element[foo|bar]']],
             ['#foo#bar', ['Hash[Hash[Element[*]#foo]#bar]']],
-            ['div>.foo', ['CombinedSelector[Element[div] > Class[Element[*].foo]]']],
-            ['div> .foo', ['CombinedSelector[Element[div] > Class[Element[*].foo]]']],
-            ['div >.foo', ['CombinedSelector[Element[div] > Class[Element[*].foo]]']],
-            ['div > .foo', ['CombinedSelector[Element[div] > Class[Element[*].foo]]']],
-            ["div \n>  \t \t .foo", ['CombinedSelector[Element[div] > Class[Element[*].foo]]']],
-            ['td.foo,.bar', ['Class[Element[td].foo]', 'Class[Element[*].bar]']],
-            ['td.foo, .bar', ['Class[Element[td].foo]', 'Class[Element[*].bar]']],
-            ["td.foo\t\r\n\f ,\t\r\n\f .bar", ['Class[Element[td].foo]', 'Class[Element[*].bar]']],
-            ['td.foo,.bar', ['Class[Element[td].foo]', 'Class[Element[*].bar]']],
-            ['td.foo, .bar', ['Class[Element[td].foo]', 'Class[Element[*].bar]']],
-            ["td.foo\t\r\n\f ,\t\r\n\f .bar", ['Class[Element[td].foo]', 'Class[Element[*].bar]']],
-            ['div, td.foo, div.bar span', ['Element[div]', 'Class[Element[td].foo]', 'CombinedSelector[Class[Element[div].bar] <followed> Element[span]]']],
+            [
+                'div>.foo',
+                ['CombinedSelector[Element[div] > Class[Element[*].foo]]']
+            ],
+            [
+                'div> .foo',
+                ['CombinedSelector[Element[div] > Class[Element[*].foo]]']
+            ],
+            [
+                'div >.foo',
+                ['CombinedSelector[Element[div] > Class[Element[*].foo]]']
+            ],
+            [
+                'div > .foo',
+                ['CombinedSelector[Element[div] > Class[Element[*].foo]]']
+            ],
+            [
+                "div \n>  \t \t .foo",
+                ['CombinedSelector[Element[div] > Class[Element[*].foo]]']
+            ],
+            [
+                'td.foo,.bar',
+                ['Class[Element[td].foo]', 'Class[Element[*].bar]']
+            ],
+            [
+                'td.foo, .bar',
+                ['Class[Element[td].foo]', 'Class[Element[*].bar]']
+            ],
+            [
+                "td.foo\t\r\n\f ,\t\r\n\f .bar",
+                ['Class[Element[td].foo]', 'Class[Element[*].bar]']
+            ],
+            [
+                'td.foo,.bar',
+                ['Class[Element[td].foo]', 'Class[Element[*].bar]']
+            ],
+            [
+                'td.foo, .bar',
+                ['Class[Element[td].foo]', 'Class[Element[*].bar]']
+            ],
+            [
+                "td.foo\t\r\n\f ,\t\r\n\f .bar",
+                ['Class[Element[td].foo]', 'Class[Element[*].bar]']
+            ],
+            [
+                'div, td.foo, div.bar span',
+                [
+                    'Element[div]',
+                    'Class[Element[td].foo]',
+                    'CombinedSelector[Class[Element[div].bar] <followed> Element[span]]'
+                ]
+            ],
             ['div > p', ['CombinedSelector[Element[div] > Element[p]]']],
             ['td:first', ['Pseudo[Element[td]:first]']],
-            ['td :first', ['CombinedSelector[Element[td] <followed> Pseudo[Element[*]:first]]']],
+            [
+                'td :first',
+                [
+                    'CombinedSelector[Element[td] <followed> Pseudo[Element[*]:first]]'
+                ]
+            ],
             ['a[name]', ['Attribute[Element[a][name]]']],
             ["a[ name\t]", ['Attribute[Element[a][name]]']],
-            ['a [name]', ['CombinedSelector[Element[a] <followed> Attribute[Element[*][name]]]']],
+            [
+                'a [name]',
+                [
+                    'CombinedSelector[Element[a] <followed> Attribute[Element[*][name]]]'
+                ]
+            ],
             ['[name="foo"]', ["Attribute[Element[*][name = 'foo']]"]],
             ["[name='foo[1]']", ["Attribute[Element[*][name = 'foo[1]']]"]],
-            ["[name='foo[0][bar]']", ["Attribute[Element[*][name = 'foo[0][bar]']]"]],
+            [
+                "[name='foo[0][bar]']",
+                ["Attribute[Element[*][name = 'foo[0][bar]']]"]
+            ],
             ['a[rel="include"]', ["Attribute[Element[a][rel = 'include']]"]],
             ['a[rel = include]', ["Attribute[Element[a][rel = 'include']]"]],
-            ["a[hreflang |= 'en']", ["Attribute[Element[a][hreflang |= 'en']]"]],
+            [
+                "a[hreflang |= 'en']",
+                ["Attribute[Element[a][hreflang |= 'en']]"]
+            ],
             ['a[hreflang|=en]', ["Attribute[Element[a][hreflang |= 'en']]"]],
             ['div:nth-child(10)', ["Function[Element[div]:nth-child(['10'])]"]],
-            [':nth-child(2n+2)', ["Function[Element[*]:nth-child(['2', 'n', '+2'])]"]],
-            ['div:nth-of-type(10)', ["Function[Element[div]:nth-of-type(['10'])]"]],
-            ['div div:nth-of-type(10) .aclass', ["CombinedSelector[CombinedSelector[Element[div] <followed> Function[Element[div]:nth-of-type(['10'])]] <followed> Class[Element[*].aclass]]"]],
+            [
+                ':nth-child(2n+2)',
+                ["Function[Element[*]:nth-child(['2', 'n', '+2'])]"]
+            ],
+            [
+                'div:nth-of-type(10)',
+                ["Function[Element[div]:nth-of-type(['10'])]"]
+            ],
+            [
+                'div div:nth-of-type(10) .aclass',
+                [
+                    "CombinedSelector[CombinedSelector[Element[div] <followed> Function[Element[div]:nth-of-type(['10'])]] <followed> Class[Element[*].aclass]]"
+                ]
+            ],
             ['label:only', ['Pseudo[Element[label]:only]']],
             ['a:lang(fr)', ["Function[Element[a]:lang(['fr'])]"]],
-            ['div:contains("foo")', ["Function[Element[div]:contains(['foo'])]"]],
+            [
+                'div:contains("foo")',
+                ["Function[Element[div]:contains(['foo'])]"]
+            ],
             ['div#foobar', ['Hash[Element[div]#foobar]']],
-            ['div:not(div.foo)', ['Negation[Element[div]:not(Class[Element[div].foo])]']],
+            [
+                'div:not(div.foo)',
+                ['Negation[Element[div]:not(Class[Element[div].foo])]']
+            ],
             ['td ~ th', ['CombinedSelector[Element[td] ~ Element[th]]']],
-            ['.foo[data-bar][data-baz=0]', ["Attribute[Attribute[Class[Element[*].foo][data-bar]][data-baz = '0']]"]],
+            [
+                '.foo[data-bar][data-baz=0]',
+                [
+                    "Attribute[Attribute[Class[Element[*].foo][data-bar]][data-baz = '0']]"
+                ]
+            ]
         ];
     }
 
     public function getParserExceptionTestData()
     {
         return [
-            ['attributes(href)/html/body/a', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, '(', 10))->getMessage()],
-            ['attributes(href)', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, '(', 10))->getMessage()],
-            ['html/body/a', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, '/', 4))->getMessage()],
-            [' ', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_FILE_END, '', 1))->getMessage()],
-            ['div, ', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_FILE_END, '', 5))->getMessage()],
-            [' , div', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, ',', 1))->getMessage()],
-            ['p, , div', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, ',', 3))->getMessage()],
-            ['div > ', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_FILE_END, '', 6))->getMessage()],
-            ['  > div', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, '>', 2))->getMessage()],
-            ['foo|#bar', SyntaxErrorException::unexpectedToken('identifier or "*"', new Token(Token::TYPE_HASH, 'bar', 4))->getMessage()],
-            ['#.foo', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, '#', 0))->getMessage()],
-            ['.#foo', SyntaxErrorException::unexpectedToken('identifier', new Token(Token::TYPE_HASH, 'foo', 1))->getMessage()],
-            [':#foo', SyntaxErrorException::unexpectedToken('identifier', new Token(Token::TYPE_HASH, 'foo', 1))->getMessage()],
-            ['[*]', SyntaxErrorException::unexpectedToken('"|"', new Token(Token::TYPE_DELIMITER, ']', 2))->getMessage()],
-            ['[foo|]', SyntaxErrorException::unexpectedToken('identifier', new Token(Token::TYPE_DELIMITER, ']', 5))->getMessage()],
-            ['[#]', SyntaxErrorException::unexpectedToken('identifier or "*"', new Token(Token::TYPE_DELIMITER, '#', 1))->getMessage()],
-            ['[foo=#]', SyntaxErrorException::unexpectedToken('string or identifier', new Token(Token::TYPE_DELIMITER, '#', 5))->getMessage()],
-            [':nth-child()', SyntaxErrorException::unexpectedToken('at least one argument', new Token(Token::TYPE_DELIMITER, ')', 11))->getMessage()],
-            ['[href]a', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_IDENTIFIER, 'a', 6))->getMessage()],
-            ['[rel:stylesheet]', SyntaxErrorException::unexpectedToken('operator', new Token(Token::TYPE_DELIMITER, ':', 4))->getMessage()],
-            ['[rel=stylesheet', SyntaxErrorException::unexpectedToken('"]"', new Token(Token::TYPE_FILE_END, '', 15))->getMessage()],
-            [':lang(fr', SyntaxErrorException::unexpectedToken('an argument', new Token(Token::TYPE_FILE_END, '', 8))->getMessage()],
-            [':contains("foo', SyntaxErrorException::unclosedString(10)->getMessage()],
-            ['foo!', SyntaxErrorException::unexpectedToken('selector', new Token(Token::TYPE_DELIMITER, '!', 3))->getMessage()],
+            [
+                'attributes(href)/html/body/a',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, '(', 10)
+                )->getMessage()
+            ],
+            [
+                'attributes(href)',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, '(', 10)
+                )->getMessage()
+            ],
+            [
+                'html/body/a',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, '/', 4)
+                )->getMessage()
+            ],
+            [
+                ' ',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_FILE_END, '', 1)
+                )->getMessage()
+            ],
+            [
+                'div, ',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_FILE_END, '', 5)
+                )->getMessage()
+            ],
+            [
+                ' , div',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, ',', 1)
+                )->getMessage()
+            ],
+            [
+                'p, , div',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, ',', 3)
+                )->getMessage()
+            ],
+            [
+                'div > ',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_FILE_END, '', 6)
+                )->getMessage()
+            ],
+            [
+                '  > div',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, '>', 2)
+                )->getMessage()
+            ],
+            [
+                'foo|#bar',
+                SyntaxErrorException::unexpectedToken(
+                    'identifier or "*"',
+                    new Token(Token::TYPE_HASH, 'bar', 4)
+                )->getMessage()
+            ],
+            [
+                '#.foo',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, '#', 0)
+                )->getMessage()
+            ],
+            [
+                '.#foo',
+                SyntaxErrorException::unexpectedToken(
+                    'identifier',
+                    new Token(Token::TYPE_HASH, 'foo', 1)
+                )->getMessage()
+            ],
+            [
+                ':#foo',
+                SyntaxErrorException::unexpectedToken(
+                    'identifier',
+                    new Token(Token::TYPE_HASH, 'foo', 1)
+                )->getMessage()
+            ],
+            [
+                '[*]',
+                SyntaxErrorException::unexpectedToken(
+                    '"|"',
+                    new Token(Token::TYPE_DELIMITER, ']', 2)
+                )->getMessage()
+            ],
+            [
+                '[foo|]',
+                SyntaxErrorException::unexpectedToken(
+                    'identifier',
+                    new Token(Token::TYPE_DELIMITER, ']', 5)
+                )->getMessage()
+            ],
+            [
+                '[#]',
+                SyntaxErrorException::unexpectedToken(
+                    'identifier or "*"',
+                    new Token(Token::TYPE_DELIMITER, '#', 1)
+                )->getMessage()
+            ],
+            [
+                '[foo=#]',
+                SyntaxErrorException::unexpectedToken(
+                    'string or identifier',
+                    new Token(Token::TYPE_DELIMITER, '#', 5)
+                )->getMessage()
+            ],
+            [
+                ':nth-child()',
+                SyntaxErrorException::unexpectedToken(
+                    'at least one argument',
+                    new Token(Token::TYPE_DELIMITER, ')', 11)
+                )->getMessage()
+            ],
+            [
+                '[href]a',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_IDENTIFIER, 'a', 6)
+                )->getMessage()
+            ],
+            [
+                '[rel:stylesheet]',
+                SyntaxErrorException::unexpectedToken(
+                    'operator',
+                    new Token(Token::TYPE_DELIMITER, ':', 4)
+                )->getMessage()
+            ],
+            [
+                '[rel=stylesheet',
+                SyntaxErrorException::unexpectedToken(
+                    '"]"',
+                    new Token(Token::TYPE_FILE_END, '', 15)
+                )->getMessage()
+            ],
+            [
+                ':lang(fr',
+                SyntaxErrorException::unexpectedToken(
+                    'an argument',
+                    new Token(Token::TYPE_FILE_END, '', 8)
+                )->getMessage()
+            ],
+            [
+                ':contains("foo',
+                SyntaxErrorException::unclosedString(10)->getMessage()
+            ],
+            [
+                'foo!',
+                SyntaxErrorException::unexpectedToken(
+                    'selector',
+                    new Token(Token::TYPE_DELIMITER, '!', 3)
+                )->getMessage()
+            ]
         ];
     }
 
@@ -188,8 +416,16 @@ class ParserTest extends TestCase
             ['::Selection', 'Element[*]', 'selection'],
             ['foo:after', 'Element[foo]', 'after'],
             ['foo::selection', 'Element[foo]', 'selection'],
-            ['lorem#ipsum ~ a#b.c[href]:empty::selection', 'CombinedSelector[Hash[Element[lorem]#ipsum] ~ Pseudo[Attribute[Class[Hash[Element[a]#b].c][href]]:empty]]', 'selection'],
-            ['video::-webkit-media-controls', 'Element[video]', '-webkit-media-controls'],
+            [
+                'lorem#ipsum ~ a#b.c[href]:empty::selection',
+                'CombinedSelector[Hash[Element[lorem]#ipsum] ~ Pseudo[Attribute[Class[Hash[Element[a]#b].c][href]]:empty]]',
+                'selection'
+            ],
+            [
+                'video::-webkit-media-controls',
+                'Element[video]',
+                '-webkit-media-controls'
+            ]
         ];
     }
 
@@ -217,7 +453,7 @@ class ParserTest extends TestCase
             ['foo:before', 2],
             ['foo::before', 2],
             ['foo:empty::before', 12],
-            ['#lorem + foo#ipsum:first-child > bar:first-line', 213],
+            ['#lorem + foo#ipsum:first-child > bar:first-line', 213]
         ];
     }
 
@@ -239,15 +475,12 @@ class ParserTest extends TestCase
             ['n', 1, 0],
             ['+n', 1, 0],
             ['-n', -1, 0],
-            ['5', 0, 5],
+            ['5', 0, 5]
         ];
     }
 
     public function getParseSeriesExceptionTestData()
     {
-        return [
-            ['foo'],
-            ['n+'],
-        ];
+        return [['foo'], ['n+']];
     }
 }

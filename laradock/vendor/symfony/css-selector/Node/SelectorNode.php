@@ -26,10 +26,14 @@ class SelectorNode extends AbstractNode
     private $tree;
     private $pseudoElement;
 
-    public function __construct(NodeInterface $tree, string $pseudoElement = null)
-    {
+    public function __construct(
+        NodeInterface $tree,
+        string $pseudoElement = null
+    ) {
         $this->tree = $tree;
-        $this->pseudoElement = $pseudoElement ? strtolower($pseudoElement) : null;
+        $this->pseudoElement = $pseudoElement
+            ? strtolower($pseudoElement)
+            : null;
     }
 
     public function getTree(): NodeInterface
@@ -47,7 +51,9 @@ class SelectorNode extends AbstractNode
      */
     public function getSpecificity(): Specificity
     {
-        return $this->tree->getSpecificity()->plus(new Specificity(0, 0, $this->pseudoElement ? 1 : 0));
+        return $this->tree
+            ->getSpecificity()
+            ->plus(new Specificity(0, 0, $this->pseudoElement ? 1 : 0));
     }
 
     /**
@@ -55,6 +61,11 @@ class SelectorNode extends AbstractNode
      */
     public function __toString(): string
     {
-        return sprintf('%s[%s%s]', $this->getNodeName(), $this->tree, $this->pseudoElement ? '::'.$this->pseudoElement : '');
+        return sprintf(
+            '%s[%s%s]',
+            $this->getNodeName(),
+            $this->tree,
+            $this->pseudoElement ? '::' . $this->pseudoElement : ''
+        );
     }
 }

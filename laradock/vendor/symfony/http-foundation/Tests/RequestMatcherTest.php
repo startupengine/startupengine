@@ -40,14 +40,21 @@ class RequestMatcherTest extends TestCase
             ['get', 'post', false],
             ['get', 'GET', true],
             ['get', ['GET', 'POST'], true],
-            ['get', 'POST', false],
+            ['get', 'POST', false]
         ];
     }
 
     public function testScheme()
     {
         $httpRequest = $request = $request = Request::create('');
-        $httpsRequest = $request = $request = Request::create('', 'get', [], [], [], ['HTTPS' => 'on']);
+        $httpsRequest = $request = $request = Request::create(
+            '',
+            'get',
+            [],
+            [],
+            [],
+            ['HTTPS' => 'on']
+        );
 
         $matcher = new RequestMatcher();
         $matcher->matchScheme('https');
@@ -69,7 +76,14 @@ class RequestMatcherTest extends TestCase
     public function testHost($pattern, $isMatch)
     {
         $matcher = new RequestMatcher();
-        $request = Request::create('', 'get', [], [], [], ['HTTP_HOST' => 'foo.example.com']);
+        $request = Request::create(
+            '',
+            'get',
+            [],
+            [],
+            [],
+            ['HTTP_HOST' => 'foo.example.com']
+        );
 
         $matcher->matchHost($pattern);
         $this->assertSame($isMatch, $matcher->matches($request));
@@ -81,7 +95,14 @@ class RequestMatcherTest extends TestCase
     public function testPort()
     {
         $matcher = new RequestMatcher();
-        $request = Request::create('', 'get', [], [], [], ['HTTP_HOST' => null, 'SERVER_PORT' => 8000]);
+        $request = Request::create(
+            '',
+            'get',
+            [],
+            [],
+            [],
+            ['HTTP_HOST' => null, 'SERVER_PORT' => 8000]
+        );
 
         $matcher->matchPort(8000);
         $this->assertTrue($matcher->matches($request));
@@ -103,7 +124,7 @@ class RequestMatcherTest extends TestCase
             ['.*\.example\.COM', true],
             ['\.example\.COM$', true],
             ['^.*\.example\.COM$', true],
-            ['.*\.sensio\.COM', false],
+            ['.*\.sensio\.COM', false]
         ];
     }
 

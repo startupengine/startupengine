@@ -35,7 +35,9 @@ abstract class AbstractFileExtractor
                 }
             }
         } elseif (is_file($resource)) {
-            $files = $this->canBeExtracted($resource) ? [$this->toSplFileInfo($resource)] : [];
+            $files = $this->canBeExtracted($resource)
+                ? [$this->toSplFileInfo($resource)]
+                : [];
         } else {
             $files = $this->extractFromDirectory($resource);
         }
@@ -58,7 +60,9 @@ abstract class AbstractFileExtractor
     protected function isFile($file)
     {
         if (!is_file($file)) {
-            throw new InvalidArgumentException(sprintf('The "%s" file does not exist.', $file));
+            throw new InvalidArgumentException(
+                sprintf('The "%s" file does not exist.', $file)
+            );
         }
 
         return true;

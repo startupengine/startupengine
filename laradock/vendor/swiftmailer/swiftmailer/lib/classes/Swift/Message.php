@@ -40,17 +40,23 @@ class Swift_Message extends Swift_Mime_SimpleMessage
      * @param string $contentType
      * @param string $charset
      */
-    public function __construct($subject = null, $body = null, $contentType = null, $charset = null)
-    {
+    public function __construct(
+        $subject = null,
+        $body = null,
+        $contentType = null,
+        $charset = null
+    ) {
         call_user_func_array(
             [$this, 'Swift_Mime_SimpleMessage::__construct'],
-            Swift_DependencyContainer::getInstance()
-                ->createDependenciesFor('mime.message')
-            );
+            Swift_DependencyContainer::getInstance()->createDependenciesFor(
+                'mime.message'
+            )
+        );
 
         if (!isset($charset)) {
-            $charset = Swift_DependencyContainer::getInstance()
-                ->lookup('properties.charset');
+            $charset = Swift_DependencyContainer::getInstance()->lookup(
+                'properties.charset'
+            );
         }
         $this->setSubject($subject);
         $this->setBody($body);
@@ -71,7 +77,11 @@ class Swift_Message extends Swift_Mime_SimpleMessage
      */
     public function addPart($body, $contentType = null, $charset = null)
     {
-        return $this->attach((new Swift_MimePart($body, $contentType, $charset))->setEncoder($this->getEncoder()));
+        return $this->attach(
+            (new Swift_MimePart($body, $contentType, $charset))->setEncoder(
+                $this->getEncoder()
+            )
+        );
     }
 
     /**
@@ -175,7 +185,9 @@ class Swift_Message extends Swift_Mime_SimpleMessage
 
     public function __wakeup()
     {
-        Swift_DependencyContainer::getInstance()->createDependenciesFor('mime.message');
+        Swift_DependencyContainer::getInstance()->createDependenciesFor(
+            'mime.message'
+        );
     }
 
     /**
@@ -212,8 +224,16 @@ class Swift_Message extends Swift_Mime_SimpleMessage
         $this->savedMessage = ['headers' => []];
         $this->savedMessage['body'] = $this->getBody();
         $this->savedMessage['children'] = $this->getChildren();
-        if (count($this->savedMessage['children']) > 0 && '' != $this->getBody()) {
-            $this->setChildren(array_merge([$this->becomeMimePart()], $this->savedMessage['children']));
+        if (
+            count($this->savedMessage['children']) > 0 &&
+            '' != $this->getBody()
+        ) {
+            $this->setChildren(
+                array_merge(
+                    [$this->becomeMimePart()],
+                    $this->savedMessage['children']
+                )
+            );
             $this->setBody('');
         }
     }
@@ -227,7 +247,9 @@ class Swift_Message extends Swift_Mime_SimpleMessage
             $lc = strtolower($head);
 
             if (!isset($this->savedMessage['headers'][$lc])) {
-                $this->savedMessage['headers'][$lc] = $this->getHeaders()->getAll($head);
+                $this->savedMessage['headers'][
+                    $lc
+                ] = $this->getHeaders()->getAll($head);
             }
         }
     }

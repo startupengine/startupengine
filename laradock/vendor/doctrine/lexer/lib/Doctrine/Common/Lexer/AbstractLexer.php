@@ -89,7 +89,7 @@ abstract class AbstractLexer
      */
     public function setInput($input)
     {
-        $this->input  = $input;
+        $this->input = $input;
         $this->tokens = array();
 
         $this->reset();
@@ -132,7 +132,7 @@ abstract class AbstractLexer
     }
 
     /**
-     * Retrieve the original lexer's input until a given position. 
+     * Retrieve the original lexer's input until a given position.
      *
      * @param integer $position
      *
@@ -164,7 +164,8 @@ abstract class AbstractLexer
      */
     public function isNextTokenAny(array $tokens)
     {
-        return null !== $this->lookahead && in_array($this->lookahead['type'], $tokens, true);
+        return null !== $this->lookahead &&
+            in_array($this->lookahead['type'], $tokens, true);
     }
 
     /**
@@ -176,8 +177,9 @@ abstract class AbstractLexer
     {
         $this->peek = 0;
         $this->token = $this->lookahead;
-        $this->lookahead = (isset($this->tokens[$this->position]))
-            ? $this->tokens[$this->position++] : null;
+        $this->lookahead = isset($this->tokens[$this->position])
+            ? $this->tokens[$this->position++]
+            : null;
 
         return $this->lookahead !== null;
     }
@@ -191,7 +193,10 @@ abstract class AbstractLexer
      */
     public function skipUntil($type)
     {
-        while ($this->lookahead !== null && $this->lookahead['type'] !== $type) {
+        while (
+            $this->lookahead !== null &&
+            $this->lookahead['type'] !== $type
+        ) {
             $this->moveNext();
         }
     }
@@ -246,7 +251,7 @@ abstract class AbstractLexer
     {
         static $regex;
 
-        if ( ! isset($regex)) {
+        if (!isset($regex)) {
             $regex = sprintf(
                 '/(%s)|%s/%s',
                 implode(')|(', $this->getCatchablePatterns()),
@@ -255,7 +260,10 @@ abstract class AbstractLexer
             );
         }
 
-        $flags = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_OFFSET_CAPTURE;
+        $flags =
+            PREG_SPLIT_NO_EMPTY |
+            PREG_SPLIT_DELIM_CAPTURE |
+            PREG_SPLIT_OFFSET_CAPTURE;
         $matches = preg_split($regex, $input, -1, $flags);
 
         foreach ($matches as $match) {
@@ -264,8 +272,8 @@ abstract class AbstractLexer
 
             $this->tokens[] = array(
                 'value' => $match[0],
-                'type'  => $type,
-                'position' => $match[1],
+                'type' => $type,
+                'position' => $match[1]
             );
         }
     }

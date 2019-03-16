@@ -36,7 +36,12 @@ class Swift_Plugins_Loggers_EchoLogger implements Swift_Plugins_Logger
     public function add($entry)
     {
         if ($this->isHtml) {
-            printf('%s%s%s', htmlspecialchars($entry, ENT_QUOTES), '<br />', PHP_EOL);
+            printf(
+                '%s%s%s',
+                htmlspecialchars($entry, ENT_QUOTES),
+                '<br />',
+                PHP_EOL
+            );
         } else {
             printf('%s%s', $entry, PHP_EOL);
         }

@@ -31,9 +31,7 @@ class CacheWarmerAggregateTest extends TestCase
     public function testInjectWarmersUsingConstructor()
     {
         $warmer = $this->getCacheWarmerMock();
-        $warmer
-            ->expects($this->once())
-            ->method('warmUp');
+        $warmer->expects($this->once())->method('warmUp');
         $aggregate = new CacheWarmerAggregate([$warmer]);
         $aggregate->warmUp(self::$cacheDir);
     }
@@ -41,12 +39,8 @@ class CacheWarmerAggregateTest extends TestCase
     public function testWarmupDoesCallWarmupOnOptionalWarmersWhenEnableOptionalWarmersIsEnabled()
     {
         $warmer = $this->getCacheWarmerMock();
-        $warmer
-            ->expects($this->never())
-            ->method('isOptional');
-        $warmer
-            ->expects($this->once())
-            ->method('warmUp');
+        $warmer->expects($this->never())->method('isOptional');
+        $warmer->expects($this->once())->method('warmUp');
 
         $aggregate = new CacheWarmerAggregate([$warmer]);
         $aggregate->enableOptionalWarmers();
@@ -60,9 +54,7 @@ class CacheWarmerAggregateTest extends TestCase
             ->expects($this->once())
             ->method('isOptional')
             ->will($this->returnValue(true));
-        $warmer
-            ->expects($this->never())
-            ->method('warmUp');
+        $warmer->expects($this->never())->method('warmUp');
 
         $aggregate = new CacheWarmerAggregate([$warmer]);
         $aggregate->warmUp(self::$cacheDir);
@@ -70,7 +62,9 @@ class CacheWarmerAggregateTest extends TestCase
 
     protected function getCacheWarmerMock()
     {
-        $warmer = $this->getMockBuilder('Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface')
+        $warmer = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 

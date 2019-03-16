@@ -94,19 +94,32 @@ class DayOfWeekFieldTest extends TestCase
     public function testHandlesZeroAndSevenDayOfTheWeekValues()
     {
         $f = new DayOfWeekField();
-        $this->assertTrue($f->isSatisfiedBy(new DateTime('2011-09-04 00:00:00'), '0-2'));
-        $this->assertTrue($f->isSatisfiedBy(new DateTime('2011-09-04 00:00:00'), '6-0'));
+        $this->assertTrue(
+            $f->isSatisfiedBy(new DateTime('2011-09-04 00:00:00'), '0-2')
+        );
+        $this->assertTrue(
+            $f->isSatisfiedBy(new DateTime('2011-09-04 00:00:00'), '6-0')
+        );
 
-        $this->assertTrue($f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), 'SUN'));
-        $this->assertTrue($f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), 'SUN#3'));
-        $this->assertTrue($f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), '0#3'));
-        $this->assertTrue($f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), '7#3'));
+        $this->assertTrue(
+            $f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), 'SUN')
+        );
+        $this->assertTrue(
+            $f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), 'SUN#3')
+        );
+        $this->assertTrue(
+            $f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), '0#3')
+        );
+        $this->assertTrue(
+            $f->isSatisfiedBy(new DateTime('2014-04-20 00:00:00'), '7#3')
+        );
     }
 
     /**
      * @see https://github.com/mtdowling/cron-expression/issues/47
      */
-    public function testIssue47() {
+    public function testIssue47()
+    {
         $f = new DayOfWeekField();
         $this->assertFalse($f->validate('mon,'));
         $this->assertFalse($f->validate('mon-'));
@@ -124,6 +137,9 @@ class DayOfWeekFieldTest extends TestCase
     {
         $f = new DayOfWeekField();
         $this->assertTrue($f->validate('MON-FRI'));
-        $this->assertSame([1,2,3,4,5], $f->getRangeForExpression('MON-FRI', 7));
+        $this->assertSame(
+            [1, 2, 3, 4, 5],
+            $f->getRangeForExpression('MON-FRI', 7)
+        );
     }
 }

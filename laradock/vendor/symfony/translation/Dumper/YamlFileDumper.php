@@ -33,10 +33,15 @@ class YamlFileDumper extends FileDumper
     /**
      * {@inheritdoc}
      */
-    public function formatCatalogue(MessageCatalogue $messages, $domain, array $options = [])
-    {
+    public function formatCatalogue(
+        MessageCatalogue $messages,
+        $domain,
+        array $options = []
+    ) {
         if (!class_exists('Symfony\Component\Yaml\Yaml')) {
-            throw new LogicException('Dumping translations in the YAML format requires the Symfony Yaml component.');
+            throw new LogicException(
+                'Dumping translations in the YAML format requires the Symfony Yaml component.'
+            );
         }
 
         $data = $messages->all($domain);
@@ -45,7 +50,10 @@ class YamlFileDumper extends FileDumper
             $data = ArrayConverter::expandToTree($data);
         }
 
-        if (isset($options['inline']) && ($inline = (int) $options['inline']) > 0) {
+        if (
+            isset($options['inline']) &&
+            ($inline = (int) $options['inline']) > 0
+        ) {
             return Yaml::dump($data, $inline);
         }
 

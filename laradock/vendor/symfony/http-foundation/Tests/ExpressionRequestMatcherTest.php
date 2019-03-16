@@ -35,8 +35,14 @@ class ExpressionRequestMatcherTest extends TestCase
         $request = Request::create('/foo');
         $expressionRequestMatcher = new ExpressionRequestMatcher();
 
-        $expressionRequestMatcher->setExpression(new ExpressionLanguage(), $expression);
-        $this->assertSame($expected, $expressionRequestMatcher->matches($request));
+        $expressionRequestMatcher->setExpression(
+            new ExpressionLanguage(),
+            $expression
+        );
+        $this->assertSame(
+            $expected,
+            $expressionRequestMatcher->matches($request)
+        );
     }
 
     /**
@@ -49,7 +55,10 @@ class ExpressionRequestMatcherTest extends TestCase
         $expressionRequestMatcher = new ExpressionRequestMatcher();
         $expressionRequestMatcher->matchAttribute('foo', 'bar');
 
-        $expressionRequestMatcher->setExpression(new ExpressionLanguage(), $expression);
+        $expressionRequestMatcher->setExpression(
+            new ExpressionLanguage(),
+            $expression
+        );
         $this->assertFalse($expressionRequestMatcher->matches($request));
     }
 
@@ -61,9 +70,15 @@ class ExpressionRequestMatcherTest extends TestCase
             ['request.getHost() == host', true],
             ['request.getClientIp() == ip', true],
             ['request.attributes.all() == attributes', true],
-            ['request.getMethod() == method && request.getPathInfo() == path && request.getHost() == host && request.getClientIp() == ip &&  request.attributes.all() == attributes', true],
+            [
+                'request.getMethod() == method && request.getPathInfo() == path && request.getHost() == host && request.getClientIp() == ip &&  request.attributes.all() == attributes',
+                true
+            ],
             ['request.getMethod() != method', false],
-            ['request.getMethod() != method && request.getPathInfo() == path && request.getHost() == host && request.getClientIp() == ip &&  request.attributes.all() == attributes', false],
+            [
+                'request.getMethod() != method && request.getPathInfo() == path && request.getHost() == host && request.getClientIp() == ip &&  request.attributes.all() == attributes',
+                false
+            ]
         ];
     }
 }

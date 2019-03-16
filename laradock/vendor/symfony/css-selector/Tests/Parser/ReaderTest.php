@@ -70,7 +70,10 @@ class ReaderTest extends TestCase
         $reader = new Reader('hello');
 
         $this->assertFalse($reader->findPattern('/world/'));
-        $this->assertEquals(['hello', 'h'], $reader->findPattern('/^([a-z]).*/'));
+        $this->assertEquals(
+            ['hello', 'h'],
+            $reader->findPattern('/^([a-z]).*/')
+        );
 
         $this->assignPosition($reader, 2);
         $this->assertFalse($reader->findPattern('/^h.*/'));

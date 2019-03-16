@@ -29,7 +29,8 @@ class RegisterListenersPassTest extends TestCase
     {
         $builder = new ContainerBuilder();
         $builder->register('event_dispatcher');
-        $builder->register('my_event_subscriber', 'stdClass')
+        $builder
+            ->register('my_event_subscriber', 'stdClass')
             ->addTag('kernel.event_subscriber');
 
         $registerListenersPass = new RegisterListenersPass();
@@ -39,12 +40,16 @@ class RegisterListenersPassTest extends TestCase
     public function testValidEventSubscriber()
     {
         $services = [
-            'my_event_subscriber' => [0 => []],
+            'my_event_subscriber' => [0 => []]
         ];
 
         $builder = new ContainerBuilder();
         $eventDispatcherDefinition = $builder->register('event_dispatcher');
-        $builder->register('my_event_subscriber', 'Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService')
+        $builder
+            ->register(
+                'my_event_subscriber',
+                'Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService'
+            )
             ->addTag('kernel.event_subscriber');
 
         $registerListenersPass = new RegisterListenersPass();
@@ -55,12 +60,20 @@ class RegisterListenersPassTest extends TestCase
                 'addListener',
                 [
                     'event',
-                    [new ServiceClosureArgument(new Reference('my_event_subscriber')), 'onEvent'],
-                    0,
-                ],
-            ],
+                    [
+                        new ServiceClosureArgument(
+                            new Reference('my_event_subscriber')
+                        ),
+                        'onEvent'
+                    ],
+                    0
+                ]
+            ]
         ];
-        $this->assertEquals($expectedCalls, $eventDispatcherDefinition->getMethodCalls());
+        $this->assertEquals(
+            $expectedCalls,
+            $eventDispatcherDefinition->getMethodCalls()
+        );
     }
 
     /**
@@ -70,7 +83,10 @@ class RegisterListenersPassTest extends TestCase
     public function testAbstractEventListener()
     {
         $container = new ContainerBuilder();
-        $container->register('foo', 'stdClass')->setAbstract(true)->addTag('kernel.event_listener', []);
+        $container
+            ->register('foo', 'stdClass')
+            ->setAbstract(true)
+            ->addTag('kernel.event_listener', []);
         $container->register('event_dispatcher', 'stdClass');
 
         $registerListenersPass = new RegisterListenersPass();
@@ -84,7 +100,10 @@ class RegisterListenersPassTest extends TestCase
     public function testAbstractEventSubscriber()
     {
         $container = new ContainerBuilder();
-        $container->register('foo', 'stdClass')->setAbstract(true)->addTag('kernel.event_subscriber', []);
+        $container
+            ->register('foo', 'stdClass')
+            ->setAbstract(true)
+            ->addTag('kernel.event_subscriber', []);
         $container->register('event_dispatcher', 'stdClass');
 
         $registerListenersPass = new RegisterListenersPass();
@@ -95,8 +114,13 @@ class RegisterListenersPassTest extends TestCase
     {
         $container = new ContainerBuilder();
 
-        $container->setParameter('subscriber.class', 'Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService');
-        $container->register('foo', '%subscriber.class%')->addTag('kernel.event_subscriber', []);
+        $container->setParameter(
+            'subscriber.class',
+            'Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService'
+        );
+        $container
+            ->register('foo', '%subscriber.class%')
+            ->addTag('kernel.event_subscriber', []);
         $container->register('event_dispatcher', 'stdClass');
 
         $registerListenersPass = new RegisterListenersPass();
@@ -108,10 +132,13 @@ class RegisterListenersPassTest extends TestCase
                 'addListener',
                 [
                     'event',
-                    [new ServiceClosureArgument(new Reference('foo')), 'onEvent'],
-                    0,
-                ],
-            ],
+                    [
+                        new ServiceClosureArgument(new Reference('foo')),
+                        'onEvent'
+                    ],
+                    0
+                ]
+            ]
         ];
         $this->assertEquals($expectedCalls, $definition->getMethodCalls());
     }
@@ -120,12 +147,18 @@ class RegisterListenersPassTest extends TestCase
     {
         $container = new ContainerBuilder();
 
-        $container->register('foo', SubscriberService::class)->addTag('kernel.event_subscriber', []);
+        $container
+            ->register('foo', SubscriberService::class)
+            ->addTag('kernel.event_subscriber', []);
         $container->register('event_dispatcher', 'stdClass');
 
-        (new RegisterListenersPass())->setHotPathEvents(['event'])->process($container);
+        (new RegisterListenersPass())
+            ->setHotPathEvents(['event'])
+            ->process($container);
 
-        $this->assertTrue($container->getDefinition('foo')->hasTag('container.hot_path'));
+        $this->assertTrue(
+            $container->getDefinition('foo')->hasTag('container.hot_path')
+        );
     }
 
     /**
@@ -135,7 +168,9 @@ class RegisterListenersPassTest extends TestCase
     public function testEventSubscriberUnresolvableClassName()
     {
         $container = new ContainerBuilder();
-        $container->register('foo', '%subscriber.class%')->addTag('kernel.event_subscriber', []);
+        $container
+            ->register('foo', '%subscriber.class%')
+            ->addTag('kernel.event_subscriber', []);
         $container->register('event_dispatcher', 'stdClass');
 
         $registerListenersPass = new RegisterListenersPass();
@@ -145,9 +180,15 @@ class RegisterListenersPassTest extends TestCase
     public function testInvokableEventListener()
     {
         $container = new ContainerBuilder();
-        $container->register('foo', \stdClass::class)->addTag('kernel.event_listener', ['event' => 'foo.bar']);
-        $container->register('bar', InvokableListenerService::class)->addTag('kernel.event_listener', ['event' => 'foo.bar']);
-        $container->register('baz', InvokableListenerService::class)->addTag('kernel.event_listener', ['event' => 'event']);
+        $container
+            ->register('foo', \stdClass::class)
+            ->addTag('kernel.event_listener', ['event' => 'foo.bar']);
+        $container
+            ->register('bar', InvokableListenerService::class)
+            ->addTag('kernel.event_listener', ['event' => 'foo.bar']);
+        $container
+            ->register('baz', InvokableListenerService::class)
+            ->addTag('kernel.event_listener', ['event' => 'event']);
         $container->register('event_dispatcher', \stdClass::class);
 
         $registerListenersPass = new RegisterListenersPass();
@@ -159,37 +200,47 @@ class RegisterListenersPassTest extends TestCase
                 'addListener',
                 [
                     'foo.bar',
-                    [new ServiceClosureArgument(new Reference('foo')), 'onFooBar'],
-                    0,
-                ],
+                    [
+                        new ServiceClosureArgument(new Reference('foo')),
+                        'onFooBar'
+                    ],
+                    0
+                ]
             ],
             [
                 'addListener',
                 [
                     'foo.bar',
-                    [new ServiceClosureArgument(new Reference('bar')), '__invoke'],
-                    0,
-                ],
+                    [
+                        new ServiceClosureArgument(new Reference('bar')),
+                        '__invoke'
+                    ],
+                    0
+                ]
             ],
             [
                 'addListener',
                 [
                     'event',
-                    [new ServiceClosureArgument(new Reference('baz')), 'onEvent'],
-                    0,
-                ],
-            ],
+                    [
+                        new ServiceClosureArgument(new Reference('baz')),
+                        'onEvent'
+                    ],
+                    0
+                ]
+            ]
         ];
         $this->assertEquals($expectedCalls, $definition->getMethodCalls());
     }
 }
 
-class SubscriberService implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
+class SubscriberService implements
+    \Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return [
-            'event' => 'onEvent',
+            'event' => 'onEvent'
         ];
     }
 }

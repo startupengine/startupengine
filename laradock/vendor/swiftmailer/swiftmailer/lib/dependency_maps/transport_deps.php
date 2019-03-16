@@ -1,11 +1,21 @@
 <?php
 
+// As SERVER_NAME can come from the user in certain configurations, check that
+// it does not contain forbidden characters (see RFC 952 and RFC 2181). Use
+// preg_replace() instead of preg_match() to prevent DoS attacks with long host names.
 Swift_DependencyContainer::getInstance()
     ->register('transport.localdomain')
-    // As SERVER_NAME can come from the user in certain configurations, check that
-    // it does not contain forbidden characters (see RFC 952 and RFC 2181). Use
-    // preg_replace() instead of preg_match() to prevent DoS attacks with long host names.
-    ->asValue(!empty($_SERVER['SERVER_NAME']) && '' === preg_replace('/(?:^\[)?[a-zA-Z0-9-:\]_]+\.?/', '', $_SERVER['SERVER_NAME']) ? trim($_SERVER['SERVER_NAME'], '[]') : '127.0.0.1')
+    ->asValue(
+        !empty($_SERVER['SERVER_NAME']) &&
+        '' ===
+            preg_replace(
+                '/(?:^\[)?[a-zA-Z0-9-:\]_]+\.?/',
+                '',
+                $_SERVER['SERVER_NAME']
+            )
+            ? trim($_SERVER['SERVER_NAME'], '[]')
+            : '127.0.0.1'
+    )
 
     ->register('transport.smtp')
     ->asNewInstanceOf('Swift_Transport_EsmtpTransport')
@@ -14,7 +24,7 @@ Swift_DependencyContainer::getInstance()
         'transport.smtphandlers',
         'transport.eventdispatcher',
         'transport.localdomain',
-        'address.idnaddressencoder',
+        'address.idnaddressencoder'
     ])
 
     ->register('transport.sendmail')
@@ -22,7 +32,7 @@ Swift_DependencyContainer::getInstance()
     ->withDependencies([
         'transport.buffer',
         'transport.eventdispatcher',
-        'transport.localdomain',
+        'transport.localdomain'
     ])
 
     ->register('transport.loadbalanced')
@@ -58,7 +68,7 @@ Swift_DependencyContainer::getInstance()
         'transport.loginauth',
         'transport.plainauth',
         'transport.ntlmauth',
-        'transport.xoauth2auth',
+        'transport.xoauth2auth'
     ])
 
     ->register('transport.smtputf8handler')
@@ -93,5 +103,4 @@ Swift_DependencyContainer::getInstance()
     ->asNewInstanceOf('Swift_AddressEncoder_IdnAddressEncoder')
 
     ->register('address.utf8addressencoder')
-    ->asNewInstanceOf('Swift_AddressEncoder_Utf8AddressEncoder')
-;
+    ->asNewInstanceOf('Swift_AddressEncoder_Utf8AddressEncoder');

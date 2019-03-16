@@ -20,10 +20,10 @@ class TranslationWriterTest extends TestCase
 {
     public function testWrite()
     {
-        $dumper = $this->getMockBuilder('Symfony\Component\Translation\Dumper\DumperInterface')->getMock();
-        $dumper
-            ->expects($this->once())
-            ->method('dump');
+        $dumper = $this->getMockBuilder(
+            'Symfony\Component\Translation\Dumper\DumperInterface'
+        )->getMock();
+        $dumper->expects($this->once())->method('dump');
 
         $writer = new TranslationWriter();
         $writer->addDumper('test', $dumper);
@@ -43,7 +43,10 @@ class TranslationWriterTest extends TestCase
         $writer->addDumper('backup', $backupDumper);
         $writer->disableBackup();
 
-        $this->assertFalse($backupDumper->backup, 'backup can be disabled if setBackup() method does exist');
+        $this->assertFalse(
+            $backupDumper->backup,
+            'backup can be disabled if setBackup() method does exist'
+        );
     }
 }
 

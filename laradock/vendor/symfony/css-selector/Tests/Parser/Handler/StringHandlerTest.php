@@ -27,18 +27,13 @@ class StringHandlerTest extends AbstractHandlerTest
             ['""', new Token(Token::TYPE_STRING, '', 1), ''],
             ["'hello'", new Token(Token::TYPE_STRING, 'hello', 1), ''],
 
-            ["'foo'bar", new Token(Token::TYPE_STRING, 'foo', 1), 'bar'],
+            ["'foo'bar", new Token(Token::TYPE_STRING, 'foo', 1), 'bar']
         ];
     }
 
     public function getDontHandleValueTestData()
     {
-        return [
-            ['hello'],
-            ['>'],
-            ['1'],
-            [' '],
-        ];
+        return [['hello'], ['>'], ['1'], [' ']];
     }
 
     protected function generateHandler()

@@ -29,7 +29,7 @@ class TraceableValueResolverTest extends TestCase
 
         $this->assertTrue($resolver->supports($request, $argument));
 
-        $event = $stopwatch->getEvent(ResolverStub::class.'::supports');
+        $event = $stopwatch->getEvent(ResolverStub::class . '::supports');
         $this->assertCount(1, $event->getPeriods());
     }
 
@@ -43,7 +43,7 @@ class TraceableValueResolverTest extends TestCase
         $iterable = $resolver->resolve($request, $argument);
 
         foreach ($iterable as $index => $resolved) {
-            $event = $stopwatch->getEvent(ResolverStub::class.'::resolve');
+            $event = $stopwatch->getEvent(ResolverStub::class . '::resolve');
             $this->assertTrue($event->isStarted());
             $this->assertEmpty($event->getPeriods());
             switch ($index) {
@@ -56,7 +56,7 @@ class TraceableValueResolverTest extends TestCase
             }
         }
 
-        $event = $stopwatch->getEvent(ResolverStub::class.'::resolve');
+        $event = $stopwatch->getEvent(ResolverStub::class . '::resolve');
         $this->assertCount(1, $event->getPeriods());
     }
 }

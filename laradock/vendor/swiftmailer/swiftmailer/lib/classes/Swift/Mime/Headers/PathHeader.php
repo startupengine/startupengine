@@ -39,11 +39,15 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
      *
      * @param string $name
      */
-    public function __construct($name, EmailValidator $emailValidator, Swift_AddressEncoder $addressEncoder = null)
-    {
+    public function __construct(
+        $name,
+        EmailValidator $emailValidator,
+        Swift_AddressEncoder $addressEncoder = null
+    ) {
         $this->setFieldName($name);
         $this->emailValidator = $emailValidator;
-        $this->addressEncoder = $addressEncoder ?? new Swift_AddressEncoder_IdnAddressEncoder();
+        $this->addressEncoder =
+            $addressEncoder ?? new Swift_AddressEncoder_IdnAddressEncoder();
     }
 
     /**
@@ -130,7 +134,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
         if (!$this->getCachedValue()) {
             if (isset($this->address)) {
                 $address = $this->addressEncoder->encodeString($this->address);
-                $this->setCachedValue('<'.$address.'>');
+                $this->setCachedValue('<' . $address . '>');
             }
         }
 

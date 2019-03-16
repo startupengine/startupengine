@@ -29,8 +29,13 @@ class AttributeNode extends AbstractNode
     private $operator;
     private $value;
 
-    public function __construct(NodeInterface $selector, ?string $namespace, string $attribute, string $operator, ?string $value)
-    {
+    public function __construct(
+        NodeInterface $selector,
+        ?string $namespace,
+        string $attribute,
+        string $operator,
+        ?string $value
+    ) {
         $this->selector = $selector;
         $this->namespace = $namespace;
         $this->attribute = $attribute;
@@ -68,7 +73,9 @@ class AttributeNode extends AbstractNode
      */
     public function getSpecificity(): Specificity
     {
-        return $this->selector->getSpecificity()->plus(new Specificity(0, 1, 0));
+        return $this->selector
+            ->getSpecificity()
+            ->plus(new Specificity(0, 1, 0));
     }
 
     /**
@@ -76,10 +83,24 @@ class AttributeNode extends AbstractNode
      */
     public function __toString(): string
     {
-        $attribute = $this->namespace ? $this->namespace.'|'.$this->attribute : $this->attribute;
+        $attribute = $this->namespace
+            ? $this->namespace . '|' . $this->attribute
+            : $this->attribute;
 
         return 'exists' === $this->operator
-            ? sprintf('%s[%s[%s]]', $this->getNodeName(), $this->selector, $attribute)
-            : sprintf("%s[%s[%s %s '%s']]", $this->getNodeName(), $this->selector, $attribute, $this->operator, $this->value);
+            ? sprintf(
+                '%s[%s[%s]]',
+                $this->getNodeName(),
+                $this->selector,
+                $attribute
+            )
+            : sprintf(
+                "%s[%s[%s %s '%s']]",
+                $this->getNodeName(),
+                $this->selector,
+                $attribute,
+                $this->operator,
+                $this->value
+            );
     }
 }

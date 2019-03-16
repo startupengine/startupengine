@@ -21,7 +21,10 @@ class ArrayConverterTest extends TestCase
      */
     public function testDump($input, $expectedOutput)
     {
-        $this->assertEquals($expectedOutput, ArrayConverter::expandToTree($input));
+        $this->assertEquals(
+            $expectedOutput,
+            ArrayConverter::expandToTree($input)
+        );
     }
 
     public function messagesData()
@@ -31,44 +34,44 @@ class ArrayConverterTest extends TestCase
                 // input
                 [
                     'foo1' => 'bar',
-                    'foo.bar' => 'value',
+                    'foo.bar' => 'value'
                 ],
                 // expected output
                 [
                     'foo1' => 'bar',
-                    'foo' => ['bar' => 'value'],
-                ],
+                    'foo' => ['bar' => 'value']
+                ]
             ],
             [
                 // input
                 [
                     'foo.bar' => 'value1',
-                    'foo.bar.test' => 'value2',
+                    'foo.bar.test' => 'value2'
                 ],
                 // expected output
                 [
                     'foo' => [
                         'bar' => 'value1',
-                        'bar.test' => 'value2',
-                    ],
-                ],
+                        'bar.test' => 'value2'
+                    ]
+                ]
             ],
             [
                 // input
                 [
                     'foo.level2.level3.level4' => 'value1',
                     'foo.level2' => 'value2',
-                    'foo.bar' => 'value3',
+                    'foo.bar' => 'value3'
                 ],
                 // expected output
                 [
                     'foo' => [
                         'level2' => 'value2',
                         'level2.level3.level4' => 'value1',
-                        'bar' => 'value3',
-                    ],
-                ],
-            ],
+                        'bar' => 'value3'
+                    ]
+                ]
+            ]
         ];
     }
 }

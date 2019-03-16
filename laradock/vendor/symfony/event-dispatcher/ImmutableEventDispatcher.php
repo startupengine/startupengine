@@ -38,7 +38,9 @@ class ImmutableEventDispatcher implements EventDispatcherInterface
      */
     public function addListener($eventName, $listener, $priority = 0)
     {
-        throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
+        throw new \BadMethodCallException(
+            'Unmodifiable event dispatchers must not be modified.'
+        );
     }
 
     /**
@@ -46,7 +48,9 @@ class ImmutableEventDispatcher implements EventDispatcherInterface
      */
     public function addSubscriber(EventSubscriberInterface $subscriber)
     {
-        throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
+        throw new \BadMethodCallException(
+            'Unmodifiable event dispatchers must not be modified.'
+        );
     }
 
     /**
@@ -54,7 +58,9 @@ class ImmutableEventDispatcher implements EventDispatcherInterface
      */
     public function removeListener($eventName, $listener)
     {
-        throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
+        throw new \BadMethodCallException(
+            'Unmodifiable event dispatchers must not be modified.'
+        );
     }
 
     /**
@@ -62,7 +68,9 @@ class ImmutableEventDispatcher implements EventDispatcherInterface
      */
     public function removeSubscriber(EventSubscriberInterface $subscriber)
     {
-        throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
+        throw new \BadMethodCallException(
+            'Unmodifiable event dispatchers must not be modified.'
+        );
     }
 
     /**

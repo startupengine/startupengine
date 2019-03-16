@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__.'/AbstractSmtpTest.php';
+require_once __DIR__ . '/AbstractSmtpTest.php';
 
-abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transport_AbstractSmtpTest
+abstract class Swift_Transport_AbstractSmtpEventSupportTest extends
+    Swift_Transport_AbstractSmtpTest
 {
     public function testRegisterPluginLoadsPluginInEventDispatcher()
     {
@@ -10,9 +11,10 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $dispatcher = $this->createEventDispatcher(false);
         $listener = $this->getMockery('Swift_Events_EventListener');
         $smtp = $this->getTransport($buf, $dispatcher);
-        $dispatcher->shouldReceive('bindEventListener')
-                   ->once()
-                   ->with($listener);
+        $dispatcher
+            ->shouldReceive('bindEventListener')
+            ->once()
+            ->with($listener);
 
         $smtp->registerPlugin($listener);
     }
@@ -23,23 +25,29 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $dispatcher = $this->createEventDispatcher(false);
         $message = $this->createMessage();
         $smtp = $this->getTransport($buf, $dispatcher);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn(['mark@swiftmailer.org' => 'Mark']);
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->once()
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'beforeSendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn(['mark@swiftmailer.org' => 'Mark']);
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->once()
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'beforeSendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturn(false);
 
@@ -54,23 +62,29 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $dispatcher = $this->createEventDispatcher(false);
         $message = $this->createMessage();
         $smtp = $this->getTransport($buf, $dispatcher);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn(['mark@swiftmailer.org' => 'Mark']);
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->once()
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'sendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn(['mark@swiftmailer.org' => 'Mark']);
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->once()
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'sendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturn(false);
 
@@ -83,45 +97,56 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
         $message = $this->createMessage();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn(['mark@swiftmailer.org' => 'Mark']);
-        $buf->shouldReceive('write')
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn(['mark@swiftmailer.org' => 'Mark']);
+        $buf
+            ->shouldReceive('write')
             ->once()
             ->with("MAIL FROM:<chris@swiftmailer.org>\r\n")
             ->andReturn(1);
-        $buf->shouldReceive('readLine')
+        $buf
+            ->shouldReceive('readLine')
             ->once()
             ->with(1)
             ->andReturn("250 OK\r\n");
-        $buf->shouldReceive('write')
+        $buf
+            ->shouldReceive('write')
             ->once()
             ->with("RCPT TO:<mark@swiftmailer.org>\r\n")
             ->andReturn(2);
-        $buf->shouldReceive('readLine')
+        $buf
+            ->shouldReceive('readLine')
             ->once()
             ->with(2)
             ->andReturn("500 Not now\r\n");
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->zeroOrMoreTimes()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'sendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->zeroOrMoreTimes()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'sendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturn(false);
-        $evt->shouldReceive('setFailedRecipients')
+        $evt
+            ->shouldReceive('setFailedRecipients')
             ->once()
             ->with(['mark@swiftmailer.org']);
 
@@ -134,45 +159,56 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
         $message = $this->createMessage();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn(['mark@swiftmailer.org' => 'Mark']);
-        $buf->shouldReceive('write')
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn(['mark@swiftmailer.org' => 'Mark']);
+        $buf
+            ->shouldReceive('write')
             ->once()
             ->with("MAIL FROM:<chris@swiftmailer.org>\r\n")
             ->andReturn(1);
-        $buf->shouldReceive('readLine')
+        $buf
+            ->shouldReceive('readLine')
             ->once()
             ->with(1)
             ->andReturn("250 OK\r\n");
-        $buf->shouldReceive('write')
+        $buf
+            ->shouldReceive('write')
             ->once()
             ->with("RCPT TO:<mark@swiftmailer.org>\r\n")
             ->andReturn(2);
-        $buf->shouldReceive('readLine')
+        $buf
+            ->shouldReceive('readLine')
             ->once()
             ->with(2)
             ->andReturn("500 Not now\r\n");
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->zeroOrMoreTimes()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'sendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->zeroOrMoreTimes()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'sendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturn(false);
-        $evt->shouldReceive('setResult')
+        $evt
+            ->shouldReceive('setResult')
             ->once()
             ->with(Swift_Events_SendEvent::RESULT_FAILED);
 
@@ -185,48 +221,59 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
         $message = $this->createMessage();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn([
-                    'mark@swiftmailer.org' => 'Mark',
-                    'chris@site.tld' => 'Chris',
-                ]);
-        $buf->shouldReceive('write')
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn([
+                'mark@swiftmailer.org' => 'Mark',
+                'chris@site.tld' => 'Chris'
+            ]);
+        $buf
+            ->shouldReceive('write')
             ->once()
             ->with("MAIL FROM:<chris@swiftmailer.org>\r\n")
             ->andReturn(1);
-        $buf->shouldReceive('readLine')
+        $buf
+            ->shouldReceive('readLine')
             ->once()
             ->with(1)
             ->andReturn("250 OK\r\n");
-        $buf->shouldReceive('write')
+        $buf
+            ->shouldReceive('write')
             ->once()
             ->with("RCPT TO:<mark@swiftmailer.org>\r\n")
             ->andReturn(2);
-        $buf->shouldReceive('readLine')
+        $buf
+            ->shouldReceive('readLine')
             ->once()
             ->with(2)
             ->andReturn("500 Not now\r\n");
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->zeroOrMoreTimes()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'sendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->zeroOrMoreTimes()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'sendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturn(false);
-        $evt->shouldReceive('setResult')
+        $evt
+            ->shouldReceive('setResult')
             ->once()
             ->with(Swift_Events_SendEvent::RESULT_TENTATIVE);
 
@@ -239,32 +286,39 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
         $message = $this->createMessage();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn([
-                    'mark@swiftmailer.org' => 'Mark',
-                    'chris@site.tld' => 'Chris',
-                ]);
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->zeroOrMoreTimes()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'sendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn([
+                'mark@swiftmailer.org' => 'Mark',
+                'chris@site.tld' => 'Chris'
+            ]);
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->zeroOrMoreTimes()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'sendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturn(false);
-        $evt->shouldReceive('setResult')
+        $evt
+            ->shouldReceive('setResult')
             ->once()
             ->with(Swift_Events_SendEvent::RESULT_SUCCESS);
 
@@ -277,27 +331,34 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_SendEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_SendEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
         $message = $this->createMessage();
 
-        $message->shouldReceive('getFrom')
-                ->zeroOrMoreTimes()
-                ->andReturn(['chris@swiftmailer.org' => null]);
-        $message->shouldReceive('getTo')
-                ->zeroOrMoreTimes()
-                ->andReturn(['mark@swiftmailer.org' => 'Mark']);
-        $dispatcher->shouldReceive('createSendEvent')
-                   ->zeroOrMoreTimes()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'beforeSendPerformed');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
-            ->atLeast()->once()
+        $message
+            ->shouldReceive('getFrom')
+            ->zeroOrMoreTimes()
+            ->andReturn(['chris@swiftmailer.org' => null]);
+        $message
+            ->shouldReceive('getTo')
+            ->zeroOrMoreTimes()
+            ->andReturn(['mark@swiftmailer.org' => 'Mark']);
+        $dispatcher
+            ->shouldReceive('createSendEvent')
+            ->zeroOrMoreTimes()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'beforeSendPerformed');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
+            ->atLeast()
+            ->once()
             ->andReturn(true);
 
         $this->finishBuffer($buf);
@@ -312,17 +373,21 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_TransportChangeEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createTransportChangeEvent')
-                   ->atLeast()->once()
-                   ->with($smtp)
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'transportStarted');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
-            ->atLeast()->once()
+        $dispatcher
+            ->shouldReceive('createTransportChangeEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp)
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'transportStarted');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
+            ->atLeast()
+            ->once()
             ->andReturn(false);
 
         $this->finishBuffer($buf);
@@ -336,17 +401,21 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_TransportChangeEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createTransportChangeEvent')
-                   ->atLeast()->once()
-                   ->with($smtp)
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'beforeTransportStarted');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
-            ->atLeast()->once()
+        $dispatcher
+            ->shouldReceive('createTransportChangeEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp)
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'beforeTransportStarted');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
+            ->atLeast()
+            ->once()
             ->andReturn(false);
 
         $this->finishBuffer($buf);
@@ -360,23 +429,28 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_TransportChangeEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createTransportChangeEvent')
-                   ->atLeast()->once()
-                   ->with($smtp)
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'beforeTransportStarted');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
-            ->atLeast()->once()
+        $dispatcher
+            ->shouldReceive('createTransportChangeEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp)
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'beforeTransportStarted');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
+            ->atLeast()
+            ->once()
             ->andReturn(true);
 
         $this->finishBuffer($buf);
         $smtp->start();
 
-        $this->assertFalse($smtp->isStarted(),
+        $this->assertFalse(
+            $smtp->isStarted(),
             '%s: Transport should not be started since event bubble was cancelled'
         );
     }
@@ -385,18 +459,22 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_TransportChangeEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_TransportChangeEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createTransportChangeEvent')
-                   ->atLeast()->once()
-                   ->with($smtp)
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'transportStopped');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
+        $dispatcher
+            ->shouldReceive('createTransportChangeEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp)
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'transportStopped');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
 
         $this->finishBuffer($buf);
         $smtp->start();
@@ -407,18 +485,22 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
     {
         $buf = $this->getBuffer();
         $dispatcher = $this->createEventDispatcher(false);
-        $evt = $this->getMockery('Swift_Events_TransportChangeEvent')->shouldIgnoreMissing();
+        $evt = $this->getMockery(
+            'Swift_Events_TransportChangeEvent'
+        )->shouldIgnoreMissing();
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createTransportChangeEvent')
-                   ->atLeast()->once()
-                   ->with($smtp)
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'beforeTransportStopped');
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
+        $dispatcher
+            ->shouldReceive('createTransportChangeEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp)
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'beforeTransportStopped');
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
 
         $this->finishBuffer($buf);
         $smtp->start();
@@ -433,19 +515,22 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $smtp = $this->getTransport($buf, $dispatcher);
 
         $hasRun = false;
-        $dispatcher->shouldReceive('createTransportChangeEvent')
-                   ->atLeast()->once()
-                   ->with($smtp)
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'beforeTransportStopped')
-                   ->andReturnUsing(function () use (&$hasRun) {
-                       $hasRun = true;
-                   });
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->zeroOrMoreTimes();
-        $evt->shouldReceive('bubbleCancelled')
+        $dispatcher
+            ->shouldReceive('createTransportChangeEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp)
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'beforeTransportStopped')
+            ->andReturnUsing(function () use (&$hasRun) {
+                $hasRun = true;
+            });
+        $dispatcher->shouldReceive('dispatchEvent')->zeroOrMoreTimes();
+        $evt
+            ->shouldReceive('bubbleCancelled')
             ->zeroOrMoreTimes()
             ->andReturnUsing(function () use (&$hasRun) {
                 return $hasRun;
@@ -455,7 +540,8 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $smtp->start();
         $smtp->stop();
 
-        $this->assertTrue($smtp->isStarted(),
+        $this->assertTrue(
+            $smtp->isStarted(),
             '%s: Transport should not be stopped since event bubble was cancelled'
         );
     }
@@ -467,13 +553,17 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_ResponseEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createResponseEvent')
-                   ->atLeast()->once()
-                   ->with($smtp, \Mockery::any(), \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->atLeast()->once()
-                   ->with($evt, 'responseReceived');
+        $dispatcher
+            ->shouldReceive('createResponseEvent')
+            ->atLeast()
+            ->once()
+            ->with($smtp, \Mockery::any(), \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->atLeast()
+            ->once()
+            ->with($evt, 'responseReceived');
 
         $this->finishBuffer($buf);
         $smtp->start();
@@ -486,13 +576,15 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_CommandEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $dispatcher->shouldReceive('createCommandEvent')
-                   ->once()
-                   ->with($smtp, \Mockery::any(), \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'commandSent');
+        $dispatcher
+            ->shouldReceive('createCommandEvent')
+            ->once()
+            ->with($smtp, \Mockery::any(), \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'commandSent');
 
         $this->finishBuffer($buf);
         $smtp->start();
@@ -505,23 +597,31 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_TransportExceptionEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $buf->shouldReceive('readLine')
-            ->atLeast()->once()
+        $buf
+            ->shouldReceive('readLine')
+            ->atLeast()
+            ->once()
             ->andReturn("503 I'm sleepy, go away!\r\n");
-        $dispatcher->shouldReceive('createTransportExceptionEvent')
-                   ->zeroOrMoreTimes()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->once()
-                   ->with($evt, 'exceptionThrown');
-        $evt->shouldReceive('bubbleCancelled')
-            ->atLeast()->once()
+        $dispatcher
+            ->shouldReceive('createTransportExceptionEvent')
+            ->zeroOrMoreTimes()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->once()
+            ->with($evt, 'exceptionThrown');
+        $evt
+            ->shouldReceive('bubbleCancelled')
+            ->atLeast()
+            ->once()
             ->andReturn(false);
 
         try {
             $smtp->start();
-            $this->fail('TransportException should be thrown on invalid response');
+            $this->fail(
+                'TransportException should be thrown on invalid response'
+            );
         } catch (Swift_TransportException $e) {
         }
     }
@@ -533,18 +633,24 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
         $evt = $this->getMockery('Swift_Events_TransportExceptionEvent');
         $smtp = $this->getTransport($buf, $dispatcher);
 
-        $buf->shouldReceive('readLine')
-            ->atLeast()->once()
+        $buf
+            ->shouldReceive('readLine')
+            ->atLeast()
+            ->once()
             ->andReturn("503 I'm sleepy, go away!\r\n");
-        $dispatcher->shouldReceive('createTransportExceptionEvent')
-                   ->twice()
-                   ->with($smtp, \Mockery::any())
-                   ->andReturn($evt);
-        $dispatcher->shouldReceive('dispatchEvent')
-                   ->twice()
-                   ->with($evt, 'exceptionThrown');
-        $evt->shouldReceive('bubbleCancelled')
-            ->atLeast()->once()
+        $dispatcher
+            ->shouldReceive('createTransportExceptionEvent')
+            ->twice()
+            ->with($smtp, \Mockery::any())
+            ->andReturn($evt);
+        $dispatcher
+            ->shouldReceive('dispatchEvent')
+            ->twice()
+            ->with($evt, 'exceptionThrown');
+        $evt
+            ->shouldReceive('bubbleCancelled')
+            ->atLeast()
+            ->once()
             ->andReturn(true);
 
         $this->finishBuffer($buf);
@@ -553,6 +659,8 @@ abstract class Swift_Transport_AbstractSmtpEventSupportTest extends Swift_Transp
 
     protected function createEventDispatcher($stub = true)
     {
-        return $this->getMockery('Swift_Events_EventDispatcher')->shouldIgnoreMissing();
+        return $this->getMockery(
+            'Swift_Events_EventDispatcher'
+        )->shouldIgnoreMissing();
     }
 }

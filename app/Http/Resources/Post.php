@@ -21,7 +21,7 @@ class Post extends JsonResource
         $fields['included'] = $relations;
         $fields['id'] = $this->id;
         $fields['hashid'] = $this->getHashid();
-        $fields['href'] = URL::to('/').'content/'.$this->getHashid();
+        $fields['href'] = URL::to('/') . 'content/' . $this->getHashid();
         $fields['status'] = $this->status;
         $fields['slug'] = $this->slug;
         $fields['tags'] = $this->tags;

@@ -14,6 +14,10 @@
 /vendor
 /.idea
 /.vagrant
+/laradock/data
+/laradock/vendor/*
+laradock/data
+laradock/vendor
 Homestead.json
 Homestead.yaml
 npm-debug.log

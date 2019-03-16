@@ -23,8 +23,13 @@ class ServiceUnavailableHttpException extends HttpException
      * @param int        $code       The internal exception code
      * @param array      $headers
      */
-    public function __construct($retryAfter = null, string $message = null, \Exception $previous = null, ?int $code = 0, array $headers = [])
-    {
+    public function __construct(
+        $retryAfter = null,
+        string $message = null,
+        \Exception $previous = null,
+        ?int $code = 0,
+        array $headers = []
+    ) {
         if ($retryAfter) {
             $headers['Retry-After'] = $retryAfter;
         }

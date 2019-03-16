@@ -46,8 +46,11 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * @param string|null $signPrivateKey
      * @param string|null $encryptCertificate
      */
-    public function __construct($signCertificate = null, $signPrivateKey = null, $encryptCertificate = null)
-    {
+    public function __construct(
+        $signCertificate = null,
+        $signPrivateKey = null,
+        $encryptCertificate = null
+    ) {
         if (null !== $signPrivateKey) {
             $this->setSignCertificate($signCertificate, $signPrivateKey);
         }
@@ -56,8 +59,9 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
             $this->setEncryptCertificate($encryptCertificate);
         }
 
-        $this->replacementFactory = Swift_DependencyContainer::getInstance()
-            ->lookup('transport.replacementfactory');
+        $this->replacementFactory = Swift_DependencyContainer::getInstance()->lookup(
+            'transport.replacementfactory'
+        );
 
         $this->signOptions = PKCS7_DETACHED;
         $this->encryptCipher = OPENSSL_CIPHER_AES_128_CBC;
@@ -75,16 +79,24 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      *
      * @return $this
      */
-    public function setSignCertificate($certificate, $privateKey = null, $signOptions = PKCS7_DETACHED, $extraCerts = null)
-    {
-        $this->signCertificate = 'file://'.str_replace('\\', '/', realpath($certificate));
+    public function setSignCertificate(
+        $certificate,
+        $privateKey = null,
+        $signOptions = PKCS7_DETACHED,
+        $extraCerts = null
+    ) {
+        $this->signCertificate =
+            'file://' . str_replace('\\', '/', realpath($certificate));
 
         if (null !== $privateKey) {
             if (is_array($privateKey)) {
                 $this->signPrivateKey = $privateKey;
-                $this->signPrivateKey[0] = 'file://'.str_replace('\\', '/', realpath($privateKey[0]));
+                $this->signPrivateKey[0] =
+                    'file://' .
+                    str_replace('\\', '/', realpath($privateKey[0]));
             } else {
-                $this->signPrivateKey = 'file://'.str_replace('\\', '/', realpath($privateKey));
+                $this->signPrivateKey =
+                    'file://' . str_replace('\\', '/', realpath($privateKey));
             }
         }
 
@@ -111,10 +123,12 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
             $this->encryptCert = [];
 
             foreach ($recipientCerts as $cert) {
-                $this->encryptCert[] = 'file://'.str_replace('\\', '/', realpath($cert));
+                $this->encryptCert[] =
+                    'file://' . str_replace('\\', '/', realpath($cert));
             }
         } else {
-            $this->encryptCert = 'file://'.str_replace('\\', '/', realpath($recipientCerts));
+            $this->encryptCert =
+                'file://' . str_replace('\\', '/', realpath($recipientCerts));
         }
 
         if (null !== $cipher) {
@@ -223,7 +237,11 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      */
     public function getAlteredHeaders()
     {
-        return ['Content-Type', 'Content-Transfer-Encoding', 'Content-Disposition'];
+        return [
+            'Content-Type',
+            'Content-Transfer-Encoding',
+            'Content-Disposition'
+        ];
     }
 
     /**
@@ -247,15 +265,11 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         } else {
             // Only keep header needed to parse the body correctly
             $this->clearAllHeaders($signMessage);
-            $this->copyHeaders(
-                $message,
-                $signMessage,
-                [
-                    'Content-Type',
-                    'Content-Transfer-Encoding',
-                    'Content-Disposition',
-                ]
-            );
+            $this->copyHeaders($message, $signMessage, [
+                'Content-Type',
+                'Content-Transfer-Encoding',
+                'Content-Disposition'
+            ]);
         }
 
         // Copy the cloned message into a temporary file stream
@@ -265,7 +279,8 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         $signedMessageStream = new Swift_ByteStream_TemporaryFileByteStream();
 
         // Sign the message using openssl
-        if (!openssl_pkcs7_sign(
+        if (
+            !openssl_pkcs7_sign(
                 $messageStream->getPath(),
                 $signedMessageStream->getPath(),
                 $this->signCertificate,
@@ -275,7 +290,12 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
                 $this->extraCerts
             )
         ) {
-            throw new Swift_IoException(sprintf('Failed to sign S/Mime message. Error: "%s".', openssl_error_string()));
+            throw new Swift_IoException(
+                sprintf(
+                    'Failed to sign S/Mime message. Error: "%s".',
+                    openssl_error_string()
+                )
+            );
         }
 
         // Parse the resulting signed message content back into the Swift message
@@ -304,15 +324,11 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         } else {
             // Only keep header needed to parse the body correctly
             $this->clearAllHeaders($encryptMessage);
-            $this->copyHeaders(
-                $message,
-                $encryptMessage,
-                [
-                    'Content-Type',
-                    'Content-Transfer-Encoding',
-                    'Content-Disposition',
-                ]
-            );
+            $this->copyHeaders($message, $encryptMessage, [
+                'Content-Type',
+                'Content-Transfer-Encoding',
+                'Content-Disposition'
+            ]);
         }
 
         // Convert the message content (including headers) to a string
@@ -323,7 +339,8 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         $encryptedMessageStream = new Swift_ByteStream_TemporaryFileByteStream();
 
         // Encrypt the message
-        if (!openssl_pkcs7_encrypt(
+        if (
+            !openssl_pkcs7_encrypt(
                 $messageStream->getPath(),
                 $encryptedMessageStream->getPath(),
                 $this->encryptCert,
@@ -332,7 +349,12 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
                 $this->encryptCipher
             )
         ) {
-            throw new Swift_IoException(sprintf('Failed to encrypt S/Mime message. Error: "%s".', openssl_error_string()));
+            throw new Swift_IoException(
+                sprintf(
+                    'Failed to encrypt S/Mime message. Error: "%s".',
+                    openssl_error_string()
+                )
+            );
         }
 
         // Parse the resulting signed message content back into the Swift message
@@ -358,8 +380,11 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      *
      * @param string $headerName
      */
-    protected function copyHeader(Swift_Message $fromMessage, Swift_Message $toMessage, $headerName)
-    {
+    protected function copyHeader(
+        Swift_Message $fromMessage,
+        Swift_Message $toMessage,
+        $headerName
+    ) {
         $header = $fromMessage->getHeaders()->get($headerName);
         if (!$header) {
             return;
@@ -367,7 +392,10 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         $headers = $toMessage->getHeaders();
         switch ($header->getFieldType()) {
             case Swift_Mime_Header::TYPE_TEXT:
-                $headers->addTextHeader($header->getFieldName(), $header->getValue());
+                $headers->addTextHeader(
+                    $header->getFieldName(),
+                    $header->getValue()
+                );
                 break;
             case Swift_Mime_Header::TYPE_PARAMETERIZED:
                 $headers->addParameterizedHeader(
@@ -404,13 +432,17 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
 
         // Create a new MIME part that wraps the original stream
         $wrappedMessage = new Swift_MimePart($messageStream, 'message/rfc822');
-        $wrappedMessage->setEncoder(new Swift_Mime_ContentEncoder_PlainContentEncoder('7bit'));
+        $wrappedMessage->setEncoder(
+            new Swift_Mime_ContentEncoder_PlainContentEncoder('7bit')
+        );
 
         return $wrappedMessage;
     }
 
-    protected function parseSSLOutput(Swift_InputByteStream $inputStream, Swift_Message $message)
-    {
+    protected function parseSSLOutput(
+        Swift_InputByteStream $inputStream,
+        Swift_Message $message
+    ) {
         $messageStream = new Swift_ByteStream_TemporaryFileByteStream();
         $this->copyFromOpenSSLOutput($inputStream, $messageStream);
 
@@ -420,8 +452,10 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     /**
      * Merges an OutputByteStream from OpenSSL to a Swift_Message.
      */
-    protected function streamToMime(Swift_OutputByteStream $fromStream, Swift_Message $message)
-    {
+    protected function streamToMime(
+        Swift_OutputByteStream $fromStream,
+        Swift_Message $message
+    ) {
         // Parse the stream into headers and body
         list($headers, $messageStream) = $this->parseStream($fromStream);
 
@@ -444,11 +478,16 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
 
         // We use the null content encoder, since the body is already encoded
         // according to the transfer encoding specified in the stream
-        $message->setEncoder(new Swift_Mime_ContentEncoder_NullContentEncoder($encoding));
+        $message->setEncoder(
+            new Swift_Mime_ContentEncoder_NullContentEncoder($encoding)
+        );
 
         // Set the disposition, if present
         if (isset($headers['content-disposition'])) {
-            $messageHeaders->addTextHeader('Content-Disposition', $headers['content-disposition']);
+            $messageHeaders->addTextHeader(
+                'Content-Disposition',
+                $headers['content-disposition']
+            );
         }
 
         // Copy over the body from the stream using the content type dictated
@@ -496,7 +535,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         foreach ($headerLines as $headerLine) {
             // Handle headers that span multiple lines
             if (false === strpos($headerLine, ':')) {
-                $headers[$currentHeaderName] .= ' '.trim($headerLine);
+                $headers[$currentHeaderName] .= ' ' . trim($headerLine);
                 continue;
             }
 
@@ -509,7 +548,9 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         $bodyStream = new Swift_ByteStream_TemporaryFileByteStream();
 
         // Skip the header and separator and point to the body
-        $emailStream->setReadPointer($headersPosEnd + strlen($headerBodySeparator));
+        $emailStream->setReadPointer(
+            $headersPosEnd + strlen($headerBodySeparator)
+        );
 
         while (false !== ($buffer = $emailStream->read($bufferLength))) {
             $bodyStream->write($buffer);
@@ -520,12 +561,20 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
         return [$headers, $bodyStream];
     }
 
-    protected function copyFromOpenSSLOutput(Swift_OutputByteStream $fromStream, Swift_InputByteStream $toStream)
-    {
+    protected function copyFromOpenSSLOutput(
+        Swift_OutputByteStream $fromStream,
+        Swift_InputByteStream $toStream
+    ) {
         $bufferLength = 4096;
         $filteredStream = new Swift_ByteStream_TemporaryFileByteStream();
-        $filteredStream->addFilter($this->replacementFactory->createFilter("\r\n", "\n"), 'CRLF to LF');
-        $filteredStream->addFilter($this->replacementFactory->createFilter("\n", "\r\n"), 'LF to CRLF');
+        $filteredStream->addFilter(
+            $this->replacementFactory->createFilter("\r\n", "\n"),
+            'CRLF to LF'
+        );
+        $filteredStream->addFilter(
+            $this->replacementFactory->createFilter("\n", "\r\n"),
+            'LF to CRLF'
+        );
 
         while (false !== ($buffer = $fromStream->read($bufferLength))) {
             $filteredStream->write($buffer);

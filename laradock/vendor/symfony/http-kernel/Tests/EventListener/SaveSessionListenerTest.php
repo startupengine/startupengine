@@ -27,8 +27,13 @@ class SaveSessionListenerTest extends TestCase
     public function testOnlyTriggeredOnMasterRequest()
     {
         $listener = new SaveSessionListener();
-        $event = $this->getMockBuilder(FilterResponseEvent::class)->disableOriginalConstructor()->getMock();
-        $event->expects($this->once())->method('isMasterRequest')->willReturn(false);
+        $event = $this->getMockBuilder(FilterResponseEvent::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $event
+            ->expects($this->once())
+            ->method('isMasterRequest')
+            ->willReturn(false);
         $event->expects($this->never())->method('getRequest');
 
         // sub request
@@ -38,15 +43,29 @@ class SaveSessionListenerTest extends TestCase
     public function testSessionSaved()
     {
         $listener = new SaveSessionListener();
-        $kernel = $this->getMockBuilder(HttpKernelInterface::class)->disableOriginalConstructor()->getMock();
+        $kernel = $this->getMockBuilder(HttpKernelInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $session = $this->getMockBuilder(SessionInterface::class)->disableOriginalConstructor()->getMock();
-        $session->expects($this->once())->method('isStarted')->willReturn(true);
+        $session = $this->getMockBuilder(SessionInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $session
+            ->expects($this->once())
+            ->method('isStarted')
+            ->willReturn(true);
         $session->expects($this->once())->method('save');
 
         $request = new Request();
         $request->setSession($session);
         $response = new Response();
-        $listener->onKernelResponse(new FilterResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response));
+        $listener->onKernelResponse(
+            new FilterResponseEvent(
+                $kernel,
+                $request,
+                HttpKernelInterface::MASTER_REQUEST,
+                $response
+            )
+        );
     }
 }

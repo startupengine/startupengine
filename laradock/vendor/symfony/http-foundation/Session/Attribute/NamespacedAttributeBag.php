@@ -25,8 +25,10 @@ class NamespacedAttributeBag extends AttributeBag
      * @param string $storageKey         Session storage key
      * @param string $namespaceCharacter Namespace character to use in keys
      */
-    public function __construct(string $storageKey = '_sf2_attributes', string $namespaceCharacter = '/')
-    {
+    public function __construct(
+        string $storageKey = '_sf2_attributes',
+        string $namespaceCharacter = '/'
+    ) {
         $this->namespaceCharacter = $namespaceCharacter;
         parent::__construct($storageKey);
     }
@@ -60,7 +62,9 @@ class NamespacedAttributeBag extends AttributeBag
             return $default;
         }
 
-        return \array_key_exists($name, $attributes) ? $attributes[$name] : $default;
+        return \array_key_exists($name, $attributes)
+            ? $attributes[$name]
+            : $default;
     }
 
     /**
@@ -102,7 +106,10 @@ class NamespacedAttributeBag extends AttributeBag
     protected function &resolveAttributePath($name, $writeContext = false)
     {
         $array = &$this->attributes;
-        $name = (0 === strpos($name, $this->namespaceCharacter)) ? substr($name, 1) : $name;
+        $name =
+            0 === strpos($name, $this->namespaceCharacter)
+                ? substr($name, 1)
+                : $name;
 
         // Check if there is anything to do, else return
         if (!$name) {
@@ -150,7 +157,7 @@ class NamespacedAttributeBag extends AttributeBag
      */
     protected function resolveKey($name)
     {
-        if (false !== $pos = strrpos($name, $this->namespaceCharacter)) {
+        if (false !== ($pos = strrpos($name, $this->namespaceCharacter))) {
             $name = substr($name, $pos + 1);
         }
 

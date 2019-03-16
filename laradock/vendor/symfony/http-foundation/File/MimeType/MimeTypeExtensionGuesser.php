@@ -384,14 +384,22 @@ class MimeTypeExtensionGuesser implements ExtensionGuesserInterface
         'application/vnd.olpc-sugar' => 'xo',
         'application/vnd.oma.dd2+xml' => 'dd2',
         'application/vnd.openofficeorg.extension' => 'oxt',
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'pptx',
-        'application/vnd.openxmlformats-officedocument.presentationml.slide' => 'sldx',
-        'application/vnd.openxmlformats-officedocument.presentationml.slideshow' => 'ppsx',
-        'application/vnd.openxmlformats-officedocument.presentationml.template' => 'potx',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.template' => 'xltx',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.template' => 'dotx',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation' =>
+            'pptx',
+        'application/vnd.openxmlformats-officedocument.presentationml.slide' =>
+            'sldx',
+        'application/vnd.openxmlformats-officedocument.presentationml.slideshow' =>
+            'ppsx',
+        'application/vnd.openxmlformats-officedocument.presentationml.template' =>
+            'potx',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' =>
+            'xlsx',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.template' =>
+            'xltx',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' =>
+            'docx',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.template' =>
+            'dotx',
         'application/vnd.osgeo.mapguide.package' => 'mgp',
         'application/vnd.osgi.dp' => 'dp',
         'application/vnd.osgi.subsystem' => 'esa',
@@ -800,7 +808,7 @@ class MimeTypeExtensionGuesser implements ExtensionGuesserInterface
         'video/x-msvideo' => 'avi',
         'video/x-sgi-movie' => 'movie',
         'video/x-smv' => 'smv',
-        'x-conference/x-cooltalk' => 'ice',
+        'x-conference/x-cooltalk' => 'ice'
     ];
 
     /**
@@ -808,6 +816,8 @@ class MimeTypeExtensionGuesser implements ExtensionGuesserInterface
      */
     public function guess($mimeType)
     {
-        return isset($this->defaultExtensions[$mimeType]) ? $this->defaultExtensions[$mimeType] : null;
+        return isset($this->defaultExtensions[$mimeType])
+            ? $this->defaultExtensions[$mimeType]
+            : null;
     }
 }

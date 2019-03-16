@@ -24,17 +24,22 @@ class Swift_MimePart extends Swift_Mime_MimePart
      * @param string $contentType
      * @param string $charset
      */
-    public function __construct($body = null, $contentType = null, $charset = null)
-    {
+    public function __construct(
+        $body = null,
+        $contentType = null,
+        $charset = null
+    ) {
         call_user_func_array(
             [$this, 'Swift_Mime_MimePart::__construct'],
-            Swift_DependencyContainer::getInstance()
-                ->createDependenciesFor('mime.part')
-            );
+            Swift_DependencyContainer::getInstance()->createDependenciesFor(
+                'mime.part'
+            )
+        );
 
         if (!isset($charset)) {
-            $charset = Swift_DependencyContainer::getInstance()
-                ->lookup('properties.charset');
+            $charset = Swift_DependencyContainer::getInstance()->lookup(
+                'properties.charset'
+            );
         }
         $this->setBody($body);
         $this->setCharset($charset);

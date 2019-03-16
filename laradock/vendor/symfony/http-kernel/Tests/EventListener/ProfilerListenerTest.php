@@ -30,25 +30,36 @@ class ProfilerListenerTest extends TestCase
     {
         $profile = new Profile('token');
 
-        $profiler = $this->getMockBuilder('Symfony\Component\HttpKernel\Profiler\Profiler')
+        $profiler = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\Profiler\Profiler'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
-        $profiler->expects($this->once())
+        $profiler
+            ->expects($this->once())
             ->method('collect')
             ->will($this->returnValue($profile));
 
-        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')->getMock();
+        $kernel = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\HttpKernelInterface'
+        )->getMock();
 
-        $masterRequest = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+        $masterRequest = $this->getMockBuilder(
+            'Symfony\Component\HttpFoundation\Request'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
-        $subRequest = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+        $subRequest = $this->getMockBuilder(
+            'Symfony\Component\HttpFoundation\Request'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
-        $response = $this->getMockBuilder('Symfony\Component\HttpFoundation\Response')
+        $response = $this->getMockBuilder(
+            'Symfony\Component\HttpFoundation\Response'
+        )
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -56,15 +67,43 @@ class ProfilerListenerTest extends TestCase
         $requestStack->push($masterRequest);
 
         $onlyException = true;
-        $listener = new ProfilerListener($profiler, $requestStack, null, $onlyException);
+        $listener = new ProfilerListener(
+            $profiler,
+            $requestStack,
+            null,
+            $onlyException
+        );
 
         // master request
-        $listener->onKernelResponse(new FilterResponseEvent($kernel, $masterRequest, Kernel::MASTER_REQUEST, $response));
+        $listener->onKernelResponse(
+            new FilterResponseEvent(
+                $kernel,
+                $masterRequest,
+                Kernel::MASTER_REQUEST,
+                $response
+            )
+        );
 
         // sub request
-        $listener->onKernelException(new GetResponseForExceptionEvent($kernel, $subRequest, Kernel::SUB_REQUEST, new HttpException(404)));
-        $listener->onKernelResponse(new FilterResponseEvent($kernel, $subRequest, Kernel::SUB_REQUEST, $response));
+        $listener->onKernelException(
+            new GetResponseForExceptionEvent(
+                $kernel,
+                $subRequest,
+                Kernel::SUB_REQUEST,
+                new HttpException(404)
+            )
+        );
+        $listener->onKernelResponse(
+            new FilterResponseEvent(
+                $kernel,
+                $subRequest,
+                Kernel::SUB_REQUEST,
+                $response
+            )
+        );
 
-        $listener->onKernelTerminate(new PostResponseEvent($kernel, $masterRequest, $response));
+        $listener->onKernelTerminate(
+            new PostResponseEvent($kernel, $masterRequest, $response)
+        );
     }
 }

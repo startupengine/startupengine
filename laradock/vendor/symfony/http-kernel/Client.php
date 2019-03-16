@@ -39,8 +39,12 @@ class Client extends BaseClient
      * @param History             $history   A History instance to store the browser history
      * @param CookieJar           $cookieJar A CookieJar instance to store the cookies
      */
-    public function __construct(HttpKernelInterface $kernel, array $server = [], History $history = null, CookieJar $cookieJar = null)
-    {
+    public function __construct(
+        HttpKernelInterface $kernel,
+        array $server = [],
+        History $history = null,
+        CookieJar $cookieJar = null
+    ) {
         // These class properties must be set before calling the parent constructor, as it may depend on it.
         $this->kernel = $kernel;
         $this->followRedirects = false;
@@ -65,7 +69,11 @@ class Client extends BaseClient
      */
     protected function doRequest($request)
     {
-        $response = $this->kernel->handle($request, HttpKernelInterface::MASTER_REQUEST, $this->catchExceptions);
+        $response = $this->kernel->handle(
+            $request,
+            HttpKernelInterface::MASTER_REQUEST,
+            $this->catchExceptions
+        );
 
         if ($this->kernel instanceof TerminableInterface) {
             $this->kernel->terminate($request, $response);
@@ -90,9 +98,10 @@ class Client extends BaseClient
         foreach (get_declared_classes() as $class) {
             if (0 === strpos($class, 'ComposerAutoloaderInit')) {
                 $r = new \ReflectionClass($class);
-                $file = \dirname(\dirname($r->getFileName())).'/autoload.php';
+                $file = \dirname(\dirname($r->getFileName())) . '/autoload.php';
                 if (file_exists($file)) {
-                    $requires .= 'require_once '.var_export($file, true).";\n";
+                    $requires .=
+                        'require_once ' . var_export($file, true) . ";\n";
                 }
             }
         }
@@ -112,7 +121,7 @@ $requires
 \$request = unserialize($request);
 EOF;
 
-        return $code.$this->getHandleScript();
+        return $code . $this->getHandleScript();
     }
 
     protected function getHandleScript()
@@ -135,9 +144,20 @@ EOF;
      */
     protected function filterRequest(DomRequest $request)
     {
-        $httpRequest = Request::create($request->getUri(), $request->getMethod(), $request->getParameters(), $request->getCookies(), $request->getFiles(), $request->getServer(), $request->getContent());
+        $httpRequest = Request::create(
+            $request->getUri(),
+            $request->getMethod(),
+            $request->getParameters(),
+            $request->getCookies(),
+            $request->getFiles(),
+            $request->getServer(),
+            $request->getContent()
+        );
 
-        foreach ($this->filterFiles($httpRequest->files->all()) as $key => $value) {
+        foreach (
+            $this->filterFiles($httpRequest->files->all())
+            as $key => $value
+        ) {
             $httpRequest->files->set($key, $value);
         }
 
@@ -164,7 +184,10 @@ EOF;
             if (\is_array($value)) {
                 $filtered[$key] = $this->filterFiles($value);
             } elseif ($value instanceof UploadedFile) {
-                if ($value->isValid() && $value->getSize() > UploadedFile::getMaxFilesize()) {
+                if (
+                    $value->isValid() &&
+                    $value->getSize() > UploadedFile::getMaxFilesize()
+                ) {
                     $filtered[$key] = new UploadedFile(
                         '',
                         $value->getClientOriginalName(),
@@ -199,6 +222,10 @@ EOF;
         $response->sendContent();
         $content = ob_get_clean();
 
-        return new DomResponse($content, $response->getStatusCode(), $response->headers->all());
+        return new DomResponse(
+            $content,
+            $response->getStatusCode(),
+            $response->headers->all()
+        );
     }
 }

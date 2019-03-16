@@ -44,7 +44,10 @@ class SurrogateListener implements EventSubscriberInterface
         $surrogate = $this->surrogate;
         if ($kernel instanceof HttpCache) {
             $surrogate = $kernel->getSurrogate();
-            if (null !== $this->surrogate && $this->surrogate->getName() !== $surrogate->getName()) {
+            if (
+                null !== $this->surrogate &&
+                $this->surrogate->getName() !== $surrogate->getName()
+            ) {
                 $surrogate = $this->surrogate;
             }
         }
@@ -59,7 +62,7 @@ class SurrogateListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::RESPONSE => 'onKernelResponse',
+            KernelEvents::RESPONSE => 'onKernelResponse'
         ];
     }
 }

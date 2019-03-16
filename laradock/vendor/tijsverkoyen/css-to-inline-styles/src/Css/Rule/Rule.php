@@ -34,8 +34,12 @@ final class Rule
      * @param Specificity $specificity
      * @param int         $order
      */
-    public function __construct($selector, array $properties, Specificity $specificity, $order)
-    {
+    public function __construct(
+        $selector,
+        array $properties,
+        Specificity $specificity,
+        $order
+    ) {
         $this->selector = $selector;
         $this->properties = $properties;
         $this->specificity = $specificity;

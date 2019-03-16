@@ -39,14 +39,21 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
         $annotatedClasses = $this->kernel->getAnnotatedClassesToCompile();
         foreach ($container->getExtensions() as $extension) {
             if ($extension instanceof Extension) {
-                $annotatedClasses = array_merge($annotatedClasses, $extension->getAnnotatedClassesToCompile());
+                $annotatedClasses = array_merge(
+                    $annotatedClasses,
+                    $extension->getAnnotatedClassesToCompile()
+                );
             }
         }
 
         $existingClasses = $this->getClassesInComposerClassMaps();
 
-        $annotatedClasses = $container->getParameterBag()->resolveValue($annotatedClasses);
-        $this->kernel->setAnnotatedClassCache($this->expandClasses($annotatedClasses, $existingClasses));
+        $annotatedClasses = $container
+            ->getParameterBag()
+            ->resolveValue($annotatedClasses);
+        $this->kernel->setAnnotatedClassCache(
+            $this->expandClasses($annotatedClasses, $existingClasses)
+        );
     }
 
     /**
@@ -63,7 +70,10 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
 
         // Explicit classes declared in the patterns are returned directly
         foreach ($patterns as $key => $pattern) {
-            if ('\\' !== substr($pattern, -1) && false === strpos($pattern, '*')) {
+            if (
+                '\\' !== substr($pattern, -1) &&
+                false === strpos($pattern, '*')
+            ) {
                 unset($patterns[$key]);
                 $expanded[] = ltrim($pattern, '\\');
             }
@@ -120,7 +130,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
                 $regex .= '$';
             }
 
-            $regexps[] = '{^\\\\'.$regex.'}';
+            $regexps[] = '{^\\\\' . $regex . '}';
         }
 
         return $regexps;
@@ -135,7 +145,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
                 continue;
             }
 
-            if (preg_match($regex, '\\'.$class)) {
+            if (preg_match($regex, '\\' . $class)) {
                 return true;
             }
         }

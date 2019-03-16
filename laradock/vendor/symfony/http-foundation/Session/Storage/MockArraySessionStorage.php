@@ -62,8 +62,10 @@ class MockArraySessionStorage implements SessionStorageInterface
      */
     protected $bags = [];
 
-    public function __construct(string $name = 'MOCKSESSID', MetadataBag $metaBag = null)
-    {
+    public function __construct(
+        string $name = 'MOCKSESSID',
+        MetadataBag $metaBag = null
+    ) {
         $this->name = $name;
         $this->setMetadataBag($metaBag);
     }
@@ -120,7 +122,9 @@ class MockArraySessionStorage implements SessionStorageInterface
     public function setId($id)
     {
         if ($this->started) {
-            throw new \LogicException('Cannot set session ID after the session has started.');
+            throw new \LogicException(
+                'Cannot set session ID after the session has started.'
+            );
         }
 
         $this->id = $id;
@@ -148,7 +152,9 @@ class MockArraySessionStorage implements SessionStorageInterface
     public function save()
     {
         if (!$this->started || $this->closed) {
-            throw new \RuntimeException('Trying to save a session that was not started yet or was already closed');
+            throw new \RuntimeException(
+                'Trying to save a session that was not started yet or was already closed'
+            );
         }
         // nothing to do since we don't persist the session data
         $this->closed = false;
@@ -186,7 +192,9 @@ class MockArraySessionStorage implements SessionStorageInterface
     public function getBag($name)
     {
         if (!isset($this->bags[$name])) {
-            throw new \InvalidArgumentException(sprintf('The SessionBagInterface %s is not registered.', $name));
+            throw new \InvalidArgumentException(
+                sprintf('The SessionBagInterface %s is not registered.', $name)
+            );
         }
 
         if (!$this->started) {
@@ -242,7 +250,9 @@ class MockArraySessionStorage implements SessionStorageInterface
 
         foreach ($bags as $bag) {
             $key = $bag->getStorageKey();
-            $this->data[$key] = isset($this->data[$key]) ? $this->data[$key] : [];
+            $this->data[$key] = isset($this->data[$key])
+                ? $this->data[$key]
+                : [];
             $bag->initialize($this->data[$key]);
         }
 

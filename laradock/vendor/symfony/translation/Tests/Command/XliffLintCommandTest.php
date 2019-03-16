@@ -33,10 +33,17 @@ class XliffLintCommandTest extends TestCase
 
         $tester->execute(
             ['filename' => $filename],
-            ['verbosity' => OutputInterface::VERBOSITY_VERBOSE, 'decorated' => false]
+            [
+                'verbosity' => OutputInterface::VERBOSITY_VERBOSE,
+                'decorated' => false
+            ]
         );
 
-        $this->assertEquals(0, $tester->getStatusCode(), 'Returns 0 in case of success');
+        $this->assertEquals(
+            0,
+            $tester->getStatusCode(),
+            'Returns 0 in case of success'
+        );
         $this->assertContains('OK', trim($tester->getDisplay()));
     }
 
@@ -48,28 +55,51 @@ class XliffLintCommandTest extends TestCase
 
         $tester->execute(
             ['filename' => [$filename1, $filename2]],
-            ['verbosity' => OutputInterface::VERBOSITY_VERBOSE, 'decorated' => false]
+            [
+                'verbosity' => OutputInterface::VERBOSITY_VERBOSE,
+                'decorated' => false
+            ]
         );
 
-        $this->assertEquals(0, $tester->getStatusCode(), 'Returns 0 in case of success');
+        $this->assertEquals(
+            0,
+            $tester->getStatusCode(),
+            'Returns 0 in case of success'
+        );
         $this->assertContains('OK', trim($tester->getDisplay()));
     }
 
     /**
      * @dataProvider provideStrictFilenames
      */
-    public function testStrictFilenames($requireStrictFileNames, $fileNamePattern, $targetLanguage, $mustFail)
-    {
+    public function testStrictFilenames(
+        $requireStrictFileNames,
+        $fileNamePattern,
+        $targetLanguage,
+        $mustFail
+    ) {
         $tester = $this->createCommandTester($requireStrictFileNames);
-        $filename = $this->createFile('note', $targetLanguage, $fileNamePattern);
+        $filename = $this->createFile(
+            'note',
+            $targetLanguage,
+            $fileNamePattern
+        );
 
         $tester->execute(
             ['filename' => $filename],
-            ['verbosity' => OutputInterface::VERBOSITY_VERBOSE, 'decorated' => false]
+            [
+                'verbosity' => OutputInterface::VERBOSITY_VERBOSE,
+                'decorated' => false
+            ]
         );
 
         $this->assertEquals($mustFail ? 1 : 0, $tester->getStatusCode());
-        $this->assertContains($mustFail ? '[WARNING] 0 XLIFF files have valid syntax and 1 contain errors.' : '[OK] All 1 XLIFF files contain valid syntax.', $tester->getDisplay());
+        $this->assertContains(
+            $mustFail
+                ? '[WARNING] 0 XLIFF files have valid syntax and 1 contain errors.'
+                : '[OK] All 1 XLIFF files contain valid syntax.',
+            $tester->getDisplay()
+        );
     }
 
     public function testLintIncorrectXmlSyntax()
@@ -79,8 +109,15 @@ class XliffLintCommandTest extends TestCase
 
         $tester->execute(['filename' => $filename], ['decorated' => false]);
 
-        $this->assertEquals(1, $tester->getStatusCode(), 'Returns 1 in case of error');
-        $this->assertContains('Opening and ending tag mismatch: target line 6 and source', trim($tester->getDisplay()));
+        $this->assertEquals(
+            1,
+            $tester->getStatusCode(),
+            'Returns 1 in case of error'
+        );
+        $this->assertContains(
+            'Opening and ending tag mismatch: target line 6 and source',
+            trim($tester->getDisplay())
+        );
     }
 
     public function testLintIncorrectTargetLanguage()
@@ -90,8 +127,15 @@ class XliffLintCommandTest extends TestCase
 
         $tester->execute(['filename' => $filename], ['decorated' => false]);
 
-        $this->assertEquals(1, $tester->getStatusCode(), 'Returns 1 in case of error');
-        $this->assertContains('There is a mismatch between the language included in the file name ("messages.en.xlf") and the "es" value used in the "target-language" attribute of the file.', trim($tester->getDisplay()));
+        $this->assertEquals(
+            1,
+            $tester->getStatusCode(),
+            'Returns 1 in case of error'
+        );
+        $this->assertContains(
+            'There is a mismatch between the language included in the file name ("messages.en.xlf") and the "es" value used in the "target-language" attribute of the file.',
+            trim($tester->getDisplay())
+        );
     }
 
     /**
@@ -134,8 +178,11 @@ EOF;
     /**
      * @return string Path to the new file
      */
-    private function createFile($sourceContent = 'note', $targetLanguage = 'en', $fileNamePattern = 'messages.%locale%.xlf')
-    {
+    private function createFile(
+        $sourceContent = 'note',
+        $targetLanguage = 'en',
+        $fileNamePattern = 'messages.%locale%.xlf'
+    ) {
         $xliffContent = <<<XLIFF
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
@@ -150,7 +197,11 @@ EOF;
 </xliff>
 XLIFF;
 
-        $filename = sprintf('%s/translation-xliff-lint-test/%s', sys_get_temp_dir(), str_replace('%locale%', 'en', $fileNamePattern));
+        $filename = sprintf(
+            '%s/translation-xliff-lint-test/%s',
+            sys_get_temp_dir(),
+            str_replace('%locale%', 'en', $fileNamePattern)
+        );
         file_put_contents($filename, $xliffContent);
 
         $this->files[] = $filename;
@@ -161,11 +212,15 @@ XLIFF;
     /**
      * @return CommandTester
      */
-    private function createCommandTester($requireStrictFileNames = true, $application = null)
-    {
+    private function createCommandTester(
+        $requireStrictFileNames = true,
+        $application = null
+    ) {
         if (!$application) {
             $application = new Application();
-            $application->add(new XliffLintCommand(null, null, null, $requireStrictFileNames));
+            $application->add(
+                new XliffLintCommand(null, null, null, $requireStrictFileNames)
+            );
         }
 
         $command = $application->find('lint:xliff');
@@ -180,7 +235,7 @@ XLIFF;
     protected function setUp()
     {
         $this->files = [];
-        @mkdir(sys_get_temp_dir().'/translation-xliff-lint-test');
+        @mkdir(sys_get_temp_dir() . '/translation-xliff-lint-test');
     }
 
     protected function tearDown()
@@ -190,7 +245,7 @@ XLIFF;
                 unlink($file);
             }
         }
-        rmdir(sys_get_temp_dir().'/translation-xliff-lint-test');
+        rmdir(sys_get_temp_dir() . '/translation-xliff-lint-test');
     }
 
     public function provideStrictFilenames()

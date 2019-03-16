@@ -123,10 +123,14 @@ class Swift_Plugins_RedirectingPlugin implements Swift_Events_SendListener
      *
      * @param string $type
      */
-    private function filterHeaderSet(Swift_Mime_SimpleHeaderSet $headerSet, $type)
-    {
+    private function filterHeaderSet(
+        Swift_Mime_SimpleHeaderSet $headerSet,
+        $type
+    ) {
         foreach ($headerSet->getAll($type) as $headers) {
-            $headers->setNameAddresses($this->filterNameAddresses($headers->getNameAddresses()));
+            $headers->setNameAddresses(
+                $this->filterNameAddresses($headers->getNameAddresses())
+            );
         }
     }
 

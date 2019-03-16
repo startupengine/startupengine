@@ -73,11 +73,17 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
         }
 
         $session = $request->getSession();
-        if ($wasStarted = $session->isStarted()) {
+        if (($wasStarted = $session->isStarted())) {
             $session->save();
         }
 
-        if ($session instanceof Session ? !$session->isEmpty() || (null !== $this->sessionId && $session->getId() !== $this->sessionId) : $wasStarted) {
+        if (
+            $session instanceof Session
+                ? !$session->isEmpty() ||
+                    (null !== $this->sessionId &&
+                        $session->getId() !== $this->sessionId)
+                : $wasStarted
+        ) {
             $params = session_get_cookie_params() + ['samesite' => null];
             foreach ($this->sessionOptions as $k => $v) {
                 if (0 === strpos($k, 'cookie_')) {
@@ -86,12 +92,32 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
             }
 
             foreach ($event->getResponse()->headers->getCookies() as $cookie) {
-                if ($session->getName() === $cookie->getName() && $params['path'] === $cookie->getPath() && $params['domain'] == $cookie->getDomain()) {
+                if (
+                    $session->getName() === $cookie->getName() &&
+                    $params['path'] === $cookie->getPath() &&
+                    $params['domain'] == $cookie->getDomain()
+                ) {
                     return;
                 }
             }
 
-            $event->getResponse()->headers->setCookie(new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly'], false, $params['samesite'] ?: null));
+            $event
+                ->getResponse()
+                ->headers->setCookie(
+                    new Cookie(
+                        $session->getName(),
+                        $session->getId(),
+                        0 === $params['lifetime']
+                            ? 0
+                            : time() + $params['lifetime'],
+                        $params['path'],
+                        $params['domain'],
+                        $params['secure'],
+                        $params['httponly'],
+                        false,
+                        $params['samesite'] ?: null
+                    )
+                );
             $this->sessionId = $session->getId();
         }
     }
@@ -100,7 +126,7 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
     {
         return [
             KernelEvents::REQUEST => ['onKernelRequest', 192],
-            KernelEvents::RESPONSE => ['onKernelResponse', -128],
+            KernelEvents::RESPONSE => ['onKernelResponse', -128]
         ];
     }
 

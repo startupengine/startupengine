@@ -31,7 +31,9 @@ interface Swift_CharacterStream
      *
      * @param Swift_CharacterReaderFactory $factory
      */
-    public function setCharacterReaderFactory(Swift_CharacterReaderFactory $factory);
+    public function setCharacterReaderFactory(
+        Swift_CharacterReaderFactory $factory
+    );
 
     /**
      * Overwrite this character stream using the byte sequence in the byte stream.

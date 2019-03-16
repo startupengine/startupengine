@@ -1,6 +1,10 @@
 .idea
 /logs
 /data
+data
 /.project
 .docker-sync
 /jenkins/jenkins_home
+/vendor
+/vendor/*
+vendor

@@ -19,7 +19,9 @@ use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class TestHttpKernel extends HttpKernel implements ControllerResolverInterface, ArgumentResolverInterface
+class TestHttpKernel extends HttpKernel implements
+    ControllerResolverInterface,
+    ArgumentResolverInterface
 {
     protected $body;
     protected $status;
@@ -29,8 +31,12 @@ class TestHttpKernel extends HttpKernel implements ControllerResolverInterface, 
     protected $catch = false;
     protected $backendRequest;
 
-    public function __construct($body, $status, $headers, \Closure $customizer = null)
-    {
+    public function __construct(
+        $body,
+        $status,
+        $headers,
+        \Closure $customizer = null
+    ) {
         $this->body = $body;
         $this->status = $status;
         $this->headers = $headers;
@@ -41,9 +47,16 @@ class TestHttpKernel extends HttpKernel implements ControllerResolverInterface, 
 
     public function assert(\Closure $callback)
     {
-        $trustedConfig = [Request::getTrustedProxies(), Request::getTrustedHeaderSet()];
+        $trustedConfig = [
+            Request::getTrustedProxies(),
+            Request::getTrustedHeaderSet()
+        ];
 
-        list($trustedProxies, $trustedHeaderSet, $backendRequest) = $this->backendRequest;
+        list(
+            $trustedProxies,
+            $trustedHeaderSet,
+            $backendRequest
+        ) = $this->backendRequest;
         Request::setTrustedProxies($trustedProxies, $trustedHeaderSet);
 
         try {
@@ -54,10 +67,17 @@ class TestHttpKernel extends HttpKernel implements ControllerResolverInterface, 
         }
     }
 
-    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = false)
-    {
+    public function handle(
+        Request $request,
+        $type = HttpKernelInterface::MASTER_REQUEST,
+        $catch = false
+    ) {
         $this->catch = $catch;
-        $this->backendRequest = [Request::getTrustedProxies(), Request::getTrustedHeaderSet(), $request];
+        $this->backendRequest = [
+            Request::getTrustedProxies(),
+            Request::getTrustedHeaderSet(),
+            $request
+        ];
 
         return parent::handle($request, $type, $catch);
     }
@@ -83,7 +103,7 @@ class TestHttpKernel extends HttpKernel implements ControllerResolverInterface, 
 
         $response = new Response($this->body, $this->status, $this->headers);
 
-        if (null !== $customizer = $this->customizer) {
+        if (null !== ($customizer = $this->customizer)) {
             $customizer($request, $response);
         }
 

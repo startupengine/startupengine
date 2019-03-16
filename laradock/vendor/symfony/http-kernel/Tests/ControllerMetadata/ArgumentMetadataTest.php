@@ -18,14 +18,27 @@ class ArgumentMetadataTest extends TestCase
 {
     public function testWithBcLayerWithDefault()
     {
-        $argument = new ArgumentMetadata('foo', 'string', false, true, 'default value');
+        $argument = new ArgumentMetadata(
+            'foo',
+            'string',
+            false,
+            true,
+            'default value'
+        );
 
         $this->assertFalse($argument->isNullable());
     }
 
     public function testDefaultValueAvailable()
     {
-        $argument = new ArgumentMetadata('foo', 'string', false, true, 'default value', true);
+        $argument = new ArgumentMetadata(
+            'foo',
+            'string',
+            false,
+            true,
+            'default value',
+            true
+        );
 
         $this->assertTrue($argument->isNullable());
         $this->assertTrue($argument->hasDefaultValue());
@@ -37,7 +50,14 @@ class ArgumentMetadataTest extends TestCase
      */
     public function testDefaultValueUnavailable()
     {
-        $argument = new ArgumentMetadata('foo', 'string', false, false, null, false);
+        $argument = new ArgumentMetadata(
+            'foo',
+            'string',
+            false,
+            false,
+            null,
+            false
+        );
 
         $this->assertFalse($argument->isNullable());
         $this->assertFalse($argument->hasDefaultValue());

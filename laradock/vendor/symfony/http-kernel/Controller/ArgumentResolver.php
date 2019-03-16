@@ -34,10 +34,14 @@ final class ArgumentResolver implements ArgumentResolverInterface
      */
     private $argumentValueResolvers;
 
-    public function __construct(ArgumentMetadataFactoryInterface $argumentMetadataFactory = null, iterable $argumentValueResolvers = [])
-    {
-        $this->argumentMetadataFactory = $argumentMetadataFactory ?: new ArgumentMetadataFactory();
-        $this->argumentValueResolvers = $argumentValueResolvers ?: self::getDefaultArgumentValueResolvers();
+    public function __construct(
+        ArgumentMetadataFactoryInterface $argumentMetadataFactory = null,
+        iterable $argumentValueResolvers = []
+    ) {
+        $this->argumentMetadataFactory =
+            $argumentMetadataFactory ?: new ArgumentMetadataFactory();
+        $this->argumentValueResolvers =
+            $argumentValueResolvers ?: self::getDefaultArgumentValueResolvers();
     }
 
     /**
@@ -47,7 +51,10 @@ final class ArgumentResolver implements ArgumentResolverInterface
     {
         $arguments = [];
 
-        foreach ($this->argumentMetadataFactory->createArgumentMetadata($controller) as $metadata) {
+        foreach (
+            $this->argumentMetadataFactory->createArgumentMetadata($controller)
+            as $metadata
+        ) {
             foreach ($this->argumentValueResolvers as $resolver) {
                 if (!$resolver->supports($request, $metadata)) {
                     continue;
@@ -56,7 +63,12 @@ final class ArgumentResolver implements ArgumentResolverInterface
                 $resolved = $resolver->resolve($request, $metadata);
 
                 if (!$resolved instanceof \Generator) {
-                    throw new \InvalidArgumentException(sprintf('%s::resolve() must yield at least one value.', \get_class($resolver)));
+                    throw new \InvalidArgumentException(
+                        sprintf(
+                            '%s::resolve() must yield at least one value.',
+                            \get_class($resolver)
+                        )
+                    );
                 }
 
                 foreach ($resolved as $append) {
@@ -70,12 +82,22 @@ final class ArgumentResolver implements ArgumentResolverInterface
             $representative = $controller;
 
             if (\is_array($representative)) {
-                $representative = sprintf('%s::%s()', \get_class($representative[0]), $representative[1]);
+                $representative = sprintf(
+                    '%s::%s()',
+                    \get_class($representative[0]),
+                    $representative[1]
+                );
             } elseif (\is_object($representative)) {
                 $representative = \get_class($representative);
             }
 
-            throw new \RuntimeException(sprintf('Controller "%s" requires that you provide a value for the "$%s" argument. Either the argument is nullable and no null value has been provided, no default value has been provided or because there is a non optional argument after this one.', $representative, $metadata->getName()));
+            throw new \RuntimeException(
+                sprintf(
+                    'Controller "%s" requires that you provide a value for the "$%s" argument. Either the argument is nullable and no null value has been provided, no default value has been provided or because there is a non optional argument after this one.',
+                    $representative,
+                    $metadata->getName()
+                )
+            );
         }
 
         return $arguments;
@@ -88,7 +110,7 @@ final class ArgumentResolver implements ArgumentResolverInterface
             new RequestValueResolver(),
             new SessionValueResolver(),
             new DefaultValueResolver(),
-            new VariadicValueResolver(),
+            new VariadicValueResolver()
         ];
     }
 }

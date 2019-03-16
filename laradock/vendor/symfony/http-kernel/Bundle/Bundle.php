@@ -70,7 +70,12 @@ abstract class Bundle implements BundleInterface
 
             if (null !== $extension) {
                 if (!$extension instanceof ExtensionInterface) {
-                    throw new \LogicException(sprintf('Extension %s must implement Symfony\Component\DependencyInjection\Extension\ExtensionInterface.', \get_class($extension)));
+                    throw new \LogicException(
+                        sprintf(
+                            'Extension %s must implement Symfony\Component\DependencyInjection\Extension\ExtensionInterface.',
+                            \get_class($extension)
+                        )
+                    );
                 }
 
                 // check naming convention
@@ -78,7 +83,13 @@ abstract class Bundle implements BundleInterface
                 $expectedAlias = Container::underscore($basename);
 
                 if ($expectedAlias != $extension->getAlias()) {
-                    throw new \LogicException(sprintf('Users will expect the alias of the default extension of a bundle to be the underscored version of the bundle name ("%s"). You can override "Bundle::getContainerExtension()" if you want to use "%s" or another alias.', $expectedAlias, $extension->getAlias()));
+                    throw new \LogicException(
+                        sprintf(
+                            'Users will expect the alias of the default extension of a bundle to be the underscored version of the bundle name ("%s"). You can override "Bundle::getContainerExtension()" if you want to use "%s" or another alias.',
+                            $expectedAlias,
+                            $extension->getAlias()
+                        )
+                    );
                 }
 
                 $this->extension = $extension;
@@ -144,7 +155,10 @@ abstract class Bundle implements BundleInterface
     {
         $basename = preg_replace('/Bundle$/', '', $this->getName());
 
-        return $this->getNamespace().'\\DependencyInjection\\'.$basename.'Extension';
+        return $this->getNamespace() .
+            '\\DependencyInjection\\' .
+            $basename .
+            'Extension';
     }
 
     /**
@@ -154,7 +168,7 @@ abstract class Bundle implements BundleInterface
      */
     protected function createContainerExtension()
     {
-        if (class_exists($class = $this->getContainerExtensionClass())) {
+        if (class_exists(($class = $this->getContainerExtensionClass()))) {
             return new $class();
         }
     }
@@ -164,7 +178,10 @@ abstract class Bundle implements BundleInterface
         $pos = strrpos(static::class, '\\');
         $this->namespace = false === $pos ? '' : substr(static::class, 0, $pos);
         if (null === $this->name) {
-            $this->name = false === $pos ? static::class : substr(static::class, $pos + 1);
+            $this->name =
+                false === $pos
+                    ? static::class
+                    : substr(static::class, $pos + 1);
         }
     }
 }

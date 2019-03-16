@@ -19,7 +19,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Kris Wallsmith <kris@symfony.com>
  */
-class MergeExtensionConfigurationPass extends BaseMergeExtensionConfigurationPass
+class MergeExtensionConfigurationPass extends
+    BaseMergeExtensionConfigurationPass
 {
     private $extensions;
 

@@ -39,8 +39,13 @@ class ExceptionListener implements EventSubscriberInterface
     private $fileLinkFormat;
     private $isTerminating = false;
 
-    public function __construct($controller, LoggerInterface $logger = null, $debug = false, string $charset = null, $fileLinkFormat = null)
-    {
+    public function __construct(
+        $controller,
+        LoggerInterface $logger = null,
+        $debug = false,
+        string $charset = null,
+        $fileLinkFormat = null
+    ) {
         $this->controller = $controller;
         $this->logger = $logger;
         $this->debug = $debug;
@@ -52,7 +57,16 @@ class ExceptionListener implements EventSubscriberInterface
     {
         $e = FlattenException::create($event->getException());
 
-        $this->logException($event->getException(), sprintf('Uncaught PHP Exception %s: "%s" at %s line %s', $e->getClass(), $e->getMessage(), $e->getFile(), $e->getLine()));
+        $this->logException(
+            $event->getException(),
+            sprintf(
+                'Uncaught PHP Exception %s: "%s" at %s line %s',
+                $e->getClass(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+            )
+        );
     }
 
     public function onKernelException(GetResponseForExceptionEvent $event)
@@ -73,20 +87,36 @@ class ExceptionListener implements EventSubscriberInterface
         $eventDispatcher = \func_num_args() > 2 ? func_get_arg(2) : null;
 
         try {
-            $response = $event->getKernel()->handle($request, HttpKernelInterface::SUB_REQUEST, false);
+            $response = $event
+                ->getKernel()
+                ->handle($request, HttpKernelInterface::SUB_REQUEST, false);
         } catch (\Exception $e) {
             $f = FlattenException::create($e);
 
-            $this->logException($e, sprintf('Exception thrown when handling an exception (%s: %s at %s line %s)', $f->getClass(), $f->getMessage(), $e->getFile(), $e->getLine()));
+            $this->logException(
+                $e,
+                sprintf(
+                    'Exception thrown when handling an exception (%s: %s at %s line %s)',
+                    $f->getClass(),
+                    $f->getMessage(),
+                    $e->getFile(),
+                    $e->getLine()
+                )
+            );
 
             $prev = $e;
             do {
-                if ($exception === $wrapper = $prev) {
+                if ($exception === ($wrapper = $prev)) {
                     throw $e;
                 }
-            } while ($prev = $wrapper->getPrevious());
+            } while (($prev = $wrapper->getPrevious()));
 
-            $prev = new \ReflectionProperty($wrapper instanceof \Exception ? \Exception::class : \Error::class, 'previous');
+            $prev = new \ReflectionProperty(
+                $wrapper instanceof \Exception
+                    ? \Exception::class
+                    : \Error::class,
+                'previous'
+            );
             $prev->setAccessible(true);
             $prev->setValue($wrapper, $exception);
 
@@ -95,12 +125,27 @@ class ExceptionListener implements EventSubscriberInterface
 
         $event->setResponse($response);
 
-        if ($this->debug && $eventDispatcher instanceof EventDispatcherInterface) {
-            $cspRemovalListener = function (FilterResponseEvent $event) use (&$cspRemovalListener, $eventDispatcher) {
-                $event->getResponse()->headers->remove('Content-Security-Policy');
-                $eventDispatcher->removeListener(KernelEvents::RESPONSE, $cspRemovalListener);
+        if (
+            $this->debug &&
+            $eventDispatcher instanceof EventDispatcherInterface
+        ) {
+            $cspRemovalListener = function (FilterResponseEvent $event) use (
+                &$cspRemovalListener,
+                $eventDispatcher
+            ) {
+                $event
+                    ->getResponse()
+                    ->headers->remove('Content-Security-Policy');
+                $eventDispatcher->removeListener(
+                    KernelEvents::RESPONSE,
+                    $cspRemovalListener
+                );
             };
-            $eventDispatcher->addListener(KernelEvents::RESPONSE, $cspRemovalListener, -128);
+            $eventDispatcher->addListener(
+                KernelEvents::RESPONSE,
+                $cspRemovalListener,
+                -128
+            );
         }
     }
 
@@ -114,8 +159,8 @@ class ExceptionListener implements EventSubscriberInterface
         return [
             KernelEvents::EXCEPTION => [
                 ['logKernelException', 0],
-                ['onKernelException', -128],
-            ],
+                ['onKernelException', -128]
+            ]
         ];
     }
 
@@ -128,7 +173,10 @@ class ExceptionListener implements EventSubscriberInterface
     protected function logException(\Exception $exception, $message)
     {
         if (null !== $this->logger) {
-            if (!$exception instanceof HttpExceptionInterface || $exception->getStatusCode() >= 500) {
+            if (
+                !$exception instanceof HttpExceptionInterface ||
+                $exception->getStatusCode() >= 500
+            ) {
                 $this->logger->critical($message, ['exception' => $exception]);
             } else {
                 $this->logger->error($message, ['exception' => $exception]);
@@ -147,13 +195,26 @@ class ExceptionListener implements EventSubscriberInterface
     protected function duplicateRequest(\Exception $exception, Request $request)
     {
         $attributes = [
-            'exception' => $exception = FlattenException::create($exception),
-            '_controller' => $this->controller ?: function () use ($exception) {
-                $handler = new ExceptionHandler($this->debug, $this->charset, $this->fileLinkFormat);
+            'exception' => ($exception = FlattenException::create($exception)),
+            '_controller' =>
+                $this->controller ?:
+                function () use ($exception) {
+                    $handler = new ExceptionHandler(
+                        $this->debug,
+                        $this->charset,
+                        $this->fileLinkFormat
+                    );
 
-                return new Response($handler->getHtml($exception), $exception->getStatusCode(), $exception->getHeaders());
-            },
-            'logger' => $this->logger instanceof DebugLoggerInterface ? $this->logger : null,
+                    return new Response(
+                        $handler->getHtml($exception),
+                        $exception->getStatusCode(),
+                        $exception->getHeaders()
+                    );
+                },
+            'logger' =>
+                $this->logger instanceof DebugLoggerInterface
+                    ? $this->logger
+                    : null
         ];
         $request = $request->duplicate(null, null, $attributes);
         $request->setMethod('GET');

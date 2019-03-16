@@ -44,24 +44,94 @@ namespace Symfony\Polyfill\Intl\Idn;
 final class Idn
 {
     private static $encodeTable = array(
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-        'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9'
     );
 
     private static $decodeTable = array(
-        'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3, 'e' => 4, 'f' => 5,
-        'g' => 6, 'h' => 7, 'i' => 8, 'j' => 9, 'k' => 10, 'l' => 11,
-        'm' => 12, 'n' => 13, 'o' => 14, 'p' => 15, 'q' => 16, 'r' => 17,
-        's' => 18, 't' => 19, 'u' => 20, 'v' => 21, 'w' => 22, 'x' => 23,
-        'y' => 24, 'z' => 25, '0' => 26, '1' => 27, '2' => 28, '3' => 29,
-        '4' => 30, '5' => 31, '6' => 32, '7' => 33, '8' => 34, '9' => 35,
+        'a' => 0,
+        'b' => 1,
+        'c' => 2,
+        'd' => 3,
+        'e' => 4,
+        'f' => 5,
+        'g' => 6,
+        'h' => 7,
+        'i' => 8,
+        'j' => 9,
+        'k' => 10,
+        'l' => 11,
+        'm' => 12,
+        'n' => 13,
+        'o' => 14,
+        'p' => 15,
+        'q' => 16,
+        'r' => 17,
+        's' => 18,
+        't' => 19,
+        'u' => 20,
+        'v' => 21,
+        'w' => 22,
+        'x' => 23,
+        'y' => 24,
+        'z' => 25,
+        '0' => 26,
+        '1' => 27,
+        '2' => 28,
+        '3' => 29,
+        '4' => 30,
+        '5' => 31,
+        '6' => 32,
+        '7' => 33,
+        '8' => 34,
+        '9' => 35
     );
 
-    public static function idn_to_ascii($domain, $options, $variant, &$idna_info = array())
-    {
+    public static function idn_to_ascii(
+        $domain,
+        $options,
+        $variant,
+        &$idna_info = array()
+    ) {
         if (\PHP_VERSION_ID >= 70200 && INTL_IDNA_VARIANT_2003 === $variant) {
-            @trigger_error('idn_to_ascii(): INTL_IDNA_VARIANT_2003 is deprecated', E_USER_DEPRECATED);
+            @trigger_error(
+                'idn_to_ascii(): INTL_IDNA_VARIANT_2003 is deprecated',
+                E_USER_DEPRECATED
+            );
         }
 
         if (INTL_IDNA_VARIANT_UTS46 === $variant) {
@@ -74,7 +144,7 @@ final class Idn
             if ('' === $part) {
                 return false;
             }
-            if (false === $part = self::encodePart($part)) {
+            if (false === ($part = self::encodePart($part))) {
                 return false;
             }
         }
@@ -84,16 +154,23 @@ final class Idn
         $idna_info = array(
             'result' => \strlen($output) > 255 ? false : $output,
             'isTransitionalDifferent' => false,
-            'errors' => 0,
+            'errors' => 0
         );
 
         return $idna_info['result'];
     }
 
-    public static function idn_to_utf8($domain, $options, $variant, &$idna_info = array())
-    {
+    public static function idn_to_utf8(
+        $domain,
+        $options,
+        $variant,
+        &$idna_info = array()
+    ) {
         if (\PHP_VERSION_ID >= 70200 && INTL_IDNA_VARIANT_2003 === $variant) {
-            @trigger_error('idn_to_utf8(): INTL_IDNA_VARIANT_2003 is deprecated', E_USER_DEPRECATED);
+            @trigger_error(
+                'idn_to_utf8(): INTL_IDNA_VARIANT_2003 is deprecated',
+                E_USER_DEPRECATED
+            );
         }
 
         $parts = explode('.', $domain);
@@ -116,7 +193,7 @@ final class Idn
         $idna_info = array(
             'result' => \strlen($output) > 255 ? false : $output,
             'isTransitionalDifferent' => false,
-            'errors' => 0,
+            'errors' => 0
         );
 
         return $idna_info['result'];
@@ -158,7 +235,7 @@ final class Idn
                 }
                 if ($c === $n) {
                     $q = $delta;
-                    for ($k = 36;; $k += 36) {
+                    for ($k = 36; ; $k += 36) {
                         $t = self::calculateThreshold($k, $bias);
                         if ($q < $t) {
                             break;
@@ -171,7 +248,7 @@ final class Idn
                     }
 
                     $output .= self::$encodeTable[$q];
-                    $bias = self::adapt($delta, $h + 1, ($h === $b));
+                    $bias = self::adapt($delta, $h + 1, $h === $b);
                     $delta = 0;
                     ++$h;
                 }
@@ -181,9 +258,11 @@ final class Idn
             ++$n;
         }
 
-        $output = 'xn--'.$output;
+        $output = 'xn--' . $output;
 
-        return \strlen($output) < 1 || 63 < \strlen($output) ? false : strtolower($output);
+        return \strlen($output) < 1 || 63 < \strlen($output)
+            ? false
+            : strtolower($output);
     }
 
     private static function listCodePoints($input)
@@ -191,7 +270,7 @@ final class Idn
         $codePoints = array(
             'all' => array(),
             'basic' => array(),
-            'nonBasic' => array(),
+            'nonBasic' => array()
         );
 
         $length = mb_strlen($input, 'utf-8');
@@ -222,7 +301,7 @@ final class Idn
 
     private static function adapt($delta, $numPoints, $firstTime)
     {
-        $delta = (int) ($firstTime ? $delta / 700 : $delta / 2);
+        $delta = (int) $firstTime ? $delta / 700 : $delta / 2;
         $delta += (int) ($delta / $numPoints);
 
         $k = 0;
@@ -231,7 +310,7 @@ final class Idn
             $k = $k + 36;
         }
 
-        return $k + (int) (36 * $delta / ($delta + 38));
+        return $k + (int) ((36 * $delta) / ($delta + 38));
     }
 
     private static function decodePart($input)
@@ -255,7 +334,7 @@ final class Idn
             $oldi = $i;
             $w = 1;
 
-            for ($k = 36;; $k += 36) {
+            for ($k = 36; ; $k += 36) {
                 $digit = self::$decodeTable[$input[$pos++]];
                 $i += $digit * $w;
                 $t = self::calculateThreshold($k, $bias);
@@ -270,7 +349,10 @@ final class Idn
             $bias = self::adapt($i - $oldi, ++$outputLength, 0 === $oldi);
             $n = $n + (int) ($i / $outputLength);
             $i = $i % $outputLength;
-            $output = mb_substr($output, 0, $i, 'utf-8').mb_chr($n, 'utf-8').mb_substr($output, $i, $outputLength - 1, 'utf-8');
+            $output =
+                mb_substr($output, 0, $i, 'utf-8') .
+                mb_chr($n, 'utf-8') .
+                mb_substr($output, $i, $outputLength - 1, 'utf-8');
 
             ++$i;
         }

@@ -30,10 +30,18 @@ class PluralizationRules
      *
      * @return int The plural position
      */
-    public static function get($number, $locale/*, bool $triggerDeprecation = true*/)
-    {
+    public static function get(
+        $number,
+        $locale /*, bool $triggerDeprecation = true*/
+    ) {
         if (3 > \func_num_args() || \func_get_arg(2)) {
-            @trigger_error(sprintf('The "%s" class is deprecated since Symfony 4.2.', __CLASS__), E_USER_DEPRECATED);
+            @trigger_error(
+                sprintf(
+                    'The "%s" class is deprecated since Symfony 4.2.',
+                    __CLASS__
+                ),
+                E_USER_DEPRECATED
+            );
         }
 
         if ('pt_BR' === $locale) {
@@ -129,7 +137,7 @@ class PluralizationRules
             case 'tk':
             case 'ur':
             case 'zu':
-                return (1 == $number) ? 0 : 1;
+                return 1 == $number ? 0 : 1;
 
             case 'am':
             case 'bh':
@@ -144,7 +152,7 @@ class PluralizationRules
             case 'xbr':
             case 'ti':
             case 'wa':
-                return ((0 == $number) || (1 == $number)) ? 0 : 1;
+                return 0 == $number || 1 == $number ? 0 : 1;
 
             case 'be':
             case 'bs':
@@ -153,41 +161,98 @@ class PluralizationRules
             case 'sh':
             case 'sr':
             case 'uk':
-                return ((1 == $number % 10) && (11 != $number % 100)) ? 0 : ((($number % 10 >= 2) && ($number % 10 <= 4) && (($number % 100 < 10) || ($number % 100 >= 20))) ? 1 : 2);
+                return 1 == $number % 10 && 11 != $number % 100
+                    ? 0
+                    : ($number % 10 >= 2 &&
+                    $number % 10 <= 4 &&
+                    ($number % 100 < 10 || $number % 100 >= 20)
+                        ? 1
+                        : 2);
 
             case 'cs':
             case 'sk':
-                return (1 == $number) ? 0 : ((($number >= 2) && ($number <= 4)) ? 1 : 2);
+                return 1 == $number
+                    ? 0
+                    : ($number >= 2 && $number <= 4
+                        ? 1
+                        : 2);
 
             case 'ga':
-                return (1 == $number) ? 0 : ((2 == $number) ? 1 : 2);
+                return 1 == $number ? 0 : (2 == $number ? 1 : 2);
 
             case 'lt':
-                return ((1 == $number % 10) && (11 != $number % 100)) ? 0 : ((($number % 10 >= 2) && (($number % 100 < 10) || ($number % 100 >= 20))) ? 1 : 2);
+                return 1 == $number % 10 && 11 != $number % 100
+                    ? 0
+                    : ($number % 10 >= 2 &&
+                    ($number % 100 < 10 || $number % 100 >= 20)
+                        ? 1
+                        : 2);
 
             case 'sl':
-                return (1 == $number % 100) ? 0 : ((2 == $number % 100) ? 1 : (((3 == $number % 100) || (4 == $number % 100)) ? 2 : 3));
+                return 1 == $number % 100
+                    ? 0
+                    : (2 == $number % 100
+                        ? 1
+                        : (3 == $number % 100 || 4 == $number % 100
+                            ? 2
+                            : 3));
 
             case 'mk':
-                return (1 == $number % 10) ? 0 : 1;
+                return 1 == $number % 10 ? 0 : 1;
 
             case 'mt':
-                return (1 == $number) ? 0 : (((0 == $number) || (($number % 100 > 1) && ($number % 100 < 11))) ? 1 : ((($number % 100 > 10) && ($number % 100 < 20)) ? 2 : 3));
+                return 1 == $number
+                    ? 0
+                    : (0 == $number || ($number % 100 > 1 && $number % 100 < 11)
+                        ? 1
+                        : ($number % 100 > 10 && $number % 100 < 20
+                            ? 2
+                            : 3));
 
             case 'lv':
-                return (0 == $number) ? 0 : (((1 == $number % 10) && (11 != $number % 100)) ? 1 : 2);
+                return 0 == $number
+                    ? 0
+                    : (1 == $number % 10 && 11 != $number % 100
+                        ? 1
+                        : 2);
 
             case 'pl':
-                return (1 == $number) ? 0 : ((($number % 10 >= 2) && ($number % 10 <= 4) && (($number % 100 < 12) || ($number % 100 > 14))) ? 1 : 2);
+                return 1 == $number
+                    ? 0
+                    : ($number % 10 >= 2 &&
+                    $number % 10 <= 4 &&
+                    ($number % 100 < 12 || $number % 100 > 14)
+                        ? 1
+                        : 2);
 
             case 'cy':
-                return (1 == $number) ? 0 : ((2 == $number) ? 1 : (((8 == $number) || (11 == $number)) ? 2 : 3));
+                return 1 == $number
+                    ? 0
+                    : (2 == $number
+                        ? 1
+                        : (8 == $number || 11 == $number
+                            ? 2
+                            : 3));
 
             case 'ro':
-                return (1 == $number) ? 0 : (((0 == $number) || (($number % 100 > 0) && ($number % 100 < 20))) ? 1 : 2);
+                return 1 == $number
+                    ? 0
+                    : (0 == $number || ($number % 100 > 0 && $number % 100 < 20)
+                        ? 1
+                        : 2);
 
             case 'ar':
-                return (0 == $number) ? 0 : ((1 == $number) ? 1 : ((2 == $number) ? 2 : ((($number % 100 >= 3) && ($number % 100 <= 10)) ? 3 : ((($number % 100 >= 11) && ($number % 100 <= 99)) ? 4 : 5))));
+                return 0 == $number
+                    ? 0
+                    : (1 == $number
+                        ? 1
+                        : (2 == $number
+                            ? 2
+                            : ($number % 100 >= 3 && $number % 100 <= 10
+                                ? 3
+                                : ($number % 100 >= 11 && $number % 100 <= 99
+                                    ? 4
+                                    : 5))));
 
             default:
                 return 0;
@@ -202,7 +267,13 @@ class PluralizationRules
      */
     public static function set(callable $rule, $locale)
     {
-        @trigger_error(sprintf('The "%s" class is deprecated since Symfony 4.2.', __CLASS__), E_USER_DEPRECATED);
+        @trigger_error(
+            sprintf(
+                'The "%s" class is deprecated since Symfony 4.2.',
+                __CLASS__
+            ),
+            E_USER_DEPRECATED
+        );
 
         if ('pt_BR' === $locale) {
             // temporary set a locale for brazilian

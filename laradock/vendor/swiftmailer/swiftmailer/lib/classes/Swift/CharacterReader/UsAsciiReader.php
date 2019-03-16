@@ -25,8 +25,12 @@ class Swift_CharacterReader_UsAsciiReader implements Swift_CharacterReader
      *
      * @return int
      */
-    public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
-    {
+    public function getCharPositions(
+        $string,
+        $startOffset,
+        &$currentMap,
+        &$ignoredChars
+    ) {
         $strlen = strlen($string);
         $ignoredChars = '';
         for ($i = 0; $i < $strlen; ++$i) {
@@ -65,7 +69,7 @@ class Swift_CharacterReader_UsAsciiReader implements Swift_CharacterReader
     public function validateByteSequence($bytes, $size)
     {
         $byte = reset($bytes);
-        if (1 == count($bytes) && $byte >= 0x00 && $byte <= 0x7F) {
+        if (1 == count($bytes) && $byte >= 0x00 && $byte <= 0x7f) {
             return 0;
         }
 

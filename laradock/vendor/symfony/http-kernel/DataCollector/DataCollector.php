@@ -37,9 +37,14 @@ abstract class DataCollector implements DataCollectorInterface, \Serializable
     public function serialize()
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 2);
-        $isCalledFromOverridingMethod = isset($trace[1]['function'], $trace[1]['object']) && 'serialize' === $trace[1]['function'] && $this === $trace[1]['object'];
+        $isCalledFromOverridingMethod =
+            isset($trace[1]['function'], $trace[1]['object']) &&
+            'serialize' === $trace[1]['function'] &&
+            $this === $trace[1]['object'];
 
-        return $isCalledFromOverridingMethod ? $this->data : serialize($this->data);
+        return $isCalledFromOverridingMethod
+            ? $this->data
+            : serialize($this->data);
     }
 
     public function unserialize($data)
@@ -64,7 +69,12 @@ abstract class DataCollector implements DataCollectorInterface, \Serializable
         }
         if (null === $this->cloner) {
             if (!class_exists(CutStub::class)) {
-                throw new \LogicException(sprintf('The VarDumper component is needed for the %s() method. Install symfony/var-dumper version 3.4 or above.', __METHOD__));
+                throw new \LogicException(
+                    sprintf(
+                        'The VarDumper component is needed for the %s() method. Install symfony/var-dumper version 3.4 or above.',
+                        __METHOD__
+                    )
+                );
             }
             $this->cloner = new VarCloner();
             $this->cloner->setMaxItems(-1);
@@ -83,14 +93,18 @@ abstract class DataCollector implements DataCollectorInterface, \Serializable
             '*' => function ($v, array $a, Stub $s, $isNested) {
                 if (!$v instanceof Stub) {
                     foreach ($a as $k => $v) {
-                        if (\is_object($v) && !$v instanceof \DateTimeInterface && !$v instanceof Stub) {
+                        if (
+                            \is_object($v) &&
+                            !$v instanceof \DateTimeInterface &&
+                            !$v instanceof Stub
+                        ) {
                             $a[$k] = new CutStub($v);
                         }
                     }
                 }
 
                 return $a;
-            },
+            }
         ];
     }
 }
