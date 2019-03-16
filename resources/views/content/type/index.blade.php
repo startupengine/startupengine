@@ -45,7 +45,7 @@
             <div class="pt-0 mb-0 col-md-12">
                 <div class="justify-content-center" id="contentApp" v-if="info != null && info.meta.total != null">
                     <div class="pb-3 mb-3 toggleVisibility text-center " v-bind:class="{ visible: info.meta.total != null,  'd-block': info.meta.total != null }">@{{ info.meta.total }} Item<span v-if="info.meta.total >1 ">s</span></div>
-                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => true,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => true, 'CARD_ROW_CLASS'=> 'justify-content-center', 'PATH' => '/content']) !!}
+                    {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => true,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => true, 'CARD_ROW_CLASS'=> 'justify-content-center', 'PATH' => '/content', 'PRIMARY_KEY' => 'item.hashid']) !!}
                 </div>
 
 

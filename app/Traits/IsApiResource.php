@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Hashids\Hashids;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 trait IsApiResource
@@ -14,6 +15,18 @@ trait IsApiResource
     public function postSave()
     {
         return false;
+    }
+
+    public function getHashId()
+    {
+        $hashids = new Hashids();
+        return $hashids->encode($this->id);
+    }
+
+    public function decodeHashId($id)
+    {
+        $hashids = new Hashids();
+        return $hashids->decode($id);
     }
 
     public function links($array = [])

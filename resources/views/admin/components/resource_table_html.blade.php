@@ -197,7 +197,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title mb-2">
                                         <a class="text-ford-blue text-capitalize"
-                                           v-bind:href="'<?php echo $options['PATH']; ?>/' + item.id">{{ item.<?php echo $options[
+                                           v-bind:href="'<?php echo $options['PATH']; ?>/' + @if(isset($options['PRIMARY_KEY'])) <?php echo $options['PRIMARY_KEY']; ?> @else item.id @endif">{{ item.<?php echo $options[
     'CARD_HEADER_FIELD'
 ]; ?>}}</a>
                                     </h5>
@@ -229,7 +229,7 @@
                                         <div align="center">
                                             <div class="btn-group mb-2" role="group" aria-label="Table row actions">
                                                 <a href="" class="btn btn-outline-primary btn-pill"
-                                                   v-bind:href="'<?php echo $options['PATH']; ?>/' + item.id">
+                                                   v-bind:href="'<?php echo $options['PATH']; ?>/' + @if(isset($options['PRIMARY_KEY'])) <?php echo $options['PRIMARY_KEY']; ?> @else item.id @endif">
                                                     View<i class="fa fa-chevron-right ml-2"
                                                            style="-webkit-text-stroke: 0px #000;font-size:8px;top:-1px;position:relative;"></i>
                                                 </a>

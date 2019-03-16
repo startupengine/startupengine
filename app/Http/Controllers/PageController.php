@@ -118,7 +118,8 @@ class PageController
             if ($slug == 'features') {
                 if (
                     hasSubscriptionProductsForSale() &&
-                    count(getSubscriptionProducts()) == 1
+                    count(getSubscriptionProducts()) == 1 &&
+                    count(\App\Feature::all()) == 0
                 ) {
                     $product = getSubscriptionProducts()[0];
                     return redirect('/products/' . $product->stripe_id);

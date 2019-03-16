@@ -10,6 +10,7 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use App\PostType;
 use App\Page;
 use App\AnalyticEvent;
+use Hashids\Hashids;
 
 class PostController extends Controller
 {
@@ -197,8 +198,9 @@ class PostController extends Controller
         }
     }
 
-    public function getItem($id, $slug = null)
+    public function getItem($hash, $slug = null)
     {
+        $id = 2;
         if (\Auth::user() && \Auth::user()->hasRole('admin')) {
             $item = Post::where('id', '=', $id)->first();
         } else {
@@ -209,7 +211,8 @@ class PostController extends Controller
 
         if ($item == null) {
             abort(404);
-        } else {
+        }
+        /*
             $event = new AnalyticEvent();
             $event->event_type = 'content viewed';
             if (\Auth::user()) {
@@ -224,11 +227,12 @@ class PostController extends Controller
             if (!isset($message)) {
                 $message = null;
             }
-            return view('content.view')
-                ->with('post', $item)
-                ->with('postType', $postType)
-                ->with('message', makeMessage($item));
-        }
+            */
+        $postType = $item->postType->slug;
+        return view('content.view')
+            ->with('post', $item)
+            ->with('postType', $postType)
+            ->with('message', makeMessage($item));
     }
 
     public function getItemsByTag($tag)

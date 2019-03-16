@@ -31,7 +31,7 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background: #3f7bff !important;
+            background: #252525e0 !important;
             @if($product->getJsonContent('[sections][about][fields][background]')  == null) opacity:1 !important; @else opacity:0.9 !important; @endif
             color:#fff !important;
             /*border-bottom:30px rgba(0,0,0,0.25) solid;*/

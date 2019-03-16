@@ -360,12 +360,10 @@
                         @foreach(getSubscriptionProducts() as $product)
                             <li class="list-group-item text-capitalize text-white"><a href="/products/{{ $product->stripe_id}}">{{ str_replace('_', ' ', ucwords($product->name)) }}</a></li>
                         @endforeach
-                        @if(pageIsPublished('features') OR hasSubscriptionProductsForSale())
-
+                        @if(pageIsPublished('features') OR count(\App\Feature::all()) > 0)
                                 @if(count(getSubscriptionProducts()) == 1)
                                 <li class="list-group-item text-capitalize text-white"><a href="/features">Features</a></li>
                                 @endif
-
                         @endif
                         <li class="list-group-item text-capitalize text-white"><a href="/pricing">Pricing</a></li>
                     </ul>

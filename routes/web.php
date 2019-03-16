@@ -70,10 +70,10 @@ Route::group(['middleware' => ['web']], function () {
         'contentTagIndex'
     );
     Route::group(['middleware' => ['webrbac']], function () {
-        Route::get('/content/{id}/{slug}', 'PostController@getItem')->name(
+        Route::get('/content/{hash}/{slug}', 'PostController@getItem')->name(
             'contentById'
         );
-        Route::get('/content/{id}', 'PostController@getItem')->name(
+        Route::get('/content/{hash}', 'PostController@getItem')->name(
             'contentById'
         );
         Route::get(

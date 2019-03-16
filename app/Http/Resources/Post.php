@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
 class Post extends JsonResource
 {
@@ -15,12 +16,12 @@ class Post extends JsonResource
     public function toArray($request)
     {
         $fields = [];
-
         //Add included relationships
         $relations = addIncludedRelationshipsToApiResource(request(), $this);
         $fields['included'] = $relations;
-
         $fields['id'] = $this->id;
+        $fields['hashid'] = $this->getHashid();
+        $fields['href'] = URL::to('/').'content/'.$this->getHashid();
         $fields['status'] = $this->status;
         $fields['slug'] = $this->slug;
         $fields['tags'] = $this->tags;

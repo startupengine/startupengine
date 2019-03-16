@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Hashids\Hashids;
 
 class WebRbac
 {
@@ -16,7 +17,12 @@ class WebRbac
     public function handle($request, Closure $next)
     {
         if (request()->route()->action['as'] == 'contentById') {
-            $id = request()->route('id');
+            $hash = request()->route('hash');
+            $hashids = new Hashids();
+            $id = $hashids->decode($hash);
+            if (!isset($id[0])) {
+                abort(500);
+            }
             $model = \App\Post::find($id);
         }
         if (request()->route()->action['as'] == 'view page') {

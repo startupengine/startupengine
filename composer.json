@@ -52,6 +52,7 @@
     "graham-campbell/digitalocean": "^5.1",
     "graham-campbell/markdown": "^10.0",
     "guzzlehttp/guzzle": "^6.3",
+    "hashids/hashids": "^3.0",
     "hmaus/drafter-installer": "^1.0",
     "hmaus/drafter-php": "^5.0",
     "intervention/image": "^2.4",
