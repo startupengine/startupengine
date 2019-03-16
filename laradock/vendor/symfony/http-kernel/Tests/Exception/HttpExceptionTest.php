@@ -12,12 +12,7 @@ class HttpExceptionTest extends TestCase
         return [
             [['X-Test' => 'Test']],
             [['X-Test' => 1]],
-            [
-                [
-                    ['X-Test' => 'Test'],
-                    ['X-Test-2' => 'Test-2'],
-                ],
-            ],
+            [[['X-Test' => 'Test'], ['X-Test-2' => 'Test-2']]]
         ];
     }
 

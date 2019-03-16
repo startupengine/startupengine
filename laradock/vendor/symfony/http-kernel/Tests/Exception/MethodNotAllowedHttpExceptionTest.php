@@ -15,10 +15,16 @@ class MethodNotAllowedHttpExceptionTest extends HttpExceptionTest
     public function testWithHeaderConstruct()
     {
         $headers = [
-            'Cache-Control' => 'public, s-maxage=1200',
+            'Cache-Control' => 'public, s-maxage=1200'
         ];
 
-        $exception = new MethodNotAllowedHttpException(['get'], null, null, null, $headers);
+        $exception = new MethodNotAllowedHttpException(
+            ['get'],
+            null,
+            null,
+            null,
+            $headers
+        );
 
         $headers['Allow'] = 'GET';
 

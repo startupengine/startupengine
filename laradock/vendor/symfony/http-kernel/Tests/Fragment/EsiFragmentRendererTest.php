@@ -22,35 +22,64 @@ class EsiFragmentRendererTest extends TestCase
 {
     public function testRenderFallbackToInlineStrategyIfEsiNotSupported()
     {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true));
+        $strategy = new EsiFragmentRenderer(
+            new Esi(),
+            $this->getInlineStrategy(true)
+        );
         $strategy->render('/', Request::create('/'));
     }
 
     public function testRenderFallbackWithScalar()
     {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
+        $strategy = new EsiFragmentRenderer(
+            new Esi(),
+            $this->getInlineStrategy(true),
+            new UriSigner('foo')
+        );
         $request = Request::create('/');
-        $reference = new ControllerReference('main_controller', ['foo' => [true]], []);
+        $reference = new ControllerReference(
+            'main_controller',
+            ['foo' => [true]],
+            []
+        );
         $strategy->render($reference, $request);
     }
 
     public function testRender()
     {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy());
+        $strategy = new EsiFragmentRenderer(
+            new Esi(),
+            $this->getInlineStrategy()
+        );
 
         $request = Request::create('/');
         $request->setLocale('fr');
         $request->headers->set('Surrogate-Capability', 'ESI/1.0');
 
-        $this->assertEquals('<esi:include src="/" />', $strategy->render('/', $request)->getContent());
-        $this->assertEquals("<esi:comment text=\"This is a comment\" />\n<esi:include src=\"/\" />", $strategy->render('/', $request, ['comment' => 'This is a comment'])->getContent());
-        $this->assertEquals('<esi:include src="/" alt="foo" />', $strategy->render('/', $request, ['alt' => 'foo'])->getContent());
+        $this->assertEquals(
+            '<esi:include src="/" />',
+            $strategy->render('/', $request)->getContent()
+        );
+        $this->assertEquals(
+            "<esi:comment text=\"This is a comment\" />\n<esi:include src=\"/\" />",
+            $strategy
+                ->render('/', $request, ['comment' => 'This is a comment'])
+                ->getContent()
+        );
+        $this->assertEquals(
+            '<esi:include src="/" alt="foo" />',
+            $strategy->render('/', $request, ['alt' => 'foo'])->getContent()
+        );
     }
 
     public function testRenderControllerReference()
     {
         $signer = new UriSigner('foo');
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(), $signer);
+        $strategy = new EsiFragmentRenderer(
+            new Esi(),
+            $this->getInlineStrategy(),
+            $signer
+        );
 
         $request = Request::create('/');
         $request->setLocale('fr');
@@ -61,7 +90,9 @@ class EsiFragmentRendererTest extends TestCase
 
         $this->assertEquals(
             '<esi:include src="/_fragment?_hash=Jz1P8NErmhKTeI6onI1EdAXTB85359MY3RIk5mSJ60w%3D&_path=_format%3Dhtml%26_locale%3Dfr%26_controller%3Dmain_controller" alt="/_fragment?_hash=iPJEdRoUpGrM1ztqByiorpfMPtiW%2FOWwdH1DBUXHhEc%3D&_path=_format%3Dhtml%26_locale%3Dfr%26_controller%3Dalt_controller" />',
-            $strategy->render($reference, $request, ['alt' => $altReference])->getContent()
+            $strategy
+                ->render($reference, $request, ['alt' => $altReference])
+                ->getContent()
         );
     }
 
@@ -70,7 +101,10 @@ class EsiFragmentRendererTest extends TestCase
      */
     public function testRenderControllerReferenceWithoutSignerThrowsException()
     {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy());
+        $strategy = new EsiFragmentRenderer(
+            new Esi(),
+            $this->getInlineStrategy()
+        );
 
         $request = Request::create('/');
         $request->setLocale('fr');
@@ -84,18 +118,27 @@ class EsiFragmentRendererTest extends TestCase
      */
     public function testRenderAltControllerReferenceWithoutSignerThrowsException()
     {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy());
+        $strategy = new EsiFragmentRenderer(
+            new Esi(),
+            $this->getInlineStrategy()
+        );
 
         $request = Request::create('/');
         $request->setLocale('fr');
         $request->headers->set('Surrogate-Capability', 'ESI/1.0');
 
-        $strategy->render('/', $request, ['alt' => new ControllerReference('alt_controller')]);
+        $strategy->render('/', $request, [
+            'alt' => new ControllerReference('alt_controller')
+        ]);
     }
 
     private function getInlineStrategy($called = false)
     {
-        $inline = $this->getMockBuilder('Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer')->disableOriginalConstructor()->getMock();
+        $inline = $this->getMockBuilder(
+            'Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer'
+        )
+            ->disableOriginalConstructor()
+            ->getMock();
 
         if ($called) {
             $inline->expects($this->once())->method('render');

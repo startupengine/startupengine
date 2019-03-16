@@ -15,10 +15,16 @@ class TooManyRequestsHttpExceptionTest extends HttpExceptionTest
     public function testWithHeaderConstruct()
     {
         $headers = [
-            'Cache-Control' => 'public, s-maxage=69',
+            'Cache-Control' => 'public, s-maxage=69'
         ];
 
-        $exception = new TooManyRequestsHttpException(69, null, null, null, $headers);
+        $exception = new TooManyRequestsHttpException(
+            69,
+            null,
+            null,
+            null,
+            $headers
+        );
 
         $headers['Retry-After'] = 69;
 
