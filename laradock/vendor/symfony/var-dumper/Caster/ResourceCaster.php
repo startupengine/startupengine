@@ -33,14 +33,20 @@ class ResourceCaster
         return $a;
     }
 
-    public static function castProcess($process, array $a, Stub $stub, $isNested)
-    {
+    public static function castProcess(
+        $process,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         return proc_get_status($process);
     }
 
     public static function castStream($stream, array $a, Stub $stub, $isNested)
     {
-        $a = stream_get_meta_data($stream) + static::castStreamContext($stream, $a, $stub, $isNested);
+        $a =
+            stream_get_meta_data($stream) +
+            static::castStreamContext($stream, $a, $stub, $isNested);
         if (isset($a['uri'])) {
             $a['uri'] = new LinkStub($a['uri']);
         }
@@ -48,14 +54,18 @@ class ResourceCaster
         return $a;
     }
 
-    public static function castStreamContext($stream, array $a, Stub $stub, $isNested)
-    {
+    public static function castStreamContext(
+        $stream,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         return @stream_context_get_params($stream) ?: $a;
     }
 
     public static function castGd($gd, array $a, Stub $stub, $isNested)
     {
-        $a['size'] = imagesx($gd).'x'.imagesy($gd);
+        $a['size'] = imagesx($gd) . 'x' . imagesy($gd);
         $a['trueColor'] = imageistruecolor($gd);
 
         return $a;

@@ -40,7 +40,11 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $item = $this->data[$this->position][$this->key];
 
-        if ($item instanceof Stub && Stub::TYPE_REF === $item->type && !$item->position) {
+        if (
+            $item instanceof Stub &&
+            Stub::TYPE_REF === $item->type &&
+            !$item->position
+        ) {
             $item = $item->value;
         }
         if (!$item instanceof Stub) {
@@ -56,7 +60,7 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
             return $item->class;
         }
         if (Stub::TYPE_RESOURCE === $item->type) {
-            return $item->class.' resource';
+            return $item->class . ' resource';
         }
     }
 
@@ -69,7 +73,11 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $item = $this->data[$this->position][$this->key];
 
-        if ($item instanceof Stub && Stub::TYPE_REF === $item->type && !$item->position) {
+        if (
+            $item instanceof Stub &&
+            Stub::TYPE_REF === $item->type &&
+            !$item->position
+        ) {
             $item = $item->value;
         }
         if (!($item = $this->getStub($item)) instanceof Stub) {
@@ -90,7 +98,10 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
             $children[$k]->position = $item->position;
 
             if ($recursive) {
-                if (Stub::TYPE_REF === $v->type && ($v = $this->getStub($v->value)) instanceof Stub) {
+                if (
+                    Stub::TYPE_REF === $v->type &&
+                    ($v = $this->getStub($v->value)) instanceof Stub
+                ) {
                     $recursive = (array) $recursive;
                     if (isset($recursive[$v->position])) {
                         continue;
@@ -111,8 +122,14 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function getIterator()
     {
-        if (!\is_array($value = $this->getValue())) {
-            throw new \LogicException(sprintf('%s object holds non-iterable type "%s".', self::class, \gettype($value)));
+        if (!\is_array(($value = $this->getValue()))) {
+            throw new \LogicException(
+                sprintf(
+                    '%s object holds non-iterable type "%s".',
+                    self::class,
+                    \gettype($value)
+                )
+            );
         }
 
         yield from $value;
@@ -120,7 +137,7 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function __get($key)
     {
-        if (null !== $data = $this->seek($key)) {
+        if (null !== ($data = $this->seek($key))) {
             $item = $this->getStub($data->data[$data->position][$data->key]);
 
             return $item instanceof Stub || [] === $item ? $data : $item;
@@ -144,12 +161,16 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function offsetSet($key, $value)
     {
-        throw new \BadMethodCallException(self::class.' objects are immutable.');
+        throw new \BadMethodCallException(
+            self::class . ' objects are immutable.'
+        );
     }
 
     public function offsetUnset($key)
     {
-        throw new \BadMethodCallException(self::class.' objects are immutable.');
+        throw new \BadMethodCallException(
+            self::class . ' objects are immutable.'
+        );
     }
 
     public function __toString()
@@ -219,21 +240,28 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $item = $this->data[$this->position][$this->key];
 
-        if ($item instanceof Stub && Stub::TYPE_REF === $item->type && !$item->position) {
+        if (
+            $item instanceof Stub &&
+            Stub::TYPE_REF === $item->type &&
+            !$item->position
+        ) {
             $item = $item->value;
         }
-        if (!($item = $this->getStub($item)) instanceof Stub || !$item->position) {
+        if (
+            !($item = $this->getStub($item)) instanceof Stub ||
+            !$item->position
+        ) {
             return;
         }
         $keys = [$key];
 
         switch ($item->type) {
             case Stub::TYPE_OBJECT:
-                $keys[] = Caster::PREFIX_DYNAMIC.$key;
-                $keys[] = Caster::PREFIX_PROTECTED.$key;
-                $keys[] = Caster::PREFIX_VIRTUAL.$key;
+                $keys[] = Caster::PREFIX_DYNAMIC . $key;
+                $keys[] = Caster::PREFIX_PROTECTED . $key;
+                $keys[] = Caster::PREFIX_VIRTUAL . $key;
                 $keys[] = "\0$item->class\0$key";
-                // no break
+            // no break
             case Stub::TYPE_ARRAY:
             case Stub::TYPE_RESOURCE:
                 break;
@@ -262,7 +290,12 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     public function dump(DumperInterface $dumper)
     {
         $refs = [0];
-        $this->dumpItem($dumper, new Cursor(), $refs, $this->data[$this->position][$this->key]);
+        $this->dumpItem(
+            $dumper,
+            new Cursor(),
+            $refs,
+            $this->data[$this->position][$this->key]
+        );
     }
 
     /**
@@ -288,8 +321,9 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
             }
         } elseif (Stub::TYPE_REF === $item->type) {
             if ($item->handle) {
-                if (!isset($refs[$r = $item->handle - (PHP_INT_MAX >> 1)])) {
-                    $cursor->refIndex = $refs[$r] = $cursor->refIndex ?: ++$refs[0];
+                if (!isset($refs[($r = $item->handle - (PHP_INT_MAX >> 1))])) {
+                    $cursor->refIndex = $refs[$r] =
+                        $cursor->refIndex ?: ++$refs[0];
                 } else {
                     $firstSeen = false;
                 }
@@ -303,8 +337,9 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
         }
         if ($item instanceof Stub) {
             if ($item->refCount) {
-                if (!isset($refs[$r = $item->handle])) {
-                    $cursor->refIndex = $refs[$r] = $cursor->refIndex ?: ++$refs[0];
+                if (!isset($refs[($r = $item->handle)])) {
+                    $cursor->refIndex = $refs[$r] =
+                        $cursor->refIndex ?: ++$refs[0];
                 } else {
                     $firstSeen = false;
                 }
@@ -329,34 +364,63 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
             }
             switch ($item->type) {
                 case Stub::TYPE_STRING:
-                    $dumper->dumpString($cursor, $item->value, Stub::STRING_BINARY === $item->class, $cut);
+                    $dumper->dumpString(
+                        $cursor,
+                        $item->value,
+                        Stub::STRING_BINARY === $item->class,
+                        $cut
+                    );
                     break;
 
                 case Stub::TYPE_ARRAY:
                     $item = clone $item;
                     $item->type = $item->class;
                     $item->class = $item->value;
-                    // no break
+                // no break
                 case Stub::TYPE_OBJECT:
                 case Stub::TYPE_RESOURCE:
-                    $withChildren = $children && $cursor->depth !== $this->maxDepth && $this->maxItemsPerDepth;
-                    $dumper->enterHash($cursor, $item->type, $item->class, $withChildren);
+                    $withChildren =
+                        $children &&
+                        $cursor->depth !== $this->maxDepth &&
+                        $this->maxItemsPerDepth;
+                    $dumper->enterHash(
+                        $cursor,
+                        $item->type,
+                        $item->class,
+                        $withChildren
+                    );
                     if ($withChildren) {
                         if ($cursor->skipChildren) {
                             $withChildren = false;
                             $cut = -1;
                         } else {
-                            $cut = $this->dumpChildren($dumper, $cursor, $refs, $children, $cut, $item->type, null !== $item->class);
+                            $cut = $this->dumpChildren(
+                                $dumper,
+                                $cursor,
+                                $refs,
+                                $children,
+                                $cut,
+                                $item->type,
+                                null !== $item->class
+                            );
                         }
                     } elseif ($children && 0 <= $cut) {
                         $cut += \count($children);
                     }
                     $cursor->skipChildren = false;
-                    $dumper->leaveHash($cursor, $item->type, $item->class, $withChildren, $cut);
+                    $dumper->leaveHash(
+                        $cursor,
+                        $item->type,
+                        $item->class,
+                        $withChildren,
+                        $cut
+                    );
                     break;
 
                 default:
-                    throw new \RuntimeException(sprintf('Unexpected Stub type: %s', $item->type));
+                    throw new \RuntimeException(
+                        sprintf('Unexpected Stub type: %s', $item->type)
+                    );
             }
         } elseif ('array' === $type) {
             $dumper->enterHash($cursor, Cursor::HASH_INDEXED, 0, false);
@@ -381,8 +445,15 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @return int The final number of removed items
      */
-    private function dumpChildren($dumper, $parentCursor, &$refs, $children, $hashCut, $hashType, $dumpKeys)
-    {
+    private function dumpChildren(
+        $dumper,
+        $parentCursor,
+        &$refs,
+        $children,
+        $hashCut,
+        $hashType,
+        $dumpKeys
+    ) {
         $cursor = clone $parentCursor;
         ++$cursor->depth;
         $cursor->hashType = $hashType;
@@ -390,13 +461,19 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
         $cursor->hashLength = \count($children);
         $cursor->hashCut = $hashCut;
         foreach ($children as $key => $child) {
-            $cursor->hashKeyIsBinary = isset($key[0]) && !preg_match('//u', $key);
+            $cursor->hashKeyIsBinary =
+                isset($key[0]) && !preg_match('//u', $key);
             $cursor->hashKey = $dumpKeys ? $key : null;
             $this->dumpItem($dumper, $cursor, $refs, $child);
-            if (++$cursor->hashIndex === $this->maxItemsPerDepth || $cursor->stop) {
+            if (
+                ++$cursor->hashIndex === $this->maxItemsPerDepth ||
+                $cursor->stop
+            ) {
                 $parentCursor->stop = true;
 
-                return $hashCut >= 0 ? $hashCut + $cursor->hashLength - $cursor->hashIndex : $hashCut;
+                return $hashCut >= 0
+                    ? $hashCut + $cursor->hashLength - $cursor->hashIndex
+                    : $hashCut;
             }
         }
 
@@ -416,7 +493,9 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
         if (isset($item[0])) {
             $stub->cut = $item[0];
         }
-        $stub->value = $stub->cut + ($stub->position ? \count($this->data[$stub->position]) : 0);
+        $stub->value =
+            $stub->cut +
+            ($stub->position ? \count($this->data[$stub->position]) : 0);
 
         return $stub;
     }

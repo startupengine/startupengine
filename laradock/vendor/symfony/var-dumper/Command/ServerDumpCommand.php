@@ -46,7 +46,7 @@ class ServerDumpCommand extends Command
         $this->server = $server;
         $this->descriptors = $descriptors + [
             'cli' => new CliDescriptor(new CliDumper()),
-            'html' => new HtmlDescriptor(new HtmlDumper()),
+            'html' => new HtmlDescriptor(new HtmlDumper())
         ];
 
         parent::__construct();
@@ -56,10 +56,18 @@ class ServerDumpCommand extends Command
     {
         $availableFormats = implode(', ', array_keys($this->descriptors));
 
-        $this
-            ->addOption('format', null, InputOption::VALUE_REQUIRED, sprintf('The output format (%s)', $availableFormats), 'cli')
-            ->setDescription('Starts a dump server that collects and displays dumps in a single place')
-            ->setHelp(<<<'EOF'
+        $this->addOption(
+            'format',
+            null,
+            InputOption::VALUE_REQUIRED,
+            sprintf('The output format (%s)', $availableFormats),
+            'cli'
+        )
+            ->setDescription(
+                'Starts a dump server that collects and displays dumps in a single place'
+            )
+            ->setHelp(
+                <<<'EOF'
 <info>%command.name%</info> starts a dump server that collects and displays
 dumps in a single place for debugging you application:
 
@@ -71,8 +79,7 @@ and redirecting the output to a file:
   <info>php %command.full_name% --format="html" > dump.html</info>
 
 EOF
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -80,8 +87,10 @@ EOF
         $io = new SymfonyStyle($input, $output);
         $format = $input->getOption('format');
 
-        if (!$descriptor = $this->descriptors[$format] ?? null) {
-            throw new InvalidArgumentException(sprintf('Unsupported format "%s".', $format));
+        if (!($descriptor = $this->descriptors[$format] ?? null)) {
+            throw new InvalidArgumentException(
+                sprintf('Unsupported format "%s".', $format)
+            );
         }
 
         $errorIo = $io->getErrorStyle();
@@ -89,10 +98,16 @@ EOF
 
         $this->server->start();
 
-        $errorIo->success(sprintf('Server listening on %s', $this->server->getHost()));
+        $errorIo->success(
+            sprintf('Server listening on %s', $this->server->getHost())
+        );
         $errorIo->comment('Quit the server with CONTROL-C.');
 
-        $this->server->listen(function (Data $data, array $context, int $clientId) use ($descriptor, $io) {
+        $this->server->listen(function (
+            Data $data,
+            array $context,
+            int $clientId
+        ) use ($descriptor, $io) {
             $descriptor->describe($io, $data, $context, $clientId);
         });
     }

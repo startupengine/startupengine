@@ -72,10 +72,18 @@ class Caster
                         }
                     }
                     if (!isset($publicProperties[$class][$k])) {
-                        $prefixedKeys[$i] = self::PREFIX_DYNAMIC.$k;
+                        $prefixedKeys[$i] = self::PREFIX_DYNAMIC . $k;
                     }
-                } elseif (isset($k[16]) && "\0" === $k[16] && 0 === strpos($k, "\0class@anonymous\0")) {
-                    $prefixedKeys[$i] = "\0".get_parent_class($class).'@anonymous'.strrchr($k, "\0");
+                } elseif (
+                    isset($k[16]) &&
+                    "\0" === $k[16] &&
+                    0 === strpos($k, "\0class@anonymous\0")
+                ) {
+                    $prefixedKeys[$i] =
+                        "\0" .
+                        get_parent_class($class) .
+                        '@anonymous' .
+                        strrchr($k, "\0");
                 }
                 ++$i;
             }
@@ -104,8 +112,12 @@ class Caster
      *
      * @return array The filtered array
      */
-    public static function filter(array $a, $filter, array $listedProperties = [], &$count = 0)
-    {
+    public static function filter(
+        array $a,
+        $filter,
+        array $listedProperties = [],
+        &$count = 0
+    ) {
         $count = 0;
 
         foreach ($a as $k => $v) {
@@ -114,13 +126,26 @@ class Caster
             if (null === $v) {
                 $type |= self::EXCLUDE_NULL & $filter;
                 $type |= self::EXCLUDE_EMPTY & $filter;
-            } elseif (false === $v || '' === $v || '0' === $v || 0 === $v || 0.0 === $v || [] === $v) {
+            } elseif (
+                false === $v ||
+                '' === $v ||
+                '0' === $v ||
+                0 === $v ||
+                0.0 === $v ||
+                [] === $v
+            ) {
                 $type |= self::EXCLUDE_EMPTY & $filter;
             }
-            if ((self::EXCLUDE_NOT_IMPORTANT & $filter) && !\in_array($k, $listedProperties, true)) {
+            if (
+                self::EXCLUDE_NOT_IMPORTANT & $filter &&
+                !\in_array($k, $listedProperties, true)
+            ) {
                 $type |= self::EXCLUDE_NOT_IMPORTANT;
             }
-            if ((self::EXCLUDE_VERBOSE & $filter) && \in_array($k, $listedProperties, true)) {
+            if (
+                self::EXCLUDE_VERBOSE & $filter &&
+                \in_array($k, $listedProperties, true)
+            ) {
                 $type |= self::EXCLUDE_VERBOSE;
             }
 
@@ -136,7 +161,7 @@ class Caster
                 $type |= self::EXCLUDE_PRIVATE & $filter;
             }
 
-            if ((self::EXCLUDE_STRICT & $filter) ? $type === $filter : $type) {
+            if (self::EXCLUDE_STRICT & $filter ? $type === $filter : $type) {
                 unset($a[$k]);
                 ++$count;
             }
@@ -145,10 +170,14 @@ class Caster
         return $a;
     }
 
-    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castPhpIncompleteClass(
+        \__PHP_Incomplete_Class $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         if (isset($a['__PHP_Incomplete_Class_Name'])) {
-            $stub->class .= '('.$a['__PHP_Incomplete_Class_Name'].')';
+            $stub->class .= '(' . $a['__PHP_Incomplete_Class_Name'] . ')';
             unset($a['__PHP_Incomplete_Class_Name']);
         }
 

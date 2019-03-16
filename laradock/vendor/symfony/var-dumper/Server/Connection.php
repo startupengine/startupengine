@@ -32,7 +32,7 @@ class Connection
     public function __construct(string $host, array $contextProviders = [])
     {
         if (false === strpos($host, '://')) {
-            $host = 'tcp://'.$host;
+            $host = 'tcp://' . $host;
         }
 
         $this->host = $host;
@@ -47,7 +47,7 @@ class Connection
     public function write(Data $data): bool
     {
         $socketIsFresh = !$this->socket;
-        if (!$this->socket = $this->socket ?: $this->createSocket()) {
+        if (!($this->socket = $this->socket ?: $this->createSocket())) {
             return false;
         }
 
@@ -56,7 +56,7 @@ class Connection
             $context[$name] = $provider->getContext();
         }
         $context = array_filter($context);
-        $encodedPayload = base64_encode(serialize([$data, $context]))."\n";
+        $encodedPayload = base64_encode(serialize([$data, $context])) . "\n";
 
         set_error_handler([self::class, 'nullErrorHandler']);
         try {
@@ -87,7 +87,13 @@ class Connection
     {
         set_error_handler([self::class, 'nullErrorHandler']);
         try {
-            return stream_socket_client($this->host, $errno, $errstr, 3, STREAM_CLIENT_CONNECT | STREAM_CLIENT_ASYNC_CONNECT);
+            return stream_socket_client(
+                $this->host,
+                $errno,
+                $errstr,
+                3,
+                STREAM_CLIENT_CONNECT | STREAM_CLIENT_ASYNC_CONNECT
+            );
         } finally {
             restore_error_handler();
         }

@@ -36,12 +36,15 @@ class ClassStub extends ConstStub
                     $r = [$callable, '__invoke'];
                 } elseif (\is_array($callable)) {
                     $r = $callable;
-                } elseif (false !== $i = strpos($callable, '::')) {
+                } elseif (false !== ($i = strpos($callable, '::'))) {
                     $r = [substr($callable, 0, $i), substr($callable, 2 + $i)];
                 } else {
                     $r = new \ReflectionFunction($callable);
                 }
-            } elseif (0 < $i = strpos($identifier, '::') ?: strpos($identifier, '->')) {
+            } elseif (
+                0 <
+                ($i = strpos($identifier, '::') ?: strpos($identifier, '->'))
+            ) {
                 $r = [substr($identifier, 0, $i), substr($identifier, 2 + $i)];
             } else {
                 $r = new \ReflectionClass($identifier);
@@ -56,13 +59,27 @@ class ClassStub extends ConstStub
             }
 
             if (false !== strpos($identifier, "class@anonymous\0")) {
-                $this->value = $identifier = preg_replace_callback('/class@anonymous\x00.*?\.php0x?[0-9a-fA-F]++/', function ($m) {
-                    return \class_exists($m[0], false) ? get_parent_class($m[0]).'@anonymous' : $m[0];
-                }, $identifier);
+                $this->value = $identifier = preg_replace_callback(
+                    '/class@anonymous\x00.*?\.php0x?[0-9a-fA-F]++/',
+                    function ($m) {
+                        return \class_exists($m[0], false)
+                            ? get_parent_class($m[0]) . '@anonymous'
+                            : $m[0];
+                    },
+                    $identifier
+                );
             }
 
-            if (null !== $callable && $r instanceof \ReflectionFunctionAbstract) {
-                $s = ReflectionCaster::castFunctionAbstract($r, [], new Stub(), true);
+            if (
+                null !== $callable &&
+                $r instanceof \ReflectionFunctionAbstract
+            ) {
+                $s = ReflectionCaster::castFunctionAbstract(
+                    $r,
+                    [],
+                    new Stub(),
+                    true
+                );
                 $s = ReflectionCaster::getSignature($s);
 
                 if ('()' === substr($identifier, -2)) {
@@ -74,14 +91,14 @@ class ClassStub extends ConstStub
         } catch (\ReflectionException $e) {
             return;
         } finally {
-            if (0 < $i = strrpos($this->value, '\\')) {
+            if (0 < ($i = strrpos($this->value, '\\'))) {
                 $this->attr['ellipsis'] = \strlen($this->value) - $i;
                 $this->attr['ellipsis-type'] = 'class';
                 $this->attr['ellipsis-tail'] = 1;
             }
         }
 
-        if ($f = $r->getFileName()) {
+        if (($f = $r->getFileName())) {
             $this->attr['file'] = $f;
             $this->attr['line'] = $r->getStartLine();
         }

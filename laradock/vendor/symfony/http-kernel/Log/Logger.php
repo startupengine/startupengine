@@ -30,36 +30,63 @@ class Logger extends AbstractLogger
         LogLevel::ERROR => 4,
         LogLevel::CRITICAL => 5,
         LogLevel::ALERT => 6,
-        LogLevel::EMERGENCY => 7,
+        LogLevel::EMERGENCY => 7
     ];
 
     private $minLevelIndex;
     private $formatter;
     private $handle;
 
-    public function __construct(string $minLevel = null, $output = 'php://stderr', callable $formatter = null)
-    {
+    public function __construct(
+        string $minLevel = null,
+        $output = 'php://stderr',
+        callable $formatter = null
+    ) {
         if (null === $minLevel) {
             $minLevel = LogLevel::WARNING;
 
-            if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
-                switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] : $_SERVER['SHELL_VERBOSITY'])) {
-                    case -1: $minLevel = LogLevel::ERROR; break;
-                    case 1: $minLevel = LogLevel::NOTICE; break;
-                    case 2: $minLevel = LogLevel::INFO; break;
-                    case 3: $minLevel = LogLevel::DEBUG; break;
+            if (
+                isset($_ENV['SHELL_VERBOSITY']) ||
+                isset($_SERVER['SHELL_VERBOSITY'])
+            ) {
+                switch (
+                    (int) isset($_ENV['SHELL_VERBOSITY'])
+                        ? $_ENV['SHELL_VERBOSITY']
+                        : $_SERVER['SHELL_VERBOSITY']
+                ) {
+                    case -1:
+                        $minLevel = LogLevel::ERROR;
+                        break;
+                    case 1:
+                        $minLevel = LogLevel::NOTICE;
+                        break;
+                    case 2:
+                        $minLevel = LogLevel::INFO;
+                        break;
+                    case 3:
+                        $minLevel = LogLevel::DEBUG;
+                        break;
                 }
             }
         }
 
         if (!isset(self::$levels[$minLevel])) {
-            throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $minLevel));
+            throw new InvalidArgumentException(
+                sprintf('The log level "%s" does not exist.', $minLevel)
+            );
         }
 
         $this->minLevelIndex = self::$levels[$minLevel];
         $this->formatter = $formatter ?: [$this, 'format'];
-        if (false === $this->handle = \is_resource($output) ? $output : @fopen($output, 'a')) {
-            throw new InvalidArgumentException(sprintf('Unable to open "%s".', $output));
+        if (
+            false ===
+            ($this->handle = \is_resource($output)
+                ? $output
+                : @fopen($output, 'a'))
+        ) {
+            throw new InvalidArgumentException(
+                sprintf('Unable to open "%s".', $output)
+            );
         }
     }
 
@@ -69,7 +96,9 @@ class Logger extends AbstractLogger
     public function log($level, $message, array $context = [])
     {
         if (!isset(self::$levels[$level])) {
-            throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $level));
+            throw new InvalidArgumentException(
+                sprintf('The log level "%s" does not exist.', $level)
+            );
         }
 
         if (self::$levels[$level] < $this->minLevelIndex) {
@@ -80,25 +109,40 @@ class Logger extends AbstractLogger
         fwrite($this->handle, $formatter($level, $message, $context));
     }
 
-    private function format(string $level, string $message, array $context): string
-    {
+    private function format(
+        string $level,
+        string $message,
+        array $context
+    ): string {
         if (false !== strpos($message, '{')) {
             $replacements = [];
             foreach ($context as $key => $val) {
-                if (null === $val || is_scalar($val) || (\is_object($val) && method_exists($val, '__toString'))) {
+                if (
+                    null === $val ||
+                    is_scalar($val) ||
+                    (\is_object($val) && method_exists($val, '__toString'))
+                ) {
                     $replacements["{{$key}}"] = $val;
                 } elseif ($val instanceof \DateTimeInterface) {
-                    $replacements["{{$key}}"] = $val->format(\DateTime::RFC3339);
+                    $replacements["{{$key}}"] = $val->format(
+                        \DateTime::RFC3339
+                    );
                 } elseif (\is_object($val)) {
-                    $replacements["{{$key}}"] = '[object '.\get_class($val).']';
+                    $replacements["{{$key}}"] =
+                        '[object ' . \get_class($val) . ']';
                 } else {
-                    $replacements["{{$key}}"] = '['.\gettype($val).']';
+                    $replacements["{{$key}}"] = '[' . \gettype($val) . ']';
                 }
             }
 
             $message = strtr($message, $replacements);
         }
 
-        return sprintf('%s [%s] %s', date(\DateTime::RFC3339), $level, $message).\PHP_EOL;
+        return sprintf(
+            '%s [%s] %s',
+            date(\DateTime::RFC3339),
+            $level,
+            $message
+        ) . \PHP_EOL;
     }
 }

@@ -42,7 +42,7 @@ class CutStub extends Stub
             case 'resource (closed)':
                 $this->type = self::TYPE_RESOURCE;
                 $this->handle = (int) $value;
-                if ('Unknown' === $this->class = @get_resource_type($value)) {
+                if ('Unknown' === ($this->class = @get_resource_type($value))) {
                     $this->class = 'Closed';
                 }
                 $this->cut = -1;
@@ -50,8 +50,13 @@ class CutStub extends Stub
 
             case 'string':
                 $this->type = self::TYPE_STRING;
-                $this->class = preg_match('//u', $value) ? self::STRING_UTF8 : self::STRING_BINARY;
-                $this->cut = self::STRING_BINARY === $this->class ? \strlen($value) : mb_strlen($value, 'UTF-8');
+                $this->class = preg_match('//u', $value)
+                    ? self::STRING_UTF8
+                    : self::STRING_BINARY;
+                $this->cut =
+                    self::STRING_BINARY === $this->class
+                        ? \strlen($value)
+                        : mb_strlen($value, 'UTF-8');
                 $this->value = '';
                 break;
         }

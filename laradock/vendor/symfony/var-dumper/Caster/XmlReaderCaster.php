@@ -37,33 +37,56 @@ class XmlReaderCaster
         \XMLReader::SIGNIFICANT_WHITESPACE => 'SIGNIFICANT_WHITESPACE',
         \XMLReader::END_ELEMENT => 'END_ELEMENT',
         \XMLReader::END_ENTITY => 'END_ENTITY',
-        \XMLReader::XML_DECLARATION => 'XML_DECLARATION',
+        \XMLReader::XML_DECLARATION => 'XML_DECLARATION'
     ];
 
-    public static function castXmlReader(\XMLReader $reader, array $a, Stub $stub, $isNested)
-    {
-        $props = Caster::PREFIX_VIRTUAL.'parserProperties';
+    public static function castXmlReader(
+        \XMLReader $reader,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
+        $props = Caster::PREFIX_VIRTUAL . 'parserProperties';
         $info = [
             'localName' => $reader->localName,
             'prefix' => $reader->prefix,
-            'nodeType' => new ConstStub(self::$nodeTypes[$reader->nodeType], $reader->nodeType),
+            'nodeType' => new ConstStub(
+                self::$nodeTypes[$reader->nodeType],
+                $reader->nodeType
+            ),
             'depth' => $reader->depth,
             'isDefault' => $reader->isDefault,
-            'isEmptyElement' => \XMLReader::NONE === $reader->nodeType ? null : $reader->isEmptyElement,
+            'isEmptyElement' =>
+                \XMLReader::NONE === $reader->nodeType
+                    ? null
+                    : $reader->isEmptyElement,
             'xmlLang' => $reader->xmlLang,
             'attributeCount' => $reader->attributeCount,
             'value' => $reader->value,
             'namespaceURI' => $reader->namespaceURI,
-            'baseURI' => $reader->baseURI ? new LinkStub($reader->baseURI) : $reader->baseURI,
+            'baseURI' => $reader->baseURI
+                ? new LinkStub($reader->baseURI)
+                : $reader->baseURI,
             $props => [
                 'LOADDTD' => $reader->getParserProperty(\XMLReader::LOADDTD),
-                'DEFAULTATTRS' => $reader->getParserProperty(\XMLReader::DEFAULTATTRS),
+                'DEFAULTATTRS' => $reader->getParserProperty(
+                    \XMLReader::DEFAULTATTRS
+                ),
                 'VALIDATE' => $reader->getParserProperty(\XMLReader::VALIDATE),
-                'SUBST_ENTITIES' => $reader->getParserProperty(\XMLReader::SUBST_ENTITIES),
-            ],
+                'SUBST_ENTITIES' => $reader->getParserProperty(
+                    \XMLReader::SUBST_ENTITIES
+                )
+            ]
         ];
 
-        if ($info[$props] = Caster::filter($info[$props], Caster::EXCLUDE_EMPTY, [], $count)) {
+        if (
+            ($info[$props] = Caster::filter(
+                $info[$props],
+                Caster::EXCLUDE_EMPTY,
+                [],
+                $count
+            ))
+        ) {
             $info[$props] = new EnumStub($info[$props]);
             $info[$props]->cut = $count;
         }

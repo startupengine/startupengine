@@ -27,9 +27,16 @@ class PostResponseEvent extends KernelEvent
 {
     private $response;
 
-    public function __construct(HttpKernelInterface $kernel, Request $request, Response $response)
-    {
-        parent::__construct($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+    public function __construct(
+        HttpKernelInterface $kernel,
+        Request $request,
+        Response $response
+    ) {
+        parent::__construct(
+            $kernel,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
 
         $this->response = $response;
     }

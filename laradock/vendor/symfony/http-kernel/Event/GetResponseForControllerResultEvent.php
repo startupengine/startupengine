@@ -32,8 +32,12 @@ class GetResponseForControllerResultEvent extends GetResponseEvent
      */
     private $controllerResult;
 
-    public function __construct(HttpKernelInterface $kernel, Request $request, int $requestType, $controllerResult)
-    {
+    public function __construct(
+        HttpKernelInterface $kernel,
+        Request $request,
+        int $requestType,
+        $controllerResult
+    ) {
         parent::__construct($kernel, $request, $requestType);
 
         $this->controllerResult = $controllerResult;

@@ -42,7 +42,7 @@ class XmlResourceCaster
         XML_ERROR_UNKNOWN_ENCODING => 'XML_ERROR_UNKNOWN_ENCODING',
         XML_ERROR_INCORRECT_ENCODING => 'XML_ERROR_INCORRECT_ENCODING',
         XML_ERROR_UNCLOSED_CDATA_SECTION => 'XML_ERROR_UNCLOSED_CDATA_SECTION',
-        XML_ERROR_EXTERNAL_ENTITY_HANDLING => 'XML_ERROR_EXTERNAL_ENTITY_HANDLING',
+        XML_ERROR_EXTERNAL_ENTITY_HANDLING => 'XML_ERROR_EXTERNAL_ENTITY_HANDLING'
     ];
 
     public static function castXml($h, array $a, Stub $stub, $isNested)
@@ -53,7 +53,10 @@ class XmlResourceCaster
         $a['error_code'] = xml_get_error_code($h);
 
         if (isset(self::$xmlErrors[$a['error_code']])) {
-            $a['error_code'] = new ConstStub(self::$xmlErrors[$a['error_code']], $a['error_code']);
+            $a['error_code'] = new ConstStub(
+                self::$xmlErrors[$a['error_code']],
+                $a['error_code']
+            );
         }
 
         return $a;

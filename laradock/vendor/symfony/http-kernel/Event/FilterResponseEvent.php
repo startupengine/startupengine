@@ -28,8 +28,12 @@ class FilterResponseEvent extends KernelEvent
 {
     private $response;
 
-    public function __construct(HttpKernelInterface $kernel, Request $request, int $requestType, Response $response)
-    {
+    public function __construct(
+        HttpKernelInterface $kernel,
+        Request $request,
+        int $requestType,
+        Response $response
+    ) {
         parent::__construct($kernel, $request, $requestType);
 
         $this->setResponse($response);

@@ -24,12 +24,12 @@ class PdoCaster
         'CASE' => [
             \PDO::CASE_LOWER => 'LOWER',
             \PDO::CASE_NATURAL => 'NATURAL',
-            \PDO::CASE_UPPER => 'UPPER',
+            \PDO::CASE_UPPER => 'UPPER'
         ],
         'ERRMODE' => [
             \PDO::ERRMODE_SILENT => 'SILENT',
             \PDO::ERRMODE_WARNING => 'WARNING',
-            \PDO::ERRMODE_EXCEPTION => 'EXCEPTION',
+            \PDO::ERRMODE_EXCEPTION => 'EXCEPTION'
         ],
         'TIMEOUT',
         'PREFETCH',
@@ -40,7 +40,7 @@ class PdoCaster
         'ORACLE_NULLS' => [
             \PDO::NULL_NATURAL => 'NATURAL',
             \PDO::NULL_EMPTY_STRING => 'EMPTY_STRING',
-            \PDO::NULL_TO_STRING => 'TO_STRING',
+            \PDO::NULL_TO_STRING => 'TO_STRING'
         ],
         'CLIENT_VERSION',
         'SERVER_VERSION',
@@ -53,8 +53,8 @@ class PdoCaster
             \PDO::FETCH_BOTH => 'BOTH',
             \PDO::FETCH_LAZY => 'LAZY',
             \PDO::FETCH_NUM => 'NUM',
-            \PDO::FETCH_OBJ => 'OBJ',
-        ],
+            \PDO::FETCH_OBJ => 'OBJ'
+        ]
     ];
 
     public static function castPdo(\PDO $c, array $a, Stub $stub, $isNested)
@@ -70,35 +70,44 @@ class PdoCaster
             }
 
             try {
-                $attr[$k] = 'ERRMODE' === $k ? $errmode : $c->getAttribute(\constant('PDO::ATTR_'.$k));
+                $attr[$k] =
+                    'ERRMODE' === $k
+                        ? $errmode
+                        : $c->getAttribute(\constant('PDO::ATTR_' . $k));
                 if ($v && isset($v[$attr[$k]])) {
                     $attr[$k] = new ConstStub($v[$attr[$k]], $attr[$k]);
                 }
             } catch (\Exception $e) {
             }
         }
-        if (isset($attr[$k = 'STATEMENT_CLASS'][1])) {
+        if (isset($attr[($k = 'STATEMENT_CLASS')][1])) {
             if ($attr[$k][1]) {
-                $attr[$k][1] = new ArgsStub($attr[$k][1], '__construct', $attr[$k][0]);
+                $attr[$k][1] = new ArgsStub(
+                    $attr[$k][1],
+                    '__construct',
+                    $attr[$k][0]
+                );
             }
             $attr[$k][0] = new ClassStub($attr[$k][0]);
         }
 
         $prefix = Caster::PREFIX_VIRTUAL;
         $a += [
-            $prefix.'inTransaction' => method_exists($c, 'inTransaction'),
-            $prefix.'errorInfo' => $c->errorInfo(),
-            $prefix.'attributes' => new EnumStub($attr),
+            $prefix . 'inTransaction' => method_exists($c, 'inTransaction'),
+            $prefix . 'errorInfo' => $c->errorInfo(),
+            $prefix . 'attributes' => new EnumStub($attr)
         ];
 
-        if ($a[$prefix.'inTransaction']) {
-            $a[$prefix.'inTransaction'] = $c->inTransaction();
+        if ($a[$prefix . 'inTransaction']) {
+            $a[$prefix . 'inTransaction'] = $c->inTransaction();
         } else {
-            unset($a[$prefix.'inTransaction']);
+            unset($a[$prefix . 'inTransaction']);
         }
 
-        if (!isset($a[$prefix.'errorInfo'][1], $a[$prefix.'errorInfo'][2])) {
-            unset($a[$prefix.'errorInfo']);
+        if (
+            !isset($a[$prefix . 'errorInfo'][1], $a[$prefix . 'errorInfo'][2])
+        ) {
+            unset($a[$prefix . 'errorInfo']);
         }
 
         $c->setAttribute(\PDO::ATTR_ERRMODE, $errmode);
@@ -106,13 +115,19 @@ class PdoCaster
         return $a;
     }
 
-    public static function castPdoStatement(\PDOStatement $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castPdoStatement(
+        \PDOStatement $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         $prefix = Caster::PREFIX_VIRTUAL;
-        $a[$prefix.'errorInfo'] = $c->errorInfo();
+        $a[$prefix . 'errorInfo'] = $c->errorInfo();
 
-        if (!isset($a[$prefix.'errorInfo'][1], $a[$prefix.'errorInfo'][2])) {
-            unset($a[$prefix.'errorInfo']);
+        if (
+            !isset($a[$prefix . 'errorInfo'][1], $a[$prefix . 'errorInfo'][2])
+        ) {
+            unset($a[$prefix . 'errorInfo']);
         }
 
         return $a;

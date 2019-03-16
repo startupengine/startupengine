@@ -24,45 +24,77 @@ class SplCaster
         \SplFileObject::DROP_NEW_LINE => 'DROP_NEW_LINE',
         \SplFileObject::READ_AHEAD => 'READ_AHEAD',
         \SplFileObject::SKIP_EMPTY => 'SKIP_EMPTY',
-        \SplFileObject::READ_CSV => 'READ_CSV',
+        \SplFileObject::READ_CSV => 'READ_CSV'
     ];
 
-    public static function castArrayObject(\ArrayObject $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castArrayObject(
+        \ArrayObject $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         return self::castSplArray($c, $a, $stub, $isNested);
     }
 
-    public static function castArrayIterator(\ArrayIterator $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castArrayIterator(
+        \ArrayIterator $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         return self::castSplArray($c, $a, $stub, $isNested);
     }
 
-    public static function castHeap(\Iterator $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castHeap(
+        \Iterator $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         $a += [
-            Caster::PREFIX_VIRTUAL.'heap' => iterator_to_array(clone $c),
+            Caster::PREFIX_VIRTUAL . 'heap' => iterator_to_array(clone $c)
         ];
 
         return $a;
     }
 
-    public static function castDoublyLinkedList(\SplDoublyLinkedList $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castDoublyLinkedList(
+        \SplDoublyLinkedList $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         $prefix = Caster::PREFIX_VIRTUAL;
         $mode = $c->getIteratorMode();
-        $c->setIteratorMode(\SplDoublyLinkedList::IT_MODE_KEEP | $mode & ~\SplDoublyLinkedList::IT_MODE_DELETE);
+        $c->setIteratorMode(
+            \SplDoublyLinkedList::IT_MODE_KEEP |
+                ($mode & ~\SplDoublyLinkedList::IT_MODE_DELETE)
+        );
 
         $a += [
-            $prefix.'mode' => new ConstStub((($mode & \SplDoublyLinkedList::IT_MODE_LIFO) ? 'IT_MODE_LIFO' : 'IT_MODE_FIFO').' | '.(($mode & \SplDoublyLinkedList::IT_MODE_DELETE) ? 'IT_MODE_DELETE' : 'IT_MODE_KEEP'), $mode),
-            $prefix.'dllist' => iterator_to_array($c),
+            $prefix . 'mode' => new ConstStub(
+                ($mode & \SplDoublyLinkedList::IT_MODE_LIFO
+                    ? 'IT_MODE_LIFO'
+                    : 'IT_MODE_FIFO') .
+                    ' | ' .
+                    ($mode & \SplDoublyLinkedList::IT_MODE_DELETE
+                        ? 'IT_MODE_DELETE'
+                        : 'IT_MODE_KEEP'),
+                $mode
+            ),
+            $prefix . 'dllist' => iterator_to_array($c)
         ];
         $c->setIteratorMode($mode);
 
         return $a;
     }
 
-    public static function castFileInfo(\SplFileInfo $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castFileInfo(
+        \SplFileInfo $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         static $map = [
             'path' => 'getPath',
             'filename' => 'getFilename',
@@ -85,105 +117,137 @@ class SplCaster
             'file' => 'isFile',
             'dir' => 'isDir',
             'link' => 'isLink',
-            'linkTarget' => 'getLinkTarget',
+            'linkTarget' => 'getLinkTarget'
         ];
 
         $prefix = Caster::PREFIX_VIRTUAL;
 
         foreach ($map as $key => $accessor) {
             try {
-                $a[$prefix.$key] = $c->$accessor();
+                $a[$prefix . $key] = $c->$accessor();
             } catch (\Exception $e) {
             }
         }
 
-        if (isset($a[$prefix.'realPath'])) {
-            $a[$prefix.'realPath'] = new LinkStub($a[$prefix.'realPath']);
+        if (isset($a[$prefix . 'realPath'])) {
+            $a[$prefix . 'realPath'] = new LinkStub($a[$prefix . 'realPath']);
         }
 
-        if (isset($a[$prefix.'perms'])) {
-            $a[$prefix.'perms'] = new ConstStub(sprintf('0%o', $a[$prefix.'perms']), $a[$prefix.'perms']);
+        if (isset($a[$prefix . 'perms'])) {
+            $a[$prefix . 'perms'] = new ConstStub(
+                sprintf('0%o', $a[$prefix . 'perms']),
+                $a[$prefix . 'perms']
+            );
         }
 
         static $mapDate = ['aTime', 'mTime', 'cTime'];
         foreach ($mapDate as $key) {
-            if (isset($a[$prefix.$key])) {
-                $a[$prefix.$key] = new ConstStub(date('Y-m-d H:i:s', $a[$prefix.$key]), $a[$prefix.$key]);
+            if (isset($a[$prefix . $key])) {
+                $a[$prefix . $key] = new ConstStub(
+                    date('Y-m-d H:i:s', $a[$prefix . $key]),
+                    $a[$prefix . $key]
+                );
             }
         }
 
         return $a;
     }
 
-    public static function castFileObject(\SplFileObject $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castFileObject(
+        \SplFileObject $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         static $map = [
             'csvControl' => 'getCsvControl',
             'flags' => 'getFlags',
             'maxLineLen' => 'getMaxLineLen',
             'fstat' => 'fstat',
             'eof' => 'eof',
-            'key' => 'key',
+            'key' => 'key'
         ];
 
         $prefix = Caster::PREFIX_VIRTUAL;
 
         foreach ($map as $key => $accessor) {
             try {
-                $a[$prefix.$key] = $c->$accessor();
+                $a[$prefix . $key] = $c->$accessor();
             } catch (\Exception $e) {
             }
         }
 
-        if (isset($a[$prefix.'flags'])) {
+        if (isset($a[$prefix . 'flags'])) {
             $flagsArray = [];
             foreach (self::$splFileObjectFlags as $value => $name) {
-                if ($a[$prefix.'flags'] & $value) {
+                if ($a[$prefix . 'flags'] & $value) {
                     $flagsArray[] = $name;
                 }
             }
-            $a[$prefix.'flags'] = new ConstStub(implode('|', $flagsArray), $a[$prefix.'flags']);
+            $a[$prefix . 'flags'] = new ConstStub(
+                implode('|', $flagsArray),
+                $a[$prefix . 'flags']
+            );
         }
 
-        if (isset($a[$prefix.'fstat'])) {
-            $a[$prefix.'fstat'] = new CutArrayStub($a[$prefix.'fstat'], ['dev', 'ino', 'nlink', 'rdev', 'blksize', 'blocks']);
+        if (isset($a[$prefix . 'fstat'])) {
+            $a[$prefix . 'fstat'] = new CutArrayStub($a[$prefix . 'fstat'], [
+                'dev',
+                'ino',
+                'nlink',
+                'rdev',
+                'blksize',
+                'blocks'
+            ]);
         }
 
         return $a;
     }
 
-    public static function castFixedArray(\SplFixedArray $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castFixedArray(
+        \SplFixedArray $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         $a += [
-            Caster::PREFIX_VIRTUAL.'storage' => $c->toArray(),
+            Caster::PREFIX_VIRTUAL . 'storage' => $c->toArray()
         ];
 
         return $a;
     }
 
-    public static function castObjectStorage(\SplObjectStorage $c, array $a, Stub $stub, $isNested)
-    {
+    public static function castObjectStorage(
+        \SplObjectStorage $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
         $storage = [];
-        unset($a[Caster::PREFIX_DYNAMIC."\0gcdata"]); // Don't hit https://bugs.php.net/65967
+        unset($a[Caster::PREFIX_DYNAMIC . "\0gcdata"]); // Don't hit https://bugs.php.net/65967
 
         $clone = clone $c;
         foreach ($clone as $obj) {
             $storage[] = [
                 'object' => $obj,
-                'info' => $clone->getInfo(),
-             ];
+                'info' => $clone->getInfo()
+            ];
         }
 
         $a += [
-            Caster::PREFIX_VIRTUAL.'storage' => $storage,
+            Caster::PREFIX_VIRTUAL . 'storage' => $storage
         ];
 
         return $a;
     }
 
-    public static function castOuterIterator(\OuterIterator $c, array $a, Stub $stub, $isNested)
-    {
-        $a[Caster::PREFIX_VIRTUAL.'innerIterator'] = $c->getInnerIterator();
+    public static function castOuterIterator(
+        \OuterIterator $c,
+        array $a,
+        Stub $stub,
+        $isNested
+    ) {
+        $a[Caster::PREFIX_VIRTUAL . 'innerIterator'] = $c->getInnerIterator();
 
         return $a;
     }
@@ -200,13 +264,17 @@ class SplCaster
             $c->setFlags($flags);
         }
         $a += [
-            $prefix.'flag::STD_PROP_LIST' => (bool) ($flags & \ArrayObject::STD_PROP_LIST),
-            $prefix.'flag::ARRAY_AS_PROPS' => (bool) ($flags & \ArrayObject::ARRAY_AS_PROPS),
+            $prefix . 'flag::STD_PROP_LIST' => (bool) ($flags &
+                \ArrayObject::STD_PROP_LIST),
+            $prefix . 'flag::ARRAY_AS_PROPS' => (bool) ($flags &
+                \ArrayObject::ARRAY_AS_PROPS)
         ];
         if ($c instanceof \ArrayObject) {
-            $a[$prefix.'iteratorClass'] = new ClassStub($c->getIteratorClass());
+            $a[$prefix . 'iteratorClass'] = new ClassStub(
+                $c->getIteratorClass()
+            );
         }
-        $a[$prefix.'storage'] = $c->getArrayCopy();
+        $a[$prefix . 'storage'] = $c->getArrayCopy();
 
         return $a;
     }

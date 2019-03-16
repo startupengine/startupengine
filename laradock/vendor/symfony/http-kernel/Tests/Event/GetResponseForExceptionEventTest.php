@@ -20,7 +20,12 @@ class GetResponseForExceptionEventTest extends TestCase
 {
     public function testAllowSuccessfulResponseIsFalseByDefault()
     {
-        $event = new GetResponseForExceptionEvent(new TestHttpKernel(), new Request(), 1, new \Exception());
+        $event = new GetResponseForExceptionEvent(
+            new TestHttpKernel(),
+            new Request(),
+            1,
+            new \Exception()
+        );
 
         $this->assertFalse($event->isAllowingCustomResponseCode());
     }

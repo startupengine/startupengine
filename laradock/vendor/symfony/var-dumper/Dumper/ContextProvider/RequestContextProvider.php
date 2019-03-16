@@ -33,7 +33,7 @@ final class RequestContextProvider implements ContextProviderInterface
 
     public function getContext(): ?array
     {
-        if (null === $request = $this->requestStack->getCurrentRequest()) {
+        if (null === ($request = $this->requestStack->getCurrentRequest())) {
             return null;
         }
 
@@ -42,8 +42,10 @@ final class RequestContextProvider implements ContextProviderInterface
         return [
             'uri' => $request->getUri(),
             'method' => $request->getMethod(),
-            'controller' => $controller ? $this->cloner->cloneVar($controller) : $controller,
-            'identifier' => spl_object_hash($request),
+            'controller' => $controller
+                ? $this->cloner->cloneVar($controller)
+                : $controller,
+            'identifier' => spl_object_hash($request)
         ];
     }
 }

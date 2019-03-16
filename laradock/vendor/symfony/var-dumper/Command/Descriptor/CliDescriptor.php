@@ -34,9 +34,16 @@ class CliDescriptor implements DumpDescriptorInterface
         $this->dumper = $dumper;
     }
 
-    public function describe(OutputInterface $output, Data $data, array $context, int $clientId): void
-    {
-        $io = $output instanceof SymfonyStyle ? $output : new SymfonyStyle(new ArrayInput([]), $output);
+    public function describe(
+        OutputInterface $output,
+        Data $data,
+        array $context,
+        int $clientId
+    ): void {
+        $io =
+            $output instanceof SymfonyStyle
+                ? $output
+                : new SymfonyStyle(new ArrayInput([]), $output);
         $this->dumper->setColors($output->isDecorated());
 
         $rows = [['date', date('r', $context['timestamp'])]];
@@ -48,12 +55,15 @@ class CliDescriptor implements DumpDescriptorInterface
             $request = $context['request'];
             $this->lastIdentifier = $request['identifier'];
             $section = sprintf('%s %s', $request['method'], $request['uri']);
-            if ($controller = $request['controller']) {
-                $rows[] = ['controller', rtrim($this->dumper->dump($controller, true), "\n")];
+            if (($controller = $request['controller'])) {
+                $rows[] = [
+                    'controller',
+                    rtrim($this->dumper->dump($controller, true), "\n")
+                ];
             }
         } elseif (isset($context['cli'])) {
             $this->lastIdentifier = $context['cli']['identifier'];
-            $section = '$ '.$context['cli']['command_line'];
+            $section = '$ ' . $context['cli']['command_line'];
         }
 
         if ($this->lastIdentifier !== $lastIdentifier) {
@@ -62,7 +72,10 @@ class CliDescriptor implements DumpDescriptorInterface
 
         if (isset($context['source'])) {
             $source = $context['source'];
-            $rows[] = ['source', sprintf('%s on line %d', $source['name'], $source['line'])];
+            $rows[] = [
+                'source',
+                sprintf('%s on line %d', $source['name'], $source['line'])
+            ];
             $file = $source['file_relative'] ?? $source['file'];
             $rows[] = ['file', $file];
             $fileLink = $source['file_link'] ?? null;
@@ -71,7 +84,10 @@ class CliDescriptor implements DumpDescriptorInterface
         $io->table([], $rows);
 
         if (isset($fileLink)) {
-            $io->writeln(['<info>Open source in your IDE/browser:</info>', $fileLink]);
+            $io->writeln([
+                '<info>Open source in your IDE/browser:</info>',
+                $fileLink
+            ]);
             $io->newLine();
         }
 
