@@ -1,5 +1,5 @@
 {
-  "namespace": "\\App\\CTA",
+  "namespace": "\\App\\Promo",
   "lang": {
     "en": {
       "singular": "promo",
@@ -17,7 +17,7 @@
     "taggable": true,
     "readonly" : {
       "id":{
-        "label": "CTA ID",
+        "label": "Promo ID",
         "column": "id"
       }
     }
@@ -25,17 +25,17 @@
   "fields": {
     "name" : {
       "display name": "Name",
-      "description": "The name of this feature.",
+      "description": "The name of this promo.",
       "type": "text",
       "validations": {
       }
     },
     "slug" : {
       "display name": "Slug",
-      "description": "The URL slug of this content.",
+      "description": "The URL slug of this promo.",
       "type": "text",
       "validations": {
-        "unique": "features,slug"
+        "unique": "promos,slug"
       }
     },
     "status": {
@@ -117,6 +117,11 @@
   },
   "permissions": {
     "browse": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add promos"]
+    },
+    "read": {
       "requires_auth": true,
       "requires_permission":
       ["add promos"]

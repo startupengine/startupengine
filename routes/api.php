@@ -84,8 +84,8 @@ Route::group(['middleware' => ['cors', 'api']], function () {
         ->middleware('auth.default');
 
     // Demo Data
-    Route::get('/demo/menu', 'DemoController@menu')->middleware('auth');
-    Route::get('/demo/user', 'DemoController@user')->middleware('auth');
+    Route::get('/demo/menu', 'DemoController@menu')->middleware('auth:api');
+    Route::get('/demo/user', 'DemoController@user')->middleware('auth:api');
     Route::get(
         '/demo/user/{id}/activities',
         'DemoController@userActivities'

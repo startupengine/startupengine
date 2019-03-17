@@ -58,7 +58,7 @@ class OptionalAuthentication extends Authenticate
     protected function authenticate($request, $guards)
     {
         if (empty($guards)) {
-            $guards = ['auth:api'];
+            $guards = ['api'];
         }
 
         foreach ($guards as $guard) {

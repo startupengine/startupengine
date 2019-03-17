@@ -54,7 +54,7 @@ trait IsApiResource
             if (modelToPath($modelType) == 'content') {
                 $publicId = $this->getHashId();
             } else {
-                $publicId = $his->id;
+                $publicId = $this->id;
             }
             return [
                 'self' =>

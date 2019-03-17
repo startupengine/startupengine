@@ -1,5 +1,5 @@
-
-<div id="contentForm" v-if="status != 'loading' && info != null && record != null && record.meta != null && record.meta.status == 'success'"
+<div id="contentForm"
+     v-if="status != 'loading' && record.data != null"
      style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
 
     <div class="row mb-2">
@@ -92,7 +92,8 @@
                                      style="position:absolute;right:-5px;top:10px;">Edit
                                 </div>
 
-                                <label><span class="badge badge-outline-dark text-dark text-uppercase">@{{ fieldName }}</span></label>
+                                <label><span
+                                            class="badge badge-outline-dark text-dark text-uppercase">@{{ fieldName }}</span></label>
 
                                 <div v-if="((record.data || {})[fieldName]) != null"
                                      class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
@@ -194,29 +195,29 @@
             @endif
         </div>
         @if(!isset($options['show_metadata']) OR $options['show_metadata'] == true)
-        <div class="col-lg-3 col-md-12" v-if="record != null && status !== 'loading'">
-            <!-- Post Overview -->
-            <div class='card card-small mb-3 formSection' id="contentDetails">
-                @if (Schema::hasColumn($item->getTable(), 'status'))
-                    <div class="formEditButton btn btn-primary btn-pill"
-                         style="position:absolute;right:15px;top:-15px;"
+            <div class="col-lg-3 col-md-12" v-if="record != null && status !== 'loading'">
+                <!-- Post Overview -->
+                <div class='card card-small mb-3 formSection' id="contentDetails">
+                    @if (Schema::hasColumn($item->getTable(), 'status'))
+                        <div class="formEditButton btn btn-primary btn-pill"
+                             style="position:absolute;right:15px;top:-15px;"
 
-                         data-toggle="modal"
-                         data-target="#modal-edit-content"
+                             data-toggle="modal"
+                             data-target="#modal-edit-content"
 
-                         v-on:click="updateForm({'fieldDisplayName': 'Status','fieldName': 'status', 'fieldType': 'select', 'fieldInput': null, 'fieldDescription': 'Publish or unpublish this content.', 'fieldSchema' :{'options': {'ACTIVE': 'ACTIVE', 'INACTIVE': 'INACTIVE'}} })">
-                        Edit
+                             v-on:click="updateForm({'fieldDisplayName': 'Status','fieldName': 'status', 'fieldType': 'select', 'fieldInput': null, 'fieldDescription': 'Publish or unpublish this content.', 'fieldSchema' :{'options': {'ACTIVE': 'ACTIVE', 'INACTIVE': 'INACTIVE'}} })">
+                            Edit
+                        </div>
+                    @endif
+                    <div class="card-header border-bottom">
+                        <h6 class="m-0"><i class="fa fa-list"></i>&nbsp; Metadata</h6>
                     </div>
-                @endif
-                <div class="card-header border-bottom">
-                    <h6 class="m-0"><i class="fa fa-list"></i>&nbsp; Metadata</h6>
-                </div>
-                <div class='card-body p-0'>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item pt-0 px-3 pb-0 mb-2">
-                            @if(isset($item->schema()->metadata))
-                                @if(isset($item->schema()->lang->en->singular))
-                                    <span class="d-block mb-2">
+                    <div class='card-body p-0'>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item pt-0 px-3 pb-0 mb-2">
+                                @if(isset($item->schema()->metadata))
+                                    @if(isset($item->schema()->lang->en->singular))
+                                        <span class="d-block mb-2">
                                         <span class="badge badge-outline-dark text-dark">Type</span>
 
                                          <p class="fieldData card-text mb-2 mt-2 p-2"
@@ -226,11 +227,11 @@
                                              @endif
                                          </p>
                                     </span>
-                                @endif
-                                @foreach($item->schema()->metadata->readonly as $key => $value)
-                                    <?php $column = $value->column; ?>
-                                    <?php $label = $value->label; ?>
-                                    <span class="d-block mb-2">
+                                    @endif
+                                    @foreach($item->schema()->metadata->readonly as $key => $value)
+                                        <?php $column = $value->column; ?>
+                                        <?php $label = $value->label; ?>
+                                        <span class="d-block mb-2">
                                     <span class="badge badge-outline-dark text-dark">{{ $label }}</span>
 
                                      <p class="fieldData card-text mb-2 mt-2 p-2"
@@ -238,10 +239,10 @@
                                          {{ $item->$column }}&nbsp;
                                     </p>
                                 </span>
-                                @endforeach
-                            @endif
-                            @if(isset($item->published_at))
-                                <span class="d-block mt-2 mb-3">
+                                    @endforeach
+                                @endif
+                                @if(isset($item->published_at))
+                                    <span class="d-block mt-2 mb-3">
                                     <span class="badge badge-outline-dark text-dark">Created</span>
                                     <br>
                                     <p class="fieldData card-text mb-2 mt-2 p-2"
@@ -250,52 +251,52 @@
                                         ({{ $item->created_at->diffForHumans() }})
                                     </p>
                                 </span>
-                            @endif
-                            <span class="d-block mb-2 mt-2">
+                                @endif
+                                <span class="d-block mb-2 mt-2">
                                 @if (Schema::hasColumn($item->getTable(), 'status'))
-                                    <span class="badge badge-outline-dark text-dark">Status</span><br>
-                                    <p v-if="record.data.status == 'ACTIVE'"
-                                       class="fieldData card-text mb-2 mt-2 p-2"
-                                       style="border-color:mediumseagreen !important;color:mediumseagreen !important;text-align:center;">@{{ record.data.status }}</p>
-                                    <p v-else class="fieldData card-text mb-2 mt-2 p-2"
-                                       style="color:#555;text-align:center;">@{{ record.data.status }}</p>
+                                        <span class="badge badge-outline-dark text-dark">Status</span><br>
+                                        <p v-if="record.data.status == 'ACTIVE'"
+                                           class="fieldData card-text mb-2 mt-2 p-2"
+                                           style="border-color:mediumseagreen !important;color:mediumseagreen !important;text-align:center;">@{{ record.data.status }}</p>
+                                        <p v-else class="fieldData card-text mb-2 mt-2 p-2"
+                                           style="color:#555;text-align:center;">@{{ record.data.status }}</p>
                                   </span>
-                            @endif
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- / Post Overview -->
-            <!-- Post Overview -->
-            @if(isset($item->schema()->metadata->taggable) && $item->schema()->metadata->taggable)
-                <div class='card card-small mb-3 formSection' id="tagsCard">
-                    <div class="formEditButton btn btn-primary btn-pill"
-                         style="position:absolute;right:15px;top:-15px;"
-                         v-on:click="updateForm({'fieldSlug': 'tags','fieldName': 'tags', 'fieldType': 'tags', 'fieldInput': null, 'fieldDisplayName': 'Tags', 'fieldDescription': 'Assign tags to this item.'})"
-                         data-toggle="modal"
-                         data-target="#modal-edit-content">Edit
-                    </div>
-                    <div class="card-header border-bottom" style="margin-bottom:15px !important;">
-                        <h6 class="m-0"><i class="fa fa-tag"></i> &nbsp;Tags</h6>
-                    </div>
-                    <div class='card-body p-0'>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-3 pb-3 pt-0">
-                                <div v-if="(record.data.tags != null && record.data.tags.length > 0)">
-                                    <span class="badge badge-primary badge-pill badge-tag m-1"
-                                          v-for="tag,tagName in record.data.tags" v-if="tag != null">
-                                        @{{ tag.name }}
-                                    </span>
-                                </div>
-                                <p class="card-text mb-1 p-1" v-else>
-                                    No tags.
-                                </p>
+                                @endif
                             </li>
                         </ul>
                     </div>
                 </div>
-            @endif
-        </div>
+                <!-- / Post Overview -->
+                <!-- Post Overview -->
+                @if(isset($item->schema()->metadata->taggable) && $item->schema()->metadata->taggable)
+                    <div class='card card-small mb-3 formSection' id="tagsCard">
+                        <div class="formEditButton btn btn-primary btn-pill"
+                             style="position:absolute;right:15px;top:-15px;"
+                             v-on:click="updateForm({'fieldSlug': 'tags','fieldName': 'tags', 'fieldType': 'tags', 'fieldInput': null, 'fieldDisplayName': 'Tags', 'fieldDescription': 'Assign tags to this item.'})"
+                             data-toggle="modal"
+                             data-target="#modal-edit-content">Edit
+                        </div>
+                        <div class="card-header border-bottom" style="margin-bottom:15px !important;">
+                            <h6 class="m-0"><i class="fa fa-tag"></i> &nbsp;Tags</h6>
+                        </div>
+                        <div class='card-body p-0'>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-3 pb-3 pt-0">
+                                    <div v-if="(record.data.tags != null && record.data.tags.length > 0)">
+                                    <span class="badge badge-primary badge-pill badge-tag m-1"
+                                          v-for="tag,tagName in record.data.tags" v-if="tag != null">
+                                        @{{ tag.name }}
+                                    </span>
+                                    </div>
+                                    <p class="card-text mb-1 p-1" v-else>
+                                        No tags.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+            </div>
         @endif
     </div>
 
@@ -322,7 +323,8 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn btn-outline-secondary" data-dismiss="modal" aria-hidden="true">Cancel</div>
-                    <div class="btn btn-danger" v-on:click="refresh('delete')">Delete <i class="material-icons">delete</i>
+                    <div class="btn btn-danger" v-on:click="refresh('delete')">Delete <i
+                                class="material-icons">delete</i>
                     </div>
                 </div>
             </div>
@@ -331,7 +333,8 @@
 
 
     <!-- Edit Content Modal -->
-    <div class="modal fade" id="modal-edit-content" tabindex="-1" role="dialog" v-if="record != null && status !== 'loading'">
+    <div class="modal fade" id="modal-edit-content" tabindex="-1" role="dialog"
+         v-if="record != null && status !== 'loading'">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -360,8 +363,10 @@
                         </div>
                         <div v-else-if="fieldType == 'checkbox'">
                             <div class="custom-control custom-toggle my-2">
-                                <input type="checkbox" id="customToggle1" name="customToggle" class="custom-control-input"  v-model="fieldInput" v-on:input="changed()">
-                                <label class="custom-control-label" for="customToggle1"><span class="dimmed">No</span> / <span class="text-success">Yes</span></label>
+                                <input type="checkbox" id="customToggle1" name="customToggle"
+                                       class="custom-control-input" v-model="fieldInput" v-on:input="changed()">
+                                <label class="custom-control-label" for="customToggle1"><span class="dimmed">No</span> /
+                                    <span class="text-success">Yes</span></label>
                             </div>
                         </div>
                         <div v-else-if="fieldType == 'richtext'">

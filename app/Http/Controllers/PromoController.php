@@ -13,10 +13,10 @@ class PromoController extends Controller
 
     public function view(Request $request, $id)
     {
-        $item = \App\Post::find($id);
+        $item = \App\Promo::find($id);
         $options = [
             'id' => $item->id,
-            'type' => 'content',
+            'type' => 'promo',
             'index_uri' => '/admin/promos'
         ];
 
