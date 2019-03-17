@@ -312,6 +312,25 @@
 </div>
 <!-- / Mobile Nav Modal -->
 
+<?php $promos = \App\Promo::where('status', '=', 'PUBLISHED')->inRandomOrder()->get();?>
+@if(count($promos) > 0)
+    <section class="section bg-dark-blue py-4 border-0">
+        <div class="container py-4">
+
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <h3 class="text-white">{{ $promos[0]->name }}</h3>
+                    @if($promos[0]->getJsonContent('[sections][heading][fields][description]') != null)<h5 class="text-light">{{ $promos[0]->getJsonContent('[sections][heading][fields][description]')  }}</h5>@endif
+                </div>
+                <div class="col-md-6 text-right">
+                    @if($promos[0]->getJsonContent('[sections][heading][fields][button]') != null)<a href class="btn btn-cta my-auto">{{ $promos[0]->getJsonContent('[sections][heading][fields][button]')  }}</a>@endif
+                </div>
+            </div>
+
+        </div>
+    </section>
+@endif
+
 <!-- Footer Section -->
 <footer  class="w-100" id="footer">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -330,7 +349,7 @@
                 @endif
             </div>
             </div>
-            @if(hasSubscriptionProductsForSale())
+            @if(hasSubscriptionProductsForSale() && count($promos) == 0)
                 <div class="justify-content-right text-right" id="navbarNav">
                     <div class="text-white">Get started today.
                         <a class="btn btn-primary btn-pill ml-2" href="/pricing">Sign Up <i
