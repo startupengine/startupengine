@@ -51,13 +51,18 @@ trait IsApiResource
             }
             return $results;
         } else {
+            if (modelToPath($modelType) == 'content') {
+                $publicId = $this->getHashId();
+            } else {
+                $publicId = $his->id;
+            }
             return [
                 'self' =>
                     url('/') .
                         '/api/resources/' .
                         modelToPath($modelType) .
                         '/' .
-                        $this->id,
+                        $publicId,
                 'related' =>
                     url('/') . '/api/resources/' . modelToPath($modelType)
             ];

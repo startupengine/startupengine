@@ -178,6 +178,12 @@
                                        title="Overview">view_quilt</i> <span>Overview</span>
                                 </a>
                             </li>
+                            <li class="nav-item {{ Request::is('admin/promo*') ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/promos">
+                                    <i class="fa fa-fw fa-tags" data-toggle="tooltip" data-placement="left"
+                                       title="Promos"></i> <span>Promos</span>
+                                </a>
+                            </li>
                             <li class="nav-item {{ Request::is('admin/users*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/users">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
@@ -247,7 +253,7 @@
                                        title="Documentation">book</i> <span>Documentation</span>
                                 </a>
                             </li>
-                            @if(ENV('APP_ENV') == 'local')
+                            @if(config('app.env') == 'local')
                                 <li class="nav-item">
                                     <a class="nav-link" href="/dev/telescope" target="_blank">
                                         <i class="material-icons" data-toggle="tooltip" data-placement="left"

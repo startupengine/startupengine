@@ -129,10 +129,11 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function schema()
     {
+        //dd(\Auth::user()->hasPermissionTo('edit posts'));
         $path = file_get_contents(storage_path() . '/schemas/post.json');
         $baseSchema = json_decode($path, true);
 
-        if ($this->postType() != null) {
+        if ($this->postType()->first() != null) {
             if (
                 $this->postType()->first() != null &&
                 isset($this->postType()->first()->json)
@@ -145,7 +146,12 @@ class Post extends Model implements \Altek\Accountant\Contracts\Recordable
                 $postTypeSchema = [];
             }
 
-            $merged = array_merge($postTypeSchema, $baseSchema);
+            $merged = array_merge($baseSchema, $postTypeSchema);
+
+            foreach ($baseSchema['sections'] as $section => $value) {
+                $merged['sections'][$section] =
+                    $baseSchema['sections'][$section];
+            }
 
             $merged = json_decode(json_encode($merged));
         } else {

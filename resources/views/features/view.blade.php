@@ -122,7 +122,7 @@
                                         @endif
                                         <h6 class="mt-3" @if($product->getJsonContent('[sections][about][fields][image]') != null) style="margin-top:80px !important;" @endif >{{ $product->name }}</h6>
                                         <p class="card-text">{{ $product->getJsonContent('[sections][about][fields][description]') }}</p>
-                                        <a href="/products/{{ $product->stripe_id }}" class="btn btn-primary">Read More <i class="fa fa-fw fa-arrow-right ml-2"></i></a>
+                                        <a href="/products/{{ $product->stripe_id }}" class="btn btn-primary btn-pill">Read More <i class="fa fa-fw fa-arrow-right text-warning ml-2"></i></a>
                                     </div>
                                 </div>
                             </div>

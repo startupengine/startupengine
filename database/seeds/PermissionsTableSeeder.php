@@ -332,6 +332,28 @@ class PermissionsTableSeeder extends Seeder
             'name' => 'delete permissions'
         ]);
 
+        //Promos
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse promos'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read promos'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit promos'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add promos'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete promos'
+        ]);
+
         ////////////////////////////////
         //Assign permissions to roles//
         //////////////////////////////
@@ -352,10 +374,19 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo('view backend');
         $role->givePermissionTo('view analytics');
 
-        //Executive
+        //Analyst
         $role = Role::where('name', '=', 'analyst')->first();
         $role->givePermissionTo('view backend');
         $role->givePermissionTo('view analytics');
+
+        //Marketer
+        $role = Role::where('name', '=', 'marketer')->first();
+        $role->givePermissionTo('view backend');
+        $role->givePermissionTo('browse promos');
+        $role->givePermissionTo('read promos');
+        $role->givePermissionTo('edit promos');
+        $role->givePermissionTo('add promos');
+        $role->givePermissionTo('delete promos');
 
         //Admin
         $role = Role::where('name', '=', 'admin')->first();
@@ -422,6 +453,12 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo('edit content types');
         $role->givePermissionTo('add content types');
         $role->givePermissionTo('delete content types');
+
+        $role->givePermissionTo('browse promos');
+        $role->givePermissionTo('read promos');
+        $role->givePermissionTo('edit promos');
+        $role->givePermissionTo('add promos');
+        $role->givePermissionTo('delete promos');
 
         //Editors
         $role = Role::where('name', '=', 'editor')->first();

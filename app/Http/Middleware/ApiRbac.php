@@ -15,6 +15,9 @@ class ApiRbac
      */
     public function handle($request, Closure $next)
     {
+        /* dd($request->headers);
+        $header = request()->header('Authorization');
+        dd($header); */
         if (request()->is('api/resources/*')) {
             $routeName = $request->route()->getName();
             if ($routeName == "BrowseApiResource") {
@@ -48,10 +51,10 @@ class ApiRbac
                 if (
                     isset($rules['requires_auth']) &&
                     $rules['requires_auth'] == true &&
-                    \Auth::user() == null
+                    request()->user() == null
                 ) {
                     throw new \Exception(
-                        'You do not have permission to perform this action.'
+                        'You must be logged in to perform this action.'
                     );
                 }
 

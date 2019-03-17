@@ -1,5 +1,5 @@
 
-<div id="contentForm" v-if="info != null && record != null && record.meta != null && record.meta.status == 'success'"
+<div id="contentForm" v-if="status != 'loading' && info != null && record != null && record.meta != null && record.meta.status == 'success'"
      style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
 
     <div class="row mb-2">
@@ -121,7 +121,7 @@
 
 
 
-                <div v-if="record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
+                <div v-if="status != 'loading' && record != null && record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
 
                     <div v-for="section,sectionName in record.data.schema.sections"
                          class="card p-0 mb-3 formSection">
@@ -194,7 +194,7 @@
             @endif
         </div>
         @if(!isset($options['show_metadata']) OR $options['show_metadata'] == true)
-        <div class="col-lg-3 col-md-12">
+        <div class="col-lg-3 col-md-12" v-if="record != null && status !== 'loading'">
             <!-- Post Overview -->
             <div class='card card-small mb-3 formSection' id="contentDetails">
                 @if (Schema::hasColumn($item->getTable(), 'status'))
@@ -331,7 +331,7 @@
 
 
     <!-- Edit Content Modal -->
-    <div class="modal fade" id="modal-edit-content" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal-edit-content" tabindex="-1" role="dialog" v-if="record != null && status !== 'loading'">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

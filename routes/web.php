@@ -136,6 +136,14 @@ Route::group(
             'adminPageView'
         );
 
+        // CTAs
+        Route::get('/admin/promos', 'PromoController@index')->name(
+            'adminCTAIndex'
+        );
+        Route::get('/admin/promos/{id}', 'PromoController@view')->name(
+            'adminCTAView'
+        );
+
         // Content
         Route::get('/admin/content', 'ContentController@index')->name(
             'adminContentIndex'

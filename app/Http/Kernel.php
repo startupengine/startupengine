@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
 
         'backend' => [\App\Http\Middleware\Backend::class],
 
-        'api' => ['throttle:200,1', 'bindings', 'auth', 'apirbac']
+        'api' => ['throttle:200,1', 'bindings', 'auth:api', 'apirbac']
     ];
 
     /**

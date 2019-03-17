@@ -207,12 +207,7 @@
                 'display_formats' => ['list'],
                 'per_page_options' => [10, 25, 100],
                 'sort_fields'=>['Date Updated' => 'updated_at','Date Created' => 'created_at', 'Name' => 'name'],
-                'created_fields' => ['24 hours' => '24 hours', 'week' => '7 days', 'month' => '30 days', 'year' => '365 days'],
-                'filters' => [
-                    'Type' => ['label' => 'type', 'options' =>
-                        ['Any' => '', 'Physical Goods' => 'json->sections->about->fields->type=Physical%20feature', 'Software Subscriptions' => 'json->sections->about->fields->type=Software%20Subscription', 'Content Subscriptions' => 'json->sections->about->fields->type=Software%20Subscription']
-                    ]
-                ]
+                'created_fields' => ['24 hours' => '24 hours', 'week' => '7 days', 'month' => '30 days', 'year' => '365 days']
             ]
         ?>
         {!! renderResourceFilterModal($options) !!}

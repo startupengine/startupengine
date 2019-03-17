@@ -71,7 +71,7 @@
     <?php $sectionCount = 1; ?>
     <main id="content" class="bg-white">
         <div class="container bg-white">
-            <div class="row px-3 mb-4">
+            <div class="row px-3 mb-5">
                 <div class="col-md-12 px-4">
                     <div class="card raised-1" style="margin-top:-60px; min-height:50px !important;">
                         <div class="card-body text-center bg-very-light-blue text-dark br-5 p-5">
@@ -81,17 +81,18 @@
                 </div>
             </div>
             @foreach($product->features()->get() as $feature)
-                <div class="row px-3 my-4">
+                <div class="row px-4">
                     <div class="col-md-12 px-4">
-                        <div class="card flat" style="min-height:50px !important;">
-                            <div class="card-body text-center bg-white text-dark br-5 p-5">
+                        <div class="px-3 flat" style="min-height:50px !important;">
+                            <div class="card-body text-center bg-white text-dark br-5 p-0 px-4">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h3 class="text-left"><span class="underlined text-capitalize bg-white">{{ $feature->name }}</span></h3>
+                                        <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" class="hiddenOnDesktop mt-4" style="max-width:100%;"/>
                                         <p class="card-text text-left py-4" style="font-size:150%;text-transform:unset !important;">{!! $feature->getJsonContent('[sections][heading][fields][description]') !!}</p>
-                                        <div align="left" class="mb-4"><a href="/features/{{ $feature->slug }}" class="btn btn-primary">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More @endif</a></div>
+                                        <div align="left" class="mb-4"><a href="/features/{{ $feature->slug }}" class="btn btn-primary btn-pill">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More <i class="ml-2 fa fa-fw fa-arrow-right text-warning "></i> @endif</a></div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 hiddenOnMobile">
                                         <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" style="max-width:100%;"/>
                                     </div>
                                 </div>
@@ -103,7 +104,7 @@
         </div>
         <?php $plans = $product->stripePlans()->data; ?>
         @if(count($plans) <= 1)
-            <div class="blog section bg-white p-4"  style="">
+            <div class="blog section bg-white pb-4 px-4"  style="">
                 <div class="container">
                     <h4 class="section-title text-center mb-5 mt-5 pt-0">Pricing</h4>
                     <div class="row px-0 pt-3 pb-5" >

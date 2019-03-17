@@ -98,7 +98,7 @@
         }
 
         .card {
-            min-height:150px !important;
+            min-height:250px !important;
         }
 
 

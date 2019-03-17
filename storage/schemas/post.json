@@ -56,23 +56,42 @@
     }
   },
   "sections": {
+    "meta": {
+      "slug": "meta",
+      "title": "meta",
+      "fields": {
+        "thumbnail": {
+          "type": "image",
+          "isThumbnail": true,
+          "validations": {
+            "url": true
+          }
+        },
+        "background": {
+          "type": "image",
+          "validations": {
+            "url": true
+          }
+        }
+      }
+    }
   },
   "permissions": {
 
     "add": {
       "requires_auth": true,
       "requires_permission":
-      ["add_posts"]
+      ["add posts"]
     },
     "edit": {
       "requires_auth": true,
       "requires_permission":
-      ["edit_posts"]
+      ["edit posts"]
     },
     "delete": {
       "requires_auth": true,
       "requires_permission":
-      ["delete_posts"]
+      ["delete posts"]
     }
   }
 }

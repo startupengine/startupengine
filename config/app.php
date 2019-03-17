@@ -252,5 +252,10 @@ return [
     'template_git_password' => env('TEMPLATE_GIT_PASSWORD', null),
     'template_git_branch' => env('TEMPLATE_GIT_BRANCH', 'master'),
     'github_username' => env('GITHUB_USERNAME', null),
-    'github_password' => env('GITHUB_PASSWORD', null)
+    'github_password' => env('GITHUB_PASSWORD', null),
+
+    'stripe_key' => env('STRIPE_KEY', null),
+    'stripe_secret' => env('STRIPE_SECRET', null),
+    'stripe_test_key' => env('STRIPE_TEST_KEY', null),
+    'stripe_test_secret' => env('STRIPE_TEST_SECRET', null)
 ];

@@ -383,6 +383,7 @@ function isResource($string)
         'preference',
         'preferenceschema',
         'product',
+        'promo',
         'role',
         'setting',
         'settingsgroup',
@@ -1024,17 +1025,17 @@ function makeMessage($item)
 
 function stripeKey($type = null)
 {
-    if (ENV('APP_ENV') != 'production') {
+    if (config('app.env') == 'production') {
         if ($type == 'secret') {
-            return ENV('STRIPE_TEST_SECRET');
+            return config('app.stripe_secret');
         } else {
-            return ENV('STRIPE_TEST_KEY');
+            return config('app.stripe_key');
         }
     } else {
         if ($type == 'secret') {
-            return ENV('STRIPE_SECRET');
+            return config('app.stripe_test_secret');
         } else {
-            return ENV('STRIPE_KEY');
+            return config('app.stripe_test_key');
         }
     }
 }

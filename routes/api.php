@@ -84,8 +84,8 @@ Route::group(['middleware' => ['cors', 'api']], function () {
         ->middleware('auth.default');
 
     // Demo Data
-    Route::get('/demo/menu', 'DemoController@menu')->middleware('auth.default');
-    Route::get('/demo/user', 'DemoController@user')->middleware('auth.default');
+    Route::get('/demo/menu', 'DemoController@menu')->middleware('auth');
+    Route::get('/demo/user', 'DemoController@user')->middleware('auth');
     Route::get(
         '/demo/user/{id}/activities',
         'DemoController@userActivities'
@@ -97,7 +97,7 @@ Route::group(['middleware' => ['cors', 'api']], function () {
         'auth.default'
     );
     Route::get(
-        '/demo/content//content/models',
+        '/demo/content/content/models',
         'DemoController@contentModels'
     )->middleware('auth.default');
     Route::get('/demo/products', 'DemoController@products')->middleware(
@@ -118,7 +118,7 @@ Route::group(['middleware' => ['cors', 'api']], function () {
     Route::get(
         '/demo/notifications',
         'DemoController@notifications'
-    )->middleware('auth.default');
+    )->middleware('auth');
 });
 
 /* OLD API ROUTES

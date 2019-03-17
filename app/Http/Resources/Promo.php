@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\URL;
 
-class Post extends JsonResource
+class Promo extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,13 +21,11 @@ class Post extends JsonResource
         $fields['included'] = $relations;
         $fields['id'] = $this->id;
         $fields['hashid'] = $this->getHashid();
-        $fields['href'] = URL::to('/') . '/content/' . $this->getHashid();
+        $fields['href'] = URL::to('/') . '/promo/' . $this->getHashid();
         $fields['status'] = $this->status;
         $fields['slug'] = $this->slug;
         $fields['tags'] = $this->tags;
-        $fields['views'] = count($this->views);
         $fields['thumbnail'] = $this->thumbnail();
-        $fields['excerpt'] = $this->excerpt();
         //dd($this->postType()->schema());
         if ($this->created_at != null) {
             $fields['created_at'] = $this->created_at->toDateTimeString();

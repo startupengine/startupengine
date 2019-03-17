@@ -1,9 +1,9 @@
 {
-  "namespace": "\\App\\Feature",
+  "namespace": "\\App\\CTA",
   "lang": {
     "en": {
-      "singular": "feature",
-      "plural": "features"
+      "singular": "promo",
+      "plural": "promos"
     }
   },
   "version": "0.1",
@@ -11,13 +11,13 @@
     "title_key": "id",
     "primary_key": "id",
     "id": {
-      "display name": "Feature ID",
+      "display name": "Promo ID",
       "read_only": true
     },
     "taggable": true,
     "readonly" : {
       "id":{
-        "label": "Page ID",
+        "label": "CTA ID",
         "column": "id"
       }
     }
@@ -56,9 +56,16 @@
       "slug": "heading",
       "title": "Heading",
       "fields": {
+        "headline": {
+          "type": "text",
+          "description": "A short, attention-grabbing one-liner.",
+          "validations": {
+            "required": true
+          }
+        },
         "description": {
           "type": "textarea",
-          "description": "This appears at the top of the page.",
+          "description": "More detailed information.",
           "validations": {
             "required": true
           }
@@ -67,7 +74,14 @@
           "type": "text",
           "description": "Text for the 'read more' button.",
           "validations": {
-            "required": true
+
+          }
+        },
+        "link": {
+          "type": "text",
+          "description": "URL the button links to.",
+          "validations": {
+            "url": true
           }
         },
         "thumbnail": {
@@ -79,13 +93,20 @@
         },
         "background": {
           "type": "image",
-          "isThumbnail": true,
+          "validations": {
+            "url": true
+          }
+        },
+        "video": {
+          "type": "text",
+          "description": "URL to a featured video.",
           "validations": {
             "url": true
           }
         },
         "body": {
           "type": "richtext",
+          "description": "This text is scene only if the user clicks through.",
           "isThumbnail": true,
           "validations": {
             "required": true
@@ -95,20 +116,25 @@
     }
   },
   "permissions": {
+    "browse": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add promos"]
+    },
     "add": {
       "requires_auth": true,
       "requires_permission":
-      ["add_features"]
+      ["add promos"]
     },
     "edit": {
       "requires_auth": true,
       "requires_permission":
-      ["edit_features"]
+      ["edit promos"]
     },
     "delete": {
       "requires_auth": true,
       "requires_permission":
-      ["delete_features"]
+      ["delete promos"]
     }
   }
 }

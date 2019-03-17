@@ -12,13 +12,32 @@ class RolesTableSeeder extends Seeder
 
     public function run()
     {
-        Role::create(['name' => 'admin', 'display_name' => 'Super Admin']);
-        Role::create(['name' => 'executive', 'display_name' => 'Executive']);
-        Role::create(['name' => 'staff', 'display_name' => 'Staff User']);
-        Role::create(['name' => 'writer', 'display_name' => 'Writer']);
-        Role::create(['name' => 'editor', 'display_name' => 'Editor']);
-        Role::create(['name' => 'developer', 'display_name' => 'Developer']);
-        Role::create(['name' => 'analyst', 'display_name' => 'Analyst']);
-        Role::create(['name' => 'user', 'display_name' => 'Regular User']);
+        Role::firstOrCreate([
+            'name' => 'admin',
+            'display_name' => 'Super Admin'
+        ]);
+        Role::firstOrCreate([
+            'name' => 'executive',
+            'display_name' => 'Executive'
+        ]);
+        Role::firstOrCreate([
+            'name' => 'staff',
+            'display_name' => 'Staff User'
+        ]);
+        Role::firstOrCreate(['name' => 'writer', 'display_name' => 'Writer']);
+        Role::firstOrCreate(['name' => 'editor', 'display_name' => 'Editor']);
+        Role::firstOrCreate([
+            'name' => 'developer',
+            'display_name' => 'Developer'
+        ]);
+        Role::firstOrCreate(['name' => 'analyst', 'display_name' => 'Analyst']);
+        Role::firstOrCreate([
+            'name' => 'user',
+            'display_name' => 'Regular User'
+        ]);
+        Role::firstOrCreate([
+            'name' => 'marketer',
+            'display_name' => 'Marketer'
+        ]);
     }
 }

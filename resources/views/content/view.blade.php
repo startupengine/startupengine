@@ -148,17 +148,21 @@
     </main>
 
     <!-- Related Content Section -->
-    <div class="blog section section-invert border-top pt-2 pb-3 " id="contentApp" v-if="info != null && info.meta != null && info.meta.total != null && info.meta.total > 0" style="border-color:rgba(0,0,150,0.1) !important;">
+    <div class="blog section border-top pt-2 pb-3 " id="contentApp" v-if="info != null && info.data != null && info.meta != null && info.meta.total != null" style="background:#eaefff !important;border-color:rgba(0,0,150,0.1) !important;">
         <h3 class="section-title text-center mt-5 ">Recommended For You</h3>
 
         <div class="container text-center">
             <div class="pt-5 mb-0">
 
-
                 <div class="row justify-content-center"  >
                     {!! renderResourceTableHtmlDynamically(['CARD_CLASS' => 'card text-left', 'CARD_HEADER_FIELD' => 'title', 'CARD_BODY_FIELD' => 'excerpt', 'CARD_CONTAINER_CLASS' => 'col-md-4 mb-4', 'WRAPPER_CLASS' => null, 'SHOW_TIMESTAMP' => false,  'SHOW_TAGS' => false,'SHOW_PAGINATION' => false, 'CARD_ROW_CLASS'=> 'px-0  justify-content-center', 'PATH' => '/content', 'PRIMARY_KEY' => 'item.hashid']) !!}
                 </div>
 
+                <div class="row px-3 mb-0 pb-0">
+                    <div class="col-md-12 px-4 pb-4 mb-0 pt-3" align="center">
+                        <a href="/content" class="btn btn-secondary raised">Explore Content<i class="fa fa-fw fa-arrow-right text-success ml-2"></i></a>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -199,5 +203,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', "FILTERS" => "{exclude: 'id!=$post->id'}", "SORT_BY" => 'views', "LIMIT" => 3]) !!}
+        {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', "FILTERS" => "{exclude: 'id!=$post->id'}", "SORT_BY" => 'views', "PER_PAGE" => 3]) !!}
 @endsection

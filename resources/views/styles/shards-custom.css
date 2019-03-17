@@ -264,7 +264,7 @@ li .dimmed {
 }
 
 #topNavbar.dark {
-  background: #2d2d2d !important;
+  background: #161923 !important;
 }
 
 #topNavbar.filled {
@@ -1081,6 +1081,11 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .underlined {
-  border-bottom: 2px rgba(69, 118, 255, 0.95) solid;
-  padding-bottom: 10px;
+  border-bottom: 2px rgba(69, 118, 255, 0.85) solid;
+  display:inline-block !important;
+  padding-bottom: 15px !important;
+}
+
+.btn-secondary {
+  background:#252938;
 }

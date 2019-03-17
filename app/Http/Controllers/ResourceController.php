@@ -93,29 +93,32 @@ class ResourceController extends Controller
             $model = new $name();
             $primaryKey = $model->getKeyName();
             $this->resourceName = "\\App\\Http\\Resources\\" . ucfirst($type);
-            $result = $name::where($primaryKey, '=', $id)->first();
-            $resource = collect([$result]);
-            $resource->transform(function ($item, $key) {
-                if (gettype($item->json) == 'string') {
-                    $item->json = json_decode($item->json);
-                }
-                if ($item->remote_data != null) {
-                    $item->remote_data = json_decode($item->remote_data);
-                }
+            $result = $name::where($primaryKey, '=', $id)->get();
+
+            foreach ($result as $key => $item) {
                 $class = $this->resourceName;
-                $item = new $class($item);
-                return $item;
-            });
+                $result[$key] = new $class($item);
+            }
 
-            $jsonResponse = json_decode(json_encode($resource));
+            $jsonResponse = json_decode(json_encode($result));
 
+            if (count($result) > 0) {
+                $links = $result[0]->links();
+            } else {
+                $links = null;
+            }
+            if (count($jsonResponse) > 0) {
+                $data = $jsonResponse[0];
+            } else {
+                $data = $jsonResponse;
+            }
             $response = [
                 'meta' => [
                     'status' => 'success'
                 ],
-                'links' => [$result->links()],
+                'links' => [$links],
                 'errors' => [],
-                'data' => $jsonResponse[0]
+                'data' => $data
             ];
 
             return response()->json($response);

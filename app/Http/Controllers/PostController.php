@@ -200,13 +200,18 @@ class PostController extends Controller
 
     public function getItem($hash, $slug = null)
     {
-        $id = 2;
+        $hashids = new Hashids();
+        $id = $hashids->decode($hash);
+        $id = $id[0];
         if (\Auth::user() && \Auth::user()->hasRole('admin')) {
             $item = Post::where('id', '=', $id)->first();
         } else {
             $item = Post::where('id', '=', $id)
                 ->where('status', '=', 'PUBLISHED')
                 ->first();
+        }
+        if ($item != null && ($slug == null or $slug != $item->slug)) {
+            return redirect('/content/' . $hash . '/' . $item->slug);
         }
 
         if ($item == null) {

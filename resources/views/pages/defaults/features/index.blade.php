@@ -29,7 +29,7 @@
         }
 
         .shards-landing-page--1 .welcome {
-            min-height: 210px !important;
+            min-height: 250px !important;
             height: auto !important;
         }
 
@@ -63,8 +63,8 @@
 @section('header')
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container">
-        <div class="row mt-5 pt-5">
-            <div class="col-md-12 px-4 mb-3 mt-4">
+        <div class="row mt-5 pt-0">
+            <div class="col-md-12 px-4 my-auto">
                 <h2 class="welcome-heading display-4 text-dark text-center ">Features</h2>
             </div>
         </div>
@@ -78,17 +78,18 @@
     @if(hasSubscriptionProductsForSale() && count(\App\Feature::all()) > 0)
         <div class="container">
         @foreach(\App\Feature::where('status', 'PUBLISHED')->get() as $feature)
-            <div class="row px-3 my-4">
-                <div class="col-md-12 px-4 pb-3 mb-3 mt-3">
-                    <div class="card mb-5 raised" style="min-height:50px !important;">
+            <div class="row inline-flex px-3 mb-0 pb-0">
+                <div class="col-md-12 px-4 pb-0 mb-0">
+                    <div class="mb-5 raised">
                         <div class="card-body text-center bg-white text-dark br-5 p-5">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h3 class="text-left"><span class="underlined pb-4 d-block text-capitalize bg-white">{{ $feature->name }}</span></h3>
+                                    <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" class="hiddenOnDesktop mt-3" style="max-width:100%;"/>
                                     <p class="card-text text-left py-4" style="font-size:150%;text-transform:unset !important;">{!! $feature->getJsonContent('[sections][heading][fields][description]') !!}</p>
-                                    <div align="left" class="mb-4"><a href="/features/{{ $feature->slug }}" class="btn btn-primary">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More @endif</a></div>
+                                    <div align="left" class="mb-4"><a href="/features/{{ $feature->slug }}" class="btn btn-primary btn-pill">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More <i class="ml-2 fa fa-fw fa-arrow-right text-warning "></i> @endif</a></div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-block hiddenOnMobile">
                                     <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" style="max-width:100%;"/>
                                 </div>
                             </div>
