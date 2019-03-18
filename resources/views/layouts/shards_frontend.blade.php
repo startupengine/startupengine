@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/styles/shards-extras.min.css">
     <link rel="stylesheet" href="/styles/shards-custom.css">
     <link rel="stylesheet" href="https://unpkg.com/vue-snotify@3.2.1/styles/material.css">
+    <link rel="stylesheet" href="/css/plyr.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <style>
@@ -93,6 +94,10 @@
 
         #footer .bg-dark .list-group-item a {
             color:#fff !important;
+        }
+
+        .plyr--video {
+            border-radius:5px !important;
         }
     </style>
 @yield('css')
@@ -439,6 +444,11 @@
 <script src="/js/axios-min.js"></script>
 <script src="/js/polyfill-min.js"></script>
 <script src="/js/bootstrap-vue.js"></script>
+<?php /* <script src="/js/plyr/plyr.js"></script> */ ?>
+<script src="https://cdn.plyr.io/3.5.2/plyr.polyfilled.js"></script>
+<script>
+    const player = new Plyr('#player');
+</script>
 {!! renderPassportApp() !!}
 <script>
     $(function () {

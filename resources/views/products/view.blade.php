@@ -74,7 +74,7 @@
             <div class="row px-3 mb-5">
                 <div class="col-md-12 px-4">
                     <div class="card raised-1" style="margin-top:-60px; min-height:50px !important;">
-                        <div class="card-body text-center bg-very-light-blue text-dark br-5 p-5">
+                        <div class="card-body text-center bg-white raised-1 text-dark br-5 p-5">
                             {!! $product->getJsonContent('[sections][about][fields][richtext_description]') !!}
                         </div>
                     </div>

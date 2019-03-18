@@ -1634,3 +1634,37 @@ function getSubscriptionProducts()
 
     return $products;
 }
+
+function getVideoHost($url)
+{
+    if (strpos($url, 'youtube') !== false) {
+        return "youtube";
+    } elseif (strpos($url, 'vimeo') !== false) {
+        return "vimeo";
+    } else {
+        return null;
+    }
+}
+
+function getVideoId($url)
+{
+    if (strpos($url, 'youtube') !== false) {
+        parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
+        return $my_array_of_vars['v'];
+    } elseif (strpos($url, 'vimeo') !== false) {
+        $v = (int) substr(parse_url($url, PHP_URL_PATH), 1);
+        return $v;
+    }
+}
+
+function getVideoQueryString($url)
+{
+    $appUrl = URL::to('/');
+    if (strpos($url, 'youtube') !== false) {
+        return "?origin=$appUrl&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1";
+    } elseif (strpos($url, 'vimeo') !== false) {
+        return "?loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media";
+    } else {
+        return null;
+    }
+}

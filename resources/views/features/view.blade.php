@@ -79,7 +79,7 @@
                                 <div class="col-md-4 text-left">
                                     <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" style="max-width:100%;max-height:250px;"/>
                                 </div>
-                                <div class="col-md-8 pt-5 pt-lg-0 pt-md-0 text-left">
+                                <div class="col-md-8 pt-lg-0 pt-md-0 text-left m-auto pt-0 pt-xs-4 pt-lg-0 pt-md-0 pb-0 pb-lg-5">
                                     {!! $feature->getJsonContent('[sections][heading][fields][description]') !!}
                                 </div>
                             </div>
