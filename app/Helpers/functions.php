@@ -713,6 +713,8 @@ function renderResourceTableScripts($options)
 
 function renderResourceTableScriptsDynamically($options = null)
 {
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+
     if (!isset($options)) {
         $options = [];
     }
@@ -876,6 +878,7 @@ function renderResourceFilterModal($options = null)
 
 function renderResourceEditorForm($options = null, $item)
 {
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
     $view = View::make('admin.components.resource_editor_form', [
         'options' => $options,
         'item' => $item
