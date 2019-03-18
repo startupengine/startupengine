@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Role;
+use Illuminate\Support\Facades\Artisan;
 
 class Backend
 {
@@ -43,6 +44,7 @@ class Backend
             //And they have been assigned a staff role
             if ($user->hasPermissionTo('view backend')) {
                 //continue...
+                Artisan::call('view:clear');
                 return $next($request);
             }
             //Otherwise...

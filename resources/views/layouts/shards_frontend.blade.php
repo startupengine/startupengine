@@ -313,20 +313,25 @@
 <!-- / Mobile Nav Modal -->
 
 <?php $promos = \App\Promo::where('status', '=', 'PUBLISHED')->inRandomOrder()->get();?>
-@if(count($promos) > 0)
-    <section class="section bg-dark-blue py-4 border-0">
-        <div class="container py-4">
+@if(count($promos) > 0 &&  !Request::is('promo*') )
+    <section class="section section-promo bg-dark-blue border-0" style=" @if($promos[0]->getJsonContent('[sections][heading][fields][background]') != null) background-image: url({{ $promos[0]->getJsonContent('[sections][heading][fields][background]') }}) !important; @else background-image: url(https://images.unsplash.com/photo-1552688455-b6faba3c8631?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=95) !important; @endif background-size:cover !important; background-position:center !important;" >
+        <div class="bg-filter py-4 ">
+            <div class="container py-4">
 
-            <div class="row">
-                <div class="col-md-6 text-left">
-                    <h3 class="text-white">{{ $promos[0]->name }}</h3>
-                    @if($promos[0]->getJsonContent('[sections][heading][fields][description]') != null)<h5 class="text-light">{{ $promos[0]->getJsonContent('[sections][heading][fields][description]')  }}</h5>@endif
+                <div class="row">
+                    <div class="col-md-6 m-auto text-lg-left text-center">
+                        <h3 class="text-white my-3 font-weight-800">{{ $promos[0]->getJsonContent('[sections][heading][fields][headline]')  }}</h3>
+                        @if($promos[0]->getJsonContent('[sections][heading][fields][description]') != null)<h5 class="text-white my-4">{{ $promos[0]->getJsonContent('[sections][heading][fields][description]')  }}</h5>@endif
+                    </div>
+                    <div class="col-md-6 m-auto text-center text-lg-right ">
+                        <div class="btn-group my-5">
+                            @if($promos[0]->getJsonContent('[sections][heading][fields][body]') != null)<a href="/promo/{{ $promos[0]->getHashId() }}" class="btn btn-white btn-lg my-auto raised-1 mr-3" style="border-radius:5px !important;">Learn More</a>@endif
+                            @if($promos[0]->getJsonContent('[sections][heading][fields][button]') != null)<a @if($promos[0]->getJsonContent('[sections][heading][fields][link]') != null)href="{{ $promos[0]->getJsonContent('[sections][heading][fields][link]') }}?promo={{ $promos[0]->getHashId() }}" @else href="/pricing?promo={{ $promos[0]->getHashId() }}" @endif class="btn btn-cta btn-lg my-auto raised-1" style="border-radius:5px !important;">{{ $promos[0]->getJsonContent('[sections][heading][fields][button]')  }}</a>@endif
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 text-right">
-                    @if($promos[0]->getJsonContent('[sections][heading][fields][button]') != null)<a href class="btn btn-cta my-auto">{{ $promos[0]->getJsonContent('[sections][heading][fields][button]')  }}</a>@endif
-                </div>
+
             </div>
-
         </div>
     </section>
 @endif
@@ -394,6 +399,7 @@
                     @foreach(docsFolders() as $docFolder)
                         <li class="list-group-item text-capitalize text-white"><a href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a></li>
                     @endforeach
+                    <li class="list-group-item text-capitalize text-white"><a href="/docs/">View All Docs</a></li>
                 </ul>
             </div>
             <div class="col-md-3 p-0 mb-3">

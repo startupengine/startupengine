@@ -774,6 +774,21 @@ tr:hover .dimmed {
 .shards-landing-page--1 .welcome:before {
   background: #001165 !important;
 }
+.shards-landing-page--1 .section-promo {
+  z-index:0 !important;
+}
+.shards-landing-page--1 .section-promo .bg-filter {
+  content: "";
+  position: inherit;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  z-index: 1;
+  background:rgba(0, 26, 101, 0.76) !important;
+}
 
 .nav-item.active {
   background: rgba(255, 255, 255, 0.1);
@@ -1088,4 +1103,33 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 
 .btn-secondary {
   background:#252938;
+}
+
+
+.font-weight-100 {
+  font-weight:100 !important;
+}
+.font-weight-200 {
+  font-weight:200 !important;
+}
+.font-weight-300 {
+  font-weight:300 !important;
+}
+.font-weight-400 {
+  font-weight:400 !important;
+}
+.font-weight-500 {
+  font-weight:500 !important;
+}
+.font-weight-600 {
+  font-weight:600 !important;
+}
+.font-weight-700 {
+  font-weight:700 !important;
+}
+.font-weight-800 {
+  font-weight:800 !important;
+}
+.font-weight-900 {
+  font-weight:900 !important;
 }

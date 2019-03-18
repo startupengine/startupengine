@@ -1,5 +1,5 @@
 <div id="contentForm"
-     v-if="status != 'loading' && record.data != null"
+     v-if="status != 'loading' && record != null"
      style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
 
     <div class="row mb-2">

@@ -82,6 +82,9 @@ Route::group(['middleware' => ['web']], function () {
         )->name('contentByTagAndType');
     });
 
+    //Promos
+    Route::get('/promo/{hash}', 'PromoController@getItem')->name('promoByHash');
+
     Route::group(['middleware' => ['webrbac']], function () {
         //Pages
         Route::get('/', 'PageController@getHomepage')->name('homepage');

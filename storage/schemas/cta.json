@@ -109,7 +109,7 @@
           "description": "This text is scene only if the user clicks through.",
           "isThumbnail": true,
           "validations": {
-            "required": true
+
           }
         }
       }
