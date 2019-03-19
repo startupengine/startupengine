@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HttpsProtocol::class,
+            \App\Http\Middleware\PromoCode::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class
         ],
 
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
             \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'cors' => \App\Http\Middleware\Cors::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'promo-code' => \App\Http\Middleware\PromoCode::class
     ];
 }

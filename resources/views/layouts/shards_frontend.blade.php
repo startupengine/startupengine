@@ -331,7 +331,7 @@
                     <div class="col-md-6 m-auto text-center text-lg-right ">
                         <div class="btn-group my-5">
                             @if($promos[0]->getJsonContent('[sections][heading][fields][body]') != null)<a href="/promo/{{ $promos[0]->getHashId() }}" class="btn btn-white btn-lg my-auto raised-1 mr-3" style="border-radius:5px !important;">Learn More</a>@endif
-                            @if($promos[0]->getJsonContent('[sections][heading][fields][button]') != null)<a @if($promos[0]->getJsonContent('[sections][heading][fields][link]') != null)href="{{ $promos[0]->getJsonContent('[sections][heading][fields][link]') }}?promo={{ $promos[0]->getHashId() }}" @else href="/pricing?promo={{ $promos[0]->getHashId() }}" @endif class="btn btn-cta btn-lg my-auto raised-1" style="border-radius:5px !important;">{{ $promos[0]->getJsonContent('[sections][heading][fields][button]')  }}</a>@endif
+                            @if($promos[0]->getJsonContent('[sections][heading][fields][button]') != null)<a @if($promos[0]->getJsonContent('[sections][heading][fields][link]') != null)href="/promo/{{ $promos[0]->getHashId() }}/outbound" @else href="/pricing?promo={{ $promos[0]->getHashId() }}" @endif class="btn btn-cta btn-lg my-auto raised-1" style="border-radius:5px !important;">{{ $promos[0]->getJsonContent('[sections][heading][fields][button]')  }}</a>@endif
                         </div>
                     </div>
                 </div>

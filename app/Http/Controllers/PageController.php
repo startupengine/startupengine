@@ -85,6 +85,8 @@ class PageController
             ->where('status', '=', 'ACTIVE')
             ->first();
         if ($page == null) {
+            $page = new \App\Page();
+            $page->addAnalyticEvent('page viewed');
             if ($slug == 'features') {
                 if (
                     hasSubscriptionProductsForSale() &&
@@ -96,7 +98,6 @@ class PageController
                 }
             }
             if (view()->exists('pages.defaults.' . $slug . '.index')) {
-                $page = new \App\Page();
                 if ($slug == 'pricing') {
                     if (hasSubscriptionProductsForSale() == false) {
                         abort(404);
@@ -111,34 +112,7 @@ class PageController
             abort(404);
         }
         $page->content = $page->content();
-        $event = new AnalyticEvent();
-        $event->event_type = 'page viewed';
-        if (\Auth::user()) {
-            $event->user_id = \Auth::user()->id;
-            $event->user_email = \Auth::user()->email;
-            $event->user_name = \Auth::user()->name;
-        }
-
-        if (
-            $page->content() !== null &&
-            $page->content()->meta &&
-            $page->content()->meta->slug !== null
-        ) {
-            $array = [
-                "id" => "$page->id",
-                "model" => "page",
-                "slug" => $page->slug,
-                "variation" => $page->content()->meta->slug
-            ];
-            $event->event_data = json_encode($array);
-        } else {
-            $array = [
-                "id" => "$page->id",
-                "model" => "page",
-                "slug" => $page->slug
-            ];
-        }
-        $event->save();
+        $page->addAnalyticEvent('page viewed');
         return view('pages.view')->with('page', $page);
     }
 

@@ -84,6 +84,10 @@ Route::group(['middleware' => ['web']], function () {
 
     //Promos
     Route::get('/promo/{hash}', 'PromoController@getItem')->name('promoByHash');
+    Route::get(
+        '/promo/{hash}/outbound',
+        'RedirectController@redirectFromPromo'
+    )->name('redirectFromPromo');
 
     Route::group(['middleware' => ['webrbac']], function () {
         //Pages
