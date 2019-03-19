@@ -29,7 +29,7 @@ class FeatureController extends Controller
     public function viewFeaturePage($slug)
     {
         $feature = \App\Feature::where('slug', $slug)->firstOrFail();
-
+        $feature->addAnalyticEvent('feature viewed');
         return view('features.view')->with('feature', $feature);
     }
 }

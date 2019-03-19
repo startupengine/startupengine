@@ -31,6 +31,7 @@ class ProductController extends Controller
             ->where('stripe_id', '=', $id)
             ->firstOrFail();
 
+        $product->addAnalyticEvent('product viewed');
         return view('products.view')->with('product', $product);
     }
 

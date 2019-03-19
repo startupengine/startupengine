@@ -90,7 +90,10 @@
                 quillOptions: {
                     modules: {
                     }
-                }
+                },
+                transformationStatus: null,
+                transformationResult: null,
+                transformationError: null
             },
 
             methods: {
@@ -100,6 +103,128 @@
                 editJson(fieldInput){
                     this.fieldInput = JSON.parse(fieldInput);
                 },
+
+
+
+
+
+
+
+
+
+
+
+
+
+                transform(transformation, action, confirm) {
+                    console.log('test');
+                    id = contentId;
+                    console.log('Recieved:');
+                    console.log([id, transformation, action, confirm]);
+                    this.transformationResult = null;
+                    this.transformationError = null;
+                    if (transformation.options != null && confirm != true) {
+                        console.log('test1');
+                        this.transformationStatus = null;
+                        if (typeof confirmAction === "function") {
+                            confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
+                        }
+                    }
+                    else if(transformation.require_confirmation != null && confirm != true) {
+                        console.log('test2');
+                        this.transformationStatus = null;
+                        if (typeof confirmAction === "function") {
+                            confirmAction({appName: '{{ $options['VUE_APP_NAME'] }}', id: id, message: transformation.confirmation_message, transformation: transformation});
+                        }
+                    }
+                    else {
+                        if (action == null) {
+                            var actionString = '&action=true';
+                        }
+                        else {
+                            var actionString = '&action=' + action;
+                        }
+                        this.transformationStatus = 'loading';
+                        url = '/api/resources/{{ $options['type'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString @if( isset($options['FORCE_URL_ARGUMENTS']) ) + '&{{ $options['FORCE_URL_ARGUMENTS'] }}'@endif;
+                        console.log(url);
+                        axios
+                            .post(url)
+                            .catch(function (error) {
+                                {{ $options['VUE_APP_NAME'] }}.updateTransformationError(error);
+                                if (error.response) {
+                                    console.log(error.response.data);
+                                    console.log(error.response.status);
+                                    console.log(error.response.headers);
+                                }
+                            })
+                            .then(response => (this.updateTransformationResult(response)));
+
+                    }
+                },
+                updateTransformationError(error){
+                    console.log('Error:');
+                    console.log(error);
+                    if(notificationsApp != null){
+                        notificationsApp.errorNotification('Something went wrong.');
+                    }
+                    if(confirmActionApp != null){
+                        confirmActionApp.dismissActionModal();
+                    }
+                    this.transformationError = error;
+                },
+                sendErrorNotification(error){
+                    console.log('Error:');
+                    console.log(error);
+                    if(typeof notificationsApp != 'undefined'){
+                        notificationsApp.errorNotification('Something went wrong.');
+                    }
+                    this.transformationError = error;
+                },
+                updateTransformationResult(response){
+                    this.transformationResult = response;
+                    if(this.transformationResult.data.hasOwnProperty('errors') && this.transformationResult.data.errors.hasOwnProperty('status')){
+                        if(confirmActionApp != null){
+                            confirmActionApp.dismissActionModal();
+                        }
+                        if(notificationsApp != null){
+                            if(this.transformationResult.data.errors.message != null) {
+                                notificationsApp.errorNotification(this.transformationResult.data.errors.message);
+                            }
+                            else {
+                                notificationsApp.errorNotification('Something went wrong.');
+                            }
+                        }
+                    }
+                    this.transformationStatus = 'loaded';
+                    this.updateData();
+                    return response;
+                },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 addResourceItem(fieldSchema){
 
                     this.displayAddItemForm = true;

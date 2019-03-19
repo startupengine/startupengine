@@ -105,13 +105,13 @@
                     <div class="mb-5 raised">
                         <div class="card-body text-center bg-white text-dark br-5 p-5">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h3 class="text-left"><span class="underlined pb-4 d-block text-capitalize bg-white">{{ $feature->name }}</span></h3>
+                                <div class="col-md-6 m-auto">
+                                    <h5 class="text-left"><span class="underlined pb-4 d-block text-capitalize bg-white">{{ $feature->name }}</span></h5>
                                     <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" class="hiddenOnDesktop mt-3" style="max-width:100%;"/>
                                     <p class="card-text text-left py-4" style="font-size:150%;text-transform:unset !important;">{!! $feature->getJsonContent('[sections][heading][fields][description]') !!}</p>
                                     <div align="left" class="mb-4"><a href="/features/{{ $feature->slug }}" class="btn btn-primary btn-pill">@if($feature->getJsonContent('[sections][heading][fields][button]') != null){!! $feature->getJsonContent('[sections][heading][fields][button]') !!}@else Read More <i class="ml-2 fa fa-fw fa-arrow-right text-warning "></i>@endif</a></div>
                                 </div>
-                                <div class="col-md-6 d-block hiddenOnMobile">
+                                <div class="col-md-6 d-block hiddenOnMobile m-auto">
                                     <img src="{!! $feature->getJsonContent('[sections][heading][fields][thumbnail]') !!}" style="max-width:100%;"/>
                                 </div>
                             </div>

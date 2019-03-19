@@ -234,6 +234,7 @@ class PostController extends Controller
             }
             */
         $postType = $item->postType->slug;
+        $item->addAnalyticEvent('content viewed');
         return view('content.view')
             ->with('post', $item)
             ->with('postType', $postType)

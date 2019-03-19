@@ -138,8 +138,47 @@ class Feature extends Model
         return $views;
     }
 
+    public function assignToProduct($input)
+    {
+        if ($input == 'schema') {
+            $options = [];
+            $options = \App\Product::all();
+            $schema = [
+                'label' => 'Assign To Product',
+                'slug' => 'Assign',
+                'description' => 'You may assign this feature to a product.',
+                'instruction' => 'Select a product.',
+                'confirmation_message' => null,
+                'options' => $options,
+                'success_message' => "Subscription successfully created.",
+                'requirements' => [
+                    'permissions_any' => [
+                        'change own subscription',
+                        'change others subscription'
+                    ]
+                ]
+            ];
+            return $schema;
+        } else {
+            return null;
+        }
+    }
+
     public function transformations()
     {
-        return null;
+        $allowed = [];
+        if (
+            \Auth::user() != null &&
+            \Auth::user()->hasPermissionTo('edit products') &&
+            \Auth::user()->hasPermissionTo('edit features')
+        ) {
+            $allowed[] = 'assignToProduct';
+        }
+
+        $results = [];
+        foreach ($allowed as $function) {
+            $results[$function] = $this->$function('schema');
+        }
+        return $results;
     }
 }

@@ -37,8 +37,13 @@ class SubscriptionController extends Controller
     {
         \Stripe\Stripe::setApiKey(getStripeKeys()["secret"]);
 
-        $product = \App\Product::where('stripe_id', '=', $product)->first();
-        $plan = \App\Plan::where('stripe_id', '=', $plan)->first();
+        $product = \App\Product::where(
+            'stripe_id',
+            '=',
+            $product
+        )->firstOrFail();
+        $plan = \App\Plan::where('stripe_id', '=', $plan)->firstOrFail();
+        $plan->addAnalyticEvent('plan viewed');
 
         if ($product != null && $plan != null) {
             return view('pages.defaults.subscribe.index')

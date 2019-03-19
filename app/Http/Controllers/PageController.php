@@ -54,41 +54,10 @@ class PageController
                 ->where('status', '=', 'ACTIVE')
                 ->first();
         }
-        $event = new AnalyticEvent();
-        if ($page !== null) {
-            $page->content = $page->content();
-            $event->event_type = 'page viewed';
-        } else {
-            $event->event_type = 'page view failed';
-        }
-
-        if (\Auth::user()) {
-            $event->user_id = \Auth::user()->id;
-            $event->user_email = \Auth::user()->email;
-            $event->user_name = \Auth::user()->name;
-        }
-        if ($page !== null && $page->content()->meta->slug !== null) {
-            $array = [
-                "id" => "$page->id",
-                "model" => "page",
-                "slug" => $page->slug,
-                "variation" => $page->content()->meta->slug
-            ];
-            $event->event_data = json_encode($array);
-        } else {
-            if ($page !== null) {
-                $array = [
-                    "id" => "$page->id",
-                    "model" => "page",
-                    "slug" => $page->slug
-                ];
-                $event->event_data = json_encode($array);
-            }
-        }
-        $event->save();
 
         if ($page == null && hasLandingPage() == true) {
             $page = new \App\Page();
+            $page->addAnalyticEvent('page viewed');
             $page->json =
                 '{"sections":{"heading":{"fields":{"headline":"Run an automated startup from your laptop."}}}}';
 
@@ -98,6 +67,7 @@ class PageController
         if ($page == null) {
             return redirect('/login');
         } else {
+            $page->addAnalyticEvent('page viewed');
             return view('pages.view')->with('page', $page);
         }
     }

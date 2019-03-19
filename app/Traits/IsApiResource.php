@@ -134,6 +134,46 @@ trait IsApiResource
         }
     }
 
+    public function transformations($input = null)
+    {
+        return null;
+    }
+
+    public function addAnalyticEvent($type = 'viewed', $json = null)
+    {
+        $event = new \App\AnalyticEvent();
+        if (\Auth::user() != null) {
+            $event->user_email = \Auth::user()->email;
+            $event->user_id = \Auth::user()->id;
+            $event->user_name = \Auth::user()->name;
+        }
+        if ($json != null) {
+            if (gettype($json) == 'string') {
+                $json = json_decode($json);
+            }
+            $event->event_data = $json;
+        }
+        $agent = request()->header('User-Agent');
+        $session = \Session::getId();
+        $primaryKey = $this->primaryKey;
+        $event->user_agent = $agent;
+        $event->fingerprint = request()->fingerprint();
+        $event->script_name = __FILE__;
+        $event->model_class = get_class($this);
+        $event->full_url = request()->fullUrl();
+        $event->request_uri = request()->getUri();
+        $event->decoded_path = request()->decodedPath();
+        $event->base_path = request()->getBasePath();
+        $event->scheme = request()->getScheme();
+        $event->scheme_and_host = request()->getSchemeAndHttpHost();
+        $event->session_id = $session;
+        $event->model_id = $this->$primaryKey;
+        $event->event_type = $type;
+        $event->client_ip = request()->ip();
+        $event->client_locale = request()->getLocale();
+        $event->save();
+    }
+
     public function thumbnailField($fullString = false)
     {
         if ($this->schema() != null && isset($this->schema()->sections)) {

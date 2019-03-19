@@ -71,7 +71,7 @@
             <div class="row px-3 mb-2">
                 <div class="col-md-12 px-4">
                     <div class="card raised-1" style="margin-top:-60px; min-height:50px !important;">
-                        <div class="card-body text-center bg-white raised-1 text-dark br-5 p-5" style="font-size:150%;">
+                        <div class="card-body text-center bg-white raised-1 text-dark br-5 px-5 pt-5 pb-0" style="font-size:150%;">
                             <div class="row">
                                 @if($promo->getJsonContent('[sections][heading][fields][thumbnail]') != null && $promo->getJsonContent('[sections][heading][fields][video]') == null)
                                     <div class="col-md-4 text-left">
@@ -117,7 +117,7 @@
                 <div class="row px-3 mt-0 pb-0">
                     <div class="col-md-12 px-4 pb-2">
                         <div class="card flat " style="display:contents;min-height:50px !important;">
-                            <div class="card-body text-left bg-white text-dark br-5 pt-0 px-5 pb-5" style="font-size:115%;">
+                            <div class="card-body text-left bg-white text-dark br-5 pt-0 p-5" style="font-size:115%;">
                                 {!! $promo->getJsonContent('[sections][heading][fields][body]') !!}
                             </div>
                         </div>

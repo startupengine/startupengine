@@ -42,6 +42,8 @@ class PromoController extends Controller
             'index_uri' => '/admin/promos'
         ];
 
+        $item->addAnalyticEvent('promo viewed');
+
         return view('promos.view')->with('promo', $item);
     }
 }

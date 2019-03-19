@@ -332,6 +332,50 @@ class PermissionsTableSeeder extends Seeder
             'name' => 'delete permissions'
         ]);
 
+        //Products
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse products'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read products'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit products'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add products'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete products'
+        ]);
+
+        //Features
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'browse features'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'read features'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'edit features'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'add features'
+        ]);
+        Permission::firstOrCreate([
+            'guard_name' => 'web',
+            'name' => 'delete features'
+        ]);
+
         //Promos
         Permission::firstOrCreate([
             'guard_name' => 'web',
@@ -453,6 +497,18 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo('edit content types');
         $role->givePermissionTo('add content types');
         $role->givePermissionTo('delete content types');
+
+        $role->givePermissionTo('browse products');
+        $role->givePermissionTo('read products');
+        $role->givePermissionTo('edit products');
+        $role->givePermissionTo('add products');
+        $role->givePermissionTo('delete products');
+
+        $role->givePermissionTo('browse features');
+        $role->givePermissionTo('read features');
+        $role->givePermissionTo('edit features');
+        $role->givePermissionTo('add features');
+        $role->givePermissionTo('delete features');
 
         $role->givePermissionTo('browse promos');
         $role->givePermissionTo('read promos');

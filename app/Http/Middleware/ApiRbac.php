@@ -30,6 +30,8 @@ class ApiRbac
                 $action = "edit";
             } elseif ($routeName == "DeleteApiResource") {
                 $action = "delete";
+            } elseif ($routeName == "AddApiResourceTransformation") {
+                $action = "transform";
             }
 
             $type = request()->route('type');

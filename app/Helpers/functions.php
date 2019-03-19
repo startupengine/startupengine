@@ -890,10 +890,19 @@ function renderResourceEditorForm($options = null, $item)
 
 function renderResourceEditorScripts($options = null)
 {
+    if (!isset($options['VUE_APP_NAME'])) {
+        $options['VUE_APP_NAME'] = 'contentEditor';
+    }
+    if (!isset($options['FORCE_URL_ARGUMENTS'])) {
+        $options['FORCE_URL_ARGUMENTS'] = null;
+    }
+
     $view = View::make('admin.components.resource_editor_scripts', [
         'options' => $options
     ]);
+
     $contents = (string) $view;
+
     return $contents;
 }
 

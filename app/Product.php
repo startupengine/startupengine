@@ -118,8 +118,8 @@ class Product extends Model implements \Altek\Accountant\Contracts\Recordable
                 }
             }
             $schema = [
-                'label' => 'Add Subscription',
-                'slug' => 'Subscribe',
+                'label' => 'Subscribe',
+                'slug' => 'subscribe',
                 'description' => 'You may subscribe to this product.',
                 'instruction' => 'Select a plan.',
                 'confirmation_message' => null,

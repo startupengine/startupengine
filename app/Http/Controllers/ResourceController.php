@@ -29,6 +29,7 @@ class ResourceController extends Controller
             $total = $count;
 
             $resource->transform(function ($item) {
+                $item->addAnalyticEvent('browsed via api');
                 if (gettype($item->json) == 'string') {
                     $item->json = json_decode($item->json);
                 }
@@ -96,6 +97,7 @@ class ResourceController extends Controller
             $result = $name::where($primaryKey, '=', $id)->get();
 
             foreach ($result as $key => $item) {
+                $item->addAnalyticEvent('read via api');
                 $class = $this->resourceName;
                 $result[$key] = new $class($item);
             }
@@ -338,6 +340,7 @@ class ResourceController extends Controller
                         }
                     }
                     $item->save();
+                    $item->addAnalyticEvent('edited via api');
 
                     $response["message"] = "Input saved.";
                 }
@@ -546,6 +549,7 @@ class ResourceController extends Controller
                     }
 
                     $item->save();
+                    $item->addAnalyticEvent('added via api');
                     $item->schema = $item->schema();
 
                     $response["message"] = "Input saved.";
@@ -577,6 +581,7 @@ class ResourceController extends Controller
                 $item = $name::where('id', '=', $id)->first();
             }
         }
+        $item->addAnalyticEvent('deleted via api');
         $item->delete();
         $response["status"] = "success";
         $response["message"] = "Item deleted.";

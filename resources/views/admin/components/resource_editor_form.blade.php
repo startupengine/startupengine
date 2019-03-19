@@ -296,6 +296,19 @@
                         </div>
                     </div>
                 @endif
+
+                @if($item->transformations() != null)
+                    <div class='card card-small mb-3 formSection' id="transformationsCard">
+                        <div class="card-header border-bottom" style="margin-bottom:15px !important;">
+                            <h6 class="m-0"><i class="fa fa-fw fa-bolt"></i> &nbsp;Actions</h6>
+                        </div>
+                        <div class='card-body pt-0 px-3 pb-3'>
+                            @foreach($item->transformations() as $transformation)
+                                <div class="btn btn-secondary btn-block" onclick="contentEditor.transform('{{ $transformation['slug'] }}')">{{ $transformation['label'] }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
             </div>
         @endif
     </div>
