@@ -1,10 +1,12 @@
 # Installation
 
+Download or clone the Startup Enginie repository from [https://github.com/startupengine/startupengine](https://github.com/startupengine/startupengine), then follow one of the two sets of instructionis below. 
+
 ## Standard Installation
 
-See Laravel's [official installation guide](https://laravel.com/docs/5.6/installation) to get started with running Laravel apps locally.
+If you're unfamiliar with running Laravel apps locally, see Laravel's [official installation guide](https://laravel.com/docs/5.6/installation) to get started.
 
-Once you're familiar with Laravel, set up a a [PostgreSQL](https://www.postgresql.org/) database and run:
+Once you're familiar with Laravel, set up a [PostgreSQL](https://www.postgresql.org/) database and run:
 
 `composer install`
 
@@ -18,7 +20,9 @@ The default user email is **admin@example.com** and the default password is **pa
 
 ## Containerized Installation
 
-Startup Engine ships with a complete Docker-powered development environment. To develop via Docker, run the following command inside the `/laradock` directory:
+Startup Engine ships with a complete Docker-powered development environment. 
+
+To develop via Docker, run the following command inside the `/laradock` directory:
 
 `docker-compose up -d nginx postgres php-worker laravel-horizon redis workspace`
 
