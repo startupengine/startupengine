@@ -64,7 +64,7 @@ class Doc extends Model
         if (request()->input('s') != null) {
             $search = request()->input('s');
             $markdown = Markdown::convertToHtml($this->content);
-            $markdown = strip_tags($markdown);
+            $markdown = strip_tags($markdown, '<br><p></p>');
             $search = str_replace("%20", " ", $search);
             $words = explode(" ", $search);
             $positions = [];
@@ -83,7 +83,7 @@ class Doc extends Model
                 $position = $positions[0];
             }
             $markdown =
-                substr(highlightWords($markdown, $search), $position, 500) .
+                substr(highlightWords($markdown, $search), $position, 300) .
                 "<span class='dimmed ml-1'>...</span>";
 
             return $markdown;

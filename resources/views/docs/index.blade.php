@@ -338,9 +338,9 @@
                              style="width:100%;border-radius:6px;margin-top:-75px;">
 
 
-                                <a href="/docs/" class="list-group-item list-group-item-action" v-for="item in info.data" v-bind:href="item.url">
+                                <a href="/docs/" class="list-group-item list-group-item-action" v-for="item in info.data" v-bind:href="item.url" v-if="item.slug != 'description.md'">
 
-                                    <div class="d-flex w-100 justify-content-between">
+                                    <div class="d-flex w-100 justify-content-between mb-4">
                                         <h5 class="my-2">@{{ item.title }}</h5>
                                         <small class="badge badge-light badge-pill px-3 my-2 text-capitalize">@{{ item.folder }}</small>
                                     </div>
