@@ -18,6 +18,7 @@ use Altek\Accountant\Contracts\Identifiable as Identifiable;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Overtrue\LaravelFollow\Traits\CanFollow;
 
 class User extends AuthUser implements
     AuditableContract,
@@ -29,6 +30,8 @@ class User extends AuthUser implements
     use \Altek\Accountant\Recordable;
 
     use Billable;
+
+    use CanFollow;
 
     use HasRoles;
 

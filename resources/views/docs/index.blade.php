@@ -120,11 +120,11 @@
         .documentation-card {
             max-height: none !important;
             box-shadow: none !important;
-            border-radius:5px !important;
+            border-radius: 5px !important;
         }
 
         .btn-lg {
-            border-radius:5px !important;
+            border-radius: 5px !important;
         }
 
         pre {
@@ -134,14 +134,14 @@
             padding: 5px 20px;
         }
 
-        .page-title  h1, .page-title  h2, .page-title  h3 {
+        .page-title h1, .page-title h2, .page-title h3 {
             font-size: 250% !important;
-            font-weight:100 !important;
-            color:#333 !important;
-            z-index:999 !important;
-            text-align:center;
-            display:block !important;
-            width:100% !important;
+            font-weight: 100 !important;
+            color: #333 !important;
+            z-index: 999 !important;
+            text-align: center;
+            display: block !important;
+            width: 100% !important;
         }
 
         .text-white p, .text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6 {
@@ -252,7 +252,7 @@
 
         #description h1, #description h2, #description h3, #description h4, #description h5, #description h6 {
             margin: 15px;
-            font-weight:300 !important;
+            font-weight: 300 !important;
         }
 
         #description {
@@ -260,7 +260,7 @@
         }
 
         #description a {
-            font-weight:600 !important;
+            font-weight: 600 !important;
         }
 
         .affix {
@@ -268,7 +268,7 @@
             top: 72;
             right: 0;
             left: 0;
-            z-index: 1030;
+            z-index: 9999 !important;
         }
 
         /* fixed to top styles */
@@ -282,7 +282,7 @@
         }
 
         .shards-landing-page--1 .welcome:before {
-            background:#ebf1fe !important;
+            background: #ebf1fe !important;
             opacity: 1 !important;
         }
     </style>
@@ -308,11 +308,14 @@
 @section('header')
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container page-title">
-        <div class="row">
-            <h5 align="center" class="w-100" style="z-index:99999;color:rgba(255,255,255,0.4);">
-                {{ setting('site.name', null) }}
-            </h5>
-            <h3 class="text-dark">Help Desk</h3>
+        <div class="row" align="center">
+            <div class="col-md-12 px-4 text-dark text-center py-5" id="description">
+                <h3 class="text-dark mb-4">Help Desk</h3>
+                <div class="input-group d-inline-flex px-4" style="max-width:800px;" id="">
+                    <input id="search" autocomplete="off" class="form-control form-control-lg form-control-translucent"
+                           placeholder="Search..." style="border-radius:30px;padding-left:20px !important;" v-model="search" @change="updateSearch(search)" />
+                </div>
+            </div>
         </div>
     </div>
     <!-- / Inner Wrapper -->
@@ -320,22 +323,44 @@
 
 
 @section('content')
-    <main id="content">
+    <main id="content" style="z-index:-1;">
 
         <div class="blog section section-invert p-4  firstSection" style="min-height:calc(100% - 300px);">
             <div class="container">
-                <div class="row px-3" id="docsApp">
+                <div class="row px-3 mb-3" id="contentApp">
+                    <div class="w-100 px-0 mb-4" v-if="info.data != null && search != ''">
+                        <div class="list-group"
+                             style="width:100%;border-radius:6px;margin-top:-75px;">
 
-                    <div class="col-md-12">
+
+                                <a href="/docs/" class="list-group-item list-group-item-action" v-for="item in info.data" v-bind:href="item.url">
+
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="my-2">@{{ item.title }}</h5>
+                                        <small class="badge badge-light badge-pill px-3 my-2 text-capitalize">@{{ item.folder }}</small>
+                                    </div>
+                                    <p class="m-0 pb-2">@{{ item.content }}</p>
+                                </a>
+
+                            <a href="/docs/" class="list-group-item list-group-item-action" v-if="info.meta.total < 1">
+                                <p class="m-0 pb-2">No results. Try searching for something else.</p>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" v-else>
                         <div class="row">
-                            <div class="list-group raised-2-down list-group-flush" style="width:100%;margin-top:-75px;border-radius:6px;">
+                            <div class="list-group raised-2-down list-group-flush"
+                                 style="width:100%;margin-top:-75px;border-radius:6px;">
 
                                 @foreach(docsFolders() as $docFolder)
-                                    <a href="/docs/{{ $docFolder }}" class="list-group-item list-group-item-action" href="/docs/{{ $docFolder }}">
+                                    <a href="/docs/{{ $docFolder }}" class="list-group-item list-group-item-action"
+                                       href="/docs/{{ $docFolder }}">
 
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="my-2">{{ str_replace('_', ' ', ucwords($docFolder)) }}</h5>
-                                            <small class="badge badge-light badge-pill px-3 my-2"><?php echo count(docFiles($docFolder)) .' '.str_plural('Item'); ?></small>
+                                            <small class="badge badge-light badge-pill px-3 my-2"><?php echo count(docFiles($docFolder)) . ' ' . str_plural('Item'); ?></small>
                                         </div>
                                         <p class="m-0 pb-2">{!! strip_tags(GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(str_replace('#', '', file_get_contents(docsPath().'/'.$docFolder.'/description.md')))) !!} </p>
                                     </a>
@@ -393,4 +418,5 @@
 
         });
     </script>
+    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'mainApp','url' => '/api/resources/doc', 'DISPLAY_FORMAT' => 'list', 'PER_PAGE' => 10, 'LIMIT' => 100]) !!}
 @endsection

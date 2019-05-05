@@ -132,6 +132,8 @@ class SyncGit extends Command
                     }
                 }
 
+                $this->call('command:SyncDocs');
+
                 File::deleteDirectory($themepath . "/.git");
                 $package->json = file_get_contents($tempdir . '/startup.json');
                 $contents = json_decode(
@@ -311,11 +313,15 @@ class SyncGit extends Command
                                                     '/page.json'
                                             );
                                             $json = json_decode($json);
-                                            $page = Page::where(
-                                                'slug',
-                                                '=',
-                                                $json->slug
-                                            )->first();
+                                            if (isset($json->slug)) {
+                                                $page = Page::where(
+                                                    'slug',
+                                                    '=',
+                                                    $json->slug
+                                                )->first();
+                                            } else {
+                                                $page = null;
+                                            }
                                             if ($page == null) {
                                                 $page = new Page();
                                             }

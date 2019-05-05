@@ -373,6 +373,7 @@ function isResource($string)
     return in_array($string, [
         'event',
         'content',
+        'doc',
         'feature',
         'log',
         'package',
@@ -1676,4 +1677,18 @@ function getVideoQueryString($url)
     } else {
         return null;
     }
+}
+
+function isActiveFeature($input)
+{
+    $features = [];
+    $features[] = 'analytics';
+    $features[] = 'content';
+    $features[] = 'docs';
+    $features[] = 'features';
+    $features[] = 'pages';
+    $features[] = 'products';
+    $features[] = 'promos';
+    $features[] = 'users';
+    return in_array($input, $features);
 }

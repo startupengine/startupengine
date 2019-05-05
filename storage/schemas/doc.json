@@ -1,0 +1,52 @@
+{
+  "namespace": "App\\Doc",
+  "lang": {
+    "en": {
+      "singular": "doc",
+      "plural": "docs"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "taggable": false,
+    "title_key": "slug",
+    "primary_key": "id",
+    "readonly": {
+      "id":{
+        "label": "Doc ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+    "status": {
+      "type": "select",
+      "options": {
+        "Draft": "DRAFT",
+        "Published": "PUBLISHED"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+  },
+  "permissions": {
+    "add": {
+      "requires_auth": true,
+      "requires_permission":
+      ["add_docs"]
+    },
+    "edit": {
+      "requires_auth": true,
+      "requires_permission":
+      ["edit_docs"]
+    },
+    "delete": {
+      "requires_auth": true,
+      "requires_permission":
+      ["delete_docs"]
+    }
+  }
+}

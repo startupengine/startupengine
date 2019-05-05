@@ -787,7 +787,7 @@ tr:hover .dimmed {
   height: auto;
   min-height: 150px;
   z-index: 1;
-  background:rgba(0, 26, 101, 0.76) !important;
+  background:rgba(29, 29, 29, 0.76) !important;
 }
 
 .nav-item.active {
@@ -882,7 +882,7 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .btn-cta, .btn-cta:active, .btn-cta:focus, .btn-cta:hover {
-  background-image: linear-gradient(#ffc57d, #ff5caf) !important;
+  background-image: linear-gradient(-60deg, #5c96ff, #5b58ff) !important;
   background-size:cover !important;
   border: 0px solid #fff !important;
   color: #fff;

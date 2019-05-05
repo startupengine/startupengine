@@ -178,86 +178,109 @@
                                        title="Overview">view_quilt</i> <span>Overview</span>
                                 </a>
                             </li>
-                            <li class="nav-item {{ Request::is('admin/promo*') ? 'active' : '' }}">
-                                <a class="nav-link" href="/admin/promos">
-                                    <i class="fa fa-fw fa-tags" data-toggle="tooltip" data-placement="left"
-                                       title="Promos"></i> <span>Promos</span>
-                                </a>
-                            </li>
+                            @if(isActiveFeature('users'))
                             <li class="nav-item {{ Request::is('admin/users*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/users">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Users">people</i> <span>Users</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('pages'))
                             <li class="nav-item {{ Request::is('admin/pages*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/pages">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Pages">library_books</i> <span>Pages</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('promos'))
+                                <li class="nav-item {{ Request::is('admin/promo*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="/admin/promos">
+                                        <i class="fa fa-fw fa-tags" data-toggle="tooltip" data-placement="left"
+                                           title="Promos"></i> <span>Promos</span>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(isActiveFeature('content'))
                             <li class="nav-item {{ Request::is('admin/content*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/content">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Content">notes</i> <span>Content</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('settings'))
                             <li class="nav-item {{ Request::is('admin/settings*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/settings">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Settings">settings</i> <span>Settings</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('products'))
                             <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/products">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Products">shopping_basket</i> <span>Products</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('features'))
                             <li class="nav-item {{ Request::is('admin/features*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/features">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Products">star</i> <span>Features</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('analytics'))
                             <li class="nav-item {{ Request::is('admin/analytics*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/analytics">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Analytics">bar_chart</i> <span>Analytics</span>
                                 </a>
                             </li>
-
+                            @endif
+                            @if(isActiveFeature('preferences'))
                             <li class="nav-item {{ Request::is('admin/preferences*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/preferences/schemas">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="Preferences">list_alt</i> <span>Preferences</span>
                                 </a>
                             </li>
+                            @endif
+                            @if(isActiveFeature('logs'))
                             <li class="nav-item {{ Request::is('admin/logs*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/logs">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
                                        title="System Logs">history</i> <span>System Logs</span>
                                 </a>
                             </li>
-                            @if(\Auth::user()->hasRole('admin') && 1 == 2)
-                                <li class="nav-item {{ Request::is('admin/realtime*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="/admin/realtime">
-                                        <i class="material-icons" data-toggle="tooltip" data-placement="left"
-                                           title="Real Time Data">track_changes</i> <span>Real Time Data</span>
-                                    </a>
-                                </li>
                             @endif
+                            @if(isActiveFeature('realtime'))
+                                @if(\Auth::user()->hasRole('admin') && 1 == 2)
+                                    <li class="nav-item {{ Request::is('admin/realtime*') ? 'active' : '' }}">
+                                        <a class="nav-link" href="/admin/realtime">
+                                            <i class="material-icons" data-toggle="tooltip" data-placement="left"
+                                               title="Real Time Data">track_changes</i> <span>Real Time Data</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endif
+                            @if(isActiveFeature('docs'))
                             <li class="nav-item">
-                                <a class="nav-link" href="/docs" target="_blank">
+                                <a class="nav-link" href="/admin/docs">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
-                                       title="Documentation">book</i> <span>Documentation</span>
+                                       title="Documentation">help_outline</i> <span>Help Desk</span>
                                 </a>
                             </li>
+                            @endif
                             @if(config('app.env') == 'local')
                                 <li class="nav-item">
                                     <a class="nav-link" href="/dev/telescope" target="_blank">
                                         <i class="material-icons" data-toggle="tooltip" data-placement="left"
-                                           title="Developer Tools">code</i> <span>Developer Tools</span>
+                                           title="Dev Tools">code</i> <span>Dev Tools</span>
                                     </a>
                                 </li>
                             @endif
@@ -329,7 +352,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <nav class="nav">
+                        <nav class="nav" style="height:60px;">
                             <a href="#"
                                class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left"
                                data-toggle="collapse" data-target=".header-navbar" aria-expanded="false"

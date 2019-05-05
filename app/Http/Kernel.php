@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'cors' => \App\Http\Middleware\Cors::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'promo-code' => \App\Http\Middleware\PromoCode::class
+        'promo-code' => \App\Http\Middleware\PromoCode::class,
+        'feature' => \App\Http\Middleware\PreReleaseFeature::class
     ];
 }

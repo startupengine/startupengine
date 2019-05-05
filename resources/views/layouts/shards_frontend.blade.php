@@ -50,7 +50,7 @@
         }
 
         #footer .navbar-dark {
-            background:#252938 !important;
+            background:#101117 !important;
         }
 
         @media(max-width:991px) {
@@ -69,7 +69,7 @@
         }
 
         #footer .bg-dark {
-            background: #252938 !important;
+            background: #101117 !important;
         }
 
         #footer .bg-dark .border-top {
@@ -87,7 +87,7 @@
         }
 
         #footer .bg-dark .list-group-item {
-            background: #252938 !important;
+            background: none !important;
             color:rgba(215,215,255,0.5) !important;
             border:none !important;
         }
@@ -122,7 +122,7 @@
 @endif
 
 <!-- Welcome Section -->
-<div class="welcome d-flex justify-content-center flex-column @yield('splash-class')" style="@yield('splash-style')">
+<div class="welcome d-flex justify-content-center flex-column @yield('splash-class')" style="@yield('splash-style');">
     <div class="container">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark px-0 fixed-top @yield('navbar-classes') " id="topNavbar">
@@ -317,12 +317,28 @@
 </div>
 <!-- / Mobile Nav Modal -->
 
+@if(\Auth::user() == null && isActiveFeature('newsletter'))
+    <div class="w-100 p-4" align="center" style="background:rgb(215, 224, 255);">
+        <div class="row">
+            <div class="col-md-6 px-4 my-auto text-center text-lg-right">
+                <h5 class="mb-2 my-4">
+                    <span class="m-2">Want to be notified of new products and content?</span>
+                </h5>
+            </div>
+            <div class="col-md-6 px-4 text-center text-lg-left my-auto">
+                <div class="input-group d-inline-flex py-4" style="max-width:500px;">
+                    <input id="newsletterInput" autocomplete="off" name="email" class="form-control form-control-lg form-control-translucent" placeholder="Your E-mail" style="border-radius:30px 0px 0px 30px;padding-left:20px !important;"><div class="btn btn-secondary btn-lg pl-3 py-3" style="border-radius: 0px 30px 30px 0px !important;" ><i class="fa fa-fw fa-envelope text-white mr-2"></i> Subscribe</div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
 <?php $promos = \App\Promo::where('status', '=', 'PUBLISHED')->inRandomOrder()->get();?>
 @if(count($promos) > 0 &&  !Request::is('promo*') )
     <section class="section section-promo bg-dark-blue border-0" style=" @if($promos[0]->getJsonContent('[sections][heading][fields][background]') != null) background-image: url({{ $promos[0]->getJsonContent('[sections][heading][fields][background]') }}) !important; @else background-image: url(https://images.unsplash.com/photo-1552688455-b6faba3c8631?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=95) !important; @endif background-size:cover !important; background-position:center !important;" >
         <div class="bg-filter py-4 ">
             <div class="container py-4">
-
                 <div class="row">
                     <div class="col-md-6 m-auto text-lg-left text-center">
                         <h3 class="text-white my-3 font-weight-800">{{ $promos[0]->getJsonContent('[sections][heading][fields][headline]')  }}</h3>
@@ -400,7 +416,7 @@
             @endif
             <div class="col-md-3 p-0 mb-3">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-book mr-2 text-primary"></i>Documentation</li>
+                    <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-book mr-2 text-primary"></i>Help</li>
                     @foreach(docsFolders() as $docFolder)
                         <li class="list-group-item text-capitalize text-white"><a href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a></li>
                     @endforeach

@@ -23,7 +23,7 @@ Route::group(
     }
 );
 
-// User Facing Front-End
+// Public Front-End
 Route::group(['middleware' => ['web']], function () {
     //Authentication
     Auth::routes(['verify' => true]);
@@ -136,97 +136,129 @@ Route::group(
         );
 
         // Pages
-        Route::get('/admin/pages', 'PageController@index')->name(
-            'adminPageIndex'
-        );
-        Route::get('/admin/pages/{id}', 'PageController@view')->name(
-            'adminPageView'
-        );
+        Route::group(['middleware' => ['feature:pages']], function () {
+            Route::get('/admin/pages', 'PageController@index')->name(
+                'adminPageIndex'
+            );
+            Route::get('/admin/pages/{id}', 'PageController@view')->name(
+                'adminPageView'
+            );
+        });
 
-        // CTAs
-        Route::get('/admin/promos', 'PromoController@index')->name(
-            'adminCTAIndex'
-        );
-        Route::get('/admin/promos/{id}', 'PromoController@view')->name(
-            'adminCTAView'
-        );
+        // Promos
+        Route::group(['middleware' => ['feature:promos']], function () {
+            Route::get('/admin/promos', 'PromoController@index')->name(
+                'adminCTAIndex'
+            );
+            Route::get('/admin/promos/{id}', 'PromoController@view')->name(
+                'adminCTAView'
+            );
+        });
 
         // Content
-        Route::get('/admin/content', 'ContentController@index')->name(
-            'adminContentIndex'
-        );
-        Route::get('/admin/content/{id}', 'ContentController@view')->name(
-            'adminContentView'
-        );
+        Route::group(['middleware' => ['feature:content']], function () {
+            Route::get('/admin/content', 'ContentController@index')->name(
+                'adminContentIndex'
+            );
+            Route::get('/admin/content/{id}', 'ContentController@view')->name(
+                'adminContentView'
+            );
+        });
 
         // Users
-        Route::get('/admin/users', 'UserController@index')->name(
-            'adminUserIndex'
-        );
-        Route::get('/admin/users/{id}', 'UserController@view')->name(
-            'adminUserView'
-        );
-        Route::get(
-            '/admin/users/{id}/preferences',
-            'UserPreferencesController@index'
-        )->name('adminUserPreferenceIndex');
+        Route::group(['middleware' => ['feature:users']], function () {
+            Route::get('/admin/users', 'UserController@index')->name(
+                'adminUserIndex'
+            );
+            Route::get('/admin/users/{id}', 'UserController@view')->name(
+                'adminUserView'
+            );
+            Route::get(
+                '/admin/users/{id}/preferences',
+                'UserPreferencesController@index'
+            )->name('adminUserPreferenceIndex');
+        });
 
         // Products
-        Route::get('/admin/products', 'ProductController@index')->name(
-            'adminProductIndex'
-        );
-        Route::get('/admin/products/{id}', 'ProductController@view')->name(
-            'adminProductView'
-        );
+        Route::group(['middleware' => ['feature:products']], function () {
+            Route::get('/admin/products', 'ProductController@index')->name(
+                'adminProductIndex'
+            );
+            Route::get('/admin/products/{id}', 'ProductController@view')->name(
+                'adminProductView'
+            );
+        });
 
         // Features
-        Route::get('/admin/features', 'FeatureController@index')->name(
-            'adminFeatureIndex'
-        );
-        Route::get('/admin/features/{id}', 'FeatureController@view')->name(
-            'adminFeatureView'
-        );
+        Route::group(['middleware' => ['feature:features']], function () {
+            Route::get('/admin/features', 'FeatureController@index')->name(
+                'adminFeatureIndex'
+            );
+            Route::get('/admin/features/{id}', 'FeatureController@view')->name(
+                'adminFeatureView'
+            );
+        });
 
         // Analytics
-        Route::get('/admin/analytics', 'AnalyticsController@index')->name(
-            'analytics'
-        );
+        Route::group(['middleware' => ['feature:analytics']], function () {
+            Route::get('/admin/analytics', 'AnalyticsController@index')->name(
+                'analytics'
+            );
+        });
+
+        // Documentation
+        Route::group(['middleware' => ['feature:docs']], function () {
+            Route::get('/admin/docs', 'DocsController@index')->name(
+                'adminFeatureIndex'
+            );
+            Route::get('/admin/docs/{id}', 'DocsController@view')->name(
+                'adminFeatureView'
+            );
+        });
 
         // Logs
-        Route::get('/admin/logs', 'LogController@index')->name('adminLogIndex');
-        Route::get('/admin/logs/{id}', 'LogController@view')->name(
-            'adminLogView'
-        );
+        Route::group(['middleware' => ['feature:logs']], function () {
+            Route::get('/admin/logs', 'LogController@index')->name(
+                'adminLogIndex'
+            );
+            Route::get('/admin/logs/{id}', 'LogController@view')->name(
+                'adminLogView'
+            );
+        });
 
         // Settings
-        Route::get('/admin/settings', 'SettingController@index')->name(
-            'adminSettingIndex'
-        );
-        Route::get('/admin/settings/{id}', 'SettingController@view')->name(
-            'adminSettingView'
-        );
-        Route::get(
-            '/admin/settings/group/{group}',
-            'SettingGroupController@index'
-        )->name('adminSettingGroupIndex');
+        Route::group(['middleware' => ['feature:settings']], function () {
+            Route::get('/admin/settings', 'SettingController@index')->name(
+                'adminSettingIndex'
+            );
+            Route::get('/admin/settings/{id}', 'SettingController@view')->name(
+                'adminSettingView'
+            );
+            Route::get(
+                '/admin/settings/group/{group}',
+                'SettingGroupController@index'
+            )->name('adminSettingGroupIndex');
+        });
 
         //Preference Schemas
-        Route::get(
-            '/admin/preferences/schemas',
-            'PreferenceSchemaController@index'
-        );
-        Route::get(
-            '/admin/preferences/schemas/{id}',
-            'PreferenceSchemaController@view'
-        );
-
-        //Preferences
-        Route::get('/admin/preference/{id}', 'PreferenceController@view');
+        Route::group(['middleware' => ['feature:preferences']], function () {
+            Route::get(
+                '/admin/preferences/schemas',
+                'PreferenceSchemaController@index'
+            );
+            Route::get(
+                '/admin/preferences/schemas/{id}',
+                'PreferenceSchemaController@view'
+            );
+            Route::get('/admin/preference/{id}', 'PreferenceController@view');
+        });
 
         //Websockets
-        Route::get('/admin/realtime', 'WebsocketController@index')->name(
-            'realtime'
-        );
+        Route::group(['middleware' => ['feature:realtime']], function () {
+            Route::get('/admin/realtime', 'WebsocketController@index')->name(
+                'realtime'
+            );
+        });
     }
 );
 //Custom Module Routes
