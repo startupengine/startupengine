@@ -141,7 +141,9 @@
       "chmod -R 777 storage",
       "php artisan passport:keys"
     ],
-    "post-update-cmd": [],
+    "post-update-cmd": [
+      "@php artisan command:SyncDocs"
+    ],
     "install-drafter": "Hmaus\\Drafter\\Installer::installDrafter"
   },
   "config": {

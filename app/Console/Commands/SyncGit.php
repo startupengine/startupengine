@@ -115,6 +115,14 @@ class SyncGit extends Command
                     }
                 }
 
+                if (file_exists($tempdir . "/docs")) {
+                    $files = File::allFiles($tempdir . "/docs");
+                    \File::copyDirectory(
+                        $tempdir . "/docs",
+                        storage_path('docs')
+                    );
+                }
+
                 if (
                     file_exists($tempdir . "/app/modules") &&
                     ($mode == "modules" or $mode == "reset")
