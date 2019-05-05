@@ -63,12 +63,29 @@ class Doc extends Model
     {
         if (request()->input('s') != null) {
             $search = request()->input('s');
-            $words = explode($search, " ");
             $markdown = Markdown::convertToHtml($this->content);
             $markdown = strip_tags($markdown);
+            $search = str_replace("%20", " ", $search);
+            $words = explode(" ", $search);
+            $positions = [];
+            foreach ($words as $word) {
+                $position = stripos($markdown, $word);
+                //dd($markdown);
+                if ($position != false) {
+                    $positions[] = $position;
+                }
+            }
+            sort($positions);
+
+            if (count($positions) == 0) {
+                $position = 0;
+            } else {
+                $position = $positions[0];
+            }
             $markdown =
-                substr(highlightWords($markdown, $search), 0, 300) .
+                substr(highlightWords($markdown, $search), $position, 500) .
                 "<span class='dimmed ml-1'>...</span>";
+
             return $markdown;
         }
     }
