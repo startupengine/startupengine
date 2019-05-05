@@ -39,5 +39,9 @@
     "vue-quill-editor": "^2.3.3",
     "vue-template-compiler": "^2.5.13",
     "vue2-editor": "^2.0.26"
+  },
+  "engines": {
+    "node": "7.0.0",
+    "npm": "6.4.0"
   }
 }
