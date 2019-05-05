@@ -136,7 +136,11 @@
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover"
     ],
-    "post-install-cmd": [],
+    "post-install-cmd": [
+      "php artisan clear-compiled",
+      "chmod -R 777 storage",
+      "php artisan passport:keys"
+    ],
     "post-update-cmd": [],
     "install-drafter": "Hmaus\\Drafter\\Installer::installDrafter"
   },
