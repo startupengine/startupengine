@@ -62,7 +62,13 @@ class Doc extends Model
     public function highlightedSearchResults()
     {
         if (request()->input('s') != null) {
+            $search = request()->input('s');
+            $words = explode($search, " ");
             $markdown = Markdown::convertToHtml($this->content);
+            $markdown = strip_tags($markdown);
+            $markdown =
+                substr(highlightWords($markdown, $search), 0, 300) .
+                "<span class='dimmed ml-1'>...</span>";
             return $markdown;
         }
     }
@@ -81,6 +87,7 @@ class Doc extends Model
     {
         $markdown = strtok($this->content, "\n");
         $markdown = str_replace("#", "", $markdown);
+        $markdown = strip_tags(Markdown::convertToHtml($markdown));
         return $markdown;
     }
 }

@@ -285,6 +285,11 @@
             background: #ebf1fe !important;
             opacity: 1 !important;
         }
+
+        .highlight_word {
+            font-weight:800 !important;
+            color:navy !important;
+        }
     </style>
 @endsection
 
@@ -339,7 +344,7 @@
                                         <h5 class="my-2">@{{ item.title }}</h5>
                                         <small class="badge badge-light badge-pill px-3 my-2 text-capitalize">@{{ item.folder }}</small>
                                     </div>
-                                    <p class="m-0 pb-2">@{{ item.content }}</p>
+                                    <span class="dimmed mr-2" style="float:left;">...</span><p class="m-0 pb-2"  v-html="item.highlighted">@{{ item.highlighted }}</p>
                                 </a>
 
                             <a href="/docs/" class="list-group-item list-group-item-action" v-if="info.meta.total < 1">
