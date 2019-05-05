@@ -79,13 +79,13 @@
     "spatie/laravel-permission": "^2.7",
     "spatie/laravel-searchable": "^1.2",
     "symfony/property-access": "^4.2",
-    "wikimedia/composer-merge-plugin": "^1.4"
+    "wikimedia/composer-merge-plugin": "^1.4",
+    "laravel/telescope": "*"
   },
   "require-dev": {
     "barryvdh/laravel-httpcache": "*",
     "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
-    "laravel/telescope": "*",
     "mockery/mockery": "0.9.*",
     "orangehill/iseed": "^2.5",
     "phpunit/phpunit": "~7.0",
