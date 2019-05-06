@@ -272,5 +272,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => URL::to('/').'/api/resources/content', 'FILTERS' => "{status: 'status=PUBLISHED'}", 'VUE_APP_NAME' => 'contentApp', 'LIMIT' => 1000]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => URL::to('/').'/api/resources/content', 'FILTERS' => null, 'VUE_APP_NAME' => 'contentApp', 'LIMIT' => 1000]) !!}
 @endsection

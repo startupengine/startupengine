@@ -250,5 +250,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/page', 'LIMIT' => 1000, 'FILTERS' => "{'status':'status=ACTIVE'}"]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/page', 'LIMIT' => 1000, 'FILTERS' => null]) !!}
 @endsection
