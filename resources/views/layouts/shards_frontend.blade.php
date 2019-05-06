@@ -107,7 +107,7 @@
 </head>
 <body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100 d-flex flex-column">
 <div id="wrap">
-<div id="mainApp">
+<div id="mainApp" v-if="info != null">
 @if(isset($message))
 <!-- Welcome Section -->
 <div class="message">
