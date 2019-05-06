@@ -30,7 +30,7 @@
         }
 
         .shards-landing-page--1 .welcome {
-            min-height: 400px !important;
+            min-height: 100% !important;
             height: auto !important;
         }
 
@@ -70,7 +70,7 @@
 @section('header')
     <!-- Inner Wrapper -->
     <div class="inner-wrapper mt-auto mb-auto container">
-        <div class="row mt-5 pt-5">
+        <div class="row m-auto">
             <div class="col-md-12 px-4 mb-3">
                 <h1 class="welcome-heading display-4 text-dark text-center ">@if($page->title != null) {{ $page->title }} @else {{ setting('site.name', 'Startup Engine') }} @endif</h1>
                 <h6 class="pt-2 text-center mb-4 mx-4">@if($page->getJsonContent('[sections][heading][fields][headline]') != null) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else {{ setting('site.description') }} @endif</h6>
