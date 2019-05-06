@@ -1,6 +1,6 @@
 # Installation
 
-Download or clone the Startup Enginie repository from [https://github.com/startupengine/startupengine](https://github.com/startupengine/startupengine), then follow one of the two sets of instructionis below. 
+Download or clone the Startup Engine repository from [GitHub](https://github.com/startupengine/startupengine), then follow one of the two sets of instructions below. 
 
 ## Standard Installation
 
