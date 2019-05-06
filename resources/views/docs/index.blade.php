@@ -333,7 +333,7 @@
         <div class="blog section section-invert p-4  firstSection" style="min-height:calc(100% - 300px);">
             <div class="container">
                 <div class="row px-3 mb-3" id="contentApp">
-                    <div class="w-100 px-0 mb-4" v-if="info.data != null && search != ''">
+                    <div class="w-100 px-0 mb-4 toggleVisibility" v-if="info.data != null && search != ''"  v-bind:class="{ visible: search !='' }">
                         <div class="list-group"
                              style="width:100%;border-radius:6px;margin-top:-75px;">
 
