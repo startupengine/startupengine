@@ -378,7 +378,7 @@
 
                     <div class="col-md-12 pr-0 py-4 w-100 text-center text-reagent-gray" style="cursor:default;">
                         Built with <span class="ml-2">💖<span
-                                    class="fa fa-fw fa-sm fa-plus text-reagent-gray mx-2"></span>&nbsp;⚡</span>
+                                    class="fa fa-fw fa-sm fa-plus text-reagent-gray mx-2"></span>&nbsp;⚡</span> using <div class="d-inline-block"><a href="https://www.startupengine.io" target="_blank"><span class="badge bg-light-blue text-dark-blue badge-pill ml-2">Startup Engine</span></a></div>
                     </div>
 
                 </div>
