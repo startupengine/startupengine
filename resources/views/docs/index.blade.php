@@ -318,7 +318,7 @@
                 <h3 class="text-dark mb-4">Help Desk</h3>
                 <div class="input-group d-inline-flex px-4" style="max-width:800px;" id="">
                     <input id="search" autocomplete="off" class="form-control form-control-lg form-control-translucent"
-                           placeholder="Search..." style="border-radius:30px;padding-left:20px !important;" v-model="search" @change="updateSearch(search)" />
+                           placeholder="Search..." style="border-radius:30px;padding-left:20px !important;" v-model="search" @change="updateSearch(search)" @input="updateSearch(search)"  />
                 </div>
             </div>
         </div>

@@ -107,7 +107,7 @@
 </head>
 <body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100 d-flex flex-column">
 <div id="wrap">
-<div id="mainApp" v-if="info != null">
+<div id="mainApp" class="toggleVisibility"  v-bind:class="{ visible: info != null }">
 @if(isset($message))
 <!-- Welcome Section -->
 <div class="message">
@@ -504,6 +504,8 @@
     $('#navbarDropdown').hover(function(){
         this.href = "#";
     });
+
+    $("#mainApp").removeClass('toggleVisibility');
 
 </script>
 
