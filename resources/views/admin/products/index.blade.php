@@ -235,5 +235,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/product', 'FILTERS' => null /*"{'type':'json->sections->about->fields->type=Software%20Subscription'}"*/, 'VUE_APP_NAME' => 'productsApp', 'LIMIT' => 1000]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' =>  '/api/resources/product', 'FILTERS' => null /*"{'type':'json->sections->about->fields->type=Software%20Subscription'}"*/, 'VUE_APP_NAME' => 'productsApp', 'LIMIT' => 1000]) !!}
 @endsection

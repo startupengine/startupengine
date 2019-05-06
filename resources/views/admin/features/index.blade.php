@@ -216,5 +216,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/feature', 'VUE_APP_NAME' => 'featuresApp', 'LIMIT' => 1000]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/feature', 'VUE_APP_NAME' => 'featuresApp', 'LIMIT' => 1000]) !!}
 @endsection

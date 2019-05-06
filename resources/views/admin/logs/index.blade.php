@@ -240,5 +240,5 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' =>  URL::to('/').'/api/resources/log', 'FILTERS' => "{type: 'type=exception'}", "LIMIT" => 50, "PER_PAGE" => 5]) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/log', 'FILTERS' => "{type: 'type=exception'}", "LIMIT" => 50, "PER_PAGE" => 5]) !!}
 @endsection

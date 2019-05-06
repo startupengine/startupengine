@@ -231,7 +231,7 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['url' => URL::to('/').'/api/resources/content', 'div_id' => 'contentApp', 'LIMIT' => 5, 'SORT_STRING' => '&sort=-views&sortMethod=COUNT']) !!}
-    {!! renderResourceTableScriptsDynamically(['url' => URL::to('/').'/api/resources/page', 'div_id' => 'pagesApp', 'LIMIT' => 5, 'SORT_STRING' => '&sort=-views&sortMethod=COUNT']) !!}
-    {!! renderResourceTableScriptsDynamically(['url' => URL::to('/').'/api/resources/product', 'div_id' => 'productsApp', 'LIMIT' => 5, 'SORT_STRING' => '&sort=-purchases&sortMethod=COUNT']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/content', 'div_id' => 'contentApp', 'LIMIT' => 5, 'SORT_STRING' => '&sort=-views&sortMethod=COUNT']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/page', 'div_id' => 'pagesApp', 'LIMIT' => 5, 'SORT_STRING' => '&sort=-views&sortMethod=COUNT']) !!}
+    {!! renderResourceTableScriptsDynamically(['url' => '/api/resources/product', 'div_id' => 'productsApp', 'LIMIT' => 5, 'SORT_STRING' => '&sort=-purchases&sortMethod=COUNT']) !!}
 @endsection
