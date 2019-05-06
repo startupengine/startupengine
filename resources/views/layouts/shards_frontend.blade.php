@@ -20,7 +20,7 @@
 
     <script src='https://unpkg.com/nprogress@0.2.0/nprogress.js'></script>
     <script>
-        NProgress.start();
+        NProgress.start(0.3);
     </script>
 
 
@@ -515,6 +515,15 @@
 
     $("#mainApp").removeClass('toggleVisibility');
     NProgress.done();
+
+    $('a').click(function(){
+        if($(this).attr('href') !== '#') {
+            NProgress.start();
+            NProgress.set(0.1)
+            $("#mainApp").addClass('toggleVisibility');
+            $("#mainApp").addClass('invisible');
+        }
+    });
 </script>
 
 @yield('scripts')
