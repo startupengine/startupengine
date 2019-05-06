@@ -18,6 +18,12 @@
           content="@yield('meta-description')">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src='https://unpkg.com/nprogress@0.2.0/nprogress.js'></script>
+    <script>
+        NProgress.start();
+    </script>
+
+
     <!-- CSS -->
     <link rel="stylesheet" href="/styles/bootstrap.4.0.0.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -28,6 +34,8 @@
     <link rel="stylesheet" href="/css/plyr.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css'/>
+
     <style>
         html, body {
             height: 100%;
@@ -506,7 +514,7 @@
     });
 
     $("#mainApp").removeClass('toggleVisibility');
-
+    NProgress.done();
 </script>
 
 @yield('scripts')
