@@ -23,6 +23,8 @@ class PostType extends Model implements
 
     use IsApiResource;
 
+    protected $fillable = ['slug', 'title', 'enabled'];
+
     /**
      * Field from the model to use as the versions name
      * @var string
