@@ -58,6 +58,7 @@ class SyncPostTypes extends Command
                     'slug' => $slug
                 ]);
                 $postType->enabled = true;
+                $postType->json = json_encode($json);
                 $postType->save();
             }
         }
