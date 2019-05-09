@@ -246,7 +246,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <?php $postTypes = \App\PostType::where('enabled', true)->orderBy('title', 'asc')->get(); ?>
+                    <?php Artisan::call('command:SyncPostTypes'); $postTypes = \App\PostType::where('enabled', true)->orderBy('title', 'asc')->get(); ?>
                     @if(count($postTypes) > 0)
                     <p class="text-center">
                         What kind of item would you like to create?

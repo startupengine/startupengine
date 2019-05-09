@@ -37,6 +37,12 @@ class SyncPostTypes extends Command
      */
     public function handle()
     {
+        $postTypes = \App\PostType::all();
+        foreach ($postTypes as $postType) {
+            $postType->enabled = false;
+
+            $postType->save();
+        }
         $files = scandir(storage_path() . '/schemas/post_types');
         foreach ($files as $file) {
             if (strpos($file, '.json')) {
@@ -51,6 +57,7 @@ class SyncPostTypes extends Command
                 $postType = \App\PostType::firstOrCreate([
                     'slug' => $slug
                 ]);
+                $postType->enabled = true;
                 $postType->save();
             }
         }

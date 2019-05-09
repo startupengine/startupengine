@@ -9,17 +9,11 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use NexusPoint\Versioned\Versioned;
 use App\Traits\IsApiResource;
 
-class PostType extends Model implements
-    AuditableContract,
-    \Altek\Accountant\Contracts\Recordable
+class PostType extends Model
 {
-    use \Altek\Accountant\Recordable;
-
     use SoftDeletes;
 
-    use Auditable;
-
-    use Versioned;
+    //use Versioned;
 
     use IsApiResource;
 
