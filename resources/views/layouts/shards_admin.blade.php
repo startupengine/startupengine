@@ -230,7 +230,7 @@
                             <li class="nav-item {{ Request::is('admin/features*') ? 'active' : '' }}">
                                 <a class="nav-link" href="/admin/features">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
-                                       title="Products">star</i> <span>Features</span>
+                                       title="Features">star</i> <span>Features</span>
                                 </a>
                             </li>
                             @endif
@@ -272,7 +272,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin/docs">
                                     <i class="material-icons" data-toggle="tooltip" data-placement="left"
-                                       title="Documentation">help_outline</i> <span>Help Desk</span>
+                                       title="Help Desk">help_outline</i> <span>Help Desk</span>
                                 </a>
                             </li>
                             @endif
