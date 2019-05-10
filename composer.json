@@ -142,7 +142,8 @@
       "php artisan passport:keys"
     ],
     "post-update-cmd": [
-      "@php artisan command:SyncDocs"
+      "@php artisan command:SyncDocs",
+      "@php artisan command:SyncSettings"
     ],
     "install-drafter": "Hmaus\\Drafter\\Installer::installDrafter"
   },
