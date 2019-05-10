@@ -11,8 +11,9 @@ class Setting extends Model implements \Altek\Accountant\Contracts\Recordable
 
     use \Altek\Accountant\Recordable;
 
-    protected $fillable = ['value'];
-    protected $casts = ['json' => 'json'];
+    protected $fillable = ['value', 'schema'];
+
+    protected $casts = ['json' => 'json', 'schema' => 'json'];
 
     public function appSettings()
     {
@@ -31,11 +32,24 @@ class Setting extends Model implements \Altek\Accountant\Contracts\Recordable
     {
         $path = file_get_contents(storage_path() . '/schemas/setting.json');
         $baseSchema = json_decode($path, true);
-        $settingSchema = json_decode($this->schema, true);
-        if ($settingSchema == null) {
-            $settingSchema = [];
+
+        if (
+            file_exists(
+                storage_path() . '/schemas/settings/' . $this->key . ".json"
+            )
+        ) {
+            $file = file_get_contents(
+                storage_path() . '/schemas/settings/' . $this->key . ".json"
+            );
+            $schema = json_decode($file, true);
+        } else {
+            $schema = null;
         }
-        $merged = array_merge($baseSchema, $settingSchema);
+
+        if ($schema == null) {
+            $schema = [];
+        }
+        $merged = array_merge($baseSchema, $schema);
         $merged = json_decode(json_encode($merged));
         return $merged;
     }

@@ -1709,6 +1709,7 @@ function isActiveFeature($input)
     $features[] = 'pages';
     $features[] = 'products';
     $features[] = 'promos';
+    $features[] = 'settings';
     $features[] = 'users';
     return in_array($input, $features);
 }

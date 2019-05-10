@@ -1,0 +1,48 @@
+{
+  "namespace": "\\App\\Setting",
+  "lang": {
+    "en": {
+      "singular": "setting",
+      "plural": "setting"
+    }
+  },
+  "version": "0.1",
+  "metadata": {
+    "title_key": "id",
+    "primary_key": "id",
+    "id": {
+      "display name": "Promo ID",
+      "read_only": true
+    },
+    "taggable": true,
+    "readonly" : {
+      "id":{
+        "label": "Promo ID",
+        "column": "id"
+      }
+    }
+  },
+  "fields": {
+    "value": {
+      "type": "text",
+      "description": "URL the logo links to.",
+      "validations": {
+        "url": true
+      }
+    },
+    "status": {
+      "type": "select",
+      "options": {
+        "Draft": "DRAFT",
+        "Published": "PUBLISHED",
+        "Unpublished": "UNPUBLISHED",
+        "PENDING": "PENDING"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  },
+  "sections": {
+  }
+}
