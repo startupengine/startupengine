@@ -227,12 +227,13 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
             $merged = array_merge($pageSchema, $baseSchema);
 
-            $merged = json_decode(json_encode($merged));
+            //$merged = json_decode(json_encode($merged));
         } else {
             $merged = $baseSchema;
         }
 
         $schema = $merged;
+        $schema = json_decode(json_encode($schema));
 
         return $schema;
     }
