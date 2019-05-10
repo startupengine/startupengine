@@ -35,7 +35,7 @@ class ApiRbac
             }
 
             $type = request()->route('type');
-            $type = "\\App\\" . ucwords(pathToModel($type));
+            $type = "\\App\\" . ucwords(pathToModel($type));w
             $model = new $type();
 
             if (

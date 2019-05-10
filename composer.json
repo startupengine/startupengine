@@ -143,7 +143,8 @@
     ],
     "post-update-cmd": [
       "@php artisan command:SyncDocs",
-      "@php artisan command:SyncSettings"
+      "@php artisan command:SyncSettings",
+      "@php artisan command:SyncPages"
     ],
     "install-drafter": "Hmaus\\Drafter\\Installer::installDrafter"
   },

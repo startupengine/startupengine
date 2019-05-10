@@ -25,13 +25,22 @@
             "php artisan optimize",
             "php artisan migrate:refresh --seed --force",
             "php artisan passport:install",
-            "php artisan command:SyncGit default"
+            "php artisan command:SyncGit default",
+            "php artisan command:SyncDocs",
+            "php artisan command:SyncSettings",
+            "php artisan command:SyncPages"
         ],
         "post-update-cmd": [
-            "php artisan migrate --force"
+            "php artisan migrate --force",
+            "php artisan command:SyncDocs",
+            "php artisan command:SyncSettings",
+            "php artisan command:SyncPages"
         ],
         "postdeploy": [
-            "php artisan migrate --force"
+            "php artisan migrate --force",
+            "php artisan command:SyncDocs",
+            "php artisan command:SyncSettings",
+            "php artisan command:SyncPages"
         ]
     },
     "env": {
