@@ -220,9 +220,12 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         $baseSchema = json_decode($path, true);
 
         if ($this->id != null && $this->schema != null) {
-            $postTypeSchema = json_decode($this->schema, true);
+            $pageSchema = json_decode($this->schema, true);
+            if ($pageSchema == null) {
+                $pageSchema = [];
+            }
 
-            $merged = array_merge($postTypeSchema, $baseSchema);
+            $merged = array_merge($pageSchema, $baseSchema);
 
             $merged = json_decode(json_encode($merged));
         } else {
