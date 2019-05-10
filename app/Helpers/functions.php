@@ -553,6 +553,9 @@ function pathToModel($type)
     if ($type == 'event') {
         $type = 'analyticevent';
     }
+    if ($type == 'settingsgroup') {
+        $type = 'SettingsGroup';
+    }
     return $type;
 }
 
