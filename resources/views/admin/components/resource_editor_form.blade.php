@@ -128,13 +128,13 @@
                          class="card p-0 mb-3 formSection">
                         <div class="card-header"><h6 v-if="section.title != null">@{{ section.title }}</h6><h6
                                     v-else>@{{ sectionName }}</h6></div>
-                        <div class="card-body pb-3 px-3 pt-0">
+                        <div class="card-body pb-3 px-3 pt-0" >
                             <div v-if="hasConditions(record['data'], value.conditions)"
                                  v-for="value,fieldName in section.fields"
                                  class="input-group">
 
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     v-if="record['data']['content'] != null && record['data']['content'].hasOwnProperty('sections') && record['data']['content']['sections'][sectionName] !== null  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
+                                     <?php /* v-if="record['data']['content'] != null && record['data']['content'].hasOwnProperty('sections') && record['data']['content']['sections'][sectionName] !== null  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null" */ ?>
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"
@@ -144,15 +144,15 @@
                                      style="position:absolute;right:-5px;top:10px;">Edit
                                 </div>
 
-                                <div class="formEditButton btn btn-primary btn-pill"
-                                     v-else
+                                <?php /* <div class="formEditButton btn btn-primary btn-pill"
+                                    v-else
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"
 
                                      v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': (section['fields'][fieldName]) })"
                                      style="position:absolute;right:-5px;top:10px;">Edit
-                                </div>
+                                </div> */ ?>
 
                                 <label v-if="value['display name'] != null"
                                        style="text-transform:uppercase;opacity:0.6;" class="mb-2"><span
