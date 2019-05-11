@@ -2,6 +2,8 @@
 
 use PHLAK\SemVer;
 
+include 'page-functions.php';
+
 function get_nested_property($property, $object)
 {
     return $object->$property;

@@ -55,10 +55,10 @@ class SyncGit extends Command
         if (Schema::hasTable('packages')) {
             $packages = Package::all();
             if ($packages->isEmpty()) {
-                $defaultpackage = new Package();
+                /* $defaultpackage = new Package();
                 $defaultpackage->url =
                     "https://github.com/startupengine/Startup-Engine-Template.git";
-                $defaultpackage->save();
+                $defaultpackage->save(); */
                 $packages = Package::all();
             }
             foreach ($packages as $package) {

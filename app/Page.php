@@ -6,6 +6,7 @@ use App\Traits\IsApiResource;
 use App\Traits\RelationshipsTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
@@ -23,6 +24,8 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
     use \Altek\Accountant\Recordable;
 
     use EloquentJoin;
+
+    use SoftDeletes;
 
     use IsApiResource;
 
