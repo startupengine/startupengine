@@ -40,7 +40,9 @@ function syncPages($defaults = false)
             $page->title = ucfirst($filename);
             $page->body = null;
             $page->excerpt = null;
-            $page->status = 'INACTIVE';
+            if ($page->status == null) {
+                $page->status = 'INACTIVE';
+            }
             $page->save();
             if ($page->deleted_at != null) {
                 $page->restore();
