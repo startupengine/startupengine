@@ -44,7 +44,7 @@ function syncPages($defaults = false)
                 $page->status = 'INACTIVE';
             }
             $page->save();
-            if ($page->deleted_at != null) {
+            if ($page->deleted_at != null && $defaults != true) {
                 $page->restore();
                 $page->deleted_at = null;
                 $page->save();
