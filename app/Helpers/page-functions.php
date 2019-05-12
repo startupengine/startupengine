@@ -59,7 +59,7 @@ function syncPages($defaults = false)
     }
 
     foreach ($pages as $page) {
-        $page->setDeletedAtAttribute(null);
+        $page->deleted_at = null;
         $page->save();
     }
 }
