@@ -19,6 +19,7 @@ class PageController
     public function view(Request $request, $id)
     {
         $item = \App\Page::find($id);
+        dd($item);
         $options = [
             'id' => $item->id,
             'type' => 'page',

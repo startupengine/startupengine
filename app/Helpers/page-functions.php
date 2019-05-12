@@ -59,7 +59,6 @@ function syncPages($defaults = false)
     }
 
     foreach ($pages as $page) {
-        $page->deleted_at = null;
-        $page->save();
+        $page->undelete();
     }
 }

@@ -253,4 +253,11 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
         return $schema;
     }
+
+    public function undelete()
+    {
+        $this->deleted_at = null;
+        $this->save();
+        $this->setDeletedAtAttribute(null);
+    }
 }
