@@ -24,31 +24,18 @@ Click the button below to deploy a new instance of Startup Engine to Heroku inst
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luckyrabbitllc/StartupEngine)
 
-Please reference Heroku's [official guide](https://devcenter.heroku.com/articles/getting-started-with-laravel) for getting started with Laravel apps on Heroku.
+# Contact Us
 
-Once you've installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), run the following commands on your instance:
+### Feature Request
+Want to request a new feature? [Send us an e-mail](inbox-w8agf2hymzpvnw4zcudlfwpa@inbound.productboard.com).
 
-First, generate an `APP_KEY` by locally running:
-
-`php artisan key:generate`.
-
-Then copy the newly generated key and run:
-
-`heroku config:set APP_KEY=APPKEYGOESHERE`
-
-The default user email is `admin@example.com` and the default password is `password`.
-
-Change these after logging in.
-
-# Support
+### Code Support
 
 Found a bug? [Submit an issue.](https://github.com/startupengine/startupengine/issues)
 
-# Security
+### Security
 
-If you discover a security vulnerability within Startup Engine, please send an e-mail to startupengine.io@domainsbyproxy.com
-
-All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability, send an e-mail to [this address](inbox-w8agf2hymzpvnw4zcudlfwpa@inbound.productboard.com).
 
 # License
 
