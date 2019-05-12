@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@yield('title') - {{ setting('site.name', 'Startup Engine') }}</title>
+    <title>@yield('title') | {{ setting('site.name', 'Startup Engine') }}</title>
     <meta name="description"
           content="@yield('meta-description')">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,7 +111,7 @@
 @yield('css')
 
 <!-- FAVICONS -->
-    <link rel="icon" sizes="180x180" href="{{ setting('site.favicon', '/images/startup-engine-icon.png') }}">
+    <link rel="icon" sizes="180x180" href="{{ setting('site.favicon', '/images/startup-engine-logo.png') }}">
 </head>
 <body class="shards-landing-page--1 @if(isset($message)) hasMessage @endif w-100 d-flex flex-column">
 <div id="wrap">
