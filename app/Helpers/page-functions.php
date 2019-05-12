@@ -27,7 +27,6 @@ function syncPages($defaults = false)
                 $pagepath . '/' . $filename . '/page.json'
             );
             $json = json_encode(json_decode($json));
-            $pages[] = $filename;
 
             $page = \App\Page::where('slug', '=', $filename)
                 ->withTrashed()
@@ -44,12 +43,23 @@ function syncPages($defaults = false)
                 $page->status = 'INACTIVE';
             }
             $page->save();
-            if ($page->deleted_at != null && $defaults != true) {
-                $page->restore();
+            if ($page->deleted_at != null) {
                 $page->deleted_at = null;
                 $page->save();
             }
-            echo "Synced Page: " . $page->title . "\n";
+            echo "DELETED " .
+                $page->title .
+                " page at " .
+                $page->deleted_at .
+                "... ";
+            echo "\nSYNCED  $page->title page at $page->deleted_at \n";
+
+            $pages[] = $page;
         }
+    }
+
+    foreach ($pages as $page) {
+        $page->setDeletedAtAttribute(null);
+        $page->save();
     }
 }

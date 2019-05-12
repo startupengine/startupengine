@@ -44,7 +44,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     use validateInputAgainstJsonSchema;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'deleted_at'];
 
     /**
      * Field from the model to use as the versions name
@@ -57,7 +57,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
      *
      * @var array
      */
-    protected $dates = ['deleted_at', 'published_at'];
+    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
     /**
      * Attributes to include in the Audit.
