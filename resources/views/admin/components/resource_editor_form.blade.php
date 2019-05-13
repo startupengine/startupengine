@@ -112,7 +112,7 @@
                                 <p v-else
                                    <?php /*-if="section['fields'][fieldName]['type'] != 'resource' && record['data']['content']['sections'][sectionName]['fields'][fieldName] == null" */ ?>
                                    class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
-                                    <span style="opacity:0.5;">No data.</span>
+                                    <span style="opacity:0.5;">No data 1.</span>
                                 </p>
                             </div>
                         </div>
@@ -133,8 +133,9 @@
                                  v-for="value,fieldName in section.fields"
                                  class="input-group">
 
+
                                 <div class="formEditButton btn btn-primary btn-pill"
-                                     <?php /* v-if="record['data']['content'] != null && record['data']['content'].hasOwnProperty('sections') && record['data']['content']['sections'][sectionName] !== null  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null" */ ?>
+                                     v-if="record['data']['content'] != null && record['data']['content'].hasOwnProperty('sections') && record['data']['content']['sections'][sectionName] !== null  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"
@@ -143,16 +144,15 @@
 
                                      style="position:absolute;right:-5px;top:10px;">Edit
                                 </div>
-
-                                <?php /* <div class="formEditButton btn btn-primary btn-pill"
-                                    v-else
+                                <div class="formEditButton btn btn-primary btn-pill"
+                                     v-else
 
                                      data-toggle="modal"
                                      data-target="#modal-edit-content"
 
                                      v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': (section['fields'][fieldName]) })"
                                      style="position:absolute;right:-5px;top:10px;">Edit
-                                </div> */ ?>
+                                </div>
 
                                 <label v-if="value['display name'] != null"
                                        style="text-transform:uppercase;opacity:0.6;" class="mb-2"><span
@@ -165,8 +165,12 @@
                                     Click to view.
                                 </p>
 
+                                <p   v-if="(((((record.data || {}).content || {}).sections || {})[sectionName] || {}).fields|| {})[fieldName] == null" class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
+                                    <span style="opacity:0.5;">No data 2. @{{ (((((record.data || {}).content || {}).sections || {})[sectionName] || {}).fields|| {})[fieldName] }}</span>
+                                </p>
+
                                 <p class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;"
-                                   v-if="(((((record.data || {}).content || {}).sections || {})[sectionName] || {}).fields|| {})[fieldName] != null">
+                                 v-else >
 
                                     <span v-if="section['fields'][fieldName]['type'] == 'image'"
                                           v-bind:style="{ backgroundImage: 'url(' + record['data']['content']['sections'][sectionName]['fields'][fieldName] + ')' }"
@@ -184,9 +188,7 @@
                                     </span>
                                 </p>
 
-                                <p v-else class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
-                                    <span style="opacity:0.5;">No data.</span>
-                                </p>
+
 
                             </div>
                         </div>

@@ -174,6 +174,10 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             $array = [];
         }
 
+        if (gettype($json) == 'string') {
+            $json = json_decode($json);
+        }
+
         return $json;
     }
 
