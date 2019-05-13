@@ -22,16 +22,16 @@
                             </div>
                             <input type="text"
                                    class="form-control form-control-lg bg-white text-truncate"
-                                   v-model="record.data.{{ $item->schema()->metadata->title_key }}"
+                                   v-model="record.data.{{ $item->standardSchema()->metadata->title_key }}"
                                    placeholder="Title"
                                    aria-label="Username" aria-describedby="basic-addon1" disabled
                                    style="pointer-events:none;border:none !important;border-radius:0px 5px 5px 0px;">
                             <div class="formEditButton btn btn-primary btn-pill"
                                  style="position:absolute;right:15px;top:-15px;"
-                                 :data-fieldvalue="record.data.{{ $item->schema()->metadata->title_key }}"
+                                 :data-fieldvalue="record.data.{{ $item->standardSchema()->metadata->title_key }}"
                                  data-toggle="modal"
                                  data-target="#modal-edit-content"
-                                 v-on:click="updateForm({ 'sectionName': '{{ $item->schema()->metadata->title_key }}','fieldSlug': '{{ $item->schema()->metadata->title_key }}', 'fieldName': '{{ $item->schema()->metadata->title_key }}', 'fieldType': 'text', 'fieldInput': record['data']['{{ $item->schema()->metadata->title_key }}'], 'fieldDisplayName': 'Title', 'fieldDescription': 'Title for this item.' })">
+                                 v-on:click="updateForm({ 'sectionName': '{{ $item->standardSchema()->metadata->title_key }}','fieldSlug': '{{ $item->standardSchema()->metadata->title_key }}', 'fieldName': '{{ $item->standardSchema()->metadata->title_key }}', 'fieldType': 'text', 'fieldInput': record['data']['{{ $item->standardSchema()->metadata->title_key }}'], 'fieldDisplayName': 'Title', 'fieldDescription': 'Title for this item.' })">
                                 Edit
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                 <div v-if="record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null ">
 
                     <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection"
-                         v-if="fieldName !== 'slug' && fieldName !== '{{ $item->schema()->metadata->title_key }}' && fieldName !== 'status'">
+                         v-if="fieldName !== 'slug' && fieldName !== '{{ $item->standardSchema()->metadata->title_key }}' && fieldName !== 'status'">
                         <div class="card-body pb-3 px-3 pt-0">
                             <div v-if="hasConditions(record['data'], value.conditions)"
                                  class="input-group mt-3">
@@ -217,20 +217,20 @@
                     <div class='card-body p-0'>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item pt-0 px-3 pb-0 mb-2">
-                                @if(isset($item->schema()->metadata))
-                                    @if(isset($item->schema()->lang->en->singular))
+                                @if(isset($item->standardSchema()->metadata))
+                                    @if(isset($item->standardSchema()->lang->en->singular))
                                         <span class="d-block mb-2">
                                         <span class="badge badge-outline-dark text-dark">Type</span>
 
                                          <p class="fieldData card-text mb-2 mt-2 p-2"
-                                            style="background:#fafafa;color:#555;text-align:center;text-transform:capitalize;"> {{ $item->schema()->lang->en->singular }}
-                                             @if (isset($item->schema()->subtype_lang->en->subtype_singular))
-                                                 - {{ $item->schema()->subtype_lang->en->subtype_singular }}
+                                            style="background:#fafafa;color:#555;text-align:center;text-transform:capitalize;"> {{ $item->standardSchema()->lang->en->singular }}
+                                             @if (isset($item->standardSchema()->subtype_lang->en->subtype_singular))
+                                                 - {{ $item->standardSchema()->subtype_lang->en->subtype_singular }}
                                              @endif
                                          </p>
                                     </span>
                                     @endif
-                                    @foreach($item->schema()->metadata->readonly as $key => $value)
+                                    @foreach($item->standardSchema()->metadata->readonly as $key => $value)
                                         <?php $column = $value->column; ?>
                                         <?php $label = $value->label; ?>
                                         <span class="d-block mb-2">
@@ -270,7 +270,7 @@
                 </div>
                 <!-- / Post Overview -->
                 <!-- Post Overview -->
-                @if(isset($item->schema()->metadata->taggable) && $item->schema()->metadata->taggable)
+                @if(isset($item->standardSchema()->metadata->taggable) && $item->standardSchema()->metadata->taggable)
                     <div class='card card-small mb-3 formSection' id="tagsCard">
                         <div class="formEditButton btn btn-primary btn-pill"
                              style="position:absolute;right:15px;top:-15px;"
@@ -328,11 +328,11 @@
                 </div>
                 <div class="modal-body pt-4">
                     <p class="card-text">
-                        You are about to delete the following <?php echo $item->schema()->lang->en->singular; ?>:
-                        <strong class="text-danger">{{ record.data.<?php echo $item->schema()->metadata->title_key;?> }}</strong>
+                        You are about to delete the following <?php echo $item->standardSchema()->lang->en->singular; ?>:
+                        <strong class="text-danger">{{ record.data.<?php echo $item->standardSchema()->metadata->title_key;?> }}</strong>
                     </p>
                     <p class="card-text">
-                        Once you delete this <?php echo $item->schema()->lang->en->singular; ?> it can only be
+                        Once you delete this <?php echo $item->standardSchema()->lang->en->singular; ?> it can only be
                         un-deleted by an administrator.
                     </p>
                 </div>

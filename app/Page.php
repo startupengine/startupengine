@@ -44,7 +44,12 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     use validateInputAgainstJsonSchema;
 
-    protected $fillable = ['title', 'deleted_at'];
+    protected $casts = [
+        'json' => 'json',
+        'schema' => 'json'
+    ];
+
+    protected $fillable = ['title', 'deleted_at', 'schema'];
 
     /**
      * Field from the model to use as the versions name
@@ -234,34 +239,57 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         return $views;
     }
 
-    public function schema()
+    public function isDefaultPage()
     {
-        $path = file_get_contents(storage_path() . '/schemas/page.json');
-        $baseSchema = json_decode($path, true);
-
-        if ($this->id != null && $this->schema != null) {
-            $pageSchema = json_decode($this->schema, true);
-            if ($pageSchema == null) {
-                $pageSchema = [];
-            }
-
-            $merged = array_merge($pageSchema, $baseSchema);
-
-            //$merged = json_decode(json_encode($merged));
+        if (isset($this->schema()->category)) {
+            $category = $this->schema()->category;
         } else {
-            $merged = $baseSchema;
+            $category = null;
         }
 
-        $schema = $merged;
-        $schema = json_decode(json_encode($schema));
+        if ($category == 'defaults') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-        return $schema;
+    public function schema()
+    {
+        return json_decode(json_encode($this->getAttributeValue('schema')));
+    }
+
+    public function standardSchema()
+    {
+        $path = file_get_contents(storage_path() . '/schemas/post.json');
+        $baseSchema = json_decode($path, true);
+
+        return json_decode(
+            json_encode(
+                array_merge(
+                    $baseSchema,
+                    json_decode(json_encode($this->schema()), true)
+                )
+            )
+        );
+    }
+
+    public function toJsonResponse($input)
+    {
+        if (gettype($input) == 'string') {
+            return json_decode($input);
+        } else {
+            return $input;
+        }
     }
 
     public function undelete()
     {
         $this->deleted_at = null;
         $this->save();
+        $this->restore();
+        ob_start();
         $this->setDeletedAtAttribute(null);
+        ob_end_clean();
     }
 }

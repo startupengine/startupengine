@@ -82,6 +82,19 @@ trait IsApiResource
         return $value;
     }
 
+    public function getJsonSchemaContent($field)
+    {
+        $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()->getPropertyAccessor();
+        $value = null;
+        if ($this->json != null) {
+            $json = json_decode($this->schema, true);
+            if ($json != null) {
+                $value = $propertyAccessor->getValue($json, $field);
+            }
+        }
+        return $value;
+    }
+
     public function getPluralName()
     {
         $schema = $this->schema();
@@ -197,6 +210,11 @@ trait IsApiResource
                 }
             }
         }
+    }
+
+    public function standardSchema()
+    {
+        return $this->schema();
     }
 
     public function sectionHasContent(

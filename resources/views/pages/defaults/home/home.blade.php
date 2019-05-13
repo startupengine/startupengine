@@ -72,8 +72,8 @@
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row m-auto">
             <div class="col-md-12 px-4 mb-3">
-                <h1 class="welcome-heading display-4 text-dark text-center ">@if($page->title != null) {{ $page->title }} @else {{ setting('site.name', 'Startup Engine') }} @endif</h1>
-                <h6 class="pt-2 text-center mb-4 mx-4">@if($page->getJsonContent('[sections][heading][fields][headline]') != null) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else {{ setting('site.description') }} @endif</h6>
+                <h1 class="welcome-heading display-4 text-dark text-center ">@if($page->getJsonContent('[sections][heading][fields][headline]')) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else {{ setting('site.name', 'Startup Engine') }} @endif</h1>
+                <h6 class="pt-2 text-center mb-4 mx-4">@if($page->getJsonContent('[sections][heading][fields][tagline]') != null) {{ $page->getJsonContent('[sections][heading][fields][tagline]') }} @else {{ setting('site.description') }} @endif</h6>
                 <p align="center">
                     @if(hasSubscriptionProductsForSale())
                         <a href="/pricing" class="mt-1 btn btn-md btn-primary   align-self-center ml-2">Get Started</a>

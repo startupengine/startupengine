@@ -19,6 +19,8 @@ class PageController
     public function view(Request $request, $id)
     {
         $item = \App\Page::find($id);
+        $item->schema = $item->schema();
+
         $options = [
             'id' => $item->id,
             'type' => 'page',
@@ -35,7 +37,7 @@ class PageController
                 ]
             ]
         ];
-
+        //dd($item->standardSchema());
         return view('admin.components.resource_view')
             ->with('item', $item)
             ->with('options', $options);
@@ -68,6 +70,9 @@ class PageController
             return redirect('/login');
         } else {
             $page->addAnalyticEvent('page viewed');
+            if ($page->isDefaultPage() == true) {
+                return view(defaultPage())->with('page', $page);
+            }
             return view('pages.view')->with('page', $page);
         }
     }

@@ -52,7 +52,7 @@ class Page extends JsonResource
             $fields['name'] = $this->name;
         }
         $fields['meta_description'] = $this->meta_description;
-        $fields['schema'] = $this->schema();
+        $fields['schema'] = $this->toJsonResponse($this->schema());
         $fields['content'] = $this->content();
         $fields = sparseFields($fields, 'page');
         return $fields;

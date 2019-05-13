@@ -41,6 +41,8 @@ function syncPages($defaults = false)
             $page->excerpt = null;
             if ($page->status == null) {
                 $page->status = 'INACTIVE';
+            } else {
+                $page->status = 'ACTIVE';
             }
             $page->save();
             if ($page->deleted_at != null) {

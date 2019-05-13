@@ -2,7 +2,14 @@
   "title": "Home",
   "slug": "home",
   "version": "0.1",
+  "lang": {
+    "en": {
+      "singular": "page",
+      "plural": "pages"
+    }
+  },
   "description": "Description goes here.",
+  "category": "defaults",
   "sections": {
     "heading": {
       "title": "Heading",
@@ -13,6 +20,12 @@
           "slug": "headline",
           "description": "A short summary of the page.",
           "placeholder": "Write a headline."
+        },
+        "tagline": {
+          "type": "text",
+          "slug": "tagline",
+          "description": "Tagline.",
+          "placeholder": "Write a compelling hook."
         },
         "button": {
           "type": "code",

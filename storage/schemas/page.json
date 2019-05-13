@@ -57,42 +57,6 @@
     }
   },
   "sections": {
-    "heading": {
-      "slug": "heading",
-      "title": "Heading",
-      "fields": {
-        "headline": {
-          "type": "text",
-          "description": "This appears at the top of the page.",
-          "validations": {
-            "required": true
-          }
-        },
-        "button": {
-          "type": "text",
-          "description": "Text for the button at the top of the page.",
-          "validations": {
-            "required": true
-          }
-        },
-        "button_link": {
-          "display name": "Button Link",
-          "type": "text",
-          "description": "URL for the button at the top of the page.",
-          "validations": {
-            "required": true
-          },
-          "conditions": "(((((data || {}).content || {}).sections || {}).HEADING || {}).fields|| {}).button != null"
-        },
-        "background": {
-          "type": "image",
-          "isThumbnail": true,
-          "validations": {
-            "url": true
-          }
-        }
-      }
-    }
   },
   "permissions": {
     "add": {

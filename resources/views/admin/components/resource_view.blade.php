@@ -291,7 +291,7 @@
 
 @endsection
 
-@section('page-title') {{ ucwords($item->schema()->lang->en->singular) }} <span
+@section('page-title') {{ ucwords($item->standardSchema()->lang->en->singular) }} <span
         style="opacity:0.5;"># {{ $item->id }}</span>@endsection
 
 @section('top-menu')
@@ -310,11 +310,11 @@
                 @endif
                 <a href="#" class="btn btn-secondary" id="editContentButton" style="">
                     <i class="material-icons mr-2">edit</i> <span class="mr-1">Edit  <span
-                                class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span></span>
+                                class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->standardSchema()->lang->en->singular) }}</span></span>
                 </a>
                 <div class="btn btn-danger px-3" data-toggle="modal"
                      data-target="#modal-delete"><i class="material-icons mr-2">delete</i> Delete <span
-                            class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->schema()->lang->en->singular) }}</span>
+                            class="hiddenOnMobile hiddenOnDesktop">{{ ucwords($item->standardSchema()->lang->en->singular) }}</span>
                 </div>
             </div>
 
