@@ -27,7 +27,7 @@ Click the button below to deploy a new instance of Startup Engine to Heroku inst
 # Contact Us
 
 ### E-mail
-Have suggestions, concerns, or feature requests? [Send us an e-mail](inbox-w8agf2hymzpvnw4zcudlfwpa@inbound.productboard.com).
+Have suggestions, concerns, or feature requests? [Send us an e-mail](mailto:inbox-w8agf2hymzpvnw4zcudlfwpa@inbound.productboard.com).
 
 ### Code Support
 Found a bug? [Submit an issue.](https://github.com/startupengine/startupengine/issues)
