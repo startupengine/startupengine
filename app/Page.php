@@ -45,7 +45,6 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
     use validateInputAgainstJsonSchema;
 
     protected $casts = [
-        'json' => 'json',
         'schema' => 'json'
     ];
 
@@ -79,6 +78,12 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         'updated_at',
         'deleted_at'
     ];
+    /**
+     * Auditable events.
+     *
+     * @var array
+     */
+    protected $auditableEvents = ['created', 'updated', 'deleted', 'restored'];
 
     /**
      * The "booting" method of the model.
@@ -91,13 +96,6 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
         static::addGlobalScope(new GlobalPagesScope());
     }
-
-    /**
-     * Auditable events.
-     *
-     * @var array
-     */
-    protected $auditableEvents = ['created', 'updated', 'deleted', 'restored'];
 
     public function searchFields()
     {
@@ -142,26 +140,31 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
     {
         //$json = $this->content();
         if ($this->content() != null && isset($this->content()->sections)) {
-            foreach ($this->schema()->sections as $section) {
-                if ($section->fields != null) {
-                    foreach ($section->fields as $field => $value) {
-                        if (
-                            isset($value->isThumbnail) &&
-                            $value->isThumbnail == true
-                        ) {
-                            $slug = $section->slug;
-                            $string =
-                                "sections->" . $slug . "->fields->" . $field;
+            if (isset($this->schema()->sectoins)) {
+                foreach ($this->schema()->sections as $section) {
+                    if ($section->fields != null) {
+                        foreach ($section->fields as $field => $value) {
                             if (
-                                isset(
-                                    $this->content()->sections->$slug->fields
-                                        ->$field
-                                )
+                                isset($value->isThumbnail) &&
+                                $value->isThumbnail == true
                             ) {
-                                return $this->content()->sections->$slug->fields
-                                    ->$field;
-                            } else {
-                                return null;
+                                $slug = $section->slug;
+                                $string =
+                                    "sections->" .
+                                    $slug .
+                                    "->fields->" .
+                                    $field;
+                                if (
+                                    isset(
+                                        $this->content()->sections->$slug
+                                            ->fields->$field
+                                    )
+                                ) {
+                                    return $this->content()->sections->$slug
+                                        ->fields->$field;
+                                } else {
+                                    return null;
+                                }
                             }
                         }
                     }
@@ -174,7 +177,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
     {
         $json = $this->json;
         if ($json != null && gettype($json) != 'object') {
-            $array = json_decode($json, true);
+            $array = json_decode(json_encode($json));
         } else {
             $array = [];
         }
@@ -183,7 +186,12 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
             $json = json_decode($json);
         }
 
-        return $json;
+        return json_decode(json_encode($json));
+    }
+
+    public function schema()
+    {
+        return json_decode(json_encode($this->getAttributeValue('schema')));
     }
 
     public function markdown($content)
@@ -254,11 +262,6 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
         }
     }
 
-    public function schema()
-    {
-        return json_decode(json_encode($this->getAttributeValue('schema')));
-    }
-
     public function standardSchema()
     {
         $path = file_get_contents(storage_path() . '/schemas/post.json');
@@ -266,10 +269,7 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
         return json_decode(
             json_encode(
-                array_merge(
-                    $baseSchema,
-                    json_decode(json_encode($this->schema()), true)
-                )
+                array_merge($baseSchema, json_decode($this->schema(), true))
             )
         );
     }
