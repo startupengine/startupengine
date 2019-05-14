@@ -625,6 +625,55 @@
                     }
                     this.resourceItem = null;
                     this.editorHasErrors = false;
+                },
+                updateRecord(response){
+                    this.record = response.data;
+                    this.status = 'loaded';
+                },
+                updateEditor(input){
+                    console.log(input);
+                    var currentValue = null;
+                    if(this.record.data.content != null
+                        && this.record.data.content.sections != null
+                        && this.record.data.content.sections[input.section.slug] != null
+                        && this.record.data.content.sections[input.section.slug]['fields'] != null){
+                        currentValue = this.record.data.content.sections[input.section.slug]['fields'][input.fieldName];
+                    }
+
+
+
+
+
+                    this.newItemSchema = null;
+                    this.displayAddItemForm = null;
+                    this.newItemSchema = null;
+                    $("#contentForm").removeClass('explicitButtons');
+                    this.updateSectionName(input.section.slug);
+                    this.updateFieldSchema(input.section.fields[input.field]);
+                    this.updateFieldName(input.fieldName);
+                    this.updateFieldSlug(input.field);
+                    var type = input.section['fields'][input.field]['type'];
+                    this.updateFieldType(type);
+                    if (type == 'select') {
+                        fieldInput = 'null';
+                    }
+                    else {
+                        fieldInput = currentValue;
+                    }
+                    this.updateFieldInput(currentValue);
+                    this.updateFieldDescription(input.section.fields[input.field].description);
+                    this.updateFieldDisplayName(input.field);
+                    if(this.fieldType == 'richtext') {
+                        var quill = new Quill('#editor', {
+                            modules: {
+                                syntax: true,              // Include syntax module
+                                toolbar: [['code-block']]  // Include button in toolbar
+                            },
+                            theme: 'snow'
+                        });
+                    }
+                    this.resourceItem = null;
+                    this.editorHasErrors = false;
                 }
             },
             mounted () {
@@ -634,14 +683,11 @@
                         'Cache-Control': 'no-cache'
                     }
                 };
-                var url2 = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '/?{!! $options['URL_PARAMETERS'] !!}' @endif;
-                console.log(url2);
+                var url = '/api/resources/{{ $options['type'] }}/' + contentId @if(isset($options['URL_PARAMETERS'])) + '/?{!! $options['URL_PARAMETERS'] !!}' @endif;
+                console.log(url);
                 axios
-                    .get(url2, config)
-                    .then(response => (this.record = response.data)
-            )
-                ;
-                this.status = 'loaded';
+                    .get(url, config)
+                    .then(response => (this.updateRecord(response)));
             }
 
         });

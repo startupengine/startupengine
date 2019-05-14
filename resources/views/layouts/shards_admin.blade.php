@@ -511,8 +511,6 @@
     {!! renderNewItemModal() !!}
     {!! renderNewItemScripts() !!}
 
-
-
 </div>
 </body>
 </html>

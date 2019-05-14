@@ -188,6 +188,9 @@ class ResourceController extends Controller
                     $schema = json_decode(json_encode($schema), true);
                     if (strpos($field, '.') !== false) {
                         $arrayIndexes = explode(".", $field);
+                        if (gettype($schema) == 'string') {
+                            $schema = json_decode($schema, true);
+                        }
                         $schemaFieldDefinition = get_array_value(
                             $schema,
                             $arrayIndexes

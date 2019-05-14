@@ -1,11 +1,8 @@
 <div id="contentForm"
-     v-if="status != 'loading' && record != null"
+     v-if="status == 'loaded' && record != null && record.data != null"
      style="opacity:0;" v-bind:style="{ 'opacity': '1' }">
-
     <div class="row mb-2">
         <div class="col-lg-9 col-md-12">
-
-
         @if(isset($options['custom_view']))
             @include($options['custom_view'])
         @else
@@ -63,8 +60,7 @@
                         </div>
                     </div>
                 @endif
-
-                <div v-if="record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null ">
+                <div v-if="status == 'loaded' && record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null ">
 
                     <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection"
                          v-if="fieldName !== 'slug' && fieldName !== '{{ $item->standardSchema()->metadata->title_key }}' && fieldName !== 'status'">
@@ -118,12 +114,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-                <div v-if="status != 'loading' && record != null && record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
-
+                <div v-else-if="status == 'loaded' && record != null && record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
                     <div v-for="section,sectionName in record.data.schema.sections"
                          class="card p-0 mb-3 formSection">
                         <div class="card-header"><h6 v-if="section.title != null">@{{ section.title }}</h6><h6
@@ -133,8 +124,8 @@
                                  v-for="value,fieldName in section.fields"
                                  class="input-group">
 
-
-                                <div class="formEditButton btn btn-primary btn-pill"
+                                <?php /* trouble is usually here */ ?>
+                                <?php /* <div class="formEditButton btn btn-primary btn-pill"
                                      v-if="record['data']['content'] != null && record['data']['content'].hasOwnProperty('sections') && record['data']['content']['sections'][sectionName] !== null  && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName]['fields'] !== null && record['data']['content']['sections'][sectionName].hasOwnProperty('fields') && record['data']['content']['sections'][sectionName]['fields'][fieldName] !== null"
 
                                      data-toggle="modal"
@@ -151,6 +142,16 @@
                                      data-target="#modal-edit-content"
 
                                      v-on:click="updateForm({ 'sectionName': sectionName,'fieldSlug': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName, 'fieldType': value.type, 'fieldInput': null, 'fieldDisplayName': fieldName, 'fieldDescription': section['fields'][fieldName]['description'], 'fieldSchema': (section['fields'][fieldName]) })"
+                                     style="position:absolute;right:-5px;top:10px;">Edit
+                                </div> */?>
+
+                                 <div class="formEditButton btn btn-primary btn-pill"
+
+                                     data-toggle="modal"
+                                     data-target="#modal-edit-content"
+
+                                     v-on:click="updateEditor({'section':section, 'field': fieldName, 'fieldName': 'sections.' + sectionName + '.fields.' + fieldName})"
+
                                      style="position:absolute;right:-5px;top:10px;">Edit
                                 </div>
 
@@ -170,7 +171,7 @@
                                 </p>
 
                                 <p class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;"
-                                 v-else >
+                                   v-else >
 
                                     <span v-if="section['fields'][fieldName]['type'] == 'image'"
                                           v-bind:style="{ backgroundImage: 'url(' + record['data']['content']['sections'][sectionName]['fields'][fieldName] + ')' }"
@@ -203,10 +204,8 @@
                     @if (Schema::hasColumn($item->getTable(), 'status'))
                         <div class="formEditButton btn btn-primary btn-pill"
                              style="position:absolute;right:15px;top:-15px;"
-
                              data-toggle="modal"
                              data-target="#modal-edit-content"
-
                              v-on:click="updateForm({'fieldDisplayName': 'Status','fieldName': 'status', 'fieldType': 'select', 'fieldInput': null, 'fieldDescription': 'Publish or unpublish this content.', 'fieldSchema' :{'options': {'ACTIVE': 'ACTIVE', 'INACTIVE': 'INACTIVE'}} })">
                             Edit
                         </div>
@@ -314,7 +313,6 @@
             </div>
         @endif
     </div>
-
     <!-- Delete Modal -->
     <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" v-if="record != null">
         <div class="modal-dialog modal-lg">
@@ -345,8 +343,6 @@
             </div>
         </div>
     </div>
-
-
     <!-- Edit Content Modal -->
     <div class="modal fade" id="modal-edit-content" tabindex="-1" role="dialog"
          v-if="record != null && status !== 'loading'">
@@ -432,6 +428,7 @@
                                    autocomplete="off" v-model="fieldInput" v-on:input="changed()"
                                    style="min-height:35px;"/>
                         </div>
+                        <?php /*
                         <div v-else-if="fieldType == 'resource'">
                             <div v-if="resourceItem == null && newItemSchema == null">
                                 <ol class="breadcrumb">
@@ -536,7 +533,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */ ?>
                         <div v-else-if="fieldType == 'select'">
                             <select id="contentEditor" class="form-control"
                                     v-on:input="changed()"
@@ -667,6 +664,5 @@
     </div>
 </div>
 <div v-else>
-        <span class="badge badge-loading text-dark mr-2">Loading... <i
-                    class="fa fa-fw fa-spin text-dark fa-spinner fa-sync"></i></span>
+    <span class="badge badge-loading text-dark mr-2">Loading... <i class="fa fa-fw fa-spin text-dark fa-spinner fa-sync"></i></span>
 </div>
