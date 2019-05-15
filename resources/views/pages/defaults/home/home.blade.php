@@ -186,5 +186,15 @@
 @endsection
 
 @section('scripts')
-    {!! renderResourceTableScriptsDynamically(['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'recentContent','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', 'PER_PAGE' => 3, 'LIMIT' => 3]) !!}
+    <?php
+        $contentOptions = ['VUE_APP_NAME'=> 'contentApp', 'div_id'=> 'recentContent','url' => '/api/resources/content', 'DISPLAY_FORMAT' => 'cards', 'PER_PAGE' => 3, 'LIMIT' => 3];
+        $tags = $page->getJsonContent('[sections][content][fields][content_tags]');
+        if($tags != null){
+            $tags = explode(',', $tags);
+            $tags = json_encode($tags);
+
+            $contentOptions['WITH_ANY_TAGS'] = $tags;
+        }
+    ?>
+    {!! renderResourceTableScriptsDynamically($contentOptions) !!}
 @endsection

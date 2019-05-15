@@ -83,77 +83,29 @@
         }
       }
     },
-    "features": {
-      "title": "Features",
-      "slug": "features",
+    "content": {
+      "title": "Content",
+      "slug": "content",
       "fields": {
-        "headline": {
+        "show_features": {
+          "type": "select",
+          "options": ["yes", "no"],
+          "slug": "show_features",
+          "description": "Do you want to display a list of features?",
+          "placeholder": "Select an option."
+        },
+        "show_content": {
+          "type": "select",
+          "options": ["yes", "no"],
+          "slug": "show_features",
+          "description": "Do you want to display a list of content?",
+          "placeholder": "Select an option."
+        },
+        "content_tags": {
           "type": "text",
-          "slug": "headline",
-          "description": "A short summary of the value proposition.",
-          "placeholder": "Write a headline."
-        },
-        "button": {
-          "type": "code",
-          "mode": "html",
-          "slug": "button",
-          "description": "A short call to action phrase.",
-          "placeholder": "Learn More"
-        },
-        "link": {
-          "type": "text",
-          "slug": "link",
-          "description": "A url to link to. (optional)",
-          "placeholder": "http://www.example.com"
-        }
-      }
-    },
-    "calltoaction": {
-      "title": "Call To Action",
-      "slug": "calltoaction",
-      "fields": {
-        "headline": {
-          "type": "text",
-          "slug": "headline",
-          "description": "A short call to action message.",
-          "placeholder": "Write a headline."
-        },
-        "message": {
-          "type": "textarea",
-          "slug": "message",
-          "description": "One or two lines about the benefit.",
-          "placeholder": "Write a message."
-        },
-        "button": {
-          "type": "code",
-          "mode": "html",
-          "slug": "button",
-          "description": "A short call to action phrase.",
-          "placeholder": "Learn More"
-        },
-        "link": {
-          "type": "text",
-          "slug": "link",
-          "description": "A url to link to. (optional)",
-          "placeholder": "http://www.example.com"
-        }
-      }
-    },
-    "meta": {
-      "title": "Meta",
-      "slug": "meta",
-      "fields": {
-        "slug": {
-          "type": "text",
-          "slug": "slug",
-          "description": "A unique slug for tracking this variation.",
-          "placeholder": "Name it clearly."
-        },
-        "Variation description": {
-          "type": "textarea",
-          "slug": "description",
-          "description": "A description of this variation.",
-          "placeholder": "Describe this variation clearly."
+          "slug": "image",
+          "description": "Comma-separated list of content tags.",
+          "placeholder": "announcements,promotions,tutorials"
         }
       }
     }
