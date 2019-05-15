@@ -61,7 +61,7 @@
 
 
         @if($page->getJsonContent('[sections][heading][fields][background]') != null)
-            @if($page->getJsonContent('[sections][heading][fields][background_type]') != 'light')
+            @if($page->getJsonContent('[sections][heading][fields][background_type]') != 'dark')
                 #topNavbar:not(.dark){
                     background: rgba(255, 255, 255, 0.85) !important;
                 }
@@ -81,7 +81,7 @@
         @if($page->getJsonContent('[sections][heading][fields][background_type]') == 'dark')
             .shards-landing-page--1 .welcome:before {
                 background: #000 !important;
-                opacity: 0.65;
+                opacity: 0.65 !important;
             }
             .shards-landing-page--1 .welcome h1,.shards-landing-page--1 .welcome h2,.shards-landing-page--1 .welcome h3,.shards-landing-page--1 .welcome h4,.shards-landing-page--1 .welcome h5,.shards-landing-page--1 .welcome h6 {
                 color:#fff !important;
@@ -91,11 +91,6 @@
                 background: #ebf1fe !important;
                 opacity: 0.5;
             }
-        @else
-            .shards-landing-page--1 .welcome:before {
-                background: #ebf1fe !important;
-                opacity: 0.5;
-             }
         @endif
     </style>
 @endsection
