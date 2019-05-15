@@ -16,6 +16,10 @@ class WebRbac
      */
     public function handle($request, Closure $next)
     {
+        if (!$request->secure() && App::environment() === 'production') {
+            return redirect()->secure($request->getRequestUri());
+        }
+
         if (request()->route()->action['as'] == 'contentById') {
             $hash = request()->route('hash');
             $hashids = new Hashids();
