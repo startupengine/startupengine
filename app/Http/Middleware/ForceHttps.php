@@ -15,10 +15,7 @@ class ForceHttps
      */
     public function handle($request, Closure $next)
     {
-        if (
-            !$request->secure() &&
-            in_array(config('app.env'), ['stage', 'production'])
-        ) {
+        if (!$request->secure() && config('app.force_https') == 'TRUE') {
             return redirect()->secure($request->getRequestUri());
         }
 

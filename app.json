@@ -59,6 +59,10 @@
         "APP_PLATFORM": {
             "description": "Don't change this if you're deploying to Heroku.",
             "value": "heroku"
+        },
+        "FORCE_HTTPS": {
+            "description": "Force unsecure requests to be rediredted to HTTPS.",
+            "value": "TRUE"
         }
     },
     "formation": {
