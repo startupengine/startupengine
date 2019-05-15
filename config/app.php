@@ -259,5 +259,5 @@ return [
     'stripe_test_key' => env('STRIPE_TEST_KEY', null),
     'stripe_test_secret' => env('STRIPE_TEST_SECRET', null),
 
-    'force_https' => env('FORCE_HTTPS', true)
+    'force_https' => env('FORCE_HTTPS', false)
 ];

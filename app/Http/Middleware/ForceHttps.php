@@ -15,16 +15,21 @@ class ForceHttps
      */
     public function handle($request, Closure $next)
     {
-        if (config('app.debug') == true) {
-            //dd($request->isSecure());
-        }
-        if ($request->isSecure()) {
+        return $next($request);
+        /*
+        if (config('app.force_https') === 'TRUE') {
+            if (config('app.debug') == true) {
+                //dd($request->isSecure());
+            }
+            if ($request->isSecure()) {
+                return $next($request);
+            }
+            if (!$request->isSecure()) {
+                return redirect()->secure($request->getRequestUri());
+            }
+
             return $next($request);
         }
-        if (!$request->isSecure() && config('app.force_https') === 'TRUE') {
-            return redirect()->secure($request->getRequestUri());
-        }
-
-        return $next($request);
+        */
     }
 }

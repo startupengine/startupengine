@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HttpsProtocol::class,
             \App\Http\Middleware\PromoCode::class,
-            \App\Http\Middleware\ForceHttps::class,
+            //\App\Http\Middleware\ForceHttps::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class
         ],
 
