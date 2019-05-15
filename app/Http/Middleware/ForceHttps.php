@@ -17,7 +17,7 @@ class ForceHttps
     {
         if (
             !$request->secure() &&
-            in_array(env('APP_ENV'), ['stage', 'production'])
+            in_array(config('app.env'), ['stage', 'production'])
         ) {
             return redirect()->secure($request->getRequestUri());
         }
