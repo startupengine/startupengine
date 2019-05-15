@@ -61,8 +61,7 @@ class PageController
             $page = new \App\Page();
             $page->addAnalyticEvent('page viewed');
             $page->json =
-                '{"sections":{"heading":{"fields":{"headline":"Run an automated startup from your laptop."}}}}';
-
+                '{"sections":{"heading":{"fields":{"headline":"Open-source startup automation."}}}}';
             return view(defaultPage())->with('page', $page);
         }
 
@@ -71,9 +70,10 @@ class PageController
         } else {
             $page->addAnalyticEvent('page viewed');
             if ($page->isDefaultPage() == true) {
+                return view('pages.view')->with('page', $page);
+            } else {
                 return view(defaultPage())->with('page', $page);
             }
-            return view('pages.view')->with('page', $page);
         }
     }
 
