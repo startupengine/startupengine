@@ -33,6 +33,15 @@
           "description": "A short call to action phrase.",
           "placeholder": "Learn More"
         },
+        "button_link": {
+          "type": "text",
+          "slug": "link",
+          "description": "A url to link to. (optional)",
+          "placeholder": "http://www.example.com",
+          "validations": {
+            "url": true
+          }
+        },
         "background": {
           "type": "text",
           "slug": "background",
@@ -57,12 +66,6 @@
           "slug": "intro",
           "description": "Write a bit of intro text (optional).",
           "placeholder": "Something exciting goes here..."
-        },
-        "link": {
-          "type": "text",
-          "slug": "link",
-          "description": "A url to link to. (optional)",
-          "placeholder": "http://www.example.com"
         },
         "headersize": {
           "type": "select",

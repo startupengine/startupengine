@@ -109,17 +109,21 @@
                 <h1 class="welcome-heading display-4 text-dark text-center ">@if($page->getJsonContent('[sections][heading][fields][headline]')) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else {{ setting('site.name', 'Startup Engine') }} @endif</h1>
                 <h6 class="pt-2 text-center mb-4 mx-4">@if($page->getJsonContent('[sections][heading][fields][tagline]') != null) {{ $page->getJsonContent('[sections][heading][fields][tagline]') }} @else {{ setting('site.description') }} @endif</h6>
                 <p align="center">
-                    @if(hasSubscriptionProductsForSale())
-                        <a href="/pricing" class="mt-1 btn btn-md btn-primary   align-self-center ml-2">@if($page->getJsonContent('[sections][heading][fields][button]') != null) {{ $page->getJsonContent('[sections][heading][fields][button]') }} @else Get Started @endif</a>
-                    @endif
-                    @if(count(\App\Feature::all()) > 0)
-                        <a href="/features"
-                           class="mt-1 btn btn-md btn-primary bg-light-blue text-dark-blue btn-no-border align-self-center">Learn
-                            More</a>
-                    @elseif(hasDocs())
-                        <a href="/docs"
-                           class="mt-1 btn btn-md btn-primary  bg-light-blue text-dark-blue btn-no-border align-self-center ">Learn
-                            More</a>
+                    @if($page->getJsonContent('[sections][heading][fields][button_link]') != null)
+                        <a href="{{ $page->getJsonContent('[sections][heading][fields][button_link]') }}" class="mt-1 btn btn-md btn-primary align-self-center ml-2">@if($page->getJsonContent('[sections][heading][fields][button]') != null) {{ $page->getJsonContent('[sections][heading][fields][button]') }} @else Get Started @endif</a>
+                    @else
+                        @if(hasSubscriptionProductsForSale())
+                            <a href="/pricing" class="mt-1 btn btn-md btn-primary   align-self-center ml-2">@if($page->getJsonContent('[sections][heading][fields][button]') != null) {{ $page->getJsonContent('[sections][heading][fields][button]') }} @else Get Started @endif</a>
+                        @endif
+                        @if(count(\App\Feature::all()) > 0)
+                            <a href="/features"
+                               class="mt-1 btn btn-md btn-primary bg-light-blue text-dark-blue btn-no-border align-self-center">Learn
+                                More</a>
+                        @elseif(hasDocs())
+                            <a href="/docs"
+                               class="mt-1 btn btn-md btn-primary  bg-light-blue text-dark-blue btn-no-border align-self-center ">Learn
+                                More</a>
+                        @endif
                     @endif
                 </p>
             </div>
