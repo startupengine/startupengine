@@ -249,6 +249,10 @@ class Page extends Model implements \Altek\Accountant\Contracts\Recordable
 
     public function isDefaultPage()
     {
+        $schema = $this->schema();
+        if (gettype($schema) == 'string') {
+            $schema = json_decode($schema);
+        }
         if (isset($this->schema()->category)) {
             $category = $this->schema()->category;
         } else {

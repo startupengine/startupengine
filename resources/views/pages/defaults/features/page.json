@@ -2,6 +2,7 @@
   "title": "Features",
   "slug": "features",
   "version": "0.1",
+  "category": "defaults",
   "description": "Description goes here.",
   "sections": {
     "heading": {

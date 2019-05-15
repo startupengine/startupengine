@@ -1605,7 +1605,11 @@ function hasLandingPage($folder = 'home')
 function defaultPage($folder = 'home')
 {
     $path = 'pages.defaults.';
-    $path = $path . $folder . '.' . $folder;
+    if ($folder == 'home') {
+        $path = $path . $folder . '.' . $folder;
+    } else {
+        $path = $path . $folder . '.index';
+    }
     return $path;
 }
 

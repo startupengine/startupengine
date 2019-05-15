@@ -86,9 +86,11 @@ class PageController
             )
             ->get();*/
         //dd($products);
+
         $page = \App\Page::where('slug', '=', $slug)
             ->where('status', '=', 'ACTIVE')
             ->first();
+
         if ($page == null) {
             $page = new \App\Page();
             $page->addAnalyticEvent('page viewed');
@@ -102,6 +104,7 @@ class PageController
                     return redirect('/products/' . $product->stripe_id);
                 }
             }
+
             if (view()->exists('pages.defaults.' . $slug . '.index')) {
                 if ($slug == 'pricing') {
                     if (hasSubscriptionProductsForSale() == false) {
@@ -109,16 +112,21 @@ class PageController
                     }
                 }
                 $page->json = "{}";
-                return view('pages.defaults.' . $slug . '.index')->with(
-                    'page',
-                    $page
-                );
+                if ($page->isDefaultPage() == true) {
+                    return view('pages.view')->with('page', $page);
+                } else {
+                    return view(defaultPage($slug))->with('page', $page);
+                }
             }
             abort(404);
         }
         $page->content = $page->content();
         $page->addAnalyticEvent('page viewed');
-        return view('pages.view')->with('page', $page);
+        if ($page->isDefaultPage() == true) {
+            return view('pages.view')->with('page', $page);
+        } else {
+            return view(defaultPage($slug))->with('page', $page);
+        }
     }
 
     public function addPage(Request $request)
