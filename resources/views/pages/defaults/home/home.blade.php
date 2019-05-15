@@ -10,12 +10,8 @@
 
 
 @section('splash-style')
-    @if($page->thumbnail() == null)
-        <?php $page->thumbnail =
-            "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1607&q=80"; ?>
-        background-image:url('{{ $page->thumbnail }}');
-    @else
-        <?php $page->thumbnail = null; ?>
+    @if($page->getJsonContent('[sections][heading][fields][background]') != null)
+        background-image:url('{{ $page->getJsonContent('[sections][heading][fields][background]') }}');
     @endif
 
 @endsection
@@ -26,7 +22,11 @@
 
         .shards-landing-page--1 .welcome:before {
             background: #ebf1fe !important;
+            @if($page->thumbnail() != null)
             opacity: 1;
+            @else
+            opacity:0.5;
+            @endif;
         }
 
         .shards-landing-page--1 .welcome {
@@ -58,12 +58,51 @@
                 z-index:9999;
             }
         }
+
+
+        @if($page->getJsonContent('[sections][heading][fields][background]') != null)
+            @if($page->getJsonContent('[sections][heading][fields][background_type]') != 'light')
+                #topNavbar:not(.dark){
+                    background: rgba(255, 255, 255, 0.85) !important;
+                }
+                #topNavbar:not(.dark) .nav-link, #topNavbar:not(.dark) .navbar-brand{
+                    color:#333 !important;
+                    text-shadow:none !important;
+                }
+            @else
+                #topNavbar .navbar-brand{
+                    color:#fff !important;
+                    text-shadow:none !important;
+                }
+
+            @endif
+        @endif
+
+        @if($page->getJsonContent('[sections][heading][fields][background_type]') == 'dark')
+            .shards-landing-page--1 .welcome:before {
+                background: #000 !important;
+                opacity: 0.65;
+            }
+            .shards-landing-page--1 .welcome h1,.shards-landing-page--1 .welcome h2,.shards-landing-page--1 .welcome h3,.shards-landing-page--1 .welcome h4,.shards-landing-page--1 .welcome h5,.shards-landing-page--1 .welcome h6 {
+                color:#fff !important;
+            }
+        @elseif($page->getJsonContent('[sections][heading][fields][background_type]') == 'light')
+             .shards-landing-page--1 .welcome:before {
+                background: #ebf1fe !important;
+                opacity: 0.5;
+            }
+        @else
+            .shards-landing-page--1 .welcome:before {
+                background: #ebf1fe !important;
+                opacity: 0.5;
+             }
+        @endif
     </style>
 @endsection
 
 
 @section('navbar-classes')
-    navbar-light navbar-blend-light-blue
+    navbar-light @if($page->getJsonContent('[sections][heading][fields][background]') == null) navbar-blend-light-blue @endif
 @endsection
 
 
@@ -76,7 +115,7 @@
                 <h6 class="pt-2 text-center mb-4 mx-4">@if($page->getJsonContent('[sections][heading][fields][tagline]') != null) {{ $page->getJsonContent('[sections][heading][fields][tagline]') }} @else {{ setting('site.description') }} @endif</h6>
                 <p align="center">
                     @if(hasSubscriptionProductsForSale())
-                        <a href="/pricing" class="mt-1 btn btn-md btn-primary   align-self-center ml-2">Get Started</a>
+                        <a href="/pricing" class="mt-1 btn btn-md btn-primary   align-self-center ml-2">@if($page->getJsonContent('[sections][heading][fields][button]') != null) {{ $page->getJsonContent('[sections][heading][fields][button]') }} @else Get Started @endif</a>
                     @endif
                     @if(count(\App\Feature::all()) > 0)
                         <a href="/features"
@@ -100,7 +139,7 @@
     @if(count(\App\Feature::all()) > 0)
         <div class="container d-block">
         @foreach(\App\Feature::where('status', 'PUBLISHED')->limit(3)->get() as $feature)
-            <div class="row inline-flex px-3 mb-0 pb-0">
+            <div class="row inline-flex px-3 mb-0 pb-0" style="margin-top:-65px;">
                 <div class="col-md-12 px-4 pb-0 mb-0">
                     <div class="mb-5 raised">
                         <div class="card-body text-center bg-white text-dark br-5 p-5">

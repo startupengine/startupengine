@@ -28,8 +28,7 @@
           "placeholder": "Write a compelling hook."
         },
         "button": {
-          "type": "code",
-          "mode": "html",
+          "type": "text",
           "slug": "button",
           "description": "A short call to action phrase.",
           "placeholder": "Learn More"
@@ -39,6 +38,13 @@
           "slug": "background",
           "description": "Url for a background image (optional).",
           "placeholder": "http://..."
+        },
+        "background_type": {
+          "type": "select",
+          "options": ["light", "dark"],
+          "slug": "background_type",
+          "description": "Is the background image dark or light?",
+          "placeholder": "Select dark or light."
         },
         "image": {
           "type": "text",
