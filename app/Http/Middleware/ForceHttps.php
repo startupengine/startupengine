@@ -19,7 +19,7 @@ class ForceHttps
             return $next($request);
         }
         if (!$request->isSecure() && config('app.force_https') == 'TRUE') {
-            return redirect()->secure($request->getRequestUri());
+            //return redirect()->secure($request->getRequestUri());
         }
 
         return $next($request);
