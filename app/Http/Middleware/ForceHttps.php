@@ -15,7 +15,7 @@ class ForceHttps
      */
     public function handle($request, Closure $next)
     {
-        if (config('app.debyug') == true) {
+        if (config('app.debug') == true) {
             dd($request->isSecure());
         }
         if ($request->isSecure()) {
