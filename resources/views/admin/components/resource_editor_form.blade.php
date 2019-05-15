@@ -61,7 +61,6 @@
                     </div>
                 @endif
                 <div v-if="status == 'loaded' && record != null && record.data != null && record.data.schema != null && record.data.schema.fields != null ">
-
                     <div v-for="value,fieldName in record.data.schema.fields" class="card p-0 mb-3 formSection"
                          v-if="fieldName !== 'slug' && fieldName !== '{{ $item->standardSchema()->metadata->title_key }}' && fieldName !== 'status'">
                         <div class="card-body pb-3 px-3 pt-0">
@@ -108,13 +107,13 @@
                                 <p v-else
                                    <?php /*-if="section['fields'][fieldName]['type'] != 'resource' && record['data']['content']['sections'][sectionName]['fields'][fieldName] == null" */ ?>
                                    class="fieldData card-text mb-2 mt-0 p-2" style="color:#555;">
-                                    <span style="opacity:0.5;">No data 1.</span>
+                                    <span style="opacity:0.5;">No data.</span>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div v-else-if="status == 'loaded' && record != null && record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
+                <div v-if="status == 'loaded' && record != null && record.data != null && record.data.schema != null && record.data.schema.hasOwnProperty('sections')">
                     <div v-for="section,sectionName in record.data.schema.sections"
                          class="card p-0 mb-3 formSection">
                         <div class="card-header"><h6 v-if="section.title != null">@{{ section.title }}</h6><h6

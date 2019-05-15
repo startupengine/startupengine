@@ -50,10 +50,10 @@
         },
         "background_type": {
           "type": "select",
-          "options": ["light", "dark"],
+          "options": ["none", "light", "dark"],
           "slug": "background_type",
           "description": "Is the background image dark or light?",
-          "placeholder": "Select dark or light."
+          "placeholder": "Select an option."
         },
         "image": {
           "type": "text",
