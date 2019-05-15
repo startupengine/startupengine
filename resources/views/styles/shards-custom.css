@@ -1105,6 +1105,10 @@ input.form-control-translucent::-ms-input-placeholder { /* Microsoft Edge */
   background:#252938;
 }
 
+.btn-gradient-primary {
+  background-image:linear-gradient(90deg,#007bff, #37a8ff) !important;
+}
+
 
 .font-weight-100 {
   font-weight:100 !important;
