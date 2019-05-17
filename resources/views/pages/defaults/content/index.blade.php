@@ -280,6 +280,49 @@
             display: contents !important;
             width: 100% !important;
         }
+
+        <?php if($page->getJsonContent('[sections][heading][fields][background]') != null) { ?>
+            .shards-landing-page--1 .welcome {
+                background-image:url('{{ $page->getJsonContent('[sections][heading][fields][background]') }}') !important;
+            }
+            @if($page->getJsonContent('[sections][heading][fields][background_type]') == 'light')
+                #topNavbar:not(.dark){
+            background: rgba(255, 255, 255, 0.85) !important;
+        }
+        #topNavbar:not(.dark) .nav-link, #topNavbar:not(.dark) .navbar-brand{
+            color:#333 !important;
+            text-shadow:none !important;
+        }
+        @else
+                #topNavbar .navbar-brand{
+            color:#fff !important;
+            text-shadow:none !important;
+        }
+
+        @endif
+        <?php } ?>
+
+        @if($page->getJsonContent('[sections][heading][fields][background_type]') == 'dark')
+            input.form-control-translucent {
+                background: rgba(255, 255, 255, 0.18);
+                box-shadow: 0px 0px 30px rgba(0,0,0,0.05) inset;
+                border-color: rgba(0,0,0,0);
+                transition: all 0.5s;
+                color: #000000;
+            }
+            .shards-landing-page--1 .welcome:before {
+                background: #000 !important;
+                opacity: 0.65 !important;
+            }
+        .shards-landing-page--1 .welcome h1,.shards-landing-page--1 .welcome h2,.shards-landing-page--1 .welcome h3,.shards-landing-page--1 .welcome h4,.shards-landing-page--1 .welcome h5,.shards-landing-page--1 .welcome h6 {
+            color:#fff !important;
+        }
+        @elseif($page->getJsonContent('[sections][heading][fields][background_type]') == 'light')
+             .shards-landing-page--1 .welcome:before {
+            background: #ebf1fe !important;
+            opacity: 0.5;
+        }
+        @endif
     </style>
 @endsection
 
@@ -290,9 +333,8 @@
 @section('page-title') Content @endsection
 
 @section('navbar-classes')
-    navbar-light navbar-blend-light-blue
+    navbar-light
 @endsection
-
 
 @section('top-menu')
 @endsection
@@ -302,8 +344,9 @@
     <div class="inner-wrapper mt-auto mb-auto container" id="">
         <div class="row">
             <div class="col-md-12 px-4 text-dark text-center py-5" id="description">
-                <h2 class="page-title mb-4">Content</h2>
-                <div class="input-group d-inline-flex px-4" style="max-width:800px;" id="">
+                <h2 class="page-title mb-2" @if($page->getJsonContent('[sections][heading][fields][tagline]') != null) style="font-weight: 800;font-size: 20px;text-transform: uppercase;letter-spacing: 1px;" @endif >@if($page->getJsonContent('[sections][heading][fields][headline]') != null) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else Content @endif</h2>
+                @if($page->getJsonContent('[sections][heading][fields][tagline]') != null) <h4 class="page-title mt-2 mb-4">{{ $page->getJsonContent('[sections][heading][fields][tagline]') }} </h4>@endif
+                <div class="input-group mt-2 d-inline-flex px-4" style="max-width:800px;" id="">
                     <input id="search" autocomplete="off" class="form-control form-control-lg form-control-translucent"  placeholder="Search..." style="border-radius:30px;padding-left:20px !important;"/>
                 </div>
             </div>

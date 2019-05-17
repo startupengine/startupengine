@@ -177,18 +177,13 @@
                                     >Pricing</a>
                                 </li>
                             @endif
-                            @if(pageIsPublished('help'))
-                                <li class="nav-item {{ Request::is('help*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="#">Help</a>
-                                </li>
-                            @endif
-                            @if(hasDocs())
+                            @if(hasDocs() && pageIsPublished('help'))
                                 <li class="nav-item {{ Request::is('docs*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="/docs" id="docsNavLink" data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
+                                    <a class="nav-link" href="/help" id="docsNavLink" data-toggle="popover" data-trigger="focus,hover" data-placement="bottom" data-content=
                                     '<div align="center" class="popover-menu">
                                     @foreach(docsFolders() as $docFolder)
                                         <a class="dropdown-item py-1 px-3 m-0" href="/docs/{{ $docFolder }}">{{ str_replace('_', ' ', ucwords($docFolder)) }}</a>
-                                    @endforeach <div class="dropdown-divider"></div> <a class="dropdown-item py-1 px-3 m-0" href="/docs">View All</a> </div>'
+                                    @endforeach <div class="dropdown-divider"></div> <a class="dropdown-item py-1 px-3 m-0" href="/help">View All</a> </div>'
                                        data-html="true" >Help</a>
                                 </li>
                             @endif

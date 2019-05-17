@@ -65,7 +65,7 @@
     <div class="inner-wrapper mt-auto mb-auto container">
         <div class="row mt-5 pt-0">
             <div class="col-md-12 px-4 my-auto">
-                <h2 class="welcome-heading display-4 text-dark text-center ">Features</h2>
+                <h2 class="welcome-heading display-4 text-dark text-center ">@if($page->getJsonContent('[sections][heading][fields][headline]')) {{ $page->getJsonContent('[sections][heading][fields][headline]') }} @else Features @endif</h2>
             </div>
         </div>
     </div>

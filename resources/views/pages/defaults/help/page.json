@@ -1,8 +1,15 @@
 {
-  "title": "Content",
-  "slug": "content",
+  "title": "Help",
+  "slug": "help",
   "version": "0.1",
+  "lang": {
+    "en": {
+      "singular": "page",
+      "plural": "pages"
+    }
+  },
   "description": "Description goes here.",
+  "category": "defaults",
   "sections": {
     "heading": {
       "title": "Heading",
@@ -17,8 +24,8 @@
         "tagline": {
           "type": "text",
           "slug": "tagline",
-          "description": "A short summary of the page.",
-          "placeholder": "Write a headline."
+          "description": "Tagline.",
+          "placeholder": "Write a compelling hook."
         },
         "background": {
           "type": "text",
