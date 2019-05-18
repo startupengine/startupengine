@@ -4,6 +4,8 @@ use PHLAK\SemVer;
 
 include 'page-functions.php';
 
+include 'resource-functions.php';
+
 function get_nested_property($property, $object)
 {
     return $object->$property;
@@ -667,23 +669,6 @@ function dotNotationToArray($string)
 {
     $array = explode('.', $string);
     return $array;
-}
-
-function sparseFields($array, $model)
-{
-    $requestedFields = request()->input('fields');
-    if ($requestedFields != null && count($requestedFields) > 0) {
-        $requestedFields = explode(',', $requestedFields[$model]);
-        $results = [];
-        foreach ($array as $item => $value) {
-            if (in_array($item, $requestedFields)) {
-                $results[$item] = $value;
-            }
-        }
-        return $results;
-    } else {
-        return $array;
-    }
 }
 
 // *********************

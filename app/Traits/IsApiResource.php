@@ -217,6 +217,15 @@ trait IsApiResource
         return $this->schema();
     }
 
+    public function getUuid()
+    {
+        $id = $this->getKey();
+        $timestamp = $this->created_at->timestamp;
+        $hashids = new \Hashids\Hashids(config('app.key'));
+        $id = $hashids->encode($id, $timestamp);
+        return $id;
+    }
+
     public function sectionHasContent(
         $sectionName,
         $fieldsToExclude = [],

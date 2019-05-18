@@ -186,6 +186,7 @@ class ResourceController extends Controller
                 //foreach field
                 foreach ($jsonInput as $field => $value) {
                     $schema = json_decode(json_encode($schema), true);
+
                     if (strpos($field, '.') !== false) {
                         $arrayIndexes = explode(".", $field);
                         if (gettype($schema) == 'string') {
@@ -196,6 +197,10 @@ class ResourceController extends Controller
                             $arrayIndexes
                         );
                     } else {
+                        if (gettype($schema) == 'string') {
+                            $schema = json_decode($schema, true);
+                        }
+
                         if (isset($schema['fields'][$field])) {
                             $schemaFieldDefinition = $schema['fields'][$field];
                         } else {

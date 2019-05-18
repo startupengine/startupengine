@@ -10,6 +10,40 @@
   },
   "description": "Description goes here.",
   "category": "defaults",
+  "fields": {
+    "title" : {
+      "display name": "Title",
+      "description": "The title of this page.",
+      "type": "text",
+      "validations": {
+        "required": true
+      }
+    },
+    "meta_description" : {
+      "display name": "Meta Description",
+      "description": "Describe this page (this appears in search engine results).",
+      "type": "textarea",
+      "isThumbnail": true
+    },
+    "slug" : {
+      "display name": "Slug",
+      "description": "The URL slug of this content.",
+      "type": "text",
+      "validations": {
+        "required": true
+      }
+    },
+    "status": {
+      "type": "select",
+      "options": {
+        "Active": "ACTIVE",
+        "Inactive": "INACTIVE"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  },
   "sections": {
     "heading": {
       "title": "Heading",
