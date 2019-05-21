@@ -51,6 +51,10 @@ class SyncSettings extends Command
                 );
 
                 $key = str_replace('.json', '', $file);
+                $concat = explode('.', $key);
+                if (count($concat) > 0) {
+                    $group = $concat[0];
+                }
 
                 $setting = \App\Setting::where('key', $key)->first();
 
@@ -61,10 +65,19 @@ class SyncSettings extends Command
                 $setting->details = $key;
                 $setting->type = "text";
                 $setting->status = "PUBLISHED";
-                $setting->key = $file;
-                $setting->json = json_encode($json);
-
+                $setting->key = $key;
+                $setting->group = $group;
+                $setting->schema = json_encode($json);
                 $setting->save();
+                if (
+                    $group != null &&
+                    $concat[1] == 'settings_description' &&
+                    isset($setting->schema()->defaults->value)
+                ) {
+                    $value = $setting->schema()->defaults->value;
+                    $setting->value = $value;
+                    $setting->save();
+                }
             }
         }
     }

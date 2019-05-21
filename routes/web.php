@@ -49,7 +49,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/js/{file}', 'JsController@render')->name('js');
 
     //Documentation
-    Route::get('/docs', 'ApiDocsController@index')->name('browseDocs');
+    //Route::get('/docs', 'ApiDocsController@index')->name('browseDocs');
     Route::get('/docs/{file}', 'ApiDocsController@view')->name('viewDocs');
     Route::get('/docs/{folder}/{file}', 'ApiDocsController@viewNested')->name(
         'viewNestedDocs'
