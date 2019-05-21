@@ -283,8 +283,8 @@
         mounted() {
             this.updateFilters(this.filters);
             this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
-            var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
-            console.log(url);
+            var url = '{{ appUrl() }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
+
             var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache', 'Authorization': "{{ passportAuthorizationHeader() }}"}};
             axios
                 .get(url, config)

@@ -6,6 +6,8 @@ include 'page-functions.php';
 
 include 'resource-functions.php';
 
+include 'url-functions.php';
+
 function get_nested_property($property, $object)
 {
     return $object->$property;
