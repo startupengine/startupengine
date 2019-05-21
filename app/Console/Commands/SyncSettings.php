@@ -78,6 +78,14 @@ class SyncSettings extends Command
                     $setting->value = $value;
                     $setting->save();
                 }
+
+                if (
+                    isset($setting->schema()->defaults->value) &&
+                    !isset($setting->value)
+                ) {
+                    $setting->value = $setting->schema()->defaults->value;
+                    $setting->save();
+                }
             }
         }
     }

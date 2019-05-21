@@ -38,6 +38,11 @@ class SyncDocs extends Command
      */
     public function handle()
     {
+        $docs = \App\Doc::all();
+        foreach ($docs as $doc) {
+            $doc->status = 'DRAFT';
+            $doc->save();
+        }
         $folders = docsFolders();
         foreach ($folders as $folder) {
             $files = docFiles($folder);
@@ -52,42 +57,45 @@ class SyncDocs extends Command
 
                     if ($record == null) {
                         $record = new \App\Doc();
-                        $record->slug = $file;
-                        $record->path =
-                            '/docs/content/' . $folder . '/' . $file;
-                        $record->content = file_get_contents(
-                            storage_path() .
-                                '/docs/content/' .
-                                $folder .
-                                '/' .
-                                $file
-                        );
-                        $record->save();
-                    } elseif (
-                        $record->content !=
-                        file_get_contents(
-                            storage_path() .
-                                '/docs/content/' .
-                                $folder .
-                                '/' .
-                                $file
-                        )
-                    ) {
-                        $record->slug = $file;
-                        $record->path =
-                            '/docs/content/' . $folder . '/' . $file;
-                        $record->content = file_get_contents(
-                            storage_path() .
-                                '/docs/content/' .
-                                $folder .
-                                '/' .
-                                $file
-                        );
-                        $record->save();
                     }
-
-                    echo (string) $file . " updated ", "\n";
+                    $record->slug = $file;
+                    $record->path = '/docs/content/' . $folder . '/' . $file;
+                    $record->content = file_get_contents(
+                        storage_path() .
+                            '/docs/content/' .
+                            $folder .
+                            '/' .
+                            $file
+                    );
+                    $record->status = 'PUBLISHED';
+                    $record->save();
+                } elseif (
+                    $record->content !=
+                    file_get_contents(
+                        storage_path() .
+                            '/docs/content/' .
+                            $folder .
+                            '/' .
+                            $file
+                    )
+                ) {
+                    $record->slug = $file;
+                    $record->path = '/docs/content/' . $folder . '/' . $file;
+                    $record->content = file_get_contents(
+                        storage_path() .
+                            '/docs/content/' .
+                            $folder .
+                            '/' .
+                            $file
+                    );
                 }
+                $record->content = file_get_contents(
+                    storage_path() . '/docs/content/' . $folder . '/' . $file
+                );
+                $record->status = 'PUBLISHED';
+                $record->save();
+
+                echo (string) $file . " updated ", "\n";
             }
         }
     }
