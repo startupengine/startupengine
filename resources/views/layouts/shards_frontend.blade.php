@@ -391,6 +391,7 @@
     <div class="section bg-dark py-0">
     <div class="container">
         <div class="row border-top mx-1 py-4">
+            @if(pageIsPublished('content') && count(\App\Post::all()) > 0)
             <div class="col-md-3 p-0 mb-3">
                 <ul class="list-group">
                     <li class="list-group-item list-group-header disabled text-primary"><i class="fa fa-fw fa-newspaper mr-2 text-primary"></i>Content</li>
@@ -401,6 +402,7 @@
                     @endforeach
                 </ul>
             </div>
+            @endif
             @if(hasSubscriptionProductsForSale())
                 <div class="col-md-3 p-0 mb-3">
                     <ul class="list-group">
