@@ -751,6 +751,11 @@ function renderResourceTableScriptsDynamically($options = null)
     if (!isset($options['WITH_ALL_TAGS'])) {
         $options['WITH_ALL_TAGS'] = '{}';
     }
+    if (!isset($options['URL'])) {
+        $options['URL'] = '/';
+    }
+
+    $options['URL'] = appUrl($options['URL']);
 
     $view = View::make('admin.components.resource_table_js', [
         'options' => $options

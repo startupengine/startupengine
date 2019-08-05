@@ -55,7 +55,7 @@
                 this.updateData();
             },
             undelete(item) {
-                url = '{{ appUrl() }}/' + item.id + '/edit?&undelete=true&save=true&json={}';
+                url = '{{ $options['url'] }}/' + item.id + '/edit?&undelete=true&save=true&json={}';
                 axios
                     .get(url)
                     .then(response => (item.deleted_at = null)
@@ -105,7 +105,7 @@
 
 
                 this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
-                var string = '{{ appUrl() }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString + '&page[number]=' + pageNumber + this.searchString;
+                var string = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString + '&page[number]=' + pageNumber + this.searchString;
 
 
 
@@ -189,7 +189,7 @@
                         var actionString = '&action=' + action;
                     }
                     this.transformationStatus = 'loading';
-                    url = '{{ appUrl() }}/' + id + '/transformation?transformation=' + transformation.slug + actionString @if( isset($options['FORCE_URL_ARGUMENTS']) ) + '&{{ $options['FORCE_URL_ARGUMENTS'] }}'@endif;
+                    url = '{{ $options['url'] }}/' + id + '/transformation?transformation=' + transformation.slug + actionString @if( isset($options['FORCE_URL_ARGUMENTS']) ) + '&{{ $options['FORCE_URL_ARGUMENTS'] }}'@endif;
                     console.log(url);
                     axios
                         .post(url)
@@ -269,7 +269,7 @@
                 return this.newContentType;
             },
             save() {
-                url = '{{ appUrl() }}?title=' + this.itemName + '&type=' + this.newContentType;
+                url = '{{ $options['url'] }}?title=' + this.itemName + '&type=' + this.newContentType;
                 axios
                     .get(url)
                     .then(response => (window.location.href = '/admin/content/view/' + response.data.data.id)
@@ -283,7 +283,7 @@
         mounted() {
             this.updateFilters(this.filters);
             this.updateTags(this.withAnyTags, this.withAllTags, this.withoutTags);
-            var url = '{{ appUrl() }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
+            var url = '{{ $options['url'] }}?' + this.filterString + '&perPage=' + this.perPage + '&limit=' + this.limit + '{!! $options['GLOBAL_FILTER'] !!}' + this.sortString + this.withAnyTagsString + this.withAllTagsString + this.withoutTagsString;
 
             var config = {headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-cache', 'Authorization': "{{ passportAuthorizationHeader() }}"}};
             axios
