@@ -25,6 +25,8 @@ class SelfDeprovision extends Command
      *
      * @return void
      */
+    const AUTO_APPROVE = "-auto-approve";
+
     public function __construct()
     {
         parent::__construct();
@@ -42,7 +44,7 @@ class SelfDeprovision extends Command
             echo "Deprovisioning...\n";
 
             exec(
-                "cd terraform/do; terraform destroy -var 'do_token=". config('terraform.do_token') ."' -auto-approve;"
+                "cd terraform/do; terraform destroy -var 'do_token=". config('terraform.do_token') . "' " . self::AUTO_APPROVE . ";"
                 , $output, $result);
 
             echo "Result Code: $result\n";

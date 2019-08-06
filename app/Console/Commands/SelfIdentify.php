@@ -37,45 +37,37 @@ class SelfIdentify extends Command
      */
     public function handle()
     {
+        if(config('terraform.do_token') != null) {
 
-        exec(
-            'cd terraform/do; terraform init;'
-        );
+            echo "Identifying...\n";
 
-        $id = exec(
-            'cd terraform/do; terraform state list;'
-        );
+            exec(
+                'cd terraform/do; terraform init;'
+            );
 
-        echo "\nID: " . $id;
+            $id = exec(
+                'cd terraform/do; terraform state list;'
+            );
 
-        exec(
-            "cd terraform/do; terraform apply; terraform refresh; "
-        );
+            echo "\nID: " . $id;
 
-        exec(
-            "cd terraform/do; terraform output ip", $output, $return
-        );
+            /*exec(
+                "cd terraform/do; terraform apply -var 'do_token=". config('terraform.do_token') ."' -auto-approve;  terraform refresh -auto-approve;",
+            $output1, $result1);*/
 
-        $output = implode(" ",$output);
+            exec(
+                "cd terraform/do; terraform output metadata", $output, $return
+            );
 
-        //echo "\nIP: " . $output;
+            echo "\nMetadata: ";
+            print_r(json_decode(json_encode($output)));
+            echo "\n";
 
-        exec(
-            "cd terraform/do; terraform output price_monthly", $output, $return
-        );
-
-        $output = implode(" ",$output);
-
-        //echo "\nPrice Monthly: " . $output;
-
-        exec(
-            "cd terraform/do; terraform output metadata", $output, $return
-        );
-
-        echo "\nMetadata: ";
-        print_r($output);
-        echo "\n";
-
-        return;
+            return;
+        }
+        else {
+            echo "Error: please set your DIGITAL_OCEAN_API_KEY environment variable.";
+            return;
+        }
     }
 }
