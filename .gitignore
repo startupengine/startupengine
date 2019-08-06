@@ -25,3 +25,10 @@ npm-debug.log
 .DS_Store
 /app/Modules
 /storage/app/modules.json
+terraform/do/.terraform/plugins/darwin_amd64/lock.json
+terraform/do/terraform.tfstate
+terraform/do/terraform.tfstate.backup
+terraform/do/.terraform.tfstate.lock.info
+terraform/do/terraform.tfvars
+terraform/do/terraform.tfvars
+terraform/do/terraform.tfvars
