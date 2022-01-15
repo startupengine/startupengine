@@ -25,7 +25,7 @@
     "fs": "^0.0.1-security",
     "gulp": "^3.9.1",
     "hiraku": "^1.0.5",
-    "marked": "^0.3.9",
+    "marked": "^4.0.10",
     "monaco-editor-forvue": "^1.0.3",
     "mysqldump": "^1.4.2",
     "opn": "^5.4.0",
