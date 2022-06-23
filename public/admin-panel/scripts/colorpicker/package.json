@@ -55,7 +55,7 @@
     "handlebars-layouts": "^3.1.4",
     "http-server": "^0.10.0",
     "jsdoc": "^3.5.5",
-    "jsdom": "^11.3.0",
+    "jsdom": "^16.5.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.8.1",
     "webpack-stream": "^4.0.0"
